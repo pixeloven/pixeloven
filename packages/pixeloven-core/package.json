@@ -7,12 +7,16 @@
   "files": [
     "dist/"
   ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pixeloven/pixeloven.git"
   },
   "author": "Brian Gebel",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "autoprefixer": "9.3.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",

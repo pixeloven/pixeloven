@@ -10,21 +10,22 @@
 // const libraryName = "pixeloven";
 
 // export default {
+//     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
+//     external: [],
 //     input: `src/${libraryName}.ts`,
 //     output: [
 //         {
 //             file: pkg.main,
-//             name: camelCase(libraryName),
 //             format: "umd",
+//             name: camelCase(libraryName),
 //             sourcemap: true,
 //         },
-//         { file: pkg.module, format: "es", sourcemap: true },
+//         { 
+//             file: pkg.module, 
+//             format: "es", 
+//             sourcemap: true 
+//         },
 //     ],
-//     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-//     external: [],
-//     watch: {
-//         include: "src/**",
-//     },
 //     plugins: [
 //         // Allow json resolution
 //         json(),
@@ -40,4 +41,7 @@
 //         // Resolve source maps to the original source
 //         sourceMaps(),
 //     ],
+//     watch: {
+//         include: "src/**",
+//     },
 // };
