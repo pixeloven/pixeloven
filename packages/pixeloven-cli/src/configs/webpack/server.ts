@@ -1,21 +1,20 @@
+import { env, resolvePath } from "@pixeloven/core";
 import { Module, Node, Output, RuleSetRule } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import merge from "webpack-merge";
 import webpackNodeExternals from "webpack-node-externals";
-import Env from "../../libraries/Env";
-import { resolvePath } from "../../macros";
 import common from "./common";
 
 /**
  * Utility functions to help segment configuration based on environment
  */
-const { ifProduction, ifDevelopment } = getIfUtils(Env.current);
+const { ifProduction, ifDevelopment } = getIfUtils(env.current);
 
 /**
  * Webpack uses `publicPath` to determine where the app is being served from.
  * It requires a trailing slash, or the file assets will get an incorrect path.
  */
-const publicPath = Env.config("PUBLIC_URL", "/");
+const publicPath = env.config("PUBLIC_URL", "/");
 
 /**
  * Define entrypoint(s) for sever

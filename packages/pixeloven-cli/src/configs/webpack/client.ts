@@ -1,3 +1,4 @@
+import { env, resolvePath } from "@pixeloven/core";
 import autoprefixer from "autoprefixer";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
@@ -18,8 +19,6 @@ import webpack, {
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 import merge from "webpack-merge";
-import Env from "../../libraries/Env";
-import { resolvePath } from "../../macros";
 import common from "./common";
 
 /**
@@ -32,13 +31,13 @@ import common from "./common";
 /**
  * Utility functions to help segment configuration based on environment
  */
-const { ifProduction, ifDevelopment } = getIfUtils(Env.current);
+const { ifProduction, ifDevelopment } = getIfUtils(env.current);
 
 /**
  * Webpack uses `publicPath` to determine where the app is being served from.
  * It requires a trailing slash, or the file assets will get an incorrect path.
  */
-const publicPath = Env.config("PUBLIC_URL", "/");
+const publicPath = env.config("PUBLIC_URL", "/");
 
 /**
  * Describe source pathing in dev tools

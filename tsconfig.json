@@ -31,7 +31,7 @@
       "node_modules/@types"
     ],
     "paths": {
-      "@pixeloven/*": ["./pixeloven-*/src"]
+      "@pixeloven/*": ["./pixeloven-*/src"],
     }
   }
 }

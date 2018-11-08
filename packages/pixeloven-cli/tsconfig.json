@@ -1,10 +1,14 @@
 {
     "extends": "../../tsconfig",
     "compilerOptions": {
-        "composite": true,
         "rootDir": "./src",
         "declarationDir": "./dist/types",
         "outDir": "./dist/lib",
         "module": "commonjs",
     },
+    "references": [
+        { 
+            "path": "../pixeloven-core" 
+        }
+    ]
 }

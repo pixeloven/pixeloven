@@ -16,9 +16,9 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "tsc -b packages/pixeloven-core",
+    "build": "tsc -b packages/pixeloven-cli packages/pixeloven-core",
     "build:docs": "typedoc --options typedoc.json",
-    "clean": "lerna clean",
+    "clean": "rimraf **/node_modules",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "pretty": "prettier **/*.{ts,tsx} --write",
     "lint": "tslint --project . -t codeFrame",
@@ -34,7 +34,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "{src,test,tools}/**/*.ts": [
+    "{test,tools}/**/*.ts": [
       "yarn run pretty",
       "yarn run lint",
       "git add"
@@ -62,7 +62,7 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
     ],
     "testMatch": [
-      "<rootDir>/**/__tests__/**/*.(j|t)s?(x)",
+      "<rootDir>/**/test/**/*.(j|t)s?(x)",
       "<rootDir>/**/?(*.)(spec|test).(j|t)s?(x)"
     ],
     "testEnvironment": "node",

@@ -198,6 +198,6 @@ lerna add [module] --exact
 ```
 Adds as a dep to all packages (we always want to use the exact flag to lock down deps)
 ```
-lerna add --scope=[package] --exact
+lerna add --scope=[package] --exact [module]
 ```
 Adds to a specific package
