@@ -1,8 +1,8 @@
-# Coverage directory
-coverage
-
-# Compiled build directory
+# Compiled directories
 build
+coverage
+dist
+docs
 
 # Dependency directories
 node_modules

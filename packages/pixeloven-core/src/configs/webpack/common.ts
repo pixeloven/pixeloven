@@ -2,15 +2,15 @@ import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TimeFixPlugin from "time-fix-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
-import webpack, {Configuration, Options, Plugin, Resolve} from "webpack";
-import {getIfUtils, removeEmpty} from "webpack-config-utils";
+import webpack, { Configuration, Options, Plugin, Resolve } from "webpack";
+import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import Env from "../../libraries/Env";
-import {resolvePath} from "../../macros";
+import { resolvePath } from "../../macros";
 
 /**
  * Utility functions to help segment configuration based on environment
  */
-const {ifProduction, ifDevelopment} = getIfUtils(Env.current);
+const { ifProduction, ifDevelopment } = getIfUtils(Env.current);
 
 /**
  * Define build performance options
@@ -86,7 +86,9 @@ const resolve: Resolve = {
     ],
     modules: [resolvePath("src"), "node_modules"],
     plugins: [
-        new ModuleScopePlugin(resolvePath("src"), [resolvePath("package.json")]),
+        new ModuleScopePlugin(resolvePath("src"), [
+            resolvePath("package.json"),
+        ]),
         new TsconfigPathsPlugin({ configFile: resolvePath("tsconfig.json") }),
     ],
 };

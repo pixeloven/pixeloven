@@ -172,6 +172,11 @@ This project follows the [all-contributors](https://github.com/kentcdodds/all-co
 warning semantic-release > @semantic-release/npm > npm > npm-registry-fetch@1.1.1: this version has a breaking change. use 1.1.0 or upgrade to latest
 warning semantic-release > @semantic-release/npm > npm > npm-registry-fetch > make-fetch-happen > socks-proxy-agent > socks@1.1.10: If using 2.x branch, please upgrade to at least 2.1.6 to avoid a serious bug with socket data flow and an import issue introduced in 2.1.0
 
+1) Add rollupjs
+2) typescript should ignore .test
+3) Clean up type docs
+4) Setup coverage reporting https://docs.coveralls.io/supported-ci-services
+
 ### More get started
 ```bash
 npm install --global lerna
@@ -183,3 +188,14 @@ https://github.com/Quramy/lerna-yarn-workspaces-example/blob/master/README.md
 Implied package structure 
     -- definitions
     -- src
+https://github.com/lerna/lerna/tree/master/commands/add#readme
+
+### Adding deps
+```
+lerna add [module] --exact
+```
+Adds as a dep to all packages (we always want to use the exact flag to lock down deps)
+```
+lerna add --scope=[package] --exact
+```
+Adds to a specific package

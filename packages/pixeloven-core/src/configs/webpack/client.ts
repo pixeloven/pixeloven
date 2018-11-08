@@ -6,24 +6,32 @@ import OfflinePlugin from "offline-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
 import UglifyJsPlugin from "uglifyjs-webpack-plugin";
-import webpack, {DevtoolModuleFilenameTemplateInfo, Module, Node, Options, Output, Plugin, RuleSetRule} from "webpack";
-import {getIfUtils, removeEmpty} from "webpack-config-utils";
+import webpack, {
+    DevtoolModuleFilenameTemplateInfo,
+    Module,
+    Node,
+    Options,
+    Output,
+    Plugin,
+    RuleSetRule,
+} from "webpack";
+import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 import merge from "webpack-merge";
 import Env from "../../libraries/Env";
-import {resolvePath} from '../../macros';
+import { resolvePath } from "../../macros";
 import common from "./common";
 
 // TODO optimize builds
-    // see if we can use TS Fork (at least for prod build)
-    // see how we can use babels cache
+// see if we can use TS Fork (at least for prod build)
+// see how we can use babels cache
 // TODO implement tslint-loader if we can do ts fork in development
 
 /**
  * Utility functions to help segment configuration based on environment
  */
-const {ifProduction, ifDevelopment} = getIfUtils(Env.current);
-    
+const { ifProduction, ifDevelopment } = getIfUtils(Env.current);
+
 /**
  * Webpack uses `publicPath` to determine where the app is being served from.
  * It requires a trailing slash, or the file assets will get an incorrect path.
@@ -34,7 +42,9 @@ const publicPath = Env.config("PUBLIC_URL", "/");
  * Describe source pathing in dev tools
  * @param info
  */
-const devtoolModuleFilenameTemplate = (info: DevtoolModuleFilenameTemplateInfo) => {
+const devtoolModuleFilenameTemplate = (
+    info: DevtoolModuleFilenameTemplateInfo,
+) => {
     if (ifProduction()) {
         return path
             .relative(resolvePath("src"), info.absoluteResourcePath)
@@ -154,9 +164,11 @@ const typeScriptRule: RuleSetRule = {
  * Define how source files are handled
  */
 const module: Module = {
-    rules: [{
-        oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule],
-    }],
+    rules: [
+        {
+            oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule],
+        },
+    ],
     strictExportPresence: true,
 };
 
@@ -177,29 +189,32 @@ const node: Node = {
  */
 const optimization: Options.Optimization = {
     minimize: ifProduction(),
-    minimizer: ifProduction([
-        /**
-         * Minify the code JavaScript
-         *
-         * @env production
-         */
-        new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
-            sourceMap: false,
-            uglifyOptions: {
-                compress: {
-                    comparisons: false,
-                    warnings: false,
+    minimizer: ifProduction(
+        [
+            /**
+             * Minify the code JavaScript
+             *
+             * @env production
+             */
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: false,
+                uglifyOptions: {
+                    compress: {
+                        comparisons: false,
+                        warnings: false,
+                    },
+                    output: {
+                        ascii_only: true,
+                        comments: false,
+                    },
                 },
-                output: {
-                    ascii_only: true,
-                    comments: false,
-                },
-            },
-        }),
-        new OptimizeCSSAssetsPlugin(),
-    ], []),
+            }),
+            new OptimizeCSSAssetsPlugin(),
+        ],
+        [],
+    ),
     splitChunks: {
         chunks: "all",
     },
@@ -209,9 +224,15 @@ const optimization: Options.Optimization = {
  * @description Output instructions for client build
  */
 const output: Output = {
-    chunkFilename: ifProduction("static/js/[name].[contenthash].js", "static/js/[name].[hash].js"),
+    chunkFilename: ifProduction(
+        "static/js/[name].[contenthash].js",
+        "static/js/[name].[hash].js",
+    ),
     devtoolModuleFilenameTemplate,
-    filename: ifProduction("static/js/[name].[contenthash].js", "static/js/[name].[hash].js"),
+    filename: ifProduction(
+        "static/js/[name].[contenthash].js",
+        "static/js/[name].[hash].js",
+    ),
     path: resolvePath("build/public", false),
     publicPath,
 };
@@ -232,17 +253,28 @@ const plugins: Plugin[] = removeEmpty([
      * Copy files
      * @env production
      */
-    ifProduction(new CopyWebpackPlugin([{
-        from: resolvePath("public"),
-        ignore: ["*.html"],
-    }]), undefined),
+    ifProduction(
+        new CopyWebpackPlugin([
+            {
+                from: resolvePath("public"),
+                ignore: ["*.html"],
+            },
+        ]),
+        undefined,
+    ),
     /**
      * Extract css to file
      * @env production
      */
     new MiniCssExtractPlugin({
-        chunkFilename: ifProduction("static/css/[name].[contenthash].css", "static/css/[name].[hash].css"),
-        filename: ifProduction("static/css/[name].[contenthash].css", "static/css/[name].[hash].css"),
+        chunkFilename: ifProduction(
+            "static/css/[name].[contenthash].css",
+            "static/css/[name].[hash].css",
+        ),
+        filename: ifProduction(
+            "static/css/[name].[contenthash].css",
+            "static/css/[name].[hash].css",
+        ),
     }),
     /**
      * Generate a manifest file which contains a mapping of all asset filenames
@@ -251,56 +283,59 @@ const plugins: Plugin[] = removeEmpty([
      *
      * @env production
      */
-    ifProduction(new ManifestPlugin({
-        fileName: "asset-manifest.json",
-    }), undefined),
+    ifProduction(
+        new ManifestPlugin({
+            fileName: "asset-manifest.json",
+        }),
+        undefined,
+    ),
     /**
      * Generates html file for offline use
      *
      * @env production
      */
-    ifProduction(new HtmlWebpackPlugin({
-        filename: resolvePath("build/public/offline.html", false),
-        inject: true,
-        minify: {
-            collapseWhitespace: true,
-            keepClosingSlash: true,
-            minifyCSS: true,
-            minifyJS: true,
-            minifyURLs: true,
-            removeComments: true,
-            removeEmptyAttributes: true,
-            removeRedundantAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            useShortDoctype: true,
-        },
-        template: resolvePath("public/offline.html"),
-    }), undefined),
+    ifProduction(
+        new HtmlWebpackPlugin({
+            filename: resolvePath("build/public/offline.html", false),
+            inject: true,
+            minify: {
+                collapseWhitespace: true,
+                keepClosingSlash: true,
+                minifyCSS: true,
+                minifyJS: true,
+                minifyURLs: true,
+                removeComments: true,
+                removeEmptyAttributes: true,
+                removeRedundantAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true,
+            },
+            template: resolvePath("public/offline.html"),
+        }),
+        undefined,
+    ),
     /**
      * Generate a service worker script that will precache, and keep up to date,
      * the HTML & assets that are part of the Webpack build.
      *
      * @env production
      */
-    ifProduction(new OfflinePlugin({
-        ServiceWorker: {
-            events: true,
-        },
-        appShell: "/offline.html",
-        caches: {
-            additional: [
-                ":externals:",
-            ],
-            externals: [
-                "/offline.html",
-            ],
-            main: [
-                ":rest:",
-            ],
-        },
-        responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
-        safeToUseOptionalCaches: true,
-    }), undefined),
+    ifProduction(
+        new OfflinePlugin({
+            ServiceWorker: {
+                events: true,
+            },
+            appShell: "/offline.html",
+            caches: {
+                additional: [":externals:"],
+                externals: ["/offline.html"],
+                main: [":rest:"],
+            },
+            responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
+            safeToUseOptionalCaches: true,
+        }),
+        undefined,
+    ),
     /**
      * This is necessary to emit hot updates (currently CSS only):
      *

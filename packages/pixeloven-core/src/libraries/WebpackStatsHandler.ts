@@ -1,5 +1,5 @@
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
-import {Options, Stats} from "webpack";
+import { Options, Stats } from "webpack";
 
 export interface FormattedStats {
     errors: string[];
@@ -12,7 +12,6 @@ export interface FormattedStats {
  * @todo Add the ability to suppress warnings
  */
 class WebpackStatsHandler {
-
     /**
      * Stats "level" of detail
      */

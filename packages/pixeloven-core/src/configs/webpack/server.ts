@@ -1,15 +1,15 @@
-import {Module, Node, Output, RuleSetRule} from "webpack";
-import {getIfUtils, removeEmpty} from "webpack-config-utils";
+import { Module, Node, Output, RuleSetRule } from "webpack";
+import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import merge from "webpack-merge";
 import webpackNodeExternals from "webpack-node-externals";
 import Env from "../../libraries/Env";
-import {resolvePath} from "../../macros";
+import { resolvePath } from "../../macros";
 import common from "./common";
 
 /**
  * Utility functions to help segment configuration based on environment
  */
-const {ifProduction, ifDevelopment} = getIfUtils(Env.current);
+const { ifProduction, ifDevelopment } = getIfUtils(Env.current);
 
 /**
  * Webpack uses `publicPath` to determine where the app is being served from.
@@ -21,7 +21,10 @@ const publicPath = Env.config("PUBLIC_URL", "/");
  * Define entrypoint(s) for sever
  */
 const entry = removeEmpty([
-    ifProduction(resolvePath("src/server/index.ts"), resolvePath("src/server/webpack.ts")),
+    ifProduction(
+        resolvePath("src/server/index.ts"),
+        resolvePath("src/server/webpack.ts"),
+    ),
 ]);
 
 /**
@@ -90,9 +93,11 @@ const typeScriptRule: RuleSetRule = {
  * Define how source files are handled
  */
 const module: Module = {
-    rules: [{
-        oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule],
-    }],
+    rules: [
+        {
+            oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule],
+        },
+    ],
     strictExportPresence: true,
 };
 

@@ -3,7 +3,7 @@
     "baseUrl": "./packages",
     "moduleResolution": "node",
     "target": "es5",
-    "module":"es2015",
+    "module":"commonjs",
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "declaration": true,
     "sourceMap": true,
@@ -24,8 +24,8 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "declarationDir": "dist/types",
-    "outDir": "dist/lib",
+    "declarationDir": "./dist/types",
+    "outDir": "./dist/lib",
     "typeRoots": [
       "definitions",
       "node_modules/@types"

@@ -4,7 +4,6 @@
 // TODO need to unify our error handling for server, client and build scripts
 
 class Exception extends Error {
-
     public name: string;
     public message: string;
 

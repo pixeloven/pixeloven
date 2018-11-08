@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import {NodeProcessException} from "../exceptions";
+import { NodeProcessException } from "../exceptions";
 
 export type Environment = "development" | "production" | "test";
 
@@ -24,7 +24,6 @@ export interface DefaultEnv extends NodeJS.ProcessEnv {
 }
 
 export class Env {
-
     /**
      * Default values for env
      */
@@ -55,12 +54,13 @@ export class Env {
     public static config(): NodeJS.ProcessEnv;
     public static config(key: string): string | undefined;
     public static config(key: string, defaultValue: string): string;
-    public static config(key?: string, defaultValue?: string): NodeJS.ProcessEnv | string | undefined {
+    public static config(
+        key?: string,
+        defaultValue?: string,
+    ): NodeJS.ProcessEnv | string | undefined {
         if (key && process.env.hasOwnProperty(key)) {
             const value = process.env[key];
-            return !value
-                ? defaultValue
-                : value;
+            return !value ? defaultValue : value;
         }
         return process.env;
     }
@@ -83,7 +83,9 @@ export class Env {
             throw new NodeProcessException("Node process is undefined.");
         }
         if (!process.env) {
-            throw new NodeProcessException("Node environmental variables are undefined.");
+            throw new NodeProcessException(
+                "Node environmental variables are undefined.",
+            );
         }
         dotenv.config();
         if (environment) {
