@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import {FileNotFoundException} from "./exceptions";
-import {logger} from "./libraries";
+import { FileNotFoundException } from "./exceptions";
+import { logger } from "./libraries";
 
 /**
  * Handle errors
@@ -22,10 +22,18 @@ export function handleError(error: Error) {
  * @param relativePath
  * @param strict if true returns
  */
-export function resolvePath(relativePath: string, strict: boolean = true): string {
-    const absolutePath = path.resolve(fs.realpathSync(process.cwd()), relativePath);
+export function resolvePath(
+    relativePath: string,
+    strict: boolean = true,
+): string {
+    const absolutePath = path.resolve(
+        fs.realpathSync(process.cwd()),
+        relativePath,
+    );
     if (strict && !fs.existsSync(absolutePath)) {
-        throw new FileNotFoundException(`No such file or directory ${absolutePath}.`);
+        throw new FileNotFoundException(
+            `No such file or directory ${absolutePath}.`,
+        );
     }
     return absolutePath;
 }
@@ -37,7 +45,7 @@ export function resolvePath(relativePath: string, strict: boolean = true): strin
 export function sleep(milliseconds: number) {
     const start = new Date().getTime();
     for (let i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds) {
+        if (new Date().getTime() - start > milliseconds) {
             break;
         }
     }
