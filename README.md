@@ -174,7 +174,9 @@ warning semantic-release > @semantic-release/npm > npm > npm-registry-fetch > ma
 
 1) Add rollupjs
 2) typescript should ignore .test
-3) Clean up type docs
+3) Clean up type docs     "external-modulemap": ".*packages\/.*", need to figure this out
+    - run: yarn build:docs
+    - run: yarn deploy:docs
 4) Setup coverage reporting https://docs.coveralls.io/supported-ci-services
 
 ### More get started

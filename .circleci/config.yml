@@ -46,5 +46,3 @@ jobs:
     - run: yarn lint
     - run: yarn test
     - run: yarn build
-    - run: yarn build:docs
-    - run: yarn deploy:docs

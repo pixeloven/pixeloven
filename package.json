@@ -1,7 +1,6 @@
 {
   "name": "pixeloven",
   "author": "Brian Gebel <brian@pixeloven.com>",
-  "version": "0.1.0",
   "description": "Framework for build Client and Server JavaScript applications",
   "private": true,
   "repository": {
@@ -18,7 +17,8 @@
   ],
   "scripts": {
     "build": "tsc -b packages/pixeloven-core",
-    "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file packages",
+    "build:docs": "typedoc --options typedoc.json",
+    "clean": "lerna clean",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "pretty": "prettier **/*.{ts,tsx} --write",
     "lint": "tslint --project . -t codeFrame",
