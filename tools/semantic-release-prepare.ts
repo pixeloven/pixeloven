@@ -1,4 +1,4 @@
-import {fork} from "child_process";
+import { fork } from "child_process";
 import colors from "colors";
 import { readFileSync, writeFileSync } from "fs";
 import path from "path";

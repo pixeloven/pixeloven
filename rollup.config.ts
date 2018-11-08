@@ -20,10 +20,10 @@
 //             name: camelCase(libraryName),
 //             sourcemap: true,
 //         },
-//         { 
-//             file: pkg.module, 
-//             format: "es", 
-//             sourcemap: true 
+//         {
+//             file: pkg.module,
+//             format: "es",
+//             sourcemap: true
 //         },
 //     ],
 //     plugins: [
