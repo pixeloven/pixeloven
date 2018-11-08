@@ -22,10 +22,12 @@ import Env from "../../libraries/Env";
 import { resolvePath } from "../../macros";
 import common from "./common";
 
-// TODO optimize builds
-// see if we can use TS Fork (at least for prod build)
-// see how we can use babels cache
-// TODO implement tslint-loader if we can do ts fork in development
+/**
+ * @todo optimize builds
+ * see if we can use TS Fork (at least for prod build)
+ * see how we can use babels cache
+ * @todo implement tslint-loader if we can do ts fork in development
+ */
 
 /**
  * Utility functions to help segment configuration based on environment
