@@ -34,7 +34,12 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "{packages,src,test}/**/*.ts": [
+    "{src,test}/**/*.ts": [
+      "yarn run pretty",
+      "yarn run lint",
+      "git add"
+    ],
+    "packages/**/*.ts": [
       "yarn run pretty",
       "yarn run lint",
       "git add"
