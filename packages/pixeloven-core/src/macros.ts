@@ -8,13 +8,13 @@ import { logger } from "./libraries";
  * @param error
  */
 export function handleError(error: Error) {
-  if (error.message) {
-    logger.error(error.message);
-  }
-  if (error.stack) {
-    logger.error(error.stack);
-  }
-  process.exit(1);
+    if (error.message) {
+        logger.error(error.message);
+    }
+    if (error.stack) {
+        logger.error(error.stack);
+    }
+    process.exit(1);
 }
 
 /**
@@ -23,19 +23,19 @@ export function handleError(error: Error) {
  * @param strict if true returns
  */
 export function resolvePath(
-  relativePath: string,
-  strict: boolean = true
+    relativePath: string,
+    strict: boolean = true,
 ): string {
-  const absolutePath = path.resolve(
-    fs.realpathSync(process.cwd()),
-    relativePath
-  );
-  if (strict && !fs.existsSync(absolutePath)) {
-    throw new FileNotFoundException(
-      `No such file or directory ${absolutePath}.`
+    const absolutePath = path.resolve(
+        fs.realpathSync(process.cwd()),
+        relativePath,
     );
-  }
-  return absolutePath;
+    if (strict && !fs.existsSync(absolutePath)) {
+        throw new FileNotFoundException(
+            `No such file or directory ${absolutePath}.`,
+        );
+    }
+    return absolutePath;
 }
 
 /**
@@ -43,10 +43,10 @@ export function resolvePath(
  * @param milliseconds
  */
 export function sleep(milliseconds: number) {
-  const start = new Date().getTime();
-  for (let i = 0; i < 1e7; i++) {
-    if (new Date().getTime() - start > milliseconds) {
-      break;
+    const start = new Date().getTime();
+    for (let i = 0; i < 1e7; i++) {
+        if (new Date().getTime() - start > milliseconds) {
+            break;
+        }
     }
-  }
 }

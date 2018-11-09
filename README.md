@@ -178,7 +178,7 @@ warning semantic-release > @semantic-release/npm > npm > npm-registry-fetch > ma
     - run: yarn build:docs
     - run: yarn deploy:docs
 4) Setup coverage reporting https://docs.coveralls.io/supported-ci-services
-
+5) prettier is lossing the configuration :(
 ### More get started
 ```bash
 npm install --global lerna

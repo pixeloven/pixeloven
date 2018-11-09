@@ -2,6 +2,8 @@
 #https://gist.githubusercontent.com/davidbarral/6bba314cc4b9b6c51eb8c4c616d8be27/raw/044ab37607c03c391bf134f847313271b4678731/task
 # Re-write this in TypeScript and compile
 # Also need to use absolute pathing
+# figure out how to use the local configs instead of cmd line
+
 CMD=$1
 shift
 
@@ -17,7 +19,7 @@ case $CMD in
     ;;
     
   pretty)
-    exe "prettier **/*.{ts,tsx} --write"
+    exe "prettier **/*.{ts,tsx} --write --trailing-comma all --tab-width 4"
     ;;
 
   test)

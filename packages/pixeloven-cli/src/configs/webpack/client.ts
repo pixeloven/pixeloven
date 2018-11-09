@@ -8,13 +8,13 @@ import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
 import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 import webpack, {
-  DevtoolModuleFilenameTemplateInfo,
-  Module,
-  Node,
-  Options,
-  Output,
-  Plugin,
-  RuleSetRule
+    DevtoolModuleFilenameTemplateInfo,
+    Module,
+    Node,
+    Options,
+    Output,
+    Plugin,
+    RuleSetRule,
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
@@ -44,40 +44,40 @@ const publicPath = env.config("PUBLIC_URL", "/");
  * @param info
  */
 const devtoolModuleFilenameTemplate = (
-  info: DevtoolModuleFilenameTemplateInfo
+    info: DevtoolModuleFilenameTemplateInfo,
 ) => {
-  if (ifProduction()) {
-    return path
-      .relative(resolvePath("src"), info.absoluteResourcePath)
-      .replace(/\\/g, "/");
-  }
-  return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
+    if (ifProduction()) {
+        return path
+            .relative(resolvePath("src"), info.absoluteResourcePath)
+            .replace(/\\/g, "/");
+    }
+    return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
 };
 
 /**
  * Define entrypoint(s) for client
  */
 const entry = {
-  main: removeEmpty([
-    ifDevelopment("webpack-hot-middleware/client?reload=true", undefined),
-    resolvePath("src/client/index.tsx")
-  ])
+    main: removeEmpty([
+        ifDevelopment("webpack-hot-middleware/client?reload=true", undefined),
+        resolvePath("src/client/index.tsx"),
+    ]),
 };
 
 /**
  * Post CSS fixes
  */
 const postCssPlugin = () => [
-  require("postcss-flexbugs-fixes"),
-  autoprefixer({
-    browsers: [
-      ">1%",
-      "last 4 versions",
-      "Firefox ESR",
-      "not ie < 9" // React doesn"t support IE8 anyway
-    ],
-    flexbox: "no-2009"
-  })
+    require("postcss-flexbugs-fixes"),
+    autoprefixer({
+        browsers: [
+            ">1%",
+            "last 4 versions",
+            "Firefox ESR",
+            "not ie < 9", // React doesn"t support IE8 anyway
+        ],
+        flexbox: "no-2009",
+    }),
 ];
 
 /**
@@ -89,38 +89,38 @@ const postCssPlugin = () => [
  * that fall through the other loaders.
  */
 const catchAllRule = {
-  exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
-  loader: require.resolve("file-loader"),
-  options: {
-    name: ifProduction("[name].[contenthash].[ext]", "[name].[hash].[ext]"),
-    outputPath: "static/media/" // TODO config
-  }
+    exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
+    loader: require.resolve("file-loader"),
+    options: {
+        name: ifProduction("[name].[contenthash].[ext]", "[name].[hash].[ext]"),
+        outputPath: "static/media/", // TODO config
+    },
 };
 
 /**
  * Handle css/scss
  */
 const scssRule: RuleSetRule = {
-  test: /\.(scss|sass|css)$/i,
-  use: removeEmpty([
-    ifDevelopment({
-      loader: "css-hot-loader"
-    }),
-    MiniCssExtractPlugin.loader,
-    {
-      loader: "css-loader"
-    },
-    {
-      loader: "postcss-loader",
-      options: {
-        ident: "postcss",
-        plugins: postCssPlugin
-      }
-    },
-    {
-      loader: "sass-loader"
-    }
-  ])
+    test: /\.(scss|sass|css)$/i,
+    use: removeEmpty([
+        ifDevelopment({
+            loader: "css-hot-loader",
+        }),
+        MiniCssExtractPlugin.loader,
+        {
+            loader: "css-loader",
+        },
+        {
+            loader: "postcss-loader",
+            options: {
+                ident: "postcss",
+                plugins: postCssPlugin,
+            },
+        },
+        {
+            loader: "sass-loader",
+        },
+    ]),
 };
 
 /**
@@ -129,11 +129,11 @@ const scssRule: RuleSetRule = {
  * smaller than specified limit in bytes as data URLs to avoid requests.
  */
 const staticFileRule: RuleSetRule = {
-  loader: require.resolve("url-loader"),
-  options: {
-    limit: 10000
-  },
-  test: /\.(bmp|png|jpg|gif|svg|eot|ttf|woff|woff2)$/
+    loader: require.resolve("url-loader"),
+    options: {
+        limit: 10000,
+    },
+    test: /\.(bmp|png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
 };
 
 /**
@@ -145,32 +145,32 @@ const staticFileRule: RuleSetRule = {
  * @todo Babel probably doesn't need to be run for server config
  */
 const typeScriptRule: RuleSetRule = {
-  include: resolvePath("src"),
-  test: /\.(ts|tsx)$/,
-  use: [
-    {
-      loader: "babel-loader"
-    },
-    {
-      loader: "ts-loader",
-      options: {
-        configFile: resolvePath("tsconfig.json")
-        // transpileOnly: true,
-      }
-    }
-  ]
+    include: resolvePath("src"),
+    test: /\.(ts|tsx)$/,
+    use: [
+        {
+            loader: "babel-loader",
+        },
+        {
+            loader: "ts-loader",
+            options: {
+                configFile: resolvePath("tsconfig.json"),
+                // transpileOnly: true,
+            },
+        },
+    ],
 };
 
 /**
  * Define how source files are handled
  */
 const module: Module = {
-  rules: [
-    {
-      oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule]
-    }
-  ],
-  strictExportPresence: true
+    rules: [
+        {
+            oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule],
+        },
+    ],
+    strictExportPresence: true,
 };
 
 /**
@@ -178,184 +178,184 @@ const module: Module = {
  * Tell Webpack to provide empty mocks for them so importing them works.
  */
 const node: Node = {
-  child_process: "empty",
-  dgram: "empty",
-  fs: "empty",
-  net: "empty",
-  tls: "empty"
+    child_process: "empty",
+    dgram: "empty",
+    fs: "empty",
+    net: "empty",
+    tls: "empty",
 };
 
 /**
  * Define build optimization options
  */
 const optimization: Options.Optimization = {
-  minimize: ifProduction(),
-  minimizer: ifProduction(
-    [
-      /**
-       * Minify the code JavaScript
-       *
-       * @env production
-       */
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false,
-        uglifyOptions: {
-          compress: {
-            comparisons: false,
-            warnings: false
-          },
-          output: {
-            ascii_only: true,
-            comments: false
-          }
-        }
-      }),
-      new OptimizeCSSAssetsPlugin()
-    ],
-    []
-  ),
-  splitChunks: {
-    chunks: "all"
-  }
+    minimize: ifProduction(),
+    minimizer: ifProduction(
+        [
+            /**
+             * Minify the code JavaScript
+             *
+             * @env production
+             */
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: false,
+                uglifyOptions: {
+                    compress: {
+                        comparisons: false,
+                        warnings: false,
+                    },
+                    output: {
+                        ascii_only: true,
+                        comments: false,
+                    },
+                },
+            }),
+            new OptimizeCSSAssetsPlugin(),
+        ],
+        [],
+    ),
+    splitChunks: {
+        chunks: "all",
+    },
 };
 
 /**
  * @description Output instructions for client build
  */
 const output: Output = {
-  chunkFilename: ifProduction(
-    "static/js/[name].[contenthash].js",
-    "static/js/[name].[hash].js"
-  ),
-  devtoolModuleFilenameTemplate,
-  filename: ifProduction(
-    "static/js/[name].[contenthash].js",
-    "static/js/[name].[hash].js"
-  ),
-  path: resolvePath("build/public", false),
-  publicPath
+    chunkFilename: ifProduction(
+        "static/js/[name].[contenthash].js",
+        "static/js/[name].[hash].js",
+    ),
+    devtoolModuleFilenameTemplate,
+    filename: ifProduction(
+        "static/js/[name].[contenthash].js",
+        "static/js/[name].[hash].js",
+    ),
+    path: resolvePath("build/public", false),
+    publicPath,
 };
 
 /**
  * @description Plugins for client specific builds
  */
 const plugins: Plugin[] = removeEmpty([
-  /**
-   * Define environmental variables for application
-   *
-   * @env all
-   */
-  new webpack.EnvironmentPlugin({
-    NODE_ENV: ifProduction("production", "development")
-  }),
-  /**
-   * Copy files
-   * @env production
-   */
-  ifProduction(
-    new CopyWebpackPlugin([
-      {
-        from: resolvePath("public"),
-        ignore: ["*.html"]
-      }
-    ]),
-    undefined
-  ),
-  /**
-   * Extract css to file
-   * @env production
-   */
-  new MiniCssExtractPlugin({
-    chunkFilename: ifProduction(
-      "static/css/[name].[contenthash].css",
-      "static/css/[name].[hash].css"
+    /**
+     * Define environmental variables for application
+     *
+     * @env all
+     */
+    new webpack.EnvironmentPlugin({
+        NODE_ENV: ifProduction("production", "development"),
+    }),
+    /**
+     * Copy files
+     * @env production
+     */
+    ifProduction(
+        new CopyWebpackPlugin([
+            {
+                from: resolvePath("public"),
+                ignore: ["*.html"],
+            },
+        ]),
+        undefined,
     ),
-    filename: ifProduction(
-      "static/css/[name].[contenthash].css",
-      "static/css/[name].[hash].css"
-    )
-  }),
-  /**
-   * Generate a manifest file which contains a mapping of all asset filenames
-   * to their corresponding output file so that tools can pick it up without
-   * having to parse `index.html`.
-   *
-   * @env production
-   */
-  ifProduction(
-    new ManifestPlugin({
-      fileName: "asset-manifest.json"
+    /**
+     * Extract css to file
+     * @env production
+     */
+    new MiniCssExtractPlugin({
+        chunkFilename: ifProduction(
+            "static/css/[name].[contenthash].css",
+            "static/css/[name].[hash].css",
+        ),
+        filename: ifProduction(
+            "static/css/[name].[contenthash].css",
+            "static/css/[name].[hash].css",
+        ),
     }),
-    undefined
-  ),
-  /**
-   * Generates html file for offline use
-   *
-   * @env production
-   */
-  ifProduction(
-    new HtmlWebpackPlugin({
-      filename: resolvePath("build/public/offline.html", false),
-      inject: true,
-      minify: {
-        collapseWhitespace: true,
-        keepClosingSlash: true,
-        minifyCSS: true,
-        minifyJS: true,
-        minifyURLs: true,
-        removeComments: true,
-        removeEmptyAttributes: true,
-        removeRedundantAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      },
-      template: resolvePath("public/offline.html")
-    }),
-    undefined
-  ),
-  /**
-   * Generate a service worker script that will precache, and keep up to date,
-   * the HTML & assets that are part of the Webpack build.
-   *
-   * @env production
-   */
-  ifProduction(
-    new OfflinePlugin({
-      ServiceWorker: {
-        events: true
-      },
-      appShell: "/offline.html",
-      caches: {
-        additional: [":externals:"],
-        externals: ["/offline.html"],
-        main: [":rest:"]
-      },
-      responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
-      safeToUseOptionalCaches: true
-    }),
-    undefined
-  ),
-  /**
-   * This is necessary to emit hot updates (currently CSS only):
-   *
-   * @env development
-   */
-  ifDevelopment(new webpack.HotModuleReplacementPlugin(), undefined)
+    /**
+     * Generate a manifest file which contains a mapping of all asset filenames
+     * to their corresponding output file so that tools can pick it up without
+     * having to parse `index.html`.
+     *
+     * @env production
+     */
+    ifProduction(
+        new ManifestPlugin({
+            fileName: "asset-manifest.json",
+        }),
+        undefined,
+    ),
+    /**
+     * Generates html file for offline use
+     *
+     * @env production
+     */
+    ifProduction(
+        new HtmlWebpackPlugin({
+            filename: resolvePath("build/public/offline.html", false),
+            inject: true,
+            minify: {
+                collapseWhitespace: true,
+                keepClosingSlash: true,
+                minifyCSS: true,
+                minifyJS: true,
+                minifyURLs: true,
+                removeComments: true,
+                removeEmptyAttributes: true,
+                removeRedundantAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true,
+            },
+            template: resolvePath("public/offline.html"),
+        }),
+        undefined,
+    ),
+    /**
+     * Generate a service worker script that will precache, and keep up to date,
+     * the HTML & assets that are part of the Webpack build.
+     *
+     * @env production
+     */
+    ifProduction(
+        new OfflinePlugin({
+            ServiceWorker: {
+                events: true,
+            },
+            appShell: "/offline.html",
+            caches: {
+                additional: [":externals:"],
+                externals: ["/offline.html"],
+                main: [":rest:"],
+            },
+            responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
+            safeToUseOptionalCaches: true,
+        }),
+        undefined,
+    ),
+    /**
+     * This is necessary to emit hot updates (currently CSS only):
+     *
+     * @env development
+     */
+    ifDevelopment(new webpack.HotModuleReplacementPlugin(), undefined),
 ]);
 
 /**
  * Client side configuration
  */
 export default merge(common, {
-  devtool: ifDevelopment("eval-source-map", false),
-  entry,
-  module,
-  name: "client",
-  node,
-  optimization,
-  output,
-  plugins,
-  target: "web"
+    devtool: ifDevelopment("eval-source-map", false),
+    entry,
+    module,
+    name: "client",
+    node,
+    optimization,
+    output,
+    plugins,
+    target: "web",
 });
