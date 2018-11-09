@@ -66,8 +66,8 @@
     "precompile": "pixeloven-cli compile:clean",
     "lint": "pixeloven-cli lint",
     "test": "pixeloven-cli test",
+    "test:watch": "pixeloven-cli test:watch",
     "pretty": "pixeloven-cli pretty",
-    "prebuild": "pixeloven-cli compile:clean",
     "pretest": "pixeloven-cli test:clean"
   }
 }
