@@ -10,27 +10,35 @@ shift
 exe() { echo "$@" ; $@ ; }
 
 case $CMD in
-  clean)
-    exe "rm -fr ./lib"
+  "clean")
+    exe "rimraf **/node_modules"
     ;;
-    
-  compile)
+
+  "compile")
     exe "../../node_modules/.bin/babel --config-file $(pwd)/babel.config.js --verbose -d ./lib ./src"
     ;;
-    
-  pretty)
+
+  "compile:clean")
+    exe "rimraf **/dist && rimraf **/docs"
+    ;;
+
+  "pretty")
     exe "prettier **/*.{ts,tsx} --write --trailing-comma all --tab-width 4"
     ;;
 
-  test)
+  "test")
     if [ -d "./test" ]; then
       exe "../../node_modules/.bin/jest -c $(pwd)/jest.config.js --rootDir ."
     else
       echo "No tests to run"
     fi
     ;;
-    
-  lint)
+
+  "test:clean")
+    exe "rimraf **/coverage"
+    ;;
+
+  "lint")
     exe "tslint --project . -t codeFrame"
     ;;
     
