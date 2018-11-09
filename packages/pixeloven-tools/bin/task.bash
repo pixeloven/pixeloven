@@ -29,7 +29,7 @@ case $CMD in
     ;;
     
   lint)
-    exe "../../node_modules/.bin/eslint ./src ./test -c $(pwd)/eslint.config.js --report-unused-disable-directives"
+    exe "tslint --project . -t codeFrame"
     ;;
     
   *)

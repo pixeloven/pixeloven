@@ -6,7 +6,7 @@ import { env, Environment } from "@pixeloven/core";
  * terminate the Node.js process with a non-zero exit code.
  */
 process.on("unhandledRejection", err => {
-    throw err;
+  throw err;
 });
 
 /**

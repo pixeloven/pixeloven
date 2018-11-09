@@ -15,51 +15,51 @@ const { ifProduction, ifDevelopment } = getIfUtils(env.current);
  * Define build performance options
  */
 const performance: Options.Performance = {
-    hints: ifDevelopment("warning", false),
+  hints: ifDevelopment("warning", false)
 };
 
 /**
  * @description Plugins need to webpack to perform build
  */
 const plugins: Plugin[] = removeEmpty([
-    /**
-     * Fixes a known issue with cross-platform differences in file watchers,
-     * so that webpack doesn't lose file changes when watched files change rapidly
-     * https://github.com/webpack/webpack-dev-middleware#known-issues
-     *
-     * @env development
-     */
-    ifDevelopment(new TimeFixPlugin(), undefined),
-    /**
-     * Watcher doesn"t work well if you mistype casing in a path so we use
-     * a plugin that prints an error when you attempt to do this.
-     * See https://github.com/facebookincubator/create-react-app/issues/240
-     *
-     * @env development
-     */
-    ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
-    /**
-     * Moment.js is an extremely popular library that bundles large locale files
-     * by default due to how Webpack interprets its code. This is a practical
-     * solution that requires the user to opt into importing specific locales.
-     * @url https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-     * @env all
-     */
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    /**
-     * Perform type checking and linting in a separate process to speed up compilation
-     * TODO might prevent showing errors in browser if async is off... but then again it breaks hmr overlay
-     * @env all
-     */
-    // import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-    // ifProduction(new ForkTsCheckerWebpackPlugin({
-    //     tsconfig: resolvePath("tsconfig.json"),
-    //     tslint: resolvePath("tslint.json"),
-    // }), new ForkTsCheckerWebpackPlugin({
-    //     tsconfig: resolvePath("tsconfig.json"),
-    //     tslint: resolvePath("tslint.json"),
-    //     watch: resolvePath("src"),
-    // })),
+  /**
+   * Fixes a known issue with cross-platform differences in file watchers,
+   * so that webpack doesn't lose file changes when watched files change rapidly
+   * https://github.com/webpack/webpack-dev-middleware#known-issues
+   *
+   * @env development
+   */
+  ifDevelopment(new TimeFixPlugin(), undefined),
+  /**
+   * Watcher doesn"t work well if you mistype casing in a path so we use
+   * a plugin that prints an error when you attempt to do this.
+   * See https://github.com/facebookincubator/create-react-app/issues/240
+   *
+   * @env development
+   */
+  ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
+  /**
+   * Moment.js is an extremely popular library that bundles large locale files
+   * by default due to how Webpack interprets its code. This is a practical
+   * solution that requires the user to opt into importing specific locales.
+   * @url https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+   * @env all
+   */
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  /**
+   * Perform type checking and linting in a separate process to speed up compilation
+   * TODO might prevent showing errors in browser if async is off... but then again it breaks hmr overlay
+   * @env all
+   */
+  // import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+  // ifProduction(new ForkTsCheckerWebpackPlugin({
+  //     tsconfig: resolvePath("tsconfig.json"),
+  //     tslint: resolvePath("tslint.json"),
+  // }), new ForkTsCheckerWebpackPlugin({
+  //     tsconfig: resolvePath("tsconfig.json"),
+  //     tslint: resolvePath("tslint.json"),
+  //     watch: resolvePath("src"),
+  // })),
 ]);
 
 /**
@@ -71,36 +71,34 @@ const plugins: Plugin[] = removeEmpty([
  * Make sure your source files are compiled, as they will not be processed in any way.
  */
 const resolve: Resolve = {
-    extensions: [
-        ".mjs",
-        ".web.ts",
-        ".ts",
-        ".web.tsx",
-        ".tsx",
-        ".web.js",
-        ".js",
-        ".json",
-        ".web.jsx",
-        ".jsx",
-    ],
-    modules: [resolvePath("src"), "node_modules"],
-    plugins: [
-        new ModuleScopePlugin(resolvePath("src"), [
-            resolvePath("package.json"),
-        ]),
-        new TsconfigPathsPlugin({ configFile: resolvePath("tsconfig.json") }),
-    ],
+  extensions: [
+    ".mjs",
+    ".web.ts",
+    ".ts",
+    ".web.tsx",
+    ".tsx",
+    ".web.js",
+    ".js",
+    ".json",
+    ".web.jsx",
+    ".jsx"
+  ],
+  modules: [resolvePath("src"), "node_modules"],
+  plugins: [
+    new ModuleScopePlugin(resolvePath("src"), [resolvePath("package.json")]),
+    new TsconfigPathsPlugin({ configFile: resolvePath("tsconfig.json") })
+  ]
 };
 
 /**
  * Common configuration
  */
 const config: Configuration = {
-    bail: ifProduction(),
-    mode: ifProduction("production", "development"),
-    performance,
-    plugins,
-    resolve,
+  bail: ifProduction(),
+  mode: ifProduction("production", "development"),
+  performance,
+  plugins,
+  resolve
 };
 
 export default config;

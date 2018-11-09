@@ -61,6 +61,7 @@
     "@types/webpack-node-externals": "^1.6.3"
   },
   "scripts": {
+    "lint": "pixeloven-tools lint",
     "pretty": "pixeloven-tools pretty"
   }
 }

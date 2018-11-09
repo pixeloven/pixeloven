@@ -20,10 +20,10 @@ const publicPath = env.config("PUBLIC_URL", "/");
  * Define entrypoint(s) for sever
  */
 const entry = removeEmpty([
-    ifProduction(
-        resolvePath("src/server/index.ts"),
-        resolvePath("src/server/webpack.ts"),
-    ),
+  ifProduction(
+    resolvePath("src/server/index.ts"),
+    resolvePath("src/server/webpack.ts")
+  )
 ]);
 
 /**
@@ -35,19 +35,19 @@ const entry = removeEmpty([
  * that fall through the other loaders.
  */
 const catchAllRule = {
-    exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
-    loader: require.resolve("file-loader"),
-    options: {
-        emitFile: false,
-    },
+  exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
+  loader: require.resolve("file-loader"),
+  options: {
+    emitFile: false
+  }
 };
 
 /**
  * Handle css/scss
  */
 const scssRule: RuleSetRule = {
-    loader: "css-loader/locals",
-    test: /\.(scss|sass|css)$/i,
+  loader: "css-loader/locals",
+  test: /\.(scss|sass|css)$/i
 };
 
 /**
@@ -56,11 +56,11 @@ const scssRule: RuleSetRule = {
  * smaller than specified limit in bytes as data URLs to avoid requests.
  */
 const staticFileRule: RuleSetRule = {
-    loader: "url-loader",
-    options: {
-        emitFile: false,
-    },
-    test: /\.(bmp|png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+  loader: "url-loader",
+  options: {
+    emitFile: false
+  },
+  test: /\.(bmp|png|jpg|gif|svg|eot|ttf|woff|woff2)$/
 };
 
 /**
@@ -72,62 +72,62 @@ const staticFileRule: RuleSetRule = {
  * @todo Babel probably doesn't need to be run for server config
  */
 const typeScriptRule: RuleSetRule = {
-    include: resolvePath("src"),
-    test: /\.(ts|tsx)$/,
-    use: [
-        {
-            loader: "babel-loader",
-        },
-        {
-            loader: "ts-loader",
-            options: {
-                configFile: resolvePath("tsconfig.json"),
-                // transpileOnly: true,
-            },
-        },
-    ],
+  include: resolvePath("src"),
+  test: /\.(ts|tsx)$/,
+  use: [
+    {
+      loader: "babel-loader"
+    },
+    {
+      loader: "ts-loader",
+      options: {
+        configFile: resolvePath("tsconfig.json")
+        // transpileOnly: true,
+      }
+    }
+  ]
 };
 
 /**
  * Define how source files are handled
  */
 const module: Module = {
-    rules: [
-        {
-            oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule],
-        },
-    ],
-    strictExportPresence: true,
+  rules: [
+    {
+      oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule]
+    }
+  ],
+  strictExportPresence: true
 };
 
 /**
  * @description Prevents these common globals from being overwritten
  */
 const node: Node = {
-    __dirname: false,
-    __filename: false,
+  __dirname: false,
+  __filename: false
 };
 
 /**
  * @description Output instructions for server build
  */
 const output: Output = {
-    filename: "server.js",
-    libraryTarget: "commonjs2",
-    path: resolvePath("build", false),
-    publicPath,
+  filename: "server.js",
+  libraryTarget: "commonjs2",
+  path: resolvePath("build", false),
+  publicPath
 };
 
 /**
  * Server side configuration
  */
 export default merge(common, {
-    devtool: ifDevelopment("eval-source-map", false),
-    entry,
-    externals: [webpackNodeExternals()],
-    module,
-    name: "server",
-    node,
-    output,
-    target: "node",
+  devtool: ifDevelopment("eval-source-map", false),
+  entry,
+  externals: [webpackNodeExternals()],
+  module,
+  name: "server",
+  node,
+  output,
+  target: "node"
 });

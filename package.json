@@ -20,8 +20,8 @@
     "build:docs": "typedoc --options typedoc.json",
     "clean": "rimraf **/node_modules",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
-    "pretty": "prettier **/*.{ts,tsx} --write",
-    "lint": "tslint --project . -t codeFrame",
+    "lint": "pixeloven-tools lint",
+    "pretty": "pixeloven-tools pretty",
     "prebuild": "rimraf **/dist && rimraf **/docs",
     "pretest": "rimraf **/coverage",
     "start": "rollup -c rollup.config.ts -w",
@@ -34,14 +34,14 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "{test,tools}/**/*.ts": [
+    "{tools}/**/*.ts": [
       "yarn run pretty",
       "yarn run lint",
       "git add"
     ],
     "packages/**/*.ts": [
-      "yarn run pretty",
-      "yarn run lint",
+      "lerna run pretty",
+      "lerna run lint",
       "git add"
     ]
   },
@@ -99,6 +99,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-conventional": "^7.1.2",
+    "@pixeloven/tools": "^0.1.3",
     "@types/jest": "^23.3.2",
     "@types/node": "^10.11.0",
     "colors": "^1.3.2",
@@ -112,7 +113,6 @@
     "lerna": "3.4.3",
     "lint-staged": "^7.3.0",
     "lodash.camelcase": "^4.3.0",
-    "prettier": "^1.14.3",
     "prompt": "^1.0.0",
     "replace-in-file": "^3.4.2",
     "rimraf": "2.6.2",
@@ -125,10 +125,6 @@
     "semantic-release": "^15.9.16",
     "ts-jest": "23.10.4",
     "ts-node": "7.0.1",
-    "tslint": "5.11.0",
-    "tslint-config-prettier": "1.15.0",
-    "tslint-config-standard": "8.0.1",
-    "tslint-eslint-rules": "5.4.0",
     "typedoc": "0.13.0",
     "typedoc-plugin-monorepo": "0.1.0",
     "typescript": "3.1.6"
