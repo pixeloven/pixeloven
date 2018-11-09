@@ -4,6 +4,8 @@
 # Also need to use absolute pathing
 # figure out how to use the local configs instead of cmd line
 # Need to be able to specific paths with linting and prettier
+# Mack --colors configrable for CI
+# TODO Compile --watch is needed
 
 # Declare configuration files
 tsconfigrc="$(pwd)/tsconfig.json"
@@ -25,7 +27,7 @@ case $CMD in
 
   "compile")
     if [ -f $tsconfigrc ]; then
-      exe "tsc --project $tsconfigrc"
+      exe "tsc --pretty --project $tsconfigrc"
     else
       error "File not found $tsconfigrc"
     fi
@@ -53,7 +55,7 @@ case $CMD in
 
   "test")
     if [ -f $jestrc ]; then
-      exe "jest --config $jestrc"
+      exe "jest --color --config $jestrc"
     else
       error "File not found $jestrc"
     fi

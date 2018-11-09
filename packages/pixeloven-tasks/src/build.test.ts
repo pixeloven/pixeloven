@@ -1,5 +1,7 @@
 import "jest";
 
 describe("build", () => {
-    expect(0).toBeLessThanOrEqual(0);
+    it("should build things", () => {
+        expect(0).toBeLessThanOrEqual(0);
+    });
 });
