@@ -14,7 +14,7 @@ import {
     WebpackStatsHandler,
 } from "@pixeloven/core";
 import chalk from "chalk";
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import path from "path";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
@@ -87,7 +87,11 @@ try {
                     logLevel: "silent",
                     publicPath: PUBLIC_PATH,
                     reporter: (middlewareOptions, reporterOptions) => {
-                        if (reporterOptions.state && reporterOptions.stats) {
+                        if (
+                            reporterOptions.state &&
+                            reporterOptions.stats &&
+                            middlewareOptions.logLevel !== "silent"
+                        ) {
                             const handler = new WebpackStatsHandler(
                                 reporterOptions.stats,
                             );
@@ -137,20 +141,13 @@ try {
              * Create error handler for server errors
              * @todo Should render a basic page with the same stack style as the dev-middleware
              */
-            app.use(
-                (
-                    err: Error,
-                    req: Request,
-                    res: Response,
-                    next: NextFunction,
-                ) => {
-                    res.status(500).send(
-                        `<h1>Unexpected Error</h1><p>See console for more details.</p><p>${
-                            err.message
-                        }</p>`,
-                    );
-                },
-            );
+            app.use((err: Error, req: Request, res: Response) => {
+                res.status(500).send(
+                    `<h1>Unexpected Error</h1><p>See console for more details.</p><p>${
+                        err.message
+                    }</p>`,
+                );
+            });
 
             /**
              * Start express server on specific host and port
