@@ -1,0 +1,15 @@
+{
+  "name": "@pixeloven/{name}",
+  "version": "{version}",
+  "description": "{description}",
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "{author}",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
