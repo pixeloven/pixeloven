@@ -16,9 +16,9 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "pixeloven-cli lint",
-    "pretty": "pixeloven-cli pretty",
-    "build": "tsc -b packages/pixeloven-cli packages/pixeloven-core",
+    "lint": "lerna run lint",
+    "pretty": "lerna run pretty",
+    "compile": "lerna run compile",
     "build:docs": "typedoc --options typedoc.json",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "test": "jest",
@@ -31,8 +31,8 @@
   },
   "lint-staged": {
     "{tools}/**/*.ts": [
-      "yarn run pretty",
-      "yarn run lint",
+      "yarn pixeloven-cli lint",
+      "yarn pixeloven-cli pretty",
       "git add"
     ],
     "packages/**/*.ts": [
@@ -105,14 +105,12 @@
     "cz-conventional-changelog": "^2.1.0",
     "husky": "1.1.3",
     "jest": "23.6.0",
-    "jest-config": "23.6.0",
     "lerna": "3.4.3",
     "lint-staged": "^7.3.0",
     "lodash.camelcase": "^4.3.0",
     "prompt": "^1.0.0",
     "replace-in-file": "^3.4.2",
     "semantic-release": "^15.9.16",
-    "ts-jest": "23.10.4",
     "ts-node": "7.0.1",
     "typedoc": "0.13.0",
     "typedoc-plugin-monorepo": "0.1.0",

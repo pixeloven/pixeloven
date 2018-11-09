@@ -3,9 +3,18 @@
 # Re-write this in TypeScript and compile
 # Also need to use absolute pathing
 # figure out how to use the local configs instead of cmd line
+# Need to be able to specific paths with linting and prettier
+
+# Declare configuration files
+tsconfigrc="$(pwd)/tsconfig.json"
+tslintrc="$(pwd)/tslint.json"
+prettierrc="$(pwd)/prettierrc.json"
+jestrc="$(pwd)/jestrc.json"
 
 CMD=$1
 shift
+
+error() { echo -e "\e[31m$@"; exit 1; }
 
 exe() { echo "$@" ; $@ ; }
 
@@ -15,38 +24,58 @@ case $CMD in
     ;;
 
   "compile")
-    exe "../../node_modules/.bin/babel --config-file $(pwd)/babel.config.js --verbose -d ./lib ./src"
+    if [ -f $tsconfigrc ]; then
+      exe "tsc --project $tsconfigrc"
+    else
+      error "File not found $tsconfigrc"
+    fi
     ;;
 
   "compile:clean")
     exe "rimraf **/dist && rimraf **/docs"
     ;;
 
+  "lint")
+    if [ -f $tslintrc ]; then
+      exe "tslint -t codeFrame --config $tslintrc --project ."
+    else
+      error "File not found $tslintrc"
+    fi
+    ;;
+
   "pretty")
-    exe "prettier **/*.{ts,tsx} --write --trailing-comma all --tab-width 4"
+    if [ -f $prettierrc ]; then
+      exe "prettier **/*.{ts,tsx} --write --trailing-comma all --tab-width 4 --config $prettierrc"
+    else
+      error "File not found $prettierrc"
+    fi
     ;;
 
   "test")
-    if [ -d "./test" ]; then
-      exe "../../node_modules/.bin/jest -c $(pwd)/jest.config.js --rootDir ."
+    if [ -f $jestrc ]; then
+      exe "jest --config $jestrc"
     else
-      echo "No tests to run"
+      error "File not found $jestrc"
+    fi
+    ;;
+
+  "test:watch")
+    if [ -f $jestrc ]; then
+      exe "jest --watch --config $jestrc"
+    else
+      error "File not found $jestrc"
     fi
     ;;
 
   "test:clean")
     exe "rimraf **/coverage"
     ;;
-
-  "lint")
-    exe "tslint --project . -t codeFrame"
-    ;;
     
   *)
     if [[ -z "$CMD" ]]; then
-      echo "USAGE: ./task (clean|compile|test|lint|<node_modules_bin_command>) command_args"
+      echo "USAGE: ./task (clean|compile|lint|pretty|test|<node_modules_bin_command>) command_args"
       exit 0
     fi
-    exe "../../node_modules/.bin/$CMD $@"
+    exe "../node_modules/.bin/$CMD $@"
     ;;
 esac

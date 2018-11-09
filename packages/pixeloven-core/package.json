@@ -29,7 +29,10 @@
   },
   "scripts": {
     "clean": "pixeloven-cli clean",
+    "compile": "pixeloven-cli compile",
+    "precompile": "pixeloven-cli compile:clean",
     "lint": "pixeloven-cli lint",
+    "test": "pixeloven-cli test",
     "pretty": "pixeloven-cli pretty",
     "prebuild": "pixeloven-cli compile:clean",
     "pretest": "pixeloven-cli test:clean"
