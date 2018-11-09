@@ -1,4 +1,4 @@
-# pixeloven-cli
+# @pixeloven/cli
 
 > Pixel Oven CLI.
 
