@@ -2,8 +2,11 @@
   "name": "@pixeloven/tasks",
   "version": "0.2.1",
   "description": "Common tasks or jobs used during development and in production",
-  "main": "dist/lib/index.js",
+  "main": "dist/lib/main.js",
   "types": "dist/types/index.d.ts",
+  "bin": {
+    "pixeloven-tasks": "./dist/lib/main.js"
+  },
   "files": [
     "dist/"
   ],

@@ -55,7 +55,7 @@ case $CMD in
 
   "test")
     if [ -f $jestrc ]; then
-      exe "jest --color --config $jestrc --env=jsdom"
+      exe "jest --color --coverage --config $jestrc --env=jsdom"
     else
       error "File not found $jestrc"
     fi
