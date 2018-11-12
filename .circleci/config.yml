@@ -43,6 +43,6 @@ jobs:
         key: v1-dependencies-{{ checksum "package.json" }}
 
     # run tests!
-    - run: yarn lint
-    - run: yarn test
-    - run: yarn build
+    - run: lerna run lint
+    - run: lerna run test
+    - run: lerna run compile

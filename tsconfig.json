@@ -33,5 +33,9 @@
     "paths": {
       "@pixeloven/*": ["./pixeloven-*/src"],
     }
-  }
+  },
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

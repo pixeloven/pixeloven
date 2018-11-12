@@ -4,7 +4,7 @@
 import "./bootstrap/development";
 
 /**
- * Import dependencies asdasd
+ * Import dependencies
  */
 import {
     env,
