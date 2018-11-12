@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Common tasks or jobs used during development and in production",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,8 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^0.2.0",
-    "@pixeloven/core": "^0.2.0",
+    "@pixeloven/cli": "^0.2.1",
+    "@pixeloven/core": "^0.2.1",
     "autoprefixer": "9.3.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.1",
