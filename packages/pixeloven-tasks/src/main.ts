@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import fs from "fs";
+import path from "path";
 import spawn from "react-dev-utils/crossSpawn";
 
 /**
@@ -18,12 +20,13 @@ const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 /**
  * Spawn process to execute script
  */
+const absolutePath = path.resolve(fs.realpathSync(__dirname), `${script}.js`);
 const result = spawn.sync(
     "node",
-    nodeArgs
-        .concat(require.resolve(script))
-        .concat(args.slice(scriptIndex + 1)),
-    { stdio: "inherit" },
+    nodeArgs.concat(absolutePath).concat(args.slice(scriptIndex + 1)),
+    {
+        stdio: "inherit",
+    },
 );
 switch (script) {
     case "build":

@@ -64,6 +64,7 @@
     "@types/webpack-node-externals": "^1.6.3"
   },
   "scripts": {
+    "prepublish": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
     "compile": "pixeloven-cli compile",
     "precompile": "pixeloven-cli compile:clean",
