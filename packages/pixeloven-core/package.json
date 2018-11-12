@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/core",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Core Framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
