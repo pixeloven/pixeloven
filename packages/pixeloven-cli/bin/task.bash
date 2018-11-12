@@ -55,7 +55,7 @@ case $CMD in
 
   "test")
     if [ -f $jestrc ]; then
-      exe "jest --color --config $jestrc"
+      exe "jest --color --config $jestrc --env=jsdom"
     else
       error "File not found $jestrc"
     fi
@@ -63,7 +63,7 @@ case $CMD in
 
   "test:watch")
     if [ -f $jestrc ]; then
-      exe "jest --watch --config $jestrc"
+      exe "jest --watch --config $jestrc --env=jsdom"
     else
       error "File not found $jestrc"
     fi
