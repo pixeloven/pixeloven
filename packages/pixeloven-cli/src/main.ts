@@ -55,7 +55,7 @@ const execute = (name: string, args: string[]) => {
     const calling = yarnArgs
         .concat(path.resolve(__dirname, "../../node_modules/.bin/", name))
         .concat(args);
-    return spawn.sync("node", calling, {
+    return spawn.sync("yarn", calling, {
         stdio: "inherit",
     });
 };
