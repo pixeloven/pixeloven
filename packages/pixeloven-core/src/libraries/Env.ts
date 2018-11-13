@@ -56,7 +56,7 @@ export class Env {
     public static config(key: string, defaultValue: string): string;
     public static config(
         key?: string,
-        defaultValue?: string,
+        defaultValue?: string
     ): NodeJS.ProcessEnv | string | undefined {
         if (key && process.env.hasOwnProperty(key)) {
             const value = process.env[key];
@@ -84,7 +84,7 @@ export class Env {
         }
         if (!process.env) {
             throw new NodeProcessException(
-                "Node environmental variables are undefined.",
+                "Node environmental variables are undefined."
             );
         }
         dotenv.config();

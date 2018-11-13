@@ -2,9 +2,14 @@
   "name": "@pixeloven/cli",
   "version": "0.5.1",
   "description": "Command line interface for PixelOven framework",
+  "main": "dist/lib/main.js",
+  "types": "dist/types/index.d.ts",
   "bin": {
-    "pixeloven-cli": "./bin/task.bash"
+    "pixeloven-cli": "./dist/lib/main.js"
   },
+  "files": [
+    "dist/"
+  ],
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
     "type": "git",
@@ -17,6 +22,7 @@
   },
   "dependencies": {
     "@types/jest": "23.3.9",
+    "cross-spawn": "6.0.5",
     "jest": "23.6.0",
     "jest-config": "23.6.0",
     "prettier": "1.15.1",
@@ -31,5 +37,13 @@
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "3.6.0",
     "typescript": "3.1.6"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "6.0.0"
+  },
+  "scripts": {
+    "prepublish": "yarn compile",
+    "compile": "tsc --pretty --project .",
+    "precompile": "rimraf **/dist && rimraf **/docs"
   }
 }
