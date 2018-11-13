@@ -8,6 +8,9 @@
 # TODO Compile --watch is needed
 # Need to be able to pass args in...
 
+# Make style lint and prettier compatibile
+# Add codeFrame to stylelint
+
 # Declare configuration files
 tsconfigrc="$(pwd)/tsconfig.json"
 tslintrc="$(pwd)/tslint.json"
