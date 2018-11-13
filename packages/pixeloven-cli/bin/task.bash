@@ -6,12 +6,14 @@
 # Need to be able to specific paths with linting and prettier
 # Mack --colors configrable for CI
 # TODO Compile --watch is needed
+# Need to be able to pass args in...
 
 # Declare configuration files
 tsconfigrc="$(pwd)/tsconfig.json"
 tslintrc="$(pwd)/tslint.json"
 prettierrc="$(pwd)/prettierrc.json"
 jestrc="$(pwd)/jestrc.json"
+stylelintrc="$(pwd)/stylelintrc.json"
 
 CMD=$1
 shift
@@ -25,7 +27,7 @@ case $CMD in
     exe "rimraf **/node_modules"
     ;;
 
-  "compile")
+  "compile:ts")
     if [ -f $tsconfigrc ]; then
       exe "tsc --pretty --project $tsconfigrc"
     else
@@ -37,11 +39,19 @@ case $CMD in
     exe "rimraf **/dist && rimraf **/docs"
     ;;
 
-  "lint")
+  "lint:ts")
     if [ -f $tslintrc ]; then
       exe "tslint -t codeFrame --config $tslintrc --project ."
     else
       error "File not found $tslintrc"
+    fi
+    ;;
+
+  "lint:scss")
+    if [ -f $stylelintrc ]; then
+      exe "stylelint src/**/*.scss --syntax scss --config $stylelintrc"
+    else
+      error "File not found $stylelintrc"
     fi
     ;;
 
@@ -50,6 +60,22 @@ case $CMD in
       exe "prettier **/*.{ts,tsx} --write --trailing-comma all --tab-width 4 --config $prettierrc"
     else
       error "File not found $prettierrc"
+    fi
+    ;;
+
+  "pretty:ts")
+    if [ -f $tslintrc ]; then
+      exe "tslint -t codeFrame --config $tslintrc --project . --fix"
+    else
+      error "File not found $tslintrc"
+    fi
+    ;;
+
+  "pretty:scss")
+    if [ -f $stylelintrc ]; then
+      exe "stylelint src/**/*.scss --syntax scss --config $stylelintrc --fix"
+    else
+      error "File not found $stylelintrc"
     fi
     ;;
 

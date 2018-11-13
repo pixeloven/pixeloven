@@ -93,7 +93,7 @@ const catchAllRule = {
     loader: require.resolve("file-loader"),
     options: {
         name: ifProduction("[name].[contenthash].[ext]", "[name].[hash].[ext]"),
-        outputPath: "static/media/", // TODO config
+        outputPath: "static/media/",
     },
 };
 

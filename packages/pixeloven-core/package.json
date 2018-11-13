@@ -30,12 +30,12 @@
   "scripts": {
     "prepublish": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
-    "compile": "pixeloven-cli compile",
+    "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",
-    "lint": "pixeloven-cli lint",
+    "lint": "pixeloven-cli lint:ts",
     "test": "pixeloven-cli test",
     "test:watch": "pixeloven-cli test:watch",
-    "pretty": "pixeloven-cli pretty",
+    "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
     "pretest": "pixeloven-cli test:clean"
   }
 }
