@@ -80,7 +80,7 @@
     "@types/webpack-node-externals": "^1.6.3"
   },
   "scripts": {
-    "prepublish": "yarn lint && yarn test && yarn compile",
+    "prepare": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
     "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",
@@ -89,5 +89,6 @@
     "test:watch": "pixeloven-cli test:watch",
     "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
     "pretest": "pixeloven-cli test:clean"
-  }
+  },
+  "gitHead": "eed45766e7d81bea5129b2154c2a74888562ba2d"
 }

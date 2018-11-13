@@ -16,7 +16,7 @@
     "@pixeloven/cli": "0.5.0"
   },
   "scripts": {
-    "prepublish": "yarn lint && yarn test && yarn compile",
+    "prepare": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
     "compile": "pixeloven-cli compile",
     "precompile": "pixeloven-cli compile:clean",

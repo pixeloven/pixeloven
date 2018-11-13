@@ -35,7 +35,7 @@ const mapScriptIndex = (index: string) =>
  * @param file 
  * @return string
  * 
- * @todo Should add warning about which config is used?
+ * @todo Should add warning about which config is used.
  */
 const loadConfig = (file: string): string => {
     const remoteConfig = path.resolve(process.cwd(), file);

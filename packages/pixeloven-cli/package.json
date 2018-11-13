@@ -42,8 +42,9 @@
     "@types/cross-spawn": "6.0.0"
   },
   "scripts": {
-    "prepublish": "yarn compile",
+    "prepare": "yarn compile",
     "compile": "tsc --pretty --project .",
     "precompile": "rimraf **/dist && rimraf **/docs"
-  }
+  },
+  "gitHead": "eed45766e7d81bea5129b2154c2a74888562ba2d"
 }
