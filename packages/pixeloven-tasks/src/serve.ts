@@ -52,11 +52,11 @@ try {
             const urls = prepareUrls(DEFAULT_PROTOCOL, DEFAULT_HOST, PORT);
             logger.info(
                 `Attempting to bind to HOST: ${chalk.cyan(
-                    urls.localUrlForBrowser,
-                )}`,
+                    urls.localUrlForBrowser
+                )}`
             );
             logger.info(
-                `If successful the application will launch automatically.`,
+                `If successful the application will launch automatically.`
             );
             sleep(3000);
 
@@ -93,7 +93,7 @@ try {
                             middlewareOptions.logLevel !== "silent"
                         ) {
                             const handler = new WebpackStatsHandler(
-                                reporterOptions.stats,
+                                reporterOptions.stats
                             );
                             const stats = handler.format();
                             if (stats) {
@@ -110,7 +110,7 @@ try {
                                 }
                             } else {
                                 logger.error(
-                                    "Unexpected Error: Failed to retrieve webpack stats.",
+                                    "Unexpected Error: Failed to retrieve webpack stats."
                                 );
                             }
                         } else {
@@ -118,7 +118,7 @@ try {
                         }
                     },
                     serverSideRender: true,
-                },
+                }
             );
             app.use(webpackDevMiddlewareInstance);
 
@@ -126,13 +126,13 @@ try {
              * Setup hot middleware for client & server
              */
             const clientCompiler = combinedCompiler.compilers.find(
-                compiler => compiler.name === "client",
+                compiler => compiler.name === "client"
             );
             if (clientCompiler) {
                 app.use(
                     webpackHotMiddleware(clientCompiler, {
                         log: logger.info,
-                    }),
+                    })
                 );
             }
             app.use(webpackHotServerMiddleware(combinedCompiler));
@@ -145,7 +145,7 @@ try {
                 res.status(500).send(
                     `<h1>Unexpected Error</h1><p>See console for more details.</p><p>${
                         err.message
-                    }</p>`,
+                    }</p>`
                 );
             });
 

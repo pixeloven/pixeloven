@@ -44,7 +44,7 @@ const publicPath = env.config("PUBLIC_URL", "/");
  * @param info
  */
 const devtoolModuleFilenameTemplate = (
-    info: DevtoolModuleFilenameTemplateInfo,
+    info: DevtoolModuleFilenameTemplateInfo
 ) => {
     if (ifProduction()) {
         return path
@@ -214,7 +214,7 @@ const optimization: Options.Optimization = {
             }),
             new OptimizeCSSAssetsPlugin(),
         ],
-        [],
+        []
     ),
     splitChunks: {
         chunks: "all",
@@ -227,12 +227,12 @@ const optimization: Options.Optimization = {
 const output: Output = {
     chunkFilename: ifProduction(
         "static/js/[name].[contenthash].js",
-        "static/js/[name].[hash].js",
+        "static/js/[name].[hash].js"
     ),
     devtoolModuleFilenameTemplate,
     filename: ifProduction(
         "static/js/[name].[contenthash].js",
-        "static/js/[name].[hash].js",
+        "static/js/[name].[hash].js"
     ),
     path: resolvePath("build/public", false),
     publicPath,
@@ -261,7 +261,7 @@ const plugins: Plugin[] = removeEmpty([
                 ignore: ["*.html"],
             },
         ]),
-        undefined,
+        undefined
     ),
     /**
      * Extract css to file
@@ -270,11 +270,11 @@ const plugins: Plugin[] = removeEmpty([
     new MiniCssExtractPlugin({
         chunkFilename: ifProduction(
             "static/css/[name].[contenthash].css",
-            "static/css/[name].[hash].css",
+            "static/css/[name].[hash].css"
         ),
         filename: ifProduction(
             "static/css/[name].[contenthash].css",
-            "static/css/[name].[hash].css",
+            "static/css/[name].[hash].css"
         ),
     }),
     /**
@@ -288,7 +288,7 @@ const plugins: Plugin[] = removeEmpty([
         new ManifestPlugin({
             fileName: "asset-manifest.json",
         }),
-        undefined,
+        undefined
     ),
     /**
      * Generates html file for offline use
@@ -313,7 +313,7 @@ const plugins: Plugin[] = removeEmpty([
             },
             template: resolvePath("public/offline.html"),
         }),
-        undefined,
+        undefined
     ),
     /**
      * Generate a service worker script that will precache, and keep up to date,
@@ -335,7 +335,7 @@ const plugins: Plugin[] = removeEmpty([
             responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
             safeToUseOptionalCaches: true,
         }),
-        undefined,
+        undefined
     ),
     /**
      * This is necessary to emit hot updates (currently CSS only):

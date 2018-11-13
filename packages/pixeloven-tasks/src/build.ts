@@ -52,7 +52,7 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
  */
 const PRIVATE_BUILD_PATH = resolvePath(
     env.config("BUILD_PATH", "build"),
-    false,
+    false
 );
 const PUBLIC_BUILD_PATH = `${PRIVATE_BUILD_PATH}/public`;
 
@@ -78,7 +78,7 @@ function printBuildStatus(warnings: string[]) {
         logger.warn(
             "Search for the " +
                 chalk.underline(chalk.yellow("keywords")) +
-                " to learn more about each warning.",
+                " to learn more about each warning."
         );
     } else {
         logger.info("Compiled successfully.");
@@ -94,7 +94,7 @@ function printBuildStatus(warnings: string[]) {
 function printBuildFileSizesAfterGzip(
     buildPath: string,
     stats: Stats,
-    previousFileSizes: OpaqueFileSizes,
+    previousFileSizes: OpaqueFileSizes
 ) {
     logger.info("File sizes after gzip:\n");
     printFileSizesAfterBuild(
@@ -102,7 +102,7 @@ function printBuildFileSizesAfterGzip(
         previousFileSizes,
         buildPath,
         WARN_AFTER_BUNDLE_GZIP_SIZE,
-        WARN_AFTER_CHUNK_GZIP_SIZE,
+        WARN_AFTER_CHUNK_GZIP_SIZE
     );
     console.log();
 }
@@ -131,7 +131,7 @@ function build(config: object, previousFileSizes: OpaqueFileSizes) {
                 messages.warnings.length
             ) {
                 logger.info(
-                    "Treating warnings as errors because process.env.CI = true.",
+                    "Treating warnings as errors because process.env.CI = true."
                 );
                 logger.info("Most CI servers set it automatically.");
                 return reject(new Error(messages.warnings.join("\n\n")));
@@ -166,7 +166,7 @@ try {
             printBuildFileSizesAfterGzip(
                 PRIVATE_BUILD_PATH,
                 stats,
-                previousFileSizes,
+                previousFileSizes
             );
         }, handleError);
 
@@ -183,7 +183,7 @@ try {
             printBuildFileSizesAfterGzip(
                 PUBLIC_BUILD_PATH,
                 stats,
-                previousFileSizes,
+                previousFileSizes
             );
         }, handleError);
 } catch (error) {
