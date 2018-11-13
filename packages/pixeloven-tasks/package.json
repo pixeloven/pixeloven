@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Common tasks or jobs used during development and in production",
   "main": "dist/lib/main.js",
   "types": "dist/types/index.d.ts",
@@ -25,8 +25,8 @@
     "@babel/polyfill": "7.0.0",
     "@babel/preset-env": "7.1.5",
     "@babel/preset-react": "7.0.0",
-    "@pixeloven/cli": "^0.5.0",
-    "@pixeloven/core": "^0.5.0",
+    "@pixeloven/cli": "^0.5.1",
+    "@pixeloven/core": "^0.5.1",
     "@types/cross-spawn": "6.0.0",
     "autoprefixer": "9.3.1",
     "babel-loader": "8.0.4",
