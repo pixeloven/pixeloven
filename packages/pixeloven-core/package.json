@@ -38,5 +38,5 @@
     "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
     "pretest": "pixeloven-cli test:clean"
   },
-  "gitHead": "eed45766e7d81bea5129b2154c2a74888562ba2d"
+  "gitHead": "f63910323d1cd2b344a75b74ab0515e1e7130ca8"
 }
