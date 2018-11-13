@@ -1,6 +1,6 @@
 # @pixeloven/cli
 
-> Pixel Oven CLI.
+> Pixel Oven cli
 
 See our website [pixeloven-cli](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
 

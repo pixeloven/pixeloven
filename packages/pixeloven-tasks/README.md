@@ -1,6 +1,6 @@
 # @pixeloven/tasks
 
-> Pixel Oven Tasks.
+> Pixel Oven tasks
 
 See our website [pixeloven-tasks](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
 

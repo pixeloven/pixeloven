@@ -1,6 +1,6 @@
 # @pixeloven/core
 
-> Pixel Oven core framework.
+> Pixel Oven core.
 
 See our website [pixeloven-core](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
 
