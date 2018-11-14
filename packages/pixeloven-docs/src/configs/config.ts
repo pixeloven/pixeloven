@@ -1,12 +1,13 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
-import { importRemoteAsset } from "./macros";
 
 /**
  * Import remote assets dynamically
  */
-importRemoteAsset("src/shared/styles/core/core.scss");
+import("" + "../../../../../../src/shared/styles").catch((error: Error) => {
+    console.error("Failed to load scss files", error.message);
+});
 
 /**
  * Import storybook styles
@@ -31,7 +32,7 @@ addDecorator(withKnobs);
  * @todo Find a way to do this with process.cwd()
  */
 const req = require.context(
-    "./src/shared/components",
+    "../../../../../../src/shared/components",
     true,
     /.stories.[jt]sx?$/,
 );
