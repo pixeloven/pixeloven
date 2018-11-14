@@ -2,7 +2,7 @@
   "name": "@pixeloven/docs",
   "version": "0.8.9",
   "description": "Documentation generators",
-  "main": "dist/lib/main.js",
+  "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "bin": {
     "pixeloven-docs": "./dist/lib/main.js"

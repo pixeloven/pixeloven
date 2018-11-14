@@ -1,6 +1,6 @@
 import deepmerge from "deepmerge";
 import { Configuration, Module, RuleSetRule } from "webpack";
-import { resolveContext, resolveTsConfig } from "./macros";
+import { resolveRoot, resolveTsConfig } from "./macros";
 
 /**
  * Extend webpack config for storybook
@@ -27,12 +27,20 @@ export default (
     const newModule: Module = {
         rules: [newTsRule, newScssRule],
     };
-    defaultConfig.context = resolveContext();
     if (defaultConfig.module) {
         defaultConfig.module = deepmerge(defaultConfig.module, newModule);
     }
-    if (defaultConfig.resolve && defaultConfig.resolve.extensions) {
-        defaultConfig.resolve.extensions.push(".ts", ".tsx");
+    if (defaultConfig.resolve) {
+        if (defaultConfig.resolve.alias) {
+            defaultConfig.resolve.alias.root = resolveRoot();
+        } else {
+            defaultConfig.resolve.alias = {
+                root: resolveRoot(),
+            };
+        }
+        if (defaultConfig.resolve.extensions) {
+            defaultConfig.resolve.extensions.push(".ts", ".tsx");
+        }
     }
     return defaultConfig;
 };

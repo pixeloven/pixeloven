@@ -5,7 +5,7 @@ import { addDecorator, configure } from "@storybook/react";
 /**
  * Import remote assets dynamically
  */
-import("" + "../../../../../../src/shared/styles").catch((error: Error) => {
+import("" + "root/src/shared/styles").catch((error: Error) => {
     console.error("Failed to load scss files", error.message);
 });
 
@@ -29,13 +29,8 @@ addDecorator(withKnobs);
 
 /**
  * Stories loader
- * @todo Find a way to do this with process.cwd()
  */
-const req = require.context(
-    "../../../../../../src/shared/components",
-    true,
-    /.stories.[jt]sx?$/,
-);
+const req = require.context("root", true, /.stories.[jt]sx?$/);
 function loadStories() {
     req.keys().forEach(req);
 }
