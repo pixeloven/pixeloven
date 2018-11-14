@@ -37,6 +37,7 @@ const req = require.context(
     /.stories.[jt]sx?$/,
 );
 function loadStories() {
+    req.keys().forEach(value => console.log(value));
     req.keys().forEach(req);
 }
 
