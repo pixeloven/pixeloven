@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Command line interface for PixelOven framework",
   "bin": {
     "pixeloven-cli": "./bin/task.bash"
