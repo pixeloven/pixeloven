@@ -15,6 +15,7 @@ const { ifProduction, ifDevelopment } = getIfUtils(env.current);
  * It requires a trailing slash, or the file assets will get an incorrect path.
  */
 const publicPath = env.config("PUBLIC_URL", "/");
+const buildPath = env.config("BUILD_PATH", "dist");
 
 /**
  * Define entrypoint(s) for sever
@@ -114,7 +115,7 @@ const node: Node = {
 const output: Output = {
     filename: "server.js",
     libraryTarget: "commonjs2",
-    path: resolvePath("build", false),
+    path: resolvePath(buildPath, false),
     publicPath,
 };
 

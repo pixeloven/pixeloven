@@ -38,6 +38,7 @@ const { ifProduction, ifDevelopment } = getIfUtils(env.current);
  * It requires a trailing slash, or the file assets will get an incorrect path.
  */
 const publicPath = env.config("PUBLIC_URL", "/");
+const buildPath = env.config("BUILD_PATH", "dist");
 
 /**
  * Describe source pathing in dev tools
@@ -234,7 +235,7 @@ const output: Output = {
         "static/js/[name].[contenthash].js",
         "static/js/[name].[hash].js"
     ),
-    path: resolvePath("build/public", false),
+    path: resolvePath(`${buildPath}/public`, false),
     publicPath,
 };
 
@@ -297,7 +298,7 @@ const plugins: Plugin[] = removeEmpty([
      */
     ifProduction(
         new HtmlWebpackPlugin({
-            filename: resolvePath("build/public/offline.html", false),
+            filename: resolvePath(`${buildPath}/public/offline.html`, false),
             inject: true,
             minify: {
                 collapseWhitespace: true,

@@ -50,10 +50,7 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 /**
  * Setup build pathing
  */
-const PRIVATE_BUILD_PATH = resolvePath(
-    env.config("BUILD_PATH", "build"),
-    false
-);
+const PRIVATE_BUILD_PATH = resolvePath(env.config("BUILD_PATH", "dist"), false);
 const PUBLIC_BUILD_PATH = `${PRIVATE_BUILD_PATH}/public`;
 
 /**
