@@ -54,7 +54,7 @@
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
-    "compile": "pixeloven-cli compile:ts",
+    "compile": "pixeloven-cli compile:ts && cp ./src/configs/index.scss ./dist/lib/configs/index.scss",
     "precompile": "pixeloven-cli compile:clean",
     "lint": "pixeloven-cli lint:ts",
     "test": "pixeloven-cli test",
