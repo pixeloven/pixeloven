@@ -1,6 +1,6 @@
 import deepmerge from "deepmerge";
 import { Configuration, Module, RuleSetRule } from "webpack";
-import { resolveRoot, resolveTsConfig } from "./macros";
+import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
 /**
  * Extend webpack config for storybook
@@ -32,10 +32,10 @@ export default (
     }
     if (defaultConfig.resolve) {
         if (defaultConfig.resolve.alias) {
-            defaultConfig.resolve.alias.root = resolveRoot();
+            defaultConfig.resolve.alias.source = resolveSourceRoot();
         } else {
             defaultConfig.resolve.alias = {
-                root: resolveRoot(),
+                source: resolveSourceRoot(),
             };
         }
         if (defaultConfig.resolve.extensions) {

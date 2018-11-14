@@ -4,7 +4,8 @@ import path from "path";
  * Resolves context for webpack
  * @todo Should make this configurable
  */
-export const resolveRoot = (): string => path.resolve(process.cwd(), ".");
+export const resolveSourceRoot = (): string =>
+    path.resolve(process.cwd(), "./src");
 
 /**
  * Resolves tsconfig path
