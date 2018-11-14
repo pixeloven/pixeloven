@@ -13,7 +13,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "0.6.0"
+    "@pixeloven/cli": "^0.7.0"
   },
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn compile",

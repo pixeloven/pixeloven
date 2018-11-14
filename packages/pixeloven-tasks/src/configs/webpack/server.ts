@@ -23,7 +23,7 @@ const buildPath = env.config("BUILD_PATH", "dist");
 const entry = removeEmpty([
     ifProduction(
         resolvePath("src/server/index.ts"),
-        resolvePath("src/server/webpack.ts")
+        resolvePath("src/server/webpack.ts"),
     ),
 ]);
 

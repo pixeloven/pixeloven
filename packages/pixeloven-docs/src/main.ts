@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import { SpawnSyncReturns } from "child_process";
 import spawn from "cross-spawn";
-import fs from "fs";
-import path from "path";
 
 /**
  * Makes the script crash on unhandled rejections instead of silently
@@ -18,16 +16,20 @@ process.on("unhandledRejection", err => {
  * @param index
  */
 const mapScriptIndex = (index: string) =>
-    index === "build" || index === "serve";
+    index === "build" ||
+    index === "build:story" ||
+    index === "serve" ||
+    index === "serve:story";
 
 /**
- * Spawn process to execute script
+ * Execute yarn cmd
+ * @param name
+ * @param args
  */
-const execute = (index: number, name: string, args: string[]) => {
-    const nodeArgs = index > 0 ? args.slice(0, index) : [];
-    const absolutePath = path.resolve(fs.realpathSync(__dirname), `${name}.js`);
-    const calling = nodeArgs.concat(absolutePath).concat(args.slice(index + 1));
-    return spawn.sync("node", calling, {
+const execute = (name: string, args: string[]) => {
+    const yarnArgs: string[] = [];
+    const calling = yarnArgs.concat(name).concat(args);
+    return spawn.sync("yarn", calling, {
         stdio: "inherit",
     });
 };
@@ -59,6 +61,9 @@ const complete = (result: SpawnSyncReturns<Buffer>) => {
 
 /**
  * Setup variables and execute
+ *
+ * @todo Check for yarn before attempting to execute
+ * @todo Show usage for scripts if not in index
  */
 const scriptArgs = process.argv.slice(2);
 const scriptIndex = scriptArgs.findIndex(index => mapScriptIndex(index));
@@ -66,12 +71,18 @@ const scriptName = scriptIndex === -1 ? scriptArgs[0] : scriptArgs[scriptIndex];
 
 switch (scriptName) {
     case "build":
-    case "serve": {
-        const result = execute(scriptIndex, scriptName, scriptArgs);
+    case "build:story": {
+        const result = execute("rimraf", ["node_modules"]);
+        complete(result);
+        break;
+    }
+    case "serve":
+    case "serve:story": {
+        const result = execute("tsc", ["--pretty", "--project"]);
         complete(result);
         break;
     }
     default:
-        console.log(`Unknown script ${scriptName}.`);
+        console.log(`Unknown usage ${scriptName}.`);
         break;
 }

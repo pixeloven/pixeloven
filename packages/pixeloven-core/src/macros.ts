@@ -24,15 +24,15 @@ export function handleError(error: Error) {
  */
 export function resolvePath(
     relativePath: string,
-    strict: boolean = true
+    strict: boolean = true,
 ): string {
     const absolutePath = path.resolve(
         fs.realpathSync(process.cwd()),
-        relativePath
+        relativePath,
     );
     if (strict && !fs.existsSync(absolutePath)) {
         throw new FileNotFoundException(
-            `No such file or directory ${absolutePath}.`
+            `No such file or directory ${absolutePath}.`,
         );
     }
     return absolutePath;

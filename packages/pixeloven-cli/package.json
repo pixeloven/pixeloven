@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@types/jest": "23.3.9",
-    "cross-spawn": "6.0.5",
     "jest": "23.6.0",
     "jest-config": "23.6.0",
     "prettier": "1.15.1",
@@ -32,8 +31,5 @@
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "3.6.0",
     "typescript": "3.1.6"
-  },
-  "devDependencies": {
-    "@types/cross-spawn": "6.0.0"
   }
 }
