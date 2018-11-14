@@ -1,5 +1,6 @@
 import { withKnobs } from "@storybook/addon-knobs";
-import { setOptions } from "@storybook/addon-options";
+import { withNotes } from "@storybook/addon-notes";
+import { withOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
 
 /**
@@ -15,17 +16,18 @@ import("" + "root/src/shared/styles").catch((error: Error) => {
 import "./index.scss";
 
 /**
- * Set options for storybook
+ * Setup storybook addons
  */
-setOptions({
-    downPanelInRight: true,
-    goFullScreen: false,
-    name: "Storybook React",
-    showDownPanel: true,
-    showLeftPanel: true,
-    showSearchBox: false,
-});
+addDecorator(
+    withOptions({
+        addonPanelInRight: true,
+        goFullScreen: false,
+        name: "Storybook React",
+        showSearchBox: false,
+    }),
+);
 addDecorator(withKnobs);
+addDecorator(withNotes);
 
 /**
  * Stories loader

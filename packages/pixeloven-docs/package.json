@@ -45,10 +45,6 @@
   "devDependencies": {
     "@types/cross-spawn": "6.0.0",
     "@types/node": "10.12.7",
-    "@types/storybook__addon-actions": "3.4.1",
-    "@types/storybook__addon-knobs": "3.4.1",
-    "@types/storybook__addon-notes": "3.3.3",
-    "@types/storybook__addon-options": "3.2.2",
     "@types/storybook__react": "4.0.0"
   },
   "scripts": {
