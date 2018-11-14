@@ -1,18 +1,21 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
-import { importAsset } from "./macros";
+import { importLocalAsset, importRemoteAsset } from "./macros";
 
 /**
  * Import remote assets
  */
-importAsset("src/shared/styles/core/core.scss");
+importRemoteAsset("src/shared/styles/core/core.scss");
 
 /**
  * Import storybook styles
  */
-import "./index.scss";
+importLocalAsset("./index.scss");
 
+/**
+ * Set options for storybook
+ */
 setOptions({
     downPanelInRight: true,
     goFullScreen: false,
