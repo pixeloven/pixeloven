@@ -31,5 +31,6 @@
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "3.6.0",
     "typescript": "3.1.6"
-  }
+  },
+  "gitHead": "e2e9f7251fca49be7d4b4e7d38d05f28cd3d6005"
 }
