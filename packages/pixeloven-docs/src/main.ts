@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { SpawnSyncReturns } from "child_process";
 import spawn from "cross-spawn";
+import fs from "fs";
+import path from "path";
 
 /**
  * Makes the script crash on unhandled rejections instead of silently
@@ -22,6 +24,20 @@ const mapScriptIndex = (index: string) =>
     index === "serve:story";
 
 /**
+ * Load config file
+ * @description First see if a remote config path is available otherwise load the local one
+ * @param file
+ * @return string
+ */
+const loadConfigPath = (dir: string): string => {
+    const remoteConfig = path.resolve(process.cwd(), dir);
+    if (fs.existsSync(remoteConfig)) {
+        return remoteConfig;
+    }
+    return path.resolve(__dirname, dir);
+};
+
+/**
  * Execute yarn cmd
  * @param name
  * @param args
@@ -29,6 +45,7 @@ const mapScriptIndex = (index: string) =>
 const execute = (name: string, args: string[]) => {
     const yarnArgs: string[] = [];
     const calling = yarnArgs.concat(name).concat(args);
+    console.log(`spawning: yarn ${calling.join(" ")}`);
     return spawn.sync("yarn", calling, {
         stdio: "inherit",
     });
@@ -64,6 +81,7 @@ const complete = (result: SpawnSyncReturns<Buffer>) => {
  *
  * @todo Check for yarn before attempting to execute
  * @todo Show usage for scripts if not in index
+ * @todo Allow for custom port/host in .env
  */
 const scriptArgs = process.argv.slice(2);
 const scriptIndex = scriptArgs.findIndex(index => mapScriptIndex(index));
@@ -72,13 +90,24 @@ const scriptName = scriptIndex === -1 ? scriptArgs[0] : scriptArgs[scriptIndex];
 switch (scriptName) {
     case "build":
     case "build:story": {
-        const result = execute("rimraf", ["node_modules"]);
+        const config = loadConfigPath("./configs");
+        const output = path.resolve(process.cwd(), "./dist/public/docs");
+        const result = execute("build-storybook", ["-c", config, "-o", output]);
         complete(result);
         break;
     }
     case "serve":
     case "serve:story": {
-        const result = execute("tsc", ["--pretty", "--project"]);
+        const config = loadConfigPath("./configs");
+        const result = execute("start-storybook", [
+            "--quiet",
+            "-s",
+            "./public",
+            "-p",
+            "9001",
+            "-c",
+            config,
+        ]);
         complete(result);
         break;
     }

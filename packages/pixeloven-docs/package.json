@@ -21,6 +21,8 @@
     "access": "public"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@emotion/core" :"0.13.1",
     "@pixeloven/cli": "^0.7.0",
     "@storybook/addon-actions": "4.0.6",
     "@storybook/addon-knobs": "4.0.6",
@@ -29,17 +31,25 @@
     "@storybook/addons": "4.0.6",
     "@storybook/core": "4.0.6",
     "@storybook/react": "4.0.6",
-    "cross-spawn": "6.0.5",
-    "deepmerge": "2.2.1",
-    "storybook-readme": "4.0.2"
+    "babel-loader": "^8.0.0",
+    "style-loader": "^0.23.0",
+    "css-loader": "^1.0.0",
+    "sass-loader": "^7.0.0",
+    "cross-spawn": "^6.0.0",
+    "deepmerge": "^2.0.0",
+    "react": "^16.6.0",
+    "react-dom": "16.6.0",
+    "storybook-readme": "4.0.2",
+    "webpack": "^4.0.0"
   },
   "devDependencies": {
+    "@types/node": "10.12.7",
     "@types/cross-spawn": "6.0.0",
-    "@types/storybook__addon-actions": "^3.4.1",
-    "@types/storybook__addon-knobs": "^3.4.1",
-    "@types/storybook__addon-notes": "^3.3.3",
-    "@types/storybook__addon-options": "^3.2.2",
-    "@types/storybook__react": "^3.0.9"
+    "@types/storybook__addon-actions": "3.4.1",
+    "@types/storybook__addon-knobs": "3.4.1",
+    "@types/storybook__addon-notes": "3.3.3",
+    "@types/storybook__addon-options": "3.2.2",
+    "@types/storybook__react": "4.0.0"
   },
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn compile",

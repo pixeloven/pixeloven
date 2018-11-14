@@ -1,10 +1,18 @@
 {
     "extends": "../../tsconfig",
     "compilerOptions": {
-        "composite": true,
         "rootDir": "./src",
         "declarationDir": "./dist/types",
         "outDir": "./dist/lib",
         "module": "commonjs",
     },
+    "exclude": [
+        "**/*.stories.ts",
+        "**/*.spec.ts",
+        "**/*.test.ts",
+        "./coverage",
+        "./dist",
+        "./docs",
+        "./node_modules"
+    ]
 }

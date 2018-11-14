@@ -6,6 +6,15 @@
         "outDir": "./dist/lib",
         "module": "commonjs",
     },
+    "exclude": [
+        "**/*.stories.ts",
+        "**/*.spec.ts",
+        "**/*.test.ts",
+        "./coverage",
+        "./dist",
+        "./docs",
+        "./node_modules"
+    ],
     "references": [
         { 
             "path": "../pixeloven-core" 

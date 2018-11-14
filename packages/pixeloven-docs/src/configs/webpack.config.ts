@@ -7,10 +7,6 @@ import { Configuration, Module, RuleSetRule } from "webpack";
  * @param baseConfig
  * @param env
  * @param defaultConfig
- *
- * @todo CLI should point to custom config directory
- * @todo Compile these configs
- * @todo https://storybook.js.org/configurations/typescript-config/
  */
 export default (
     baseConfig: Configuration,
@@ -18,10 +14,10 @@ export default (
     defaultConfig: Configuration,
 ) => {
     const newTsRule: RuleSetRule = {
-        include: path.resolve(__dirname, "../src/shared/components"),
+        include: path.resolve(process.cwd(), "src/shared/components"),
         loader: require.resolve("ts-loader"),
         options: {
-            configFile: path.resolve(__dirname, "../tsconfig.json"),
+            configFile: path.resolve(process.cwd(), "tsconfig.json"),
         },
         test: /\.(ts|tsx)$/,
     };
