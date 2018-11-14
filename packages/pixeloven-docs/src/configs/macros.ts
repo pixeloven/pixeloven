@@ -28,3 +28,17 @@ export const importRemoteAsset = (file: string): void => {
         );
     });
 };
+
+/**
+ * Resolves share component path
+ * @todo Should make this configurable
+ */
+export const resolveSharedComponents = (): string =>
+    path.resolve(process.cwd(), "./src/shared/components");
+
+/**
+ * Resolves tsconfig path
+ * @todo Should make this configurable
+ */
+export const resolveTsConfig = (): string =>
+    path.resolve(process.cwd(), "./tsconfig.json");

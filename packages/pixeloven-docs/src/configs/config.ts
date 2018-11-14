@@ -1,7 +1,11 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
-import { importLocalAsset, importRemoteAsset } from "./macros";
+import {
+    importLocalAsset,
+    importRemoteAsset,
+    resolveSharedComponents,
+} from "./macros";
 
 /**
  * Import remote assets
@@ -27,7 +31,11 @@ setOptions({
 addDecorator(withKnobs);
 
 // Stories loader
-const req = require.context("src/shared/components", true, /.stories.[jt]sx?$/);
+const req = require.context(
+    resolveSharedComponents(),
+    true,
+    /.stories.[jt]sx?$/,
+);
 function loadStories() {
     req.keys().forEach(req);
 }
