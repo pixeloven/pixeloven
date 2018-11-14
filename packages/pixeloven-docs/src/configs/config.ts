@@ -1,11 +1,7 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
-import {
-    importLocalAsset,
-    importRemoteAsset,
-    resolveSharedComponents,
-} from "./macros";
+import { importLocalAsset, importRemoteAsset } from "./macros";
 
 /**
  * Import remote assets
@@ -30,9 +26,12 @@ setOptions({
 });
 addDecorator(withKnobs);
 
-// Stories loader
+/**
+ * Stories loader
+ * @todo Find a way to do this with process.cwd()
+ */
 const req = require.context(
-    resolveSharedComponents(),
+    "../../../../../../src/shared/components",
     true,
     /.stories.[jt]sx?$/,
 );
