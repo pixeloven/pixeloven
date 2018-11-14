@@ -1,6 +1,6 @@
 import deepmerge from "deepmerge";
 import { Configuration, Module, RuleSetRule } from "webpack";
-import { resolveSharedComponents, resolveTsConfig } from "./macros";
+import { resolveContext, resolveTsConfig } from "./macros";
 
 /**
  * Extend webpack config for storybook
@@ -14,7 +14,6 @@ export default (
     defaultConfig: Configuration,
 ) => {
     const newTsRule: RuleSetRule = {
-        include: resolveSharedComponents(),
         loader: "ts-loader",
         options: {
             configFile: resolveTsConfig(),
@@ -28,6 +27,7 @@ export default (
     const newModule: Module = {
         rules: [newTsRule, newScssRule],
     };
+    defaultConfig.context = resolveContext();
     if (defaultConfig.module) {
         defaultConfig.module = deepmerge(defaultConfig.module, newModule);
     }

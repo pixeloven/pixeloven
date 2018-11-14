@@ -1,17 +1,17 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
-import { importLocalAsset, importRemoteAsset } from "./macros";
+import { importRemoteAsset } from "./macros";
 
 /**
- * Import remote assets
+ * Import remote assets dynamically
  */
 importRemoteAsset("src/shared/styles/core/core.scss");
 
 /**
  * Import storybook styles
  */
-importLocalAsset("./index.scss");
+import "./index.scss";
 
 /**
  * Set options for storybook
@@ -31,12 +31,11 @@ addDecorator(withKnobs);
  * @todo Find a way to do this with process.cwd()
  */
 const req = require.context(
-    "../../../../../../src/shared/components",
+    "./src/shared/components",
     true,
     /.stories.[jt]sx?$/,
 );
 function loadStories() {
-    req.keys().forEach(value => console.log(value));
     req.keys().forEach(req);
 }
 
