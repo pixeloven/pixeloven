@@ -1,4 +1,4 @@
-# Usage
+# Integration
 Instructions for implementing framework.
 
 ## Table of Contents
@@ -24,7 +24,7 @@ yarn add @pixeloven/{name}
 ```
 
 ### Importing libraries
-All ***transpiled*** package from this project should follow the same pattern. Compiled library files will be output to `dist/lib` while all types will be output to `dist/types`.
+All ***transpiled*** packages from this project should follow the same pattern. Compiled library files will be output to `dist/lib` while all type declarations will be output to `dist/types`.
 
 ```javascript
 import {something} from '@pixeloven/{name}'
