@@ -47,7 +47,7 @@ This makes more sense in combination with [automatic releases](#automatic-releas
 
 ## Improvements
 Below are just some of the up coming ideas for improvements.
-* Review this [starter](https://github.com/bitjson/typescript-starter) and the one this was based on for trending ideas.
+* Review this [starter](https://github.com/bitjson/typescript-starter) and [this one](https://github.com/alexjoverm/typescript-library-starter) for trending ideas.
 * Should look into [tslint-immutable](https://www.npmjs.com/package/tslint-immutable)
 * Break `env` and `logger` from `core`.
 * Add better typings for all packages but especially `docs`
