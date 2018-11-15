@@ -15,5 +15,10 @@
         "./dist",
         "./docs",
         "./node_modules"
+    ],
+    "references": [
+        { 
+            "path": "../pixeloven-core" 
+        }
     ]
 }
