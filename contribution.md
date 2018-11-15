@@ -1,15 +1,25 @@
-We're really glad you're reading this, because we need volunteer developers to help this project come to fruition. 👏
+# Contribution
+Below are instructions for contributing to this project.
 
-## Instructions
+## Table of Contents
+
+- [Quick Guide](#quick-guide)
+- [Detailed Instructions](#detailed-instructions)
+- [Pull Requests](#pull-requests)
+
+## Quick Guide
 
 These steps will guide you through contributing to this project:
 
-- Fork the repo
+- Fork repository
 - Ensure Node >= `8.0.0` and yarn >= `1.0.0`
 - Ensure [lerna](https://www.npmjs.com/package/lerna) and [yarn](https://yarnpkg.com/docs/install/) are installed
-- Clone and install dependencies
+- Clone repository and install dependencies
+
+## Detailed Instructions
 
 ### Required Setup
+
 > Note please ensure system has these minimum requirements or greater.
 Check "engine" requirements:
 ```bash
@@ -21,7 +31,6 @@ Please follow these official instructions to install yarn for your specific syst
 $ yarn -v
 $ 1.0.0
 ```
-
 
 ### Recommended approach
 
@@ -40,9 +49,10 @@ $ lerna bootstrap
 ```bash
 $ git clone https://github.com/YOUR-USERNAME/pixeloven
 $ yarn install
-$ lerna bootstrap
+$ yarn lerna bootstrap
 ```
 
+## Pull Requests
 Keep in mind that this project is a mono-repo design. If you encounter any issue when running scripts it is recommended to run `yarn clean` at the root of this project and re run the setup above.
 
 Make both your branches and commits descriptive. Ensure "lerna" commands such as `lerna run build` and `lerna run test` work properly before submitting a pull request.

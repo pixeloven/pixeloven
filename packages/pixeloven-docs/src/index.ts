@@ -1,4 +1,6 @@
+import * as Actions from "@storybook/addon-actions";
+import * as Knobs from "@storybook/addon-knobs";
+
 export * from "@storybook/react";
-export { default as Actions } from "@storybook/addon-actions";
-export { default as Knobs } from "@storybook/addon-knobs";
-export { default as Readme } from "storybook-readme";
+export * from "storybook-readme";
+export { Actions, Knobs };
