@@ -12,9 +12,16 @@
     "node": ">=8.0.0",
     "yarn": ">=1.0.0"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@pixeloven/cli",
+      "**/@pixeloven/core",
+      "**/@pixeloven/env"
+    ]
+  },
   "scripts": {
     "clean": "lerna run clean",
     "compile": "lerna run compile",
