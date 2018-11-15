@@ -32,9 +32,9 @@
     }
   },
   "exclude": [
-    "**/*.stories.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts",
+    "./**/*.stories.ts",
+    "./**/*.spec.ts",
+    "./**/*.test.ts",
     "./coverage",
     "./dist",
     "./docs",
