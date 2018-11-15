@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/env",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "Environment loader",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",

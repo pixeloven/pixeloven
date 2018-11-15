@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/docs",
-  "version": "0.10.3",
+  "version": "1.0.0",
   "description": "Documentation generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
