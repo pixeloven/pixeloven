@@ -20,7 +20,6 @@ export interface DefaultEnv extends NodeJS.ProcessEnv {
     PROTOCOL: string;
     PUBLIC_URL: string;
     NODE_ENV: string;
-    NODE_PATH: string;
 }
 
 export class Env {
@@ -28,22 +27,14 @@ export class Env {
      * Default values for env
      */
     public static defaultValues: DefaultEnv = {
-        BABEL_ENV: "",
-        BUILD_PATH: "",
-        HOST: "",
-        NODE_ENV: "",
-        NODE_PATH: "",
-        PORT: "",
-        PROTOCOL: "",
-        PUBLIC_URL: "",
+        BABEL_ENV: "production",
+        BUILD_PATH: "dist",
+        HOST: "localhost",
+        NODE_ENV: "production",
+        PORT: "8080",
+        PROTOCOL: "https",
+        PUBLIC_URL: "/",
     };
-
-    /**
-     * Get current environment
-     */
-    public static get current(): Environment {
-        return Env.config("NODE_ENV", "production") as Environment;
-    }
 
     /**
      * Get entire env, get by key or set by key
@@ -58,11 +49,19 @@ export class Env {
         key?: string,
         defaultValue?: string,
     ): NodeJS.ProcessEnv | string | undefined {
-        if (key && process.env.hasOwnProperty(key)) {
-            const value = process.env[key];
-            return !value ? defaultValue : value;
+        if (key) {
+            return process.env.hasOwnProperty(key)
+                ? process.env[key]
+                : defaultValue;
         }
         return process.env;
+    }
+
+    /**
+     * Get current environment
+     */
+    public static get current(): Environment {
+        return Env.config("NODE_ENV") as Environment;
     }
 
     /**
@@ -79,23 +78,39 @@ export class Env {
      * @description Check env and setup default keys
      */
     public static load(environment?: Environment): void {
-        if (!process) {
+        if (!Env.process) {
             throw new NodeProcessException("Node process is undefined.");
-        }
-        if (!process.env) {
-            throw new NodeProcessException(
-                "Node environmental variables are undefined.",
-            );
         }
         dotenv.config();
         if (environment) {
-            process.env = Object.assign(Env.defaultValues, process.env, {
+            process.env = Object.assign({}, Env.defaultValues, process.env, {
                 BABEL_ENV: environment,
                 NODE_ENV: environment,
             });
         } else {
-            process.env = Object.assign(Env.defaultValues, process.env);
+            process.env = Object.assign({}, Env.defaultValues, process.env);
         }
+    }
+
+    /**
+     * Private variable for storing global process
+     */
+    private static proc: NodeJS.Process | undefined = process;
+
+    /**
+     * Return process
+     * @return Process
+     */
+    public static get process(): NodeJS.Process | undefined {
+        return Env.proc;
+    }
+
+    /**
+     * Allows for the process to be overridden
+     * @description This should rarely be used. It's main function is to facilitate testing.
+     */
+    public static set process(proc: NodeJS.Process | undefined) {
+        Env.proc = proc;
     }
 }
 
