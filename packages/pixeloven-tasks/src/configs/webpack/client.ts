@@ -1,4 +1,5 @@
-import { env, resolvePath } from "@pixeloven/core";
+import { resolvePath } from "@pixeloven/core";
+import { env } from "@pixeloven/env";
 import autoprefixer from "autoprefixer";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";

@@ -1,6 +1,7 @@
 {
     "extends": "../../tsconfig",
     "compilerOptions": {
+        "composite": true,
         "rootDir": "./src",
         "declarationDir": "./dist/types",
         "outDir": "./dist/lib",
@@ -14,13 +15,5 @@
         "./dist",
         "./docs",
         "./node_modules"
-    ],
-    "references": [
-        { 
-            "path": "../pixeloven-core" 
-        },
-        { 
-            "path": "../pixeloven-env" 
-        }
     ]
 }

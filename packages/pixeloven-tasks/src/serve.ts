@@ -7,12 +7,12 @@ import "./bootstrap/development";
  * Import dependencies
  */
 import {
-    env,
     handleError,
     logger,
     sleep,
     WebpackStatsHandler,
 } from "@pixeloven/core";
+import { env } from "@pixeloven/env";
 import chalk from "chalk";
 import express, { Request, Response } from "express";
 import path from "path";

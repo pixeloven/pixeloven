@@ -1,4 +1,5 @@
-import { env, resolvePath } from "@pixeloven/core";
+import { resolvePath } from "@pixeloven/core";
+import { env } from "@pixeloven/env";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TimeFixPlugin from "time-fix-plugin";

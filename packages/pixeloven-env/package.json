@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/core",
+  "name": "@pixeloven/env",
   "version": "0.10.0",
-  "description": "Core Framework",
+  "description": "Environment loader",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -19,12 +19,12 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^0.10.0",
-    "react-dev-utils": "6.1.1",
-    "webpack-log": "2.0.0"
+    "@pixeloven/core": "^0.10.0",
+    "dotenv": "6.1.0"
   },
   "devDependencies": {
-    "@types/node": "10.12.7",
-    "@types/webpack": "4.4.19"
+    "@types/dotenv": "6.1.0",
+    "@types/node": "10.12.7"
   },
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn compile",

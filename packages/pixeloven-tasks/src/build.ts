@@ -7,12 +7,12 @@ import "./bootstrap/production";
  * Import dependencies
  */
 import {
-    env,
     handleError,
     logger,
     resolvePath,
     WebpackStatsHandler,
 } from "@pixeloven/core";
+import { env } from "@pixeloven/env";
 import chalk from "chalk";
 import fs from "fs-extra";
 import Promise from "promise";

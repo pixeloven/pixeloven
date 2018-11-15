@@ -1,5 +1,5 @@
+import { NodeProcessException } from "@pixeloven/core";
 import dotenv from "dotenv";
-import { NodeProcessException } from "../exceptions";
 
 export type Environment = "development" | "production" | "test";
 

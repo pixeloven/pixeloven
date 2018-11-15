@@ -1,4 +1,5 @@
-import { env, resolvePath } from "@pixeloven/core";
+import { resolvePath } from "@pixeloven/core";
+import { env } from "@pixeloven/env";
 import { Module, Node, Output, RuleSetRule } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import merge from "webpack-merge";
