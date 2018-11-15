@@ -32,7 +32,7 @@ import {something} from '@pixeloven/{name}'
 Import the installed package and away you go!
 
 ## Directory Structure
-To use all aspects of this framework it is recommended the following directory be followed.
+To use all aspects of this framework it is recommended the following directory structure be followed.
 ```
 project
 ├── .circleci
