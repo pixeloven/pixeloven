@@ -27,7 +27,7 @@ For existing projects please review our [integration guide](./integration.md) fo
 
 > ***TBD*** Link to template directory with instructions for creating new template.
 
-This project was born from a small collective effort with the purpose to abstract common configuration and infrastructure used in the creation of ***isomorphic react*** applications. However, for this project to be even more successful we need yor help. **Start coding!** :heart:
+This project was born from a small collective effort within ***GoFundMe*** with the purpose to abstract common configuration and infrastructure used in the creation of *isomorphic* React applications. However, for this project to be even more successful we need your help. **Join us and start coding!** :heart:
 
 Please consider reviewing our [contribution guide](./contribution.md) for more details.
 
