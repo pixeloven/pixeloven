@@ -18,8 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "0.10.0",
-    "@pixeloven/core": "0.10.0",
+    "@pixeloven/cli": "^1.0.0",
+    "@pixeloven/core": "^1.0.0",
     "dotenv": "6.1.0"
   },
   "devDependencies": {
