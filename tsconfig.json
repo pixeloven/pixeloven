@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "./packages",
+    "baseUrl": ".",
+    "rootDir": ".",
     "moduleResolution": "node",
     "target": "es5",
     "module":"commonjs",
@@ -26,12 +27,17 @@
     "emitDecoratorMetadata": true,
     "declarationDir": "./dist/types",
     "outDir": "./dist/lib",
-    "typeRoots": [
-      "definitions",
-      "node_modules/@types"
-    ],
     "paths": {
-      "@pixeloven/*": ["./pixeloven-*/src"],
+      "~/*": ["packages/*"]
     }
-  }
+  },
+  "exclude": [
+    "**/*.stories.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "./coverage",
+    "./dist",
+    "./docs",
+    "./node_modules"
+],
 }

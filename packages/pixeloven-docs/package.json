@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/docs",
-  "version": "1.0.0",
+  "version": "0.10.3",
   "description": "Documentation generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -23,7 +23,7 @@
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@emotion/core": "0.13.1",
-    "@pixeloven/cli": "^1.0.0",
+    "@pixeloven/cli": "0.10.0",
     "@storybook/addon-actions": "4.0.6",
     "@storybook/addon-knobs": "4.0.6",
     "@storybook/addon-notes": "4.0.6",
@@ -50,13 +50,13 @@
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
-    "compile": "pixeloven-cli compile:ts && cp ./src/configs/index.scss ./dist/lib/configs/index.scss",
+    "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",
+    "postcompile": "cp ./src/configs/index.scss ./dist/lib/configs/index.scss",
     "lint": "pixeloven-cli lint:ts",
     "test": "pixeloven-cli test",
     "test:watch": "pixeloven-cli test:watch",
     "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
     "pretest": "pixeloven-cli test:clean"
-  },
-  "gitHead": "877d6f1c5bc1582239236e1658a861e41bc1cf7d"
+  }
 }

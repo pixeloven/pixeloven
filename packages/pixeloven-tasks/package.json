@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "1.0.0",
+  "version": "0.10.0",
   "description": "Common tasks or jobs used during development and in production",
   "main": "dist/lib/main.js",
   "types": "dist/types/index.d.ts",
@@ -25,8 +25,8 @@
     "@babel/polyfill": "7.0.0",
     "@babel/preset-env": "7.1.5",
     "@babel/preset-react": "7.0.0",
-    "@pixeloven/cli": "^1.0.0",
-    "@pixeloven/core": "^1.0.0",
+    "@pixeloven/cli": "0.10.0",
+    "@pixeloven/core": "0.10.0",
     "autoprefixer": "9.3.1",
     "babel-loader": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
@@ -34,7 +34,7 @@
     "copy-webpack-plugin": "4.6.0",
     "cross-spawn": "6.0.5",
     "css-hot-loader": "1.4.2",
-    "css-loader": "^1.0.0",
+    "css-loader": "1.0.1",
     "express": "4.16.4",
     "file-loader": "^2.0.0",
     "fs-extra": "7.0.1",
@@ -91,6 +91,5 @@
     "test:watch": "pixeloven-cli test:watch",
     "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
     "pretest": "pixeloven-cli test:clean"
-  },
-  "gitHead": "877d6f1c5bc1582239236e1658a861e41bc1cf7d"
+  }
 }
