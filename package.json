@@ -19,7 +19,9 @@
     "nohoist": [
       "**/@pixeloven/cli",
       "**/@pixeloven/core",
-      "**/@pixeloven/env"
+      "**/@pixeloven/docs",
+      "**/@pixeloven/env",
+      "**/@pixeloven/tasks"
     ]
   },
   "scripts": {
@@ -80,7 +82,6 @@
     "replace-in-file": "^3.4.2",
     "semantic-release": "^15.9.16",
     "ts-node": "7.0.1",
-    "typedoc": "0.13.0",
-    "typedoc-plugin-monorepo": "0.1.0"
+    "typedoc": "0.13.0"
   }
 }
