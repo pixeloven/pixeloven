@@ -17,6 +17,9 @@ These steps will guide you through contributing to this project:
 - Clone repository and install dependencies
 
 ## Detailed Instructions
+This project uses `circleci` as our CI tool. It is highly recommended that you run our tooling locally while developing.
+
+Please review their [documentation](https://circleci.com/docs/2.0/local-cli/) on running jobs locally for more information.
 
 ### Required Setup
 
