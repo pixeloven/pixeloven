@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
     # specify the version you desire here
-    - image: circleci/node:8.10
+    - image: circleci/node:8.12
 
     working_directory: ~/repo
 
@@ -17,7 +17,7 @@ jobs:
     # Download and cache dependencies
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum "package.json" }}
+        - v2-dependencies-{{ checksum "package.json" }}
 
     - run:
         name: Update NPM
@@ -28,12 +28,8 @@ jobs:
         command: sudo npm install -g yarn
 
     - run:
-        name: Instal Lerna
-        command: sudo npm install -g lerna
-
-    - run:
         name: Install Dependencies
-        command: lerna bootstrap
+        command: yarn install
 
     - save_cache:
         paths:
@@ -41,6 +37,4 @@ jobs:
         key: v1-dependencies-{{ checksum "package.json" }}
 
     # run tests!
-    - run: lerna run lint
-    - run: lerna run test
-    - run: lerna run compile
+    - run: yarn run prepare

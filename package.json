@@ -25,6 +25,7 @@
     ]
   },
   "scripts": {
+    "prepare": "lerna run prepare",
     "clean": "lerna run clean",
     "compile": "lerna run compile",
     "precompile": "lerna run compile:clean",
