@@ -58,8 +58,10 @@ Below are just some of the up coming ideas for improvements.
 * Improve [Offline](https://github.com/NekR/offline-plugin/issues/64) Support of dynamic urls
 * Create generator for new package
 * Create generator for new starter based on demo app.
-* Docker/CI support for open browser. 
+* Docker/CI support for open browser. (don't)
 * Load env for storybook too.
+* -tasks should have peerDesp for express
+* -tasks add winston for logging
 
 ## Our Commitment
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!

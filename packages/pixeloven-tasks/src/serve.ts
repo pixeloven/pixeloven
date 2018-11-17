@@ -114,7 +114,7 @@ try {
                                 );
                             }
                         } else {
-                            logger.info("Compiling...");
+                            logger.info("Waiting...");
                         }
                     },
                     serverSideRender: true,

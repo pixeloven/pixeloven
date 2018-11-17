@@ -37,6 +37,9 @@ const { ifProduction, ifDevelopment } = getIfUtils(env.current);
 /**
  * Webpack uses `publicPath` to determine where the app is being served from.
  * It requires a trailing slash, or the file assets will get an incorrect path.
+ *
+ * @todo DEV needs to be / to serve assets :( but this breaks the bundle.js (server side is fine)
+ * @todo Maybe do this in Output instead of here because some stuff might still need this.
  */
 const publicPath = env.config("PUBLIC_URL", "/");
 const buildPath = env.config("BUILD_PATH", "dist");
@@ -61,7 +64,10 @@ const devtoolModuleFilenameTemplate = (
  */
 const entry = {
     main: removeEmpty([
-        ifDevelopment("webpack-hot-middleware/client?reload=true", undefined),
+        ifDevelopment(
+            "webpack-hot-middleware/client?reload=true&path=__webpack_hmr",
+            undefined,
+        ),
         resolvePath("src/client/index.tsx"),
     ]),
 };
@@ -237,7 +243,7 @@ const output: Output = {
         "static/js/[name].[hash].js",
     ),
     path: resolvePath(`${buildPath}/public`, false),
-    publicPath,
+    publicPath: ifProduction(publicPath, "/"),
 };
 
 /**
