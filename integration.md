@@ -89,8 +89,17 @@ This structure is not a requirement to use this project but it is highly recomme
 Simply create an `.env` file at the root of this project. Then copy the contents into the newly created file as shown below.
 ```text
 PORT=8080
-HOST=localhost
-PROTOCOL=http
+HOST=0.0.0.0
+PROTOCOL=https
 PUBLIC_URL=/
 BUILD_PATH=dist
+LOG_LEVEL=debug
 ``` 
+The following log levels are available.
+- `trace`
+- `debug`
+- `info`
+- `warn`
+- `error`
+- `silent`
+Setting a log level means that all other levels below it will be visible in the console. Setting logLevel: 'silent' will hide all console output. The module leverages [`webpack-log`](https://github.com/webpack-contrib/webpack-log#readme) for logging management, and more information can be found on its page.

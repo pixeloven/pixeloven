@@ -2,6 +2,7 @@ import { resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import autoprefixer from "autoprefixer";
 import CopyWebpackPlugin from "copy-webpack-plugin";
+import Dotenv from "dotenv-webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OfflinePlugin from "offline-plugin";
@@ -252,11 +253,13 @@ const output: Output = {
 const plugins: Plugin[] = removeEmpty([
     /**
      * Define environmental variables for application
-     *
+     * @description For now we are only allowing a strict set to be exposed to the client.
+     * @todo Should eventually move to this and make Env client/server agnostic. https://github.com/mrsteele/dotenv-webpack
      * @env all
      */
     new webpack.EnvironmentPlugin({
         NODE_ENV: ifProduction("production", "development"),
+        PUBLIC_URL: publicPath,
     }),
     /**
      * Copy files
@@ -324,7 +327,7 @@ const plugins: Plugin[] = removeEmpty([
         undefined,
     ),
     /**
-     * Generate a service worker script that will precache, and keep up to date,
+     * Generate a service worker script that will pre-cache, and keep up to date,
      * the HTML & assets that are part of the Webpack build.
      *
      * @env production

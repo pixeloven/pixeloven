@@ -30,6 +30,7 @@ import webpackServerConfig from "./configs/webpack/server";
  */
 const { choosePort, prepareUrls } = WebpackDevServerUtils;
 
+const LOG_LEVEL = env.config("LOG_LEVEL", "info");
 const PUBLIC_PATH = env.config("PUBLIC_URL", "/");
 const DEFAULT_HOST = env.config("HOST", "localhost");
 const DEFAULT_PROTOCOL = env.config("PROTOCOL", "http");
@@ -84,7 +85,7 @@ try {
                 combinedCompiler,
                 {
                     index: false,
-                    logLevel: "silent",
+                    logLevel: LOG_LEVEL,
                     publicPath: PUBLIC_PATH,
                     reporter: (middlewareOptions, reporterOptions) => {
                         if (

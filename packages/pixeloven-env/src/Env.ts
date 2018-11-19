@@ -16,6 +16,7 @@ export interface DefaultEnv extends NodeJS.ProcessEnv {
     BABEL_ENV: string;
     BUILD_PATH: string;
     HOST: string;
+    LOG_LEVEL: string;
     PORT: string;
     PROTOCOL: string;
     PUBLIC_URL: string;
@@ -30,6 +31,7 @@ export class Env {
         BABEL_ENV: "production",
         BUILD_PATH: "dist",
         HOST: "localhost",
+        LOG_LEVEL: "info",
         NODE_ENV: "production",
         PORT: "8080",
         PROTOCOL: "https",
@@ -75,7 +77,7 @@ export class Env {
 
     /**
      * Load from file for specific environment
-     * @description Check env and setup default keys
+     * @description Check env and setup default keys. This should ONLY be executed on the server (node) side.
      */
     public static load(environment?: Environment): void {
         if (!Env.process) {
