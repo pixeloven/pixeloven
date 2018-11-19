@@ -34,7 +34,9 @@ jobs:
     - save_cache:
         paths:
         - node_modules
-        key: v1-dependencies-{{ checksum "package.json" }}
+        key: v2-dependencies-{{ checksum "package.json" }}
 
     # run tests!
-    - run: yarn run prepare
+    - run: yarn lint
+    - run: yarn test
+    - run: yarn compile
