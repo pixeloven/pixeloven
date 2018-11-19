@@ -89,8 +89,8 @@ This structure is not a requirement to use this project but it is highly recomme
 Simply create an `.env` file at the root of this project. Then copy the contents into the newly created file as shown below.
 ```text
 PORT=8080
-HOST=0.0.0.0
-PROTOCOL=https
+HOST=localhost
+PROTOCOL=http
 PUBLIC_URL=/
 BUILD_PATH=dist
 LOG_LEVEL=debug

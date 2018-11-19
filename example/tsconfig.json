@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+      "baseUrl": ".",
+      "rootDir": "./src",
+      "declaration": false,
+      "paths": {
+        "@pixeloven/*": ["../packages-*/src"],
+        "@client/*": ["src/client/*"],
+        "@server/*": ["src/server/*"],
+        "@shared/*": ["src/shared/*"]
+      },
+  },
+  "exclude": [
+    "./**/*.stories.ts",
+    "./**/*.spec.ts",
+    "./**/*.test.ts",
+    "./coverage",
+    "./dist",
+    "./docs",
+    "./node_modules"
+  ]
+}

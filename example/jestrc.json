@@ -1,0 +1,47 @@
+{
+  "preset": "ts-jest",
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/test/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 0,
+      "functions": 0,
+      "lines": 0,
+      "statements": 0
+    }
+  },
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**"
+  ],
+  "setupFiles": [
+    "<rootDir>/node_modules/@pixeloven/tasks/dist/lib/bootstrap/testing.js"
+  ],
+  "testMatch": [
+    "<rootDir>/test/**/*.(j|t)s?(x)",
+    "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+  ],
+  "testEnvironment": "node",
+  "testURL": "http://localhost",
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+  "transformIgnorePatterns": [
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+  ],
+  "moduleNameMapper": {
+    "@client/(.*)$": "<rootDir>/src/client/$1",
+    "@server/(.*)$": "<rootDir>/src/server/$1",
+    "@shared/(.*)$": "<rootDir>/src/shared/$1",
+    ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/node_modules/@pixeloven/core/dist/lib/mocks/fileMock.js",
+    ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/@pixeloven/core/dist/lib/mocks/styleMock.js"
+  },
+  "moduleFileExtensions": [
+    "js",
+    "jsx",
+    "ts",
+    "tsx"
+  ]
+}
