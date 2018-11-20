@@ -19,17 +19,21 @@ jobs:
         keys:
         - v2-dependencies-{{ checksum "package.json" }}
 
-    - run:
-        name: Update NPM
-        command: sudo npm install -g npm
+    # - run:
+    #     name: Update NPM
+    #     command: sudo npm install -g npm
 
-    - run:
-        name: Update Yarn
-        command: sudo npm install -g yarn
+    # - run:
+    #     name: Update Yarn
+    #     command: sudo npm install -g yarn
 
     - run:
         name: Install Dependencies
         command: yarn install
+
+    # -run:
+    #     name: Link packages
+    #     command: ls -la node_modules/@pixeloven
 
     - save_cache:
         paths:
