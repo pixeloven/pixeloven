@@ -15,9 +15,9 @@ jobs:
     - checkout
 
     # Download and cache dependencies
-    - restore_cache:
-        keys:
-        - v2-dependencies-{{ checksum "package.json" }}
+    # - restore_cache:
+    #     keys:
+    #     - v2-dependencies-{{ checksum "package.json" }}
 
     - run:
         name: Update NPM
@@ -28,13 +28,17 @@ jobs:
         command: sudo npm install -g yarn
 
     - run:
-        name: Install Dependencies
-        command: yarn install
+        name: Install Lerna
+        command: sudo npm install -g lerna
 
-    - save_cache:
-        paths:
-        - node_modules
-        key: v2-dependencies-{{ checksum "package.json" }}
+    - run:
+        name: Install Dependencies
+        command: lerna bootstrap
+
+    # - save_cache:
+    #     paths:
+    #     - node_modules
+    #     key: v2-dependencies-{{ checksum "package.json" }}
 
     # run tests!
     - run: yarn lint
