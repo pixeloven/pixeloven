@@ -28,6 +28,11 @@ import common from "./common";
  * see how we can use babels cache
  * @todo implement tslint-loader if we can do ts fork in development
  */
+/**
+ * Tell webpack what we are making :)
+ */
+const name = "client";
+const target = "web";
 
 /**
  * Utility functions to help segment configuration based on environment
@@ -257,8 +262,10 @@ const plugins: Plugin[] = removeEmpty([
      * @env all
      */
     new webpack.EnvironmentPlugin({
+        NAME: name,
         NODE_ENV: ifProduction("production", "development"),
         PUBLIC_URL: publicPath,
+        TARGET: target,
     }),
     /**
      * Copy files
@@ -362,10 +369,10 @@ export default merge(common, {
     devtool: ifDevelopment("eval-source-map", false),
     entry,
     module,
-    name: "client",
+    name,
     node,
     optimization,
     output,
     plugins,
-    target: "web",
+    target,
 });

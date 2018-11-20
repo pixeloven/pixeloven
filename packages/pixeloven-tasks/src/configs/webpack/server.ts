@@ -1,10 +1,16 @@
 import { resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
-import { Module, Node, Output, RuleSetRule } from "webpack";
+import webpack, { Module, Node, Output, Plugin, RuleSetRule } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import merge from "webpack-merge";
 import webpackNodeExternals from "webpack-node-externals";
 import common from "./common";
+
+/**
+ * Tell webpack what we are making :)
+ */
+const name = "server";
+const target = "node";
 
 /**
  * Utility functions to help segment configuration based on environment
@@ -121,6 +127,24 @@ const output: Output = {
 };
 
 /**
+ * @description Plugins need to webpack to perform build
+ */
+const plugins: Plugin[] = removeEmpty([
+    /**
+     * Define environmental variables for application
+     * @description For now we are only allowing a strict set to be exposed to the client.
+     * @todo Should eventually move to this and make Env client/server agnostic. https://github.com/mrsteele/dotenv-webpack
+     * @env all
+     */
+    new webpack.EnvironmentPlugin({
+        NAME: name,
+        NODE_ENV: ifProduction("production", "development"),
+        PUBLIC_URL: publicPath,
+        TARGET: target,
+    }),
+]);
+
+/**
  * Server side configuration
  */
 export default merge(common, {
@@ -128,8 +152,9 @@ export default merge(common, {
     entry,
     externals: [webpackNodeExternals()],
     module,
-    name: "server",
+    name,
     node,
     output,
-    target: "node",
+    plugins,
+    target,
 });
