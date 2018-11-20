@@ -20,6 +20,21 @@ jobs:
       - checkout:
           path: /tmp/workspace/pixeloven
 
+      # Persist the specified paths (pixeloven) into the workspace for use in downstream job. 
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - pixeloven
+
+  build:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace/pixeloven
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -36,21 +51,6 @@ jobs:
       - run:
           name: List packages
           command: ls -al node_modules/@pixeloven
-
-      # Persist the specified paths (pixeloven) into the workspace for use in downstream job. 
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
-          # taken to be the root directory of the workspace.
-          root: workspace
-          # Must be relative path from root
-          paths:
-            - pixeloven
-
-  build:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace/pixeloven
 
         # Run build and test
       - run:
