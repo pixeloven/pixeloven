@@ -3,6 +3,8 @@ This project is a `mono-repo` designed to contain several packages that in combi
 
 [![CircleCI](https://circleci.com/gh/pixeloven/pixeloven.svg?style=svg)](https://circleci.com/gh/pixeloven/pixeloven)
 
+[![Coverage Status](https://coveralls.io/github/pixeloven/pixeloven/badge.svg?branch=master)](https://coveralls.io/github/pixeloven/pixeloven?branch=master)
+
 ## Table of Contents
 
 - [Requirements](#requirements)

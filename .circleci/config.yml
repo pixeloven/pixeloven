@@ -43,3 +43,7 @@ jobs:
     - run:
         name: Test source
         command: yarn test
+
+    - run:
+        name: Report coverage
+        command: yarn report-coverage
