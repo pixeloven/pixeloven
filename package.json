@@ -27,13 +27,10 @@
   "scripts": {
     "clean": "lerna run clean",
     "compile": "lerna run compile",
-    "precompile": "lerna run compile:clean",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "test:watch": "lerna run test:watch",
     "pretty": "lerna run pretty",
-    "prebuild": "lerna run compile:clean",
-    "pretest": "lerna run test:clean",
     "build:docs": "typedoc --options typedoc.json",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
