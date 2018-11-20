@@ -14,7 +14,7 @@ commands:
         default: "node_modules"
     steps:
       - run:
-          name: "List << parameters.path >> contents"
+          name: "List << parameters.path >>"
           command: ls -al << parameters.path >>
   install:
     description: "Install dependencies"
@@ -43,27 +43,32 @@ jobs:
   setup:
     executor: node-executor
     steps:
-      - run:
-          name: Remove old workspace
-          command: rm -rf /tmp/workspace
-      - run:
-          name: Create new workspace
-          command: mkdir -p /tmp/workspace
-
-  build:
-    executor: node-executor
-    steps:
       # Download and cache dependencies
       - install
 
       # Check for pixeloven deps
       - list:
-          path: node_modules/@pixeloven
+          path: node_modules
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  build:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+
+      # Check for pixeloven deps
+      - list:
+          path: node_modules
 
         # Run build and test
       - run:
-            name: Lint source
-            command: yarn lint
+          name: Lint source
+          command: yarn lint
       - run:
           name: Compile source
           command: yarn compile
@@ -78,7 +83,7 @@ jobs:
 
       # Save coverage files to workspace
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: .
           paths: 
             - packages/**/coverage/lcov.info
 
@@ -86,14 +91,11 @@ jobs:
     executor: node-executor
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/pixeloven
 
-      # Download and cache dependencies
-      - install
-
-      # Check for workspace
+      # Check for pixeloven deps
       - list:
-          path: /tmp/workspace
+          path: node_modules
 
       # Run test and report
     #   - run:
