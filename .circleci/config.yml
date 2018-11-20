@@ -8,7 +8,7 @@ executors:
   node-executor:
     docker:
       - image: circleci/node:8.12
-    working_directory: /tmp/workspace/pixeloven
+    working_directory: /tmp
 
 jobs:
   setup:
@@ -31,6 +31,7 @@ jobs:
 
   build:
     executor: node-executor
+    working_directory: /tmp/workspace/pixeloven
     steps:
       - attach_workspace:
           at: /tmp/workspace/pixeloven
@@ -65,6 +66,7 @@ jobs:
 
   report:
     executor: node-executor
+    working_directory: /tmp/workspace/pixeloven
     steps:
       - attach_workspace:
           at: /tmp/workspace/pixeloven
