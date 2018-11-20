@@ -14,8 +14,11 @@ jobs:
   setup:
     executor: node-executor
     steps:
+      # Create workspace
+      - run: mkdir -p workspace
       # Checkout repo
-      - checkout
+      - checkout:
+          path: /tmp/workspace/pixeloven
 
       # Download and cache dependencies
       - restore_cache:
@@ -38,13 +41,16 @@ jobs:
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
           # taken to be the root directory of the workspace.
-          root: pixeloven
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - pixeloven
 
   build:
     executor: node-executor
     steps:
       - attach_workspace:
-          at: /tmp/pixeloven
+          at: /tmp/workspace/pixeloven
 
         # Run build and test
       - run:
@@ -61,7 +67,7 @@ jobs:
     executor: node-executor
     steps:
       - attach_workspace:
-          at: /tmp/pixeloven
+          at: /tmp/workspace/pixeloven
 
       # Run test and report
       - run:
