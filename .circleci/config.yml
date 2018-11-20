@@ -23,7 +23,7 @@ jobs:
         name: Install Dependencies
         command: yarn install
 
-    -run:
+    - run:
         name: List packages
         command: ls -al node_modules/@pixeloven
 
@@ -37,6 +37,6 @@ jobs:
     - run: yarn test
     - run: yarn compile
 
-    -run:
+    - run:
         name: List packages
         command: ls -al node_modules/@pixeloven
