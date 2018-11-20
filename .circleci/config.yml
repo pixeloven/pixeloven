@@ -23,20 +23,23 @@ jobs:
         name: Install Dependencies
         command: yarn install
 
-    - run:
-        name: List packages
-        command: ls -al node_modules/@pixeloven
-
     - save_cache:
         paths:
         - node_modules
         key: v2-dependencies-{{ checksum "package.json" }}
 
-    # run tests!
-    - run: yarn lint
-    - run: yarn test
-    - run: yarn compile
-
     - run:
         name: List packages
         command: ls -al node_modules/@pixeloven
+
+    - run:
+        name: Lint source
+        command: yarn lint
+
+    - run:
+        name: Compile source
+        command: yarn compile
+
+    - run:
+        name: Test source
+        command: yarn test
