@@ -4,25 +4,20 @@
 #
 version: 2.1
 
-executors:
-  node-executor:
-    docker:
-      - image: circleci/node:8.12
-    working_directory: /tmp
-
-jobs:
-  setup:
-    executor: node-executor
+# Reusable commands
+commands:
+  list:
+    description: "List directory contents"
+    parameters:
+      path:
+        type: string
+        default: "node_modules"
     steps:
-      # Clean and Create workspace
-      - run: rm -rf /tmp/workspace
-      - run: mkdir -p /tmp/workspace
-
-  build:
-    executor: node-executor
+      - run: ls -al << parameters.path >>
+  install:
+    description: "Install dependencies"
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v2-dependencies-{{ checksum "package.json" }}
@@ -34,10 +29,24 @@ jobs:
             - node_modules
           key: v2-dependencies-{{ checksum "package.json" }}
 
+# Common executor for node based jobs
+executors:
+  node-executor:
+    docker:
+      - image: circleci/node:8.12
+    working_directory: ~/pixeloven
+
+# Define jobs
+jobs:
+  build:
+    executor: node-executor
+    steps:
+          # Download and cache dependencies
+      - install
+
       # Check for pixeloven deps
-      - run:
-          name: List packages
-          command: ls -al node_modules/@pixeloven
+      - list:
+          path: node_modules/@pixeloven
 
         # Run build and test
       - run:
@@ -50,25 +59,29 @@ jobs:
           name: Test source
           command: yarn test
 
-      # Persist the specified paths (pixeloven) into the workspace for use in downstream job. 
+       # Save artifacts
+      - store_artifacts:
+          path: dist
+          destination: dist
+
+      # Save coverage files to workspace
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
-          # taken to be the root directory of the workspace.
           root: /tmp/workspace
-          # Must be relative path from root
-          paths:
-            - pixeloven
+          paths: 
+            - packages/**/coverage/lcov.info
 
   report:
     executor: node-executor
     steps:
       - attach_workspace:
-          at: /tmp/workspace/pixeloven
+          at: /tmp/workspace
 
-      # Check for coverage
-      - run:
-          name: List coverage files
-          command: ls -al /tmp/workspace/pixeloven
+      # Download and cache dependencies
+      - install
+
+      # Check for workspace
+      - list:
+          path: /tmp/workspace
 
       # Run test and report
     #   - run:
@@ -77,12 +90,9 @@ jobs:
 
 workflows:
   version: 2.1
-  setup-build-and-report:
+  build-and-report:
     jobs:
-      - setup
-      - build:
-          requires:
-            - setup
+      - build
       - report:
           requires:
             - build
