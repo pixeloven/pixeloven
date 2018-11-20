@@ -8,7 +8,7 @@ executors:
   node-executor:
     docker:
       - image: circleci/node:8.12
-    working_directory: /tmp
+    working_directory: /tmp/workspace/pixeloven
 
 jobs:
   setup:
@@ -34,7 +34,6 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace/pixeloven
-      working_directory: /tmp/workspace/pixeloven
 
       # Download and cache dependencies
       - restore_cache:
@@ -69,8 +68,7 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace/pixeloven
-      working_directory: /tmp/workspace/pixeloven
-      
+
       # Run test and report
       - run:
           name: Test source
