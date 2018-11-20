@@ -28,12 +28,8 @@ jobs:
         command: sudo npm install -g yarn
 
     - run:
-        name: Install Lerna
-        command: sudo npm install -g lerna
-
-    - run:
         name: Install Dependencies
-        command: lerna bootstrap
+        command: yarn install
 
     # - save_cache:
     #     paths:
