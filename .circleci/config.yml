@@ -14,28 +14,14 @@ jobs:
   setup:
     executor: node-executor
     steps:
-      # Create workspace
-      - run: mkdir -p workspace
-      # Checkout repo
-      - checkout:
-          path: /tmp/workspace/pixeloven
-
-      # Persist the specified paths (pixeloven) into the workspace for use in downstream job. 
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
-          # taken to be the root directory of the workspace.
-          root: workspace
-          # Must be relative path from root
-          paths:
-            - pixeloven
+      # Clean and Create workspace
+      - run: rm -rf /tmp/workspace
+      - run: mkdir -p /tmp/workspace
 
   build:
     executor: node-executor
-    working_directory: /tmp/workspace/pixeloven
     steps:
-      - attach_workspace:
-          at: /tmp/workspace/pixeloven
-
+      - checkout
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -64,17 +50,30 @@ jobs:
           name: Test source
           command: yarn test
 
+      # Persist the specified paths (pixeloven) into the workspace for use in downstream job. 
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
+          # taken to be the root directory of the workspace.
+          root: /tmp/workspace
+          # Must be relative path from root
+          paths:
+            - pixeloven
+
   report:
     executor: node-executor
-    working_directory: /tmp/workspace/pixeloven
     steps:
       - attach_workspace:
           at: /tmp/workspace/pixeloven
 
-      # Run test and report
+      # Check for coverage
       - run:
-          name: Test source
-          command: yarn report-coverage
+          name: List coverage files
+          command: ls -al /tmp/workspace/pixeloven
+
+      # Run test and report
+    #   - run:
+    #       name: Test source
+    #       command: yarn report-coverage
 
 workflows:
   version: 2.1
