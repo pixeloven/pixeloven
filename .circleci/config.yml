@@ -14,56 +14,59 @@ jobs:
   setup:
     executor: node-executor
     steps:
-    - checkout
+      # Checkout repo
+      - checkout
 
-    # Download and cache dependencies
-    - restore_cache:
-        keys:
-        - v2-dependencies-{{ checksum "package.json" }}
-    - run:
-        name: Install Dependencies
-        command: yarn install
-    - save_cache:
-        paths:
-        - node_modules
-        key: v2-dependencies-{{ checksum "package.json" }}
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v2-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v2-dependencies-{{ checksum "package.json" }}
 
-    # Check for pixeloven deps
-    - run:
-        name: List packages
-        command: ls -al node_modules/@pixeloven
+      # Check for pixeloven deps
+      - run:
+          name: List packages
+          command: ls -al node_modules/@pixeloven
 
-    # Persist the specified paths (pixeloven) into the workspace for use in downstream job. 
-    - persist_to_workspace:
-        # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
-        # taken to be the root directory of the workspace.
-        root: pixeloven
+      # Persist the specified paths (pixeloven) into the workspace for use in downstream job. 
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory created by checking out source.
+          # taken to be the root directory of the workspace.
+          root: pixeloven
 
   build:
     executor: node-executor
-    - attach_workspace:
-        at: /tmp/pixeloven
+    steps:
+      - attach_workspace:
+          at: /tmp/pixeloven
 
-    # Run build and test
-    - run:
-        name: Lint source
-        command: yarn lint
-    - run:
-        name: Compile source
-        command: yarn compile
-    - run:
-        name: Test source
-        command: yarn test
+        # Run build and test
+      - run:
+            name: Lint source
+            command: yarn lint
+      - run:
+          name: Compile source
+          command: yarn compile
+      - run:
+          name: Test source
+          command: yarn test
 
   report:
     executor: node-executor
-    - attach_workspace:
-        at: /tmp/pixeloven
+    steps:
+      - attach_workspace:
+          at: /tmp/pixeloven
 
-    # Run test and report
-    - run:
-        name: Test source
-        command: yarn report-coverage
+      # Run test and report
+      - run:
+          name: Test source
+          command: yarn report-coverage
 
 workflows:
   version: 2.1
