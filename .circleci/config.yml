@@ -49,9 +49,16 @@ jobs:
       # Check for pixeloven deps
       - list:
           path: node_modules
+          
+      - run:
+          name: Remove old workspace
+          command: rm -rf /tmp/workspace
+      - run:
+          name: Create new workspace
+          command: mkdir -p /tmp/workspace
 
       - persist_to_workspace:
-          root: .
+          root: /tmp/workspace
           paths:
             - .
 
@@ -83,7 +90,7 @@ jobs:
 
       # Save coverage files to workspace
       - persist_to_workspace:
-          root: .
+          root: /tmp/workspace
           paths: 
             - packages/**/coverage/lcov.info
 
