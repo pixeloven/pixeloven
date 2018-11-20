@@ -72,12 +72,13 @@ workflows:
   version: 2.1
   setup-build-and-report:
     jobs:
-      - build
-      - test
+      - setup
+      - build:
+          requires:
+            - setup
       - report:
           requires:
             - build
-            - test
           filters:
             branches:
               only: master
