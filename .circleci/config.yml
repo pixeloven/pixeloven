@@ -8,9 +8,7 @@ jobs:
     docker:
     # specify the version you desire here
     - image: circleci/node:8.12
-
     working_directory: ~/pixeloven
-
     steps:
     - checkout
 
@@ -18,32 +16,46 @@ jobs:
     - restore_cache:
         keys:
         - v2-dependencies-{{ checksum "package.json" }}
-
     - run:
         name: Install Dependencies
         command: yarn install
-
     - save_cache:
         paths:
         - node_modules
         key: v2-dependencies-{{ checksum "package.json" }}
-
     - run:
         name: List packages
         command: ls -al node_modules/@pixeloven
-
     - run:
         name: Lint source
         command: yarn lint
-
     - run:
         name: Compile source
         command: yarn compile
-
     - run:
         name: Test source
         command: yarn test
 
+  deploy:
+    machine:
+      enabled: true
+    environment:
+      COVERALLS_SERVICE_NAME: "circleci"
+    working_directory: ~/pixeloven
+    steps:
+    - checkout
     - run:
         name: Report coverage
         command: yarn report-coverage
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
