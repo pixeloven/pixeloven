@@ -6,7 +6,6 @@ version: 2
 jobs:
   build:
     docker:
-    # specify the version you desire here
     - image: circleci/node:8.12
     working_directory: ~/pixeloven
     steps:
@@ -23,6 +22,8 @@ jobs:
         paths:
         - node_modules
         key: v2-dependencies-{{ checksum "package.json" }}
+
+    # Run build
     - run:
         name: List packages
         command: ls -al node_modules/@pixeloven
@@ -32,28 +33,40 @@ jobs:
     - run:
         name: Compile source
         command: yarn compile
-    - run:
-        name: Test source
-        command: yarn test
 
-  deploy:
-    machine:
-      enabled: true
+  test:
+    docker:
+    # specify the version you desire here
+    - image: circleci/node:8.12
     environment:
       COVERALLS_SERVICE_NAME: "circleci"
     working_directory: ~/pixeloven
     steps:
     - checkout
+
+    # Download and cache dependencies
+    - restore_cache:
+        keys:
+        - v2-dependencies-{{ checksum "package.json" }}
     - run:
-        name: Report coverage
-        command: yarn report-coverage
+        name: Install Dependencies
+        command: yarn install
+    - save_cache:
+        paths:
+        - node_modules
+        key: v2-dependencies-{{ checksum "package.json" }}
+
+    # Run test and report
+    - run:
+        name: Test source
+        command: yarn test
 
 workflows:
   version: 2
-  build-and-deploy:
+  build-and-test:
     jobs:
       - build
-      - deploy:
+      - test:
           requires:
             - build
           filters:
