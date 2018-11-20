@@ -13,7 +13,9 @@ commands:
         type: string
         default: "node_modules"
     steps:
-      - run: ls -al << parameters.path >>
+      - run:
+          name: "List << parameters.path >> contents"
+          command: ls -al << parameters.path >>
   install:
     description: "Install dependencies"
     steps:
@@ -38,10 +40,20 @@ executors:
 
 # Define jobs
 jobs:
+  setup:
+    executor: node-executor
+    steps:
+      - run:
+          name: Remove old workspace
+          command: rm -rf /tmp/workspace
+      - run:
+          name: Create new workspace
+          command: mkdir -p /tmp/workspace
+
   build:
     executor: node-executor
     steps:
-          # Download and cache dependencies
+      # Download and cache dependencies
       - install
 
       # Check for pixeloven deps
@@ -90,9 +102,12 @@ jobs:
 
 workflows:
   version: 2.1
-  build-and-report:
+  setup-build-and-report:
     jobs:
-      - build
+      - setup
+      - build:
+          requires:
+            - setup
       - report:
           requires:
             - build
