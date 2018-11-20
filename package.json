@@ -33,7 +33,7 @@
     "pretty": "lerna run pretty",
     "build:docs": "typedoc --options typedoc.json",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "report-coverage": "cat ./packages/**/coverage/lcov.info | coveralls",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
