@@ -25,11 +25,6 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "declarationDir": "./dist/types",
-    "outDir": "./dist/lib",
-    "paths": {
-      "~/*": ["packages/*"]
-    }
   },
   "exclude": [
     "./**/*.stories.ts",
@@ -39,5 +34,5 @@
     "./dist",
     "./docs",
     "./node_modules"
-],
+  ],
 }

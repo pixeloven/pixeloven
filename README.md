@@ -62,6 +62,7 @@ Below are just some of the up coming ideas for improvements.
 * Load env for storybook too.
 * -tasks should have peerDesp for express
 * -tasks add winston for logging
+* - handle precommit for each package https://github.com/sudo-suhas/lint-staged-multi-pkg
 
 ## Our Commitment
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!

@@ -9,7 +9,7 @@ jobs:
     # specify the version you desire here
     - image: circleci/node:8.12
 
-    working_directory: ~/repo
+    working_directory: ~/pixeloven
 
     steps:
     - checkout
@@ -20,21 +20,26 @@ jobs:
         - v2-dependencies-{{ checksum "package.json" }}
 
     - run:
-        name: Update NPM
-        command: sudo npm install -g npm
-
-    - run:
-        name: Update Yarn
-        command: sudo npm install -g yarn
-
-    - run:
         name: Install Dependencies
         command: yarn install
 
     - save_cache:
         paths:
         - node_modules
-        key: v1-dependencies-{{ checksum "package.json" }}
+        key: v2-dependencies-{{ checksum "package.json" }}
 
-    # run tests!
-    - run: yarn run prepare
+    - run:
+        name: List packages
+        command: ls -al node_modules/@pixeloven
+
+    - run:
+        name: Lint source
+        command: yarn lint
+
+    - run:
+        name: Compile source
+        command: yarn compile
+
+    - run:
+        name: Test source
+        command: yarn test

@@ -1,0 +1,54 @@
+@import "../../../styles/core/core";
+
+.a-button {
+    -webkit-appearance: none;
+
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: $global-spacing-quarter;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    padding: $global-spacing-half $global-spacing;
+
+    &:hover {
+        background-color: $color-dark-primary;
+        color: $color-white;
+    }
+}
+
+.a-button--hollow {
+    background-color: transparent;
+    border: 1px solid $color-primary;
+    color: $color-primary;
+
+    &:hover {
+        border-color: $color-dark-primary;
+    }
+}
+
+.a-button--full-width {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.a-button--unstyled {
+    border: none;
+    color: inherit;
+    padding: 0;
+    background-color: transparent;
+
+    &:hover {
+        background-color: transparent;
+        color: inherit;
+    }
+}
+
+.a-button--disabled {
+    background-color: $color-gray !important;
+    border-color: $color-gray !important;
+    color: $color-white !important;
+    cursor: not-allowed !important;
+}

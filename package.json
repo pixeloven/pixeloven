@@ -25,16 +25,12 @@
     ]
   },
   "scripts": {
-    "prepare": "lerna run prepare",
     "clean": "lerna run clean",
     "compile": "lerna run compile",
-    "precompile": "lerna run compile:clean",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "test:watch": "lerna run test:watch",
     "pretty": "lerna run pretty",
-    "prebuild": "lerna run compile:clean",
-    "pretest": "lerna run test:clean",
     "build:docs": "typedoc --options typedoc.json",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
@@ -44,7 +40,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "{tools}/**/*.ts": [
+    "example/**/*.{ts,tsx}": [
       "yarn pixeloven-cli lint",
       "yarn pixeloven-cli pretty",
       "git add"
@@ -52,6 +48,11 @@
     "packages/**/*.ts": [
       "lerna run pretty",
       "lerna run lint",
+      "git add"
+    ],
+    "tools/**/*.ts": [
+      "yarn pixeloven-cli lint",
+      "yarn pixeloven-cli pretty",
       "git add"
     ]
   },
@@ -68,7 +69,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-conventional": "^7.1.2",
-    "@pixeloven/cli": "0.10.0",
+    "@pixeloven/cli": "1.0.0",
     "@types/node": "10.12.7",
     "colors": "^1.3.2",
     "commitizen": "^3.0.0",

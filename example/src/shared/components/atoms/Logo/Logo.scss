@@ -1,0 +1,15 @@
+.a-logo {
+    margin: 0 auto;
+    animation: logo-spin infinite 20s linear;
+    height: 100px;
+    width: 100px;
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
