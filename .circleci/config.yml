@@ -44,21 +44,17 @@ jobs:
   setup:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      # @todo should cache checkout too 
+      # Allows us to pre-cache yarn install
       - checkout
       - install
-
-      # Check for pixeloven deps
-      - list:
-          path: node_modules
+      - list
 
   lint:
     executor: node-executor
     steps:
-      # Download and cache dependencies
       - checkout
       - install
+      - list
 
         # Run task
       - run:
@@ -68,42 +64,32 @@ jobs:
   build:
     executor: node-executor
     steps:
-      # Download and cache dependencies
       - checkout
       - install
+      - list
 
         # Run build and test
-        # @todo can cache dist/* for testing or use workspace
+        # @todo Find a way to break this out into parts
       - run:
           name: Compile source
           command: yarn compile
 
-       # Save artifacts
-      - store_artifacts:
-          path: dist
-          destination: dist
-
-  test:
-    executor: node-executor
-    steps:
-      # Download and cache dependencies
-      - checkout
-      - install
-
-        # Run build and test
-        # @todo find a way for test to run without compiling. 
-        # @desc This is to get around this issue https://github.com/facebook/jest/issues/1477 
-      - run:
-          name: Compile source
-          command: yarn compile
-
-        # Run task
       - run:
           name: Test source
           command: yarn test
 
+       # Save artifacts
+      - store_artifacts:
+          path: packages/**/dist
+          destination: dist
+
+       # Save artifacts
+      - store_artifacts:
+          path: packages/**/coverage
+          destination: coverage
+
       # Save project
-      - store_test_results:
+      - persist_to_workspace:
           root: .
           paths: 
             - packages/**/coverage/lcov.info
@@ -135,15 +121,12 @@ workflows:
       - lint:
           requires:
             - setup
-      - test:
-          requires:
-            - setup
       - build:
           requires:
             - setup
       - report:
           requires:
-            - test
+            - build
           filters:
             branches:
               only: master
