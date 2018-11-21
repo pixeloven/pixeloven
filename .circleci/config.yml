@@ -50,12 +50,13 @@ jobs:
       - list:
           path: node_modules
 
+      # Save project
       - persist_to_workspace:
           root: .
           paths:
             - .
 
-  build:
+  lint:
     executor: node-executor
     steps:
       - attach_workspace:
@@ -69,6 +70,18 @@ jobs:
       - run:
           name: Lint source
           command: yarn lint
+
+  build:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+
+      # Check for pixeloven deps
+      - list:
+          path: node_modules
+
+        # Run build and test
       - run:
           name: Compile source
           command: yarn compile
@@ -81,11 +94,11 @@ jobs:
           path: dist
           destination: dist
 
-      # Save coverage files to workspace
+      # Save project
       - persist_to_workspace:
           root: .
           paths: 
-            - packages/**/coverage/lcov.info
+            - .
 
   report:
     executor: node-executor
@@ -107,11 +120,15 @@ workflows:
   setup-build-and-report:
     jobs:
       - setup
+      - lint:
+          requires:
+            - setup
       - build:
           requires:
             - setup
       - report:
           requires:
+            - setup
             - build
           filters:
             branches:
