@@ -40,7 +40,7 @@ executors:
 
 # Define jobs
 jobs:
-  setup:
+  lint:
     executor: node-executor
     steps:
       # Download and cache dependencies
@@ -50,32 +50,35 @@ jobs:
       - list:
           path: node_modules
 
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
+        # Run task
+      - run:
+          name: Lint source
+          command: yarn lint
 
-  lint:
+  test:
     executor: node-executor
     steps:
-      - attach_workspace:
-          at: ~/pixeloven
+      # Download and cache dependencies
+      - install
 
       # Check for pixeloven deps
       - list:
           path: node_modules
 
-        # Run build and test
+        # Run task
       - run:
-          name: Lint source
-          command: yarn lint
+          name: Test source
+          command: yarn test
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - packages/**/coverage/lcov.info
 
   build:
     executor: node-executor
     steps:
-      - attach_workspace:
-          at: ~/pixeloven
 
       # Check for pixeloven deps
       - list:
@@ -85,30 +88,24 @@ jobs:
       - run:
           name: Compile source
           command: yarn compile
-      - run:
-          name: Test source
-          command: yarn test
 
        # Save artifacts
       - store_artifacts:
           path: dist
           destination: dist
 
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - .
-
   report:
     executor: node-executor
     steps:
+      # Download and cache dependencies
+      - install
+
       - attach_workspace:
           at: ~/pixeloven
 
       # Check for pixeloven deps
       - list:
-          path: node_modules
+          path: packages/**/coverage/lcov.info
 
       # Run test and report
     #   - run:
@@ -117,19 +114,17 @@ jobs:
 
 workflows:
   version: 2.1
-  setup-build-and-report:
+  runner:
     jobs:
-      - setup
-      - lint:
-          requires:
-            - setup
+      - lint
+      - test
       - build:
           requires:
-            - setup
+            - lint
+            - test
       - report:
           requires:
-            - setup
-            - build
+            - test
           filters:
             branches:
               only: master
