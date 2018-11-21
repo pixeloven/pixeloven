@@ -11,24 +11,26 @@ commands:
     parameters:
       path:
         type: string
-        default: "node_modules"
+        default: "."
     steps:
       - run:
-          name: "List << parameters.path >>"
+          name: "List Directory"
           command: ls -al << parameters.path >>
   install:
     description: "Install dependencies"
     steps:
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run:
           name: Install Dependencies
           command: yarn install
       - save_cache:
           paths:
             - node_modules
-          key: v2-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
 
 # Common executor for node based jobs
 executors:
@@ -43,6 +45,7 @@ jobs:
     executor: node-executor
     steps:
       # Download and cache dependencies
+      # @todo should cache checkout too 
       - checkout
       - install
 
@@ -70,6 +73,7 @@ jobs:
       - install
 
         # Run build and test
+        # @todo can cache dist/* for testing or use workspace
       - run:
           name: Compile source
           command: yarn compile
@@ -99,7 +103,7 @@ jobs:
           command: yarn test
 
       # Save project
-      - persist_to_workspace:
+      - store_test_results:
           root: .
           paths: 
             - packages/**/coverage/lcov.info
@@ -108,6 +112,7 @@ jobs:
     executor: node-executor
     steps:
       # Download and cache dependencies
+      - checkout
       - install
 
       - attach_workspace:
@@ -118,9 +123,9 @@ jobs:
           path: packages/**/coverage/lcov.info
 
       # Run test and report
-      - run:
-          name: Test source
-          command: yarn report-coverage
+      # - run:
+      #     name: Test source
+      #     command: yarn report-coverage
 
 workflows:
   version: 2.1
