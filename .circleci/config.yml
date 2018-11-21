@@ -40,7 +40,7 @@ executors:
 
 # Define jobs
 jobs:
-  lint:
+  setup:
     executor: node-executor
     steps:
       # Download and cache dependencies
@@ -50,10 +50,32 @@ jobs:
       - list:
           path: node_modules
 
+  lint:
+    executor: node-executor
+    steps:
+      # Download and cache dependencies
+      - install
+
         # Run task
       - run:
           name: Lint source
           command: yarn lint
+
+  build:
+    executor: node-executor
+    steps:
+      # Download and cache dependencies
+      - install
+
+        # Run build and test
+      - run:
+          name: Compile source
+          command: yarn compile
+
+       # Save artifacts
+      - store_artifacts:
+          path: dist
+          destination: dist
 
   test:
     executor: node-executor
@@ -61,9 +83,11 @@ jobs:
       # Download and cache dependencies
       - install
 
-      # Check for pixeloven deps
-      - list:
-          path: node_modules
+        # Run build and test
+        # @desc This is to get around this issue https://github.com/facebook/jest/issues/1477 
+      - run:
+          name: Compile source
+          command: yarn compile
 
         # Run task
       - run:
@@ -75,24 +99,6 @@ jobs:
           root: .
           paths: 
             - packages/**/coverage/lcov.info
-
-  build:
-    executor: node-executor
-    steps:
-
-      # Check for pixeloven deps
-      - list:
-          path: node_modules
-
-        # Run build and test
-      - run:
-          name: Compile source
-          command: yarn compile
-
-       # Save artifacts
-      - store_artifacts:
-          path: dist
-          destination: dist
 
   report:
     executor: node-executor
@@ -116,12 +122,16 @@ workflows:
   version: 2.1
   runner:
     jobs:
-      - lint
-      - test
+      - setup
+      - lint:
+          requires:
+            - setup
+      - test:
+          requires:
+            - setup
       - build:
           requires:
-            - lint
-            - test
+            - setup
       - report:
           requires:
             - test
