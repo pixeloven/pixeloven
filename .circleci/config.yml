@@ -19,7 +19,6 @@ commands:
   install:
     description: "Install dependencies"
     steps:
-      - checkout
       - restore_cache:
           keys:
             - v2-dependencies-{{ checksum "package.json" }}
@@ -44,6 +43,7 @@ jobs:
     executor: node-executor
     steps:
       # Download and cache dependencies
+      - checkout
       - install
 
       # Check for pixeloven deps
@@ -54,6 +54,7 @@ jobs:
     executor: node-executor
     steps:
       # Download and cache dependencies
+      - checkout
       - install
 
         # Run task
@@ -65,6 +66,7 @@ jobs:
     executor: node-executor
     steps:
       # Download and cache dependencies
+      - checkout
       - install
 
         # Run build and test
@@ -81,9 +83,11 @@ jobs:
     executor: node-executor
     steps:
       # Download and cache dependencies
+      - checkout
       - install
 
         # Run build and test
+        # @todo find a way for test to run without compiling. 
         # @desc This is to get around this issue https://github.com/facebook/jest/issues/1477 
       - run:
           name: Compile source
@@ -114,9 +118,9 @@ jobs:
           path: packages/**/coverage/lcov.info
 
       # Run test and report
-    #   - run:
-    #       name: Test source
-    #       command: yarn report-coverage
+      - run:
+          name: Test source
+          command: yarn report-coverage
 
 workflows:
   version: 2.1
