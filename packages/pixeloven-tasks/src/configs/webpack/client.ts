@@ -287,11 +287,11 @@ const plugins: Plugin[] = removeEmpty([
     new MiniCssExtractPlugin({
         chunkFilename: ifProduction(
             "static/css/[name].[contenthash].css",
-            "static/css/[name].[hash].css",
+            "static/css/main.css",
         ),
         filename: ifProduction(
             "static/css/[name].[contenthash].css",
-            "static/css/[name].[hash].css",
+            "static/css/main.css",
         ),
     }),
     /**
