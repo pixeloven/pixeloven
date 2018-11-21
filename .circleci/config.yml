@@ -109,9 +109,9 @@ jobs:
           path: packages/**/coverage/lcov.info
 
       # Run test and report
-      # - run:
-      #     name: Test source
-      #     command: yarn report-coverage
+      - run:
+          name: Test source
+          command: yarn report-coverage
 
 workflows:
   version: 2.1
