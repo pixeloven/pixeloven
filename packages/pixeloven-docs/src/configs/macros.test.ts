@@ -1,9 +1,15 @@
 import "jest";
+import {resolveSourceRoot, resolveTsConfig} from "./macros";
 
-describe("macros", () => {
-    describe("importAsset", () => {
-        it("should import an asset", () => {
-            expect(0).toBeLessThanOrEqual(0);
+describe("@pixeloven/docs", () => {
+    describe("configs", () => {
+        describe("macros", () => {
+            it("resolveSourceRoot should resolve src root", () => {
+                expect(resolveSourceRoot()).toContain("/src");
+            });
+            it("resolveTsConfig should resolve ts config", () => {
+                expect(resolveTsConfig()).toContain("/tsconfig.json");
+            });
         });
     });
 });

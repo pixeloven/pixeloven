@@ -36,6 +36,5 @@
     "test:watch": "pixeloven-cli test:watch",
     "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
     "pretest": "pixeloven-cli test:clean"
-  },
-  "gitHead": "877d6f1c5bc1582239236e1658a861e41bc1cf7d"
+  }
 }

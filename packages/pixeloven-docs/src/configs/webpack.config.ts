@@ -1,4 +1,5 @@
 import deepmerge from "deepmerge";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { Configuration, Module, RuleSetRule } from "webpack";
 import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
@@ -13,19 +14,32 @@ export default (
     env: object,
     defaultConfig: Configuration,
 ) => {
-    const newTsRule: RuleSetRule = {
-        loader: "ts-loader",
-        options: {
-            configFile: resolveTsConfig(),
-        },
-        test: /\.(ts|tsx)$/,
-    };
     const newScssRule: RuleSetRule = {
-        loaders: ["style-loader", "css-loader", "sass-loader"], // TODO update to be the same as app
+        loaders: [
+            "css-hot-loader",
+            MiniCssExtractPlugin.loader,
+            "css-loader",
+            "sass-loader",
+        ],
         test: /\.(scss|sass|css)$/i,
     };
+    const newTsRule: RuleSetRule = {
+        include: resolveSourceRoot(),
+        test: /\.(ts|tsx)$/,
+        use: [
+            {
+                loader: "babel-loader",
+            },
+            {
+                loader: "ts-loader",
+                options: {
+                    configFile: resolveTsConfig(),
+                },
+            },
+        ],
+    };
     const newModule: Module = {
-        rules: [newTsRule, newScssRule],
+        rules: [newScssRule, newTsRule],
     };
     if (defaultConfig.module) {
         defaultConfig.module = deepmerge(defaultConfig.module, newModule);

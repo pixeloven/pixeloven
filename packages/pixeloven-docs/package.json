@@ -33,17 +33,19 @@
     "@storybook/react": "4.0.6",
     "babel-loader": "^8.0.0",
     "cross-spawn": "^6.0.0",
+    "css-hot-loader": "^1.4.0",
     "css-loader": "^1.0.0",
     "deepmerge": "^2.0.0",
+    "mini-css-extract-plugin":"^0.4.5",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "sass-loader": "^7.0.0",
     "storybook-readme": "4.0.2",
-    "style-loader": "^0.23.0",
     "webpack": "^4.0.0"
   },
   "devDependencies": {
     "@types/cross-spawn": "6.0.0",
+    "@types/mini-css-extract-plugin": "^0.2.0",
     "@types/node": "10.12.7",
     "@types/storybook__react": "4.0.0"
   },
