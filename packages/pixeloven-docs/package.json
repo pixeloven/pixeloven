@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/docs",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Documentation generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -23,7 +23,7 @@
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@emotion/core": "0.13.1",
-    "@pixeloven/cli": "^1.0.0",
+    "@pixeloven/cli": "^1.0.5",
     "@storybook/addon-actions": "4.0.6",
     "@storybook/addon-knobs": "4.0.6",
     "@storybook/addon-notes": "4.0.6",
