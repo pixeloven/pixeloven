@@ -10,6 +10,7 @@ export const newScssRule: RuleSetRule = {
     ],
     test: /\.(scss|sass|css)$/i,
 };
+
 export const newTsRule: RuleSetRule = {
     include: resolveSourceRoot(),
     test: /\.(ts|tsx)$/,
@@ -25,6 +26,7 @@ export const newTsRule: RuleSetRule = {
         },
     ],
 };
+
 export const newModule: Module = {
     rules: [newScssRule, newTsRule],
 };
@@ -53,6 +55,8 @@ export default (
         }
         if (defaultConfig.resolve.extensions) {
             defaultConfig.resolve.extensions.push(".ts", ".tsx");
+        } else {
+            defaultConfig.resolve.extensions = [".ts", ".tsx"];
         }
     }
     return defaultConfig;
