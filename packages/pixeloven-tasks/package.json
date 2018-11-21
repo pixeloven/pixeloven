@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Common tasks or jobs used during development and in production",
   "main": "dist/lib/main.js",
   "types": "dist/types/index.d.ts",
@@ -26,8 +26,8 @@
     "@babel/preset-env": "7.1.5",
     "@babel/preset-react": "7.0.0",
     "@pixeloven/cli": "^1.0.5",
-    "@pixeloven/core": "^1.0.5",
-    "@pixeloven/env": "^1.0.5",
+    "@pixeloven/core": "^1.0.6",
+    "@pixeloven/env": "^1.0.6",
     "autoprefixer": "9.3.1",
     "babel-loader": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",

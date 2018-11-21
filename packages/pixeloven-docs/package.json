@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/docs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Documentation generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -38,8 +38,8 @@
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "sass-loader": "^7.0.0",
-    "style-loader": "^0.23.0",
     "storybook-readme": "4.0.2",
+    "style-loader": "^0.23.0",
     "webpack": "^4.0.0"
   },
   "devDependencies": {
