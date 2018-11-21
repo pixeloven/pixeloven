@@ -2,8 +2,7 @@
 This project is a `mono-repo` designed to contain several packages that in combination make up the ***PixelOven Framework***. Below are instructions on how to contribute to this project as well as directions on how to integrate each individual package into existing projects. 
 
 [![CircleCI](https://circleci.com/gh/pixeloven/pixeloven.svg?style=svg)](https://circleci.com/gh/pixeloven/pixeloven)
-
-[![Coverage Status](https://coveralls.io/github/pixeloven/pixeloven/badge.svg?branch=master)](https://coveralls.io/github/pixeloven/pixeloven?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/pixeloven/pixeloven/badge.svg?branch=master)](https://coveralls.io/github/pixeloven/pixeloven?branch=master)
 
 ## Table of Contents
 

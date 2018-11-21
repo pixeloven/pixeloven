@@ -40,21 +40,23 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "example/**/*.{ts,tsx}": [
-      "yarn pixeloven-cli lint",
-      "yarn pixeloven-cli pretty",
-      "git add"
-    ],
-    "packages/**/*.ts": [
-      "lerna run pretty",
-      "lerna run lint",
-      "git add"
-    ],
-    "tools/**/*.ts": [
-      "yarn pixeloven-cli lint",
-      "yarn pixeloven-cli pretty",
-      "git add"
-    ]
+    "linter": {
+      "example/**/*.{ts,tsx}": [
+        "yarn pixeloven-cli pretty",
+        "yarn pixeloven-cli lint",
+        "git add"
+      ],
+      "packages/**/*.{ts,tsx}": [
+        "lerna run pretty",
+        "lerna run lint",
+        "git add"
+      ],
+      "tools/**/*.{ts,tsx}": [
+        "yarn pixeloven-cli pretty",
+        "yarn pixeloven-cli lint",
+        "git add"
+      ]
+    }
   },
   "config": {
     "commitizen": {
