@@ -17,6 +17,7 @@
       "packages/*"
     ],
     "nohoist": [
+      "**/json5",
       "**/@pixeloven/cli",
       "**/@pixeloven/core",
       "**/@pixeloven/docs",

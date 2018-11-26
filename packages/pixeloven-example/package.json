@@ -9,9 +9,7 @@
   },
   "author": "Brian Gebel",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
+  "private": true,
   "dependencies": {
     "@pixeloven/cli": "^1.0.0",
     "@pixeloven/core": "^1.0.0",
@@ -106,19 +104,21 @@
     "test:watch": "pixeloven-cli test:watch"
   },
   "lint-staged": {
-    "src/**/*.{scss,ts,tsx}": [
-      "yarn pretty",
-      "git add"
-    ],
-    "src/**/*.{scss}": [
-      "yarn pretty:scss",
-      "yarn lint:scss",
-      "git add"
-    ],
-    "src/**/*.{ts,tsx}": [
-      "yarn pretty:ts",
-      "yarn lint:ts",
-      "git add"
-    ]
+    "linters": {
+      "src/**/*.{scss,ts,tsx}": [
+        "yarn pretty",
+        "git add"
+      ],
+      "src/**/*.{scss}": [
+        "yarn pretty:scss",
+        "yarn lint:scss",
+        "git add"
+      ],
+      "src/**/*.{ts,tsx}": [
+        "yarn pretty:ts",
+        "yarn lint:ts",
+        "git add"
+      ]
+    }
   }
 }
