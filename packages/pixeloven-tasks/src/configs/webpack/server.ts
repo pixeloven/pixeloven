@@ -1,5 +1,6 @@
 import { resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
+import Dotenv from "dotenv-webpack";
 import webpack, { Module, Node, Output, Plugin, RuleSetRule } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import merge from "webpack-merge";
@@ -131,9 +132,10 @@ const output: Output = {
  */
 const plugins: Plugin[] = removeEmpty([
     /**
-     * Define environmental variables for application
-     * @description For now we are only allowing a strict set to be exposed to the client.
-     * @todo Should eventually move to this and make Env client/server agnostic. https://github.com/mrsteele/dotenv-webpack
+     * Define environmental variables base on entry point
+     * @description Provides entry point specific env variables
+     * @todo Should merge this and the one below eventually
+     * 
      * @env all
      */
     new webpack.EnvironmentPlugin({
@@ -141,6 +143,14 @@ const plugins: Plugin[] = removeEmpty([
         NODE_ENV: ifProduction("production", "development"),
         PUBLIC_URL: publicPath,
         TARGET: target,
+    }),
+    /**
+     * Define environmental from .env
+     * @description Define environmental vars from .env file
+     * @env all
+     */
+    new Dotenv({
+        path: resolvePath(".env")
     }),
 ]);
 

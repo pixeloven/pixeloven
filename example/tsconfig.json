@@ -5,7 +5,7 @@
       "rootDir": "./src",
       "declaration": false,
       "paths": {
-        "@pixeloven/*": ["../packages-*/src"],
+        "@pixeloven/*": ["../packages/pixeloven-*/src"],
         "@client/*": ["src/client/*"],
         "@server/*": ["src/server/*"],
         "@shared/*": ["src/shared/*"]
