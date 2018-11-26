@@ -1,12 +1,16 @@
 {
-  "name": "ussr-frontend",
-  "version": "1.0.0",
-  "description": "React Framework",
-  "author": "Brian Gebel <bgebel@gofundme.com>",
-  "private": true,
+  "name": "@pixeloven/example",
+  "version": "1.0.6",
+  "description": "Example project using the framework",
+  "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:gofundmedevs/ssr-frontend.git"
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@pixeloven/cli": "^1.0.0",
