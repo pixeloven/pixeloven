@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/core",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Core Framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,8 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^1.2.1",
-    "@pixeloven/exceptions": "^1.2.1",
+    "@pixeloven/cli": "^1.2.2",
+    "@pixeloven/exceptions": "^1.2.2",
     "react-dev-utils": "6.1.1",
     "webpack-log": "2.0.0"
   },

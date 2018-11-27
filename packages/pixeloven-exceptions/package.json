@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/exceptions",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Exceptions and exception handlers",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^1.2.1"
+    "@pixeloven/cli": "^1.2.2"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
