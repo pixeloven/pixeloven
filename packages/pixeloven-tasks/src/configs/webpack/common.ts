@@ -1,6 +1,7 @@
 import { resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
+import Dotenv from "dotenv-webpack";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TimeFixPlugin from "time-fix-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
@@ -47,6 +48,14 @@ const plugins: Plugin[] = removeEmpty([
      * @env all
      */
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    /**
+     * Define environmental from .env
+     * @description Define environmental vars from .env file
+     * @env all
+     */
+    new Dotenv({
+        path: resolvePath(".env", false)
+    }),
     /**
      * Perform type checking and linting in a separate process to speed up compilation
      * TODO might prevent showing errors in browser if async is off... but then again it breaks hmr overlay
