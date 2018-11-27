@@ -1,6 +1,5 @@
 import { resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
-import Dotenv from "dotenv-webpack";
 import webpack, { Module, Node, Output, Plugin, RuleSetRule } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import merge from "webpack-merge";
@@ -143,14 +142,6 @@ const plugins: Plugin[] = removeEmpty([
         NODE_ENV: ifProduction("production", "development"),
         PUBLIC_URL: publicPath,
         TARGET: target,
-    }),
-    /**
-     * Define environmental from .env
-     * @description Define environmental vars from .env file
-     * @env all
-     */
-    new Dotenv({
-        path: resolvePath(".env")
     }),
 ]);
 

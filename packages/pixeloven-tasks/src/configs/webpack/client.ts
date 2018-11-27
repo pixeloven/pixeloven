@@ -2,7 +2,6 @@ import { resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import autoprefixer from "autoprefixer";
 import CopyWebpackPlugin from "copy-webpack-plugin";
-import Dotenv from "dotenv-webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OfflinePlugin from "offline-plugin";
@@ -269,14 +268,7 @@ const plugins: Plugin[] = removeEmpty([
         PUBLIC_URL: publicPath,
         TARGET: target,
     }),
-    /**
-     * Define environmental from .env
-     * @description Define environmental vars from .env file
-     * @env all
-     */
-    new Dotenv({
-        path: resolvePath(".env")
-    }),
+
     /**
      * Copy files
      * @env production
