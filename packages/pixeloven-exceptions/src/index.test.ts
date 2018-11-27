@@ -1,5 +1,9 @@
 import "jest";
-import { Exception, FileNotFoundException, NodeProcessException } from "./index";
+import {
+    Exception,
+    FileNotFoundException,
+    NodeProcessException,
+} from "./index";
 
 describe("@pixeloven/exceptions", () => {
     describe("index", () => {

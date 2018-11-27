@@ -3,11 +3,7 @@ import { Configuration, Module, RuleSetRule } from "webpack";
 import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
 export const newScssRule: RuleSetRule = {
-    loaders: [
-        "style-loader",
-        "css-loader",
-        "sass-loader",
-    ],
+    loaders: ["style-loader", "css-loader", "sass-loader"],
     test: /\.(scss|sass|css)$/i,
 };
 

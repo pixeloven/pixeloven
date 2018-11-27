@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^1.2.1",
+    "@pixeloven/exceptions": "^1.2.1",
     "react-dev-utils": "6.1.1",
     "webpack-log": "2.0.0"
   },

@@ -259,7 +259,7 @@ const plugins: Plugin[] = removeEmpty([
      * Define environmental variables base on entry point
      * @description Provides entry point specific env variables
      * @todo Should merge this and the one below eventually
-     * 
+     *
      * @env all
      */
     new webpack.EnvironmentPlugin({

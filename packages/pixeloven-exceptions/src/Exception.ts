@@ -2,13 +2,12 @@
  * Generic Exception
  */
 class Exception extends Error {
-
     /**
      * Build exception
-     * @param message 
+     * @param message
      */
     constructor(message: string) {
-        super(message)/* istanbul ignore next */;
+        super(message) /* istanbul ignore next */;
         Object.setPrototypeOf(this, Exception.prototype);
         this.name = this.constructor.name;
         Error.captureStackTrace(this, this.constructor);

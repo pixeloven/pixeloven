@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^1.2.1",
-    "@pixeloven/core": "^1.2.1",
+    "@pixeloven/exceptions": "^1.2.1",
     "dotenv": "6.1.0"
   },
   "devDependencies": {

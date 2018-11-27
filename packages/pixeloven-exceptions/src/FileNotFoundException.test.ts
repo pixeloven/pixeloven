@@ -40,7 +40,7 @@ describe("@pixeloven/exceptions", () => {
         it("can be thrown and have instanceof checked", () => {
             const throwable = () => {
                 throw exception;
-            }
+            };
             expect(throwable).toThrow(FileNotFoundException);
             expect(exception).toBeInstanceOf(FileNotFoundException);
         });

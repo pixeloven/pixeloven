@@ -54,7 +54,7 @@ const plugins: Plugin[] = removeEmpty([
      * @env all
      */
     new Dotenv({
-        path: resolvePath(".env", false)
+        path: resolvePath(".env", false),
     }),
     /**
      * Perform type checking and linting in a separate process to speed up compilation
