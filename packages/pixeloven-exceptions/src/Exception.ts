@@ -8,12 +8,10 @@ class Exception extends Error {
      * @param message 
      */
     constructor(message: string) {
-        super(message);
-        Object.setPrototypeOf(this, Exception.prototype)
-        if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, this.constructor);
-        }
+        super(message)/* istanbul ignore next */;
+        Object.setPrototypeOf(this, Exception.prototype);
         this.name = this.constructor.name;
+        Error.captureStackTrace(this, this.constructor);
     }
 
     /**

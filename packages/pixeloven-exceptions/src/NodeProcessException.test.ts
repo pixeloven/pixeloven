@@ -1,19 +1,19 @@
 import "jest";
-import FileNotFoundException from "./FileNotFoundException";
+import NodeProcessException from "./NodeProcessException";
 
-const name = "FileNotFoundException";
+const name = "NodeProcessException";
 const message = "testing";
-const defaultMessage = "File not found.";
-const exception = new FileNotFoundException(message);
+const defaultMessage = "Node process error.";
+const exception = new NodeProcessException(message);
 
 describe("@pixeloven/exceptions", () => {
-    describe("FileNotFoundException", () => {
+    describe("NodeProcessException", () => {
         describe("exception.message", () => {
             it(`property should return string "${message}"`, () => {
                 expect(exception.message).toEqual(message);
             });
             it(`property default should return string "${defaultMessage}"`, () => {
-                const defaultException = new FileNotFoundException();
+                const defaultException = new NodeProcessException();
                 expect(defaultException.message).toEqual(defaultMessage);
             });
         });
@@ -33,16 +33,16 @@ describe("@pixeloven/exceptions", () => {
             });
         });
         describe("getStack", () => {
-            it(`method should contain stack trace with string "FileNotFoundException"`, () => {
-                expect(exception.getStack()).toContain("FileNotFoundException");
+            it(`method should contain stack trace with string "NodeProcessException"`, () => {
+                expect(exception.getStack()).toContain("NodeProcessException");
             });
         });
         it("can be thrown and have instanceof checked", () => {
             const throwable = () => {
                 throw exception;
             }
-            expect(throwable).toThrow(FileNotFoundException);
-            expect(exception).toBeInstanceOf(FileNotFoundException);
+            expect(throwable).toThrow(NodeProcessException);
+            expect(exception).toBeInstanceOf(NodeProcessException);
         });
     });
 });

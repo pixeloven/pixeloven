@@ -5,13 +5,11 @@ import Exception from "./Exception";
  * @description Extends JS Error to be used when a file can not be found.
  */
 class FileNotFoundException extends Exception {
-    constructor(message?: string) {
-        super(message || "File not found.");
-        Object.setPrototypeOf(this, FileNotFoundException.prototype)
-        if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, this.constructor);
-        }
+    constructor(message: string = "File not found.") {
+        super(message)/* istanbul ignore next */;
+        Object.setPrototypeOf(this, FileNotFoundException.prototype);
         this.name = this.constructor.name;
+        Error.captureStackTrace(this, this.constructor);
     }
 }
 

@@ -28,8 +28,8 @@ describe("@pixeloven/exceptions", () => {
             });
         });
         describe("getStack", () => {
-            it(`method should return string "${name}"`, () => {
-                expect(exception.getName()).toEqual(name);
+            it(`method should contain stack trace with string "Exception"`, () => {
+                expect(exception.getStack()).toContain("Exception");
             });
         });
         it("can be thrown and have instanceof checked", () => {
