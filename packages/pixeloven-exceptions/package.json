@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/env",
+  "name": "@pixeloven/exceptions",
   "version": "1.2.1",
-  "description": "Environment loader",
+  "description": "Exceptions and exception handlers",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -18,13 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^1.2.1",
-    "@pixeloven/core": "^1.2.1",
-    "dotenv": "6.1.0"
-  },
-  "devDependencies": {
-    "@types/dotenv": "6.1.0",
-    "@types/node": "10.12.7"
+    "@pixeloven/cli": "^1.2.1"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
