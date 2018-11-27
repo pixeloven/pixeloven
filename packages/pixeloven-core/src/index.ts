@@ -4,5 +4,4 @@
  * @todo Explore using rollupjs here
  */
 export * from "./macros";
-export * from "./exceptions";
 export * from "./libraries";
