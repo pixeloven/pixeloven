@@ -1,6 +1,6 @@
+import { FileNotFoundException } from "@pixeloven/exceptions";
 import fs from "fs";
 import path from "path";
-import { FileNotFoundException } from "./exceptions";
 import { logger } from "./libraries";
 
 /**

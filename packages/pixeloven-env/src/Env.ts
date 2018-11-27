@@ -1,4 +1,4 @@
-import { NodeProcessException } from "@pixeloven/core";
+import { NodeProcessException } from "@pixeloven/exceptions";
 import dotenv from "dotenv";
 
 export type Environment = "development" | "production" | "test";

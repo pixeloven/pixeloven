@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/core",
+  "name": "@pixeloven/exceptions",
   "version": "1.2.1",
-  "description": "Core Framework",
+  "description": "Exceptions and exception handlers",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -18,14 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^1.2.1",
-    "@pixeloven/exceptions": "^1.2.1",
-    "react-dev-utils": "6.1.1",
-    "webpack-log": "2.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "10.12.7",
-    "@types/webpack": "4.4.19"
+    "@pixeloven/cli": "^1.2.1"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

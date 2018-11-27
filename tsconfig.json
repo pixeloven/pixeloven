@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
+    "removeComments": true,
     "moduleResolution": "node",
     "target": "es5",
     "module":"commonjs",

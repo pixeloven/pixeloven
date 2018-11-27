@@ -1,5 +1,5 @@
 import "jest";
-import {resolveSourceRoot, resolveTsConfig} from "./macros";
+import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
 describe("@pixeloven/docs", () => {
     describe("configs", () => {

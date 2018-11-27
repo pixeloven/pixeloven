@@ -1,0 +1,16 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-standard",
+    "tslint-config-prettier",
+    "tslint-eslint-rules"
+  ],
+  "rules": {
+    "arrow-parens": false,
+    "interface-name" : false,
+    "no-console": false,
+    "no-any": true,
+    "no-null-keyword": true
+  }
+}
