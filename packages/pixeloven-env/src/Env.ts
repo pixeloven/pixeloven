@@ -31,7 +31,7 @@ export class Env {
         BABEL_ENV: "production",
         BUILD_PATH: "dist",
         HOST: "localhost",
-        LOG_LEVEL: "info",
+        LOG_LEVEL: "silent",
         NODE_ENV: "production",
         PORT: "8080",
         PROTOCOL: "http",
