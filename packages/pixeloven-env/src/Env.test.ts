@@ -63,7 +63,7 @@ describe("@pixeloven/env", () => {
                 expect(process.env.HOST).toEqual("localhost");
                 expect(process.env.NODE_ENV).toEqual("production");
                 expect(process.env.PORT).toEqual("8080");
-                expect(process.env.PROTOCOL).toEqual("https");
+                expect(process.env.PROTOCOL).toEqual("http");
                 expect(process.env.PUBLIC_URL).toEqual("/");
             });
             it('should load default env and set environment to "development"', () => {
@@ -73,7 +73,7 @@ describe("@pixeloven/env", () => {
                 expect(process.env.HOST).toEqual("localhost");
                 expect(process.env.NODE_ENV).toEqual("development");
                 expect(process.env.PORT).toEqual("8080");
-                expect(process.env.PROTOCOL).toEqual("https");
+                expect(process.env.PROTOCOL).toEqual("http");
                 expect(process.env.PUBLIC_URL).toEqual("/");
             });
         });

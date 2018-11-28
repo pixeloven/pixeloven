@@ -34,7 +34,7 @@ export class Env {
         LOG_LEVEL: "info",
         NODE_ENV: "production",
         PORT: "8080",
-        PROTOCOL: "https",
+        PROTOCOL: "http",
         PUBLIC_URL: "/",
     };
 
