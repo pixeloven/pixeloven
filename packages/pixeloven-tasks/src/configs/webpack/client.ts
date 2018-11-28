@@ -117,21 +117,21 @@ const scssRule: RuleSetRule = {
     test: /\.(scss|sass|css)$/i,
     use: removeEmpty([
         ifDevelopment({
-            loader: "css-hot-loader",
+            loader: require.resolve("css-hot-loader"),
         }),
         MiniCssExtractPlugin.loader,
         {
-            loader: "css-loader",
+            loader: require.resolve("css-loader"),
         },
         {
-            loader: "postcss-loader",
+            loader: require.resolve("postcss-loader"),
             options: {
                 ident: "postcss",
                 plugins: postCssPlugin,
             },
         },
         {
-            loader: "sass-loader",
+            loader: require.resolve("sass-loader"),
         },
     ]),
 };
@@ -162,10 +162,10 @@ const typeScriptRule: RuleSetRule = {
     test: /\.(ts|tsx)$/,
     use: [
         {
-            loader: "babel-loader",
+            loader: require.resolve("babel-loader"),
         },
         {
-            loader: "ts-loader",
+            loader: require.resolve("ts-loader"),
             options: {
                 configFile: resolvePath("tsconfig.json"),
                 // transpileOnly: true,

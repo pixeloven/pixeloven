@@ -54,7 +54,7 @@ const catchAllRule = {
  * Handle css/scss
  */
 const scssRule: RuleSetRule = {
-    loader: "css-loader/locals",
+    loader: require.resolve("css-loader/locals"),
     test: /\.(scss|sass|css)$/i,
 };
 
@@ -64,7 +64,7 @@ const scssRule: RuleSetRule = {
  * smaller than specified limit in bytes as data URLs to avoid requests.
  */
 const staticFileRule: RuleSetRule = {
-    loader: "url-loader",
+    loader: require.resolve("url-loader"),
     options: {
         emitFile: false,
     },
@@ -84,10 +84,10 @@ const typeScriptRule: RuleSetRule = {
     test: /\.(ts|tsx)$/,
     use: [
         {
-            loader: "babel-loader",
+            loader: require.resolve("babel-loader"),
         },
         {
-            loader: "ts-loader",
+            loader: require.resolve("ts-loader"),
             options: {
                 configFile: resolvePath("tsconfig.json"),
                 // transpileOnly: true,
