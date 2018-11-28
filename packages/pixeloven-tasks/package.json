@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Common tasks or jobs used during development and in production",
   "main": "dist/lib/main.js",
   "types": "dist/types/index.d.ts",
