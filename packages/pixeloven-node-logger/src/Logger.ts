@@ -1,8 +1,12 @@
 import log from "webpack-log";
-const logger = log({ name: "core" });
 
 export type Message = string | string[];
 export type Level = "info" | "warn" | "error";
+
+/**
+ * Create logger
+ */
+const logger = log({ name: "core" });
 
 /**
  * Logs a message as a specific
@@ -23,7 +27,7 @@ const messenger = (message: Message, level: Level): void => {
  * Simple wrapper for webpack-log
  * @todo Add a success log state
  */
-export const Logger = {
+const Logger = {
     error: (message: Message): void => messenger(message, "error"),
     info: (message: Message): void => messenger(message, "info"),
     warn: (message: Message): void => messenger(message, "warn"),
