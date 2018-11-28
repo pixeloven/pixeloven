@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/exceptions",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Exceptions and exception handlers",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
