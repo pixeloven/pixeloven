@@ -26,8 +26,7 @@
     "stylelint-scss": "3.4.0",
     "ts-jest": "23.10.5",
     "tslint": "5.11.0",
-    "tslint-config-prettier": "1.16.0",
-    "tslint-config-standard": "8.0.1",
+    "tslint-config-prettier": "1.17.0",
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "3.6.0",
     "typescript": "3.1.6"

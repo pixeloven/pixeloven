@@ -3,16 +3,14 @@
   "linterOptions": {
     "exclude": [
       ".circleci",
-      ".storybook",
-      "build",
+      "dist",
       "coverage",
       "node_modules",
       "public"
     ]
   },
   "extends": [
-    "tslint:recommended",
-    "tslint-config-standard",
+    "tslint:latest",
     "tslint-config-prettier",
     "tslint-eslint-rules"
   ],
