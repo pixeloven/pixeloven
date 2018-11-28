@@ -1,5 +1,5 @@
 /**
- * Register exceptions here
+ * Register libraries here
  */
 export { default as Exception } from "./Exception";
 export { default as FileNotFoundException } from "./FileNotFoundException";

@@ -1,0 +1,35 @@
+{
+  "name": "@pixeloven/node-logger",
+  "version": "1.2.5",
+  "description": "Node logger",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@pixeloven/cli": "^1.2.4",
+    "webpack-log": "2.0.0"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn compile",
+    "clean": "pixeloven-cli clean",
+    "compile": "pixeloven-cli compile:ts",
+    "precompile": "pixeloven-cli compile:clean",
+    "lint": "pixeloven-cli lint:ts",
+    "test": "pixeloven-cli test",
+    "test:watch": "pixeloven-cli test:watch",
+    "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
+    "pretest": "pixeloven-cli test:clean"
+  }
+}
