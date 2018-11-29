@@ -66,6 +66,7 @@ const devtoolModuleFilenameTemplate = (
 
 /**
  * Define entrypoint(s) for client
+ * @todo Might need to do the path portion better because hot-update.json is broken
  */
 const entry = {
     main: removeEmpty([

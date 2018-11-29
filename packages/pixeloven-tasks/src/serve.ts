@@ -14,7 +14,7 @@ import {
 } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import chalk from "chalk";
-import express, { Request, Response } from "express";
+import express from "express";
 import path from "path";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
@@ -24,6 +24,7 @@ import webpackHotMiddleware from "webpack-hot-middleware";
 import webpackHotServerMiddleware from "webpack-hot-server-middleware";
 import webpackClientConfig from "./configs/webpack/client";
 import webpackServerConfig from "./configs/webpack/server";
+import errorHandler from "./middleware/errorHandler";
 
 /**
  * Get WebpackDevServerUtils functions
@@ -142,13 +143,7 @@ try {
              * Create error handler for server errors
              * @todo Should render a basic page with the same stack style as the dev-middleware
              */
-            app.use((err: Error, req: Request, res: Response) => {
-                res.status(500).send(
-                    `<h1>Unexpected Error</h1><p>See console for more details.</p><p>${
-                        err.message
-                    }</p>`,
-                );
-            });
+            app.use(errorHandler);
 
             /**
              * Start express server on specific host and port
