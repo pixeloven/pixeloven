@@ -48,6 +48,9 @@
     "@types/node": "10.12.7",
     "@types/storybook__react": "4.0.0"
   },
+  "peerDependencies": {
+    "babel-loader": "^8.0.0"
+  },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
