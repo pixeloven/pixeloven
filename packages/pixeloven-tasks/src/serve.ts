@@ -133,7 +133,10 @@ try {
             if (clientCompiler) {
                 app.use(
                     webpackHotMiddleware(clientCompiler, {
+                        heartbeat: 3000,
                         log: logger.info,
+                        path: "__webpack_hmr",
+                        reload: true,
                     }),
                 );
             }
