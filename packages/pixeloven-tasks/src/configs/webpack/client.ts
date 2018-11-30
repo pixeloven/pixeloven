@@ -67,10 +67,11 @@ const devtoolModuleFilenameTemplate = (
 /**
  * Define entrypoint(s) for client
  */
+const hotModulePath = path.normalize(`${publicPath}/__webpack_hmr`); 
 const entry = {
     main: removeEmpty([
         ifDevelopment(
-            "webpack-hot-middleware/client?reload=true&path=__webpack_hmr",
+            `webpack-hot-middleware/client?reload=true&path=${hotModulePath}`,
             undefined,
         ),
         resolvePath("src/client/index.tsx"),
