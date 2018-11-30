@@ -13,7 +13,6 @@ import {
     WebpackStatsHandler,
 } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
-import chalk from "chalk";
 import fs from "fs-extra";
 import Promise from "promise";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
@@ -73,9 +72,7 @@ function printBuildStatus(warnings: string[]) {
         logger.warn("Compiled with warnings.");
         logger.warn(warnings.join("\n\n")); // TODO print array??? can webpacl-log handle this natively???
         logger.warn(
-            "Search for the " +
-                chalk.underline(chalk.yellow("keywords")) +
-                " to learn more about each warning.",
+            "Search for the \"keywords\" to learn more about each warning.",
         );
     } else {
         logger.info("Compiled successfully.");

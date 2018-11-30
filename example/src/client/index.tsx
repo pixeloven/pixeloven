@@ -37,3 +37,10 @@ renderMethod(<AppWrapper />, root);
  * Register service workers
  */
 register();
+
+/**
+ * @todo Can we do this on the server too??? and can it be configurable
+ */
+if (module.hot) {
+    module.hot.accept();
+}

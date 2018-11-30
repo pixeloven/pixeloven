@@ -31,7 +31,6 @@
     "autoprefixer": "9.3.1",
     "babel-loader": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
-    "chalk": "2.4.1",
     "copy-webpack-plugin": "4.6.0",
     "cross-spawn": "6.0.5",
     "css-hot-loader": "^1.4.0",

@@ -236,6 +236,8 @@ const optimization: Options.Optimization = {
 
 /**
  * @description Output instructions for client build
+ * @todo hot need to be relative paths but include publicPath (remove starting slash)
+ * @todo relative paths fixes it but then vendor breaks... :/ maybe no chunking in dev???
  */
 const output: Output = removeEmpty({
     chunkFilename: ifProduction(
@@ -247,16 +249,16 @@ const output: Output = removeEmpty({
         "static/js/[name].[contenthash].js",
         "static/js/[name].[hash].js",
     ),
-    hotUpdateChunkFilename: ifDevelopment(
-        path.normalize(`${publicPath}/[id].[hash].hot-update.js`),
-        undefined,
-    ),
-    hotUpdateMainFilename: ifDevelopment(
-        path.normalize(`${publicPath}/[hash].hot-update.json`),
-        undefined,
-    ),
+    // hotUpdateChunkFilename: ifDevelopment(
+    //     path.normalize(`${publicPath}/static/js/[id].[hash].hot-update.js`).substring(1),
+    //     undefined,
+    // ),
+    // hotUpdateMainFilename: ifDevelopment(
+    //     path.normalize(`${publicPath}/static/js/[hash].hot-update.json`).substring(1), 
+    //     undefined,
+    // ),
     path: resolvePath(`${buildPath}/public`, false),
-    publicPath: ifProduction(publicPath, "/"),
+    publicPath,
 });
 
 /**
