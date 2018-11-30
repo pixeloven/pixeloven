@@ -67,11 +67,10 @@ const devtoolModuleFilenameTemplate = (
 /**
  * Define entrypoint(s) for client
  */
-const hotModulePath = path.normalize(`${publicPath}/__webpack_hmr`); 
 const entry = {
     main: removeEmpty([
         ifDevelopment(
-            `webpack-hot-middleware/client?reload=true&path=${hotModulePath}`,
+            `webpack-hot-middleware/client?reload=true&path=__webpack_hmr`,
             undefined,
         ),
         resolvePath("src/client/index.tsx"),
@@ -238,7 +237,7 @@ const optimization: Options.Optimization = {
 /**
  * @description Output instructions for client build
  */
-const output: Output = {
+const output: Output = removeEmpty({
     chunkFilename: ifProduction(
         "static/js/[name].[contenthash].js",
         "static/js/[name].[hash].js",
@@ -248,9 +247,17 @@ const output: Output = {
         "static/js/[name].[contenthash].js",
         "static/js/[name].[hash].js",
     ),
+    hotUpdateChunkFilename: ifDevelopment(
+        path.normalize(`${publicPath}/[id].[hash].hot-update.js`),
+        undefined,
+    ),
+    hotUpdateMainFilename: ifDevelopment(
+        path.normalize(`${publicPath}/[hash].hot-update.json`),
+        undefined,
+    ),
     path: resolvePath(`${buildPath}/public`, false),
     publicPath: ifProduction(publicPath, "/"),
-};
+});
 
 /**
  * @description Plugins for client specific builds

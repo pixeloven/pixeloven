@@ -135,7 +135,6 @@ try {
                     webpackHotMiddleware(clientCompiler, {
                         heartbeat: 3000,
                         log: logger.info,
-                        path: path.normalize(`${PUBLIC_PATH}/__webpack_hmr`),
                         reload: true,
                     }),
                 );
