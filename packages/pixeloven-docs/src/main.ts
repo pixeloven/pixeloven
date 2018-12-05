@@ -42,10 +42,9 @@ const loadConfigPath = (dir: string): string => {
  * @param name
  * @param args
  */
-const execute = (name: string, args: string[]) => {
+const execute = (name: string, args: string[] = []) => {
     const yarnArgs: string[] = [];
     const calling = yarnArgs.concat(name).concat(args);
-    console.log(`spawning: yarn ${calling.join(" ")}`);
     return spawn.sync("yarn", calling, {
         stdio: "inherit",
     });

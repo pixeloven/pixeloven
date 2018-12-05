@@ -1,0 +1,32 @@
+import {{capitalize serviceName}}ActionTypes from "@shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.actions";
+import { {{lowerCase serviceType}}{{capitalize resourceName}} } from "@shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.service";
+import { all, call, put, takeEvery } from "redux-saga/effects";
+
+// Worker
+function* work() {
+    try {
+        const response = yield call({{lowerCase serviceType}}{{capitalize resourceName}});
+        const { data } = response;
+        yield put({
+            payload: data,
+            type: {{capitalize serviceName}}ActionTypes.{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_SUCCESS,
+        });
+    } catch (error) {
+        yield put({
+            payload: error.response,
+            type: {{capitalize serviceName}}ActionTypes.{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_FAILURE,
+        });
+    }
+}
+
+// Watcher
+function* watch() {
+    yield takeEvery({{capitalize serviceName}}ActionTypes.{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_IN_PROGRESS, work);
+}
+
+// Root
+function* saga() {
+    yield all([watch()]);
+}
+
+export default saga;

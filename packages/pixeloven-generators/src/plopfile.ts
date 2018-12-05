@@ -1,8 +1,14 @@
 import {Plop} from "./plop";
+
 /**
  * Acceptable types
  */
 const componentTypes = ["atom", "molecule", "organism", "page", "template"]
+
+/**
+ * Allowed request methods
+ */
+const requestMethods = ["DELETE", "GET", "POST", "PUT"];
 
 /**
  * Validate component type
@@ -15,17 +21,28 @@ const validateComponentType = (componentType: string) => {
 }
 
 /**
- * Validate component name
- * @param componentType
+ * Validate word
+ * @param word
  */
-const validateComponentName = (componentName: string) => {
-    if (/.+/.test(componentName.trim())) { 
+const validateWord = (word: string) => {
+    if (/^[a-z]+$/i.test(word.trim())) { 
         return true;
     }
-    return "Component name is required."
+    return "Must be a valid alpha string."
 }
 
 /**
+ * Validate component name
+ * @param componentType
+ */
+const validateRequestMethod = (requestMethod: string) => {
+    return !requestMethods.find((value) => requestMethod === value) 
+        ? "Must be a valid request method: DELETE, GET, POST, PUT" 
+        : true;
+}
+
+/**
+ * @todo should check filesystem for serviceName, and components etc
  * @todo need to resolve all these paths
  * @todo should document these paths
  * @todo should create a generator to create an app based on these paths
@@ -42,31 +59,31 @@ const generator = (plop: Plop) => {
         actions: [
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{componentName}}/README.md",
+                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/README.md",
                 templateFile: "templates/Component/README.md.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{componentName}}/index.ts",
+                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/index.ts",
                 templateFile: "templates/Component/index.ts.hbs",
                 type: "add",            },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.tsx",
+                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.tsx",
                 templateFile: "templates/Component/Component.tsx.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.stories.tsx",
+                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.stories.tsx",
                 templateFile: "templates/Component/Component.stories.tsx.hbs",
                 type: "add",
 
             },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.test.tsx",
+                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.test.tsx",
                 templateFile: "templates/Component/Component.test.tsx.hbs",
                 type: "add",
             },
@@ -80,11 +97,72 @@ const generator = (plop: Plop) => {
                 validate: validateComponentType
             },
             {
-                message: 'What is the name of the new component?',
+                message: "What is the name of the new component?",
                 name: "componentName",
                 type: "input",
-                validate: validateComponentName
+                validate: validateWord
             }
+        ]
+    });
+    plop.setGenerator("store", {
+        actions: [
+            {
+                abortOnFail: true,
+                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.actions.ts",
+                templateFile: "templates/Store/Store.actions.ts.hbs",
+                type: "add",
+            },
+            {
+                abortOnFail: true,
+                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.reducers.ts",
+                templateFile: "templates/Store/Store.reducers.ts.hbs",
+                type: "add",
+            },
+            {
+                abortOnFail: true,
+                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.sagas.ts",
+                templateFile: "templates/Store/Store.sagas.ts.hbs",
+                type: "add",
+            },
+            {
+                abortOnFail: true,
+                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.selectors.ts",
+                templateFile: "templates/Store/Store.selectors.ts.hbs",
+                type: "add",
+            },
+            {
+                abortOnFail: true,
+                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.service.ts",
+                templateFile: "templates/Store/Store.service.ts.hbs",
+                type: "add",
+            },
+            {
+                abortOnFail: true,
+                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.types.d.ts",
+                templateFile: "templates/Store/Store.types.d.ts.hbs",
+                type: "add",
+            },
+        ],
+        description: "Generate a new service, resource and store boilerplate",
+        prompts: [
+            {
+                message: "What is the \"name\" of the service? (I.E. iss)",
+                name: "serviceName",
+                type: "input",
+                validate: validateWord
+            },
+            {
+                message: "What is the \"name\" a resource on this service? (I.E. location)",
+                name: "resourceName",
+                type: "input",
+                validate: validateWord
+            },
+            {
+                message: "How will we be communicating to this first resource? (I.E. GET, POST, etc)",
+                name: "serviceType",
+                type: "input",
+                validate: validateRequestMethod
+            },
         ]
     })
 }

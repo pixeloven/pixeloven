@@ -1,4 +1,6 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
+import { SpawnSyncReturns } from "child_process";
+import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
 import { logger } from "./libraries";
@@ -7,7 +9,7 @@ import { logger } from "./libraries";
  * Handle errors
  * @param error
  */
-export function handleError(error: Error) {
+export const handleError = (error: Error) => {
     if (error.message) {
         logger.error(error.message);
     }
@@ -22,10 +24,10 @@ export function handleError(error: Error) {
  * @param relativePath
  * @param strict if true returns
  */
-export function resolvePath(
+export const resolvePath = (
     relativePath: string,
     strict: boolean = true,
-): string {
+): string => {
     const absolutePath = path.resolve(
         fs.realpathSync(process.cwd()),
         relativePath,
@@ -42,7 +44,7 @@ export function resolvePath(
  * Sleep application for a given time
  * @param milliseconds
  */
-export function sleep(milliseconds: number) {
+export const sleep = (milliseconds: number) => {
     const start = new Date().getTime();
     for (let i = 0; i < 1e7; i++) {
         if (new Date().getTime() - start > milliseconds) {
@@ -50,3 +52,42 @@ export function sleep(milliseconds: number) {
         }
     }
 }
+
+/**
+ * Spawn yarn cmd
+ * @param name
+ * @param args
+ */
+export const spawnYarn = (name: string, args: string[] = []) => {
+    const yarnArgs: string[] = [];
+    const calling = yarnArgs.concat(name).concat(args);
+    return spawn.sync("yarn", calling, {
+        stdio: "inherit",
+    });
+};
+
+/**
+ * Check signal returned by execution and close process
+ * @param result
+ * @todo should use the core logger here
+ */
+export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
+    if (result.signal) {
+        if (result.signal === "SIGKILL") {
+            console.error(
+                "Process exited too early. " +
+                    "This probably means the system ran out of memory or someone called " +
+                    "`kill -9` on the process.",
+            );
+        } else if (result.signal === "SIGTERM") {
+            console.error(
+                "Process exited too early. " +
+                    "Someone might have called `kill` or `killall`, or the system could " +
+                    "be shutting down.",
+            );
+        }
+        process.exit(1);
+    } else {
+        process.exit(result.status);
+    }
+};

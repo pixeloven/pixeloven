@@ -1,0 +1,40 @@
+import {{capitalize serviceName}}ActionTypes from "@shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.actions";
+import { {{capitalize serviceName}}State } from "@shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.types";
+
+interface {{capitalize serviceType}}{{capitalize serviceName}}{{capitalize resourceName}}Success {
+    type: {{capitalize serviceName}}ActionTypes.{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_SUCCESS;
+    payload: string;
+}
+
+interface {{capitalize serviceType}}{{capitalize serviceName}}{{capitalize resourceName}}Failure {
+    type: {{capitalize serviceName}}ActionTypes.{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_FAILURE;
+    payload: string;
+}
+
+type Action = {{capitalize serviceType}}{{capitalize serviceName}}{{capitalize resourceName}}Success | {{capitalize serviceType}}{{capitalize serviceName}}{{capitalize resourceName}}Failure;
+
+const initialState = {
+    {{lowerCase resourceName}}: "",
+};
+
+const {{lowerCase serviceName}}Reducer = (
+    state: {{capitalize serviceName}}State = initialState,
+    action: Action,
+): {{capitalize serviceName}}State => {
+    switch (action.type) {
+        case {{capitalize serviceName}}ActionTypes.{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_SUCCESS:
+            return {
+                ...state,
+                {{lowerCase resourceName}}: action.payload,
+            };
+        case {{capitalize serviceName}}ActionTypes.{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+
+export default {{lowerCase serviceName}}Reducer;

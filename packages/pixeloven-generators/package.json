@@ -18,6 +18,8 @@
     "access": "public"
   },
   "dependencies": {
+    "@pixeloven/cli": "^1.2.4",
+    "@pixeloven/core": "^1.2.5",
     "plop": "2.1.0"
   },
   "devDependencies": {
@@ -28,6 +30,7 @@
     "clean": "pixeloven-cli clean",
     "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",
+    "postcompile": "cp -r ./src/templates ./dist/lib/templates",
     "lint": "pixeloven-cli lint:ts",
     "test": "pixeloven-cli test",
     "test:watch": "pixeloven-cli test:watch",
