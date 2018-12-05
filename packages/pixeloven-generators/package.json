@@ -1,0 +1,37 @@
+{
+  "name": "@pixeloven/generators",
+  "version": "1.2.5",
+  "description": "Common code generators",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "plop": "2.1.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^0.0.43"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn compile",
+    "clean": "pixeloven-cli clean",
+    "compile": "pixeloven-cli compile:ts",
+    "precompile": "pixeloven-cli compile:clean",
+    "lint": "pixeloven-cli lint:ts",
+    "test": "pixeloven-cli test",
+    "test:watch": "pixeloven-cli test:watch",
+    "pretty": "pixeloven-cli pretty && pixeloven-cli pretty:ts",
+    "pretest": "pixeloven-cli test:clean"
+  }
+}
