@@ -2,7 +2,7 @@ import { FileNotFoundException } from "@pixeloven/exceptions";
 import fs from "fs";
 import "jest";
 import path from "path";
-import {logger, Message} from "./libraries";
+import {logger, Message} from "@pixeloven/node-logger";
 import * as macros from "./macros"
 
 let resolvePathExists = true;
@@ -27,6 +27,7 @@ describe("@pixeloven/exceptions", () => {
         afterAll(() => {
             jest.clearAllMocks();
             jest.restoreAllMocks();
+            resolvePathExists = true;
         });
         describe("handleError", () => {
             it("should log error and exit", () => {
