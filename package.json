@@ -17,7 +17,6 @@
       "packages/*"
     ],
     "nohoist": [
-      "**/typescript",
       "**/@pixeloven/cli",
       "**/@pixeloven/core",
       "**/@pixeloven/docs",
