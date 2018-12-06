@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/env",
-  "version": "1.2.5",
+  "version": "2.0.0-alpha.0",
   "description": "Environment loader",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^1.2.4",
-    "@pixeloven/exceptions": "^1.2.5",
+    "@pixeloven/exceptions": "^2.0.0-alpha.0",
     "dotenv": "6.1.0"
   },
   "devDependencies": {

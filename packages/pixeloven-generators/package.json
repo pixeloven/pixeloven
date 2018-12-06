@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/generators",
-  "version": "1.2.5",
+  "version": "2.0.0-alpha.0",
   "description": "Common code generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^1.2.4",
-    "@pixeloven/core": "^1.2.5",
+    "@pixeloven/core": "^2.0.0-alpha.0",
     "plop": "2.1.0"
   },
   "devDependencies": {
