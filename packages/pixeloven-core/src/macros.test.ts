@@ -8,7 +8,7 @@ import * as macros from "./macros"
 let resolvePathExists = true;
 const logErrorMock = (message: Message) => message;
 const exitMock = (code?: number) => code;
-const existsSyncMock = (path: string) => resolvePathExists;
+const existsSyncMock = (somePath: string) => resolvePathExists;
 
 const logErrorSpy = jest.spyOn(logger, "error").mockImplementation(logErrorMock);
 const exitSpy = jest.spyOn(macros, "exit").mockImplementation(exitMock);

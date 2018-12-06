@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { spawnYarn, spawnComplete } from "@pixeloven/core";
+import { spawnComplete, spawnYarn } from "@pixeloven/core";
 
 /**
  * Makes the script crash on unhandled rejections instead of silently

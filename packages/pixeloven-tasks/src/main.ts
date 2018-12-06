@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { SpawnSyncReturns } from "child_process";
+import { spawnComplete } from "@pixeloven/core";
 import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
@@ -33,31 +33,6 @@ const execute = (index: number, name: string, args: string[]) => {
 };
 
 /**
- * Check signal returned by execution and close process
- * @param result
- */
-const complete = (result: SpawnSyncReturns<Buffer>) => {
-    if (result.signal) {
-        if (result.signal === "SIGKILL") {
-            console.error(
-                "Process exited too early. " +
-                    "This probably means the system ran out of memory or someone called " +
-                    "`kill -9` on the process.",
-            );
-        } else if (result.signal === "SIGTERM") {
-            console.error(
-                "Process exited too early. " +
-                    "Someone might have called `kill` or `killall`, or the system could " +
-                    "be shutting down.",
-            );
-        }
-        process.exit(1);
-    } else {
-        process.exit(result.status);
-    }
-};
-
-/**
  * Setup variables and execute
  */
 const scriptArgs = process.argv.slice(2);
@@ -68,7 +43,7 @@ switch (scriptName) {
     case "build":
     case "serve": {
         const result = execute(scriptIndex, scriptName, scriptArgs);
-        complete(result);
+        spawnComplete(result);
         break;
     }
     default:
