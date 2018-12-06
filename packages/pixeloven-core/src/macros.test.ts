@@ -27,7 +27,7 @@ describe("@pixeloven/exceptions", () => {
         afterAll(() => {
             jest.clearAllMocks();
             jest.restoreAllMocks();
-          });
+        });
         describe("handleError", () => {
             it("should log error and exit", () => {
 

@@ -96,6 +96,12 @@ const generator = (plop: Plop) => {
                 templateFile: "templates/Component/Component.test.tsx.hbs",
                 type: "add",
             },
+            {
+                abortOnFail: true,
+                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.scss",
+                templateFile: "templates/Component/Component.scss.hbs",
+                type: "add",
+            },
         ],
         description: "Generate a new Atomic component",
         prompts: [
