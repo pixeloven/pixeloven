@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { spawnComplete } from "@pixeloven/core";
+import { logger } from "@pixeloven/node-logger";
 import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
@@ -47,6 +48,6 @@ switch (scriptName) {
         break;
     }
     default:
-        console.log(`Unknown script ${scriptName}.`);
+        logger.error(`Unknown script ${scriptName}.`);
         break;
 }

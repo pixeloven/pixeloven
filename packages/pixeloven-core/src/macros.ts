@@ -1,9 +1,9 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
+import { logger } from "@pixeloven/node-logger";
 import { SpawnSyncReturns } from "child_process";
 import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
-import { logger } from "./libraries";
 
 /**
  * Simple wrapper for process exit
@@ -79,13 +79,13 @@ export const spawnYarn = (name: string, args: string[] = []) => {
 export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
     if (result.signal) {
         if (result.signal === "SIGKILL") {
-            console.error(
+            logger.error(
                 "Process exited too early. " +
                     "This probably means the system ran out of memory or someone called " +
                     "`kill -9` on the process.",
             );
         } else if (result.signal === "SIGTERM") {
-            console.error(
+            logger.error(
                 "Process exited too early. " +
                     "Someone might have called `kill` or `killall`, or the system could " +
                     "be shutting down.",

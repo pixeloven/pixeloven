@@ -8,11 +8,11 @@ import "./bootstrap/development";
  */
 import {
     handleError,
-    logger,
     sleep,
     WebpackStatsHandler,
 } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
+import { logger } from "@pixeloven/node-logger";
 import express from "express";
 import path from "path";
 import openBrowser from "react-dev-utils/openBrowser";

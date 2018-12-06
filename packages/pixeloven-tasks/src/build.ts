@@ -8,11 +8,11 @@ import "./bootstrap/production";
  */
 import {
     handleError,
-    logger,
     resolvePath,
     WebpackStatsHandler,
 } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
+import { logger } from "@pixeloven/node-logger";
 import fs from "fs-extra";
 import Promise from "promise";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";

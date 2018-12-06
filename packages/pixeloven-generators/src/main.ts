@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { exit, spawnComplete, spawnYarn } from "@pixeloven/core";
+import { logger } from "@pixeloven/node-logger";
 
 export const errorHandler = (err: Error) => {
     throw err;
@@ -21,7 +22,7 @@ const main = (argv: string[]) => {
     const scriptIndex = scriptArgs.findIndex(index => mapScriptIndex(index));
     const scriptName = scriptIndex === -1 ? scriptArgs[0] : scriptArgs[scriptIndex];
     if(scriptIndex === -1) {
-        console.log(`Unknown usage ${scriptName}.`);
+        logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
         const scriptResult = spawnYarn("plop");

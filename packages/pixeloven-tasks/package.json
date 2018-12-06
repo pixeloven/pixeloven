@@ -28,6 +28,7 @@
     "@pixeloven/cli": "^1.2.4",
     "@pixeloven/core": "^2.0.0-alpha.0",
     "@pixeloven/env": "^2.0.0-alpha.0",
+    "@pixeloven/node-logger": "^2.0.0-alpha.0",
     "autoprefixer": "9.3.1",
     "babel-loader": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",

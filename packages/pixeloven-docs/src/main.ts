@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { spawnComplete, spawnYarn } from "@pixeloven/core";
+import { logger } from "@pixeloven/node-logger";
 import fs from "fs";
 import path from "path";
 
@@ -72,6 +73,6 @@ switch (scriptName) {
         break;
     }
     default:
-        console.log(`Unknown usage ${scriptName}.`);
+        logger.error(`Unknown usage ${scriptName}.`);
         break;
 }
