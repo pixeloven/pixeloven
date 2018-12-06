@@ -24,6 +24,7 @@
     "@babel/core": "^7.0.0",
     "@emotion/core": "0.13.1",
     "@pixeloven/cli": "^1.2.4",
+    "@pixeloven/core": "^1.2.5",
     "@storybook/addon-actions": "4.0.6",
     "@storybook/addon-knobs": "4.0.6",
     "@storybook/addon-notes": "4.0.6",
