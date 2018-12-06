@@ -6,6 +6,11 @@ import path from "path";
 import { logger } from "./libraries";
 
 /**
+ * Simple wrapper for process exit
+ */
+export const exit = process.exit;
+
+/**
  * Handle errors
  * @param error
  */
@@ -16,7 +21,7 @@ export const handleError = (error: Error) => {
     if (error.stack) {
         logger.error(error.stack);
     }
-    process.exit(1);
+    exit(1);
 }
 
 /**
@@ -86,8 +91,8 @@ export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
                     "be shutting down.",
             );
         }
-        process.exit(1);
+        exit(1);
     } else {
-        process.exit(result.status);
+        exit(result.status);
     }
 };
