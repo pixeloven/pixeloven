@@ -1,20 +1,27 @@
 import * as inquirer from "inquirer";
 
-// Based on https://github.com/amwmedia/node-plop/blob/master/index.d.ts
+export type HelperFunction = (txt: string) => string
+
+/**
+ * @todo Should make my own plop
+ *   generators: { [name: string]: PlopGenerator };
+ *   helpers: { [name: string]: HelperFunction };
+ * @description Based on https://github.com/amwmedia/node-plop/blob/master/index.d.ts
+ */
 export interface Plop {
   getGenerator(name: string): PlopGenerator;
   setGenerator(name: string, config: PlopGenerator): PlopGenerator;
-  setHelper(name:string,fn:Function):void;
-  getHelper(name:string):Function;
+  getHelper(name: string): HelperFunction;
+  setHelper(name: string, fn: HelperFunction): void;
 }
 
-interface PlopGenerator{
+export interface PlopGenerator {
   description: string;
   prompts: inquirer.Question[];
   actions: ActionConfig[];
 }
 
-interface ActionConfig{
+export interface ActionConfig {
   type: string;
   path: string;
   templateFile: string;
@@ -23,7 +30,7 @@ interface ActionConfig{
   abortOnFail?: boolean;
 }
 
-interface PlopCfg{
+export interface PlopCfg {
   force: boolean;
   destBasePath: string;
 }

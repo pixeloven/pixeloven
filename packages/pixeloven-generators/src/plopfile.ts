@@ -14,7 +14,7 @@ const requestMethods = ["DELETE", "GET", "POST", "PUT"];
  * Validate component type
  * @param componentType
  */
-const validateComponentType = (componentType: string) => {
+export const validateComponentType = (componentType: string) => {
     return !componentTypes.find((value) => componentType === value) 
         ? "Component type must be one of the following: atom, molecule, organism, page, template" 
         : true;
@@ -24,7 +24,7 @@ const validateComponentType = (componentType: string) => {
  * Validate word
  * @param word
  */
-const validateWord = (word: string) => {
+export const validateWord = (word: string) => {
     if (/^[a-z]+$/i.test(word.trim())) { 
         return true;
     }
@@ -35,11 +35,20 @@ const validateWord = (word: string) => {
  * Validate component name
  * @param componentType
  */
-const validateRequestMethod = (requestMethod: string) => {
+export const validateRequestMethod = (requestMethod: string) => {
     return !requestMethods.find((value) => requestMethod === value) 
         ? "Must be a valid request method: DELETE, GET, POST, PUT" 
         : true;
 }
+
+/**
+ * Modifiers for templates
+ * @param txt 
+ */
+export const capitalize = (txt: string) => txt.charAt(0).toUpperCase() + txt.toLowerCase().slice(1);
+export const plural = (txt: string) => `${txt}s`;
+export const upperCase = (txt: string) => txt.toUpperCase();
+export const lowerCase = (txt: string) => txt.toLowerCase();
 
 /**
  * @todo should check filesystem for serviceName, and components etc
@@ -50,10 +59,10 @@ const validateRequestMethod = (requestMethod: string) => {
  * @todo https://github.com/amwmedia/plop/blob/master/example/plopfile.js
  */
 const generator = (plop: Plop) => {
-    plop.setHelper("capitalize", (txt: string) => txt.charAt(0).toUpperCase() + txt.toLowerCase().slice(1));
-    plop.setHelper("plural", (txt: string) => `${txt}s`);
-    plop.setHelper("upperCase", (txt: string) => txt.toUpperCase());
-    plop.setHelper("lowerCase", (txt: string) => txt.toLowerCase());
+    plop.setHelper("capitalize", capitalize);
+    plop.setHelper("plural", plural);
+    plop.setHelper("upperCase", upperCase);
+    plop.setHelper("lowerCase", lowerCase);
 
     plop.setGenerator("component", {
         actions: [
