@@ -17,6 +17,7 @@
       "packages/*"
     ],
     "nohoist": [
+      "**/typescript",
       "**/@pixeloven/cli",
       "**/@pixeloven/core",
       "**/@pixeloven/docs",
@@ -79,7 +80,7 @@
     "cross-env": "5.2.0",
     "cz-conventional-changelog": "2.1.0",
     "husky": "1.2.0",
-    "lerna": "3.5.0",
+    "lerna": "3.5.1",
     "lint-staged": "8.1.0",
     "lodash.camelcase": "4.3.0",
     "prompt": "1.0.0",
