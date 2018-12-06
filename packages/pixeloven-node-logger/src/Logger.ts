@@ -1,9 +1,9 @@
-import log, { WebpackLogInstance } from "webpack-log";
+import log from "webpack-log";
 
 export type Message = string | string[];
 export type Level = "info" | "warn" | "error";
 
-export interface LoggerInstance extends WebpackLogInstance {
+export interface LoggerInstance {
     error: (message: Message) => void;
     info: (message: Message) => void;
     warn: (message: Message) => void;
