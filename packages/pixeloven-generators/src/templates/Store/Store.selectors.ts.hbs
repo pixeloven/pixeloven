@@ -1,0 +1,12 @@
+import { State } from "@shared/store/types";
+import { createSelector } from "reselect";
+
+const {{lowerCase serviceType}}{{capitalize serviceName}}State = (state: State) => state.{{lowerCase serviceName}}Reducer;
+
+const {{lowerCase serviceType}}{{capitalize serviceName}}{{capitalize resourceName}} = () =>
+    createSelector(
+        [{{lowerCase serviceType}}{{capitalize serviceName}}State],
+        state => state.{{lowerCase resourceName}},
+    );
+
+export { {{lowerCase serviceType}}{{capitalize serviceName}}State, {{lowerCase serviceType}}{{capitalize serviceName}}{{capitalize resourceName}} };

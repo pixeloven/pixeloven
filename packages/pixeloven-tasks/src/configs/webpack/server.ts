@@ -123,7 +123,7 @@ const output: Output = {
     filename: "server.js",
     libraryTarget: "commonjs2",
     path: resolvePath(buildPath, false),
-    publicPath: ifProduction(publicPath, "/"),
+    publicPath,
 };
 
 /**

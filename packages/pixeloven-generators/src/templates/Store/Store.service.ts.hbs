@@ -1,0 +1,8 @@
+import { HttpClient } from "@shared/utils/HttpClient";
+
+const {{lowerCase serviceType}}{{capitalize resourceName}} = () => {
+    const url = "/{{lowerCase serviceName}}/v1/{{lowerCase resourceName}}";
+    return HttpClient.{{lowerCase serviceType}}(url);
+};
+
+export { {{lowerCase serviceType}}{{capitalize resourceName}} };

@@ -70,7 +70,7 @@ const devtoolModuleFilenameTemplate = (
 const entry = {
     main: removeEmpty([
         ifDevelopment(
-            "webpack-hot-middleware/client?reload=true&path=__webpack_hmr",
+            `webpack-hot-middleware/client?reload=true&path=__webpack_hmr`,
             undefined,
         ),
         resolvePath("src/client/index.tsx"),
@@ -236,8 +236,10 @@ const optimization: Options.Optimization = {
 
 /**
  * @description Output instructions for client build
+ * @todo hot need to be relative paths but include publicPath (remove starting slash)
+ * @todo relative paths fixes it but then vendor breaks... :/ maybe no chunking in dev???
  */
-const output: Output = {
+const output: Output = removeEmpty({
     chunkFilename: ifProduction(
         "static/js/[name].[contenthash].js",
         "static/js/[name].[hash].js",
@@ -247,9 +249,17 @@ const output: Output = {
         "static/js/[name].[contenthash].js",
         "static/js/[name].[hash].js",
     ),
+    // hotUpdateChunkFilename: ifDevelopment(
+    //     path.normalize(`${publicPath}/static/js/[id].[hash].hot-update.js`).substring(1),
+    //     undefined,
+    // ),
+    // hotUpdateMainFilename: ifDevelopment(
+    //     path.normalize(`${publicPath}/static/js/[hash].hot-update.json`).substring(1), 
+    //     undefined,
+    // ),
     path: resolvePath(`${buildPath}/public`, false),
-    publicPath: ifProduction(publicPath, "/"),
-};
+    publicPath,
+});
 
 /**
  * @description Plugins for client specific builds

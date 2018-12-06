@@ -13,8 +13,7 @@ import {
     WebpackStatsHandler,
 } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
-import chalk from "chalk";
-import express, { Request, Response } from "express";
+import express from "express";
 import path from "path";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
@@ -24,37 +23,38 @@ import webpackHotMiddleware from "webpack-hot-middleware";
 import webpackHotServerMiddleware from "webpack-hot-server-middleware";
 import webpackClientConfig from "./configs/webpack/client";
 import webpackServerConfig from "./configs/webpack/server";
+import {getBaseUrl, getHMRPath, getHost, getPort, getPublicPath} from "./macros";
+import errorHandler from "./middleware/errorHandler";
 
 /**
  * Get WebpackDevServerUtils functions
  */
-const { choosePort, prepareUrls } = WebpackDevServerUtils;
+const { choosePort } = WebpackDevServerUtils;
 
 const LOG_LEVEL = env.config("LOG_LEVEL", "info");
-const PUBLIC_PATH = env.config("PUBLIC_URL", "/");
-const DEFAULT_HOST = env.config("HOST", "localhost");
-const DEFAULT_PROTOCOL = env.config("PROTOCOL", "http");
-const DEFAULT_PORT = parseInt(env.config("PORT", "8080"), 10);
+
+const publicPath = getPublicPath();
+const baseUrl = getBaseUrl();
+const host = getHost();
+const port = getPort();
+const hmrPath = getHMRPath();
 
 /**
- * @todo for some reason we get a bunch of uncaught exceptions in the browser after re-compile
- * @todo add error handling middleware to catch errors
+ * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
+ * @todo bring this back https://github.com/gaearon/react-hot-loader
  */
 try {
     /**
      * We attempt to use the default port but if it is busy, we offer the user to
      * run on a different port. `choosePort()` Promise resolves to the next free port.
      */
-    choosePort(DEFAULT_HOST, DEFAULT_PORT)
-        .then((PORT: number) => {
+    choosePort(host, port)
+        .then((chosenPort: number) => {
             /**
              * Notify user of host binding
              */
-            const urls = prepareUrls(DEFAULT_PROTOCOL, DEFAULT_HOST, PORT);
             logger.info(
-                `Attempting to bind to HOST: ${chalk.cyan(
-                    urls.localUrlForBrowser,
-                )}`,
+                `Attempting to bind to ${host}`,
             );
             logger.info(
                 `If successful the application will launch automatically.`,
@@ -66,7 +66,7 @@ try {
              * @type {Function}
              */
             const app = express();
-            app.use(express.static(path.resolve(process.cwd(), "public")));
+            app.use(publicPath, express.static(path.resolve(process.cwd(), "public")));
 
             /**
              * Setup webpack hot module replacement for development
@@ -86,7 +86,7 @@ try {
                 {
                     index: false,
                     logLevel: LOG_LEVEL,
-                    publicPath: PUBLIC_PATH,
+                    publicPath,
                     reporter: (middlewareOptions, reporterOptions) => {
                         if (
                             reporterOptions.state &&
@@ -132,33 +132,37 @@ try {
             if (clientCompiler) {
                 app.use(
                     webpackHotMiddleware(clientCompiler, {
+                        heartbeat: 3000,
                         log: logger.info,
+                        path: hmrPath,
+                        reload: true,
                     }),
                 );
             }
-            app.use(webpackHotServerMiddleware(combinedCompiler));
+            /**
+             * Pass express app in as options. Might allow for us to apply settings 
+             */
+            app.use(webpackHotServerMiddleware(combinedCompiler, {
+                serverRendererOptions: {
+                    app,
+                }
+            }));
 
             /**
              * Create error handler for server errors
              * @todo Should render a basic page with the same stack style as the dev-middleware
              */
-            app.use((err: Error, req: Request, res: Response) => {
-                res.status(500).send(
-                    `<h1>Unexpected Error</h1><p>See console for more details.</p><p>${
-                        err.message
-                    }</p>`,
-                );
-            });
+            app.use(errorHandler);
 
             /**
              * Start express server on specific host and port
              */
-            app.listen(PORT, DEFAULT_HOST, (error?: Error) => {
+            app.listen(chosenPort, host, (error?: Error) => {
                 if (error) {
                     handleError(error);
                 }
                 logger.info("Starting development server...");
-                openBrowser(urls.localUrlForBrowser);
+                openBrowser(baseUrl);
             });
         })
         .catch((error: Error) => {

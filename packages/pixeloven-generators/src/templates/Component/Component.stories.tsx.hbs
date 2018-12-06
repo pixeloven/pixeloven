@@ -1,0 +1,12 @@
+import { withReadme } from "storybook-readme";
+import Readme from "./README.md";
+
+import { storiesOf } from "@storybook/react";
+import * as React from "react";
+import {{componentName}} from "./{{componentName}}";
+
+storiesOf("Components/{{capitalize (plural componentType)}}/{{componentName}}", module)
+    .addDecorator(withReadme(Readme))
+    .add("default", () => {
+        return <{{componentName}} example={"example"} />;
+    });

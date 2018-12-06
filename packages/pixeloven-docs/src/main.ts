@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import { SpawnSyncReturns } from "child_process";
-import spawn from "cross-spawn";
+import { spawnComplete, spawnYarn } from "@pixeloven/core";
 import fs from "fs";
 import path from "path";
 
@@ -38,45 +37,6 @@ const loadConfigPath = (dir: string): string => {
 };
 
 /**
- * Execute yarn cmd
- * @param name
- * @param args
- */
-const execute = (name: string, args: string[]) => {
-    const yarnArgs: string[] = [];
-    const calling = yarnArgs.concat(name).concat(args);
-    console.log(`spawning: yarn ${calling.join(" ")}`);
-    return spawn.sync("yarn", calling, {
-        stdio: "inherit",
-    });
-};
-
-/**
- * Check signal returned by execution and close process
- * @param result
- */
-const complete = (result: SpawnSyncReturns<Buffer>) => {
-    if (result.signal) {
-        if (result.signal === "SIGKILL") {
-            console.error(
-                "Process exited too early. " +
-                    "This probably means the system ran out of memory or someone called " +
-                    "`kill -9` on the process.",
-            );
-        } else if (result.signal === "SIGTERM") {
-            console.error(
-                "Process exited too early. " +
-                    "Someone might have called `kill` or `killall`, or the system could " +
-                    "be shutting down.",
-            );
-        }
-        process.exit(1);
-    } else {
-        process.exit(result.status);
-    }
-};
-
-/**
  * Setup variables and execute
  *
  * @todo Check for yarn before attempting to execute
@@ -92,14 +52,14 @@ switch (scriptName) {
     case "build:story": {
         const config = loadConfigPath("./configs");
         const output = path.resolve(process.cwd(), "./dist/public/docs");
-        const result = execute("build-storybook", ["-c", config, "-o", output]);
-        complete(result);
+        const result = spawnYarn("build-storybook", ["-c", config, "-o", output]);
+        spawnComplete(result);
         break;
     }
     case "serve":
     case "serve:story": {
         const config = loadConfigPath("./configs");
-        const result = execute("start-storybook", [
+        const result = spawnYarn("start-storybook", [
             "--quiet",
             "-s",
             "./public",
@@ -108,7 +68,7 @@ switch (scriptName) {
             "-c",
             config,
         ]);
-        complete(result);
+        spawnComplete(result);
         break;
     }
     default:

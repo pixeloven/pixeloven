@@ -1,0 +1,14 @@
+/**
+ * Add new actions here.
+ * @description Out of the box we provide three standard actions but others may be added.
+ * _FAILURE = when an actions fails
+ * _IN_PROGRESS = often associated with when an action is in progress (E.I. Loading)
+ * _SUCCESS = when an actions is successful
+ */
+enum TypeKeys {
+    {{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_FAILURE = "{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_FAILURE",
+    {{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_IN_PROGRESS = "{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_IN_PROGRESS",
+    {{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_SUCCESS = "{{upperCase serviceType}}_{{upperCase serviceName}}_{{upperCase resourceName}}_SUCCESS",
+}
+
+export default TypeKeys;
