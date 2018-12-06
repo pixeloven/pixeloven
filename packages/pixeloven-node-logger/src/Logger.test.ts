@@ -1,50 +1,60 @@
 import "jest";
-import Logger from "./Logger";
-
-jest.mock("webpack-log");
+import Logger, {logInstance} from "./Logger";
 
 describe("@pixeloven/node-logger", () => {
     describe("Logger", () => {
-        beforeEach(() => {
-            jest.clearAllMocks();
+        const spyError = jest.spyOn( logInstance, "error" ).mockImplementation(); 
+        afterAll(() => {
+            jest.restoreAllMocks();
         });
         describe("error", () => {
-            it('should log "string" to console', () => {
-                Logger.error("test1");
-                // expect(Logger.error.mock.calls.length).toEqual(1);
+            afterEach(() => {
+                jest.clearAllMocks();
             });
-            it('should log "string[]" to console', () => {
+            it("should log \"string\" to console", () => {
+                Logger.error("test1");
+                expect(spyError).toHaveBeenCalledTimes(1);
+            });
+            it("should log \"string[]\" to console", () => {
                 Logger.error([
                     "test1",
                     "test2",
                 ]);
-                // expect(MockLogger.error.mock.calls.length).toEqual(2);
+                expect(spyError).toHaveBeenCalledTimes(2);
             });
         });
         describe("info", () => {
-            it('should log "string" to console', () => {
-                Logger.info("test1");
-                // expect(MockLogger.info.mock.calls.length).toEqual(1);
+            const spyInfo = jest.spyOn( logInstance, "info" ).mockImplementation(); 
+            afterEach(() => {
+                jest.clearAllMocks();
             });
-            it('should log "string[]" to console', () => {
+            it("should log \"string\" to console", () => {
+                Logger.info("test1");
+                expect(spyInfo).toHaveBeenCalledTimes(1);
+            });
+            it("should log \"string[]\" to console", () => {
                 Logger.info([
                     "test1",
                     "test2",
                 ]);
-                // expect(MockLogger.info.mock.calls.length).toEqual(2);
+                expect(spyInfo).toHaveBeenCalledTimes(2);
             });
         });
         describe("warn", () => {
-            it('should log "string" to console', () => {
-                Logger.warn("test1");
-                // expect(MockLogger.warn.mock.calls.length).toEqual(1);
+            const spyWarn = jest.spyOn( logInstance, "warn" ).mockImplementation(); 
+            afterEach(() => {
+                jest.clearAllMocks();
             });
-            it('should log "string[]" to console', () => {
+            it("should log \"string\" to console", () => {
+                Logger.warn("test1");
+                expect(spyWarn).toHaveBeenCalledTimes(1);
+            });
+            it("should log \"string[]\" to console", () => {
                 Logger.warn([
                     "test1",
                     "test2",
                 ]);
-                // expect(MockLogger.warn.mock.calls.length).toEqual(2);
+                expect(spyWarn).toHaveBeenCalledTimes(2);
             });
         });
     });

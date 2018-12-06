@@ -1,12 +1,21 @@
-import log from "webpack-log";
+import log, { WebpackLogInstance } from "webpack-log";
 
 export type Message = string | string[];
 export type Level = "info" | "warn" | "error";
 
+export interface LoggerInstance extends WebpackLogInstance {
+    error: (message: Message) => void;
+    info: (message: Message) => void;
+    warn: (message: Message) => void;
+}
+
+export const logInstanceName = "core";
+
 /**
  * Create logger
+ * @todo Eventually write my own logger instead of wrapping webpack-log
  */
-const logger = log({ name: "core" });
+export const logInstance = log({ name: logInstanceName });
 
 /**
  * Logs a message as a specific
@@ -16,10 +25,10 @@ const logger = log({ name: "core" });
 const messenger = (message: Message, level: Level): void => {
     if (Array.isArray(message)) {
         message.map((item: string) => {
-            logger[level](item);
+            logInstance[level](item);
         });
     } else {
-        logger[level](message);
+        logInstance[level](message);
     }
 };
 
@@ -27,7 +36,7 @@ const messenger = (message: Message, level: Level): void => {
  * Simple wrapper for webpack-log
  * @todo Add a success log state
  */
-const Logger = {
+const Logger: LoggerInstance = {
     error: (message: Message): void => messenger(message, "error"),
     info: (message: Message): void => messenger(message, "info"),
     warn: (message: Message): void => messenger(message, "warn"),
