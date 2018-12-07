@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { spawnComplete, spawnYarn } from "@pixeloven/core";
+import { exit, spawnComplete, spawnYarn } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import fs from "fs";
 import path from "path";
@@ -40,6 +40,11 @@ const main = (argv: string[]) => {
     const scriptIndex = scriptArgs.findIndex(index => mapScriptIndex(index));
     const scriptName = scriptIndex === -1 ? scriptArgs[0] : scriptArgs[scriptIndex];
     
+    if (scriptIndex === -1) {
+        logger.error(`Unknown usage ${scriptName}.`);
+        exit(1);
+    }
+
     switch (scriptName) {
         case "build":
         case "build:story": {
@@ -64,9 +69,6 @@ const main = (argv: string[]) => {
             spawnComplete(result);
             break;
         }
-        default:
-            logger.error(`Unknown usage ${scriptName}.`);
-            break;
     }
 }
 
