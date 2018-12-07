@@ -110,8 +110,13 @@ jobs:
 
       # Run test and report
       - run:
-          name: Test source
+          name: Report source
           command: yarn report-coverage
+
+      # Run test and report
+      - run:
+          name: Report source V2
+          command: yarn report-coverage-v2
 
 workflows:
   version: 2.1
