@@ -11,6 +11,14 @@ import path from "path";
 export const exit = process.exit;
 
 /**
+ * 
+ * @param err Generic error handler
+ */
+export const errorHandler = (err: Error) => {
+    throw err;
+};
+
+/**
  * Handle errors
  * @param error
  */
@@ -57,6 +65,19 @@ export const sleep = (milliseconds: number) => {
         }
     }
 }
+
+/**
+ * Spawn node script
+ * @param name
+ * @param args
+ */
+export const spawnNode = (name: string, args: string[]) => {
+    const nodeArgs: string[] = [];
+    const calling = nodeArgs.concat(name).concat(args);
+    return spawn.sync("node", calling, {
+        stdio: "inherit",
+    });
+};
 
 /**
  * Spawn yarn cmd

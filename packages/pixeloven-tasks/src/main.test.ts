@@ -7,7 +7,7 @@ const exitMock = (code?: number) => {
     testCode = code;
 };
 
-const spawnYarnMock = (cmd: string) => {
+const spawnNodeMock = (cmd: string) => {
     return cmd;
 };
 
@@ -32,10 +32,10 @@ describe("@pixeloven/generators", () => {
         it("should start cli and pass", () => {
             testArgv.push("/some/path", "yarn", "generate");
             const exitSpy = jest.spyOn(macros, "exit").mockImplementation(exitMock);
-            const exitSpawnYarn = jest.spyOn(macros, "spawnYarn").mockImplementation(spawnYarnMock);
+            const exitSpawnNode = jest.spyOn(macros, "spawnNode").mockImplementation(spawnNodeMock);
             const exitSpawnComplete = jest.spyOn(macros, "spawnComplete").mockImplementation(spawnCompleteMock);
             main(testArgv);
-            expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
+            expect(exitSpawnNode).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
             expect(exitSpy).toHaveBeenCalledTimes(1);
             expect(testCode).toEqual(1);

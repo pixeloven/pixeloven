@@ -27,6 +27,7 @@
     "webpack-log": "2.0.0"
   },
   "devDependencies": {
+    "@types/cross-spawn": "6.0.0",
     "@types/node": "10.12.7",
     "@types/webpack": "4.4.19"
   },

@@ -2,10 +2,6 @@ import { exit, spawnComplete, spawnYarn } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import path from "path";
 
-export const errorHandler = (err: Error) => {
-    throw err;
-};
-
 /**
  * Map index to "script"
  * @param index
