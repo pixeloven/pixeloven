@@ -19,9 +19,11 @@ const testArgv: string[] = [];
 
 describe("@pixeloven/generators", () => {
     describe("main", () => {
+        afterEach(() => {
+            jest.restoreAllMocks();
+        });
         afterAll(() => {
             jest.clearAllMocks();
-            jest.restoreAllMocks();
         });
         it("should start cli and fail", () => {
             const exitSpy = jest.spyOn(macros, "exit").mockImplementation(exitMock);
@@ -29,15 +31,22 @@ describe("@pixeloven/generators", () => {
             expect(exitSpy).toHaveBeenCalledTimes(1);
             expect(testCode).toEqual(1);
         });
-        it("should start cli and pass", () => {
-            testArgv.push("/some/path", "yarn", "generate");
-            const exitSpy = jest.spyOn(macros, "exit").mockImplementation(exitMock);
+        it("should start cli \"build\" and pass", () => {
+            testArgv.push("/some/path", "node", "build");
             const exitSpawnNode = jest.spyOn(macros, "spawnNode").mockImplementation(spawnNodeMock);
             const exitSpawnComplete = jest.spyOn(macros, "spawnComplete").mockImplementation(spawnCompleteMock);
             main(testArgv);
             expect(exitSpawnNode).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
-            expect(exitSpy).toHaveBeenCalledTimes(1);
+            expect(testCode).toEqual(1);
+        });
+        it("should start cli \"start\" and pass", () => {
+            testArgv.push("/some/path", "node", "start");
+            const exitSpawnNode = jest.spyOn(macros, "spawnNode").mockImplementation(spawnNodeMock);
+            const exitSpawnComplete = jest.spyOn(macros, "spawnComplete").mockImplementation(spawnCompleteMock);
+            main(testArgv);
+            expect(exitSpawnNode).toHaveBeenCalledTimes(1);
+            expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
             expect(testCode).toEqual(1);
         });
     });
