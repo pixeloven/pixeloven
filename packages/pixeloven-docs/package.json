@@ -2,10 +2,10 @@
   "name": "@pixeloven/docs",
   "version": "2.1.0",
   "description": "Documentation generators",
-  "main": "dist/lib/index.js",
+  "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
   "bin": {
-    "pixeloven-docs": "./dist/lib/main.js"
+    "pixeloven-docs": "./dist/lib/index.js"
   },
   "files": [
     "dist/"
