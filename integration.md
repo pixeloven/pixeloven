@@ -95,11 +95,31 @@ PUBLIC_URL=/
 BUILD_PATH=dist
 LOG_LEVEL=debug
 ``` 
-The following log levels are available.
-- `trace`
-- `debug`
-- `info`
-- `warn`
-- `error`
-- `silent`
+If you plan to run the development server in docker or a virtual machine or perhaps in a CI environment then it is recommended that the following env be used.
+```text
+PORT=8080
+HOST=0.0.0.0
+PROTOCOL=http
+PUBLIC_URL=/
+BUILD_PATH=dist
+LOG_LEVEL=debug
+MACHINE=docker
+``` 
+> Note the MACHINE variable only applies while running the development server.
+
+The following `MACHINE`s are available.
+* `ci` should be used if this environment is running inside a CI environment such as circleci.
+* `docker` similar to the CI value notifies the system that the server is running in a docker/virtual machine.
+* `host` this is the **default** value and implies that the server is running on the host machine.
+* `virtual` simply another alias for `docker`.
+
+Currently these 
+
+The following `LOG_LEVEL`s are available.
+* `trace`
+* `debug`
+* `info`
+* `warn`
+* `error`
+* `silent`
 Setting a log level means that all other levels below it will be visible in the console. Setting logLevel: 'silent' will hide all console output. The module leverages [`webpack-log`](https://github.com/webpack-contrib/webpack-log#readme) for logging management, and more information can be found on its page.
