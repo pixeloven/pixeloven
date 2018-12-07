@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/generators",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Common code generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
