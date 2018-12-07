@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Common tasks or jobs used during development and in production",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -26,7 +26,7 @@
     "@babel/preset-env": "7.1.5",
     "@babel/preset-react": "7.0.0",
     "@pixeloven/cli": "^2.0.1",
-    "@pixeloven/core": "^2.0.1",
+    "@pixeloven/core": "^2.1.0",
     "@pixeloven/env": "^2.0.1",
     "@pixeloven/node-logger": "^2.0.1",
     "autoprefixer": "9.3.1",
