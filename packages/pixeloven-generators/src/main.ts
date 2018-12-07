@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { exit, spawnComplete, spawnYarn } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
+import path from "path";
 
 export const errorHandler = (err: Error) => {
     throw err;
@@ -25,7 +26,7 @@ const main = (argv: string[]) => {
         logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
-        const scriptResult = spawnYarn("plop");
+        const scriptResult = spawnYarn("plop", ["--plopfile", path.resolve(__dirname, "./plopfile.js")]);
         spawnComplete(scriptResult);
     }
 }
