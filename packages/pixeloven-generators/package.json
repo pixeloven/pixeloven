@@ -26,6 +26,7 @@
     "plop": "2.1.0"
   },
   "devDependencies": {
+    "@types/node": "10.12.12",
     "@types/inquirer": "^0.0.43"
   },
   "scripts": {

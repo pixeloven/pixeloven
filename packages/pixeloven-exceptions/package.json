@@ -20,6 +20,9 @@
   "dependencies": {
     "@pixeloven/cli": "^2.0.1"
   },
+  "devDependencies": {
+    "@types/node": "10.12.12"
+  },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",

@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "6.0.0",
-    "@types/node": "10.12.7",
+    "@types/node": "10.12.12",
     "@types/webpack": "4.4.19"
   },
   "scripts": {

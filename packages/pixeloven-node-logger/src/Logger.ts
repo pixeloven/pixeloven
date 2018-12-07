@@ -9,6 +9,9 @@ export interface LoggerInstance {
     warn: (message: Message) => void;
 }
 
+/**
+ * Log Instance name
+ */
 export const logInstanceName = "core";
 
 /**

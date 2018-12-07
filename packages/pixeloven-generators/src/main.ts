@@ -11,7 +11,10 @@ const mapScriptIndex = (index: string) =>
 
 /**
  * Setup execution
- * @todo use unified logger
+ * @todo Should make my own plop
+ *   generators: { [name: string]: PlopGenerator };
+ *   helpers: { [name: string]: HelperFunction };
+ * @description Based on https://github.com/amwmedia/node-plop/blob/master/index.d.ts
  */
 const main = (argv: string[]) => {
     const scriptArgs = argv.slice(2);

@@ -1,11 +1,25 @@
-import "jest";
-import { Actions, Knobs } from "./index";
+import * as cli from "./main";
 
-describe("@pixeloven/docs", () => {
+let testArgv: string[] = [];
+const cliMock = (argv: string[]) => {
+    testArgv = argv;
+};
+
+const caller = () => {
+    require("./index")
+}
+
+describe("@pixeloven/generators", () => {
     describe("index", () => {
-        it("should export Actions and Knobs", () => {
-            expect(typeof Actions).toEqual("object");
-            expect(typeof Knobs).toEqual("object");
+        afterAll(() => {
+            jest.clearAllMocks();
+            jest.restoreAllMocks();
+        });
+        it("should execute main and succeed", () => {
+            const cliSpy = jest.spyOn(cli, "default").mockImplementation(cliMock);
+            caller();
+            expect(cliSpy).toHaveBeenCalledTimes(1);
+            expect(testArgv).toEqual(process.argv);
         });
     });
 });
