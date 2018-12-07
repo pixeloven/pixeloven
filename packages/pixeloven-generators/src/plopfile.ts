@@ -1,3 +1,4 @@
+import {resolvePath} from "@pixeloven/core";
 import {Plop} from "./plop";
 
 /**
@@ -58,6 +59,8 @@ export const lowerCase = (txt: string) => txt.toLowerCase();
  * @todo should create a generator to create package (current template)
  * @todo https://github.com/amwmedia/plop/blob/master/example/plopfile.js
  */
+const componentPath = resolvePath("src/shared/components", false);
+const storePath = resolvePath("src/shared/store", false);
 const generator = (plop: Plop) => {
     plop.setHelper("capitalize", capitalize);
     plop.setHelper("plural", plural);
@@ -68,37 +71,37 @@ const generator = (plop: Plop) => {
         actions: [
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/README.md",
+                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/README.md`,
                 templateFile: "templates/Component/README.md.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/index.ts",
+                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/index.ts`,
                 templateFile: "templates/Component/index.ts.hbs",
                 type: "add",            },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.tsx",
+                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.tsx`,
                 templateFile: "templates/Component/Component.tsx.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.stories.tsx",
+                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.stories.tsx`,
                 templateFile: "templates/Component/Component.stories.tsx.hbs",
                 type: "add",
 
             },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.test.tsx",
+                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.test.tsx`,
                 templateFile: "templates/Component/Component.test.tsx.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/components/{{plural (lowerCase componentType)}}/{{capitalize componentName}}/{{capitalize componentName}}.scss",
+                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.scss`,
                 templateFile: "templates/Component/Component.scss.hbs",
                 type: "add",
             },
@@ -123,37 +126,37 @@ const generator = (plop: Plop) => {
         actions: [
             {
                 abortOnFail: true,
-                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.actions.ts",
+                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.actions.ts`,
                 templateFile: "templates/Store/Store.actions.ts.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.reducers.ts",
+                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.reducers.ts`,
                 templateFile: "templates/Store/Store.reducers.ts.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.sagas.ts",
+                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.sagas.ts`,
                 templateFile: "templates/Store/Store.sagas.ts.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.selectors.ts",
+                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.selectors.ts`,
                 templateFile: "templates/Store/Store.selectors.ts.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.service.ts",
+                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.service.ts`,
                 templateFile: "templates/Store/Store.service.ts.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: "src/shared/store/{{capitalize serviceName}}/{{capitalize serviceName}}.types.d.ts",
+                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.types.d.ts`,
                 templateFile: "templates/Store/Store.types.d.ts.hbs",
                 type: "add",
             },
