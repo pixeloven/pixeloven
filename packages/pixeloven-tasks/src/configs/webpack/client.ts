@@ -124,6 +124,9 @@ const scssRule: RuleSetRule = {
             loader: require.resolve("css-loader"),
         },
         {
+            loader: require.resolve("resolve-url-loader"),
+        },
+        {
             loader: require.resolve("postcss-loader"),
             options: {
                 ident: "postcss",
