@@ -19,7 +19,7 @@
     "!**/node_modules/**"
   ],
   "setupFiles": [
-    "<rootDir>/node_modules/@pixeloven/tasks/dist/lib/bootstrap/testing.js"
+    "<rootDir>../../packages/pixeloven-tasks/src/bootstrap/testing.ts"
   ],
   "testMatch": [
     "<rootDir>/test/**/*.(j|t)s?(x)",

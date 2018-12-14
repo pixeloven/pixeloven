@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/example",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -37,10 +37,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.5",
-    "@pixeloven/cli": "2.2.0",
-    "@pixeloven/docs": "2.2.0",
-    "@pixeloven/generators": "2.2.0",
-    "@pixeloven/tasks": "2.2.0",
+    "@pixeloven/cli": "^2.2.0",
+    "@pixeloven/docs": "^2.2.0",
+    "@pixeloven/generators": "^2.2.0",
+    "@pixeloven/tasks": "^2.2.0",
     "@types/classnames": "2.2.6",
     "@types/enzyme": "3.1.15",
     "@types/enzyme-adapter-react-16": "1.0.3",

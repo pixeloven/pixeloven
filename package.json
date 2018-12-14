@@ -14,6 +14,7 @@
   },
   "workspaces": {
     "packages": [
+      "examples/*",
       "packages/*"
     ]
   },
@@ -23,7 +24,6 @@
     "compile": "lerna run compile",
     "lint": "lerna run lint",
     "test": "lerna run test",
-    "test:watch": "lerna run test:watch",
     "pretty": "lerna run pretty",
     "build:docs": "typedoc --options typedoc.json",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
