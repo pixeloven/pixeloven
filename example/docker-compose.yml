@@ -6,7 +6,7 @@ services:
     image: node-react
     build:
       context: .
-    command: yarn start:app
+    command: yarn production
     ports:
       - "8080:8080"
       - "9001:9001"

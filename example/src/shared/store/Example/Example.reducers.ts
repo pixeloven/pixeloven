@@ -1,13 +1,20 @@
-import ExampleActionTypes, { ExampleAction } from "@shared/store/Example/Example.actions";
+import ExampleActionTypes, {
+    ExampleAction,
+} from "@shared/store/Example/Example.actions";
 import { ExampleState } from "@shared/store/Example/Example.types";
 import produce from "immer";
 
-const initialState: ExampleState = {
+export const initialState: ExampleState = {
     example: {
         description: "",
         id: 0,
         title: "",
-    }
+    },
+    meta: {
+        error: false,
+        initialized: false,
+        loading: false,
+    },
 };
 
 /**
@@ -35,4 +42,7 @@ const exampleReducer = (draft: ExampleState, action: ExampleAction) => {
     }
 };
 
-export default produce<ExampleState, ExampleAction>(exampleReducer, initialState);
+export default produce<ExampleState, ExampleAction>(
+    exampleReducer,
+    initialState,
+);
