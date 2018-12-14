@@ -1,6 +1,6 @@
 {
-  "name": "@pixeloven/example",
-  "version": "1.0.0",
+  "name": "@pixeloven/react-ssr-example",
+  "version": "2.2.0",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -37,10 +37,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.5",
-    "@pixeloven/cli": "2.2.0",
-    "@pixeloven/docs": "2.2.0",
-    "@pixeloven/generators": "2.2.0",
-    "@pixeloven/tasks": "2.2.0",
+    "@pixeloven/cli": "^2.2.0",
+    "@pixeloven/docs": "^2.2.0",
+    "@pixeloven/generators": "^2.2.0",
+    "@pixeloven/tasks": "^2.2.0",
     "@types/classnames": "2.2.6",
     "@types/enzyme": "3.1.15",
     "@types/enzyme-adapter-react-16": "1.0.3",
@@ -61,12 +61,10 @@
     "@types/storybook__addon-options": "3.2.2",
     "@types/storybook__react": "4.0.0",
     "@types/supertest": "2.0.6",
-    "@types/webpack": "4.4.19",
+    "@types/webpack": "4.4.21",
     "babel-loader": "8.0.4",
     "enzyme": "3.7.0",
     "enzyme-adapter-react-16": "1.7.0",
-    "husky": "1.1.4",
-    "lint-staged": "8.1.0",
     "node-mocks-http": "^1.7.3",
     "npm-run-all": "4.1.5",
     "raf": "3.4.1",
@@ -82,13 +80,13 @@
     "build": "run-p build:app build:story",
     "build:app": "pixeloven-tasks build",
     "build:story": "pixeloven-docs build",
+    "prebuild": "pixeloven-cli compile:clean",
+    "clean": "pixeloven-cli clean",
     "development": "pixeloven-tasks serve",
     "generate": "pixeloven-generators generate",
     "lint": "run-p lint:ts lint:scss",
     "lint:ts": "pixeloven-cli lint:ts",
     "lint:scss": "pixeloven-cli lint:scss",
-    "prebuild": "pixeloven-cli compile:clean",
-    "precommit": "lint-staged",
     "pretest": "pixeloven-cli test:clean",
     "pretty": "pixeloven-cli pretty",
     "pretty:ts": "pixeloven-cli pretty:ts",
@@ -99,23 +97,5 @@
     "start:story": "pixeloven-docs serve",
     "test": "pixeloven-cli test",
     "test:watch": "pixeloven-cli test:watch"
-  },
-  "lint-staged": {
-    "linters": {
-      "src/**/*.{scss,ts,tsx}": [
-        "yarn pretty",
-        "git add"
-      ],
-      "src/**/*.{scss}": [
-        "yarn pretty:scss",
-        "yarn lint:scss",
-        "git add"
-      ],
-      "src/**/*.{ts,tsx}": [
-        "yarn pretty:ts",
-        "yarn lint:ts",
-        "git add"
-      ]
-    }
   }
 }
