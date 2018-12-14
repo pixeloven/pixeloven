@@ -94,7 +94,7 @@ jobs:
 
       - run:
           name: Create .env file
-          command: lerna run env:create
+          command: yarn env:create
 
         # Run build
       - run:
@@ -184,6 +184,10 @@ jobs:
       - store_artifacts:
           path: examples/**/coverage
           destination: examples/coverage
+
+      # @todo need to do this https://github.com/atlassian/lerna-semantic-release
+      # @todo would be nice to also deploy the above to a special branch for github
+      # https://blog.frederikring.com/articles/deploying-github-pages-circle-ci/
 
 workflows:
   version: 2.1
