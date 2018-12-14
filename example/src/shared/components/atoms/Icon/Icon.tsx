@@ -37,7 +37,7 @@ class Icon extends React.Component<Props> {
                 className={iconClasses}
             >
                 <use
-                    href={`/static/media/${iconType}-icons.svg#${iconType}-${iconName}`}
+                    href={`static/media/${iconType}-icons.svg#${iconType}-${iconName}`}
                 />
             </svg>
         );

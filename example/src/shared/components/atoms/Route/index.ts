@@ -1,4 +1,4 @@
 /**
  * Register component here
  */
-export { default as Route, RouteComponentProps, RouteProps } from "./Route";
+export { default as Route } from "./Route";

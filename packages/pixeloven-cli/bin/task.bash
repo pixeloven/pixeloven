@@ -21,9 +21,13 @@ stylelintrc="$(pwd)/stylelintrc.json"
 CMD=$1
 shift
 
-error() { echo -e "\e[31m$@"; exit 1; }
+error() { 
+  echo -e "\e[31m$@"; exit 1; 
+}
 
-exe() { echo "$@" ; $@ ; }
+exe() { 
+  echo "$@" ; $@ ; 
+}
 
 case $CMD in
   "clean")

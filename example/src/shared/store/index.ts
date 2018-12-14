@@ -1,2 +1,3 @@
-import store from "./store";
-export default store;
+export * from "./reducers";
+export * from "./sagas";
+export * from "./store";

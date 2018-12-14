@@ -3,3 +3,4 @@
  */
 export { MainMenu } from "./MainMenu";
 export { MenuItemArray, MenuItem } from "./MenuItemArray";
+export { RenderRoutes } from "./RenderRoutes";

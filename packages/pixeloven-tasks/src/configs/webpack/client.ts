@@ -1,26 +1,31 @@
 import { resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import autoprefixer from "autoprefixer";
+import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
+import Dotenv from "dotenv-webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OfflinePlugin from "offline-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
+import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
+import TimeFixPlugin from "time-fix-plugin";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 import webpack, {
+    Configuration,
     DevtoolModuleFilenameTemplateInfo,
     Module,
     Node,
     Options,
     Output,
     Plugin,
+    Resolve,
     RuleSetRule,
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
-import merge from "webpack-merge";
-import common from "./common";
 
 /**
  * @todo optimize builds
@@ -122,9 +127,6 @@ const scssRule: RuleSetRule = {
         MiniCssExtractPlugin.loader,
         {
             loader: require.resolve("css-loader"),
-        },
-        {
-            loader: require.resolve("resolve-url-loader"),
         },
         {
             loader: require.resolve("postcss-loader"),
@@ -257,7 +259,7 @@ const output: Output = removeEmpty({
     //     undefined,
     // ),
     // hotUpdateMainFilename: ifDevelopment(
-    //     path.normalize(`${publicPath}/static/js/[hash].hot-update.json`).substring(1), 
+    //     path.normalize(`${publicPath}/static/js/[hash].hot-update.json`).substring(1),
     //     undefined,
     // ),
     path: resolvePath(`${buildPath}/public`, false),
@@ -265,9 +267,40 @@ const output: Output = removeEmpty({
 });
 
 /**
+ * Define build performance options
+ */
+const performance: Options.Performance = {
+    hints: ifDevelopment("warning", false),
+};
+
+/**
  * @description Plugins for client specific builds
  */
 const plugins: Plugin[] = removeEmpty([
+    /**
+     * Fixes a known issue with cross-platform differences in file watchers,
+     * so that webpack doesn't lose file changes when watched files change rapidly
+     * https://github.com/webpack/webpack-dev-middleware#known-issues
+     *
+     * @env development
+     */
+    ifDevelopment(new TimeFixPlugin(), undefined),
+    /**
+     * Watcher doesn"t work well if you mistype casing in a path so we use
+     * a plugin that prints an error when you attempt to do this.
+     * See https://github.com/facebookincubator/create-react-app/issues/240
+     *
+     * @env development
+     */
+    ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
+    /**
+     * Moment.js is an extremely popular library that bundles large locale files
+     * by default due to how Webpack interprets its code. This is a practical
+     * solution that requires the user to opt into importing specific locales.
+     * @url https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+     * @env all
+     */
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     /**
      * Define environmental variables base on entry point
      * @description Provides entry point specific env variables
@@ -281,6 +314,28 @@ const plugins: Plugin[] = removeEmpty([
         PUBLIC_URL: publicPath,
         TARGET: target,
     }),
+    /**
+     * Define environmental from .env
+     * @description Define environmental vars from .env file
+     * @env all
+     */
+    new Dotenv({
+        path: resolvePath(".env", false),
+    }),
+    /**
+     * Perform type checking and linting in a separate process to speed up compilation
+     * TODO might prevent showing errors in browser if async is off... but then again it breaks hmr overlay
+     * @env all
+     */
+    // import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+    // ifProduction(new ForkTsCheckerWebpackPlugin({
+    //     tsconfig: resolvePath("tsconfig.json"),
+    //     tslint: resolvePath("tslint.json"),
+    // }), new ForkTsCheckerWebpackPlugin({
+    //     tsconfig: resolvePath("tsconfig.json"),
+    //     tslint: resolvePath("tslint.json"),
+    //     watch: resolvePath("src"),
+    // })),
 
     /**
      * Copy files
@@ -378,16 +433,52 @@ const plugins: Plugin[] = removeEmpty([
 ]);
 
 /**
+ * @description Tell webpack how to resolve files and modules
+ * Prevents users from importing files from outside of src/ (or node_modules/).
+ * This often causes confusion because we only process files within src/ with babel.
+ * To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+ * please link the files into your node_modules/ and let module-resolution kick in.
+ * Make sure your source files are compiled, as they will not be processed in any way.
+ */
+const resolve: Resolve = {
+    extensions: [
+        ".mjs",
+        ".web.ts",
+        ".ts",
+        ".web.tsx",
+        ".tsx",
+        ".web.js",
+        ".js",
+        ".json",
+        ".web.jsx",
+        ".jsx",
+    ],
+    modules: [resolvePath("src"), "node_modules"],
+    plugins: [
+        new ModuleScopePlugin(resolvePath("src"), [
+            resolvePath("package.json"),
+        ]),
+        new TsconfigPathsPlugin({ configFile: resolvePath("tsconfig.json") }),
+    ],
+};
+
+/**
  * Client side configuration
  */
-export default merge(common, {
+const config: Configuration = {
+    bail: ifProduction(),
     devtool: ifDevelopment("eval-source-map", false),
     entry,
+    mode: ifProduction("production", "development"),
     module,
     name,
     node,
     optimization,
     output,
+    performance,
     plugins,
+    resolve,
     target,
-});
+};
+
+export default config;

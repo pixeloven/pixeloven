@@ -16,8 +16,7 @@
   ],
   "rules": {
     "arrow-parens": false,
-    "prefer-object-spread": false,
-    "interface-name": false,
+    "interface-name" : false,
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
     "no-console": false,

@@ -1,5 +1,5 @@
+import { RouteComponentProps } from "@shared/router";
 import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
 import { Container, Grid } from "semantic-ui-react";
 
 class NoMatch extends React.Component<RouteComponentProps> {

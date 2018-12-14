@@ -62,6 +62,7 @@ describe("@pixeloven/env", () => {
                 expect(process.env.BUILD_PATH).toEqual("dist");
                 expect(process.env.LOG_LEVEL).toEqual("silent");
                 expect(process.env.HOST).toEqual("localhost");
+                expect(process.env.MACHINE).toEqual("host");
                 expect(process.env.NODE_ENV).toEqual("production");
                 expect(process.env.PORT).toEqual("8080");
                 expect(process.env.PROTOCOL).toEqual("http");
@@ -73,6 +74,7 @@ describe("@pixeloven/env", () => {
                 expect(process.env.BUILD_PATH).toEqual("dist");
                 expect(process.env.LOG_LEVEL).toEqual("silent");
                 expect(process.env.HOST).toEqual("localhost");
+                expect(process.env.MACHINE).toEqual("host");
                 expect(process.env.NODE_ENV).toEqual("development");
                 expect(process.env.PORT).toEqual("8080");
                 expect(process.env.PROTOCOL).toEqual("http");

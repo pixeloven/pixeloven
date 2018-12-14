@@ -26,24 +26,34 @@ describe("@pixeloven/docs", () => {
             jest.clearAllMocks();
         });
         it("should start cli and fail", () => {
-            const exitSpy = jest.spyOn(macros, "exit").mockImplementation(exitMock);
+            const exitSpy = jest
+                .spyOn(macros, "exit")
+                .mockImplementation(exitMock);
             testArgv.push("/some/path", "yarn", "bad");
             main(testArgv);
             expect(exitSpy).toHaveBeenCalledTimes(1);
             expect(testCode).toEqual(1);
         });
-        it("should start cli \"build\" and pass", () => {
+        it('should start cli "build" and pass', () => {
             testArgv.push("/some/path", "yarn", "build");
-            const exitSpawnYarn = jest.spyOn(macros, "spawnYarn").mockImplementation(spawnYarnMock);
-            const exitSpawnComplete = jest.spyOn(macros, "spawnComplete").mockImplementation(spawnCompleteMock);
+            const exitSpawnYarn = jest
+                .spyOn(macros, "spawnYarn")
+                .mockImplementation(spawnYarnMock);
+            const exitSpawnComplete = jest
+                .spyOn(macros, "spawnComplete")
+                .mockImplementation(spawnCompleteMock);
             main(testArgv);
             expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
         });
-        it("should start cli \"start\" and pass", () => {
+        it('should start cli "start" and pass', () => {
             testArgv.push("/some/path", "yarn", "serve");
-            const exitSpawnYarn = jest.spyOn(macros, "spawnYarn").mockImplementation(spawnYarnMock);
-            const exitSpawnComplete = jest.spyOn(macros, "spawnComplete").mockImplementation(spawnCompleteMock);
+            const exitSpawnYarn = jest
+                .spyOn(macros, "spawnYarn")
+                .mockImplementation(spawnYarnMock);
+            const exitSpawnComplete = jest
+                .spyOn(macros, "spawnComplete")
+                .mockImplementation(spawnCompleteMock);
             main(testArgv);
             expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);

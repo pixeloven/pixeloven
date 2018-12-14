@@ -16,7 +16,7 @@ class AppLogo extends React.Component<Props> {
         return (
             <img
                 className="a-logo"
-                src={"/static/media/logo.svg"}
+                src={"static/media/logo.svg"}
                 style={logoStyle}
             />
         );

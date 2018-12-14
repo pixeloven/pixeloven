@@ -11,7 +11,7 @@ import path from "path";
 export const exit = process.exit;
 
 /**
- * 
+ *
  * @param err Generic error handler
  */
 export const errorHandler = (err: Error) => {
@@ -30,7 +30,7 @@ export const handleError = (error: Error) => {
         logger.error(error.stack);
     }
     exit(1);
-}
+};
 
 /**
  * Resolve relative path
@@ -51,7 +51,7 @@ export const resolvePath = (
         );
     }
     return absolutePath;
-}
+};
 
 /**
  * Sleep application for a given time
@@ -64,7 +64,7 @@ export const sleep = (milliseconds: number) => {
             break;
         }
     }
-}
+};
 
 /**
  * Spawn node script
@@ -116,4 +116,18 @@ export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
     } else {
         exit(result.status);
     }
+};
+
+/**
+ * Load config file
+ * @description First see if a remote config path is available otherwise load the local one
+ * @param file
+ * @return string
+ */
+export const loadConfigPath = (dir: string): string => {
+    const remoteConfig = path.resolve(process.cwd(), dir);
+    if (fs.existsSync(remoteConfig)) {
+        return remoteConfig;
+    }
+    return path.resolve(__dirname, dir);
 };

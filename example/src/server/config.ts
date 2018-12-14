@@ -1,18 +1,11 @@
-import { env, Environment } from "@pixeloven/env";
-
-/**
- * Load .env into application
- * @todo CA-111 We should no longer load form filesystem. Process.env should be included in the bundle
- */
-env.load();
-
 /**
  * General configuration for server
  */
-const HOST = env.config("HOST", "localhost");
-const PORT = env.config("PORT", "8080");
-const PROTOCOL = env.config("PROTOCOL", "http");
-const ENVIRONMENT = env.config("NODE_ENV", "production") as Environment;
+const BASE_PATH = process.env.PUBLIC_URL || "/";
+const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT || "8080";
+const PROTOCOL = process.env.PROTOCOL || "https";
+const ENVIRONMENT = process.env.NODE_ENV || "production";
 
 export interface Server {
     host: string;
@@ -21,7 +14,8 @@ export interface Server {
 }
 
 export interface Config {
-    environment: Environment;
+    basePath: string;
+    environment: string;
     server: Server;
 }
 
@@ -31,10 +25,8 @@ const server: Server = {
     protocol: PROTOCOL,
 };
 
-/**
- * Define general config
- */
 export const config: Config = {
+    basePath: BASE_PATH,
     environment: ENVIRONMENT,
     server,
 };

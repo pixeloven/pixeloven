@@ -1,7 +1,7 @@
 import log from "webpack-log";
 
 export type Message = string | string[];
-export type Level = "info" | "warn" | "error";
+export type Level = "error" | "info" | "warn";
 
 export interface LoggerInstance {
     error: (message: Message) => void;

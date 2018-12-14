@@ -1,5 +1,4 @@
-
-import {env, Environment} from "@pixeloven/env";
+import { env, Environment } from "@pixeloven/env";
 
 let envValue: Environment;
 const cliMock = (key: string, environment: Environment) => {
@@ -7,8 +6,8 @@ const cliMock = (key: string, environment: Environment) => {
 };
 
 const caller = () => {
-    require("./development")
-}
+    require("./development");
+};
 
 describe("@pixeloven/tasks", () => {
     describe("development", () => {
@@ -18,9 +17,11 @@ describe("@pixeloven/tasks", () => {
         afterEach(() => {
             jest.restoreAllMocks();
         });
-        it("should set env to \"development\"", () => {
+        it('should set env to "development"', () => {
             const envLoadSpy = jest.spyOn(env, "load").mockImplementation();
-            const envDefineSpy = jest.spyOn(env, "define").mockImplementation(cliMock);
+            const envDefineSpy = jest
+                .spyOn(env, "define")
+                .mockImplementation(cliMock);
             caller();
             expect(envLoadSpy).toHaveBeenCalledTimes(1);
             expect(envDefineSpy).toHaveBeenCalledTimes(2);
