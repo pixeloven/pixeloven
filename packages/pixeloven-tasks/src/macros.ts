@@ -24,13 +24,17 @@ const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
  * Returns default url
  * @returns string
  */
-export const getDefaultUrl = () => normalizeUrl(`${DEFAULT_PROTOCOL}://${DEFAULT_HOST}:${DEFAULT_PORT}/${DEFAULT_PUBLIC_PATH}/`);
+export const getDefaultUrl = () =>
+    normalizeUrl(
+        `${DEFAULT_PROTOCOL}://${DEFAULT_HOST}:${DEFAULT_PORT}/${DEFAULT_PUBLIC_PATH}/`,
+    );
 
 /**
  * Returns base url
  * @returns string
  */
-export const getBaseUrl = () => normalizeUrl(`${PROTOCOL}://${HOST}:${PORT}/${PUBLIC_PATH}`);
+export const getBaseUrl = () =>
+    normalizeUrl(`${PROTOCOL}://${HOST}:${PORT}/${PUBLIC_PATH}`);
 
 /**
  * Get Base Url
@@ -56,8 +60,8 @@ export const getHMRPath = () => path.normalize(`${PUBLIC_PATH}/__webpack_hmr`);
 export const getHost = () => {
     const baseUrl = getBaseUrl();
     const parsedUrl = getUrlObject(baseUrl);
-    return parsedUrl.hostname || HOST
-}
+    return parsedUrl.hostname || HOST;
+};
 
 /**
  * Returns PORT as a numeric

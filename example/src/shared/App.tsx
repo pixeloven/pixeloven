@@ -1,8 +1,11 @@
-import { Route } from "@shared/components/atoms";
-import routes from "@shared/routes";
+import { RenderRoutes } from "@shared/components";
+import { RouteProps } from "@shared/router";
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Switch } from "react-router-dom";
+
+interface Props {
+    routes: RouteProps[];
+}
 
 interface State {
     hasError?: boolean;
@@ -11,7 +14,7 @@ interface State {
 /**
  * Wrap application with router and implement react helmet
  */
-class App extends React.Component<{}, State> {
+class App extends React.Component<Props, State> {
     /**
      * Sets an error boundary in case errors in the application aren't handled properly
      * @param error
@@ -20,22 +23,19 @@ class App extends React.Component<{}, State> {
         return { hasError: true };
     }
 
-    constructor(props: {}) {
+    constructor(props: Props) {
         super(props);
         this.state = { hasError: false };
     }
 
     public render(): React.ReactNode {
-        const mappedRoutes = routes.map((route, index) => (
-            <Route key={index} {...route} />
-        ));
         if (this.state.hasError) {
             return <h1>Something went wrong.</h1>;
         }
         return (
             <React.Fragment>
                 <Helmet titleTemplate="%s | React App" />
-                <Switch>{mappedRoutes}</Switch>
+                <RenderRoutes routes={this.props.routes} />
             </React.Fragment>
         );
     }

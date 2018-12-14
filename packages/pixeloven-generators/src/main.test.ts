@@ -26,15 +26,21 @@ describe("@pixeloven/generators", () => {
             jest.clearAllMocks();
         });
         it("should start cli and fail", () => {
-            const exitSpy = jest.spyOn(macros, "exit").mockImplementation(exitMock);
+            const exitSpy = jest
+                .spyOn(macros, "exit")
+                .mockImplementation(exitMock);
             main(testArgv);
             expect(exitSpy).toHaveBeenCalledTimes(1);
             expect(testCode).toEqual(1);
         });
         it("should start cli and pass", () => {
             testArgv.push("/some/path", "yarn", "generate");
-            const exitSpawnYarn = jest.spyOn(macros, "spawnYarn").mockImplementation(spawnYarnMock);
-            const exitSpawnComplete = jest.spyOn(macros, "spawnComplete").mockImplementation(spawnCompleteMock);
+            const exitSpawnYarn = jest
+                .spyOn(macros, "spawnYarn")
+                .mockImplementation(spawnYarnMock);
+            const exitSpawnComplete = jest
+                .spyOn(macros, "spawnComplete")
+                .mockImplementation(spawnCompleteMock);
             main(testArgv);
             expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);

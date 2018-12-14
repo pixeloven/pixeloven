@@ -2,5 +2,5 @@
  * Register view here
  */
 export * from "./Html";
-export * from "./ScriptTags";
-export * from "./StyleSheetTags";
+export * from "./Link";
+export * from "./Script";

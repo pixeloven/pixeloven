@@ -1,11 +1,10 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import expressWinston from "express-winston";
-import fs from "fs";
 import path from "path";
 import winston from "winston";
 import { config } from "./config";
 import { health } from "./controllers";
-import { renderer } from "./middleware";
+import { assetPath, errorHandler, renderer } from "./middleware";
 
 /**
  * Create express application
@@ -15,51 +14,43 @@ const app = express();
 
 /**
  * Setup express logger
+ * @todo Log to file AND need to catch stack trace and what not
  */
 app.use(
     expressWinston.logger({
-        transports: [new winston.transports.Console()],
+        transports: [
+            new winston.transports.Console(),
+            // new winston.transports.File({
+            //     filename: "error.log",
+            //     level: "error",
+            // })
+        ],
     }),
 );
 
 /**
- * Defines static build files
+ * Register endpoints
+ * @todo all endpoints and middleware should respond at the baseUrl https://stackoverflow.com/questions/4375554/is-it-possible-to-set-a-base-url-for-nodejs-app
+ */
+app.use("/v1/health", health);
+
+/**
+ * Defines public path
  */
 const publicPath = path.resolve(__dirname, "public");
-app.use(express.static(publicPath));
 
 /**
  * Define render middleware
- * @todo CA-104 Get from manifest or pass in at build time.
  */
-const cssFiles = fs
-    .readdirSync(`${publicPath}/static/css`)
-    .filter(fn => fn.endsWith(".css"))
-    .map(file => `/static/css/${file}`);
-const jsFiles = fs
-    .readdirSync(`${publicPath}/static/js`)
-    .filter(fn => fn.endsWith(".js"))
-    .map(file => `/static/js/${file}`);
-app.use(
-    (req: Request, res: Response, next: NextFunction): void => {
-        req.files = {
-            css: cssFiles,
-            js: jsFiles,
-        };
-        next();
-    },
-);
+app.use(config.basePath, express.static(publicPath));
+app.use(assetPath(publicPath, config.basePath));
 app.use(renderer);
-
-/**
- * Register endpoints
- */
-app.use(health);
+app.use(errorHandler);
 
 /**
  * Start express server on specific host and port
  */
-app.listen(config.server.port, config.server.host, () => {
+const server = app.listen(config.server.port, config.server.host, () => {
     console.log(
         `Running on ${config.server.protocol}://${config.server.host}:${
             config.server.port
@@ -67,3 +58,5 @@ app.listen(config.server.port, config.server.host, () => {
     );
     console.log(`Serving static files from: ${publicPath}`);
 });
+
+export default server;

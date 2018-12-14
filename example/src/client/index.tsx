@@ -3,7 +3,9 @@ import "raf/polyfill";
 import { config } from "@client/config";
 import { register } from "@client/serviceWorkers";
 import App from "@shared/App";
-import store from "@shared/store";
+import { convertCustomRouteConfig } from "@shared/router";
+import routeConfig from "@shared/routes";
+import { configureStore } from "@shared/store";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -16,12 +18,16 @@ import "../shared/styles/core/core.scss";
 const root = document.getElementById("root");
 
 /**
+ * Get route config
+ */
+const routes = convertCustomRouteConfig(routeConfig);
+/**
  * Wrap application with container, router and store
  */
 const AppWrapper = () => (
-    <Provider store={store}>
+    <Provider store={configureStore(true)}>
         <BrowserRouter basename={config.basePath}>
-            <App />
+            <App routes={routes} />
         </BrowserRouter>
     </Provider>
 );
@@ -38,9 +44,6 @@ renderMethod(<AppWrapper />, root);
  */
 register();
 
-/**
- * @todo Can we do this on the server too??? and can it be configurable
- */
 if (module.hot) {
     module.hot.accept();
 }

@@ -1,4 +1,3 @@
-
 describe("@pixeloven/generators", () => {
     describe("plopfile", () => {
         it("should export module", () => {

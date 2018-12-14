@@ -1,42 +1,16 @@
-import { Route, RouteComponentProps } from "@shared/components";
+import { RenderRoutes } from "@shared/components";
+import { RouteComponentProps } from "@shared/router";
 import * as React from "react";
-import { Link, Switch } from "react-router-dom";
-import {
-    Container,
-    Icon,
-    Responsive,
-    Segment,
-    Visibility,
-} from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { Container, Icon, Responsive, Segment } from "semantic-ui-react";
 import { MainMenu, MenuItem } from "../../molecules";
 
-interface State {
-    fixedTopMenu: boolean;
-}
-
-class Default extends React.PureComponent<RouteComponentProps, State> {
-    public state: State = {
-        fixedTopMenu: false,
-    };
-
-    public stickMainMenu = (): void => {
-        this.setState({ fixedTopMenu: true });
-    };
-
-    public unStickMainMenu = (): void => {
-        this.setState({ fixedTopMenu: false });
-    };
-
+class Default extends React.PureComponent<RouteComponentProps> {
     public render(): React.ReactNode {
         const { routes, match } = this.props;
-        const { fixedTopMenu } = this.state;
-        const mappedSubRoutes = routes
-            ? routes.map((route, index) => <Route key={index} {...route} />)
-            : undefined;
         const items: MenuItem[] = [
             { name: "Home", path: "/", active: true },
             { name: "Blog", path: "/blog", active: false },
-            { name: "Sagas", path: "/sagas", active: false },
         ];
         items.forEach((item, index) => {
             items[index].active = match.isExact
@@ -46,20 +20,10 @@ class Default extends React.PureComponent<RouteComponentProps, State> {
         return (
             <Responsive>
                 <Container fluid={true}>
-                    <Visibility
-                        onBottomPassed={this.stickMainMenu}
-                        onBottomVisible={this.unStickMainMenu}
-                        once={false}
-                    >
-                        <MainMenu
-                            as={Link}
-                            items={items}
-                            fixed={fixedTopMenu}
-                        />
-                    </Visibility>
+                    <MainMenu as={Link} items={items} fixed={false} />
                 </Container>
                 <Container fluid={true}>
-                    <Switch>{mappedSubRoutes}</Switch>
+                    {routes && <RenderRoutes routes={routes} />}
                 </Container>
                 <Container fluid={true}>
                     <Segment inverted={true} vertical={true} textAlign="center">

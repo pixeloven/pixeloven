@@ -1,4 +1,5 @@
-import { ScriptTags, StyleSheetTags } from "@server/views";
+import { Link, Script } from "@server/views";
+import { State } from "@shared/store/types";
 import * as React from "react";
 import { HelmetData } from "react-helmet";
 
@@ -6,29 +7,43 @@ interface HtmlProps {
     children: React.ReactNode;
     files?: Express.Files;
     helmet?: HelmetData;
+    initialState?: State;
 }
 
-/**
- * @todo CA-103 manifest and favicon should be absolute to basePath
- * @param props
- */
 const Html = (props: HtmlProps) => {
+    const serializedState = JSON.stringify(props.initialState);
+    const cssTags =
+        props.files && props.files.css ? (
+            <Link href={props.files.css} rel="stylesheet" type="text/css" />
+        ) : (
+            undefined
+        );
+    const jsTags =
+        props.files && props.files.js ? (
+            <Script src={props.files.js} />
+        ) : (
+            undefined
+        );
     return (
         <html lang="en">
             <head>
                 {props.helmet && props.helmet.title.toComponent()}
                 {props.helmet && props.helmet.meta.toComponent()}
                 {props.helmet && props.helmet.link.toComponent()}
-                <link rel="manifest" href="manifest.json" />
-                <link rel="shortcut icon" href="favicon.ico" />
-                {props.files && <StyleSheetTags hrefs={props.files.css} />}
+                <Link href="favicon.ico" rel="icon" />
+                {cssTags}
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `window.INIT_STATE = ${serializedState};`,
+                    }}
+                />
             </head>
             <body>
                 <noscript>
                     You need to enable JavaScript to run this app.
                 </noscript>
                 <div id="root">{props.children}</div>
-                {props.files && <ScriptTags sources={props.files.js} />}
+                {jsTags}
             </body>
         </html>
     );

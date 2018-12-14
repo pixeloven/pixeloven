@@ -6,15 +6,12 @@ import "./bootstrap/development";
 /**
  * Import dependencies
  */
-import {
-    handleError,
-    sleep,
-    WebpackStatsHandler,
-} from "@pixeloven/core";
+import { handleError, sleep } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import express from "express";
 import path from "path";
+import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
 import webpack from "webpack";
@@ -23,7 +20,13 @@ import webpackHotMiddleware from "webpack-hot-middleware";
 import webpackHotServerMiddleware from "webpack-hot-server-middleware";
 import webpackClientConfig from "./configs/webpack/client";
 import webpackServerConfig from "./configs/webpack/server";
-import {getBaseUrl, getHMRPath, getHost, getPort, getPublicPath} from "./macros";
+import {
+    getBaseUrl,
+    getHMRPath,
+    getHost,
+    getPort,
+    getPublicPath,
+} from "./macros";
 import errorHandler from "./middleware/errorHandler";
 
 /**
@@ -40,21 +43,20 @@ const host = getHost();
 const port = getPort();
 const hmrPath = getHMRPath();
 
-type ServerOnComplete = (error?: Error) => void
+type ServerOnComplete = (error?: Error) => void;
 
 /**
  * @todo move this out of here and setup tests
  */
-const server = (serverHost: string, serverPort: number, onComplete: ServerOnComplete) => {
+const server = (
+    serverHost: string,
+    serverPort: number,
+    onComplete: ServerOnComplete,
+) => {
     /**
      * Notify user of host binding
      */
-    logger.info(
-        `Attempting to bind to ${serverHost}`,
-    );
-    logger.info(
-        `If successful the application will launch automatically.`,
-    );
+    logger.info(`Attempting to bind to ${serverHost}:${serverPort}`);
     sleep(3000);
 
     /**
@@ -80,8 +82,8 @@ const server = (serverHost: string, serverPort: number, onComplete: ServerOnComp
      */
     const watchOptions: webpack.Options.WatchOptions = {
         aggregateTimeout: 200,
-        poll: MACHINE !== "host" ? 500 : false
-    }
+        poll: MACHINE !== "host" ? 500 : false,
+    };
     const webpackDevMiddlewareInstance = webpackDevMiddleware(
         combinedCompiler,
         {
@@ -94,17 +96,14 @@ const server = (serverHost: string, serverPort: number, onComplete: ServerOnComp
                     reporterOptions.stats &&
                     middlewareOptions.logLevel !== "silent"
                 ) {
-                    const handler = new WebpackStatsHandler(
-                        reporterOptions.stats,
+                    const stats = formatWebpackMessages(
+                        reporterOptions.stats.toJson("verbose"),
                     );
-                    const stats = handler.format();
                     if (stats) {
                         if (reporterOptions.stats.hasErrors()) {
                             logger.error(stats.errors);
                             logger.error("Failed to compile.");
-                        } else if (
-                            reporterOptions.stats.hasWarnings()
-                        ) {
+                        } else if (reporterOptions.stats.hasWarnings()) {
                             logger.warn(stats.warnings);
                             logger.warn("Compiled with warnings.");
                         } else {
@@ -142,13 +141,15 @@ const server = (serverHost: string, serverPort: number, onComplete: ServerOnComp
         );
     }
     /**
-     * Pass express app in as options. Might allow for us to apply settings 
+     * Pass express app in as options. Might allow for us to apply settings
      */
-    app.use(webpackHotServerMiddleware(combinedCompiler, {
-        serverRendererOptions: {
-            app,
-        }
-    }));
+    app.use(
+        webpackHotServerMiddleware(combinedCompiler, {
+            serverRendererOptions: {
+                app,
+            },
+        }),
+    );
 
     /**
      * Create error handler for server errors
@@ -160,7 +161,7 @@ const server = (serverHost: string, serverPort: number, onComplete: ServerOnComp
      * Start express server on specific host and port
      */
     app.listen(serverPort, serverHost, onComplete);
-}
+};
 
 /**
  * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
@@ -179,6 +180,7 @@ try {
                 }
                 logger.info("Starting development server...");
                 if (MACHINE === "host") {
+                    logger.info("Application will launch automatically.");
                     openBrowser(baseUrl);
                 }
             });

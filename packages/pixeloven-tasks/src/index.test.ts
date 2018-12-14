@@ -6,8 +6,8 @@ const cliMock = (argv: string[]) => {
 };
 
 const caller = () => {
-    require("./index")
-}
+    require("./index");
+};
 
 describe("@pixeloven/tasks", () => {
     describe("index", () => {
@@ -16,7 +16,9 @@ describe("@pixeloven/tasks", () => {
             jest.restoreAllMocks();
         });
         it("should execute main and succeed", () => {
-            const cliSpy = jest.spyOn(cli, "default").mockImplementation(cliMock);
+            const cliSpy = jest
+                .spyOn(cli, "default")
+                .mockImplementation(cliMock);
             caller();
             expect(cliSpy).toHaveBeenCalledTimes(1);
             expect(testArgv).toEqual(process.argv);

@@ -1,6 +1,7 @@
-import { Blog, Home, NoMatch } from "./components/pages";
-import { SagasConnect } from "./components/pages/Sagas";
-import { Default } from "./components/templates";
+import { Blog, Home, NoMatch } from "@shared/components/pages";
+import { Default } from "@shared/components/templates";
+// import ExampleActionTypes from "@shared/store/Example/Example.actions";
+// import { Dispatch } from "redux";
 
 /**
  * Defines routes for both client and server
@@ -10,7 +11,7 @@ const routes = [
     {
         component: Default,
         exact: true,
-        path: "/",
+        path: (parentPath: string) => `${parentPath}/`,
         routes: [
             {
                 component: Home,
@@ -19,27 +20,25 @@ const routes = [
     },
     {
         component: Default,
-        path: "/blog",
+        path: (parentPath: string) => `${parentPath}/blog`,
         routes: [
             {
                 component: Blog,
                 exact: true,
-                path: "/blog",
+                // fetchData: (
+                //     dispatch: Dispatch,
+                //     params: BlogPageParams,
+                // ): void => {
+                //     dispatch({
+                //         payload: "posts",
+                //         type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
+                //     });
+                // },
+                path: (parentPath: string) => `${parentPath}/blog`,
             },
             {
                 component: Blog,
-                path: "/blog/:post",
-            },
-        ],
-    },
-    {
-        component: Default,
-        path: "/sagas",
-        routes: [
-            {
-                component: SagasConnect,
-                exact: true,
-                path: "/sagas",
+                path: (parentPath: string) => `${parentPath}/blog/:post`,
             },
         ],
     },
