@@ -4,9 +4,9 @@ import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
 export const newScssRule: RuleSetRule = {
     loaders: [
-        require.resolve("style-loader"), 
-        require.resolve("css-loader"), 
-        require.resolve("sass-loader")
+        require.resolve("style-loader"),
+        require.resolve("css-loader"),
+        require.resolve("sass-loader"),
     ],
     test: /\.(scss|sass|css)$/i,
 };

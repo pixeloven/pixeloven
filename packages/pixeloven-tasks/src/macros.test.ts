@@ -1,18 +1,25 @@
 import "jest";
-import {getBaseUrl, getDefaultUrl, getHost, getPort, getPublicPath, getUrlObject} from "./macros";
+import {
+    getBaseUrl,
+    getDefaultUrl,
+    getHost,
+    getPort,
+    getPublicPath,
+    getUrlObject,
+} from "./macros";
 
 describe("@pixeloven/tasks", () => {
     describe("macros", () => {
         describe("getBaseUrl", () => {
             it("should return base url from constants", () => {
                 const url = getBaseUrl();
-                expect(url).toEqual("http://localhost:8080/")
+                expect(url).toEqual("http://localhost:8080/");
             });
         });
         describe("getDefaultUrl", () => {
             it("should return base url from .env values", () => {
                 const url = getDefaultUrl();
-                expect(url).toEqual("http://localhost:8080/")
+                expect(url).toEqual("http://localhost:8080/");
             });
         });
         describe("getHost", () => {

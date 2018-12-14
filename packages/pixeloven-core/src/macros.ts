@@ -11,7 +11,7 @@ import path from "path";
 export const exit = process.exit;
 
 /**
- * 
+ *
  * @param err Generic error handler
  */
 export const errorHandler = (err: Error) => {
@@ -30,7 +30,7 @@ export const handleError = (error: Error) => {
         logger.error(error.stack);
     }
     exit(1);
-}
+};
 
 /**
  * Resolve relative path
@@ -51,7 +51,7 @@ export const resolvePath = (
         );
     }
     return absolutePath;
-}
+};
 
 /**
  * Sleep application for a given time
@@ -64,7 +64,7 @@ export const sleep = (milliseconds: number) => {
             break;
         }
     }
-}
+};
 
 /**
  * Spawn node script

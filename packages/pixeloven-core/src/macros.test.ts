@@ -1,10 +1,10 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
-import {logger, Message} from "@pixeloven/node-logger";
+import { logger, Message } from "@pixeloven/node-logger";
 import spawn from "cross-spawn";
 import fs from "fs";
 import "jest";
 import path from "path";
-import * as macros from "./macros"
+import * as macros from "./macros";
 
 let resolvePathExists = true;
 const logErrorMock = (message: Message) => message;
@@ -18,7 +18,7 @@ const spawnSyncMock = (cmd: string, args: [], options: object) => "testing";
  */
 const approxTimeDiff = (start: number, end: number) => {
     return Math.round((end - start) / 10) * 10;
-}
+};
 
 describe("@pixeloven/exceptions", () => {
     describe("macros", () => {
@@ -33,36 +33,50 @@ describe("@pixeloven/exceptions", () => {
             it("should re-throw error", () => {
                 const caller = () => {
                     macros.errorHandler(new Error("error"));
-                }            
+                };
                 expect(caller).toThrowError();
             });
         });
         describe("handleError", () => {
             it("should log error and exit", () => {
-                const logErrorSpy = jest.spyOn(logger, "error").mockImplementation(logErrorMock);
-                const exitSpy = jest.spyOn(macros, "exit").mockImplementation(exitMock);
-                macros.handleError(new Error);
+                const logErrorSpy = jest
+                    .spyOn(logger, "error")
+                    .mockImplementation(logErrorMock);
+                const exitSpy = jest
+                    .spyOn(macros, "exit")
+                    .mockImplementation(exitMock);
+                macros.handleError(new Error());
                 expect(logErrorSpy).toHaveBeenCalledTimes(1);
                 expect(exitSpy).toHaveBeenCalledTimes(1);
             });
         });
         describe("resolvePath", () => {
-            it("should resolve path \"strict\" successfully", () => {
+            it('should resolve path "strict" successfully', () => {
                 resolvePathExists = true;
-                const existsSyncSpy = jest.spyOn(fs, "existsSync").mockImplementation(existsSyncMock);
+                const existsSyncSpy = jest
+                    .spyOn(fs, "existsSync")
+                    .mockImplementation(existsSyncMock);
                 const absolutePath = macros.resolvePath("testing");
-                expect(absolutePath).toEqual(path.resolve(process.cwd(), "testing"));
+                expect(absolutePath).toEqual(
+                    path.resolve(process.cwd(), "testing"),
+                );
                 expect(existsSyncSpy).toHaveBeenCalledTimes(1);
             });
-            it("should resolve path NOT \"strict\" successfully", () => {
-                const existsSyncSpy = jest.spyOn(fs, "existsSync").mockImplementation(existsSyncMock);
+            it('should resolve path NOT "strict" successfully', () => {
+                const existsSyncSpy = jest
+                    .spyOn(fs, "existsSync")
+                    .mockImplementation(existsSyncMock);
                 const absolutePath = macros.resolvePath("testing", true);
-                expect(absolutePath).toEqual(path.resolve(process.cwd(), "testing"));
+                expect(absolutePath).toEqual(
+                    path.resolve(process.cwd(), "testing"),
+                );
                 expect(existsSyncSpy).toHaveBeenCalledTimes(1);
             });
-            it("should try resolve path \"strict\" and throw error", () => {
+            it('should try resolve path "strict" and throw error', () => {
                 resolvePathExists = false;
-                const existsSyncSpy = jest.spyOn(fs, "existsSync").mockImplementation(existsSyncMock);
+                const existsSyncSpy = jest
+                    .spyOn(fs, "existsSync")
+                    .mockImplementation(existsSyncMock);
                 const t = () => {
                     macros.resolvePath("testing");
                 };
@@ -81,7 +95,9 @@ describe("@pixeloven/exceptions", () => {
         });
         describe("spawnNode", () => {
             it("should spawn a new node caller", () => {
-                const spawnSyncSpy = jest.spyOn(spawn, "sync").mockImplementation(spawnSyncMock);
+                const spawnSyncSpy = jest
+                    .spyOn(spawn, "sync")
+                    .mockImplementation(spawnSyncMock);
                 macros.spawnNode("script", ["arg"]);
                 expect(spawnSyncSpy).toHaveBeenCalledTimes(1);
             });

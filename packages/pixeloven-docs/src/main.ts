@@ -38,8 +38,9 @@ const loadConfigPath = (dir: string): string => {
 const main = (argv: string[]) => {
     const scriptArgs = argv.slice(2);
     const scriptIndex = scriptArgs.findIndex(index => mapScriptIndex(index));
-    const scriptName = scriptIndex === -1 ? scriptArgs[0] : scriptArgs[scriptIndex];
-    
+    const scriptName =
+        scriptIndex === -1 ? scriptArgs[0] : scriptArgs[scriptIndex];
+
     if (scriptIndex === -1) {
         logger.error(`Unknown usage ${scriptName}.`);
         exit(1);
@@ -50,7 +51,12 @@ const main = (argv: string[]) => {
         case "build:story": {
             const config = loadConfigPath("./configs");
             const output = path.resolve(process.cwd(), "./dist/public/docs");
-            const result = spawnYarn("build-storybook", ["-c", config, "-o", output]);
+            const result = spawnYarn("build-storybook", [
+                "-c",
+                config,
+                "-o",
+                output,
+            ]);
             spawnComplete(result);
             break;
         }
@@ -70,6 +76,6 @@ const main = (argv: string[]) => {
             break;
         }
     }
-}
+};
 
 export default main;

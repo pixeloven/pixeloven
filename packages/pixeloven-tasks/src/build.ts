@@ -6,11 +6,7 @@ import "./bootstrap/production";
 /**
  * Import dependencies
  */
-import {
-    handleError,
-    resolvePath,
-    WebpackStatsHandler,
-} from "@pixeloven/core";
+import { handleError, resolvePath, WebpackStatsHandler } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import fs from "fs-extra";
@@ -72,7 +68,7 @@ function printBuildStatus(warnings: string[]) {
         logger.warn("Compiled with warnings.");
         logger.warn(warnings.join("\n\n")); // TODO print array??? can webpacl-log handle this natively???
         logger.warn(
-            "Search for the \"keywords\" to learn more about each warning.",
+            'Search for the "keywords" to learn more about each warning.',
         );
     } else {
         logger.info("Compiled successfully.");
