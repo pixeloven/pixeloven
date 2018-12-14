@@ -168,6 +168,10 @@ const typeScriptRule: RuleSetRule = {
     use: [
         {
             loader: require.resolve("babel-loader"),
+            options: {
+                presets: ["@babel/preset-env", "@babel/preset-react"],
+                useBuiltIns: "usage"
+            }
         },
         {
             loader: require.resolve("ts-loader"),
