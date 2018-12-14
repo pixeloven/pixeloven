@@ -29,7 +29,7 @@
     "@pixeloven/core": "^2.2.0",
     "@pixeloven/env": "^2.2.0",
     "@pixeloven/node-logger": "^2.2.0",
-    "autoprefixer": "9.3.1",
+    "autoprefixer": "9.4.2",
     "babel-loader": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "copy-webpack-plugin": "4.6.0",
