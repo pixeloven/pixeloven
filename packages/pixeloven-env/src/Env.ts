@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 
 export type Environment = "development" | "production" | "test";
 
+export type Machine = "ci" | "docker" | "host" | "virtual" | undefined;
+
 export interface Environments {
     development?: object;
     production?: object;
@@ -20,6 +22,7 @@ export interface DefaultEnv extends NodeJS.ProcessEnv {
     PORT: string;
     PROTOCOL: string;
     PUBLIC_URL: string;
+    MACHINE: string;
     NODE_ENV: string;
 }
 
@@ -32,6 +35,7 @@ export class Env {
         BUILD_PATH: "dist",
         HOST: "localhost",
         LOG_LEVEL: "silent",
+        MACHINE: "host",
         NODE_ENV: "production",
         PORT: "8080",
         PROTOCOL: "http",

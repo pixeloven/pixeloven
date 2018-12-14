@@ -96,7 +96,9 @@ const server = (
                     reporterOptions.stats &&
                     middlewareOptions.logLevel !== "silent"
                 ) {
-                    const stats = formatWebpackMessages(reporterOptions.stats.toJson("verbose"))
+                    const stats = formatWebpackMessages(
+                        reporterOptions.stats.toJson("verbose"),
+                    );
                     if (stats) {
                         if (reporterOptions.stats.hasErrors()) {
                             logger.error(stats.errors);

@@ -111,7 +111,7 @@ function build(config: object, previousFileSizes: OpaqueFileSizes) {
             if (err) {
                 return reject(err);
             }
-            const messages = formatWebpackMessages(stats.toJson("verbose"))
+            const messages = formatWebpackMessages(stats.toJson("verbose"));
             if (messages.errors.length) {
                 return reject(new Error(messages.errors.join("\n\n")));
             }
