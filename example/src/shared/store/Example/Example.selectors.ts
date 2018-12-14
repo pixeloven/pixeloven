@@ -15,8 +15,4 @@ const makeGetExampleDescription = () =>
         example => example.description,
     );
 
-export {
-    getExampleState,
-    makeGetExampleTitle,
-    makeGetExampleDescription,
-};
+export { getExampleState, makeGetExampleTitle, makeGetExampleDescription };

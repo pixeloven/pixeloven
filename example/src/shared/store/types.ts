@@ -7,7 +7,7 @@ export interface ServiceError {
     message: string;
 }
 
-export type ResponseTypes = object | string | number | undefined
+export type ResponseTypes = object | string | number | undefined;
 
 export interface SuccessResponse {
     [key: string]: ResponseTypes | ResponseTypes[];

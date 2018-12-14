@@ -30,6 +30,6 @@ export type GetExampleInProgress = Action<
 export type ExampleAction =
     | GetExampleSuccess
     | GetExampleFailure
-    | GetExampleInProgress
+    | GetExampleInProgress;
 
 export default TypeKeys;

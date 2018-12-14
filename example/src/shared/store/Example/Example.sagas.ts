@@ -1,9 +1,7 @@
 import ExampleActionTypes, {
     GetExampleInProgress,
 } from "@shared/store/Example/Example.actions";
-import {
-    getExample,
-} from "@shared/store/Example/Example.service";
+import { getExample } from "@shared/store/Example/Example.service";
 import { all, call, put, takeEvery } from "redux-saga/effects";
 
 // Workers
@@ -26,17 +24,12 @@ function* workExample(action: GetExampleInProgress) {
 
 // Watchers
 function* watchExample() {
-    yield takeEvery(
-        ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
-        workExample,
-    );
+    yield takeEvery(ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS, workExample);
 }
 
 // Root
 function* saga() {
-    yield all([
-        watchExample(),
-    ]);
+    yield all([watchExample()]);
 }
 
 export default saga;
