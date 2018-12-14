@@ -61,12 +61,54 @@ jobs:
           name: Lint source
           command: yarn lint
 
-  build:
+  compile:
     executor: node-executor
     steps:
       - checkout
       - install
       - list
+
+        # Run build and test
+      - run:
+          name: Compile source
+          command: yarn compile
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - packages/**/dist
+
+  build:
+    executor: node-executor
+    steps:
+      # Download and cache dependencies
+      - checkout
+      - install
+
+      - attach_workspace:
+          at: ~/pixeloven
+
+        # Run build
+      - run:
+          name: Build source
+          command: yarn build
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/dist
+
+  test:
+    executor: node-executor
+    steps:
+      # Download and cache dependencies
+      - checkout
+      - install
+
+      - attach_workspace:
+          at: ~/pixeloven
 
         # Run build and test
         # @todo Find a way to break this out into parts
@@ -78,20 +120,11 @@ jobs:
           name: Test source
           command: yarn test
 
-       # Save artifacts
-      - store_artifacts:
-          path: packages/**/dist
-          destination: dist
-
-       # Save artifacts
-      - store_artifacts:
-          path: packages/**/coverage
-          destination: coverage
-
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
+            - examples/**/coverage/lcov.info
             - packages/**/coverage/lcov.info
 
   report:
@@ -118,6 +151,24 @@ jobs:
           name: Report source V2
           command: yarn report-coverage-v2
 
+  deploy:
+    executor: node-executor
+    steps:
+
+      - attach_workspace:
+          at: ~/pixeloven
+
+       # Save dist artifacts
+      - store_artifacts:
+          path: packages/**/dist
+          destination: dist
+
+       # Save coverage artifacts
+      - store_artifacts:
+          path: packages/**/coverage
+          destination: coverage
+
+          
 workflows:
   version: 2.1
   runner:
@@ -126,12 +177,24 @@ workflows:
       - lint:
           requires:
             - setup
-      - build:
+      - compile:
           requires:
             - setup
-      - report:
+      - build:
+          requires:
+            - compile
+      - test:
           requires:
             - build
+      - report:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - test
           filters:
             branches:
               only: master
