@@ -14,6 +14,7 @@ import TimeFixPlugin from "time-fix-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 import webpack, {
+    Configuration,
     DevtoolModuleFilenameTemplateInfo,
     Module,
     Node,
@@ -464,7 +465,7 @@ const resolve: Resolve = {
 /**
  * Client side configuration
  */
-export default {
+const config: Configuration = {
     bail: ifProduction(),
     devtool: ifDevelopment("eval-source-map", false),
     entry,
@@ -479,3 +480,5 @@ export default {
     resolve,
     target,
 };
+
+export default config;

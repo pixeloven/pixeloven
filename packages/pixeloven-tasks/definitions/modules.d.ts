@@ -3,6 +3,7 @@
  * @description Consult DefinitelyTyped before declaring below
  * http://definitelytyped.org/
  */
+declare module "react-dev-utils/formatWebpackMessages";
 declare module "react-dev-utils/openBrowser";
 declare module "react-dev-utils/ModuleScopePlugin";
 declare module "react-dev-utils/WebpackDevServerUtils";

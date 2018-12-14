@@ -6,6 +6,7 @@ import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TimeFixPlugin from "time-fix-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import webpack, {
+    Configuration,
     Module,
     Node,
     Options,
@@ -242,7 +243,7 @@ const resolve: Resolve = {
 /**
  * Server side configuration
  */
-export default {
+const config: Configuration = {
     bail: ifProduction(),
     devtool: ifDevelopment("eval-source-map", false),
     entry,
@@ -257,3 +258,5 @@ export default {
     resolve,
     target,
 };
+
+export default config;

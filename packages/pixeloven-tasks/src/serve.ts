@@ -6,11 +6,12 @@ import "./bootstrap/development";
 /**
  * Import dependencies
  */
-import { handleError, sleep, WebpackStatsHandler } from "@pixeloven/core";
+import { handleError, sleep } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import express from "express";
 import path from "path";
+import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
 import webpack from "webpack";
@@ -96,10 +97,7 @@ const server = (
                     reporterOptions.stats &&
                     middlewareOptions.logLevel !== "silent"
                 ) {
-                    const handler = new WebpackStatsHandler(
-                        reporterOptions.stats,
-                    );
-                    const stats = handler.format();
+                    const stats = formatWebpackMessages(reporterOptions.stats.toJson("verbose"))
                     if (stats) {
                         if (reporterOptions.stats.hasErrors()) {
                             logger.error(stats.errors);
