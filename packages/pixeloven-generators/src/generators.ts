@@ -157,8 +157,8 @@ const generator = (plop: Plop) => {
             },
             {
                 abortOnFail: true,
-                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.types.d.ts`,
-                templateFile: "templates/Store/Store.types.d.ts.hbs",
+                path: `${storePath}/{{capitalize serviceName}}/{{capitalize serviceName}}.types.ts`,
+                templateFile: "templates/Store/Store.types.ts.hbs",
                 type: "add",
             },
         ],
