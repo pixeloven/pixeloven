@@ -1,22 +1,6 @@
+import { RouteComponentProps, RouteProps } from "@shared/router";
 import * as React from "react";
-import {
-    match,
-    Route as DefaultRoute,
-    RouteComponentProps as DefaultRouteComponentProps,
-    RouteProps as DefaultRouteProps,
-} from "react-router-dom";
-
-export interface RouteComponentProps extends DefaultRouteComponentProps {
-    routes?: RouteProps[];
-}
-
-export interface RouteProps extends DefaultRouteProps {
-    component: new (props: RouteComponentProps) => React.Component<
-        RouteComponentProps
-    >;
-    loadData?: (match: match) => Promise<void>;
-    statusCode?: number;
-}
+import { Route as DefaultRoute } from "react-router-dom";
 
 /**
  * Wraps react router <Route> for rendering nested routes and components
@@ -27,15 +11,19 @@ export interface RouteProps extends DefaultRouteProps {
  * @param rest
  * @constructor
  */
-const Route = ({ component: Component, exact, path, ...rest }: RouteProps) => {
-    const render = (props: RouteComponentProps) => {
-        if (props.staticContext) {
-            props.staticContext.statusCode =
-                rest.statusCode || props.staticContext.statusCode || 200;
-        }
-        return <Component {...props} {...rest} />;
+const Route = (props: RouteProps) => {
+    const { component: Component, exact, path, strict, ...otherProps } = props;
+    const render = (componentProps: RouteComponentProps) => {
+        return <Component {...componentProps} {...otherProps} />;
     };
-    return <DefaultRoute exact={exact} path={path} render={render} />;
+    return (
+        <DefaultRoute
+            exact={exact}
+            path={path}
+            strict={strict}
+            render={render}
+        />
+    );
 };
 
 export default Route;

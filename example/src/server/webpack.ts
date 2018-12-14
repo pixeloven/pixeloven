@@ -9,7 +9,6 @@ interface RendererOptions {
     serverStats: Stats;
 }
 
-// TODO refresh automatically when server/css change https://github.com/glenjamin/ultimate-hot-reloading-example/blob/master/server.js
 /**
  * Webpack Dev server
  * @param options

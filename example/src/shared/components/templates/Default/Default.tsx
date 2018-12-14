@@ -1,6 +1,7 @@
-import { Route, RouteComponentProps } from "@shared/components";
+import { RenderRoutes } from "@shared/components";
+import { RouteComponentProps } from "@shared/router";
 import * as React from "react";
-import { Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Container,
     Icon,
@@ -30,9 +31,6 @@ class Default extends React.PureComponent<RouteComponentProps, State> {
     public render(): React.ReactNode {
         const { routes, match } = this.props;
         const { fixedTopMenu } = this.state;
-        const mappedSubRoutes = routes
-            ? routes.map((route, index) => <Route key={index} {...route} />)
-            : undefined;
         const items: MenuItem[] = [
             { name: "Home", path: "/", active: true },
             { name: "Blog", path: "/blog", active: false },
@@ -59,7 +57,7 @@ class Default extends React.PureComponent<RouteComponentProps, State> {
                     </Visibility>
                 </Container>
                 <Container fluid={true}>
-                    <Switch>{mappedSubRoutes}</Switch>
+                    {routes && <RenderRoutes routes={routes} />}
                 </Container>
                 <Container fluid={true}>
                     <Segment inverted={true} vertical={true} textAlign="center">

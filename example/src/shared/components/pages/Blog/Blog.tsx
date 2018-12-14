@@ -1,6 +1,6 @@
+import { RouteComponentProps } from "@shared/router";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { RouteComponentProps } from "react-router-dom";
 import { Grid, Header } from "semantic-ui-react";
 import { Icon } from "../../atoms/Icon";
 

@@ -1,13 +1,19 @@
+/**
+ * General configuration for server
+ * @description Process env is provided in a very limited capacity for the client. Webpack parses "process.env" into string literals
+ */
+const BASE_PATH = process.env.PUBLIC_URL || "/";
+const ENVIRONMENT = process.env.NODE_ENV || "production";
+
 export interface Config {
-    environment: string;
     basePath: string;
+    environment: string;
 }
 
 /**
  * Define general config
- * @description Process env is provided in a very limited capacity for the client
  */
 export const config: Config = {
-    basePath: process.env.PUBLIC_URL || "/",
-    environment: process.env.NODE_ENV || "production",
+    basePath: BASE_PATH,
+    environment: ENVIRONMENT,
 };
