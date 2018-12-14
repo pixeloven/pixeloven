@@ -1,5 +1,5 @@
 {
-  "name": "@pixeloven/example",
+  "name": "@pixeloven/react-ssr-example",
   "version": "2.2.0",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
@@ -61,7 +61,7 @@
     "@types/storybook__addon-options": "3.2.2",
     "@types/storybook__react": "4.0.0",
     "@types/supertest": "2.0.6",
-    "@types/webpack": "4.4.19",
+    "@types/webpack": "4.4.21",
     "babel-loader": "8.0.4",
     "enzyme": "3.7.0",
     "enzyme-adapter-react-16": "1.7.0",

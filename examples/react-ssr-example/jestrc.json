@@ -2,44 +2,18 @@
   "bail": true,
   "verbose": true,
   "preset": "ts-jest",
-  "coveragePathIgnorePatterns": [
-    "<rootDir>/node_modules/"
-  ],
-  "coverageThreshold": {
-    "global": {
-      "branches": 75,
-      "functions": 75,
-      "lines": 75,
-      "statements": 75
-    }
-  },
-  "collectCoverageFrom": [
-    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
-    "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",
-    "!**/node_modules/**"
-  ],
-  "setupFiles": [
-    "<rootDir>../../packages/pixeloven-tasks/src/bootstrap/testing.ts"
-  ],
-  "testMatch": [
-    "<rootDir>/test/**/*.(j|t)s?(x)",
-    "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
-  ],
-  "testPathIgnorePatterns": [
-    "<rootDir>/node_modules/"
-  ],
-  "testEnvironment": "node",
-  "testURL": "http://localhost",
   "transform": {
-    "^.+\\.(js|jsx)$": "babel-jest",
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
   "transformIgnorePatterns": [
-    "<rootDir>/node_modules/"
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
   ],
-  "moduleDirectories": [
-    "node_modules"
+  "testMatch": [
+    "<rootDir>/src/**/test/**/*.(j|t)s?(x)",
+    "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
   ],
+  "testEnvironment": "node",
+  "testURL": "http://localhost",
   "moduleNameMapper": {
     "@client/(.*)$": "<rootDir>/src/client/$1",
     "@server/(.*)$": "<rootDir>/src/server/$1",
@@ -52,5 +26,22 @@
     "jsx",
     "ts",
     "tsx"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/test/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 65,
+      "functions": 65,
+      "lines": 65,
+      "statements": 65
+    }
+  },
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**"
   ]
 }
