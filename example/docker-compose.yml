@@ -1,0 +1,12 @@
+
+version: "2"
+services:
+  node-react:
+    container_name: node-react
+    image: node-react
+    build:
+      context: .
+    command: yarn start:app
+    ports:
+      - "8080:8080"
+      - "9001:9001"

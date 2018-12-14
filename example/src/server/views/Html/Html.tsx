@@ -31,27 +31,6 @@ const Html = (props: HtmlProps) => {
                 {props.helmet && props.helmet.meta.toComponent()}
                 {props.helmet && props.helmet.link.toComponent()}
                 <Link href="favicon.ico" rel="icon" />
-                <Link
-                    href="https://d25oniaj7o2jcw.cloudfront.net/Lato-Black.woff2"
-                    rel="preload"
-                    type="font/woff2"
-                    as="font"
-                    crossOrigin="anonymous"
-                />
-                <Link
-                    href="https://d25oniaj7o2jcw.cloudfront.net/Lato-Light.woff2"
-                    rel="preload"
-                    type="font/woff2"
-                    as="font"
-                    crossOrigin="anonymous"
-                />
-                <Link
-                    href="https://d25oniaj7o2jcw.cloudfront.net/Lato-Regular.woff2"
-                    rel="preload"
-                    type="font/woff2"
-                    as="font"
-                    crossOrigin="anonymous"
-                />
                 {cssTags}
                 <script
                     dangerouslySetInnerHTML={{
