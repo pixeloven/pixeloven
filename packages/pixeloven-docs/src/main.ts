@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import { exit, spawnComplete, spawnYarn } from "@pixeloven/core";
+import { exit, loadConfigPath, spawnComplete, spawnYarn } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
-import fs from "fs";
 import path from "path";
 
 /**
@@ -13,20 +12,6 @@ const mapScriptIndex = (index: string) =>
     index === "build:story" ||
     index === "serve" ||
     index === "serve:story";
-
-/**
- * Load config file
- * @description First see if a remote config path is available otherwise load the local one
- * @param file
- * @return string
- */
-const loadConfigPath = (dir: string): string => {
-    const remoteConfig = path.resolve(process.cwd(), dir);
-    if (fs.existsSync(remoteConfig)) {
-        return remoteConfig;
-    }
-    return path.resolve(__dirname, dir);
-};
 
 /**
  * Setup variables and execute

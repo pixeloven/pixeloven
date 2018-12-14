@@ -117,3 +117,17 @@ export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
         exit(result.status);
     }
 };
+
+/**
+ * Load config file
+ * @description First see if a remote config path is available otherwise load the local one
+ * @param file
+ * @return string
+ */
+export const loadConfigPath = (dir: string): string => {
+    const remoteConfig = path.resolve(process.cwd(), dir);
+    if (fs.existsSync(remoteConfig)) {
+        return remoteConfig;
+    }
+    return path.resolve(__dirname, dir);
+};

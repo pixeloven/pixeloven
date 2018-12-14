@@ -102,5 +102,23 @@ describe("@pixeloven/exceptions", () => {
                 expect(spawnSyncSpy).toHaveBeenCalledTimes(1);
             });
         });
+        describe("loadConfigPath", () => {
+            it("should load remote config file", () => {
+                resolvePathExists = true;
+                const existsSyncSpy = jest
+                    .spyOn(fs, "existsSync")
+                    .mockImplementation(existsSyncMock);
+                macros.loadConfigPath("file.json");
+                expect(existsSyncSpy).toHaveBeenCalledTimes(1);
+            });
+            it("should load local config file", () => {
+                resolvePathExists = false;
+                const existsSyncSpy = jest
+                    .spyOn(fs, "existsSync")
+                    .mockImplementation(existsSyncMock);
+                macros.loadConfigPath("file.json");
+                expect(existsSyncSpy).toHaveBeenCalledTimes(1);
+            });
+        });
     });
 });
