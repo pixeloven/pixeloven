@@ -92,7 +92,7 @@ jobs:
 
       - install
 
-      - run
+      - run:
           name: Create .env file
           command: lerna run env:create
 
