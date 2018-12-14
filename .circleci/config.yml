@@ -92,6 +92,10 @@ jobs:
 
       - install
 
+      - run
+          name: Create .env file
+          command: lerna run env:create
+
         # Run build
       - run:
           name: Build source
@@ -168,12 +172,18 @@ jobs:
        # Save dist artifacts
       - store_artifacts:
           path: packages/**/dist
-          destination: dist
+          destination: packages/dist
+      - store_artifacts:
+          path: examples/**/dist
+          destination: examples/dist
 
        # Save coverage artifacts
       - store_artifacts:
           path: packages/**/coverage
-          destination: coverage
+          destination: packages/coverage
+      - store_artifacts:
+          path: examples/**/coverage
+          destination: examples/coverage
 
 workflows:
   version: 2.1
