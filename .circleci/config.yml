@@ -54,7 +54,6 @@ jobs:
     steps:
       - checkout
       - install
-      - list
 
         # Run task
       - run:
@@ -66,12 +65,15 @@ jobs:
     steps:
       - checkout
       - install
-      - list
 
         # Run build and test
       - run:
           name: Compile source
           command: yarn compile
+
+      # Check for build files
+      - list:
+          path: packages/**/dist
 
       # Save project
       - persist_to_workspace:
@@ -84,15 +86,20 @@ jobs:
     steps:
       # Download and cache dependencies
       - checkout
-      - install
 
       - attach_workspace:
           at: ~/pixeloven
+
+      - install
 
         # Run build
       - run:
           name: Build source
           command: yarn build
+
+      # Check for build files
+      - list:
+          path: examples/**/dist
 
       # Save project
       - persist_to_workspace:
@@ -105,51 +112,51 @@ jobs:
     steps:
       # Download and cache dependencies
       - checkout
-      - install
 
       - attach_workspace:
           at: ~/pixeloven
 
-        # Run build and test
-        # @todo Find a way to break this out into parts
-      - run:
-          name: Compile source
-          command: yarn compile
+      - install
 
+        # Run test
       - run:
           name: Test source
           command: yarn test
+
+      # Check for build files
+      - list:
+          path: examples/**/coverage
+      - list:
+          path: packages/**/coverage
 
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
-            - examples/**/coverage/lcov.info
-            - packages/**/coverage/lcov.info
+            - examples/**/coverage
+            - packages/**/coverage
 
   report:
     executor: node-executor
     steps:
       # Download and cache dependencies
       - checkout
-      - install
 
       - attach_workspace:
           at: ~/pixeloven
 
-      # Check for pixeloven deps
+      - install
+
+      # Check for coverage files for reporting
+      - list:
+          path: examples/**/coverage/lcov.info
       - list:
           path: packages/**/coverage/lcov.info
 
       # Run test and report
       - run:
-          name: Report source
-          command: yarn report-coverage
-
-      # Run test and report
-      - run:
           name: Report source V2
-          command: yarn report-coverage-v2
+          command: yarn report-coverage
 
   deploy:
     executor: node-executor
@@ -168,7 +175,6 @@ jobs:
           path: packages/**/coverage
           destination: coverage
 
-          
 workflows:
   version: 2.1
   runner:
