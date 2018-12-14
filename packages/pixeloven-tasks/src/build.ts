@@ -6,12 +6,13 @@ import "./bootstrap/production";
 /**
  * Import dependencies
  */
-import { handleError, resolvePath, WebpackStatsHandler } from "@pixeloven/core";
+import { handleError, resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import fs from "fs-extra";
 import Promise from "promise";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
+import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import webpack, { Stats } from "webpack";
 import webpackClientConfig from "./configs/webpack/client";
 import webpackServerConfig from "./configs/webpack/server";
@@ -110,8 +111,7 @@ function build(config: object, previousFileSizes: OpaqueFileSizes) {
             if (err) {
                 return reject(err);
             }
-            const handler = new WebpackStatsHandler(stats);
-            const messages = handler.format();
+            const messages = formatWebpackMessages(stats.toJson("verbose"))
             if (messages.errors.length) {
                 return reject(new Error(messages.errors.join("\n\n")));
             }

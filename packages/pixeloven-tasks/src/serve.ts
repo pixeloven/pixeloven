@@ -56,8 +56,7 @@ const server = (
     /**
      * Notify user of host binding
      */
-    logger.info(`Attempting to bind to ${serverHost}`);
-    logger.info(`If successful the application will launch automatically.`);
+    logger.info(`Attempting to bind to ${serverHost}:${serverPort}`);
     sleep(3000);
 
     /**
@@ -179,6 +178,7 @@ try {
                 }
                 logger.info("Starting development server...");
                 if (MACHINE === "host") {
+                    logger.info("Application will launch automatically.");
                     openBrowser(baseUrl);
                 }
             });
