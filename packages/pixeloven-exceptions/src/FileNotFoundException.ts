@@ -6,8 +6,7 @@ import Exception from "./Exception";
  */
 class FileNotFoundException extends Exception {
     constructor(message: string = "File not found.") {
-        /* istanbul ignore next */
-        super(message);
+        super(message) /* istanbul ignore next: can't cover */;
         Object.setPrototypeOf(this, FileNotFoundException.prototype);
         this.name = this.constructor.name;
         Error.captureStackTrace(this, this.constructor);
