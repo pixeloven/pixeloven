@@ -172,8 +172,7 @@ const typeScriptRule: RuleSetRule = {
                 presets: [
                     require.resolve("@babel/preset-env"), 
                     require.resolve("@babel/preset-react")
-                ],
-                useBuiltIns: "usage"
+                ]
             }
         },
         {

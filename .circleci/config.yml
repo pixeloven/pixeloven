@@ -54,69 +54,141 @@ jobs:
     steps:
       - checkout
       - install
-      - list
 
         # Run task
       - run:
           name: Lint source
           command: yarn lint
 
-  build:
+  compile:
     executor: node-executor
     steps:
       - checkout
       - install
-      - list
 
         # Run build and test
-        # @todo Find a way to break this out into parts
       - run:
           name: Compile source
           command: yarn compile
 
-      - run:
-          name: Test source
-          command: yarn test
-
-       # Save artifacts
-      - store_artifacts:
+      # Check for build files
+      - list:
           path: packages/**/dist
-          destination: dist
-
-       # Save artifacts
-      - store_artifacts:
-          path: packages/**/coverage
-          destination: coverage
 
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
-            - packages/**/coverage/lcov.info
+            - packages/**/dist
+
+  build:
+    executor: node-executor
+    steps:
+      # Download and cache dependencies
+      - checkout
+
+      - attach_workspace:
+          at: ~/pixeloven
+
+      - install
+
+      - run:
+          name: Create .env file
+          command: yarn env:create
+
+        # Run build
+      - run:
+          name: Build source
+          command: yarn build
+
+      # Check for build files
+      - list:
+          path: examples/**/dist
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/dist
+
+  test:
+    executor: node-executor
+    steps:
+      # Download and cache dependencies
+      - checkout
+
+      - attach_workspace:
+          at: ~/pixeloven
+
+      - install
+
+        # Run test
+      - run:
+          name: Test source
+          command: yarn test
+
+      # Check for build files
+      - list:
+          path: examples/**/coverage
+      - list:
+          path: packages/**/coverage
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/coverage
+            - packages/**/coverage
 
   report:
     executor: node-executor
     steps:
       # Download and cache dependencies
       - checkout
-      - install
 
       - attach_workspace:
           at: ~/pixeloven
 
-      # Check for pixeloven deps
+      - install
+
+      # Check for coverage files for reporting
+      - list:
+          path: examples/**/coverage/lcov.info
       - list:
           path: packages/**/coverage/lcov.info
 
       # Run test and report
       - run:
-          name: Report source
+          name: Report source V2
           command: yarn report-coverage
 
-      # Run test and report
-      - run:
-          name: Report source V2
-          command: yarn report-coverage-v2
+  deploy:
+    executor: node-executor
+    steps:
+
+      - attach_workspace:
+          at: ~/pixeloven
+
+       # Save dist artifacts
+      - store_artifacts:
+          path: packages/**/dist
+          destination: packages/dist
+      - store_artifacts:
+          path: examples/**/dist
+          destination: examples/dist
+
+       # Save coverage artifacts
+      - store_artifacts:
+          path: packages/**/coverage
+          destination: packages/coverage
+      - store_artifacts:
+          path: examples/**/coverage
+          destination: examples/coverage
+
+      # @todo need to do this https://github.com/atlassian/lerna-semantic-release
+      # @todo would be nice to also deploy the above to a special branch for github
+      # https://blog.frederikring.com/articles/deploying-github-pages-circle-ci/
+      # should add the typ docs as well.
 
 workflows:
   version: 2.1
@@ -126,12 +198,24 @@ workflows:
       - lint:
           requires:
             - setup
-      - build:
+      - compile:
           requires:
             - setup
-      - report:
+      - build:
+          requires:
+            - compile
+      - test:
           requires:
             - build
+      - report:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - test
           filters:
             branches:
               only: master

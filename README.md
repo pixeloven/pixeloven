@@ -53,9 +53,7 @@ This makes more sense in combination with [automatic releases](#automatic-releas
 Below are just some of the up coming ideas for improvements.
 * Review this [starter](https://github.com/bitjson/typescript-starter) and [this one](https://github.com/alexjoverm/typescript-library-starter) for trending ideas.
 * Should look into [tslint-immutable](https://www.npmjs.com/package/tslint-immutable)
-* Break `env` and `logger` from `core`.
 * Add better typings for all packages but especially `docs`
-* Add better tests
 * Update package readmes
 * Integrate TypeDocs with story book and for this repo
 * Clean up deps across all packages
@@ -67,6 +65,7 @@ Below are just some of the up coming ideas for improvements.
 * -tasks should have peerDesp for express
 * -tasks add winston for logging
 * handle precommit for each package https://github.com/sudo-suhas/lint-staged-multi-pkg
+* https://github.com/atlassian/lerna-semantic-release
 
 ## Our Commitment
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!

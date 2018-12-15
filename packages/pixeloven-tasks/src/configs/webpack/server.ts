@@ -242,12 +242,18 @@ const resolve: Resolve = {
 
 /**
  * Server side configuration
+ * @todo webpackNodeExternals() Confirmed need to write my own externals and/or PR the existing project.
  */
 const config: Configuration = {
     bail: ifProduction(),
     devtool: ifDevelopment("eval-source-map", false),
     entry,
-    externals: [webpackNodeExternals()],
+    externals: [
+        { 
+            express: require.resolve("express") 
+        },
+        webpackNodeExternals()
+    ],
     mode: ifProduction("production", "development"),
     module,
     name,

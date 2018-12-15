@@ -33,12 +33,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "typeRoots": [
-    "./node_modules/@types"
-  ],
   "exclude": [
     "**/*.stories.ts",
     "**/*.test.ts",
-    "node_modules"
+    "**/node_modules"
   ]
 }

@@ -83,6 +83,7 @@
     "prebuild": "pixeloven-cli compile:clean",
     "clean": "pixeloven-cli clean",
     "development": "pixeloven-tasks serve",
+    "env:create": "cp .env.example .env",
     "generate": "pixeloven-generators generate",
     "lint": "run-p lint:ts lint:scss",
     "lint:ts": "pixeloven-cli lint:ts",
