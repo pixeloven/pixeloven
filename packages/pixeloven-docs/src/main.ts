@@ -31,7 +31,6 @@ const main = (argv: string[]) => {
         exit(1);
     }
 
-    // TODO need to resolve bin locally
     switch (scriptName) {
         case "build":
         case "build:story": {
@@ -39,6 +38,7 @@ const main = (argv: string[]) => {
             const output = path.resolve(process.cwd(), "./dist/public/docs");
             const cmd = path.resolve(process.cwd(), "../../node_modules/.bin/build-storybook");
             const result = spawnNode(cmd, [
+                "--ci",
                 "-c",
                 config,
                 "-o",
@@ -53,6 +53,7 @@ const main = (argv: string[]) => {
             const cmd = path.resolve(process.cwd(), "../../node_modules/.bin/start-storybook");
             const result = spawnNode(cmd, [
                 "--quiet",
+                "--ci",
                 "-s",
                 "./public",
                 "-p",
