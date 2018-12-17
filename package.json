@@ -61,7 +61,9 @@
     "cz-lerna-changelog": "2.0.1",
     "husky": "1.2.1",
     "lerna": "3.5.1",
-    "lint-staged": "8.1.0"
+    "lerna-semantic-release": "9.1.0",
+    "lint-staged": "8.1.0",
+    "semantic-release": "15.13.0"
   },
   "config": {
     "commitizen": {
