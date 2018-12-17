@@ -168,6 +168,12 @@ const typeScriptRule: RuleSetRule = {
     use: [
         {
             loader: require.resolve("babel-loader"),
+            options: {
+                presets: [
+                    require.resolve("@babel/preset-env"),
+                    require.resolve("@babel/preset-react"),
+                ],
+            },
         },
         {
             loader: require.resolve("ts-loader"),
@@ -430,6 +436,7 @@ const plugins: Plugin[] = removeEmpty([
      * @env development
      */
     ifDevelopment(new webpack.HotModuleReplacementPlugin(), undefined),
+    ifDevelopment(new webpack.NoEmitOnErrorsPlugin(), undefined),
 ]);
 
 /**

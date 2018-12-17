@@ -247,7 +247,14 @@ const config: Configuration = {
     bail: ifProduction(),
     devtool: ifDevelopment("eval-source-map", false),
     entry,
-    externals: [webpackNodeExternals()],
+    externals: [
+        // Exclude from local node_modules dir
+        webpackNodeExternals(),
+        // Exclude from file - helpful for lerna packages
+        webpackNodeExternals({
+            modulesFromFile: true,
+        })
+    ],
     mode: ifProduction("production", "development"),
     module,
     name,
