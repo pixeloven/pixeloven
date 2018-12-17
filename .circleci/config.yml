@@ -204,6 +204,7 @@ workflows:
       - build:
           requires:
             - compile
+            - lint
       - test:
           requires:
             - build
