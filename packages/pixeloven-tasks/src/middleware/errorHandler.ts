@@ -5,34 +5,34 @@ import { AllHtmlEntities } from "html-entities";
 const entities = new AllHtmlEntities();
 
 const styles = {
-    "background": "rgba(0,0,0,0.85)",
-    "bottom": 0,
-    "color": "#E8E8E8",
+    background: "rgba(0,0,0,0.85)",
+    bottom: 0,
+    color: "#E8E8E8",
     "font-family": "Menlo, Consolas, monospace",
     "font-size": "13px",
-    "left": 0,
+    left: 0,
     "line-height": "1.2",
-    "overflow": "auto",
-    "padding": "10px",
-    "position": "fixed",
-    "right": 0,
+    overflow: "auto",
+    padding: "10px",
+    position: "fixed",
+    right: 0,
     "text-align": "left",
-    "top": 0,
+    top: 0,
     "white-space": "pre",
     "z-index": 9999,
 };
 
 const colors = {
-    "black": "181818",
-    "blue": "7CAFC2",
-    "cyan": "C3C2EF",
-    "darkgrey": "6D7891",
-    "green": "B3CB74",
-    "lightgrey": "EBE7E3",
-    "magenta": "7FACCA",
-    "red": "E36049",
-    "reset": ["transparent", "transparent"],
-    "yellow": "FFD080",
+    black: "181818",
+    blue: "7CAFC2",
+    cyan: "C3C2EF",
+    darkgrey: "6D7891",
+    green: "B3CB74",
+    lightgrey: "EBE7E3",
+    magenta: "7FACCA",
+    red: "E36049",
+    reset: ["transparent", "transparent"],
+    yellow: "FFD080",
 };
 
 function problemType(type: string) {
@@ -67,9 +67,9 @@ function renderProblems(type: string, lines: string[]) {
     lines.forEach(msg => problems.push(renderProblem(type, msg)));
     return (
         "<html>" +
-        "<body style=\"" +
+        '<body style="' +
         inlineStyles.join(";") +
-        "\">" +
+        '">' +
         problems.join() +
         "</body>" +
         "</html>"
