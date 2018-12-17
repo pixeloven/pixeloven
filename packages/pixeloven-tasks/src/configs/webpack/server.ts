@@ -253,7 +253,7 @@ const config: Configuration = {
         // Exclude from file - helpful for lerna packages
         webpackNodeExternals({
             modulesFromFile: true,
-        })
+        }),
     ],
     mode: ifProduction("production", "development"),
     module,

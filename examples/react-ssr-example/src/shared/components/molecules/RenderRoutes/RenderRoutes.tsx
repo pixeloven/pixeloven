@@ -1,8 +1,8 @@
+import { Route } from "@shared/components/atoms";
+import { RouteProps } from "@shared/router";
 import * as React from "react";
 import { SwitchProps } from "react-router";
 import { Switch } from "react-router-dom";
-import { RouteProps } from "../../../router";
-import { Route } from "../../atoms";
 
 export interface RenderRoutesProps {
     routes: RouteProps[];

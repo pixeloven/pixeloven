@@ -16,3 +16,4 @@ declare module "@storybook/addon-knobs";
 declare module "@storybook/addon-notes";
 declare module "@storybook/addon-options";
 declare module "storybook-readme";
+declare module "tsconfig-paths-webpack-plugin";
