@@ -249,10 +249,10 @@ const config: Configuration = {
     devtool: ifDevelopment("eval-source-map", false),
     entry,
     externals: [
-        { 
-            express: require.resolve("express") 
+        {
+            express: require.resolve("express"),
         },
-        webpackNodeExternals()
+        webpackNodeExternals(),
     ],
     mode: ifProduction("production", "development"),
     module,
