@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { exit, loadConfigPath, spawnComplete, spawnNode } from "@pixeloven/core";
+import { exit, spawnComplete, spawnNode } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import path from "path";
 
@@ -31,14 +31,14 @@ const main = (argv: string[]) => {
         exit(1);
     }
 
+    // TODO output dir should be configurable 
     switch (scriptName) {
         case "build":
         case "build:story": {
-            const config = loadConfigPath("./configs");
+            const config = path.resolve(__dirname, "./configs");
             const output = path.resolve(process.cwd(), "./dist/public/docs");
             const cmd = path.resolve(process.cwd(), "../../node_modules/.bin/build-storybook");
             const result = spawnNode(cmd, [
-                "--ci",
                 "-c",
                 config,
                 "-o",
@@ -49,7 +49,7 @@ const main = (argv: string[]) => {
         }
         case "serve":
         case "serve:story": {
-            const config = loadConfigPath("./configs");
+            const config = path.resolve(__dirname, "./configs");
             const cmd = path.resolve(process.cwd(), "../../node_modules/.bin/start-storybook");
             const result = spawnNode(cmd, [
                 "--quiet",
