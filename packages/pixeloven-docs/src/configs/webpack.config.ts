@@ -1,6 +1,7 @@
 import deepmerge from "deepmerge";
 import { Configuration, Module, RuleSetRule } from "webpack";
 import { resolveSourceRoot, resolveTsConfig } from "./macros";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 
 export const newScssRule: RuleSetRule = {
     loaders: [
@@ -46,6 +47,7 @@ export default (
         defaultConfig.module = deepmerge(defaultConfig.module, newModule);
     }
     if (defaultConfig.resolve) {
+        // Aliases
         if (defaultConfig.resolve.alias) {
             defaultConfig.resolve.alias.source = resolveSourceRoot();
         } else {
@@ -53,10 +55,27 @@ export default (
                 source: resolveSourceRoot(),
             };
         }
+        // Extensions
         if (defaultConfig.resolve.extensions) {
             defaultConfig.resolve.extensions.push(".ts", ".tsx");
         } else {
             defaultConfig.resolve.extensions = [".ts", ".tsx"];
+        }
+        // Modules
+        if (defaultConfig.resolve.modules) {
+            defaultConfig.resolve.modules.push(resolveSourceRoot());
+            defaultConfig.resolve.modules.push("node_modules");
+        } else {
+            defaultConfig.resolve.modules = [resolveSourceRoot(), "node_modules"];
+        }
+        // Plugins
+        const tsPathPlugin  = new TsconfigPathsPlugin({
+            configFile: resolveTsConfig()
+        });
+        if (defaultConfig.resolve.plugins) {
+            defaultConfig.resolve.plugins.push(tsPathPlugin);
+        } else {
+            defaultConfig.resolve.plugins = [tsPathPlugin];
         }
     }
     return defaultConfig;
