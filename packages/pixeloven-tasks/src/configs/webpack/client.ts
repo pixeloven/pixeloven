@@ -333,13 +333,16 @@ const plugins: Plugin[] = removeEmpty([
      * Perform type checking and linting in a separate process to speed up compilation
      * @env all
      */
-    ifProduction(new ForkTsCheckerWebpackPlugin({
-        tsconfig: resolvePath("tsconfig.json"),
-    }), new ForkTsCheckerWebpackPlugin({
-        async: true,
-        tsconfig: resolvePath("tsconfig.json"),
-        watch: resolvePath("src"),
-    })),
+    ifProduction(
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: resolvePath("tsconfig.json"),
+        }),
+        new ForkTsCheckerWebpackPlugin({
+            async: true,
+            tsconfig: resolvePath("tsconfig.json"),
+            watch: resolvePath("src"),
+        }),
+    ),
 
     /**
      * Copy files
