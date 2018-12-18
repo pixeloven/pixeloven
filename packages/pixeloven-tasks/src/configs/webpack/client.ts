@@ -4,6 +4,7 @@ import autoprefixer from "autoprefixer";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import Dotenv from "dotenv-webpack";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OfflinePlugin from "offline-plugin";
@@ -179,7 +180,7 @@ const typeScriptRule: RuleSetRule = {
             loader: require.resolve("ts-loader"),
             options: {
                 configFile: resolvePath("tsconfig.json"),
-                // transpileOnly: true,
+                transpileOnly: true,
             },
         },
     ],
@@ -330,18 +331,15 @@ const plugins: Plugin[] = removeEmpty([
     }),
     /**
      * Perform type checking and linting in a separate process to speed up compilation
-     * TODO might prevent showing errors in browser if async is off... but then again it breaks hmr overlay
      * @env all
      */
-    // import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-    // ifProduction(new ForkTsCheckerWebpackPlugin({
-    //     tsconfig: resolvePath("tsconfig.json"),
-    //     tslint: resolvePath("tslint.json"),
-    // }), new ForkTsCheckerWebpackPlugin({
-    //     tsconfig: resolvePath("tsconfig.json"),
-    //     tslint: resolvePath("tslint.json"),
-    //     watch: resolvePath("src"),
-    // })),
+    ifProduction(new ForkTsCheckerWebpackPlugin({
+        tsconfig: resolvePath("tsconfig.json"),
+    }), new ForkTsCheckerWebpackPlugin({
+        async: true,
+        tsconfig: resolvePath("tsconfig.json"),
+        watch: resolvePath("src"),
+    })),
 
     /**
      * Copy files

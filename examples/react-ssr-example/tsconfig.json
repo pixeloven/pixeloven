@@ -36,6 +36,10 @@
   "exclude": [
     "**/*.stories.ts",
     "**/*.test.ts",
-    "**/node_modules"
+    "dist",
+    "coverage",
+    "public",
+    "node_modules",
+    "**/node_modules/*"
   ]
 }
