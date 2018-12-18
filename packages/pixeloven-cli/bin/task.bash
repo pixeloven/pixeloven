@@ -48,7 +48,7 @@ case $CMD in
 
   "lint:ts")
     if [ -f $tslintrc ]; then
-      exe "tslint -t codeFrame --config $tslintrc --project ."
+      exe "tslint -t codeFrame --config $tslintrc $@"
     else
       error "File not found $tslintrc"
     fi
@@ -56,7 +56,7 @@ case $CMD in
 
   "lint:scss")
     if [ -f $stylelintrc ]; then
-      exe "stylelint src/**/*.scss --syntax scss --config $stylelintrc"
+      exe "stylelint --syntax scss --config $stylelintrc $@" # src/**/*.scss
     else
       error "File not found $stylelintrc"
     fi
@@ -64,7 +64,7 @@ case $CMD in
 
   "pretty")
     if [ -f $prettierrc ]; then
-      exe "prettier src/**/*.{scss,ts,tsx} --write --config $prettierrc"
+      exe "prettier --write --config $prettierrc $@" # src/**/*.{scss,ts,tsx}
     else
       error "File not found $prettierrc"
     fi
@@ -72,7 +72,7 @@ case $CMD in
 
   "pretty:ts")
     if [ -f $tslintrc ]; then
-      exe "tslint -t codeFrame --config $tslintrc --project . --fix"
+      exe "tslint -t codeFrame --config $tslintrc --fix $@" # src/**/*.{ts,tsx}
     else
       error "File not found $tslintrc"
     fi
@@ -80,7 +80,7 @@ case $CMD in
 
   "pretty:scss")
     if [ -f $stylelintrc ]; then
-      exe "stylelint src/**/*.scss --syntax scss --config $stylelintrc --fix"
+      exe "stylelint --syntax scss --config $stylelintrc --fix $@" # src/**/*.scss
     else
       error "File not found $stylelintrc"
     fi

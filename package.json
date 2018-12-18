@@ -24,7 +24,7 @@
     "clean": "lerna clean",
     "compile": "lerna run compile",
     "env:create": "lerna run env:create",
-    "link": "lerna link",
+    "link-packages": "lerna link",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "pretty": "lerna run pretty",
