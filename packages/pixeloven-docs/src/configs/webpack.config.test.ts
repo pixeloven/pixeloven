@@ -2,6 +2,9 @@ import "jest";
 import { Configuration } from "webpack";
 import config, { newModule } from "./webpack.config";
 
+/**
+ * @todo should create a generator to do this but for now let's disable this rule here
+ */
 /* tslint:disable no-object-literal-type-assertion */
 describe("@pixeloven/docs", () => {
     describe("configs", () => {
