@@ -17,7 +17,11 @@ commands:
           name: "List Directory"
           command: ls -al << parameters.path >>
   install:
-    description: "Install dependencies"
+    description: "Install & Link dependencies"
+    parameters:
+      method:
+        type: string
+        default: "bootstrap"
     steps:
       - restore_cache:
           keys:
@@ -25,8 +29,8 @@ commands:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run:
-          name: Install Dependencies
-          command: yarn bootstrap
+          name: Install & Link Dependencies
+          command: yarn << parameters.method >>
       - save_cache:
           paths:
             - node_modules
@@ -53,7 +57,8 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - install
+      - install:
+          method: "link-packages"
 
         # Run task
       - run:
@@ -64,7 +69,8 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - install
+      - install:
+          method: "link-packages"
 
         # Run build and test
       - run:
@@ -90,7 +96,8 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install
+      - install:
+          method: "link-packages"
 
       - run:
           name: Create .env file
@@ -120,7 +127,8 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install
+      - install:
+          method: "link-packages"
 
         # Run test
       - run:
@@ -149,7 +157,8 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install
+      - install:
+          method: "link-packages"
 
       # Check for coverage files for reporting
       - list:
@@ -188,7 +197,7 @@ jobs:
       # @todo need to do this https://github.com/atlassian/lerna-semantic-release
       # @todo would be nice to also deploy the above to a special branch for github
       # https://blog.frederikring.com/articles/deploying-github-pages-circle-ci/
-      # should add the typ docs as well.
+      # should add the typedocs as well.
 
 workflows:
   version: 2.1

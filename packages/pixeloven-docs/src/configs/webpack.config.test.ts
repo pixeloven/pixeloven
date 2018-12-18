@@ -36,7 +36,7 @@ describe("@pixeloven/docs", () => {
                 } as Configuration;
                 const actualConfig = config(baseConfig, {}, defaultConfig);
                 expect(actualConfig.resolve).toHaveProperty("alias");
-                expect(actualConfig.resolve).toHaveProperty("alias.source");
+                expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
             it("webpack config returns defaultConfig and adds an alias to resolve", () => {
                 const baseConfig = {} as Configuration;
@@ -50,7 +50,7 @@ describe("@pixeloven/docs", () => {
                 const actualConfig = config(baseConfig, {}, defaultConfig);
                 expect(actualConfig.resolve).toHaveProperty("alias");
                 expect(actualConfig.resolve).toHaveProperty("alias.original");
-                expect(actualConfig.resolve).toHaveProperty("alias.source");
+                expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
             it("webpack config returns defaultConfig and defines extensions to resolve ", () => {
                 const baseConfig = {} as Configuration;
