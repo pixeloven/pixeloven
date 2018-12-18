@@ -2,6 +2,7 @@ import "jest";
 import { Configuration } from "webpack";
 import config, { newModule } from "./webpack.config";
 
+/* tslint:disable no-object-literal-type-assertion */
 describe("@pixeloven/docs", () => {
     describe("configs", () => {
         describe("webpack.config", () => {
