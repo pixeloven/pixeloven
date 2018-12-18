@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { exit, spawnComplete, spawnNode } from "@pixeloven/core";
+import { exit, spawnComplete, spawnYarn } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import path from "path";
 
@@ -32,27 +32,20 @@ const main = (argv: string[]) => {
     }
 
     // TODO output dir should be configurable
+    // TODO this is broken in remote libraries :(
     switch (scriptName) {
         case "build":
         case "build:story": {
             const config = path.resolve(__dirname, "./configs");
             const output = path.resolve(process.cwd(), "./dist/public/docs");
-            const cmd = path.resolve(
-                process.cwd(),
-                "../../node_modules/.bin/build-storybook",
-            );
-            const result = spawnNode(cmd, ["-c", config, "-o", output]);
+            const result = spawnYarn("build-storybook", ["-c", config, "-o", output]);
             spawnComplete(result);
             break;
         }
         case "serve":
         case "serve:story": {
             const config = path.resolve(__dirname, "./configs");
-            const cmd = path.resolve(
-                process.cwd(),
-                "../../node_modules/.bin/start-storybook",
-            );
-            const result = spawnNode(cmd, [
+            const result = spawnYarn("start-storybook", [
                 "--quiet",
                 "--ci",
                 "-s",

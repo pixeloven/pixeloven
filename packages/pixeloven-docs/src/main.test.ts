@@ -36,26 +36,26 @@ describe("@pixeloven/docs", () => {
         });
         it('should start cli "build" and pass', () => {
             testArgv.push("/some/path", "yarn", "build");
-            const exitSpawnNode = jest
-                .spyOn(macros, "spawnNode")
+            const exitSpawnYarn = jest
+                .spyOn(macros, "spawnYarn")
                 .mockImplementation(spawnYarnMock);
             const exitSpawnComplete = jest
                 .spyOn(macros, "spawnComplete")
                 .mockImplementation(spawnCompleteMock);
             main(testArgv);
-            expect(exitSpawnNode).toHaveBeenCalledTimes(1);
+            expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
         });
         it('should start cli "start" and pass', () => {
             testArgv.push("/some/path", "yarn", "serve");
-            const exitSpawnNode = jest
-                .spyOn(macros, "spawnNode")
+            const exitSpawnYarn = jest
+                .spyOn(macros, "spawnYarn")
                 .mockImplementation(spawnYarnMock);
             const exitSpawnComplete = jest
                 .spyOn(macros, "spawnComplete")
                 .mockImplementation(spawnCompleteMock);
             main(testArgv);
-            expect(exitSpawnNode).toHaveBeenCalledTimes(1);
+            expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
         });
     });
