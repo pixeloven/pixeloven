@@ -49,10 +49,10 @@ export default (
     if (defaultConfig.resolve) {
         // Aliases
         if (defaultConfig.resolve.alias) {
-            defaultConfig.resolve.alias.source = resolveSourceRoot();
+            defaultConfig.resolve.alias["@src"] = resolveSourceRoot();
         } else {
             defaultConfig.resolve.alias = {
-                source: resolveSourceRoot(),
+                "@src": resolveSourceRoot(),
             };
         }
         // Extensions

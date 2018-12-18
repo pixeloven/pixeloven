@@ -24,7 +24,7 @@
     "clean": "lerna clean",
     "compile": "lerna run compile",
     "env:create": "lerna run env:create",
-    "link": "lerna link",
+    "link-packages": "lerna link",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "pretty": "lerna run pretty",
@@ -45,11 +45,14 @@
     "linter": {
       "examples/**/*.{ts,tsx}": [
         "yarn pretty",
+        "yarn pretty:ts",
+        "yarn pretty:scss",
         "yarn lint",
         "git add"
       ],
-      "packages/**/*.{ts,tsx}": [
+      "packages/**/*.{scss,ts,tsx}": [
         "yarn pretty",
+        "yarn pretty:ts",
         "yarn lint",
         "git add"
       ]

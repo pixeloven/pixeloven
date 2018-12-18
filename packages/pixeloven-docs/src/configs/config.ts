@@ -2,18 +2,19 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { withNotes } from "@storybook/addon-notes";
 import { withOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
+import path from "path";
 
 /**
  * Import remote assets dynamically
  */
-import("" + "source/shared/styles").catch((error: Error) => {
+import("" + "@src/shared/styles").catch((error: Error) => {
     console.error("Failed to load scss files", error.message);
 });
 
 /**
  * Import storybook styles
  */
-import "./index.scss";
+import (path.resolve(__dirname, "./index.scss"));
 
 /**
  * Setup storybook addons
@@ -33,7 +34,7 @@ addDecorator(withNotes);
  * Stories loader
  */
 const req = require.context(
-    "source/shared/components",
+    "@src/shared",
     true,
     /.stories.[jt]sx?$/,
 );

@@ -2,6 +2,10 @@ import "jest";
 import { Configuration } from "webpack";
 import config, { newModule } from "./webpack.config";
 
+/**
+ * @todo should create a generator to do this but for now let's disable this rule here
+ */
+/* tslint:disable no-object-literal-type-assertion */
 describe("@pixeloven/docs", () => {
     describe("configs", () => {
         describe("webpack.config", () => {
@@ -32,7 +36,7 @@ describe("@pixeloven/docs", () => {
                 } as Configuration;
                 const actualConfig = config(baseConfig, {}, defaultConfig);
                 expect(actualConfig.resolve).toHaveProperty("alias");
-                expect(actualConfig.resolve).toHaveProperty("alias.source");
+                expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
             it("webpack config returns defaultConfig and adds an alias to resolve", () => {
                 const baseConfig = {} as Configuration;
@@ -46,7 +50,7 @@ describe("@pixeloven/docs", () => {
                 const actualConfig = config(baseConfig, {}, defaultConfig);
                 expect(actualConfig.resolve).toHaveProperty("alias");
                 expect(actualConfig.resolve).toHaveProperty("alias.original");
-                expect(actualConfig.resolve).toHaveProperty("alias.source");
+                expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
             it("webpack config returns defaultConfig and defines extensions to resolve ", () => {
                 const baseConfig = {} as Configuration;
