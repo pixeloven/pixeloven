@@ -20,13 +20,13 @@ const root = document.getElementById("root");
 /**
  * Get route config
  */
-const routes = convertCustomRouteConfig(routeConfig);
+const routes = convertCustomRouteConfig(routeConfig, config.basePath);
 /**
  * Wrap application with container, router and store
  */
 const AppWrapper = () => (
     <Provider store={configureStore(true)}>
-        <BrowserRouter basename={config.basePath}>
+        <BrowserRouter>
             <App routes={routes} />
         </BrowserRouter>
     </Provider>

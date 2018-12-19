@@ -32,6 +32,7 @@ export interface RouteProps extends DefaultRouteProps {
     component: RouteComponent<Params>;
     fetchData?: RouteFetchDataFunction;
     routes?: RouteProps[];
+    statusCode?: number;
 }
 
 export type RouteResolvePath = (parentPath: string) => string;

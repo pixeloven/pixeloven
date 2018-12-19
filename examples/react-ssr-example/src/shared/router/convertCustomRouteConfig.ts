@@ -21,6 +21,7 @@ const convertCustomRouteConfig = (
             routes: route.routes
                 ? convertCustomRouteConfig(route.routes, pathResult)
                 : [],
+            statusCode: route.statusCode
         };
     });
 };
