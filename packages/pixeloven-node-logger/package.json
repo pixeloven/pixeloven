@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/node-logger",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Node logger",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^3.0.0",
+    "@pixeloven/cli": "^3.0.2",
     "webpack-log": "2.0.0"
   },
   "scripts": {
