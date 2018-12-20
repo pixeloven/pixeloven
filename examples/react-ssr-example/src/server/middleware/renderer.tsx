@@ -23,7 +23,7 @@ export default (req: Request, res: Response, next: NextFunction): void => {
     const staticContext: StaticContext = {
         statusCode: 200,
     };
-    const routes = convertCustomRouteConfig(routeConfig);
+    const routes = convertCustomRouteConfig(routeConfig, config.basePath);
 
     // run saga middleware and then proceed with rendering once END action is received
     store
@@ -38,7 +38,6 @@ export default (req: Request, res: Response, next: NextFunction): void => {
                 >
                     <Provider store={store}>
                         <StaticRouter
-                            basename={config.basePath}
                             location={req.url}
                             context={staticContext}
                         >

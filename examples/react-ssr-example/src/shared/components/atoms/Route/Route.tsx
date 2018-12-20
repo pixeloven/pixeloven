@@ -14,6 +14,9 @@ import { Route as DefaultRoute } from "react-router-dom";
 const Route = (props: RouteProps) => {
     const { component: Component, exact, path, strict, ...otherProps } = props;
     const render = (componentProps: RouteComponentProps) => {
+        if (componentProps.staticContext && props.statusCode) {
+            componentProps.staticContext.statusCode = props.statusCode;
+        }
         return <Component {...componentProps} {...otherProps} />;
     };
     return (

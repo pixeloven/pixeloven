@@ -15,7 +15,7 @@ const TestComponent = () => {
 describe("Shared/Components/Atoms", () => {
     describe("Route", () => {
         it("should render one <Route />", () => {
-            const wrapper = shallow(<Route component={TestComponent} />);
+            const wrapper = shallow(<Route component={TestComponent} statusCode={200} />);
             expect(wrapper.find("Route").length).toEqual(1);
         });
     });
