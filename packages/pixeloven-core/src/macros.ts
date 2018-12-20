@@ -86,8 +86,8 @@ export const spawnNode = (name: string, args: string[]) => {
  */
 export const spawnYarn = (name: string, args: string[] = []) => {
     const yarnArgs: string[] = [];
-    const calling = yarnArgs.concat(name).concat(args);
-    return spawn.sync("yarn", calling, {
+    const calling = yarnArgs.concat(args);
+    return spawn.sync(name, calling, {
         stdio: "inherit",
     });
 };
