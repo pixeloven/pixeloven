@@ -14,7 +14,7 @@ import("" + "@src/shared/styles").catch((error: Error) => {
 /**
  * Import storybook styles
  */
-import (path.resolve(__dirname, "./index.scss"));
+import(path.resolve(__dirname, "./index.scss"));
 
 /**
  * Setup storybook addons
@@ -33,11 +33,7 @@ addDecorator(withNotes);
 /**
  * Stories loader
  */
-const req = require.context(
-    "@src/shared",
-    true,
-    /.stories.[jt]sx?$/,
-);
+const req = require.context("@src/shared", true, /.stories.[jt]sx?$/);
 function loadStories() {
     req.keys().forEach(req);
 }

@@ -42,7 +42,7 @@ const routes = [
                 component: NoMatch,
                 statusCode: 404,
             },
-        ]
+        ],
     },
 ];
 
