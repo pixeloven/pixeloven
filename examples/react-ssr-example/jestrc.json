@@ -45,5 +45,5 @@
     "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",
     "!<rootDir>/src/**/styles/**",
     "!**/node_modules/**"
-  ],
+  ]
 }
