@@ -80,7 +80,7 @@
     "node": "8.x || 9.x || 10.x"
   },
   "scripts": {
-    "build": "run-p build:app",
+    "build": "run-p build:app build:story",
     "build:app": "pixeloven-tasks build",
     "build:story": "pixeloven-docs build",
     "prebuild": "pixeloven-cli compile:clean",
