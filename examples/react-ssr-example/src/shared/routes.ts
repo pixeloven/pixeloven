@@ -1,6 +1,5 @@
 import { Blog, Home, NoMatch } from "@shared/components/pages";
 import { Default } from "@shared/components/templates";
-// import ExampleActionTypes from "@shared/store/Example/Example.actions";
 // import { Dispatch } from "redux";
 
 /**
@@ -10,18 +9,14 @@ import { Default } from "@shared/components/templates";
 const routes = [
     {
         component: Default,
-        exact: true,
-        path: (parentPath: string) => `${parentPath}/`,
         routes: [
+            // Home Page
             {
                 component: Home,
+                exact: true,
+                path: (parentPath: string) => `${parentPath}/`,
             },
-        ],
-    },
-    {
-        component: Default,
-        path: (parentPath: string) => `${parentPath}/blog`,
-        routes: [
+            // Blog Main
             {
                 component: Blog,
                 exact: true,
@@ -36,15 +31,18 @@ const routes = [
                 // },
                 path: (parentPath: string) => `${parentPath}/blog`,
             },
+            // Blog Page
             {
                 component: Blog,
+                exact: true,
                 path: (parentPath: string) => `${parentPath}/blog/:post`,
             },
-        ],
-    },
-    {
-        component: NoMatch,
-        statusCode: 404,
+            // 404 Page
+            {
+                component: NoMatch,
+                statusCode: 404,
+            },
+        ]
     },
 ];
 
