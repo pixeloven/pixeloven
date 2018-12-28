@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Common tasks or jobs used during development and in production",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -26,7 +26,7 @@
     "@babel/preset-env": "7.1.5",
     "@babel/preset-react": "7.0.0",
     "@pixeloven/cli": "^3.0.2",
-    "@pixeloven/core": "^3.0.2",
+    "@pixeloven/core": "^3.0.3",
     "@pixeloven/env": "^3.0.2",
     "@pixeloven/node-logger": "^3.0.2",
     "ansi-html": "0.0.7",
