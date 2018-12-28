@@ -4,4 +4,3 @@
  * http://definitelytyped.org/
  */
 declare module "react-dev-utils/formatWebpackMessages";
-declare module "webpack-log";

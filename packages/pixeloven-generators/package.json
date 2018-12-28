@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/generators",
-  "version": "3.0.6",
+  "version": "3.1.0",
   "description": "Common code generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -21,12 +21,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^3.0.2",
-    "@pixeloven/core": "^3.0.6",
-    "plop": "2.1.0"
+    "@pixeloven/cli": "^3.1.0",
+    "@pixeloven/core": "^3.1.0",
+    "plop": "2.2.0"
   },
   "devDependencies": {
-    "@types/inquirer": "^0.0.43",
+    "@types/inquirer": "0.0.43",
     "@types/node": "10.12.12"
   },
   "scripts": {
