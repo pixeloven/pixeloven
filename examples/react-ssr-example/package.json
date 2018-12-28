@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/react-ssr-example",
-  "version": "3.0.6",
+  "version": "3.1.0",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -37,10 +37,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
-    "@pixeloven/cli": "^3.0.2",
-    "@pixeloven/docs": "^3.0.6",
-    "@pixeloven/generators": "^3.0.6",
-    "@pixeloven/tasks": "^3.0.6",
+    "@pixeloven/cli": "^3.1.0",
+    "@pixeloven/docs": "^3.1.0",
+    "@pixeloven/generators": "^3.1.0",
+    "@pixeloven/tasks": "^3.1.0",
     "@types/classnames": "2.2.6",
     "@types/enzyme": "3.1.15",
     "@types/enzyme-adapter-react-16": "1.0.3",
