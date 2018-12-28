@@ -32,8 +32,7 @@
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "report-coverage": "cat ./packages/**/coverage/lcov.info | codecov",
     "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare"
+    "semantic-release": "semantic-release"
   },
   "husky": {
     "hooks": {
