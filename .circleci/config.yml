@@ -126,8 +126,7 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install:
-          method: "link-packages"
+      - install
 
         # Run test
       - run:
