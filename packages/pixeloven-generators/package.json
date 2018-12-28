@@ -23,10 +23,10 @@
   "dependencies": {
     "@pixeloven/cli": "^3.0.2",
     "@pixeloven/core": "^3.0.6",
-    "plop": "2.1.0"
+    "plop": "2.2.0"
   },
   "devDependencies": {
-    "@types/inquirer": "^0.0.43",
+    "@types/inquirer": "0.0.43",
     "@types/node": "10.12.12"
   },
   "scripts": {
