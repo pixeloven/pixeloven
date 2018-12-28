@@ -33,7 +33,7 @@
     "@storybook/core": "4.0.12",
     "@storybook/react": "4.0.12",
     "babel-loader": "8.0.4",
-    "css-loader": "2.1.0",
+    "css-loader": "1.0.1",
     "deepmerge": "3.0.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

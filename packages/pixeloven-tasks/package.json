@@ -35,7 +35,7 @@
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "copy-webpack-plugin": "4.6.0",
     "css-hot-loader": "1.4.3",
-    "css-loader": "2.1.0",
+    "css-loader": "1.0.1",
     "dotenv-webpack": "1.6.0",
     "express": "4.16.4",
     "file-loader": "3.0.1",
