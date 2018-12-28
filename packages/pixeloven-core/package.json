@@ -23,13 +23,13 @@
     "@pixeloven/node-logger": "^3.0.2",
     "cross-spawn": "6.0.5",
     "react-dev-utils": "6.1.1",
-    "webpack": "^4.26.0",
+    "webpack": "4.27.1",
     "webpack-log": "2.0.0"
   },
   "devDependencies": {
     "@types/cross-spawn": "6.0.0",
     "@types/node": "10.12.12",
-    "@types/webpack": "4.4.21"
+    "@types/webpack": "4.4.22"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

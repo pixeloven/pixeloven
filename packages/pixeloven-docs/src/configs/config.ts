@@ -1,3 +1,4 @@
+import { withBackgrounds } from "@storybook/addon-backgrounds";
 import { withKnobs } from "@storybook/addon-knobs";
 import { withOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
@@ -19,6 +20,12 @@ addDecorator(
         name: "Storybook React",
         showSearchBox: false,
     }),
+);
+addDecorator(
+    withBackgrounds([
+        { name: "twitter", value: "#00aced" },
+        { name: "facebook", value: "#3b5998" },
+    ]),
 );
 addDecorator(withKnobs);
 
