@@ -24,8 +24,8 @@ addDecorator(
 addDecorator(
     withBackgrounds([
         { name: "default", value: "transparent", default: true },
-        { name: "twitter", value: "#00aced", default: false  },
-        { name: "facebook", value: "#3b5998", default: false  },
+        { name: "twitter", value: "#00aced", default: false },
+        { name: "facebook", value: "#3b5998", default: false },
     ]),
 );
 addDecorator(withKnobs);
