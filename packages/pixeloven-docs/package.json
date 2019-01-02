@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/docs",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Documentation generators",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
@@ -23,8 +23,8 @@
   "dependencies": {
     "@babel/core": "7.2.2",
     "@emotion/core": "0.13.1",
-    "@pixeloven/cli": "^3.1.1",
-    "@pixeloven/core": "^3.1.1",
+    "@pixeloven/cli": "^3.1.2",
+    "@pixeloven/core": "^3.1.2",
     "babel-loader": "8.0.4",
     "css-loader": "1.0.1",
     "deepmerge": "3.0.0",
