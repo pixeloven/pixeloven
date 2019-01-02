@@ -96,7 +96,8 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install
+      - install:
+          method: "link-packages"
 
       - run:
           name: Create .env file
@@ -126,7 +127,8 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install
+      - install:
+          method: "link-packages"
 
         # Run test
       - run:
