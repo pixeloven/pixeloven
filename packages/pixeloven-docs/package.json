@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/docs",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Documentation generators",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
@@ -23,20 +23,11 @@
   "dependencies": {
     "@babel/core": "7.2.2",
     "@emotion/core": "0.13.1",
-    "@pixeloven/cli": "^3.1.0",
-    "@pixeloven/core": "^3.1.0",
-    "@storybook/addon-actions": "4.0.12",
-    "@storybook/addon-backgrounds": "4.0.12",
-    "@storybook/addon-knobs": "4.0.12",
-    "@storybook/addon-options": "4.0.12",
-    "@storybook/addons": "4.0.12",
-    "@storybook/core": "4.0.12",
-    "@storybook/react": "4.0.12",
+    "@pixeloven/cli": "^3.1.1",
+    "@pixeloven/core": "^3.1.1",
     "babel-loader": "8.0.4",
     "css-loader": "1.0.1",
     "deepmerge": "3.0.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
     "sass-loader": "7.1.0",
     "storybook-readme": "4.0.2",
     "style-loader": "0.23.1",
@@ -49,7 +40,15 @@
     "@types/storybook__react": "4.0.0"
   },
   "peerDependencies": {
-    "babel-loader": "^8.0.0"
+    "@storybook/addon-actions": "^4.0.0",
+    "@storybook/addon-backgrounds": "^4.0.0",
+    "@storybook/addon-knobs": "^4.0.0",
+    "@storybook/addon-options": "^4.0.0",
+    "@storybook/addons": "^4.0.0",
+    "@storybook/core": "^4.0.0",
+    "@storybook/react": "^4.0.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
