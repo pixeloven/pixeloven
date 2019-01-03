@@ -204,7 +204,7 @@ const plugins: Plugin[] = removeEmpty([
             tsconfig: resolvePath("tsconfig.json"),
         }),
         new ForkTsCheckerWebpackPlugin({
-            async: true,
+            async: false,
             tsconfig: resolvePath("tsconfig.json"),
             watch: resolvePath("src"),
         }),
