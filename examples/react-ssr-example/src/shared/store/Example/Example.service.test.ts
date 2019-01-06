@@ -1,7 +1,5 @@
 import "jest";
-import {
-    getExample
-} from "./Example.service";
+import { getExample } from "./Example.service";
 
 describe("shared/store/Example/Example.service", () => {
     describe("getExample", () => {

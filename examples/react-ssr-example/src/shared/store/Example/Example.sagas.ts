@@ -7,7 +7,7 @@ import { all, call, put, takeEvery } from "redux-saga/effects";
 // Workers
 function* workExample(action: GetExampleInProgress) {
     try {
-        const response = yield call(getExample(action.payload));
+        const response = yield call(getExample, action.payload);
         const { data } = response;
 
         yield put({
@@ -33,3 +33,4 @@ function* saga() {
 }
 
 export default saga;
+export { workExample };

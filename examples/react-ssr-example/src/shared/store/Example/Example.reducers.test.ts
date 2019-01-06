@@ -35,7 +35,6 @@ describe("Shared/Store/Example", () => {
                         payload: {
                             example: {
                                 description: "woot",
-                                id: 1,
                                 title: "woot",
                             },
                         },
