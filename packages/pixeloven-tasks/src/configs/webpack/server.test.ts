@@ -13,7 +13,12 @@ describe("@pixeloven/tasks", () => {
         describe("server", () => {
             beforeEach(() => {
                 sandbox = sinon.createSandbox();
-                sandbox.stub(core, "resolvePath").call((relativePath: string, strict?: boolean) => `/test/path/${relativePath}`);
+                sandbox
+                    .stub(core, "resolvePath")
+                    .call(
+                        (relativePath: string, strict?: boolean) =>
+                            `/test/path/${relativePath}`,
+                    );
             });
             afterEach(() => {
                 sandbox.restore();
