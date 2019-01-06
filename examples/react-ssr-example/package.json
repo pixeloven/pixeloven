@@ -91,6 +91,7 @@
     "development": "pixeloven-tasks serve",
     "env:docker": "cp .env.docker .env",
     "env:local": "cp .env.localhost .env",
+    "env:production": "cp .env.localhost .env",
     "generate": "pixeloven-generators generate",
     "lint": "run-p lint:ts lint:scss",
     "lint:ts": "pixeloven-cli lint:ts src/**/*.{ts,tsx}",

@@ -100,7 +100,7 @@ jobs:
 
       - run:
           name: Create .env file
-          command: yarn env:docker
+          command: yarn env:production
 
         # Run build
       - run:
