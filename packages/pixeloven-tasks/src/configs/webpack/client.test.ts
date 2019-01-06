@@ -23,7 +23,7 @@ describe("@pixeloven/tasks", () => {
             afterEach(() => {
                 sandbox.restore();
             });
-            it("should export webpack config targeting client for development", () => {
+            it("should export webpack config targeting web for development", () => {
                 const config = caller();
                 expect(config).toHaveProperty("default");
                 expect(config.default.mode).toEqual("development");
