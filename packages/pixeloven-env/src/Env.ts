@@ -1,9 +1,9 @@
 import { NodeProcessException } from "@pixeloven/exceptions";
 import dotenv from "dotenv";
 
-export type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent"
+export type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent";
 
-export type Protocol = "http" | "https"
+export type Protocol = "http" | "https";
 
 export type Environment = "development" | "production" | "test";
 

@@ -28,6 +28,8 @@
     "lint": "lerna run lint",
     "test": "lerna run test",
     "pretty": "lerna run pretty",
+    "pretty:ts": "lerna run pretty:ts",
+    "pretty:scss": "lerna run pretty:scss",
     "build:docs": "typedoc --options typedoc.json",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "report-coverage": "cat ./packages/**/coverage/lcov.info | codecov",
