@@ -1,7 +1,6 @@
 import { State, SuccessResponse } from "@shared/store/types";
 
 export interface Example {
-    id: number;
     title: string;
     description: string;
 }

@@ -7,7 +7,6 @@ import produce from "immer";
 export const initialState: ExampleState = {
     example: {
         description: "",
-        id: 0,
         title: "",
     },
     meta: {

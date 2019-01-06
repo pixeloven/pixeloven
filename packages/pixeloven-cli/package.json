@@ -16,7 +16,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/jest": "23.3.10",
+    "@types/jest": "23.3.11",
     "jest": "23.6.0",
     "jest-config": "23.6.0",
     "prettier": "1.15.3",
