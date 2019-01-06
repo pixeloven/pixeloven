@@ -51,6 +51,7 @@ export class Env {
     /**
      * Get entire env, get by key or set by key
      * @description Values will always be read in as a string. All casting must happen afterward.
+     * @todo This should not be static makes testing harder
      * @param key
      * @param defaultValue
      */
@@ -88,6 +89,7 @@ export class Env {
     /**
      * Load from file for specific environment
      * @description Check env and default keys. This should ONLY be executed on the server (node) side.
+     * @todo Need to override whether this loads from a file
      */
     public static load(environment?: Environment): void {
         if (!Env.process) {
