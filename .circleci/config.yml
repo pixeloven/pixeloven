@@ -69,8 +69,7 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - install:
-          method: "link-packages"
+      - install
 
         # Run build and test
       - run:
