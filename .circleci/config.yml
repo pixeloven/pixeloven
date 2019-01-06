@@ -69,8 +69,7 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - install:
-          method: "link-packages"
+      - install
 
         # Run build and test
       - run:
@@ -100,7 +99,7 @@ jobs:
 
       - run:
           name: Create .env file
-          command: yarn env:create
+          command: yarn env:production
 
         # Run build
       - run:
