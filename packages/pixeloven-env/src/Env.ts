@@ -1,6 +1,10 @@
 import { NodeProcessException } from "@pixeloven/exceptions";
 import dotenv from "dotenv";
 
+export type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent"
+
+export type Protocol = "http" | "https"
+
 export type Environment = "development" | "production" | "test";
 
 export type Machine = "ci" | "docker" | "host" | "virtual" | undefined;
@@ -15,15 +19,16 @@ export interface Environments {
  * Define required keys here
  */
 export interface DefaultEnv extends NodeJS.ProcessEnv {
-    BABEL_ENV: string;
+    BABEL_ENV: Environment;
     BUILD_PATH: string;
+    DOMAIN: string;
     HOST: string;
-    LOG_LEVEL: string;
+    LOG_LEVEL: LogLevel;
     PORT: string;
-    PROTOCOL: string;
+    PROTOCOL: Protocol;
     PUBLIC_URL: string;
-    MACHINE: string;
-    NODE_ENV: string;
+    MACHINE: Machine;
+    NODE_ENV: Environment;
 }
 
 export class Env {
@@ -33,6 +38,7 @@ export class Env {
     public static defaultValues: DefaultEnv = {
         BABEL_ENV: "production",
         BUILD_PATH: "dist",
+        DOMAIN: "",
         HOST: "localhost",
         LOG_LEVEL: "silent",
         MACHINE: "host",
@@ -81,7 +87,7 @@ export class Env {
 
     /**
      * Load from file for specific environment
-     * @description Check env and setup default keys. This should ONLY be executed on the server (node) side.
+     * @description Check env and default keys. This should ONLY be executed on the server (node) side.
      */
     public static load(environment?: Environment): void {
         if (!Env.process) {
