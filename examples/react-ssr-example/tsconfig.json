@@ -34,8 +34,6 @@
     "allowSyntheticDefaultImports": true
   },
   "exclude": [
-    "**/*.stories.ts",
-    "**/*.test.ts",
     "dist",
     "coverage",
     "public",
