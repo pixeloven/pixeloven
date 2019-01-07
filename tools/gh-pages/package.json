@@ -1,0 +1,40 @@
+{
+  "name": "@pixeloven/gh-pages",
+  "version": "3.1.2",
+  "description": "Publishes project docs to GitHub Pages",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@pixeloven/cli": "^3.1.2",
+    "@pixeloven/core": "^3.1.2",
+    "dotenv": "6.1.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "6.1.0",
+    "@types/gh-pages": "2.0.0",
+    "gh-pages": "2.0.1"
+  },
+  "scripts": {
+    "clean": "pixeloven-cli clean",
+    "compile": "pixeloven-cli compile:ts",
+    "precompile": "pixeloven-cli compile:clean",
+    "lint": "yarn lint:ts",
+    "lint:ts": "pixeloven-cli lint:ts src/**/*.{ts,tsx}",
+    "pretest": "pixeloven-cli test:clean",
+    "pretty": "pixeloven-cli pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-cli pretty:ts src/**/*.{ts,tsx}",
+    "test": "pixeloven-cli test",
+    "test:watch": "pixeloven-cli test:watch"
+  }
+}
