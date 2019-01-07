@@ -13,9 +13,13 @@ import fs from "fs-extra";
 import Promise from "promise";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
-import webpack, { Stats } from "webpack";
+import webpack, { Configuration, Stats } from "webpack";
 import webpackClientConfig from "./configs/webpack/client";
 import webpackServerConfig from "./configs/webpack/server";
+import {
+    hasClientCodePath,
+    hasServerCodePath
+} from "./macros";
 
 /**
  * Build Information
@@ -103,7 +107,7 @@ function printBuildFileSizesAfterGzip(
  * @param config
  * @param previousFileSizes
  */
-function build(config: object, previousFileSizes: OpaqueFileSizes) {
+function build(config: Configuration, previousFileSizes: OpaqueFileSizes) {
     logger.info("Creating an optimized production build...");
     const compiler = webpack(config);
     return new Promise((resolve, reject) => {
@@ -139,6 +143,7 @@ function build(config: object, previousFileSizes: OpaqueFileSizes) {
  * Build script
  */
 try {
+    const environment = env.config();
     // TODO be mindful of /docs.. this deletes them :( - Also make storybook configurable ON/OFF
     setupDirectory(PRIVATE_BUILD_PATH);
     setupDirectory(PUBLIC_BUILD_PATH);
@@ -147,35 +152,38 @@ try {
      * Handle build for server side JavaScript
      * @description This lets us display how files changed
      */
-    measureFileSizesBeforeBuild(PRIVATE_BUILD_PATH)
-        .then((previousFileSizes: OpaqueFileSizes) => {
-            return build(webpackServerConfig, previousFileSizes);
-        })
-        .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
-            printBuildStatus(warnings);
-            printBuildFileSizesAfterGzip(
-                PRIVATE_BUILD_PATH,
-                stats,
-                previousFileSizes,
-            );
-        }, handleError);
-
+    if (hasServerCodePath()) {
+        measureFileSizesBeforeBuild(PRIVATE_BUILD_PATH)
+            .then((previousFileSizes: OpaqueFileSizes) => {
+                return build(webpackServerConfig(environment), previousFileSizes);
+            })
+            .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
+                printBuildStatus(warnings);
+                printBuildFileSizesAfterGzip(
+                    PRIVATE_BUILD_PATH,
+                    stats,
+                    previousFileSizes,
+                );
+            }, handleError);
+    }
     /**
      * Handle build for client side JavaScript
      * @description This lets us display how files changed
      */
-    measureFileSizesBeforeBuild(PUBLIC_BUILD_PATH)
-        .then((previousFileSizes: OpaqueFileSizes) => {
-            return build(webpackClientConfig, previousFileSizes);
-        })
-        .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
-            printBuildStatus(warnings);
-            printBuildFileSizesAfterGzip(
-                PUBLIC_BUILD_PATH,
-                stats,
-                previousFileSizes,
-            );
-        }, handleError);
+    if (hasClientCodePath()) {
+        measureFileSizesBeforeBuild(PUBLIC_BUILD_PATH)
+            .then((previousFileSizes: OpaqueFileSizes) => {
+                return build(webpackClientConfig(environment), previousFileSizes);
+            })
+            .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
+                printBuildStatus(warnings);
+                printBuildFileSizesAfterGzip(
+                    PUBLIC_BUILD_PATH,
+                    stats,
+                    previousFileSizes,
+                );
+            }, handleError);
+    }
 } catch (error) {
     handleError(error);
 }

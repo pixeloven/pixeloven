@@ -69,9 +69,10 @@ const server = (
     /**
      * Setup webpack hot module replacement for development
      */
+    const environment = env.config();
     const combinedCompiler = webpack([
-        webpackClientConfig,
-        webpackServerConfig,
+        webpackClientConfig(environment),
+        webpackServerConfig(environment),
     ]);
 
     /**
