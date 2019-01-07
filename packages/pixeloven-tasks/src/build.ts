@@ -13,7 +13,7 @@ import fs from "fs-extra";
 import Promise from "promise";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
-import webpack, { Stats } from "webpack";
+import webpack, { Configuration, Stats } from "webpack";
 import webpackClientConfig from "./configs/webpack/client";
 import webpackServerConfig from "./configs/webpack/server";
 
@@ -103,7 +103,7 @@ function printBuildFileSizesAfterGzip(
  * @param config
  * @param previousFileSizes
  */
-function build(config: object, previousFileSizes: OpaqueFileSizes) {
+function build(config: Configuration, previousFileSizes: OpaqueFileSizes) {
     logger.info("Creating an optimized production build...");
     const compiler = webpack(config);
     return new Promise((resolve, reject) => {
