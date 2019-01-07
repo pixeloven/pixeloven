@@ -1,7 +1,7 @@
 import * as core from "@pixeloven/core";
 import "jest";
 import sinon, { SinonSandbox } from "sinon";
-import server from "./server"
+import server from "./server";
 
 let sandbox: SinonSandbox;
 
