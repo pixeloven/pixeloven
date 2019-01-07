@@ -1,5 +1,4 @@
 import { resolvePath } from "@pixeloven/core";
-import { env } from "@pixeloven/env";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import Dotenv from "dotenv-webpack";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -19,6 +18,8 @@ import webpack, {
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import webpackNodeExternals from "webpack-node-externals";
 
+const config = (env: NodeJS.ProcessEnv): Configuration => {
+
 /**
  * Tell webpack what we are making :)
  */
@@ -26,16 +27,17 @@ const name = "server";
 const target = "node";
 
 /**
- * Utility functions to help segment configuration based on environment
- */
-const { ifProduction, ifDevelopment } = getIfUtils(env.current);
-
-/**
  * Webpack uses `publicPath` to determine where the app is being served from.
  * It requires a trailing slash, or the file assets will get an incorrect path.
  */
-const publicPath = env.config("PUBLIC_URL", "/");
-const buildPath = env.config("BUILD_PATH", "dist");
+const environment = env.NODE_ENV || "production";
+const publicPath = env.PUBLIC_URL || "/";
+const buildPath = env.BUILD_PATH || "dist";
+
+/**
+ * Utility functions to help segment configuration based on environment
+ */
+const { ifProduction, ifDevelopment } = getIfUtils(environment);
 
 /**
  * Define entrypoint(s) for sever
@@ -244,7 +246,7 @@ const resolve: Resolve = {
 /**
  * Server side configuration
  */
-const config: Configuration = {
+return {
     bail: ifProduction(),
     devtool: ifDevelopment("eval-source-map", false),
     entry,
@@ -266,5 +268,5 @@ const config: Configuration = {
     resolve,
     target,
 };
-
+};
 export default config;

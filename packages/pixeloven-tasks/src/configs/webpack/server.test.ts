@@ -1,16 +1,13 @@
 import * as core from "@pixeloven/core";
 import "jest";
 import sinon, { SinonSandbox } from "sinon";
+import server from "./server"
 
 let sandbox: SinonSandbox;
 
-const caller = () => {
-    return require("./server");
-};
-
 describe("@pixeloven/tasks", () => {
     describe("webpack", () => {
-        describe("server", () => {
+        describe("client", () => {
             beforeEach(() => {
                 sandbox = sinon.createSandbox();
                 sandbox
@@ -24,21 +21,19 @@ describe("@pixeloven/tasks", () => {
                 sandbox.restore();
             });
             it("should export webpack config targeting node for development", () => {
-                const config = caller();
-                expect(config).toHaveProperty("default");
-                expect(config.default.mode).toEqual("development");
-                expect(config.default.target).toEqual("node");
+                const env = process.env;
+                env.NODE_ENV = "development";
+                const config = server(env);
+                expect(config.mode).toEqual("development");
+                expect(config.target).toEqual("node");
             });
-            /**
-             * @todo pass env into server config. Make configs return functions that have the env passed in.
-             */
-            // it("should export webpack config targeting client for production", () => {
-            //     process.env.NODE_ENV = "production";
-            //     const config = caller();
-            //     expect(config).toHaveProperty("default");
-            //     expect(config.default.mode).toEqual("production");
-            //     expect(config.default.target).toEqual("web");
-            // });
+            it("should export webpack config targeting node for production", () => {
+                const env = process.env;
+                env.NODE_ENV = "production";
+                const config = server(env);
+                expect(config.mode).toEqual("production");
+                expect(config.target).toEqual("node");
+            });
         });
     });
 });

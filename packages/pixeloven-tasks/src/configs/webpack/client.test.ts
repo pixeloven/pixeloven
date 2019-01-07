@@ -1,12 +1,9 @@
 import * as core from "@pixeloven/core";
 import "jest";
 import sinon, { SinonSandbox } from "sinon";
+import client from "./client"
 
 let sandbox: SinonSandbox;
-
-const caller = () => {
-    return require("./client");
-};
 
 describe("@pixeloven/tasks", () => {
     describe("webpack", () => {
@@ -24,21 +21,19 @@ describe("@pixeloven/tasks", () => {
                 sandbox.restore();
             });
             it("should export webpack config targeting web for development", () => {
-                const config = caller();
-                expect(config).toHaveProperty("default");
-                expect(config.default.mode).toEqual("development");
-                expect(config.default.target).toEqual("web");
+                const env = process.env;
+                env.NODE_ENV = "development";
+                const config = client(env);
+                expect(config.mode).toEqual("development");
+                expect(config.target).toEqual("web");
             });
-            /**
-             * @todo pass env into client config. Make configs return functions that have the env passed in.
-             */
-            // it("should export webpack config targeting client for production", () => {
-            //     process.env.NODE_ENV = "production";
-            //     const config = caller();
-            //     expect(config).toHaveProperty("default");
-            //     expect(config.default.mode).toEqual("production");
-            //     expect(config.default.target).toEqual("web");
-            // });
+            it("should export webpack config targeting web for production", () => {
+                const env = process.env;
+                env.NODE_ENV = "production";
+                const config = client(env);
+                expect(config.mode).toEqual("production");
+                expect(config.target).toEqual("web");
+            });
         });
     });
 });

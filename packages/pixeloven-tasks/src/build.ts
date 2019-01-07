@@ -139,6 +139,7 @@ function build(config: object, previousFileSizes: OpaqueFileSizes) {
  * Build script
  */
 try {
+    const environment = env.config();
     // TODO be mindful of /docs.. this deletes them :( - Also make storybook configurable ON/OFF
     setupDirectory(PRIVATE_BUILD_PATH);
     setupDirectory(PUBLIC_BUILD_PATH);
@@ -149,7 +150,7 @@ try {
      */
     measureFileSizesBeforeBuild(PRIVATE_BUILD_PATH)
         .then((previousFileSizes: OpaqueFileSizes) => {
-            return build(webpackServerConfig, previousFileSizes);
+            return build(webpackServerConfig(environment), previousFileSizes);
         })
         .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
             printBuildStatus(warnings);
@@ -166,7 +167,7 @@ try {
      */
     measureFileSizesBeforeBuild(PUBLIC_BUILD_PATH)
         .then((previousFileSizes: OpaqueFileSizes) => {
-            return build(webpackClientConfig, previousFileSizes);
+            return build(webpackClientConfig(environment), previousFileSizes);
         })
         .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
             printBuildStatus(warnings);

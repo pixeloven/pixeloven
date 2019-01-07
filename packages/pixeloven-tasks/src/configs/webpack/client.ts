@@ -1,5 +1,4 @@
 import { resolvePath } from "@pixeloven/core";
-import { env } from "@pixeloven/env";
 import autoprefixer from "autoprefixer";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
@@ -28,6 +27,8 @@ import webpack, {
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 
+const config = (env: NodeJS.ProcessEnv): Configuration => {
+
 /**
  * @todo optimize builds
  * see if we can use TS Fork (at least for prod build)
@@ -41,19 +42,20 @@ const name = "client";
 const target = "web";
 
 /**
- * Utility functions to help segment configuration based on environment
- */
-const { ifProduction, ifDevelopment } = getIfUtils(env.current);
-
-/**
  * Webpack uses `publicPath` to determine where the app is being served from.
  * It requires a trailing slash, or the file assets will get an incorrect path.
  *
  * @todo DEV needs to be / to serve assets :( but this breaks the bundle.js (server side is fine)
  * @todo Maybe do this in Output instead of here because some stuff might still need this.
  */
-const publicPath = env.config("PUBLIC_URL", "/");
-const buildPath = env.config("BUILD_PATH", "dist");
+const environment = env.NODE_ENV || "production";
+const publicPath = env.PUBLIC_URL || "/";
+const buildPath = env.BUILD_PATH || "dist";
+
+/**
+ * Utility functions to help segment configuration based on environment
+ */
+const { ifProduction, ifDevelopment } = getIfUtils(environment);
 
 /**
  * Describe source pathing in dev tools
@@ -473,20 +475,21 @@ const resolve: Resolve = {
 /**
  * Client side configuration
  */
-const config: Configuration = {
-    bail: ifProduction(),
-    devtool: ifDevelopment("eval-source-map", false),
-    entry,
-    mode: ifProduction("production", "development"),
-    module,
-    name,
-    node,
-    optimization,
-    output,
-    performance,
-    plugins,
-    resolve,
-    target,
+    return {
+        bail: ifProduction(),
+        devtool: ifDevelopment("eval-source-map", false),
+        entry,
+        mode: ifProduction("production", "development"),
+        module,
+        name,
+        node,
+        optimization,
+        output,
+        performance,
+        plugins,
+        resolve,
+        target,
+    };
 };
 
 export default config;
