@@ -16,6 +16,10 @@ import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import webpack, { Configuration, Stats } from "webpack";
 import webpackClientConfig from "./configs/webpack/client";
 import webpackServerConfig from "./configs/webpack/server";
+import {
+    hasClientCodePath,
+    hasServerCodePath
+} from "./macros";
 
 /**
  * Build Information
@@ -148,35 +152,38 @@ try {
      * Handle build for server side JavaScript
      * @description This lets us display how files changed
      */
-    measureFileSizesBeforeBuild(PRIVATE_BUILD_PATH)
-        .then((previousFileSizes: OpaqueFileSizes) => {
-            return build(webpackServerConfig(environment), previousFileSizes);
-        })
-        .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
-            printBuildStatus(warnings);
-            printBuildFileSizesAfterGzip(
-                PRIVATE_BUILD_PATH,
-                stats,
-                previousFileSizes,
-            );
-        }, handleError);
-
+    if (hasServerCodePath()) {
+        measureFileSizesBeforeBuild(PRIVATE_BUILD_PATH)
+            .then((previousFileSizes: OpaqueFileSizes) => {
+                return build(webpackServerConfig(environment), previousFileSizes);
+            })
+            .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
+                printBuildStatus(warnings);
+                printBuildFileSizesAfterGzip(
+                    PRIVATE_BUILD_PATH,
+                    stats,
+                    previousFileSizes,
+                );
+            }, handleError);
+    }
     /**
      * Handle build for client side JavaScript
      * @description This lets us display how files changed
      */
-    measureFileSizesBeforeBuild(PUBLIC_BUILD_PATH)
-        .then((previousFileSizes: OpaqueFileSizes) => {
-            return build(webpackClientConfig(environment), previousFileSizes);
-        })
-        .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
-            printBuildStatus(warnings);
-            printBuildFileSizesAfterGzip(
-                PUBLIC_BUILD_PATH,
-                stats,
-                previousFileSizes,
-            );
-        }, handleError);
+    if (hasClientCodePath()) {
+        measureFileSizesBeforeBuild(PUBLIC_BUILD_PATH)
+            .then((previousFileSizes: OpaqueFileSizes) => {
+                return build(webpackClientConfig(environment), previousFileSizes);
+            })
+            .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
+                printBuildStatus(warnings);
+                printBuildFileSizesAfterGzip(
+                    PUBLIC_BUILD_PATH,
+                    stats,
+                    previousFileSizes,
+                );
+            }, handleError);
+    }
 } catch (error) {
     handleError(error);
 }

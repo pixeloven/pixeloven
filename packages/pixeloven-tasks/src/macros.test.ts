@@ -6,6 +6,8 @@ import {
     getPort,
     getPublicPath,
     getUrlObject,
+    hasClientCodePath,
+    hasServerCodePath
 } from "./macros";
 
 describe("@pixeloven/tasks", () => {
@@ -45,6 +47,16 @@ describe("@pixeloven/tasks", () => {
                 const url = getBaseUrl();
                 const object = getUrlObject(url);
                 expect(typeof object).toBe("object");
+            });
+        });
+        describe("hasClientCodePath", () => {
+            it("should return whether path exists", () => {
+                expect(typeof hasClientCodePath()).toEqual("boolean");
+            });
+        });
+        describe("hasServerCodePath", () => {
+            it("should return whether path exists", () => {
+                expect(typeof hasServerCodePath()).toEqual("boolean");
             });
         });
     });
