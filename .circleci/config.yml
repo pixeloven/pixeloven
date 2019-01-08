@@ -21,7 +21,7 @@ commands:
     parameters:
       method:
         type: string
-        default: "bootstrap"
+        default: "install"
     steps:
       - restore_cache:
           keys:
@@ -51,11 +51,6 @@ jobs:
   setup:
     executor: node-executor
     steps:
-     # Install npm globally
-      - run:
-          name: Install lerna
-          command: npm install lerna --global
-
       # Allows us to pre-cache yarn install
       - checkout
       - install
