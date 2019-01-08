@@ -35,6 +35,8 @@
     "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",
     "postcompile": "cp -r ./src/templates ./dist/lib/templates",
+    "document": "pixeloven-cli document:ts",
+    "predocument": "pixeloven-cli document:clean",
     "lint": "yarn lint:ts",
     "lint:ts": "pixeloven-cli lint:ts src/**/*.{ts,tsx}",
     "pretest": "pixeloven-cli test:clean",

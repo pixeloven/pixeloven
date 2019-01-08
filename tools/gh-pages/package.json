@@ -1,9 +1,12 @@
 {
-  "name": "@pixeloven/env",
+  "name": "@pixeloven/gh-pages",
   "version": "3.1.2",
-  "description": "Environment loader",
+  "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
+  "bin": {
+    "po-gh-pages": "./dist/lib/index.js"
+  },
   "files": [
     "dist/"
   ],
@@ -14,20 +17,19 @@
   },
   "author": "Brian Gebel",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
+  "private": true,
   "dependencies": {
     "@pixeloven/cli": "^3.1.2",
-    "@pixeloven/exceptions": "^3.1.2",
-    "dotenv": "6.1.0"
+    "@pixeloven/core": "^3.1.2",
+    "@pixeloven/node-logger": "^3.1.2",
+    "fs-extra": "7.0.1"
   },
   "devDependencies": {
-    "@types/dotenv": "6.1.0",
-    "@types/node": "10.12.12"
+    "@types/fs-extra": "5.0.4",
+    "@types/gh-pages": "2.0.0",
+    "gh-pages": "2.0.1"
   },
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
     "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",

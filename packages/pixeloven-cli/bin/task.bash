@@ -17,6 +17,7 @@ tslintrc="$(pwd)/tslint.json"
 prettierrc="$(pwd)/prettierrc.json"
 jestrc="$(pwd)/jestrc.json"
 stylelintrc="$(pwd)/stylelintrc.json"
+typedocrc="$(pwd)/typedoc.js"
 
 CMD=$1
 shift
@@ -34,6 +35,10 @@ case $CMD in
     exe "rimraf **/node_modules"
     ;;
 
+  "compile:clean")
+    exe "rimraf dist"
+    ;;
+
   "compile:ts")
     if [ -f $tsconfigrc ]; then
       exe "tsc --pretty --project $tsconfigrc"
@@ -42,8 +47,12 @@ case $CMD in
     fi
     ;;
 
-  "compile:clean")
-    exe "rimraf dist docs"
+  "document:clean")
+    exe "rimraf docs"
+    ;;
+
+  "document:ts")
+    exe "typedoc --options $typedocrc $@"
     ;;
 
   "lint:ts")

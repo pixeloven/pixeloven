@@ -6,10 +6,9 @@ import "./bootstrap/production";
 /**
  * Import dependencies
  */
-import { handleError, resolvePath } from "@pixeloven/core";
+import { createOrEmptyDir, handleError, resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
-import fs from "fs-extra";
 import Promise from "promise";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
@@ -52,17 +51,6 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
  */
 const PRIVATE_BUILD_PATH = resolvePath(env.config("BUILD_PATH", "dist"), false);
 const PUBLIC_BUILD_PATH = `${PRIVATE_BUILD_PATH}/public`;
-
-/**
- * Setup Build Directory
- * @param fullPath
- */
-function setupDirectory(fullPath: string) {
-    if (!fs.existsSync(fullPath)) {
-        fs.mkdirSync(fullPath);
-    }
-    fs.emptyDirSync(fullPath);
-}
 
 /**
  * Print msg on status of build
@@ -145,8 +133,8 @@ function build(config: Configuration, previousFileSizes: OpaqueFileSizes) {
 try {
     const environment = env.config();
     // TODO be mindful of /docs.. this deletes them :( - Also make storybook configurable ON/OFF
-    setupDirectory(PRIVATE_BUILD_PATH);
-    setupDirectory(PUBLIC_BUILD_PATH);
+    createOrEmptyDir(PRIVATE_BUILD_PATH);
+    createOrEmptyDir(PUBLIC_BUILD_PATH);
 
     /**
      * Handle build for server side JavaScript

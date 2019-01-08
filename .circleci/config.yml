@@ -21,20 +21,32 @@ commands:
     parameters:
       method:
         type: string
-        default: "bootstrap"
+        default: "install"
     steps:
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      # - restore_cache:
+      #     keys:
+      #       - v2-dependencies-{{ checksum "package.json" }}
+      #       # fallback to using the latest cache if no exact match is found
+      #       - v2-dependencies-
       - run:
           name: Install & Link Dependencies
           command: yarn << parameters.method >>
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #       - examples/**/node_modules
+      #       - packages/**/node_modules
+      #       - tools/**/node_modules
+      #     key: v2-dependencies-{{ checksum "package.json" }}
+  yarn:
+    description: "Excutes yarn cmds"
+    parameters:
+      method:
+        type: string
+    steps:
+      - run:
+          name: yarn << parameters.method >>
+          command: yarn << parameters.method >>
 
 # Common executor for node based jobs
 executors:
@@ -43,72 +55,91 @@ executors:
       - image: circleci/node:10.15
     working_directory: ~/pixeloven
 
+
 # Define jobs
 jobs:
   setup:
     executor: node-executor
     steps:
-      # Allows us to pre-cache yarn install
+      # @todo We should create a custom docker image with lerna installed or find a way to add lerna to the executor
+      # @todo We should cache node_modules perhaps cache key for each package.json
       - checkout
-      - install
-      - list
+      - yarn:
+          method: "install"
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - .
 
   lint:
     executor: node-executor
     steps:
-      - checkout
-      - install:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
           method: "link-packages"
-
-        # Run task
-      - run:
-          name: Lint source
-          command: yarn lint
+      - yarn:
+          method: "lint"
 
   compile:
     executor: node-executor
     steps:
-      - checkout
-      - install
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
 
         # Run build and test
       - run:
           name: Compile source
           command: yarn compile
 
-      # Check for build files
-      - list:
-          path: packages/**/dist
-
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
             - packages/**/dist
+            - tools/**/dist
+
+  document:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
+
+      # Generate documentation
+      - run:
+          name: Document source
+          command: yarn document
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/docs
+            - packages/**/docs
+            - tools/**/docs
 
   build:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      - checkout
-
       - attach_workspace:
           at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
 
-      - install
-
+      # Run build
       - run:
           name: Create .env file
           command: yarn env:production
 
-        # Run build
       - run:
           name: Build source
           command: yarn build
-
-      # Check for build files
-      - list:
-          path: examples/**/dist
 
       # Save project
       - persist_to_workspace:
@@ -119,24 +150,15 @@ jobs:
   test:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      - checkout
-
       - attach_workspace:
           at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
 
-      - install
-
-        # Run test
+      # Run test
       - run:
           name: Test source
           command: yarn test
-
-      # Check for build files
-      - list:
-          path: examples/**/coverage
-      - list:
-          path: packages/**/coverage
 
       # Save project
       - persist_to_workspace:
@@ -144,17 +166,14 @@ jobs:
           paths: 
             - examples/**/coverage
             - packages/**/coverage
+            - tools/**/coverage
 
   report:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      - checkout
-
       - attach_workspace:
           at: ~/pixeloven
-
-      - install:
+      - yarn:
           method: "link-packages"
 
       # Check for coverage files for reporting
@@ -162,10 +181,12 @@ jobs:
           path: examples/**/coverage/lcov.info
       - list:
           path: packages/**/coverage/lcov.info
+      - list:
+          path: tools/**/coverage/lcov.info
 
       # Run test and report
       - run:
-          name: Report source V2
+          name: Report source
           command: yarn report-coverage
 
   deploy:
@@ -175,6 +196,14 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
+      # Check for compiled & build files
+      - list:
+          path: examples/**/dist
+      - list:
+          path: packages/**/dist
+      - list:
+          path: tools/**/dist
+
        # Save dist artifacts
       - store_artifacts:
           path: packages/**/dist
@@ -182,6 +211,17 @@ jobs:
       - store_artifacts:
           path: examples/**/dist
           destination: examples/dist
+      - store_artifacts:
+          path: tools/**/dist
+          destination: tools/dist
+
+      # Check for compiled & build files
+      - list:
+          path: examples/**/coverage
+      - list:
+          path: packages/**/coverage
+      - list:
+          path: tools/**/coverage
 
        # Save coverage artifacts
       - store_artifacts:
@@ -190,6 +230,31 @@ jobs:
       - store_artifacts:
           path: examples/**/coverage
           destination: examples/coverage
+      - store_artifacts:
+          path: tools/**/coverage
+          destination: examples/coverage
+
+      # Check for compiled & build files
+      - list:
+          path: examples/**/docs
+      - list:
+          path: packages/**/docs
+      - list:
+          path: tools/**/docs
+
+      # Save docs artifacts
+      - store_artifacts:
+          path: packages/**/docs
+          destination: packages/docs
+      - store_artifacts:
+          path: examples/**/docs
+          destination: examples/docs
+      - store_artifacts:
+          path: tools/**/docs
+          destination: examples/docs
+
+      # @todo generate docs and run newly compiled tool to deploy to github pages
+      # doc gen might be it's own job though
 
       # @todo need to do this https://github.com/atlassian/lerna-semantic-release
       # @todo would be nice to also deploy the above to a special branch for github
@@ -200,11 +265,17 @@ workflows:
   version: 2.1
   runner:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              ignore: gh-pages
       - lint:
           requires:
             - setup
       - compile:
+          requires:
+            - setup
+      - document:
           requires:
             - setup
       - build:
@@ -213,15 +284,20 @@ workflows:
             - lint
       - test:
           requires:
-            - build
+            - compile
+            - lint
       - report:
           requires:
+            - build
+            - document
             - test
           filters:
             branches:
               only: master
       - deploy:
           requires:
+            - build
+            - document
             - test
           filters:
             branches:
