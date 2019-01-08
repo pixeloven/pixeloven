@@ -90,6 +90,8 @@
     "prebuild": "pixeloven-cli compile:clean",
     "clean": "pixeloven-cli clean",
     "development": "pixeloven-tasks serve",
+    "document": "pixeloven-cli document:ts",
+    "predocument": "pixeloven-cli document:clean",
     "env:docker": "cp .env.docker .env",
     "env:local": "cp .env.localhost .env",
     "env:production": "cp .env.localhost .env",

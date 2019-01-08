@@ -31,7 +31,7 @@
     "pretty": "lerna run pretty",
     "pretty:ts": "lerna run pretty:ts",
     "pretty:scss": "lerna run pretty:scss",
-    "build:docs": "typedoc --options typedoc.json",
+    "document": "lerna run document",
     "deploy:docs": "ts-node --files tools/gh-pages-publish",
     "report-coverage": "cat ./packages/**/coverage/lcov.info | codecov",
     "commit": "git-cz",
