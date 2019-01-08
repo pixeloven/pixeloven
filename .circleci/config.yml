@@ -278,12 +278,15 @@ workflows:
       - build:
           requires:
             - compile
+            - lint
       - test:
           requires:
             - compile
+            - lint
       - report:
           requires:
             - build
+            - document
             - test
           filters:
             branches:
@@ -291,6 +294,7 @@ workflows:
       - deploy:
           requires:
             - build
+            - document
             - test
           filters:
             branches:
