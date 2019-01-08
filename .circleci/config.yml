@@ -62,7 +62,8 @@ jobs:
       - checkout
       - install:
           method: "link-packages"
-
+      - list:
+          path: packages/**/node_modules
         # Run task
       - run:
           name: Lint source
