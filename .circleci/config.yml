@@ -226,6 +226,18 @@ jobs:
       - store_artifacts:
           path: tools/**/coverage
           destination: examples/coverage
+
+      # Save docs artifacts
+      - store_artifacts:
+          path: packages/**/docs
+          destination: packages/docs
+      - store_artifacts:
+          path: examples/**/docs
+          destination: examples/docs
+      - store_artifacts:
+          path: tools/**/docs
+          destination: examples/docs
+
       # @todo generate docs and run newly compiled tool to deploy to github pages
       # doc gen might be it's own job though
 
