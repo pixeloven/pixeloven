@@ -23,21 +23,30 @@ commands:
         type: string
         default: "install"
     steps:
-      - restore_cache:
-          keys:
-            - v2-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v2-dependencies-
+      # - restore_cache:
+      #     keys:
+      #       - v2-dependencies-{{ checksum "package.json" }}
+      #       # fallback to using the latest cache if no exact match is found
+      #       - v2-dependencies-
       - run:
           name: Install & Link Dependencies
           command: yarn << parameters.method >>
-      - save_cache:
-          paths:
-            - node_modules
-            - examples/**/node_modules
-            - packages/**/node_modules
-            - tools/**/node_modules
-          key: v2-dependencies-{{ checksum "package.json" }}
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #       - examples/**/node_modules
+      #       - packages/**/node_modules
+      #       - tools/**/node_modules
+      #     key: v2-dependencies-{{ checksum "package.json" }}
+  yarn:
+    description: "Excutes yarn cmds"
+    parameters:
+      method:
+        type: string
+    steps:
+      - run:
+          name: yarn << parameters.method >>
+          command: yarn << parameters.method >>
 
 # Common executor for node based jobs
 executors:
@@ -46,34 +55,40 @@ executors:
       - image: circleci/node:10.15
     working_directory: ~/pixeloven
 
+
 # Define jobs
 jobs:
   setup:
     executor: node-executor
     steps:
-      # Allows us to pre-cache yarn install
+      # @todo We should create a custom docker image with lerna installed or find a way to add lerna to the executor
+      # @todo We should cache node_modules perhaps cache key for each package.json
       - checkout
-      - install
-      - list
+      - yarn:
+          method: "install"
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - .
 
   lint:
     executor: node-executor
     steps:
-      - checkout
-      - install:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
           method: "link-packages"
-      - list:
-          path: packages/**/node_modules
-        # Run task
-      - run:
-          name: Lint source
-          command: yarn lint
+      - yarn:
+          method: "lint"
 
   compile:
     executor: node-executor
     steps:
-      - checkout
-      - install:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
           method: "link-packages"
 
         # Run build and test
@@ -91,9 +106,9 @@ jobs:
   document:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      - checkout
-      - install:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
           method: "link-packages"
 
       # Generate documentation
@@ -112,27 +127,16 @@ jobs:
   build:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      - checkout
-
       - attach_workspace:
           at: ~/pixeloven
-
-      # Check for compiled files
-      - list:
-          path: packages/**/dist
-      - list:
-          path: tools/**/dist
-
-      # Link compiled packages
-      - install:
+      - yarn:
           method: "link-packages"
 
+      # Run build
       - run:
           name: Create .env file
           command: yarn env:production
 
-        # Run build
       - run:
           name: Build source
           command: yarn build
@@ -146,25 +150,12 @@ jobs:
   test:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      - checkout
-
       - attach_workspace:
           at: ~/pixeloven
-
-      # Check for compiled & build files
-      - list:
-          path: examples/**/dist
-      - list:
-          path: packages/**/dist
-      - list:
-          path: tools/**/dist
-
-      # Link compiled packages
-      - install:
+      - yarn:
           method: "link-packages"
 
-        # Run test
+      # Run test
       - run:
           name: Test source
           command: yarn test
@@ -180,13 +171,9 @@ jobs:
   report:
     executor: node-executor
     steps:
-      # Download and cache dependencies
-      - checkout
-
       - attach_workspace:
           at: ~/pixeloven
-
-      - install:
+      - yarn:
           method: "link-packages"
 
       # Check for coverage files for reporting
@@ -209,6 +196,14 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
+      # Check for compiled & build files
+      - list:
+          path: examples/**/dist
+      - list:
+          path: packages/**/dist
+      - list:
+          path: tools/**/dist
+
        # Save dist artifacts
       - store_artifacts:
           path: packages/**/dist
@@ -220,6 +215,14 @@ jobs:
           path: tools/**/dist
           destination: tools/dist
 
+      # Check for compiled & build files
+      - list:
+          path: examples/**/coverage
+      - list:
+          path: packages/**/coverage
+      - list:
+          path: tools/**/coverage
+
        # Save coverage artifacts
       - store_artifacts:
           path: packages/**/coverage
@@ -230,6 +233,14 @@ jobs:
       - store_artifacts:
           path: tools/**/coverage
           destination: examples/coverage
+
+      # Check for compiled & build files
+      - list:
+          path: examples/**/docs
+      - list:
+          path: packages/**/docs
+      - list:
+          path: tools/**/docs
 
       # Save docs artifacts
       - store_artifacts:
@@ -258,28 +269,28 @@ workflows:
       - lint:
           requires:
             - setup
+      - test:
+          requires:
+            - setup
       - compile:
           requires:
-            - setup
-      - document:
-          requires:
-            - setup
+            - lint
+            - test
       - build:
           requires:
             - compile
-            - lint
-      - test:
+      - document:
           requires:
             - build
       - report:
           requires:
-            - test
+            - build
           filters:
             branches:
               only: master
       - deploy:
           requires:
-            - test
+            - build
           filters:
             branches:
               only: master
