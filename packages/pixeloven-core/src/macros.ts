@@ -2,7 +2,7 @@ import { FileNotFoundException } from "@pixeloven/exceptions";
 import { logger } from "@pixeloven/node-logger";
 import { SpawnSyncReturns } from "child_process";
 import spawn from "cross-spawn";
-import fs from "fs";
+import fs from "fs-extra";
 import path from "path";
 
 /**
@@ -65,6 +65,18 @@ export const sleep = (milliseconds: number) => {
         }
     }
 };
+
+/**
+ * Create or empty existing directory
+ * @param fullPath
+ */
+export const createOrEmptyDir = (fullPath: string) => {
+    if (fs.existsSync(fullPath)) {
+        fs.emptyDirSync(fullPath);
+    } else {
+        fs.mkdirSync(fullPath);
+    }
+}
 
 /**
  * Spawn node script

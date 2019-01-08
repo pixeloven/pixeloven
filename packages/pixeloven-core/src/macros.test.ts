@@ -1,7 +1,7 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
 import { logger, Message } from "@pixeloven/node-logger";
 import spawn from "cross-spawn";
-import fs from "fs";
+import fs from "fs-extra";
 import "jest";
 import path from "path";
 import * as macros from "./macros";
@@ -10,6 +10,8 @@ let resolvePathExists = true;
 const logErrorMock = (message: Message) => message;
 const exitMock = (code?: number) => code;
 const existsSyncMock = (somePath: string) => resolvePathExists;
+const mkdirSyncMock = (somePath: string) => undefined;
+const emptyDirSyncMock = (somePath: string) => undefined;
 const spawnSyncMock = (cmd: string, args: [], options: object) => "testing";
 
 /**
@@ -45,8 +47,10 @@ describe("@pixeloven/exceptions", () => {
                 const exitSpy = jest
                     .spyOn(macros, "exit")
                     .mockImplementation(exitMock);
-                macros.handleError(new Error());
-                expect(logErrorSpy).toHaveBeenCalledTimes(1);
+                const error = new Error();
+                error.stack = "tracing";
+                macros.handleError(error);
+                expect(logErrorSpy).toHaveBeenCalledTimes(2);
                 expect(exitSpy).toHaveBeenCalledTimes(1);
             });
         });
@@ -91,6 +95,32 @@ describe("@pixeloven/exceptions", () => {
                 macros.sleep(milliseconds);
                 const end = new Date().getTime();
                 expect(approxTimeDiff(start, end)).toEqual(milliseconds);
+            });
+        });
+        describe("createOrEmptyDir", () => {
+            it("should make a new directory", () => {
+                resolvePathExists = false;
+                const existsSyncSpy = jest
+                    .spyOn(fs, "existsSync")
+                    .mockImplementation(existsSyncMock);
+                const mkdirSyncSpy = jest
+                    .spyOn(fs, "mkdirSync")
+                    .mockImplementation(mkdirSyncMock);
+                macros.createOrEmptyDir("tmp");
+                expect(existsSyncSpy).toHaveBeenCalledTimes(1);
+                expect(mkdirSyncSpy).toHaveBeenCalledTimes(1);
+            });
+            it("should empty an existing directory", () => {
+                resolvePathExists = true;
+                const existsSyncSpy = jest
+                    .spyOn(fs, "existsSync")
+                    .mockImplementation(existsSyncMock);
+                const emptyDirSyncSpy = jest
+                    .spyOn(fs, "emptyDirSync")
+                    .mockImplementation(emptyDirSyncMock);
+                macros.createOrEmptyDir("tmp");
+                expect(existsSyncSpy).toHaveBeenCalledTimes(1);
+                expect(emptyDirSyncSpy).toHaveBeenCalledTimes(1);
             });
         });
         describe("spawnNode", () => {
