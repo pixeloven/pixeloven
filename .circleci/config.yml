@@ -51,12 +51,11 @@ jobs:
   setup:
     executor: node-executor
     steps:
+      # Allows us to pre-cache yarn install
+      - checkout
       - run:
           name: Install lerna
           command: yarn add lerna -g
-
-      # Allows us to pre-cache yarn install
-      - checkout
       - install
       - list
 
