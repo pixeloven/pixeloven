@@ -269,28 +269,29 @@ workflows:
       - lint:
           requires:
             - setup
-      - test:
-          requires:
-            - setup
       - compile:
           requires:
-            - lint
-            - test
+            - setup
+      - document:
+          requires:
+            - setup
       - build:
           requires:
             - compile
-      - document:
+      - test:
           requires:
-            - build
+            - compile
       - report:
           requires:
             - build
+            - test
           filters:
             branches:
               only: master
       - deploy:
           requires:
             - build
+            - test
           filters:
             branches:
               only: master
