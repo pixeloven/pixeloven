@@ -43,6 +43,8 @@ const copyDocs = (containerName: string, packageName: string) => {
  * Publish dist files
  * @todo Make docs directory configurable through argv
  * @todo if argv is empty we should print usage here
+ * @todo need to support the creation of an index page
+ * @todo gh-pages might not support index files with underscores
  */
 const main = (argv: string[]) => {
     try {
