@@ -69,22 +69,41 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - install
+      - install:
+          method: "link-packages"
 
         # Run build and test
       - run:
           name: Compile source
           command: yarn compile
 
-      # Check for build files
-      - list:
-          path: packages/**/dist
-
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
             - packages/**/dist
+            - tools/**/dist
+
+  document:
+    executor: node-executor
+    steps:
+      # Download and cache dependencies
+      - checkout
+      - install:
+          method: "link-packages"
+
+      # Generate documentation
+      - run:
+          name: Document source
+          command: yarn document
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/docs
+            - packages/**/docs
+            - tools/**/docs
 
   build:
     executor: node-executor
@@ -95,7 +114,15 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install
+      # Check for compiled files
+      - list:
+          path: packages/**/dist
+      - list:
+          path: tools/**/dist
+
+      # Link compiled packages
+      - install:
+          method: "link-packages"
 
       - run:
           name: Create .env file
@@ -105,10 +132,6 @@ jobs:
       - run:
           name: Build source
           command: yarn build
-
-      # Check for build files
-      - list:
-          path: examples/**/dist
 
       # Save project
       - persist_to_workspace:
@@ -125,18 +148,22 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
 
-      - install
+      # Check for compiled & build files
+      - list:
+          path: examples/**/dist
+      - list:
+          path: packages/**/dist
+      - list:
+          path: tools/**/dist
+
+      # Link compiled packages
+      - install:
+          method: "link-packages"
 
         # Run test
       - run:
           name: Test source
           command: yarn test
-
-      # Check for build files
-      - list:
-          path: examples/**/coverage
-      - list:
-          path: packages/**/coverage
 
       # Save project
       - persist_to_workspace:
@@ -144,6 +171,7 @@ jobs:
           paths: 
             - examples/**/coverage
             - packages/**/coverage
+            - tools/**/coverage
 
   report:
     executor: node-executor
@@ -162,10 +190,12 @@ jobs:
           path: examples/**/coverage/lcov.info
       - list:
           path: packages/**/coverage/lcov.info
+      - list:
+          path: tools/**/coverage/lcov.info
 
       # Run test and report
       - run:
-          name: Report source V2
+          name: Report source
           command: yarn report-coverage
 
   deploy:
@@ -182,6 +212,9 @@ jobs:
       - store_artifacts:
           path: examples/**/dist
           destination: examples/dist
+      - store_artifacts:
+          path: tools/**/dist
+          destination: tools/dist
 
        # Save coverage artifacts
       - store_artifacts:
@@ -190,6 +223,11 @@ jobs:
       - store_artifacts:
           path: examples/**/coverage
           destination: examples/coverage
+      - store_artifacts:
+          path: tools/**/coverage
+          destination: examples/coverage
+      # @todo generate docs and run newly compiled tool to deploy to github pages
+      # doc gen might be it's own job though
 
       # @todo need to do this https://github.com/atlassian/lerna-semantic-release
       # @todo would be nice to also deploy the above to a special branch for github
@@ -205,6 +243,9 @@ workflows:
           requires:
             - setup
       - compile:
+          requires:
+            - setup
+      - document:
           requires:
             - setup
       - build:
