@@ -51,11 +51,13 @@ jobs:
   setup:
     executor: node-executor
     steps:
-      # Allows us to pre-cache yarn install
-      - checkout
+     # Install npm globally
       - run:
           name: Install lerna
-          command: yarn add lerna -g
+          command: npm install lerna --global
+
+      # Allows us to pre-cache yarn install
+      - checkout
       - install
       - list
 
