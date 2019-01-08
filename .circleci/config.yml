@@ -25,16 +25,19 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - v2-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - v2-dependencies-
       - run:
           name: Install & Link Dependencies
           command: yarn << parameters.method >>
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - examples/**/node_modules
+            - packages/**/node_modules
+            - tools/**/node_modules
+          key: v2-dependencies-{{ checksum "package.json" }}
 
 # Common executor for node based jobs
 executors:
