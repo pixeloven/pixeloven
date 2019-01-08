@@ -22,7 +22,7 @@ const approxTimeDiff = (start: number, end: number) => {
     return Math.round((end - start) / 10) * 10;
 };
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven/core", () => {
     describe("macros", () => {
         afterAll(() => {
             jest.clearAllMocks();
@@ -48,9 +48,8 @@ describe("@pixeloven/exceptions", () => {
                     .spyOn(macros, "exit")
                     .mockImplementation(exitMock);
                 const error = new Error();
-                error.stack = "tracing";
                 macros.handleError(error);
-                expect(logErrorSpy).toHaveBeenCalledTimes(2);
+                expect(logErrorSpy).toHaveBeenCalledTimes(1);
                 expect(exitSpy).toHaveBeenCalledTimes(1);
             });
         });
