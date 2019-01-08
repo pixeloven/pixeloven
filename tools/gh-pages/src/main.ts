@@ -45,6 +45,11 @@ const copyDocs = (containerName: string, packageName: string) => {
  * @todo if argv is empty we should print usage here
  * @todo need to support the creation of an index page
  * @todo gh-pages might not support index files with underscores
+ * @todo Type docs should not include readme.md file
+ *      docs
+ *          -> types
+ *          -> coverage
+ *          -> index.html (simple static site created from README.md)
  */
 const main = (argv: string[]) => {
     try {
