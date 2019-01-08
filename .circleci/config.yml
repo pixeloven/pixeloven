@@ -265,7 +265,10 @@ workflows:
   version: 2.1
   runner:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              ignore: gh-pages
       - lint:
           requires:
             - setup
