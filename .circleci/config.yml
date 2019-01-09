@@ -277,7 +277,7 @@ workflows:
             - setup
       - document:
           requires:
-            - setup
+            - compile
       - build:
           requires:
             - compile
