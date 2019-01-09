@@ -278,6 +278,7 @@ workflows:
       - document:
           requires:
             - compile
+            - lint
       - build:
           requires:
             - compile
