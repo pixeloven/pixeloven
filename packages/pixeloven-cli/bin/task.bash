@@ -97,7 +97,15 @@ case $CMD in
 
   "test")
     if [ -f $jestrc ]; then
-      exe "jest --color --coverage --maxWorkers 2 --config $jestrc --env=jsdom"
+      exe "jest --color --maxWorkers 2 --config $jestrc --env=jsdom $@"
+    else
+      error "File not found $jestrc"
+    fi
+    ;;
+
+  "test:coverage")
+    if [ -f $jestrc ]; then
+      exe "jest --color --coverage --maxWorkers 2 --config $jestrc --env=jsdom $@"
     else
       error "File not found $jestrc"
     fi
@@ -105,7 +113,7 @@ case $CMD in
 
   "test:watch")
     if [ -f $jestrc ]; then
-      exe "jest --watch --config $jestrc --env=jsdom"
+      exe "jest --watch --config $jestrc --env=jsdom $@"
     else
       error "File not found $jestrc"
     fi
