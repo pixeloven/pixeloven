@@ -52,7 +52,7 @@ case $CMD in
     ;;
 
   "document:ts")
-    exe "typedoc --options $typedocrc $@"
+    exe "typedoc --options $typedocrc --tsconfig $tsconfigrc $@"
     ;;
 
   "lint:ts")
