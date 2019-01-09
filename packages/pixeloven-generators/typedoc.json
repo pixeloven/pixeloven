@@ -1,9 +1,9 @@
-module.exports = {
-    "name": "@pixeloven/docs",
+{
+    "name": "@pixeloven/generators",
     "target": "es5",
     "out": "docs",
     "ignoreCompilerErrors": "false",
     "preserveConstEnums": "true",
     "exclude": "*.test.ts",
     "stripInternal": "false"
-};
+}

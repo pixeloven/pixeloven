@@ -1,9 +1,9 @@
-module.exports = {
-    "name": "@pixeloven/react-ssr-example",
+{
+    "name": "@pixeloven/gh-pages",
     "target": "es5",
     "out": "docs",
     "ignoreCompilerErrors": "false",
     "preserveConstEnums": "true",
-    "exclude": "*.{story,test}.{ts,tsx}",
+    "exclude": "*.test.ts",
     "stripInternal": "false"
-};
+}

@@ -17,7 +17,7 @@ tslintrc="$(pwd)/tslint.json"
 prettierrc="$(pwd)/prettierrc.json"
 jestrc="$(pwd)/jestrc.json"
 stylelintrc="$(pwd)/stylelintrc.json"
-typedocrc="$(pwd)/typedoc.js"
+typedocrc="$(pwd)/typedoc.json"
 
 CMD=$1
 shift
