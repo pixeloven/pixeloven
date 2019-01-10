@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/gh-pages",
-  "version": "3.1.2",
+  "version": "3.2.0",
   "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -19,9 +19,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@pixeloven/cli": "^3.1.2",
-    "@pixeloven/core": "^3.1.2",
-    "@pixeloven/node-logger": "^3.1.2",
+    "@pixeloven/cli": "^3.2.0",
+    "@pixeloven/core": "^3.2.0",
+    "@pixeloven/node-logger": "^3.2.0",
     "fs-extra": "7.0.1"
   },
   "devDependencies": {

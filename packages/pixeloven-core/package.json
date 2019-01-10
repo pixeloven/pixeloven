@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/core",
-  "version": "3.1.2",
+  "version": "3.2.0",
   "description": "Core Framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,9 +18,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^3.1.2",
-    "@pixeloven/exceptions": "^3.1.2",
-    "@pixeloven/node-logger": "^3.1.2",
+    "@pixeloven/cli": "^3.2.0",
+    "@pixeloven/exceptions": "^3.2.0",
+    "@pixeloven/node-logger": "^3.2.0",
     "cross-spawn": "6.0.5",
     "fs-extra": "7.0.1",
     "react-dev-utils": "6.1.1",
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "6.0.0",
-    "@types/node": "10.12.12",
     "@types/fs-extra": "5.0.4",
+    "@types/node": "10.12.12",
     "@types/webpack": "4.4.22"
   },
   "scripts": {
