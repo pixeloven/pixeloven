@@ -103,12 +103,8 @@ case $CMD in
     fi
     ;;
 
-  "test:coverage")
-    if [ -f $jestrc ]; then
-      exe "jest --color --coverage --maxWorkers 2 --config $jestrc --env=jsdom $@"
-    else
-      error "File not found $jestrc"
-    fi
+  "test:clean")
+    exe "rimraf coverage"
     ;;
 
   "test:watch")
@@ -119,10 +115,6 @@ case $CMD in
     fi
     ;;
 
-  "test:clean")
-    exe "rimraf coverage"
-    ;;
-    
   *)
     if [[ -z "$CMD" ]]; then
       echo "USAGE: ./task (clean|compile|lint|pretty|test|<node_modules_bin_command>) command_args"
