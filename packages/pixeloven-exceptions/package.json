@@ -28,7 +28,7 @@
     "clean": "pixeloven-cli clean",
     "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",
-    "document": "pixeloven-cli document:ts",
+    "document": "pixeloven-cli document:ts src",
     "predocument": "pixeloven-cli document:clean",
     "lint": "yarn lint:ts",
     "lint:ts": "pixeloven-cli lint:ts src/**/*.{ts,tsx}",

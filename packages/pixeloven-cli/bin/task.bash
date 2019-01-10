@@ -17,7 +17,7 @@ tslintrc="$(pwd)/tslint.json"
 prettierrc="$(pwd)/prettierrc.json"
 jestrc="$(pwd)/jestrc.json"
 stylelintrc="$(pwd)/stylelintrc.json"
-typedocrc="$(pwd)/typedoc.js"
+typedocrc="$(pwd)/typedoc.json"
 
 CMD=$1
 shift
@@ -52,7 +52,7 @@ case $CMD in
     ;;
 
   "document:ts")
-    exe "typedoc --options $typedocrc $@"
+    exe "typedoc --options $typedocrc --tsconfig $tsconfigrc $@"
     ;;
 
   "lint:ts")
@@ -97,15 +97,7 @@ case $CMD in
 
   "test")
     if [ -f $jestrc ]; then
-      exe "jest --color --coverage --maxWorkers 2 --config $jestrc --env=jsdom"
-    else
-      error "File not found $jestrc"
-    fi
-    ;;
-
-  "test:watch")
-    if [ -f $jestrc ]; then
-      exe "jest --watch --config $jestrc --env=jsdom"
+      exe "jest --color --maxWorkers 2 --config $jestrc --env=jsdom $@"
     else
       error "File not found $jestrc"
     fi
@@ -114,7 +106,15 @@ case $CMD in
   "test:clean")
     exe "rimraf coverage"
     ;;
-    
+
+  "test:watch")
+    if [ -f $jestrc ]; then
+      exe "jest --watch --config $jestrc --env=jsdom $@"
+    else
+      error "File not found $jestrc"
+    fi
+    ;;
+
   *)
     if [[ -z "$CMD" ]]; then
       echo "USAGE: ./task (clean|compile|lint|pretty|test|<node_modules_bin_command>) command_args"
