@@ -107,7 +107,7 @@
     "start": "run-p start:app start:story",
     "start:app": "pixeloven-tasks serve",
     "start:story": "pixeloven-docs serve",
-    "test": "pixeloven-cli test",
+    "test": "pixeloven-cli test --color --coverage",
     "test:watch": "pixeloven-cli test:watch"
   }
 }

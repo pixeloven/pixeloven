@@ -62,7 +62,7 @@
     "pretest": "pixeloven-cli test:clean",
     "pretty": "pixeloven-cli pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-cli pretty:ts src/**/*.{ts,tsx}",
-    "test": "pixeloven-cli test",
+    "test": "pixeloven-cli test --color --coverage",
     "test:watch": "pixeloven-cli test:watch"
   }
 }
