@@ -9,7 +9,7 @@ const caller = () => {
     require("./development");
 };
 
-describe("@pixeloven/dev-server", () => {
+describe("@pixeloven/webpack-dev-server", () => {
     describe("bootstrap", () => {
         describe("development", () => {
             afterAll(() => {
