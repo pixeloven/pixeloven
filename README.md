@@ -62,8 +62,6 @@ Below are just some of the up coming ideas for improvements.
 * Create generator for new starter based on demo app.
 * Docker/CI support for open browser. (don't)
 * Load env for storybook too.
-* -tasks should have peerDesp for express
-* -tasks add winston for logging
 * handle precommit for each package https://github.com/sudo-suhas/lint-staged-multi-pkg
 * https://github.com/atlassian/lerna-semantic-release
 
