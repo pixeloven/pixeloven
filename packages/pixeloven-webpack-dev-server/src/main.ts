@@ -1,4 +1,4 @@
-import { exit, handleError, sleep } from "@pixeloven/core";
+import { exit, handleError, normalizeUrl, sleep } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import {
     webpackClientConfig,
@@ -6,10 +6,11 @@ import {
 } from "@pixeloven/webpack-config";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
-import { config } from "./lib/config";
-import Features, { Options } from "./lib/Features";
+import Compiler from "./lib/Compiler";
+import { createDefaultConfig } from "./lib/ServerConfig";        // const config = getServerConfig();
+
 import Server from "./lib/Server";
-import { hasOptionsFile, normalizeUrl, requireOptions } from "./utils/macros";
+
 /**
  * Get WebpackDevServerUtils functions
  */
@@ -33,12 +34,13 @@ const main = (argv: string[]) => {
         logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
-        let options: Options = {};
-        if (hasOptionsFile) {
-            options = requireOptions() as Options;
-        }
-        const features = new Features(options);
-        const server = new Server(config, features);
+        const webpackConfig = [
+            webpackClientConfig(process.env),
+            webpackServerConfig(process.env),
+        ];
+        const compiler = new Compiler(webpackConfig);
+        const config = createDefaultConfig(compiler);
+        const server = new Server(config);
 
         /**
          * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
@@ -56,22 +58,19 @@ const main = (argv: string[]) => {
                 .then((chosenPort: number) => {
                     logger.info(`Attempting to bind to ${host}:${chosenPort}`);
                     sleep(1000);
-                    const webpackConfigs = [
-                        webpackClientConfig(process.env),
-                        webpackServerConfig(process.env),
-                    ];
-                    server.start(webpackConfigs, (error?: Error) => {
+
+                    server.start((error?: Error) => {
                         if (error) {
                             handleError(error);
                         }
                         logger.info("Starting development server...");
-                        if (config.machine === "host") {
+                        if (config.server.machine === "host") {
                             logger.info(
                                 "Application will launch automatically.",
                             );
                             const baseUrl = normalizeUrl(
                                 `${protocol}://${host}:${chosenPort}/${
-                                    config.publicPath
+                                    config.server.path
                                 }`,
                             );
                             openBrowser(baseUrl);

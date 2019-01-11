@@ -79,6 +79,13 @@ export const createOrEmptyDir = (fullPath: string) => {
 };
 
 /**
+ * Normalize a url
+ * @param item
+ */
+export const normalizeUrl = (item: string) =>
+    item.replace(/([^:]\/)\/+/g, "$1");
+
+/**
  * Spawn node script
  * @param name
  * @param args

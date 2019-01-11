@@ -1,69 +1,45 @@
 import express from "express";
 import path from "path";
-import webpack, { Configuration } from "webpack";
-import { Config } from "./config";
-import Features from "./Features";
-import {
-    createWebpackDevMiddleware,
-    createWebpackHotMiddleware,
-    createWebpackHotServerMiddleware,
-    errorHandler,
-} from "./middleware";
+import { ServerConfig } from "./ServerConfig";
 
 type ServerOnComplete = (error?: Error) => void;
 
 class Server {
-    protected config: Config;
-    protected features: Features;
+    protected config: ServerConfig;
 
-    constructor(config: Config, features: Features) {
+    /**
+     * Construct server
+     * @param config 
+     */
+    constructor(config: ServerConfig) {
         this.config = config;
-        this.features = features;
     }
 
+    /**
+     * Start server from webpack configuration
+     * @param compilerConfig 
+     * @param onComplete 
+     */
     public start(
-        compilerConfig: Configuration[],
         onComplete: ServerOnComplete,
     ) {
         const app = express();
-        app.use(
-            this.config.publicPath,
-            express.static(path.resolve(process.cwd(), "public")),
-        );
-
-        /**
-         * Run before hook
-         */
-        this.features.before(app);
-
-        /**
-         * Setup webpack dev server
-         */
-        const combinedCompiler = webpack(compilerConfig);
-        const clientCompiler = combinedCompiler.compilers.find(
-            compiler => compiler.name === "client",
-        );
-        app.use(createWebpackDevMiddleware(this.config, combinedCompiler));
-        if (clientCompiler) {
-            app.use(createWebpackHotMiddleware(this.config, clientCompiler));
+        if (this.config.before) {
+            this.config.before(app);
         }
+        // Register static file serving
         app.use(
-            createWebpackHotServerMiddleware(this.config, combinedCompiler),
+            this.config.server.path,
+            express.static(path.resolve(process.cwd(), "public")), // TODO check it exists first
         );
-
-        /**
-         * Run after hook
-         */
-        this.features.after(app);
-
-        /**
-         * Register error handler
-         */
-        app.use(errorHandler);
-
-        /**
-         * Start express server on specific host and port
-         */
+        // TODO we should also host coverage docs and docs if they exist
+        if (this.config.middle) {
+            this.config.middle(app);
+        }
+        if (this.config.after) {
+            this.config.after(app);
+        }
+        // Start express server on specific host and port
         app.listen(
             this.config.server.port,
             this.config.server.host,
