@@ -14,9 +14,7 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 /**
  * Get FileSizeReporter functions
  */
-const {
-    printFileSizesAfterBuild,
-} = FileSizeReporter;
+const { printFileSizesAfterBuild } = FileSizeReporter;
 
 /**
  * Build Information
@@ -72,7 +70,10 @@ export function printBuildFileSizesAfterGzip(
  * @param config
  * @param previousFileSizes
  */
-export function build(config: Configuration, previousFileSizes: OpaqueFileSizes) {
+export function build(
+    config: Configuration,
+    previousFileSizes: OpaqueFileSizes,
+) {
     logger.info("Creating an optimized production build...");
     const compiler = webpack(config);
     return new Promise((resolve, reject) => {

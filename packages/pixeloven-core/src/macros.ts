@@ -76,7 +76,7 @@ export const createOrEmptyDir = (fullPath: string) => {
     } else {
         fs.mkdirSync(fullPath);
     }
-}
+};
 
 /**
  * Spawn node script

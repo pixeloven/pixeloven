@@ -6,52 +6,52 @@ import { Config } from "../config";
 
 /**
  * Creates webpackDevMiddleware with custom configuration
- * @param config 
- * @param compiler 
- * @param watchOptions 
+ * @param config
+ * @param compiler
+ * @param watchOptions
  */
-const createWebpackDevMiddleware = (config: Config, compiler: MultiCompiler) => {
-    return webpackDevMiddleware(
-        compiler,
-        {
-            index: false,
-            logLevel: config.logLevel,
-            publicPath: config.publicPath,
-            reporter: (middlewareOptions, reporterOptions) => {
-                if (
-                    reporterOptions.state &&
-                    reporterOptions.stats &&
-                    middlewareOptions.logLevel !== "silent"
-                ) {
-                    const stats = formatWebpackMessages(
-                        reporterOptions.stats.toJson("verbose"),
-                    );
-                    if (stats) {
-                        if (reporterOptions.stats.hasErrors()) {
-                            logger.error(stats.errors);
-                            logger.error("Failed to compile.");
-                        } else if (reporterOptions.stats.hasWarnings()) {
-                            logger.warn(stats.warnings);
-                            logger.warn("Compiled with warnings.");
-                        } else {
-                            logger.info("Compiled successfully.");
-                        }
+const createWebpackDevMiddleware = (
+    config: Config,
+    compiler: MultiCompiler,
+) => {
+    return webpackDevMiddleware(compiler, {
+        index: false,
+        logLevel: config.logLevel,
+        publicPath: config.publicPath,
+        reporter: (middlewareOptions, reporterOptions) => {
+            if (
+                reporterOptions.state &&
+                reporterOptions.stats &&
+                middlewareOptions.logLevel !== "silent"
+            ) {
+                const stats = formatWebpackMessages(
+                    reporterOptions.stats.toJson("verbose"),
+                );
+                if (stats) {
+                    if (reporterOptions.stats.hasErrors()) {
+                        logger.error(stats.errors);
+                        logger.error("Failed to compile.");
+                    } else if (reporterOptions.stats.hasWarnings()) {
+                        logger.warn(stats.warnings);
+                        logger.warn("Compiled with warnings.");
                     } else {
-                        logger.error(
-                            "Unexpected Error: Failed to retrieve webpack stats.",
-                        );
+                        logger.info("Compiled successfully.");
                     }
                 } else {
-                    logger.info("Waiting...");
+                    logger.error(
+                        "Unexpected Error: Failed to retrieve webpack stats.",
+                    );
                 }
-            },
-            serverSideRender: true,
-            watchOptions: {
-                aggregateTimeout: 200,
-                poll: config.machine !== "host" ? 500 : false,
-            },
+            } else {
+                logger.info("Waiting...");
+            }
         },
-    );
-}
+        serverSideRender: true,
+        watchOptions: {
+            aggregateTimeout: 200,
+            poll: config.machine !== "host" ? 500 : false,
+        },
+    });
+};
 
 export default createWebpackDevMiddleware;

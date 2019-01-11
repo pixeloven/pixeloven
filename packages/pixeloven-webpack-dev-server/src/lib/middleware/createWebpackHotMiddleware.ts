@@ -6,17 +6,20 @@ import { Config } from "../config";
 
 /**
  * Creates webpackHotMiddleware with custom configuration
- * @param config 
- * @param compiler 
- * @param watchOptions 
+ * @param config
+ * @param compiler
+ * @param watchOptions
  */
-const createWebpackHotMiddleware = (config: Config, clientCompiler: Compiler) => {
+const createWebpackHotMiddleware = (
+    config: Config,
+    clientCompiler: Compiler,
+) => {
     return webpackHotMiddleware(clientCompiler, {
         heartbeat: 3000,
         log: logger.info,
         path: path.normalize(`${config.publicPath}/__webpack_hmr`),
         reload: true,
-    })
-}
+    });
+};
 
 export default createWebpackHotMiddleware;

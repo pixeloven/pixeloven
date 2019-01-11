@@ -3,17 +3,16 @@ import path from "path";
 import webpack, { Configuration } from "webpack";
 import { Config } from "./config";
 import Features from "./Features";
-import { 
+import {
     createWebpackDevMiddleware,
     createWebpackHotMiddleware,
     createWebpackHotServerMiddleware,
-    errorHandler
+    errorHandler,
 } from "./middleware";
 
 type ServerOnComplete = (error?: Error) => void;
 
 class Server {
-
     protected config: Config;
     protected features: Features;
 
@@ -22,9 +21,15 @@ class Server {
         this.features = features;
     }
 
-    public start(compilerConfig: Configuration[], onComplete: ServerOnComplete) {
+    public start(
+        compilerConfig: Configuration[],
+        onComplete: ServerOnComplete,
+    ) {
         const app = express();
-        app.use(this.config.publicPath, express.static(path.resolve(process.cwd(), "public")));
+        app.use(
+            this.config.publicPath,
+            express.static(path.resolve(process.cwd(), "public")),
+        );
 
         /**
          * Run before hook
@@ -42,8 +47,10 @@ class Server {
         if (clientCompiler) {
             app.use(createWebpackHotMiddleware(this.config, clientCompiler));
         }
-        app.use(createWebpackHotServerMiddleware(this.config, combinedCompiler));
-        
+        app.use(
+            createWebpackHotServerMiddleware(this.config, combinedCompiler),
+        );
+
         /**
          * Run after hook
          */
@@ -57,7 +64,11 @@ class Server {
         /**
          * Start express server on specific host and port
          */
-        app.listen(this.config.server.port, this.config.server.host, onComplete);
+        app.listen(
+            this.config.server.port,
+            this.config.server.host,
+            onComplete,
+        );
     }
 }
 

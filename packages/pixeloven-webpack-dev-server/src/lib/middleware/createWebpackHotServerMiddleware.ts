@@ -4,16 +4,19 @@ import { Config } from "../config";
 
 /**
  * Creates webpackHotMiddleware with custom configuration
- * @param config 
- * @param compiler 
- * @param watchOptions 
+ * @param config
+ * @param compiler
+ * @param watchOptions
  */
-const createWebpackHotServerMiddleware = (config: Config, compiler: MultiCompiler) => {
+const createWebpackHotServerMiddleware = (
+    config: Config,
+    compiler: MultiCompiler,
+) => {
     return webpackHotServerMiddleware(compiler, {
         serverRendererOptions: {
-            server: config.server
-        }
+            server: config.server,
+        },
     });
-}
+};
 
 export default createWebpackHotServerMiddleware;

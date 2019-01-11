@@ -1,20 +1,25 @@
 #!/usr/bin/env node
-import { createOrEmptyDir, exit, handleError, resolvePath } from "@pixeloven/core";
+import {
+    createOrEmptyDir,
+    exit,
+    handleError,
+    resolvePath,
+} from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
-import { webpackClientConfig, webpackServerConfig } from "@pixeloven/webpack-config";
+import {
+    webpackClientConfig,
+    webpackServerConfig,
+} from "@pixeloven/webpack-config";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
 import {
     build,
     BuildInformation,
     OpaqueFileSizes,
     printBuildFileSizesAfterGzip,
-    printBuildStatus
+    printBuildStatus,
 } from "./utils/build";
-import {
-    hasClientCodePath,
-    hasServerCodePath
-} from "./utils/macros";
+import { hasClientCodePath, hasServerCodePath } from "./utils/macros";
 
 /**
  * Setup build pathing
@@ -25,16 +30,13 @@ const PUBLIC_BUILD_PATH = `${PRIVATE_BUILD_PATH}/public`;
 /**
  * Get FileSizeReporter functions
  */
-const {
-    measureFileSizesBeforeBuild
-} = FileSizeReporter;
+const { measureFileSizesBeforeBuild } = FileSizeReporter;
 
 /**
  * Map index to "script"
  * @param index
  */
-const mapScriptIndex = (index: string) =>
-    index === "build";
+const mapScriptIndex = (index: string) => index === "build";
 
 /**
  * Setup variables and execute
@@ -53,7 +55,7 @@ const main = (argv: string[]) => {
             // TODO be mindful of /docs.. this deletes them :( - Also make storybook configurable ON/OFF
             createOrEmptyDir(PRIVATE_BUILD_PATH);
             createOrEmptyDir(PUBLIC_BUILD_PATH);
-        
+
             /**
              * Handle build for server side JavaScript
              * @description This lets us display how files changed
@@ -61,16 +63,26 @@ const main = (argv: string[]) => {
             if (hasServerCodePath()) {
                 measureFileSizesBeforeBuild(PRIVATE_BUILD_PATH)
                     .then((previousFileSizes: OpaqueFileSizes) => {
-                        return build(webpackServerConfig(environment), previousFileSizes);
-                    })
-                    .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
-                        printBuildStatus(warnings);
-                        printBuildFileSizesAfterGzip(
-                            PRIVATE_BUILD_PATH,
-                            stats,
+                        return build(
+                            webpackServerConfig(environment),
                             previousFileSizes,
                         );
-                    }, handleError);
+                    })
+                    .then(
+                        ({
+                            previousFileSizes,
+                            stats,
+                            warnings,
+                        }: BuildInformation) => {
+                            printBuildStatus(warnings);
+                            printBuildFileSizesAfterGzip(
+                                PRIVATE_BUILD_PATH,
+                                stats,
+                                previousFileSizes,
+                            );
+                        },
+                        handleError,
+                    );
             }
             /**
              * Handle build for client side JavaScript
@@ -79,16 +91,26 @@ const main = (argv: string[]) => {
             if (hasClientCodePath()) {
                 measureFileSizesBeforeBuild(PUBLIC_BUILD_PATH)
                     .then((previousFileSizes: OpaqueFileSizes) => {
-                        return build(webpackClientConfig(environment), previousFileSizes);
-                    })
-                    .then(({ previousFileSizes, stats, warnings }: BuildInformation) => {
-                        printBuildStatus(warnings);
-                        printBuildFileSizesAfterGzip(
-                            PUBLIC_BUILD_PATH,
-                            stats,
+                        return build(
+                            webpackClientConfig(environment),
                             previousFileSizes,
                         );
-                    }, handleError);
+                    })
+                    .then(
+                        ({
+                            previousFileSizes,
+                            stats,
+                            warnings,
+                        }: BuildInformation) => {
+                            printBuildStatus(warnings);
+                            printBuildFileSizesAfterGzip(
+                                PUBLIC_BUILD_PATH,
+                                stats,
+                                previousFileSizes,
+                            );
+                        },
+                        handleError,
+                    );
             }
         } catch (error) {
             handleError(error);

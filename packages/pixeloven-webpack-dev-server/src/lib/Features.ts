@@ -1,17 +1,16 @@
 import { Application } from "express";
 
 export interface Options {
-    after?: (app: Application) => void
-    before?: (app: Application) => void  
+    after?: (app: Application) => void;
+    before?: (app: Application) => void;
 }
 
 class Features {
-    
     protected options: Options;
 
     /**
      * Construct features
-     * @param options 
+     * @param options
      */
     constructor(options: Options) {
         this.options = options;
@@ -19,7 +18,7 @@ class Features {
 
     /**
      * Executes user defined "after" callback
-     * @param app 
+     * @param app
      */
     public after(app: Application) {
         if (this.options.after) {
@@ -29,7 +28,7 @@ class Features {
 
     /**
      * Executes user defined "before" callback
-     * @param app 
+     * @param app
      */
     public before(app: Application) {
         if (this.options.before) {

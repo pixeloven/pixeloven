@@ -1,7 +1,6 @@
 import "jest";
 import * as cli from "./main";
 
-
 let testArgv: string[] = [];
 const cliMock = (argv: string[]) => {
     testArgv = argv;

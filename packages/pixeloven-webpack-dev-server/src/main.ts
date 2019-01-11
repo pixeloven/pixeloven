@@ -1,12 +1,15 @@
 import { exit, handleError, sleep } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
-import { webpackClientConfig, webpackServerConfig } from "@pixeloven/webpack-config";
+import {
+    webpackClientConfig,
+    webpackServerConfig,
+} from "@pixeloven/webpack-config";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
 import { config } from "./lib/config";
 import Features, { Options } from "./lib/Features";
 import Server from "./lib/Server";
-
+import { hasOptionsFile, normalizeUrl, requireOptions } from "./utils/macros";
 /**
  * Get WebpackDevServerUtils functions
  */
@@ -17,12 +20,6 @@ const { choosePort } = WebpackDevServerUtils;
  * @param index
  */
 const mapScriptIndex = (index: string) => index === "start";
-
-/**
- * Normalize a url
- * @param item 
- */
-const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
 
 /**
  * Setup execution
@@ -36,10 +33,10 @@ const main = (argv: string[]) => {
         logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
-        // TODO need to pickup webpack configs 
-        // TODO need to pickup dev server config
-
-        const options: Options = {}; // Need to get this from some sort of user config
+        let options: Options = {};
+        if (hasOptionsFile) {
+            options = requireOptions() as Options;
+        }
         const features = new Features(options);
         const server = new Server(config, features);
 
@@ -59,15 +56,24 @@ const main = (argv: string[]) => {
                 .then((chosenPort: number) => {
                     logger.info(`Attempting to bind to ${host}:${chosenPort}`);
                     sleep(1000);
-                    const webpackConfigs = [webpackClientConfig(process.env), webpackServerConfig(process.env)]
+                    const webpackConfigs = [
+                        webpackClientConfig(process.env),
+                        webpackServerConfig(process.env),
+                    ];
                     server.start(webpackConfigs, (error?: Error) => {
                         if (error) {
                             handleError(error);
                         }
                         logger.info("Starting development server...");
                         if (config.machine === "host") {
-                            logger.info("Application will launch automatically.");
-                            const baseUrl = normalizeUrl(`${protocol}://${host}:${chosenPort}/${config.publicPath}`);
+                            logger.info(
+                                "Application will launch automatically.",
+                            );
+                            const baseUrl = normalizeUrl(
+                                `${protocol}://${host}:${chosenPort}/${
+                                    config.publicPath
+                                }`,
+                            );
                             openBrowser(baseUrl);
                         }
                     });
@@ -78,7 +84,6 @@ const main = (argv: string[]) => {
         } catch (error) {
             handleError(error);
         }
-        
     }
 };
 
