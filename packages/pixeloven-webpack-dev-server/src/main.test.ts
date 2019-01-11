@@ -7,17 +7,9 @@ const exitMock = (code?: number) => {
     testCode = code;
 };
 
-const spawnYarnMock = (cmd: string) => {
-    return cmd;
-};
-
-const spawnCompleteMock = (sig: string) => {
-    return sig;
-};
-
 const testArgv: string[] = [];
 
-describe("@pixeloven/dev-server", () => {
+describe("@pixeloven/webpack-dev-server", () => {
     describe("main", () => {
         afterEach(() => {
             jest.restoreAllMocks();
@@ -33,18 +25,9 @@ describe("@pixeloven/dev-server", () => {
             expect(exitSpy).toHaveBeenCalledTimes(1);
             expect(testCode).toEqual(1);
         });
-        it("should start cli and pass", () => {
-            testArgv.push("/some/path", "yarn", "generate");
-            const exitSpawnYarn = jest
-                .spyOn(macros, "spawnYarn")
-                .mockImplementation(spawnYarnMock);
-            const exitSpawnComplete = jest
-                .spyOn(macros, "spawnComplete")
-                .mockImplementation(spawnCompleteMock);
-            main(testArgv);
-            expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
-            expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
-            expect(testCode).toEqual(1);
+        xit('should start cli "start" and pass', () => {
+            // TODO also need to mock out logger
+            // TODO figure out how to test everything in side try catch
         });
     });
 });

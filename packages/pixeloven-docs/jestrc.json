@@ -16,6 +16,7 @@
   "testURL": "http://localhost",
   "moduleFileExtensions": [
     "js",
+    "json",
     "jsx",
     "ts",
     "tsx"

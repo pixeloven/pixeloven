@@ -1,4 +1,6 @@
+import "jest";
 import * as cli from "./main";
+
 
 let testArgv: string[] = [];
 const cliMock = (argv: string[]) => {
@@ -9,7 +11,7 @@ const caller = () => {
     require("./index");
 };
 
-describe("@pixeloven/dev-server", () => {
+describe("@pixeloven/webpack-dev-server", () => {
     describe("index", () => {
         afterAll(() => {
             jest.clearAllMocks();

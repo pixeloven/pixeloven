@@ -16,6 +16,7 @@
   "testURL": "http://localhost",
   "moduleFileExtensions": [
     "js",
+    "json",
     "jsx",
     "ts",
     "tsx"
@@ -26,10 +27,10 @@
   ],
   "coverageThreshold": {
     "global": {
-      "branches": 0,
+      "branches": 70,
       "functions": 0,
-      "lines": 0,
-      "statements": 0
+      "lines": 70,
+      "statements": 70
     }
   },
   "collectCoverage": true,

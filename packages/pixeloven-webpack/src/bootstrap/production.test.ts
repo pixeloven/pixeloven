@@ -9,7 +9,7 @@ const caller = () => {
     require("./production");
 };
 
-describe("@pixeloven/tasks", () => {
+describe("@pixeloven/webpack", () => {
     describe("production", () => {
         afterAll(() => {
             jest.clearAllMocks();
