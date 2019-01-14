@@ -100,21 +100,3 @@ export const createDefaultConfig = (compiler: Compiler): ServerConfig => {
     }
 };
 
-/**
- * Require options file
- * @todo Should add warnings and logging here
- */
-export const createServerConfig = (compiler: Compiler, fileName: string, buffer: Buffer) => {
-    const defaultConfig = createDefaultConfig(compiler);
-    const serverConfigFunction = interopRequireConfig(
-        requireFromString(buffer.toString(), fileName)
-    );
-    if (serverConfigFunction) {
-        const serverConfig = serverConfigFunction();
-        return {
-            ...defaultConfig, 
-            ...serverConfig
-        };
-    }
-    return defaultConfig;
-};
