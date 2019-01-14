@@ -17,8 +17,10 @@ interface RendererOptions {
 export default (options: RendererOptions) => {
     /**
      * Apply application to dev-server
-     * @todo make a single entrypoint file and just segment on development or prod
+     * @todo make a single entry-point file and just segment on development or prod
      * @todo still need something like nodemon to refresh the server :(
+     * @todo make service workers configurable
+     * @todo move all static files up to static/
      */
     server(options.app);
     const { scripts, stylesheets } = flushChunks(options.clientStats, {
