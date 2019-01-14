@@ -122,6 +122,13 @@ describe("@pixeloven/core", () => {
                 expect(emptyDirSyncSpy).toHaveBeenCalledTimes(1);
             });
         });
+        describe("normalizeUrl", () => {
+            it("should return normalized url", () => {
+                const url = "https://localhost:8080//test/resource///woot";
+                const expectedUrl = "https://localhost:8080/test/resource/woot";
+                expect(macros.normalizeUrl(url)).toEqual(expectedUrl);
+            });
+        });
         describe("spawnNode", () => {
             it("should spawn a new node caller", () => {
                 const spawnSyncSpy = jest

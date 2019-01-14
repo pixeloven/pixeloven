@@ -1,0 +1,52 @@
+{
+  "name": "@pixeloven/webpack",
+  "version": "3.2.1",
+  "description": "Webpack build script",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "bin": {
+    "pixeloven-webpack": "./dist/lib/index.js"
+  },
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@pixeloven/cli": "^3.2.1",
+    "@pixeloven/core": "^3.2.1",
+    "@pixeloven/env": "^3.2.1",
+    "@pixeloven/node-logger": "^3.2.1",
+    "@pixeloven/webpack-config": "^3.2.1",
+    "promise": "8.0.2",
+    "react-dev-utils": "6.1.1",
+    "webpack": "4.28.2"
+  },
+  "devDependencies": {
+    "@types/node": "10.12.12",
+    "@types/webpack": "4.4.22"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn compile",
+    "clean": "pixeloven-cli clean",
+    "compile": "pixeloven-cli compile:ts",
+    "precompile": "pixeloven-cli compile:clean",
+    "document": "pixeloven-cli document:ts src",
+    "predocument": "pixeloven-cli document:clean",
+    "lint": "yarn lint:ts",
+    "lint:ts": "pixeloven-cli lint:ts src/**/*.{ts,tsx}",
+    "pretest": "pixeloven-cli test:clean",
+    "pretty": "pixeloven-cli pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-cli pretty:ts src/**/*.{ts,tsx}",
+    "test": "pixeloven-cli test --color --coverage",
+    "test:watch": "pixeloven-cli test:watch"
+  }
+}

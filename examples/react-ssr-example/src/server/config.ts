@@ -1,7 +1,7 @@
 /**
  * General configuration for server
  */
-const BASE_PATH = process.env.PUBLIC_URL || "/";
+const BASE_URL = process.env.PUBLIC_URL || "/";
 const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || "8080";
 const PROTOCOL = process.env.PROTOCOL || "https";
@@ -14,7 +14,7 @@ export interface Server {
 }
 
 export interface Config {
-    basePath: string;
+    baseUrl: string;
     environment: string;
     server: Server;
 }
@@ -26,7 +26,7 @@ const server: Server = {
 };
 
 export const config: Config = {
-    basePath: BASE_PATH,
+    baseUrl: BASE_URL,
     environment: ENVIRONMENT,
     server,
 };

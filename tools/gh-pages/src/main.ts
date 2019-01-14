@@ -17,12 +17,12 @@ const resolveDir = (relativePath: string) => {
     } else {
         throw new Error("Path is not a directory.");
     }
-}
+};
 
 /**
  * Copies docs to destination
- * @param containerName 
- * @param relativePath 
+ * @param containerName
+ * @param relativePath
  */
 const copyDocs = (containerName: string, packageName: string) => {
     try {
@@ -32,12 +32,12 @@ const copyDocs = (containerName: string, packageName: string) => {
         const absoluteDestPath = resolvePath(relativeDestPath, false);
         fs.copySync(absoluteSourcePath, absoluteDestPath);
         logger.info(`Copied: ${absoluteSourcePath}`);
-    } catch(error) {
+    } catch (error) {
         if (error && error.message) {
             logger.warn(error.message);
         }
     }
-}
+};
 
 /**
  * Publish dist files
@@ -58,13 +58,15 @@ const main = (argv: string[]) => {
         logger.info("Creating global docs directory");
         createOrEmptyDir("docs");
 
-        scriptArgs.forEach((containerName) =>{
+        scriptArgs.forEach(containerName => {
             logger.info(`Resolving ${containerName}`);
-            const examples = fs.readdirSync(containerName)
-            examples.forEach((packageName) => copyDocs(containerName, packageName));
+            const examples = fs.readdirSync(containerName);
+            examples.forEach(packageName =>
+                copyDocs(containerName, packageName),
+            );
         });
         ghpages.publish("docs", handleError);
-    } catch(error) {
+    } catch (error) {
         handleError(error);
     }
 };

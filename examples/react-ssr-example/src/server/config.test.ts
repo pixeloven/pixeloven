@@ -3,7 +3,7 @@ import { config } from "./config";
 
 describe("client/config", () => {
     it("contains basePath property", () => {
-        expect(config).toHaveProperty("basePath");
+        expect(config).toHaveProperty("baseUrl");
     });
     it("contains environment property", () => {
         expect(config).toHaveProperty("environment");

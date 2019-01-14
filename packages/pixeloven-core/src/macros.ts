@@ -76,7 +76,14 @@ export const createOrEmptyDir = (fullPath: string) => {
     } else {
         fs.mkdirSync(fullPath);
     }
-}
+};
+
+/**
+ * Normalize a url
+ * @param item
+ */
+export const normalizeUrl = (item: string) =>
+    item.replace(/([^:]\/)\/+/g, "$1");
 
 /**
  * Spawn node script
