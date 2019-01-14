@@ -1,4 +1,4 @@
-import { Application,NextFunction, Request, Response } from "express";
+import { Application, NextFunction, Request, Response } from "express";
 import { flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
@@ -18,11 +18,10 @@ export default (options: RendererOptions) => {
 
     /**
      * Apply application to dev-server
+     * @todo make a single entrypoint file and just segment on development or prod
+     * @todo still need something like nodemon to refresh the server :(
      */
-    server(options.app)
-
-    // TODO could unify this in assetPath.ts
-    // TODO might still be able to register static server here and routes -- unify dev and prod
+    server(options.app);
     const { scripts, stylesheets } = flushChunks(options.clientStats, {
         chunkNames: flushChunkNames(),
     });

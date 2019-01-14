@@ -1,8 +1,8 @@
 import { Application } from "express";
 import expressWinston from "express-winston";
 import winston from "winston";
-import { health } from "./controllers/index";
-import { errorHandler, renderer } from "./middleware/index";
+import { health } from "./controllers";
+import { errorHandler, renderer } from "./middleware";
 
 const server = (app: Application) => {
     /**

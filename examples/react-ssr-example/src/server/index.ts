@@ -18,8 +18,8 @@ const publicPath = path.resolve(__dirname, "public");
 /**
  * Define render middleware
  */
-app.use(assetPath(publicPath, config.basePath));
-app.use(config.basePath, express.static(publicPath));
+app.use(assetPath(publicPath));
+app.use(config.baseUrl, express.static(publicPath));
 server(app);
 
 /**
