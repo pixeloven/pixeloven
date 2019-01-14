@@ -1,6 +1,6 @@
 import { MultiCompiler } from "webpack";
 import webpackHotServerMiddleware from "webpack-hot-server-middleware";
-import { Server } from "../ServerConfig";
+import { Config } from "../config";
 
 /**
  * Creates webpackHotMiddleware with custom configuration
@@ -10,7 +10,7 @@ import { Server } from "../ServerConfig";
  * @param watchOptions
  */
 const createWebpackHotServerMiddleware = (
-    config: Server,
+    config: Config,
     compiler: MultiCompiler,
 ) => {
     return webpackHotServerMiddleware(compiler, {

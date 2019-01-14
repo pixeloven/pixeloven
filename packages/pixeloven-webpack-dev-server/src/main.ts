@@ -7,8 +7,7 @@ import {
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
 import Compiler from "./lib/Compiler";
-import { createDefaultConfig } from "./lib/ServerConfig";        // const config = getServerConfig();
-
+import config from "./lib/config";
 import Server from "./lib/Server";
 
 /**
@@ -39,8 +38,7 @@ const main = (argv: string[]) => {
             webpackServerConfig(process.env),
         ];
         const compiler = new Compiler(webpackConfig);
-        const config = createDefaultConfig(compiler);
-        const server = new Server(config);
+        const server = new Server(compiler, config);
 
         /**
          * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
@@ -51,9 +49,9 @@ const main = (argv: string[]) => {
              * We attempt to use the default port but if it is busy, we offer the user to
              * run on a different port. `choosePort()` Promise resolves to the next free port.
              */
-            const host = config.server.host;
-            const port = config.server.port;
-            const protocol = config.server.protocol;
+            const host = config.host;
+            const port = config.port;
+            const protocol = config.protocol;
             choosePort(host, port)
                 .then((chosenPort: number) => {
                     logger.info(`Attempting to bind to ${host}:${chosenPort}`);
@@ -64,13 +62,13 @@ const main = (argv: string[]) => {
                             handleError(error);
                         }
                         logger.info("Starting development server...");
-                        if (config.server.machine === "host") {
+                        if (config.machine === "host") {
                             logger.info(
                                 "Application will launch automatically.",
                             );
                             const baseUrl = normalizeUrl(
                                 `${protocol}://${host}:${chosenPort}/${
-                                    config.server.path
+                                    config.path
                                 }`,
                             );
                             openBrowser(baseUrl);

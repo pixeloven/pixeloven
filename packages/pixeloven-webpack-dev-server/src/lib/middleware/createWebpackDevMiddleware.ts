@@ -2,7 +2,7 @@ import { logger } from "@pixeloven/node-logger";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import { MultiCompiler } from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
-import { Server } from "../ServerConfig";
+import { Config } from "../config";
 
 /**
  * Creates webpackDevMiddleware with custom configuration
@@ -11,7 +11,7 @@ import { Server } from "../ServerConfig";
  * @param watchOptions
  */
 const createWebpackDevMiddleware = (
-    config: Server,
+    config: Config,
     compiler: MultiCompiler,
 ) => {
     return webpackDevMiddleware(compiler, {

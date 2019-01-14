@@ -2,7 +2,7 @@ import { logger } from "@pixeloven/node-logger";
 import path from "path";
 import { Compiler } from "webpack";
 import webpackHotMiddleware from "webpack-hot-middleware";
-import { Server } from "../ServerConfig";
+import { Config } from "../config";
 
 /**
  * Creates webpackHotMiddleware with custom configuration
@@ -11,7 +11,7 @@ import { Server } from "../ServerConfig";
  * @param watchOptions
  */
 const createWebpackHotMiddleware = (
-    config: Server,
+    config: Config,
     clientCompiler: Compiler,
 ) => {
     return webpackHotMiddleware(clientCompiler, {
