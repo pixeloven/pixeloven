@@ -1,10 +1,11 @@
-import { NextFunction, Request, Response } from "express";
+import { Application,NextFunction, Request, Response } from "express";
 import { flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
-import { renderer } from "./middleware";
+import server from "./server";
 
 interface RendererOptions {
+    app: Application,
     clientStats: Stats;
     serverStats: Stats;
 }
@@ -14,6 +15,13 @@ interface RendererOptions {
  * @param options
  */
 export default (options: RendererOptions) => {
+
+    /**
+     * Apply application to dev-server
+     */
+    server(options.app)
+
+    // TODO could unify this in assetPath.ts
     // TODO might still be able to register static server here and routes -- unify dev and prod
     const { scripts, stylesheets } = flushChunks(options.clientStats, {
         chunkNames: flushChunkNames(),
@@ -28,6 +36,6 @@ export default (options: RendererOptions) => {
             css: stylesheets,
             js: scripts,
         };
-        renderer(req, res, next);
+        next();
     };
 };

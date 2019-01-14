@@ -38,7 +38,8 @@ class Server {
             this.compiler.server.hooks.done.tap(
                 "PixelOvenWebpackDevServer",
                 () => {
-                    logger.info("DONE!!!!!!!!!!!!");
+                    // TODO add more logging here (or use forked hot-server)
+                    logger.info("webpack built server");
                 },
             );
         }
@@ -48,10 +49,10 @@ class Server {
         const publicPath = path.resolve(process.cwd(), "public");
         if (fs.existsSync(publicPath)) {
             logger.info(
-                'Static file directory "public" found. Automatically setting up static file serving.',
+                "Static file directory `public` found. Automatically setting up static file serving.",
             );
             app.use(this.config.path, express.static(publicPath));
-        } // TODO should we log here?
+        }
         app.use(
             createWebpackDevMiddleware(this.config, this.compiler.combined),
         );
@@ -60,12 +61,15 @@ class Server {
                 createWebpackHotMiddleware(this.config, this.compiler.client),
             );
         }
+        const subApp = express();
         app.use(
             createWebpackHotServerMiddleware(
+                subApp,
                 this.config,
                 this.compiler.combined,
             ),
         );
+        app.use(subApp);
         app.use(errorHandler);
 
         // Start express server on specific host and port

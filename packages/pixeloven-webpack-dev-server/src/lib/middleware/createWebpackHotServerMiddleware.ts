@@ -1,3 +1,4 @@
+import { Application } from "express";
 import { MultiCompiler } from "webpack";
 import webpackHotServerMiddleware from "webpack-hot-server-middleware";
 import { Config } from "../config";
@@ -10,11 +11,13 @@ import { Config } from "../config";
  * @param watchOptions
  */
 const createWebpackHotServerMiddleware = (
+    app: Application,
     config: Config,
     compiler: MultiCompiler,
 ) => {
     return webpackHotServerMiddleware(compiler, {
         serverRendererOptions: {
+            app,
             server: config,
         },
     });
