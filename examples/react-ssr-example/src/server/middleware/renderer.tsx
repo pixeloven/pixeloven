@@ -23,7 +23,7 @@ export default (req: Request, res: Response, next: NextFunction): void => {
     const staticContext: StaticContext = {
         statusCode: 200,
     };
-    const routes = convertCustomRouteConfig(routeConfig, config.basePath);
+    const routes = convertCustomRouteConfig(routeConfig, config.baseUrl);
 
     // run saga middleware and then proceed with rendering once END action is received
     store
@@ -58,7 +58,7 @@ export default (req: Request, res: Response, next: NextFunction): void => {
      * This likely will break prod build and we should find a better way
      * @todo perhaps by modifying nginx proxy on the docker side so that this is needed
      */
-    const relativeUrlPath = req.url.replace(config.basePath, "/");
+    const relativeUrlPath = req.url.replace(config.baseUrl, "/");
 
     /**
      * Finds any matching routes attempts to init state on each
