@@ -11,7 +11,6 @@ import {
     errorHandler,
 } from "./middleware";
 
-
 type ServerOnComplete = (error?: Error) => void;
 
 class Server {
@@ -20,8 +19,8 @@ class Server {
 
     /**
      * Construct server
-     * @param compiler 
-     * @param config 
+     * @param compiler
+     * @param config
      */
     constructor(compiler: Compiler, config: Config) {
         this.compiler = compiler;
@@ -30,44 +29,47 @@ class Server {
 
     /**
      * Start server from webpack configuration
-     * @param compilerConfig 
-     * @param onComplete 
+     * @param compilerConfig
+     * @param onComplete
      */
-    public start(
-        onComplete: ServerOnComplete,
-    ) {
+    public start(onComplete: ServerOnComplete) {
         const app = express();
         if (this.compiler.server) {
-            this.compiler.server.hooks.done.tap("PixelOvenWebpackDevServer", () => {
-                logger.info("DONE!!!!!!!!!!!!");
-            });
+            this.compiler.server.hooks.done.tap(
+                "PixelOvenWebpackDevServer",
+                () => {
+                    logger.info("DONE!!!!!!!!!!!!");
+                },
+            );
         }
         /**
          * @todo Support coverage and type docs. Plus storybook docs
          */
         const publicPath = path.resolve(process.cwd(), "public");
         if (fs.existsSync(publicPath)) {
-            logger.info("Static file directory \"public\" found. Automatically setting up static file serving.");
-            app.use(
-                this.config.path,
-                express.static(publicPath),
+            logger.info(
+                'Static file directory "public" found. Automatically setting up static file serving.',
             );
+            app.use(this.config.path, express.static(publicPath));
         } // TODO should we log here?
-        app.use(createWebpackDevMiddleware(this.config, this.compiler.combined));
+        app.use(
+            createWebpackDevMiddleware(this.config, this.compiler.combined),
+        );
         if (this.compiler.client) {
-            app.use(createWebpackHotMiddleware(this.config, this.compiler.client));
+            app.use(
+                createWebpackHotMiddleware(this.config, this.compiler.client),
+            );
         }
         app.use(
-            createWebpackHotServerMiddleware(this.config, this.compiler.combined),
+            createWebpackHotServerMiddleware(
+                this.config,
+                this.compiler.combined,
+            ),
         );
         app.use(errorHandler);
 
         // Start express server on specific host and port
-        app.listen(
-            this.config.port,
-            this.config.host,
-            onComplete,
-        );
+        app.listen(this.config.port, this.config.host, onComplete);
     }
 }
 

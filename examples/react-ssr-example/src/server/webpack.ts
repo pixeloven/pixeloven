@@ -1,4 +1,4 @@
-import { Application, NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
@@ -7,21 +7,6 @@ import { renderer } from "./middleware";
 interface RendererOptions {
     clientStats: Stats;
     serverStats: Stats;
-}
-
-/**
- * Allows us to configure our development server prior to rendering
- * @todo eventually we should unify our middleware and make this more unified
- */
-export const config = () => {
-    return {
-        after: (app: Application) => {
-            console.log("After!!!!!!!!!!!!!!");
-        },
-        before: (app: Application) => {
-            console.log("Before!!!!!!!!!!!!!!");
-        },
-    }
 }
 
 /**

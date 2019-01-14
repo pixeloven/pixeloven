@@ -40,6 +40,6 @@ const server: Config = {
     path: PUBLIC_PATH,
     port: parseInt(PORT, 10),
     protocol: PROTOCOL,
-}
+};
 
 export default server;

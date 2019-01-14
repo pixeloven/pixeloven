@@ -1,7 +1,6 @@
 import webpack, { Configuration, MultiCompiler } from "webpack";
 
 class Compiler {
-
     /**
      * Defines our combined compiler
      */
@@ -14,7 +13,7 @@ class Compiler {
 
     /**
      * Construct compilers
-     * @param config 
+     * @param config
      */
     constructor(config: Configuration[]) {
         this.config = config;
@@ -22,11 +21,15 @@ class Compiler {
     }
 
     public get client() {
-        return this.combined.compilers.find(compiler => compiler.name === "client")
+        return this.combined.compilers.find(
+            compiler => compiler.name === "client",
+        );
     }
 
     public get server() {
-        return this.combined.compilers.find(compiler => compiler.name === "server")
+        return this.combined.compilers.find(
+            compiler => compiler.name === "server",
+        );
     }
 }
 
