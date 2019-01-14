@@ -3,22 +3,20 @@ import fs from "fs";
 import path from "path";
 
 interface Manifest {
-    [key: string] : string
+    [key: string]: string;
 }
 
 /**
  * Reads asset manifest file
- * @param publicPath 
+ * @param publicPath
  */
-const requireAssetManifest = (
-    publicPath: string,
-): Manifest | undefined => {
+const requireAssetManifest = (publicPath: string): Manifest | undefined => {
     const manifestPath = path.normalize(`${publicPath}/asset-manifest.json`);
     if (fs.existsSync(manifestPath)) {
         return JSON.parse(fs.readFileSync("asset-manifest.json", "utf8"));
     }
     return undefined;
-}
+};
 
 /**
  * Find static files
@@ -26,10 +24,7 @@ const requireAssetManifest = (
  * @param baseUrl
  * @param type
  */
-export const findStaticFiles = (
-    manifest: Manifest,
-    type: string,
-) => {
+export const findStaticFiles = (manifest: Manifest, type: string) => {
     const results: string[] = [];
     for (const key in manifest) {
         if (manifest.hasOwnProperty(key)) {
@@ -39,7 +34,7 @@ export const findStaticFiles = (
         }
     }
     return results;
-}
+};
 
 /**
  * Define assets for template

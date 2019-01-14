@@ -5,7 +5,7 @@ import flushChunks from "webpack-flush-chunks";
 import server from "./server";
 
 interface RendererOptions {
-    app: Application,
+    app: Application;
     clientStats: Stats;
     serverStats: Stats;
 }
@@ -15,7 +15,6 @@ interface RendererOptions {
  * @param options
  */
 export default (options: RendererOptions) => {
-
     /**
      * Apply application to dev-server
      * @todo make a single entrypoint file and just segment on development or prod
