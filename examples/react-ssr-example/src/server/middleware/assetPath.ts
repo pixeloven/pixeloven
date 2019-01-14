@@ -10,10 +10,10 @@ interface Manifest {
  * Reads asset manifest file
  * @param publicPath
  */
-const requireAssetManifest = (publicPath: string): Manifest | undefined => {
+export const requireAssetManifest = (publicPath: string): Manifest | undefined => {
     const manifestPath = path.normalize(`${publicPath}/asset-manifest.json`);
     if (fs.existsSync(manifestPath)) {
-        return JSON.parse(fs.readFileSync("asset-manifest.json", "utf8"));
+        return JSON.parse(fs.readFileSync(manifestPath, "utf8"));
     }
     return undefined;
 };
