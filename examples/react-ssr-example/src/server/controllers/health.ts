@@ -11,7 +11,7 @@ const router = Router();
  * @param res
  */
 router.get(
-    "/",
+    "/v1/health",
     (req: Request, res: Response): void => {
         res.status(200).send("OK");
     },
