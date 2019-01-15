@@ -39,6 +39,16 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
     const { ifProduction, ifDevelopment } = getIfUtils(environment);
 
     /**
+     * Define entrypoint(s) for sever
+     */
+    const entry = removeEmpty([
+        ifProduction(
+            resolvePath("src/server/index.ts"),
+            resolvePath("src/server/webpack.ts"),
+        ),
+    ]);
+
+    /**
      * All other files that aren't caught by the other loaders will go through this one.
      * @description "file" loader makes sure those assets get served by WebpackDevServer.
      * When you `import` an asset, you get its (virtual) filename.
@@ -240,7 +250,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
     return {
         bail: ifProduction(),
         devtool: ifDevelopment("eval-source-map", false),
-        entry: resolvePath("src/server/index.ts"),
+        entry,
         externals: [
             // Exclude from local node_modules dir
             webpackNodeExternals(),
