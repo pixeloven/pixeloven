@@ -1,7 +1,6 @@
+import { AssetManifest } from "@server/utils";
 import { Application, NextFunction, Request, Response } from "express";
-import { flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
-import flushChunks from "webpack-flush-chunks";
 import server from "./server";
 
 interface RendererOptions {
@@ -16,26 +15,24 @@ interface RendererOptions {
  */
 export default (options: RendererOptions) => {
     /**
-     * Apply application to dev-server
-     * @todo make a single entry-point file and just segment on development or prod
-     * @todo still need something like nodemon to refresh the server :(
-     * @todo make service workers configurable
-     * @todo move all static files up to static/
+     * Get asset manifest from webpack stats
      */
-    server(options.app);
-    const { scripts, stylesheets } = flushChunks(options.clientStats, {
-        chunkNames: flushChunkNames(),
+    const asset = new AssetManifest({
+        stats: options.clientStats,
     });
 
     /**
+     * Apply application to dev-server
+     */
+    server(options.app);
+
+    /**
      * Register client settings
-     * @description Currently CSS is not emitted and is therefore inline. This means we don't yet need to reference it here.
      */
     return (req: Request, res: Response, next: NextFunction): void => {
-        req.files = {
-            css: stylesheets,
-            js: scripts,
-        };
+        if (asset.manifest) {
+            req.files = asset.manifest;
+        }
         next();
     };
 };
