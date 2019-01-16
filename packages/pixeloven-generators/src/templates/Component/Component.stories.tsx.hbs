@@ -1,9 +1,10 @@
-import { withReadme } from "storybook-readme";
-import Readme from "./README.md";
-
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
-import {{componentName}} from "./{{componentName}}";
+import { withReadme } from "storybook-readme";
+
+import { {{componentName}} } from "@shared/components/{{(plural componentType)}}";
+
+import Readme from "./README.md";
 
 storiesOf("Components/{{capitalize (plural componentType)}}/{{componentName}}", module)
     .addDecorator(withReadme(Readme))
