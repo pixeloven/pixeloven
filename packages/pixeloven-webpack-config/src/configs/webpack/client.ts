@@ -426,6 +426,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
             new OfflinePlugin({
                 ServiceWorker: {
                     events: true,
+                    output: "static/js/sw.js",
                 },
                 appShell: "/offline.html",
                 caches: {
