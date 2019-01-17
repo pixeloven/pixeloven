@@ -21,4 +21,3 @@ server(app);
  * Start express server on specific host and port
  */
 app.listen(config.server.port, config.server.host);
-
