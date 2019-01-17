@@ -180,7 +180,15 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
          *
          * @env all
          */
-        new webpack.EnvironmentPlugin(process.env),
+        new webpack.EnvironmentPlugin({
+            ...process.env,
+            ...{
+                NAME: name,
+                NODE_ENV: ifProduction("production", "development"),
+                PUBLIC_URL: publicPath,
+                TARGET: target,
+            }
+        }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation
          * @env all
