@@ -37,12 +37,11 @@ const main = (argv: string[]) => {
         case "build":
         case "build:story": {
             const config = path.resolve(__dirname, "./configs");
-            const output = path.resolve(process.cwd(), "./dist/public/docs");
             const result = spawnYarn("build-storybook", [
                 "-c",
                 config,
                 "-o",
-                output,
+                "./dist/public/docs",
             ]);
             spawnComplete(result);
             break;
