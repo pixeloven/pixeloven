@@ -1,22 +1,21 @@
-FROM node:10.14
-LABEL description="React SSR"
+FROM node:10.15
+LABEL description="React SSR Example"
 
-# Install CI tools, upgrade package managers and install modules
-# Install tools for watching files: https://stackoverflow.com/questions/42445288/enabling-webpack-hot-reload-in-a-docker-application
-# TODO add curl -fLSs https://circle.ci/cli | bash && \ once they support 2.1
+# Copy directory contents to tmp directory
 WORKDIR /tmp
-COPY package.json /tmp/
+COPY . /tmp/
 
 RUN apt-get update && \
     npm install -g npm && \
     npm install -g yarn && \
-    yarn install
+    yarn install && \
+    yarn build
 
 # Copy repo files into container and move node_modules into app and then build application
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
 RUN cp -a /tmp/node_modules /usr/src/app/ && \
-    yarn run build
+    cp -a /tmp/dist /usr/src/app/
 
 EXPOSE 8080
 EXPOSE 9001

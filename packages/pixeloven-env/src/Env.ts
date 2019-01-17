@@ -121,7 +121,7 @@ export class Env {
 
     /**
      * Allows for the process to be overridden
-     * @description This should rarely be used. It's main function is to facilitate testing.
+     * @description This setters main function is to facilitate testing and should not be used otherwise
      */
     public static set process(proc: NodeJS.Process | undefined) {
         Env.proc = proc;

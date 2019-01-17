@@ -24,13 +24,13 @@
     "cross-spawn": "6.0.5",
     "fs-extra": "7.0.1",
     "react-dev-utils": "6.1.1",
-    "webpack": "4.28.2"
+    "webpack": "4.28.4"
   },
   "devDependencies": {
     "@types/cross-spawn": "6.0.0",
     "@types/fs-extra": "5.0.4",
-    "@types/node": "10.12.12",
-    "@types/webpack": "4.4.22"
+    "@types/node": "10.12.18",
+    "@types/webpack": "4.4.23"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
