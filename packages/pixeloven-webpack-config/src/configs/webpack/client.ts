@@ -2,7 +2,6 @@ import { resolvePath } from "@pixeloven/core";
 import autoprefixer from "autoprefixer";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
-import Dotenv from "dotenv-webpack";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -315,24 +314,10 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
         /**
          * Define environmental variables base on entry point
          * @description Provides entry point specific env variables
-         * @todo Should merge this and the one below eventually
          *
          * @env all
          */
-        new webpack.EnvironmentPlugin({
-            NAME: name,
-            NODE_ENV: ifProduction("production", "development"),
-            PUBLIC_URL: publicPath,
-            TARGET: target,
-        }),
-        /**
-         * Define environmental from .env
-         * @description Define environmental vars from .env file
-         * @env all
-         */
-        new Dotenv({
-            path: resolvePath(".env", false),
-        }),
+        new webpack.EnvironmentPlugin(process.env),
         /**
          * Perform type checking and linting in a separate process to speed up compilation
          * @env all

@@ -21,7 +21,7 @@
     "@pixeloven/cli": "^4.0.0"
   },
   "devDependencies": {
-    "@types/node": "10.12.12"
+    "@types/node": "10.12.18"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

@@ -1,13 +1,9 @@
 import "jest";
-import { env, Environment, Environments } from "./index";
+import { env } from "./index";
 
 describe("@pixeloven/env", () => {
     describe("index", () => {
-        it("should export env, Environment and Environments", () => {
-            const environment: Environment = "test";
-            const environments: Environments = {};
-            expect(typeof environment).toEqual("string");
-            expect(typeof environments).toEqual("object");
+        it("should export default as env", () => {
             expect(typeof env).toEqual("function");
         });
     });
