@@ -11,9 +11,5 @@ declare module "*.md";
  * @description Consult DefinitelyTyped before declaring below
  * http://definitelytyped.org/
  */
-// declare module "@storybook/addon-actions";
-// declare module "@storybook/addon-backgrounds";
-// declare module "@storybook/addon-knobs";
-// declare module "@storybook/addon-options";
 declare module "storybook-readme";
 declare module "tsconfig-paths-webpack-plugin";
