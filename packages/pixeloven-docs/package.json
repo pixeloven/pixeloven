@@ -25,6 +25,13 @@
     "@emotion/core": "0.13.1",
     "@pixeloven/cli": "^4.0.0",
     "@pixeloven/core": "^4.0.0",
+    "@storybook/addon-actions": "4.1.7",
+    "@storybook/addon-options": "4.1.7",
+    "@storybook/addon-backgrounds": "4.1.7",
+    "@storybook/addon-knobs": "4.1.7",
+    "@storybook/addons": "4.1.7",
+    "@storybook/core": "4.1.7",
+    "@storybook/react": "4.1.7",
     "babel-loader": "8.0.5",
     "css-loader": "1.0.1",
     "deepmerge": "3.1.0",
@@ -37,18 +44,13 @@
   "devDependencies": {
     "@types/mini-css-extract-plugin": "0.2.0",
     "@types/node": "10.12.18",
-    "@types/storybook__react": "4.0.0"
+    "@types/storybook__react": "4.0.0",
+    "react": "16.3.0",
+    "react-dom": "16.3.0"
   },
   "peerDependencies": {
-    "@storybook/addon-actions": "^4.0.0",
-    "@storybook/addon-backgrounds": "^4.0.0",
-    "@storybook/addon-knobs": "^4.0.0",
-    "@storybook/addon-options": "^4.0.0",
-    "@storybook/addons": "^4.0.0",
-    "@storybook/core": "^4.0.0",
-    "@storybook/react": "^4.0.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react": ">=16.3.0",
+    "react-dom": ">=16.3.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
