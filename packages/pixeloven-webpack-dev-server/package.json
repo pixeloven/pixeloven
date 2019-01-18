@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-dev-server",
-  "version": "4.1.1",
+  "version": "4.1.3",
   "description": "Webpack Development Server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -22,11 +22,11 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^4.1.1",
-    "@pixeloven/core": "^4.1.1",
-    "@pixeloven/env": "^4.1.1",
-    "@pixeloven/exceptions": "^4.1.1",
+    "@pixeloven/core": "^4.1.3",
+    "@pixeloven/env": "^4.1.3",
+    "@pixeloven/exceptions": "^4.1.3",
     "@pixeloven/node-logger": "^4.1.1",
-    "@pixeloven/webpack-config": "^4.1.1",
+    "@pixeloven/webpack-config": "^4.1.3",
     "ansi-html": "0.0.7",
     "express": "4.16.4",
     "html-entities": "1.2.1",
