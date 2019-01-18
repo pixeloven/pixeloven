@@ -1,20 +1,40 @@
 import "jest";
-import {
-    Exception,
-    FileNotFoundException,
-    NodeProcessException,
-} from "./index";
+import * as exceptions from "./index";
 
 describe("@pixeloven/exceptions", () => {
     describe("index", () => {
         it("should export Exception", () => {
-            expect(typeof Exception).toEqual("function");
+            expect(typeof exceptions.Exception).toEqual("function");
         });
-        it("should export FileNotFoundException", () => {
-            expect(typeof FileNotFoundException).toEqual("function");
+        describe("File", () => {
+            it("should export FileNotFoundException", () => {
+                expect(typeof exceptions.FileNotFoundException).toEqual("function");
+            });
+            it("should export NodeProcessException", () => {
+                expect(typeof exceptions.NodeProcessException).toEqual("function");
+            });
         });
-        it("should export NodeProcessException", () => {
-            expect(typeof NodeProcessException).toEqual("function");
+        describe("Http", () => {
+            it("should export HttpBadRequestException", () => {
+                expect(typeof exceptions.HttpBadRequestException).toEqual("function");
+            });
+            it("should export HttpForbiddenException", () => {
+                expect(typeof exceptions.HttpForbiddenException).toEqual("function");
+            });
+            it("should export HttpInternalServerErrorException", () => {
+                expect(typeof exceptions.HttpInternalServerErrorException).toEqual("function");
+            });
+            it("should export HttpNotFoundException", () => {
+                expect(typeof exceptions.HttpNotFoundException).toEqual("function");
+            });
+            it("should export HttpResponseException", () => {
+                expect(typeof exceptions.HttpResponseException).toEqual("function");
+            });
+        });
+        describe("Node", () => {
+            it("should export NodeProcessException", () => {
+                expect(typeof exceptions.NodeProcessException).toEqual("function");
+            });
         });
     });
 });
