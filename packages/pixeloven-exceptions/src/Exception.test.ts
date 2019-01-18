@@ -8,12 +8,12 @@ const exception = new Exception(message);
 describe("@pixeloven/exceptions", () => {
     describe("Exception", () => {
         describe("exception.message", () => {
-            it(`property should return string "${message}"`, () => {
+            it(`property should be set to default string`, () => {
                 expect(exception.message).toEqual(message);
             });
         });
         describe("exception.name", () => {
-            it(`property should return string "${name}"`, () => {
+            it(`property should be set the class name "${name}"`, () => {
                 expect(exception.name).toEqual(name);
             });
         });
@@ -23,13 +23,13 @@ describe("@pixeloven/exceptions", () => {
             });
         });
         describe("getName", () => {
-            it(`method should return string "${name}"`, () => {
+            it(`method should return the class name "${name}"`, () => {
                 expect(exception.getName()).toEqual(name);
             });
         });
         describe("getStack", () => {
-            it(`method should contain stack trace with string "Exception"`, () => {
-                expect(exception.getStack()).toContain("Exception");
+            it(`method should contain stack trace with string "${name}"`, () => {
+                expect(exception.getStack()).toContain(name);
             });
         });
         it("can be thrown and have instanceof checked", () => {
