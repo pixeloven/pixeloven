@@ -1,19 +1,19 @@
 import "jest";
-import ProcessException from "./ProcessException";
+import NodeProcessException from "./ProcessException";
 
-const name = "ProcessException";
+const name = "NodeProcessException";
 const defaultMessage = "Node Process Error";
-const exception = new ProcessException();
+const exception = new NodeProcessException();
 
 describe("@pixeloven/exceptions", () => {
-    describe("ProcessException", () => {
+    describe("NodeProcessException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {
                 expect(exception.message).toEqual(defaultMessage);
             });
             it(`property should be set to custom string`, () => {
                 const customMsg = "testing";
-                const defaultException = new ProcessException(customMsg);
+                const defaultException = new NodeProcessException(customMsg);
                 expect(defaultException.message).toEqual(customMsg);
             });
         });
@@ -26,8 +26,8 @@ describe("@pixeloven/exceptions", () => {
             const throwable = () => {
                 throw exception;
             };
-            expect(throwable).toThrow(ProcessException);
-            expect(exception).toBeInstanceOf(ProcessException);
+            expect(throwable).toThrow(NodeProcessException);
+            expect(exception).toBeInstanceOf(NodeProcessException);
         });
     });
 });

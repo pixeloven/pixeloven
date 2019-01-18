@@ -1,19 +1,19 @@
 import "jest";
-import NotFoundException from "./NotFoundException";
+import HttpNotFoundException from "./NotFoundException";
 
-const name = "NotFoundException";
+const name = "HttpNotFoundException";
 const defaultMessage = "Not Found";
-const exception = new NotFoundException();
+const exception = new HttpNotFoundException();
 
 describe("@pixeloven/exceptions", () => {
-    describe("NotFoundException", () => {
+    describe("HttpNotFoundException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {
                 expect(exception.message).toEqual(defaultMessage);
             });
             it(`property should be set to custom string`, () => {
                 const customMsg = "testing";
-                const defaultException = new NotFoundException(customMsg);
+                const defaultException = new HttpNotFoundException(customMsg);
                 expect(defaultException.message).toEqual(customMsg);
             });
         });
@@ -31,8 +31,8 @@ describe("@pixeloven/exceptions", () => {
             const throwable = () => {
                 throw exception;
             };
-            expect(throwable).toThrow(NotFoundException);
-            expect(exception).toBeInstanceOf(NotFoundException);
+            expect(throwable).toThrow(HttpNotFoundException);
+            expect(exception).toBeInstanceOf(HttpNotFoundException);
         });
     });
 });

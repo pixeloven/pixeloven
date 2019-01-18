@@ -1,19 +1,19 @@
 import "jest";
-import BadRequestException from "./BadRequestException";
+import HttpBadRequestException from "./BadRequestException";
 
-const name = "BadRequestException";
+const name = "HttpBadRequestException";
 const defaultMessage = "Bad Request";
-const exception = new BadRequestException();
+const exception = new HttpBadRequestException();
 
 describe("@pixeloven/exceptions", () => {
-    describe("BadRequestException", () => {
+    describe("HttpBadRequestException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {
                 expect(exception.message).toEqual(defaultMessage);
             });
             it(`property should be set to custom string`, () => {
                 const customMsg = "testing";
-                const defaultException = new BadRequestException(customMsg);
+                const defaultException = new HttpBadRequestException(customMsg);
                 expect(defaultException.message).toEqual(customMsg);
             });
         });
@@ -31,8 +31,8 @@ describe("@pixeloven/exceptions", () => {
             const throwable = () => {
                 throw exception;
             };
-            expect(throwable).toThrow(BadRequestException);
-            expect(exception).toBeInstanceOf(BadRequestException);
+            expect(throwable).toThrow(HttpBadRequestException);
+            expect(exception).toBeInstanceOf(HttpBadRequestException);
         });
     });
 });

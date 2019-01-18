@@ -1,19 +1,19 @@
 import "jest";
-import NotFoundException from "./NotFoundException";
+import FileNotFoundException from "./NotFoundException";
 
-const name = "NotFoundException";
+const name = "FileNotFoundException";
 const defaultMessage = "File Not Found";
-const exception = new NotFoundException();
+const exception = new FileNotFoundException();
 
 describe("@pixeloven/exceptions", () => {
-    describe("NotFoundException", () => {
+    describe("FileNotFoundException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {
                 expect(exception.message).toEqual(defaultMessage);
             });
             it(`property should be set to custom string`, () => {
                 const customMsg = "testing";
-                const defaultException = new NotFoundException(customMsg);
+                const defaultException = new FileNotFoundException(customMsg);
                 expect(defaultException.message).toEqual(customMsg);
             });
         });
@@ -26,8 +26,8 @@ describe("@pixeloven/exceptions", () => {
             const throwable = () => {
                 throw exception;
             };
-            expect(throwable).toThrow(NotFoundException);
-            expect(exception).toBeInstanceOf(NotFoundException);
+            expect(throwable).toThrow(FileNotFoundException);
+            expect(exception).toBeInstanceOf(FileNotFoundException);
         });
     });
 });

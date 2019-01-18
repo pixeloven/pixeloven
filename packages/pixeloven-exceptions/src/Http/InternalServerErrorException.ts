@@ -1,12 +1,12 @@
-import ResponseException from "./ResponseException";
+import HttpResponseException from "./ResponseException";
 
-class InternalServerErrorException extends ResponseException {
+class HttpInternalServerErrorException extends HttpResponseException {
     constructor(message: string = "Internal Server Error") {
         super(500, message) /* istanbul ignore next: can't cover */;
-        Object.setPrototypeOf(this, InternalServerErrorException.prototype);
+        Object.setPrototypeOf(this, HttpInternalServerErrorException.prototype);
         this.name = this.constructor.name;
         Error.captureStackTrace(this, this.constructor);
     }
 }
 
-export default InternalServerErrorException;
+export default HttpInternalServerErrorException;

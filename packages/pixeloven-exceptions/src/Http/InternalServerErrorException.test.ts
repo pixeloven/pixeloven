@@ -1,19 +1,19 @@
 import "jest";
-import InternalServerErrorException from "./InternalServerErrorException";
+import HttpInternalServerErrorException from "./InternalServerErrorException";
 
-const name = "InternalServerErrorException";
+const name = "HttpInternalServerErrorException";
 const defaultMessage = "Internal Server Error";
-const exception = new InternalServerErrorException();
+const exception = new HttpInternalServerErrorException();
 
 describe("@pixeloven/exceptions", () => {
-    describe("InternalServerErrorException", () => {
+    describe("HttpInternalServerErrorException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {
                 expect(exception.message).toEqual(defaultMessage);
             });
             it(`property should be set to custom string`, () => {
                 const customMsg = "testing";
-                const defaultException = new InternalServerErrorException(customMsg);
+                const defaultException = new HttpInternalServerErrorException(customMsg);
                 expect(defaultException.message).toEqual(customMsg);
             });
         });
@@ -31,8 +31,8 @@ describe("@pixeloven/exceptions", () => {
             const throwable = () => {
                 throw exception;
             };
-            expect(throwable).toThrow(InternalServerErrorException);
-            expect(exception).toBeInstanceOf(InternalServerErrorException);
+            expect(throwable).toThrow(HttpInternalServerErrorException);
+            expect(exception).toBeInstanceOf(HttpInternalServerErrorException);
         });
     });
 });
