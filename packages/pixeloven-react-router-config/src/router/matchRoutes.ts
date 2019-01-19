@@ -11,7 +11,7 @@ interface MatchedRoutes {
  * Type definitions don't cover this and not available in the version of react router we use
  * @param pathname
  *
- * @todo root match might need to be /f/ or PUBLIC_URL
+ * @todo root match might need to be whatever public path is for this to work
  */
 const computeRootMatch = (pathname: string): match => {
     return { path: "/", url: "/", params: {}, isExact: pathname === "/" };

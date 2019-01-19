@@ -1,12 +1,11 @@
 import { RouteConfig, RouteProps } from "../types";
 
 /**
- * @param customRouteConfig
- * @param parentRoute
- *
- * @todo Remove path function in favor of just using config in router.ts?
+ * Convert custom route config to v4
+ * @param routeConfig 
+ * @param parentRoute 
  */
-const convertCustomRouteConfig = (
+const convertRouteConfig = (
     routeConfig: RouteConfig[],
     parentRoute: string = "",
 ): RouteProps[] => {
@@ -21,11 +20,11 @@ const convertCustomRouteConfig = (
             fetchData: route.fetchData,
             path: pathResult ? pathResult : undefined,
             routes: route.routes
-                ? convertCustomRouteConfig(route.routes, pathResult)
+                ? convertRouteConfig(route.routes, pathResult)
                 : [],
             statusCode: route.statusCode,
         };
     });
 };
 
-export default convertCustomRouteConfig;
+export default convertRouteConfig;
