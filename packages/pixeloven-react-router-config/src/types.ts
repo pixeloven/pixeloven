@@ -13,6 +13,9 @@ type Params = any;
 // Params extends { [K in keyof Params]?: string
 /* tslint:enable no-any */
 
+/**
+ * @todo need to generalize this
+ */
 export type RouteFetchDataFunction = (
     dispatch: Dispatch,
     ownProps: Params,
@@ -40,7 +43,6 @@ export type RouteResolvePath = (parentPath: string) => string;
 export interface RouteConfig {
     component: RouteComponent<Params>;
     exact?: boolean;
-    key?: number;
     path?: RouteResolvePath;
     fetchData?: RouteFetchDataFunction;
     routes?: RouteConfig[];
