@@ -23,7 +23,6 @@
   "dependencies": {
     "@babel/core": "7.2.2",
     "@emotion/core": "0.13.1",
-    "@pixeloven/cli": "^4.1.1",
     "@pixeloven/core": "^4.1.4",
     "babel-loader": "8.0.5",
     "css-loader": "1.0.1",
@@ -35,6 +34,7 @@
     "webpack": "4.28.4"
   },
   "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
     "@types/mini-css-extract-plugin": "0.2.0",
     "@types/node": "10.12.18",
     "@types/storybook__addon-actions": "3.4.1",
@@ -52,8 +52,8 @@
     "@storybook/addons": "^4.1.0",
     "@storybook/core": "^4.1.0",
     "@storybook/react": "^4.1.0",
-    "react": ">=16.3.0",
-    "react-dom": ">=16.3.0"
+    "react": ">=16.3",
+    "react-dom": ">=16.3"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

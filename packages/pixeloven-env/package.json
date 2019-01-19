@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^4.1.1",
     "@pixeloven/exceptions": "^4.1.4",
     "dotenv": "6.1.0"
   },
   "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
     "@types/dotenv": "6.1.0",
     "@types/node": "10.12.18"
   },

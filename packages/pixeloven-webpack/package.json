@@ -21,7 +21,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^4.1.1",
     "@pixeloven/core": "^4.1.4",
     "@pixeloven/env": "^4.1.4",
     "@pixeloven/node-logger": "^4.1.1",
@@ -31,6 +30,7 @@
     "webpack": "4.28.4"
   },
   "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
     "@types/node": "10.12.18",
     "@types/webpack": "4.4.23"
   },
