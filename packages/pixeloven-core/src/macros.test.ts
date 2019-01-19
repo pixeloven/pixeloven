@@ -14,14 +14,6 @@ const mkdirSyncMock = (somePath: string) => undefined;
 const emptyDirSyncMock = (somePath: string) => undefined;
 const spawnSyncMock = (cmd: string, args: [], options: object) => "testing";
 
-/**
- * Return approx time diff
- * @description Need since sleep is not accurate to the exact milliseconds
- */
-const approxTimeDiff = (start: number, end: number) => {
-    return Math.round((end - start) / 10) * 10;
-};
-
 describe("@pixeloven/core", () => {
     describe("macros", () => {
         afterAll(() => {
@@ -85,15 +77,6 @@ describe("@pixeloven/core", () => {
                 };
                 expect(t).toThrow(FileNotFoundException);
                 expect(existsSyncSpy).toHaveBeenCalledTimes(1);
-            });
-        });
-        describe("sleep", () => {
-            it("should wait for approx 500 milliseconds", () => {
-                const milliseconds = 500;
-                const start = new Date().getTime();
-                macros.sleep(milliseconds);
-                const end = new Date().getTime();
-                expect(approxTimeDiff(start, end)).toEqual(milliseconds);
             });
         });
         describe("createOrEmptyDir", () => {
