@@ -1,4 +1,4 @@
-import { RouteProps } from "@shared/router";
+import { RouteProps } from "../types";
 import { match, matchPath } from "react-router";
 
 interface MatchedRoutes {

@@ -1,4 +1,4 @@
-import { RouteConfig, RouteProps } from "./types";
+import { RouteConfig, RouteProps } from "../types";
 
 /**
  * @param customRouteConfig
