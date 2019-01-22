@@ -1,5 +1,5 @@
-import { RouteProps } from "../types";
 import { match, matchPath } from "react-router";
+import { RouteProps } from "../types";
 
 interface MatchedRoutes {
     matched: match;

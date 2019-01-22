@@ -1,4 +1,4 @@
 export {
-    default as convertCustomRouteConfig,
-} from "./convertCustomRouteConfig";
+    default as convertRouteConfig,
+} from "./convertRouteConfig";
 export { default as matchRoutes } from "./matchRoutes";

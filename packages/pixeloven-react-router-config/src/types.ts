@@ -14,7 +14,7 @@ type Params = any;
 /* tslint:enable no-any */
 
 /**
- * @todo need to generalize this
+ * @todo generalize this as to not force users into using redux
  */
 export type RouteFetchDataFunction = (
     dispatch: Dispatch,
