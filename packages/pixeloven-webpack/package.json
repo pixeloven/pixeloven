@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack",
-  "version": "4.1.4",
+  "version": "4.1.5",
   "description": "Webpack build script",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^4.1.1",
-    "@pixeloven/core": "^4.1.4",
+    "@pixeloven/core": "^4.1.5",
     "@pixeloven/env": "^4.1.4",
     "@pixeloven/node-logger": "^4.1.1",
-    "@pixeloven/webpack-config": "^4.1.4",
+    "@pixeloven/webpack-config": "^4.1.5",
     "promise": "8.0.2",
     "react-dev-utils": "6.1.1",
     "webpack": "4.28.4"
