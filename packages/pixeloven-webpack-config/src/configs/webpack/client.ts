@@ -1,6 +1,7 @@
 import { resolvePath } from "@pixeloven/core";
 import autoprefixer from "autoprefixer";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
+import CompressionPlugin from "compression-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
@@ -437,6 +438,20 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
                 responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
                 safeToUseOptionalCaches: true,
             }),
+            undefined,
+        ),
+
+        /**
+         * Creates gzip assets
+         *
+         * @env production
+         */
+        ifProduction(
+            new CompressionPlugin({
+                algorithm: "gzip",
+                filename: "[path].gz[query]",
+                test: /\.js$|\.css$|\.html$/,
+            }), 
             undefined,
         ),
         /**
