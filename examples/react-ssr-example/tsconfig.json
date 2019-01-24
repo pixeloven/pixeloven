@@ -2,11 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "build",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
     "lib": [
       "es5",
       "es6",
+      "esnext",
       "dom"
     ],
     "sourceMap": true,
