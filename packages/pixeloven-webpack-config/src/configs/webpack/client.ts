@@ -248,6 +248,10 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
             ],
             [],
         ),
+        /**
+         * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+         * @todo Also see how we can prevent specific vendor packages from being added to vendor js
+         */
         splitChunks: {
             chunks: "all",
         },
