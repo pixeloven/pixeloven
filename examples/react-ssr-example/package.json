@@ -75,7 +75,6 @@
     "enzyme-adapter-react-16": "1.7.1",
     "node-mocks-http": "1.7.3",
     "npm-run-all": "4.1.5",
-    "raf": "3.4.1",
     "redux-saga-test-plan": "3.7.0",
     "sinon": "7.2.2",
     "supertest": "3.3.0",
