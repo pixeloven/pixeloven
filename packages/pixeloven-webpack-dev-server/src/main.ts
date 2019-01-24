@@ -38,7 +38,6 @@ const main = (argv: string[]) => {
             webpackServerConfig(process.env),
         ];
         const compiler = new Compiler(webpackConfig);
-        const server = new Server(compiler, config);
 
         /**
          * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
@@ -55,6 +54,8 @@ const main = (argv: string[]) => {
             choosePort(host, port)
                 .then((chosenPort: number) => {
                     logger.info(`Attempting to bind to ${host}:${chosenPort}`);
+                    config.port = chosenPort;
+                    const server = new Server(compiler, config);
                     server.start((error?: Error) => {
                         if (error) {
                             handleError(error);
