@@ -1,4 +1,4 @@
-import { Icon } from "@shared/components/atoms";
+import { Icon, Logo } from "@shared/components/atoms";
 import { RouteComponentProps } from "@shared/router";
 import * as React from "react";
 import { Helmet } from "react-helmet";
@@ -6,9 +6,6 @@ import { Container, Grid, Header, Segment } from "semantic-ui-react";
 
 class Home extends React.Component<RouteComponentProps> {
     public render(): React.ReactNode {
-        const LazyLogo = React.lazy(() =>
-            import("@shared/components/atoms/Logo/Logo"),
-        );
         return (
             <React.Fragment>
                 <Helmet>
@@ -25,9 +22,7 @@ class Home extends React.Component<RouteComponentProps> {
                                     textAlign="center"
                                 >
                                     <Container>
-                                        <React.Suspense fallback={<div>Loading...</div>}>
-                                            <LazyLogo speed="10s" />
-                                        </React.Suspense>
+                                        <Logo speed="10s" />
                                         <Header as="h1" inverted={true}>
                                             Welcome to TypeScript + React
                                         </Header>
