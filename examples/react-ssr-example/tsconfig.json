@@ -2,12 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "build",
-    "module": "esnext",
+    "module": "commonjs",
     "target": "es5",
     "lib": [
       "es5",
       "es6",
-      "esnext",
       "dom"
     ],
     "sourceMap": true,
@@ -32,7 +31,8 @@
     "noUnusedLocals": true,
     "declaration": false,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true
   },
   "exclude": [
     "dist",
