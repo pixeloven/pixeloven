@@ -11,10 +11,15 @@ interface MatchedRoutes {
  * Type definitions don't cover this and not available in the version of react router we use
  * @param pathname
  *
- * @todo root match might need to be whatever public path is for this to work
+ * @todo Scope whether root match might need to be whatever public path instead of always "/"
  */
-const computeRootMatch = (pathname: string): match => {
-    return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
+export const computeRootMatch = (pathname: string): match => {
+    return { 
+        isExact: pathname === "/" ,
+        params: {},
+        path: "/",
+        url: "/", 
+    };
 };
 
 const matchRoutes = (
