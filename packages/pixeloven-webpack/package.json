@@ -27,7 +27,7 @@
     "@pixeloven/node-logger": "^4.1.1",
     "@pixeloven/webpack-config": "^4.1.5",
     "promise": "8.0.2",
-    "react-dev-utils": "6.1.1",
+    "react-dev-utils": "7.0.1",
     "webpack": "4.28.4"
   },
   "devDependencies": {

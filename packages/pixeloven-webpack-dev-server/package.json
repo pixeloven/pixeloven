@@ -30,7 +30,7 @@
     "ansi-html": "0.0.7",
     "express": "4.16.4",
     "html-entities": "1.2.1",
-    "react-dev-utils": "6.1.1",
+    "react-dev-utils": "7.0.1",
     "webpack": "4.28.4",
     "webpack-dev-middleware": "3.4.0",
     "webpack-hot-middleware": "2.24.3",
