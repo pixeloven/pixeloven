@@ -250,6 +250,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
         ),
         /**
          * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+         * @todo https://itnext.io/react-router-and-webpack-v4-code-splitting-using-splitchunksplugin-f0a48f110312
          * @todo Also see how we can prevent specific vendor packages from being added to vendor js
          */
         splitChunks: {
@@ -259,8 +260,6 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
 
     /**
      * @description Output instructions for client build
-     * @todo hot need to be relative paths but include publicPath (remove starting slash)
-     * @todo relative paths fixes it but then vendor breaks... :/ maybe no chunking in dev???
      */
     const output: Output = removeEmpty({
         chunkFilename: ifProduction(
@@ -272,14 +271,6 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
             "static/js/[name].[contenthash].js",
             "static/js/[name].[hash].js",
         ),
-        // hotUpdateChunkFilename: ifDevelopment(
-        //     path.normalize(`${publicPath}/static/js/[id].[hash].hot-update.js`).substring(1),
-        //     undefined,
-        // ),
-        // hotUpdateMainFilename: ifDevelopment(
-        //     path.normalize(`${publicPath}/static/js/[hash].hot-update.json`).substring(1),
-        //     undefined,
-        // ),
         path: resolvePath(`${buildPath}/public`, false),
         publicPath,
     });
