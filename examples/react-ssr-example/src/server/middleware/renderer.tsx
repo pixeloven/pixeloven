@@ -1,7 +1,7 @@
 import { convertRouteConfig, matchRoutes } from "@pixeloven/react-router-config";
 import { config } from "@server/config";
 import { Html } from "@server/views";
-import App from "@shared/App";
+import { App } from "@shared/components";
 import routeConfig from "@shared/routes";
 import { configureStore, rootSaga } from "@shared/store";
 import { NextFunction, Request, Response } from "express";

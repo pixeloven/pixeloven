@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/react-router-config",
-  "version": "4.1.4",
+  "version": "4.1.5",
   "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
