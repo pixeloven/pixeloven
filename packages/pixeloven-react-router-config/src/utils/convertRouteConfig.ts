@@ -2,6 +2,7 @@ import { RouteConfig, RouteProps } from "../types";
 
 /**
  * Convert custom route config to v4
+ * @todo Add support for path to be a string instead of a function
  * @param routeConfig 
  * @param parentRoute 
  */
@@ -10,20 +11,23 @@ const convertRouteConfig = (
     parentRoute: string = "",
 ): RouteProps[] => {
     return routeConfig.map(route => {
-        let pathResult = parentRoute;
-        if (route.path) {
-            pathResult = route.path(parentRoute).replace("//", "/");
-        }
-        return {
-            component: route.component,
-            exact: route.exact,
-            fetchData: route.fetchData,
-            path: pathResult ? pathResult : undefined,
-            routes: route.routes
-                ? convertRouteConfig(route.routes, pathResult)
-                : [],
-            statusCode: route.statusCode,
+        const path = route.path 
+            ? route.path(parentRoute).replace("//", "/")
+            : parentRoute;
+        const routes = route.routes && route.routes.length
+            ? convertRouteConfig(route.routes, path)
+            : undefined;
+        const results = {
+            ...route,
+            path,
+            routes
         };
+        Object.keys(results).forEach(key => {
+            if (!results[key]) {
+                delete results[key];
+            }
+        });
+        return results;
     });
 };
 

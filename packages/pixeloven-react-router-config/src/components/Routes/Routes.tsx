@@ -24,11 +24,7 @@ const Routes = (props: RoutesProps) => {
                         return (
                             <Status
                                 statusCode={route.statusCode}
-                                staticContext={
-                                    componentProps
-                                        ? componentProps.staticContext
-                                        : undefined
-                                }
+                                staticContext={componentProps.staticContext}
                             >
                                 <route.component
                                     {...componentProps}
