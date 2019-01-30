@@ -1,9 +1,9 @@
 
 version: "2"
 services:
-  node-react:
-    container_name: node-react
-    image: node-react
+  react-ssr-example:
+    container_name: react-ssr-example
+    image: react-ssr-example
     build:
       context: .
     command: yarn production

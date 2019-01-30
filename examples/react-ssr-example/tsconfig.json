@@ -31,7 +31,8 @@
     "noUnusedLocals": true,
     "declaration": false,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "dist",

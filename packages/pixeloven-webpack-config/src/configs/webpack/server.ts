@@ -1,6 +1,5 @@
 import { resolvePath } from "@pixeloven/core";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
-import Dotenv from "dotenv-webpack";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TimeFixPlugin from "time-fix-plugin";
@@ -99,6 +98,16 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
         use: [
             {
                 loader: require.resolve("babel-loader"),
+                options: {
+                    plugins: [
+                        require.resolve("@babel/plugin-syntax-dynamic-import"),
+                    ],
+                    presets: [
+                        require.resolve("@babel/preset-env"),
+                        require.resolve("@babel/preset-react"),
+                        require.resolve("@babel/preset-typescript"),
+                    ],
+                },
             },
             {
                 loader: require.resolve("ts-loader"),
@@ -178,23 +187,17 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
         /**
          * Define environmental variables base on entry point
          * @description Provides entry point specific env variables
-         * @todo Should merge this and the one below eventually
          *
          * @env all
          */
         new webpack.EnvironmentPlugin({
-            NAME: name,
-            NODE_ENV: ifProduction("production", "development"),
-            PUBLIC_URL: publicPath,
-            TARGET: target,
-        }),
-        /**
-         * Define environmental from .env
-         * @description Define environmental vars from .env file
-         * @env all
-         */
-        new Dotenv({
-            path: resolvePath(".env", false),
+            ...process.env,
+            ...{
+                NAME: name,
+                NODE_ENV: ifProduction("production", "development"),
+                PUBLIC_URL: publicPath,
+                TARGET: target,
+            }
         }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation

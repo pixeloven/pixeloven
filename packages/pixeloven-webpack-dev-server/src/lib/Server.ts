@@ -37,9 +37,9 @@ class Server {
         if (this.compiler.server) {
             this.compiler.server.hooks.done.tap(
                 "PixelOvenWebpackDevServer",
-                () => {
-                    // TODO add more logging here (or use forked hot-server)
-                    logger.info("webpack built server");
+                (stats) => {
+                    const json = stats.toJson("normal");
+                    logger.info(`webpack built server ${json.hash} in ${json.time}ms`);
                 },
             );
         }
@@ -49,7 +49,7 @@ class Server {
         const publicPath = path.resolve(process.cwd(), "public");
         if (fs.existsSync(publicPath)) {
             logger.info(
-                "Static file directory `public` found. Automatically setting up static file serving.",
+                "Static public file directory found. Automatically setting up static file serving.",
             );
             app.use(this.config.path, express.static(publicPath));
         }

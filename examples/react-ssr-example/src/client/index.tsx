@@ -1,5 +1,3 @@
-import "raf/polyfill";
-
 import { config } from "@client/config";
 import { register } from "@client/serviceWorkers";
 import App from "@shared/App";

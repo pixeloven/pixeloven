@@ -54,19 +54,6 @@ export const resolvePath = (
 };
 
 /**
- * Sleep application for a given time
- * @param milliseconds
- */
-export const sleep = (milliseconds: number) => {
-    const start = new Date().getTime();
-    for (let i = 0; i < 1e7; i++) {
-        if (new Date().getTime() - start > milliseconds) {
-            break;
-        }
-    }
-};
-
-/**
  * Create or empty existing directory
  * @param fullPath
  */

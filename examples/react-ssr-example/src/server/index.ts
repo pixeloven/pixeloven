@@ -11,27 +11,13 @@ import server from "./server";
 const app = express();
 
 /**
- * Defines public path
- */
-const publicPath = path.resolve(__dirname, "public");
-
-/**
  * Define render middleware
  */
-app.use(assetPath(publicPath));
-app.use(config.baseUrl, express.static(publicPath));
+app.use(assetPath(path.resolve(__dirname, "public/asset-manifest.json")));
+app.use(config.baseUrl, express.static(path.resolve(__dirname, "public")));
 server(app);
 
 /**
  * Start express server on specific host and port
  */
-const application = app.listen(config.server.port, config.server.host, () => {
-    console.log(
-        `Running on ${config.server.protocol}://${config.server.host}:${
-            config.server.port
-        }`,
-    );
-    console.log(`Serving static files from: ${publicPath}`);
-});
-
-export default application;
+app.listen(config.server.port, config.server.host);
