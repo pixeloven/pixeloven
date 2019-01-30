@@ -12,17 +12,26 @@ configure({
 
 jest.mock("axios");
 
+const getRandomInt = (min: number, max: number) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
 describe("Server", () => {
     describe("server", () => {
         const app = express();
         server(app);
-        app.listen(8080, "localhost");
+        const running = app.listen(getRandomInt(8080, 48080), "localhost");
 
         beforeEach(() => {
             Helmet.canUseDOM = false;
         });
         afterEach(() => {
             Helmet.canUseDOM = true;
+        });
+        afterAll(() => {
+            running.close();
         });
         it(`responds to "/v1/health" with 200 and render "OK"`, done => {
             request(app)

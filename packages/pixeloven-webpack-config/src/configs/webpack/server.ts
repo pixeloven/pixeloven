@@ -98,6 +98,16 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
         use: [
             {
                 loader: require.resolve("babel-loader"),
+                options: {
+                    plugins: [
+                        require.resolve("@babel/plugin-syntax-dynamic-import"),
+                    ],
+                    presets: [
+                        require.resolve("@babel/preset-env"),
+                        require.resolve("@babel/preset-react"),
+                        require.resolve("@babel/preset-typescript"),
+                    ],
+                },
             },
             {
                 loader: require.resolve("ts-loader"),
