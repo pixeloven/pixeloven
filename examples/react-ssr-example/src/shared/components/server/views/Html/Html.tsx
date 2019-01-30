@@ -32,17 +32,17 @@ const Html = (props: HtmlProps) => {
                 {props.helmet && props.helmet.link.toComponent()}
                 <Link href="favicon.ico" rel="icon" />
                 {cssTags}
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `window.INIT_STATE = ${serializedState};`,
-                    }}
-                />
             </head>
             <body>
                 <noscript>
                     You need to enable JavaScript to run this app.
                 </noscript>
                 <div id="root">{props.children}</div>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `window.INIT_STATE = ${serializedState};`,
+                    }}
+                />
                 {jsTags}
             </body>
         </html>

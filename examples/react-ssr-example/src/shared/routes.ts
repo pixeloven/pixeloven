@@ -3,6 +3,21 @@ import { Default } from "@shared/components/templates";
 // import { Dispatch } from "redux";
 
 /**
+ * @todo Need to create a better unknown error page
+ */
+export const unknownErrorRoutes = [
+    {
+        component: Default,
+        routes: [
+            {
+                component: NoMatch,
+                statusCode: 500,
+            },
+        ],
+    },
+];
+
+/**
  * Defines routes for both client and server
  * @description Nested routes allow for pages to share templates.
  */
