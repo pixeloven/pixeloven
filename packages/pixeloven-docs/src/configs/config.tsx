@@ -2,6 +2,7 @@ import { withBackgrounds } from "@storybook/addon-backgrounds";
 import { withKnobs } from "@storybook/addon-knobs";
 import { withOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
+import React from 'react';
 
 /**
  * Import remote assets dynamically
@@ -29,6 +30,20 @@ addDecorator(
     ]),
 );
 addDecorator(withKnobs);
+
+
+/**
+ * Wrapper with custom id for modals to attach to
+ */
+const modalContainerDecorator = (storyFn: () => {}) => (
+    <>
+        <div id= "modal-root" />
+        <div id="root" >
+            { storyFn() }
+        </div>
+    </>
+);
+addDecorator(modalContainerDecorator);
 
 /**
  * Stories loader
