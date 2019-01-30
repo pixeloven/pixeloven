@@ -8,7 +8,6 @@ export interface RoutesProps {
 }
 
 /**
- * @todo MAKE SURE SSR works with this version
  * @param props
  */
 const Routes = (props: RoutesProps) => {
