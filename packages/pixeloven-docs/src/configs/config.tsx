@@ -37,7 +37,7 @@ addDecorator(withKnobs);
  */
 const modalContainerDecorator = (storyFn: () => {}) => (
     <>
-        <div id= "modal-root" />
+        <div id="modal-root" />
         <div id="root" >
             { storyFn() }
         </div>
