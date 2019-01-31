@@ -12,7 +12,7 @@ interface Params {
  * @todo Need make this not dependent on redux
  */
 export type RouteFetchDataFunction = (
-    callback: Dispatch,
+    dispatch: Dispatch,
     ownProps: Params,
 ) => void;
 
