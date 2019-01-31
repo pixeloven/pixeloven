@@ -1,12 +1,9 @@
 {
-  "name": "@pixeloven/generators",
+  "name": "@pixeloven/react-router-config",
   "version": "4.1.5",
-  "description": "Common code generators",
+  "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
-  "bin": {
-    "pixeloven-generators": "./dist/lib/index.js"
-  },
   "files": [
     "dist/"
   ],
@@ -20,22 +17,28 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@pixeloven/cli": "^4.1.1",
-    "@pixeloven/core": "^4.1.5",
-    "plop": "2.2.0"
-  },
   "devDependencies": {
     "@pixeloven/cli": "^4.1.1",
-    "@types/inquirer": "0.0.43",
-    "@types/node": "10.12.18"
+    "@types/react-router": "4.4.3",
+    "@types/react-router-dom": "4.3.1",
+    "@types/react-redux": "7.0.1",
+    "@types/node": "10.12.18",
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
+    "react-router": "4.3.1",
+    "react-router-dom": "4.3.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.3",
+    "react-dom": ">=16.3",
+    "react-router": ">=4",
+    "react-router-dom": ">=4"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-cli clean",
     "compile": "pixeloven-cli compile:ts",
     "precompile": "pixeloven-cli compile:clean",
-    "postcompile": "cp -r ./src/templates ./dist/lib/templates",
     "document": "pixeloven-cli document:ts src",
     "predocument": "pixeloven-cli document:clean",
     "lint": "yarn lint:ts",

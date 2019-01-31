@@ -5,14 +5,12 @@ import {
 } from "react-router-dom";
 import { Dispatch } from "redux";
 
+interface Params { 
+    [key: string]: object | number | string 
+};
 /**
- * @todo Need a better way to do this than to pass any
+ * @todo Need make this not dependent on redux
  */
-/* tslint:disable no-any */
-type Params = any;
-// Params extends { [K in keyof Params]?: string
-/* tslint:enable no-any */
-
 export type RouteFetchDataFunction = (
     dispatch: Dispatch,
     ownProps: Params,
@@ -40,7 +38,6 @@ export type RouteResolvePath = (parentPath: string) => string;
 export interface RouteConfig {
     component: RouteComponent<Params>;
     exact?: boolean;
-    key?: number;
     path?: RouteResolvePath;
     fetchData?: RouteFetchDataFunction;
     routes?: RouteConfig[];

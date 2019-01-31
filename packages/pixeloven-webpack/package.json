@@ -31,6 +31,7 @@
     "webpack": "4.28.4"
   },
   "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
     "@types/node": "10.12.18",
     "@types/webpack": "4.4.23"
   },

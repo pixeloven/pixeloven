@@ -18,8 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^4.1.1",
     "webpack-log": "2.0.0"
+  },
+  "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
+    "@types/inquirer": "0.0.43",
+    "@types/node": "10.12.18"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

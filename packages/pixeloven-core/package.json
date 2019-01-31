@@ -18,7 +18,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^4.1.1",
     "@pixeloven/exceptions": "^4.1.4",
     "@pixeloven/node-logger": "^4.1.1",
     "cross-spawn": "6.0.5",
@@ -26,6 +25,7 @@
     "webpack": "4.28.4"
   },
   "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
     "@types/cross-spawn": "6.0.0",
     "@types/fs-extra": "5.0.4",
     "@types/node": "10.12.18",

@@ -17,10 +17,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@pixeloven/cli": "^4.1.1"
-  },
   "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
     "@types/node": "10.12.18"
   },
   "scripts": {

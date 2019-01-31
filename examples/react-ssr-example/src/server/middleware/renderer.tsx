@@ -1,7 +1,7 @@
+import { convertRouteConfig, matchRoutes } from "@pixeloven/react-router-config";
 import { config } from "@server/config";
 import { Html } from "@server/views";
-import App from "@shared/App";
-import { convertCustomRouteConfig, matchRoutes } from "@shared/router";
+import { App } from "@shared/components";
 import routeConfig from "@shared/routes";
 import { configureStore, rootSaga } from "@shared/store";
 import { NextFunction, Request, Response } from "express";
@@ -23,7 +23,7 @@ export default (req: Request, res: Response, next: NextFunction): void => {
     const staticContext: StaticContext = {
         statusCode: 200,
     };
-    const routes = convertCustomRouteConfig(routeConfig, config.baseUrl);
+    const routes = convertRouteConfig(routeConfig, config.baseUrl);
 
     // run saga middleware and then proceed with rendering once END action is received
     store

@@ -58,6 +58,7 @@
     "webpack-node-externals": "1.7.2"
   },
   "devDependencies": {
+    "@pixeloven/cli": "^4.1.1",
     "@types/autoprefixer": "9.1.1",
     "@types/case-sensitive-paths-webpack-plugin": "2.1.2",
     "@types/copy-webpack-plugin": "4.4.2",

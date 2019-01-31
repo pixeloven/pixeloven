@@ -1,5 +1,5 @@
-import { RouteProps } from "@shared/router";
 import { match, matchPath } from "react-router";
+import { RouteProps } from "../types";
 
 interface MatchedRoutes {
     matched: match;
@@ -10,9 +10,16 @@ interface MatchedRoutes {
  * Copied form Router.computeRootMatch(pathname) version 4.4.0-beta
  * Type definitions don't cover this and not available in the version of react router we use
  * @param pathname
+ *
+ * @todo Scope whether root match might need to be whatever public path instead of always "/"
  */
-const computeRootMatch = (pathname: string): match => {
-    return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
+export const computeRootMatch = (pathname: string): match => {
+    return { 
+        isExact: pathname === "/" ,
+        params: {},
+        path: "/",
+        url: "/", 
+    };
 };
 
 const matchRoutes = (

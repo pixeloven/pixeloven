@@ -1,5 +1,4 @@
-import { RenderRoutes } from "@shared/components";
-import { RouteProps } from "@shared/router";
+import { RouteProps, Routes } from "@pixeloven/react-router-config";
 import React from "react";
 import { Helmet } from "react-helmet";
 
@@ -35,7 +34,7 @@ class App extends React.Component<Props, State> {
         return (
             <React.Fragment>
                 <Helmet titleTemplate="%s | React App" />
-                <RenderRoutes routes={this.props.routes} />
+                <Routes config={this.props.routes} />
             </React.Fragment>
         );
     }

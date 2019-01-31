@@ -1,7 +1,7 @@
 import { config } from "@client/config";
 import { register } from "@client/serviceWorkers";
-import App from "@shared/App";
-import { convertCustomRouteConfig } from "@shared/router";
+import { convertRouteConfig } from "@pixeloven/react-router-config";
+import { App } from "@shared/components";
 import routeConfig from "@shared/routes";
 import { configureStore } from "@shared/store";
 import * as React from "react";
@@ -18,7 +18,7 @@ const root = document.getElementById("root");
 /**
  * Get route config
  */
-const routes = convertCustomRouteConfig(routeConfig, config.basePath);
+const routes = convertRouteConfig(routeConfig, config.basePath);
 /**
  * Wrap application with container, router and store
  */

@@ -1,5 +1,4 @@
-import { RenderRoutes } from "@shared/components";
-import { RouteComponentProps } from "@shared/router";
+import { RouteComponentProps, Routes } from "@pixeloven/react-router-config";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { Container, Icon, Responsive, Segment } from "semantic-ui-react";
@@ -23,7 +22,7 @@ class Default extends React.PureComponent<RouteComponentProps> {
                     <MainMenu as={Link} items={items} fixed={false} />
                 </Container>
                 <Container fluid={true}>
-                    {routes && <RenderRoutes routes={routes} />}
+                    {routes && <Routes config={routes} />}
                 </Container>
                 <Container fluid={true}>
                     <Segment inverted={true} vertical={true} textAlign="center">
