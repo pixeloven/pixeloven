@@ -26,11 +26,27 @@ export const validateComponentType = (componentType: string) => {
  * @param word
  */
 export const validateWord = (word: string) => {
-    if (/^[a-z]+$/i.test(word.trim())) {
-        return true;
+    if (word.length > 0) {
+        if (/^[a-z]+$/i.test(word.trim())) {
+            return true;
+        }
+        return "Must be a valid alpha string.";
     }
-    return "Must be a valid alpha string.";
+    return `Must be a minimum of 1 character.`;
 };
+
+/**
+ * Creates a validator that checks min length
+ * @param min 
+ */
+export const validateMinLength = (min: number) => {
+    return (str: string) => {
+        if (str.length >= min) {
+            return true;
+        }
+        return `Must be a minimum of ${min} characters.`;
+    }
+}
 
 /**
  * Validate component name
@@ -124,7 +140,8 @@ const generator = (plop: Plop) => {
             {
                 message: "Provide a brief description of this component.",
                 name: "componentDescription",
-                type: "input"
+                type: "input",
+                validate: validateMinLength(1),
             },
         ],
     });
