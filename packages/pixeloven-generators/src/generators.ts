@@ -138,7 +138,7 @@ const generator = (plop: Plop) => {
                 validate: validateWord,
             },
             {
-                message: "Provide a brief description of this component.",
+                message: "Provide a brief description of this component:",
                 name: "componentDescription",
                 type: "input",
                 validate: validateMinLength(1),
