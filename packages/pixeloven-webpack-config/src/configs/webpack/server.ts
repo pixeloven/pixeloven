@@ -46,6 +46,9 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
             resolvePath("src/server/webpack.ts"),
         ),
     ]);
+    // const entry = [
+    //     resolvePath("src/server/index.ts"),
+    // ];
 
     /**
      * All other files that aren't caught by the other loaders will go through this one.

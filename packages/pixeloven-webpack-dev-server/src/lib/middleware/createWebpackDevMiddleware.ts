@@ -6,6 +6,7 @@ import { Config } from "../config";
 
 /**
  * Creates webpackDevMiddleware with custom configuration
+ * @todo remove formatMessage and handle ourselves
  * @param config
  * @param compiler
  * @param watchOptions

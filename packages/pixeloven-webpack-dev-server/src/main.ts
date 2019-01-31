@@ -33,11 +33,28 @@ const main = (argv: string[]) => {
         logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
-        const webpackConfig = [
+        const compiler = new Compiler([
             webpackClientConfig(process.env),
             webpackServerConfig(process.env),
-        ];
-        const compiler = new Compiler(webpackConfig);
+        ]);
+
+        /**
+         * When compiler is complete print basic stats
+         * @todo Refresh server if server path files have been touched
+         * @todo Stream json for client and server to browser
+         * @todo print access like storybook
+         */
+        compiler.onDone("client", (stats) => {
+            /**
+             * @todo this is handled by the client middleware - would like to move reporting here
+             */
+            const json = stats.toJson("normal");
+            logger.info(`webpack built client ${json.hash} in ${json.time}ms`);
+        });
+        compiler.onDone("server", (stats) => {
+            const json = stats.toJson("normal");
+            logger.info(`webpack built server ${json.hash} in ${json.time}ms`);
+        });
 
         /**
          * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example

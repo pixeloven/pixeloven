@@ -34,15 +34,6 @@ class Server {
      */
     public start(onComplete: ServerOnComplete) {
         const app = express();
-        if (this.compiler.server) {
-            this.compiler.server.hooks.done.tap(
-                "PixelOvenWebpackDevServer",
-                (stats) => {
-                    const json = stats.toJson("normal");
-                    logger.info(`webpack built server ${json.hash} in ${json.time}ms`);
-                },
-            );
-        }
         /**
          * @todo Support coverage and type docs. Plus storybook docs
          */
