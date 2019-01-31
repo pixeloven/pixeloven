@@ -1,12 +1,12 @@
 import { exit, handleError, normalizeUrl } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
+import { Compiler } from "@pixeloven/webpack-compiler";
 import {
     webpackClientConfig,
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
-import Compiler from "./lib/Compiler";
 import config from "./lib/config";
 import Server from "./lib/Server";
 
@@ -33,7 +33,7 @@ const main = (argv: string[]) => {
         logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
-        const compiler = new Compiler([
+        const compiler = Compiler.create([
             webpackClientConfig(process.env),
             webpackServerConfig(process.env),
         ]);

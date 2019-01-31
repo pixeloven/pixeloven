@@ -8,6 +8,21 @@ class Compiler {
     public static id = "PixelOvenWebpackCompiler";
 
     /**
+     * Checks that our configurations follow a specific set of rules and creates a new instance
+     * @todo should also validate target
+     * @param config 
+     */
+    public static create(configs: Configuration[]) {
+        if (!configs.find((config) => config.name === "client")) {
+            throw Error(`Cannot find configuration property "name" with value "client"`);
+        }
+        if (!configs.find((config) => config.name === "server")) {
+            throw Error(`Cannot find configuration property "name" with value "server"`);
+        }
+        return new Compiler(configs);
+    }
+
+    /**
      * Defines our combined compiler
      */
     public combined: MultiCompiler;
@@ -15,15 +30,16 @@ class Compiler {
     /**
      * Array of webpack configs
      */
-    protected config: Configuration[];
+    protected configs: Configuration[];
+
 
     /**
      * Construct compilers
-     * @param config
+     * @param configs
      */
-    constructor(config: Configuration[]) {
-        this.config = config;
-        this.combined = webpack(config);
+    constructor(configs: Configuration[]) {
+        this.configs = configs;
+        this.combined = webpack(configs);
     }
 
     /**

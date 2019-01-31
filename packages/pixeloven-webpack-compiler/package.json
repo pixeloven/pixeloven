@@ -1,12 +1,9 @@
 {
-  "name": "@pixeloven/webpack-dev-server",
+  "name": "@pixeloven/webpack-compiler",
   "version": "4.1.5",
-  "description": "Webpack Development Server",
+  "description": "Wrapper class for webpack compiler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
-  "bin": {
-    "pixeloven-webpack-dev-server": "./dist/lib/index.js"
-  },
   "files": [
     "dist/"
   ],
@@ -21,32 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^4.1.1",
-    "@pixeloven/core": "^4.1.5",
-    "@pixeloven/env": "^4.1.4",
-    "@pixeloven/exceptions": "^4.1.4",
-    "@pixeloven/node-logger": "^4.1.1",
-    "@pixeloven/webpack-compiler": "^4.1.5",
-    "@pixeloven/webpack-config": "^4.1.5",
-    "ansi-html": "0.0.7",
-    "express": "4.16.4",
-    "html-entities": "1.2.1",
-    "react-dev-utils": "7.0.1",
-    "require-from-string" : "2.0.2",
-    "webpack": "4.28.4",
-    "webpack-dev-middleware": "3.5.1",
-    "webpack-hot-middleware": "2.24.3",
-    "webpack-hot-server-middleware": "0.5.0"
+    "webpack": "4.28.4"
   },
   "devDependencies": {
     "@pixeloven/cli": "^4.1.1",
-    "@types/express": "4.16.0",
-    "@types/html-entities": "1.2.16",
     "@types/node": "10.12.18",
-    "@types/require-from-string" : "1.2.0",
-    "@types/webpack": "4.4.23",
-    "@types/webpack-dev-middleware": "2.0.2",
-    "@types/webpack-hot-middleware": "2.16.4"
+    "@types/webpack": "4.4.23"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

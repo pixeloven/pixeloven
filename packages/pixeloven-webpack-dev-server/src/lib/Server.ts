@@ -1,8 +1,8 @@
 import { logger } from "@pixeloven/node-logger";
+import { Compiler } from "@pixeloven/webpack-compiler";
 import express from "express";
 import fs from "fs";
 import path from "path";
-import Compiler from "./Compiler";
 import { Config } from "./config";
 import {
     createWebpackDevMiddleware,
@@ -54,11 +54,7 @@ class Server {
         }
         const subApp = express();
         app.use(
-            createWebpackHotServerMiddleware(
-                subApp,
-                this.config,
-                this.compiler.combined,
-            ),
+            createWebpackHotServerMiddleware(this.compiler),
         );
         app.use(subApp);
         app.use(errorHandler);

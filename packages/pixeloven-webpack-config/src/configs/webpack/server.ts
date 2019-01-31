@@ -40,15 +40,15 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
     /**
      * Define entrypoint(s) for sever
      */
-    const entry = removeEmpty([
-        ifProduction(
-            resolvePath("src/server/index.ts"),
-            resolvePath("src/server/webpack.ts"),
-        ),
-    ]);
-    // const entry = [
-    //     resolvePath("src/server/index.ts"),
-    // ];
+    // const entry = removeEmpty([
+    //     ifProduction(
+    //         resolvePath("src/server/index.ts"),
+    //         resolvePath("src/server/webpack.ts"),
+    //     ),
+    // ]);
+    const entry = [
+        resolvePath("src/server/index.ts"),
+    ];
 
     /**
      * All other files that aren't caught by the other loaders will go through this one.
