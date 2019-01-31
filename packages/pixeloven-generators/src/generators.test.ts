@@ -74,12 +74,12 @@ describe("@pixeloven/generators", () => {
             it(`should create min length validator and fail`, () => {
                 const validateMinLength = makeValidateMinLength(2);
                 expect(typeof validateMinLength).toEqual("function");
-                expect(typeof validateMinLength("t")).toEqual("function");
+                expect(typeof validateMinLength("t")).toEqual("string");
             });
             it(`should create min length validator and pass`, () => {
                 const validateMinLength = makeValidateMinLength(1);
                 expect(typeof validateMinLength).toEqual("function");
-                expect(typeof validateMinLength("t")).toEqual("function");
+                expect(validateMinLength("t")).toEqual(true);
             });
         });
         describe("capitalize", () => {
