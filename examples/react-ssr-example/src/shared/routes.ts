@@ -1,6 +1,7 @@
 import { Blog, Home, NoMatch } from "@shared/components/pages";
 import { Default } from "@shared/components/templates";
-// import { Dispatch } from "redux";
+import ExampleActionTypes from "@shared/store/Example/Example.actions";
+import { Dispatch } from "redux";
 
 /**
  * @todo Need to create a better unknown error page
@@ -35,15 +36,15 @@ const routes = [
             {
                 component: Blog,
                 exact: true,
-                // fetchData: (
-                //     dispatch: Dispatch,
-                //     params: BlogPageParams,
-                // ): void => {
-                //     dispatch({
-                //         payload: "posts",
-                //         type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
-                //     });
-                // },
+                fetchData: (
+                    dispatch: Dispatch,
+                    params: object,
+                ): void => {
+                    dispatch({
+                        payload: "posts",
+                        type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
+                    });
+                },
                 path: (parentPath: string) => `${parentPath}/blog`,
             },
             // Blog Page

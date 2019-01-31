@@ -73,7 +73,7 @@ interface Props {
     routes: RouteProps[];
 }
 
-class App extends React.PureComponent<> {
+class App extends React.PureComponent<Props> {
     public render(): React.ReactNode {
         return <Routes config={routes} />
     }

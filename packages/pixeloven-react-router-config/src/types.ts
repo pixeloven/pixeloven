@@ -3,24 +3,19 @@ import {
     RouteComponentProps as DefaultRouteComponentProps,
     RouteProps as DefaultRouteProps,
 } from "react-router-dom";
-import { Dispatch } from "redux";
 
+interface Params { 
+    [key: string]: object | number | string 
+};
 /**
- * @todo Need a better way to do this than to pass any
+ * @todo Need to do a better job with the Function type
  */
-/* tslint:disable no-any */
-type Params = any;
-// Params extends { [K in keyof Params]?: string
-/* tslint:enable no-any */
-
-/**
- * @todo generalize this as to not force users into using redux
- */
+/* tslint:disable ban-types */
 export type RouteFetchDataFunction = (
-    dispatch: Dispatch,
+    callback: Function,
     ownProps: Params,
 ) => void;
-
+/* tslint:enable ban-types */
 export type RouteComponent<T = {}> =
     | React.ComponentType<DefaultRouteComponentProps<T>>
     | ConnectedComponentClass<object, DefaultRouteComponentProps<T>>;
