@@ -2,9 +2,9 @@ import "jest";
 import generator, {
     capitalize,
     lowerCase,
+    makeValidateMinLength,
     plural,
     upperCase,
-    validateMinLength,
     validateWord,
 } from "./generators";
 import { HelperFunction, Plop, PlopGenerator } from "./plop";
@@ -72,10 +72,14 @@ describe("@pixeloven/generators", () => {
         });
         describe("validateMinLength", () => {
             it(`should create min length validator and fail`, () => {
-                expect(typeof validateMinLength(2)("t")).toEqual("function");
+                const validateMinLength = makeValidateMinLength(2);
+                expect(typeof validateMinLength).toEqual("function");
+                expect(typeof validateMinLength("t")).toEqual("function");
             });
             it(`should create min length validator and pass`, () => {
-                expect(typeof validateMinLength(1)("t")).toEqual("function");
+                const validateMinLength = makeValidateMinLength(1);
+                expect(typeof validateMinLength).toEqual("function");
+                expect(typeof validateMinLength("t")).toEqual("function");
             });
         });
         describe("capitalize", () => {

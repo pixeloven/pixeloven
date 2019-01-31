@@ -29,7 +29,7 @@ export const validateWord = (word: string) => {
  * Creates a validator that checks min length
  * @param min 
  */
-export const validateMinLength = (min: number) => {
+export const makeValidateMinLength = (min: number) => {
     return (str: string) => {
         if (str.length >= min) {
             return true;
@@ -121,7 +121,7 @@ const generator = (plop: Plop) => {
                 message: "Provide a brief description of this component:",
                 name: "componentDescription",
                 type: "input",
-                validate: validateMinLength(1),
+                validate: makeValidateMinLength(1),
             },
         ],
     });
