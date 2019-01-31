@@ -3,19 +3,19 @@ import {
     RouteComponentProps as DefaultRouteComponentProps,
     RouteProps as DefaultRouteProps,
 } from "react-router-dom";
+import { Dispatch } from "redux";
 
 interface Params { 
     [key: string]: object | number | string 
 };
 /**
- * @todo Need to do a better job with the Function type
+ * @todo Need make this not dependent on redux
  */
-/* tslint:disable ban-types */
 export type RouteFetchDataFunction = (
-    callback: Function,
+    callback: Dispatch,
     ownProps: Params,
 ) => void;
-/* tslint:enable ban-types */
+
 export type RouteComponent<T = {}> =
     | React.ComponentType<DefaultRouteComponentProps<T>>
     | ConnectedComponentClass<object, DefaultRouteComponentProps<T>>;
