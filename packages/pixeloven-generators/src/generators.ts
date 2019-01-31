@@ -121,6 +121,11 @@ const generator = (plop: Plop) => {
                 type: "input",
                 validate: validateWord,
             },
+            {
+                message: "Provide a brief description of this component.",
+                name: "componentDescription",
+                type: "input"
+            },
         ],
     });
     plop.setGenerator("store", {
