@@ -4,9 +4,7 @@ import generator, {
     lowerCase,
     plural,
     upperCase,
-    validateComponentType,
     validateMinLength,
-    validateRequestMethod,
     validateWord,
 } from "./generators";
 import { HelperFunction, Plop, PlopGenerator } from "./plop";
@@ -59,16 +57,6 @@ describe("@pixeloven/generators", () => {
                 );
             });
         });
-        describe("validateComponentType", () => {
-            it(`should fail with value "test"`, () => {
-                expect(typeof validateComponentType("test")).toEqual("string");
-            });
-            it(`should pass with value "atom"`, () => {
-                const value = validateComponentType("atom");
-                expect(typeof value).toEqual("boolean");
-                expect(value).toEqual(true);
-            });
-        });
         describe("validateWord", () => {
             it(`should fail with empty string`, () => {
                 expect(typeof validateWord("")).toEqual("string");
@@ -88,16 +76,6 @@ describe("@pixeloven/generators", () => {
             });
             it(`should create min length validator and pass`, () => {
                 expect(typeof validateMinLength(1)("t")).toEqual("function");
-            });
-        });
-        describe("validateRequestMethod", () => {
-            it(`should fail with value "test"`, () => {
-                expect(typeof validateRequestMethod("test")).toEqual("string");
-            });
-            it(`should pass with value "GET"`, () => {
-                const value = validateRequestMethod("GET");
-                expect(typeof value).toEqual("boolean");
-                expect(value).toEqual(true);
             });
         });
         describe("capitalize", () => {
