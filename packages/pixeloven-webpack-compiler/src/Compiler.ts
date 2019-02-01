@@ -1,7 +1,12 @@
-import webpack, { Configuration, MultiCompiler, Stats } from "webpack";
+import webpack, { 
+    Compiler as SingleCompiler, 
+    Configuration, 
+    MultiCompiler, 
+    Stats 
+} from "webpack";
 
-type OnCompleteType = "client" | "server"
-type OnCompleteCallback = (stats: Stats) => void
+type Type = "client" | "server";
+type Handler = (stats: Stats) => void;
 
 class Compiler {
 
@@ -65,12 +70,31 @@ class Compiler {
      * @param type 
      * @param callback 
      */
-    public onDone(type: OnCompleteType, callback: OnCompleteCallback) {
-        if (type === "client" && this.client) {
-            this.client.hooks.done.tap(Compiler.id, callback);
+    public onDone(type: Type) {
+        const client = this.client;
+        const server = this.server;
+
+        /**
+         * Process compiler with callback
+         * @param compiler 
+         */
+        const process = (handler: Handler, compiler?: SingleCompiler) => {
+            if (!compiler) {
+                throw Error("Could not find compiler type.")
+            }
+            compiler.hooks.done.tap(Compiler.id, handler);
         }
-        if (type === "server" && this.server) {
-            this.server.hooks.done.tap(Compiler.id, callback);
+        const clientPromise = new Promise<Stats>((resolve) => {
+            process((stats) => resolve(stats), client);
+        });
+        const serverPromise = new Promise<Stats>((resolve) => {
+            process((stats) => resolve(stats), server);
+        });
+        switch (type) {
+            case "client":
+                return clientPromise;
+            case "server":
+                return serverPromise;
         }
     }
 }

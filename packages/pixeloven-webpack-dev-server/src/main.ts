@@ -44,14 +44,14 @@ const main = (argv: string[]) => {
          * @todo Stream json for client and server to browser
          * @todo print access like storybook
          */
-        compiler.onDone("client", (stats) => {
+        compiler.onDone("client").then((stats) => {
             /**
              * @todo this is handled by the client middleware - would like to move reporting here
              */
             const json = stats.toJson("normal");
             logger.info(`webpack built client ${json.hash} in ${json.time}ms`);
         });
-        compiler.onDone("server", (stats) => {
+        compiler.onDone("server").then((stats) => {
             const json = stats.toJson("normal");
             logger.info(`webpack built server ${json.hash} in ${json.time}ms`);
         });
@@ -73,6 +73,9 @@ const main = (argv: string[]) => {
                     logger.info(`Attempting to bind to ${host}:${chosenPort}`);
                     config.port = chosenPort;
                     const server = new Server(compiler, config);
+                    /**
+                     * @todo Need a better way to do this
+                     */
                     server.start((error?: Error) => {
                         if (error) {
                             handleError(error);
@@ -89,6 +92,8 @@ const main = (argv: string[]) => {
                             );
                             openBrowser(baseUrl);
                         }
+                    }).then((instance) => {
+                        // Todo might be able to restart the server based on some signal here.
                     });
                 })
                 .catch((error: Error) => {

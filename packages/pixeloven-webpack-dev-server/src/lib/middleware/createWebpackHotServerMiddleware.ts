@@ -1,38 +1,98 @@
 /* tslint:disable:no-any */
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
-import express, { Application, NextFunction, Request, Response } from "express";
-import requireFromString from "require-from-string";
+import { NextFunction, Request, Response } from "express";
+// import requireFromString from "require-from-string";
 // import webpackHotServerMiddleware from "webpack-hot-server-middleware";
 
-interface ServerEntryPoint {
-    __esModule: any;
-    default: any;
+// interface ServerEntryPoint {
+//     __esModule: any;
+//     default: any;
+// }
+
+// const interopRequireDefault = (obj: ServerEntryPoint) => {
+//     return obj && obj.__esModule ? obj.default : obj;
+// }
+
+// const getServer = (filename: string, buffer: Buffer) => {
+//     const server = interopRequireDefault(
+//         requireFromString(buffer.toString(), filename),
+//     );
+//     /**
+//      * @todo not sure if this will work
+//      */
+//     if (Object.getPrototypeOf(server) === express) {
+//         throw new Error();
+//     }
+//     return server as Application;
+// }
+
+/**
+ * @todo Add this to @types/webpack 
+ * @description based on https://webpack.js.org/api/stats/
+ */
+interface AssetObject {
+    chunkNames: string[];
+    chunks: number[];
+    emitted: boolean;
+    name: string;
+    size: number;
 }
 
-const interopRequireDefault = (obj: ServerEntryPoint) => {
-    return obj && obj.__esModule ? obj.default : obj;
+interface StatsObject {
+    version: string;
+    hash: string;
+    time: number;
+    filteredModules: number;
+    outputPath: string; // path to webpack output directory
+    assetsByChunkName: {
+      [key: string]: string
+    };
+    assets: AssetObject[];
+    chunks: [
+      // A list of chunk objects
+    ];
+    modules: [
+      // A list of module objects
+    ];
+    errors: [
+      // A list of error strings
+    ];
+    warnings: [
+      // A list of warning strings
+    ];
 }
 
-const getServer = (filename: string, buffer: Buffer) => {
-    const server = interopRequireDefault(
-        requireFromString(buffer.toString(), filename),
-    );
-    /**
-     * @todo not sure if this will work
-     */
-    if (Object.getPrototypeOf(server) === express) {
-        throw new Error();
+interface StatsBuffer {
+    clientStats?: StatsObject;
+    serverStats?: StatsObject;
+}
+
+/**
+ * Process client and server compilations
+ * @param compiler 
+ */
+async function process(compiler: Compiler) {
+    const buffer: StatsBuffer = {};
+    const clientStats = await compiler.onDone("client");
+    const serverStats = await compiler.onDone("server");
+    if (clientStats) {
+        buffer.clientStats = clientStats.toJson("verbose");
     }
-    return server as Application;
+    if (serverStats) {
+        buffer.serverStats = serverStats.toJson("verbose");
+    }
+    return buffer;
 }
+
 
 /**
  * @todo make compiler it's own package
  * @todo make this it's own package
+ * @todo should handle compiler.hooks.invalid like https://github.com/webpack-contrib/webpack-hot-middleware/blob/master/middleware.js
  * @param compiler 
  */
-const webpackHotServerMiddleware = (compiler: Compiler) => {
+function webpackHotServerMiddleware(compiler: Compiler) {
     if (!compiler.client) {
         logger.warn(`Cannot find webpack compiler "client". Starting without client compiler`);
     }
@@ -42,9 +102,20 @@ const webpackHotServerMiddleware = (compiler: Compiler) => {
     if (compiler.server.options.target !== "node") {
         throw new Error(`Server compiler configuration must be targeting node.`);
     }
-    return (req: Request, res: Response, next: NextFunction): void => {
-        next();
-    };
+    const promise = process(compiler);
+    
+    return promise.then((buffer) => {
+        return (req: Request, res: Response, next: NextFunction): void => {
+            res.send(buffer);
+        };
+    }).catch((err: Error) => {
+        /**
+         * @todo need to do a better job of error handling
+         */
+        return (req: Request, res: Response, next: NextFunction): void => {
+            next(err)
+        };
+    })
 }
 
 /**
