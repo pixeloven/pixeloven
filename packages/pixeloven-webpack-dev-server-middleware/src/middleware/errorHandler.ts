@@ -78,6 +78,7 @@ function renderProblems(type: string, lines: string[]) {
 
 /**
  * Handle errors
+ * @todo Make configurable and unify with the client overlay once we rewrite that
  * @param err
  * @param req
  * @param res

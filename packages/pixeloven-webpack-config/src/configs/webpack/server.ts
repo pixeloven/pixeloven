@@ -46,9 +46,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
     //         resolvePath("src/server/webpack.ts"),
     //     ),
     // ]);
-    const entry = [
-        resolvePath("src/server/index.ts"),
-    ];
+    const entry = [resolvePath("src/server/index.ts")];
 
     /**
      * All other files that aren't caught by the other loaders will go through this one.
@@ -200,7 +198,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
                 NODE_ENV: ifProduction("production", "development"),
                 PUBLIC_URL: publicPath,
                 TARGET: target,
-            }
+            },
         }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation

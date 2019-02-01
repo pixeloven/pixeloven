@@ -1,15 +1,15 @@
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
+import {
+    createWebpackDevMiddleware,
+    createWebpackHotClientMiddleware,
+    createWebpackHotServerMiddleware,
+    errorHandler,
+} from "@pixeloven/webpack-dev-server-middleware";
 import express from "express";
 import fs from "fs";
 import path from "path";
 import { Config } from "./config";
-import {
-    createWebpackDevMiddleware,
-    createWebpackHotMiddleware,
-    createWebpackHotServerMiddleware,
-    errorHandler,
-} from "./middleware";
 
 type ServerOnComplete = (error?: Error) => void;
 
@@ -44,19 +44,37 @@ class Server {
             );
             app.use(this.config.path, express.static(publicPath));
         }
-        app.use(
-            createWebpackDevMiddleware(this.config, this.compiler.combined),
-        );
-        if (this.compiler.client) {
-            app.use(
-                createWebpackHotMiddleware(this.config, this.compiler.client),
-            );
-        }
 
         /**
-         * @todo might need to convert all of the above to async
+         * Create middleware
          */
-        app.use(createWebpackHotServerMiddleware(this.compiler));
+        const webpackDevMiddleware = createWebpackDevMiddleware(
+            {
+                publicPath: this.config.path,
+                watchOptions: {
+                    poll: this.config.machine !== "host" ? 500 : false,
+                },
+            },
+            this.compiler,
+        );
+        const webpackHotClientMiddleware = createWebpackHotClientMiddleware(
+            {
+                publicPath: this.config.path,
+            },
+            this.compiler,
+        );
+        const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
+            this.compiler,
+        );
+
+        /**
+         * Apply middleware to server application
+         */
+        app.use(webpackDevMiddleware);
+        if (webpackHotClientMiddleware) {
+            app.use(webpackHotClientMiddleware);
+        }
+        app.use(webpackHotServerMiddleware);
         app.use(errorHandler);
 
         // Start express server on specific host and port

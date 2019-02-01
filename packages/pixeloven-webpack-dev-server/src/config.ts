@@ -1,8 +1,5 @@
 import { env, LogLevel, Machine, Protocol } from "@pixeloven/env";
 
-/**
- * @todo unify with @pixeloven/env
- */
 export interface Config {
     logLevel: LogLevel;
     host: string;

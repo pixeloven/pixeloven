@@ -7,8 +7,8 @@ import {
 } from "@pixeloven/webpack-config";
 import openBrowser from "react-dev-utils/openBrowser";
 import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
-import config from "./lib/config";
-import Server from "./lib/Server";
+import config from "./config";
+import Server from "./Server";
 
 /**
  * Get WebpackDevServerUtils functions
@@ -44,14 +44,14 @@ const main = (argv: string[]) => {
          * @todo Stream json for client and server to browser
          * @todo print access like storybook
          */
-        compiler.onDone("client").then((stats) => {
+        compiler.onDone("client").then(stats => {
             /**
              * @todo this is handled by the client middleware - would like to move reporting here
              */
             const json = stats.toJson("normal");
             logger.info(`webpack built client ${json.hash} in ${json.time}ms`);
         });
-        compiler.onDone("server").then((stats) => {
+        compiler.onDone("server").then(stats => {
             const json = stats.toJson("normal");
             logger.info(`webpack built server ${json.hash} in ${json.time}ms`);
         });

@@ -48,18 +48,30 @@ describe("@pixeloven/react-router-config", () => {
                 expect(matched[1].route.path).toEqual("/testing/bar");
             });
             it("should match to root path", () => {
-                const matched = matchRoutes([{
-                    component: TestComponent,
-                }], "/");
+                const matched = matchRoutes(
+                    [
+                        {
+                            component: TestComponent,
+                        },
+                    ],
+                    "/",
+                );
                 expect(matched.length).toEqual(1);
             });
             it("should match parent and child to root path", () => {
-                const matched = matchRoutes([{
-                    component: TestComponent,
-                    routes: [{
-                        component: TestComponent,
-                    }],
-                }], "/");
+                const matched = matchRoutes(
+                    [
+                        {
+                            component: TestComponent,
+                            routes: [
+                                {
+                                    component: TestComponent,
+                                },
+                            ],
+                        },
+                    ],
+                    "/",
+                );
                 expect(matched.length).toEqual(2);
             });
             it("should match no routes", () => {
@@ -74,7 +86,6 @@ describe("@pixeloven/react-router-config", () => {
                 expect(matched.params).toEqual({});
                 expect(matched.path).toEqual("/");
                 expect(matched.url).toEqual("/");
-
             });
         });
     });

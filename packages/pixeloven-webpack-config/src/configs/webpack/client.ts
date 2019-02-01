@@ -323,7 +323,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
                 NODE_ENV: ifProduction("production", "development"),
                 PUBLIC_URL: publicPath,
                 TARGET: target,
-            }
+            },
         }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation

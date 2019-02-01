@@ -14,11 +14,11 @@ interface MatchedRoutes {
  * @todo Scope whether root match might need to be whatever public path instead of always "/"
  */
 export const computeRootMatch = (pathname: string): match => {
-    return { 
-        isExact: pathname === "/" ,
+    return {
+        isExact: pathname === "/",
         params: {},
         path: "/",
-        url: "/", 
+        url: "/",
     };
 };
 

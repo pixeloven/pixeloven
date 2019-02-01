@@ -1,5 +1,5 @@
 import "jest";
-import { Compiler} from "./index";
+import { Compiler } from "./index";
 
 describe("@pixeloven/webpack-compiler", () => {
     describe("index", () => {

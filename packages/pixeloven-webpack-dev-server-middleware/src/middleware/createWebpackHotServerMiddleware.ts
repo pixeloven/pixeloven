@@ -28,7 +28,7 @@ import { NextFunction, Request, Response } from "express";
 // }
 
 /**
- * @todo Add this to @types/webpack 
+ * @todo Add this to @types/webpack
  * @description based on https://webpack.js.org/api/stats/
  */
 interface AssetObject {
@@ -46,73 +46,71 @@ interface StatsObject {
     filteredModules: number;
     outputPath: string; // path to webpack output directory
     assetsByChunkName: {
-      [key: string]: string
+        [key: string]: string;
     };
     assets: AssetObject[];
-    chunks: [
-      // A list of chunk objects
-    ];
-    modules: [
-      // A list of module objects
-    ];
-    errors: [
-      // A list of error strings
-    ];
-    warnings: [
-      // A list of warning strings
-    ];
+    chunks: [// A list of chunk objects];
+    modules: [// A list of module objects];
+    errors: [// A list of error strings];
+    warnings: [// A list of warning strings];
 }
 
 interface StatsBuffer {
-    clientStats?: StatsObject;
-    serverStats?: StatsObject;
-}
-
-/**
- * Process client and server compilations
- * @todo can't wait for both at the same time...
- * @param compiler 
- */
-async function process(compiler: Compiler) {
-    const buffer: StatsBuffer = {};
-    const clientStats = await compiler.onDone("client");
-    // const serverStats = await compiler.onDone("server");
-    if (clientStats) {
-        buffer.clientStats = clientStats.toJson("verbose");
-    }
-    // if (serverStats) {
-    //     buffer.serverStats = serverStats.toJson("verbose");
-    // }
-    return buffer;
+    client?: StatsObject;
+    server?: StatsObject;
 }
 
 /**
  * @todo make compiler it's own package
  * @todo make this it's own package
  * @todo should handle compiler.hooks.invalid like https://github.com/webpack-contrib/webpack-hot-middleware/blob/master/middleware.js
- * @param compiler 
+ * @param compiler
  */
 function webpackHotServerMiddleware(compiler: Compiler) {
     if (!compiler.client) {
-        logger.warn(`Cannot find webpack compiler "client". Starting without client compiler`);
+        logger.warn(
+            `Cannot find webpack compiler "client". Starting without client compiler`,
+        );
     }
     if (!compiler.server) {
         throw new Error(`Server compiler not found.`);
     }
     if (compiler.server.options.target !== "node") {
-        throw new Error(`Server compiler configuration must be targeting node.`);
+        throw new Error(
+            `Server compiler configuration must be targeting node.`,
+        );
     }
-    const promise = process(compiler);
-    logger.info("before");
-    promise.then((buffer) => {
-        logger.info("then");
-    }).catch((err: Error) => {
-        logger.error(err.message);
-    })
 
+    /**
+     * @todo Don handlers for providing stats to server
+     */
+    const buffer: StatsBuffer = {};
+    logger.info("client - before");
+    compiler
+        .onDone("client")
+        .then(stats => {
+            logger.info("client - then");
+            buffer.client = stats.toJson("verbose");
+        })
+        .catch((err: Error) => {
+            logger.info("client - catch");
+            logger.error(err.message);
+        });
+    logger.info("client - after");
+    logger.info("server - before");
+    compiler
+        .onDone("server")
+        .then(stats => {
+            logger.info("server - then");
+            buffer.server = stats.toJson("verbose");
+        })
+        .catch((err: Error) => {
+            logger.info("server - catch");
+            logger.error(err.message);
+        });
     // Return app from entry point here instead
     return (req: Request, res: Response, next: NextFunction): void => {
-        next()
+        res.write(JSON.stringify(buffer));
     };
 }
 
@@ -123,9 +121,7 @@ function webpackHotServerMiddleware(compiler: Compiler) {
  * @param compiler
  * @param watchOptions
  */
-const createWebpackHotServerMiddleware = (
-    compiler: Compiler
-) => {
+const createWebpackHotServerMiddleware = (compiler: Compiler) => {
     return webpackHotServerMiddleware(compiler);
 };
 

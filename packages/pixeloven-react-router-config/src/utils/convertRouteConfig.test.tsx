@@ -14,7 +14,7 @@ const TestComponent = () => {
 
 const customSimpleRoutes = [
     {
-        component: TestComponent
+        component: TestComponent,
     },
 ];
 
@@ -28,14 +28,14 @@ const customNestedRoutes = [
                 exact: true,
                 path: (parentPath: string) => `${parentPath}/child`,
                 statusCode: 200,
-            }
+            },
         ],
     },
 ];
 
 const createSimpleConvertedRoutes = () => [
     {
-        component: TestComponent
+        component: TestComponent,
     },
 ];
 

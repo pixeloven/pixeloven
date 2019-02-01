@@ -1,24 +1,30 @@
 import { logger } from "@pixeloven/node-logger";
+import { Compiler } from "@pixeloven/webpack-compiler";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
-import { MultiCompiler } from "webpack";
+import { WatchOptions } from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
-import { Config } from "../config";
+
+interface DevMiddlewareConfig {
+    publicPath: string;
+    watchOptions?: WatchOptions;
+}
 
 /**
  * Creates webpackDevMiddleware with custom configuration
- * @todo remove formatMessage and handle ourselves
+ * @todo Remove formatWebpackMessages and handle ourselves
+ * @todo make more configurable
+ *
  * @param config
  * @param compiler
  * @param watchOptions
  */
 const createWebpackDevMiddleware = (
-    config: Config,
-    compiler: MultiCompiler,
+    config: DevMiddlewareConfig,
+    compiler: Compiler,
 ) => {
-    return webpackDevMiddleware(compiler, {
+    return webpackDevMiddleware(compiler.combined, {
+        ...config,
         index: false,
-        logLevel: config.logLevel,
-        publicPath: config.path,
         reporter: (middlewareOptions, reporterOptions) => {
             if (
                 reporterOptions.state &&
@@ -48,10 +54,6 @@ const createWebpackDevMiddleware = (
             }
         },
         serverSideRender: true,
-        watchOptions: {
-            aggregateTimeout: 200,
-            poll: config.machine !== "host" ? 500 : false,
-        },
     });
 };
 

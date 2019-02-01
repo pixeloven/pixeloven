@@ -1,6 +1,9 @@
 import log from "webpack-log";
 
 export type Message = string | string[];
+/**
+ * @todo Need to support import { LogLevel } from "@pixeloven/env";
+ */
 export type Level = "error" | "info" | "warn";
 
 export interface LoggerInstance {

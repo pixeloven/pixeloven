@@ -5,9 +5,9 @@ import {
 } from "react-router-dom";
 import { Dispatch } from "redux";
 
-interface Params { 
-    [key: string]: object | number | string 
-};
+interface Params {
+    [key: string]: object | number | string;
+}
 /**
  * @todo Need make this not dependent on redux
  */
