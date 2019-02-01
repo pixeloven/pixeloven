@@ -1,31 +1,11 @@
 /* tslint:disable:no-any */
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
-import { NextFunction, Request, Response } from "express";
-// import requireFromString from "require-from-string";
-// import webpackHotServerMiddleware from "webpack-hot-server-middleware";
-
-// interface ServerEntryPoint {
-//     __esModule: any;
-//     default: any;
-// }
-
-// const interopRequireDefault = (obj: ServerEntryPoint) => {
-//     return obj && obj.__esModule ? obj.default : obj;
-// }
-
-// const getServer = (filename: string, buffer: Buffer) => {
-//     const server = interopRequireDefault(
-//         requireFromString(buffer.toString(), filename),
-//     );
-//     /**
-//      * @todo not sure if this will work
-//      */
-//     if (Object.getPrototypeOf(server) === express) {
-//         throw new Error();
-//     }
-//     return server as Application;
-// }
+import express, { Application, NextFunction, Request, Response } from "express";
+import MemoryFileSystem from "memory-fs";
+import path from "path";
+import requireFromString from "require-from-string";
+import * as sourceMapSupport from "source-map-support";
 
 /**
  * @todo Add this to @types/webpack
@@ -58,10 +38,82 @@ interface StatsObject {
     // A list of warning strings
     warnings: [];
 }
+// const buffer = outputFs.readFileSync(filename);
 
-interface StatsBuffer {
+interface MultiStatsObject {
     client?: StatsObject;
     server?: StatsObject;
+}
+
+interface Module {
+    __esModule: any;
+    default: any;
+}
+
+/**
+ * Checks file is an es module and has a default export
+ * @param obj
+ */
+const interopRequireDefault = (obj: Module) => {
+    return obj && obj.__esModule ? obj.default : obj;
+};
+
+/**
+ * Returns server application from file name and memory buffer
+ * @param filename
+ * @param buffer
+ */
+const getServer = (filename: string, buffer: Buffer) => {
+    const server = interopRequireDefault(
+        requireFromString(buffer.toString(), filename),
+    );
+    /**
+     * @todo not sure if this will work
+     */
+    if (Object.getPrototypeOf(server) === express) {
+        throw new Error();
+    }
+    return server as Application;
+};
+
+/**
+ * Gets file name from buffer
+ * @description If source maps are generated `assetsByChunkName.main` will be an array of filenames.
+ * @param stats
+ * @param chunkName
+ */
+function getFileName(stats: StatsObject, chunkName: string) {
+    const outputPath = stats.outputPath;
+    const fileName = stats.assetsByChunkName[chunkName];
+    if (!fileName) {
+        throw Error(`Asset chunk ${chunkName} could not be found`);
+    }
+    return path.join(
+        outputPath,
+        Array.isArray(fileName)
+            ? fileName.find(asset => /\.js$/.test(asset))
+            : fileName,
+    );
+}
+
+/**
+ * @todo This might not bee needed anymore should see what happens with or without.
+ * @param fs
+ */
+function installSourceMapSupport(fs: MemoryFileSystem) {
+    sourceMapSupport.install({
+        // NOTE: If https://github.com/evanw/node-source-map-support/pull/149
+        // lands we can be less aggressive and explicitly invalidate the source
+        // map cache when Webpack recompiles.
+        emptyCacheBetweenOperations: true,
+        retrieveFile(source) {
+            try {
+                return fs.readFileSync(source, "utf8");
+            } catch (ex) {
+                // Doesn't exist
+            }
+        },
+    });
 }
 
 /**
@@ -86,35 +138,55 @@ function webpackHotServerMiddleware(compiler: Compiler) {
     }
 
     /**
-     * @todo Don handlers for providing stats to server
+     * https://github.com/60frames/webpack-hot-server-middleware/blob/master/src/index.js
+     * @todo Done handlers for providing stats to server
      */
-    const buffer: StatsBuffer = {};
-    logger.info("client - before");
+    const multiStats: MultiStatsObject = {};
     compiler
         .onDone("client")
         .then(stats => {
-            logger.info("client - then");
-            buffer.client = stats.toJson("verbose");
+            multiStats.client = stats.toJson("verbose");
+            logger.info("Applying client stats to stream.");
         })
         .catch((err: Error) => {
             logger.info("client - catch");
             logger.error(err.message);
         });
-    logger.info("client - after");
-    logger.info("server - before");
+
+    /**
+     * @todo we could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here
+     */
+    const outputFs = compiler.server.outputFileSystem as MemoryFileSystem;
+    installSourceMapSupport(outputFs);
+
+    /**
+     * @todo Need to do something like this...
+     * 1) Inspired by AssetManifest add client stats to express request.
+     *      - How do we apply if client seems to finish after server starts? async problems:(
+     * 2) Pass server app back to dev server and apply as middleware / sub app.
+     * 3) Need to be able to restart server if server bundle changes
+     *      - Need to be able to config path so we are always refreshing if not needed.
+     */
+
+    let buffer: Buffer;
     compiler
         .onDone("server")
         .then(stats => {
-            logger.info("server - then");
-            buffer.server = stats.toJson("verbose");
+            const serverStats = stats.toJson("verbose");
+            multiStats.server = serverStats;
+            logger.info("Applying server stats to stream.");
+
+            const fileName = getFileName(serverStats, "main");
+            buffer = outputFs.readFileSync(fileName);
+            const server = getServer(fileName, buffer);
+            logger.info(typeof server);
         })
         .catch((err: Error) => {
-            logger.info("server - catch");
             logger.error(err.message);
         });
     // Return app from entry point here instead
     return (req: Request, res: Response, next: NextFunction): void => {
-        res.write(JSON.stringify(buffer));
+        res.write(buffer);
     };
 }
 

@@ -40,6 +40,7 @@ const mapScriptIndex = (index: string) => index === "build";
 
 /**
  * Setup variables and execute
+ * @todo We should use the new compiler class here... Also create a Build class similar to our Server class
  */
 const main = (argv: string[]) => {
     const scriptArgs = argv.slice(2);
