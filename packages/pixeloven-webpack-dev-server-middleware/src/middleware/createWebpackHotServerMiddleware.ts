@@ -49,10 +49,14 @@ interface StatsObject {
         [key: string]: string;
     };
     assets: AssetObject[];
-    chunks: [// A list of chunk objects];
-    modules: [// A list of module objects];
-    errors: [// A list of error strings];
-    warnings: [// A list of warning strings];
+    // A list of chunk objects
+    chunks: [];
+    // A list of module objects
+    modules: [];
+    // A list of error strings
+    errors: [];
+    // A list of warning strings
+    warnings: [];
 }
 
 interface StatsBuffer {
