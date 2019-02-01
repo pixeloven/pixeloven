@@ -32,7 +32,7 @@ class Server {
      * @param compilerConfig
      * @param onComplete
      */
-    public async start(onComplete: ServerOnComplete) {
+    public start(onComplete: ServerOnComplete) {
         const app = express();
         /**
          * @todo Support coverage and type docs. Plus storybook docs
@@ -56,10 +56,7 @@ class Server {
         /**
          * @todo might need to convert all of the above to async
          */
-        logger.warn("before");
-        const webpackHotServerMiddleware = await createWebpackHotServerMiddleware(this.compiler);
-        logger.warn("after"); // TODO why is this blocking now :(
-        app.use(webpackHotServerMiddleware);
+        app.use(createWebpackHotServerMiddleware(this.compiler));
         app.use(errorHandler);
 
         // Start express server on specific host and port

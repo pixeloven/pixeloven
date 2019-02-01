@@ -92,8 +92,6 @@ const main = (argv: string[]) => {
                             );
                             openBrowser(baseUrl);
                         }
-                    }).then((instance) => {
-                        // Todo might be able to restart the server based on some signal here.
                     });
                 })
                 .catch((error: Error) => {

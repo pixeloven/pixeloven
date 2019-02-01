@@ -70,21 +70,21 @@ interface StatsBuffer {
 
 /**
  * Process client and server compilations
+ * @todo can't wait for both at the same time...
  * @param compiler 
  */
 async function process(compiler: Compiler) {
     const buffer: StatsBuffer = {};
     const clientStats = await compiler.onDone("client");
-    const serverStats = await compiler.onDone("server");
+    // const serverStats = await compiler.onDone("server");
     if (clientStats) {
         buffer.clientStats = clientStats.toJson("verbose");
     }
-    if (serverStats) {
-        buffer.serverStats = serverStats.toJson("verbose");
-    }
+    // if (serverStats) {
+    //     buffer.serverStats = serverStats.toJson("verbose");
+    // }
     return buffer;
 }
-
 
 /**
  * @todo make compiler it's own package
@@ -103,19 +103,17 @@ function webpackHotServerMiddleware(compiler: Compiler) {
         throw new Error(`Server compiler configuration must be targeting node.`);
     }
     const promise = process(compiler);
-    
-    return promise.then((buffer) => {
-        return (req: Request, res: Response, next: NextFunction): void => {
-            res.send(buffer);
-        };
+    logger.info("before");
+    promise.then((buffer) => {
+        logger.info("then");
     }).catch((err: Error) => {
-        /**
-         * @todo need to do a better job of error handling
-         */
-        return (req: Request, res: Response, next: NextFunction): void => {
-            next(err)
-        };
+        logger.error(err.message);
     })
+
+    // Return app from entry point here instead
+    return (req: Request, res: Response, next: NextFunction): void => {
+        next()
+    };
 }
 
 /**
