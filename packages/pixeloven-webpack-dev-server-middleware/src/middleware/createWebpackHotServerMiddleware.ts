@@ -149,7 +149,6 @@ function webpackHotServerMiddleware(compiler: Compiler) {
             logger.info("Applying client stats to stream.");
         })
         .catch((err: Error) => {
-            logger.info("client - catch");
             logger.error(err.message);
         });
 
@@ -167,7 +166,6 @@ function webpackHotServerMiddleware(compiler: Compiler) {
      * 3) Need to be able to restart server if server bundle changes
      *      - Need to be able to config path so we are always refreshing if not needed.
      */
-
     let buffer: Buffer;
     compiler
         .onDone("server")
