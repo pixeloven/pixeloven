@@ -27,5 +27,4 @@ server(app);
 if (config.environment === "production") {
     app.listen(config.server.port, config.server.host);
 }
-
 export default app;
