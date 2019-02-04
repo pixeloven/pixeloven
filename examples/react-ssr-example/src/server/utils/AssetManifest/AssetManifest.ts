@@ -1,8 +1,5 @@
 import fs from "fs";
 import path from "path";
-import { flushChunkNames } from "react-universal-component/server";
-import { Stats } from "webpack";
-import flushChunks from "webpack-flush-chunks";
 
 interface Manifest {
     [key: string]: string;
@@ -10,7 +7,6 @@ interface Manifest {
 
 interface ManifestConfig {
     fileName?: string;
-    stats?: Stats;
 }
 
 export class AssetManifest {
@@ -35,15 +31,7 @@ export class AssetManifest {
      * Return manifest
      */
     public get manifest() {
-        if (this.config.stats) {
-            const { scripts, stylesheets } = flushChunks(this.config.stats, {
-                chunkNames: flushChunkNames(),
-            });
-            return {
-                css: stylesheets,
-                js: scripts,
-            };
-        } else if (this.config.fileName) {
+        if (this.config.fileName) {
             const manifestPath = path.resolve(this.config.fileName);
             if (fs.existsSync(manifestPath)) {
                 const manifestFile = JSON.parse(
