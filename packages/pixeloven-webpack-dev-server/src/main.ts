@@ -75,7 +75,7 @@ const main = (argv: string[]) => {
 
                     /**
                      * On listen complete
-                     * @param error 
+                     * @param error
                      */
                     const onComplete = (error?: Error) => {
                         if (error) {
@@ -99,9 +99,9 @@ const main = (argv: string[]) => {
                      * Create and start application
                      */
                     const server = new Server(compiler, config);
-                    server.create().then((app) => {
+                    server.create().then(app => {
                         app.listen(config.port, config.host, onComplete);
-                    })
+                    });
                 })
                 .catch((error: Error) => {
                     handleError(error);

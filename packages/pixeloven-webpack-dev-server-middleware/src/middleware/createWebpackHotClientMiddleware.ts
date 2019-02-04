@@ -1,5 +1,6 @@
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
+import { NextFunction, Request, Response } from "express";
 import path from "path";
 import webpackHotMiddleware from "webpack-hot-middleware";
 
@@ -27,7 +28,12 @@ const createWebpackHotClientMiddleware = (
             reload: true,
         });
     }
-    return undefined;
+    logger.warn(
+        `Cannot find webpack compiler "client". Starting without client compiler`,
+    );
+    return (req: Request, res: Response, next: NextFunction) => {
+        next();
+    };
 };
 
 export default createWebpackHotClientMiddleware;

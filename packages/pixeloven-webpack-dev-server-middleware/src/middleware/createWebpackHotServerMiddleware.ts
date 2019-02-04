@@ -1,4 +1,3 @@
-/* tslint:disable:no-any */
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import express, { Application, NextFunction, Request, Response } from "express";
@@ -6,49 +5,7 @@ import MemoryFileSystem from "memory-fs";
 import path from "path";
 import requireFromString from "require-from-string";
 import * as sourceMapSupport from "source-map-support";
-
-/**
- * @todo Add this to @types/webpack
- * @description based on https://webpack.js.org/api/stats/
- */
-interface AssetObject {
-    chunkNames: string[];
-    chunks: number[];
-    emitted: boolean;
-    name: string;
-    size: number;
-}
-
-interface StatsObject {
-    version: string;
-    hash: string;
-    time: number;
-    filteredModules: number;
-    outputPath: string; // path to webpack output directory
-    assetsByChunkName: {
-        [key: string]: string;
-    };
-    assets: AssetObject[];
-    // A list of chunk objects
-    chunks: [];
-    // A list of module objects
-    modules: [];
-    // A list of error strings
-    errors: [];
-    // A list of warning strings
-    warnings: [];
-}
-// const buffer = outputFs.readFileSync(filename);
-
-interface MultiStatsObject {
-    client?: StatsObject;
-    server?: StatsObject;
-}
-
-interface Module {
-    __esModule: any;
-    default: any;
-}
+import { Module, StatsObject } from "./types";
 
 /**
  * Checks file is an es module and has a default export
@@ -71,7 +28,7 @@ const getServer = (filename: string, buffer: Buffer) => {
      * @todo not sure if this will work
      */
     if (Object.getPrototypeOf(server) === express) {
-        throw new Error();
+        throw new Error("Module is not of type Express.Application");
     }
     return server as Application;
 };
@@ -86,7 +43,7 @@ function getFileName(stats: StatsObject, chunkName: string) {
     const outputPath = stats.outputPath;
     const fileName = stats.assetsByChunkName[chunkName];
     if (!fileName) {
-        throw Error(`Asset chunk ${chunkName} could not be found`);
+        throw Error(`Asset chunk ${chunkName} could not be found.`);
     }
     return path.join(
         outputPath,
@@ -97,7 +54,7 @@ function getFileName(stats: StatsObject, chunkName: string) {
 }
 
 /**
- * @todo This might not bee needed anymore should see what happens with or without.
+ * @todo Investigate whether is still necessary
  * @param fs
  */
 function installSourceMapSupport(fs: MemoryFileSystem) {
@@ -122,7 +79,7 @@ function installSourceMapSupport(fs: MemoryFileSystem) {
  * @todo should handle compiler.hooks.invalid like https://github.com/webpack-contrib/webpack-hot-middleware/blob/master/middleware.js
  * @param compiler
  */
-function webpackHotServerMiddleware(compiler: Compiler) {
+async function webpackHotServerMiddleware(compiler: Compiler) {
     if (!compiler.client) {
         logger.warn(
             `Cannot find webpack compiler "client". Starting without client compiler`,
@@ -142,25 +99,8 @@ function webpackHotServerMiddleware(compiler: Compiler) {
     const outputFs = compiler.server.outputFileSystem as MemoryFileSystem;
     installSourceMapSupport(outputFs);
 
-
-
     /**
-     * https://github.com/60frames/webpack-hot-server-middleware/blob/master/src/index.js
-     * @todo Done handlers for providing stats to server
-     */
-    const multiStats: MultiStatsObject = {};
-    compiler
-        .onDone("client")
-        .then(stats => {
-            multiStats.client = stats.toJson("verbose");
-            logger.info("Applying client stats to stream.");
-        })
-        .catch((err: Error) => {
-            logger.error(err.message);
-        });
-
-    /**
-     * @todo might need to break the client and server into two async methods that do Promise.all on. 
+     * @todo might need to break the client and server into two async methods that do Promise.all on.
      *      - https://hackernoon.com/async-await-generators-promises-51f1a6ceede2
      * @todo Need to do something like this...
      * 1) Inspired by AssetManifest add client stats to express request.
@@ -169,31 +109,31 @@ function webpackHotServerMiddleware(compiler: Compiler) {
      * 3) Need to be able to restart server if server bundle changes
      *      - Need to be able to config path so we are always refreshing if not needed.
      */
-    return compiler
-        .onDone("server")
-        .then(stats => {
-            const serverStats = stats.toJson("verbose");
-            multiStats.server = serverStats;
-            logger.info("Applying server stats to stream.");
 
-            const fileName = getFileName(serverStats, "main");
-            const buffer = outputFs.readFileSync(fileName);
-            return getServer(fileName, buffer);
-        })
-        .catch((err: Error) => {
-            logger.error(err.message);
-            return (req: Request, res: Response, next: NextFunction) => {
-                next(err);
-            }
-        });
+    /**
+     * @todo Make chunk name configurable
+     * @todo Allow streaming of webpack stats for both server and client to browser
+     */
+    try {
+        const serverStats = await compiler.onDone("server");
+        const serverStatsObject = serverStats.toJson("verbose");
+        logger.info("Applying server stats to stream.");
+
+        const fileName = getFileName(serverStatsObject, "main");
+        const buffer = outputFs.readFileSync(fileName);
+        return getServer(fileName, buffer);
+    } catch (err) {
+        logger.error(err.message);
+        return (req: Request, res: Response, next: NextFunction) => {
+            next(err);
+        };
+    }
 }
 
 /**
  * Creates webpackHotMiddleware with custom configuration
  * @todo To support before and after hooks with a more unified config we should probably fork this middleware
- * @param config
  * @param compiler
- * @param watchOptions
  */
 const createWebpackHotServerMiddleware = (compiler: Compiler) => {
     return webpackHotServerMiddleware(compiler);

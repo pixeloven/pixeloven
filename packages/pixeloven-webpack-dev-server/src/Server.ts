@@ -4,6 +4,7 @@ import {
     createWebpackDevMiddleware,
     createWebpackHotClientMiddleware,
     createWebpackHotServerMiddleware,
+    createWebpackReactAssetMiddleware,
     errorHandler,
 } from "@pixeloven/webpack-dev-server-middleware";
 import express from "express";
@@ -65,17 +66,16 @@ class Server {
         const webpackHotServerMiddleware = await createWebpackHotServerMiddleware(
             this.compiler,
         );
-
+        const webpackReactAssetMiddleware = await createWebpackReactAssetMiddleware(
+            this.compiler,
+        );
         /**
          * Apply middleware to server application
          */
         app.use(webpackDevMiddleware);
-        if (webpackHotClientMiddleware) {
-            app.use(webpackHotClientMiddleware);
-        }
-        if (webpackHotServerMiddleware) {
-            app.use(webpackHotServerMiddleware);
-        }
+        app.use(webpackHotClientMiddleware);
+        app.use(webpackReactAssetMiddleware);
+        app.use(webpackHotServerMiddleware);
         app.use(errorHandler);
         return app;
     }
