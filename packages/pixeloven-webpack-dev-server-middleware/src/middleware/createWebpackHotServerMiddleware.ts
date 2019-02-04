@@ -100,19 +100,12 @@ async function webpackHotServerMiddleware(compiler: Compiler) {
     installSourceMapSupport(outputFs);
 
     /**
-     * @todo might need to break the client and server into two async methods that do Promise.all on.
-     *      - https://hackernoon.com/async-await-generators-promises-51f1a6ceede2
-     * @todo Need to do something like this...
-     * 1) Inspired by AssetManifest add client stats to express request.
-     *      - How do we apply if client seems to finish after server starts? async problems:(
-     * 2) Pass server app back to dev server and apply as middleware / sub app.
-     * 3) Need to be able to restart server if server bundle changes
-     *      - Need to be able to config path so we are always refreshing if not needed.
-     */
-
-    /**
      * @todo Make chunk name configurable
      * @todo Allow streaming of webpack stats for both server and client to browser
+     * 
+     * @todo Need to do the following:
+     * 1) Cleanup logging
+     * 2) Need to invalidate/restart server if this chunk changes
      */
     try {
         const serverStats = await compiler.onDone("server");

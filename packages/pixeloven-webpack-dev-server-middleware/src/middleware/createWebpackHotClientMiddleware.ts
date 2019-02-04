@@ -23,7 +23,7 @@ const createWebpackHotClientMiddleware = (
     if (compiler.client) {
         return webpackHotMiddleware(compiler.client, {
             heartbeat: 3000,
-            log: logger.info,
+            log: false,
             path: path.normalize(`${config.publicPath}/__webpack_hmr`),
             reload: true,
         });

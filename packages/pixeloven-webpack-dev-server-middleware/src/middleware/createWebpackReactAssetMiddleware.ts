@@ -13,7 +13,8 @@ async function webpackReactAssetMiddleware(compiler: Compiler) {
     if (compiler.client) {
         try {
             const clientStats = await compiler.onDone("client");
-            const { scripts, stylesheets } = flushChunks(clientStats, {
+            const clientStatsJson = clientStats.toJson("verbose");
+            const { scripts, stylesheets } = flushChunks(clientStatsJson, {
                 chunkNames: flushChunkNames(),
             });
             logger.info("Applying react assets to stream.");
