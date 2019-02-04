@@ -24,7 +24,6 @@
     "react-dev-utils": "7.0.1",
     "react-universal-component": "3.0.3",
     "require-from-string" : "2.0.2",
-    "source-map-support" : "0.5.10",
     "webpack-dev-middleware": "3.5.1",
     "webpack-flush-chunks": "2.0.3",
     "webpack-hot-middleware": "2.24.3"
