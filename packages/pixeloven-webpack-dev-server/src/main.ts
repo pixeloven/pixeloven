@@ -72,11 +72,12 @@ const main = (argv: string[]) => {
                 .then((chosenPort: number) => {
                     logger.info(`Attempting to bind to ${host}:${chosenPort}`);
                     config.port = chosenPort;
-                    const server = new Server(compiler, config);
+
                     /**
-                     * @todo Need a better way to do this
+                     * On listen complete
+                     * @param error 
                      */
-                    server.start((error?: Error) => {
+                    const onComplete = (error?: Error) => {
                         if (error) {
                             handleError(error);
                         }
@@ -92,7 +93,15 @@ const main = (argv: string[]) => {
                             );
                             openBrowser(baseUrl);
                         }
-                    });
+                    };
+
+                    /**
+                     * Create and start application
+                     */
+                    const server = new Server(compiler, config);
+                    server.create().then((app) => {
+                        app.listen(config.port, config.host, onComplete);
+                    })
                 })
                 .catch((error: Error) => {
                     handleError(error);

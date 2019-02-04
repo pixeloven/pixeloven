@@ -136,6 +136,13 @@ function webpackHotServerMiddleware(compiler: Compiler) {
             `Server compiler configuration must be targeting node.`,
         );
     }
+    /**
+     * @todo we could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here
+     */
+    const outputFs = compiler.server.outputFileSystem as MemoryFileSystem;
+    installSourceMapSupport(outputFs);
+
+
 
     /**
      * https://github.com/60frames/webpack-hot-server-middleware/blob/master/src/index.js
@@ -153,12 +160,8 @@ function webpackHotServerMiddleware(compiler: Compiler) {
         });
 
     /**
-     * @todo we could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here
-     */
-    const outputFs = compiler.server.outputFileSystem as MemoryFileSystem;
-    installSourceMapSupport(outputFs);
-
-    /**
+     * @todo might need to break the client and server into two async methods that do Promise.all on. 
+     *      - https://hackernoon.com/async-await-generators-promises-51f1a6ceede2
      * @todo Need to do something like this...
      * 1) Inspired by AssetManifest add client stats to express request.
      *      - How do we apply if client seems to finish after server starts? async problems:(
@@ -166,8 +169,7 @@ function webpackHotServerMiddleware(compiler: Compiler) {
      * 3) Need to be able to restart server if server bundle changes
      *      - Need to be able to config path so we are always refreshing if not needed.
      */
-    let buffer: Buffer;
-    compiler
+    return compiler
         .onDone("server")
         .then(stats => {
             const serverStats = stats.toJson("verbose");
@@ -175,17 +177,15 @@ function webpackHotServerMiddleware(compiler: Compiler) {
             logger.info("Applying server stats to stream.");
 
             const fileName = getFileName(serverStats, "main");
-            buffer = outputFs.readFileSync(fileName);
-            const server = getServer(fileName, buffer);
-            logger.info(typeof server);
+            const buffer = outputFs.readFileSync(fileName);
+            return getServer(fileName, buffer);
         })
         .catch((err: Error) => {
             logger.error(err.message);
+            return (req: Request, res: Response, next: NextFunction) => {
+                next(err);
+            }
         });
-    // Return app from entry point here instead
-    return (req: Request, res: Response, next: NextFunction): void => {
-        res.write(buffer);
-    };
 }
 
 /**

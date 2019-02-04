@@ -11,8 +11,6 @@ import fs from "fs";
 import path from "path";
 import { Config } from "./config";
 
-type ServerOnComplete = (error?: Error) => void;
-
 class Server {
     protected compiler: Compiler;
     protected config: Config;
@@ -32,7 +30,7 @@ class Server {
      * @param compilerConfig
      * @param onComplete
      */
-    public start(onComplete: ServerOnComplete) {
+    public async create() {
         const app = express();
         /**
          * @todo Support coverage and type docs. Plus storybook docs
@@ -47,6 +45,7 @@ class Server {
 
         /**
          * Create middleware
+         * @todo have all middleware return a promise
          */
         const webpackDevMiddleware = createWebpackDevMiddleware(
             {
@@ -63,7 +62,7 @@ class Server {
             },
             this.compiler,
         );
-        const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
+        const webpackHotServerMiddleware = await createWebpackHotServerMiddleware(
             this.compiler,
         );
 
@@ -74,11 +73,11 @@ class Server {
         if (webpackHotClientMiddleware) {
             app.use(webpackHotClientMiddleware);
         }
-        app.use(webpackHotServerMiddleware);
+        if (webpackHotServerMiddleware) {
+            app.use(webpackHotServerMiddleware);
+        }
         app.use(errorHandler);
-
-        // Start express server on specific host and port
-        return app.listen(this.config.port, this.config.host, onComplete);
+        return app;
     }
 }
 
