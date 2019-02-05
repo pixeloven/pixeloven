@@ -24,7 +24,7 @@ class Home extends React.Component<RouteComponentProps> {
                                     <Container>
                                         <Logo speed="10s" />
                                         <Header as="h1" inverted={true}>
-                                            Welcome to TypeScript + React Lame
+                                            Welcome to TypeScript + React
                                         </Header>
                                         <p>
                                             Includes Semantic UI React, Redux

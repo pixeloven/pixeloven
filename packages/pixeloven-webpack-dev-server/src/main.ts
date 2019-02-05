@@ -5,15 +5,14 @@ import {
     webpackClientConfig,
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
-import openBrowser from "react-dev-utils/openBrowser";
-import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
+import http from "http";
+import net from "net";
 import config from "./config";
 import Server from "./Server";
 
-/**
- * Get WebpackDevServerUtils functions
- */
-const { choosePort } = WebpackDevServerUtils;
+interface State {
+    serverInstance?: http.Server
+}
 
 /**
  * Map index to "script"
@@ -33,79 +32,61 @@ const main = (argv: string[]) => {
         logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
-        const compiler = Compiler.create([
-            webpackClientConfig(process.env),
-            webpackServerConfig(process.env),
-        ]);
-
-        /**
-         * When compiler is complete print basic stats
-         * @todo Refresh server if server path files have been touched
-         * @todo Stream json for client and server to browser
-         * @todo print access like storybook
-         */
-        compiler.onDone("client").then(stats => {
-            /**
-             * @todo this is handled by the client middleware - would like to move reporting here
-             */
-            const json = stats.toJson("normal");
-            logger.info(`webpack built client ${json.hash} in ${json.time}ms`);
-        });
-        compiler.onDone("server").then(stats => {
-            const json = stats.toJson("normal");
-            logger.info(`webpack built server ${json.hash} in ${json.time}ms`);
-        });
-
         /**
          * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
          * @todo bring this back https://github.com/gaearon/react-hot-loader
+         * 
+         * @todo 1) Create CLI options for --open (auto-open)
+         * @todo 2) Create CLI options for --choose-port (auto-choose-port)
          */
         try {
+            const state: State = {};
+            const compiler = Compiler.create([
+                webpackClientConfig(process.env),
+                webpackServerConfig(process.env),
+            ]);
+    
             /**
-             * We attempt to use the default port but if it is busy, we offer the user to
-             * run on a different port. `choosePort()` Promise resolves to the next free port.
+             * When compiler is complete print basic stats
+             * @todo Refresh server if server path files have been touched
+             * @todo Improve logging across all middleware
+             * @todo print access like storybook
+             * https://blog.cloudboost.io/reloading-the-express-server-without-nodemon-e7fa69294a96
+             * @todo Need to find a better way than to have onDone and onDoneOnce
+             *  - Maybe we track promises internally? Renew them automatically?
+             *  - Or find a way to wait for callback results?
+             * 
+             * @todo FIX client onDone runs twice which means we are compile an extra time :(
              */
-            const host = config.host;
-            const port = config.port;
-            const protocol = config.protocol;
-            choosePort(host, port)
-                .then((chosenPort: number) => {
-                    logger.info(`Attempting to bind to ${host}:${chosenPort}`);
-                    config.port = chosenPort;
+            compiler.onDone("client", (stats) => {
+                const json = stats.toJson("normal");
+                logger.info(`Webpack built client ${json.hash} in ${json.time}ms`);
+            });
+            compiler.onDone("server", (stats) => {
+                const json = stats.toJson("normal");
+                logger.info(`Webpack built server ${json.hash} in ${json.time}ms`);
 
-                    /**
-                     * On listen complete
-                     * @param error
-                     */
-                    const onComplete = (error?: Error) => {
-                        if (error) {
-                            handleError(error);
-                        }
-                        logger.info("Starting development server...");
-                        if (config.machine === "host") {
-                            logger.info(
-                                "Application will launch automatically.",
-                            );
-                            const baseUrl = normalizeUrl(
-                                `${protocol}://${host}:${chosenPort}/${
-                                    config.path
-                                }`,
-                            );
-                            openBrowser(baseUrl);
-                        }
-                    };
-
-                    /**
-                     * Create and start application
-                     */
-                    const server = new Server(compiler, config);
-                    server.create().then(app => {
-                        app.listen(config.port, config.host, onComplete);
-                    });
-                })
-                .catch((error: Error) => {
-                    handleError(error);
+                // TODO in here let's look to see if any files in src/server have change and if so restart server
+                if (state.serverInstance) {
+                    logger.info("RESTARTING");
+                }
+            });
+            logger.info(`Attempting to bind to ${config.host}:${config.port}`);
+            /**
+             * Create and start application
+             */
+            const baseUrl = normalizeUrl(
+                `${config.protocol}://${config.host}:${config.port}/${
+                    config.path
+                }`,
+            );
+            const server = new Server(compiler, config);
+            server.create().then(app => {
+                state.serverInstance = app.listen(config.port, config.host, () => {
+                    logger.info("Starting development server...");
+                    logger.info(`Application created at: ${baseUrl}`);
                 });
+            });
         } catch (error) {
             handleError(error);
         }

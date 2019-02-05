@@ -28,8 +28,8 @@
     "@pixeloven/webpack-compiler": "^4.1.5",
     "@pixeloven/webpack-config": "^4.1.5",
     "@pixeloven/webpack-dev-server-middleware": "^4.1.5",
-    "express": "4.16.4",
-    "react-dev-utils": "7.0.1"
+    "chokidar": "2.0.4",
+    "express": "4.16.4"
   },
   "devDependencies": {
     "@pixeloven/cli": "^4.1.1",

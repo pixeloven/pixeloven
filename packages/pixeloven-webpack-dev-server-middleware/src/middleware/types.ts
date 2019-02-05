@@ -30,12 +30,6 @@ export interface StatsObject {
     // A list of warning strings
     warnings: [];
 }
-// const buffer = outputFs.readFileSync(filename);
-
-export interface MultiStatsObject {
-    client?: StatsObject;
-    server?: StatsObject;
-}
 
 export interface Module {
     __esModule: any;

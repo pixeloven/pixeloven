@@ -12,12 +12,12 @@ import flushChunks from "webpack-flush-chunks";
 async function webpackReactAssetMiddleware(compiler: Compiler) {
     if (compiler.client) {
         try {
-            const clientStats = await compiler.onDone("client");
+            const clientStats = await compiler.onDoneOnce("client");
             const clientStatsJson = clientStats.toJson("verbose");
             const { scripts, stylesheets } = flushChunks(clientStatsJson, {
                 chunkNames: flushChunkNames(),
             });
-            logger.info("Applying react assets to stream.");
+            logger.info("Applying bundled react assets to stream");
             return (req: Request, res: Response, next: NextFunction) => {
                 req.files = {
                     css: stylesheets,
@@ -33,7 +33,7 @@ async function webpackReactAssetMiddleware(compiler: Compiler) {
         }
     }
     logger.warn(
-        `Cannot find webpack compiler "client". Starting without client compiler`,
+        `Webpack compiler "client" not found starting without`,
     );
     return (req: Request, res: Response, next: NextFunction) => {
         next();

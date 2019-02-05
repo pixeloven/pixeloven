@@ -29,7 +29,7 @@ const createWebpackHotClientMiddleware = (
         });
     }
     logger.warn(
-        `Cannot find webpack compiler "client". Starting without client compiler`,
+        `Webpack compiler "client" not found starting without`,
     );
     return (req: Request, res: Response, next: NextFunction) => {
         next();

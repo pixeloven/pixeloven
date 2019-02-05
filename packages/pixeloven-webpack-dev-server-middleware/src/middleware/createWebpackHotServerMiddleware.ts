@@ -54,27 +54,22 @@ const getFileName = (stats: StatsObject, chunkName: string) => {
  * @param compiler
  */
 async function webpackHotServerMiddleware(compiler: Compiler) {
-    if (!compiler.client) {
-        logger.warn(
-            `Cannot find webpack compiler "client". Starting without client compiler`,
-        );
-    }
     if (!compiler.server) {
-        throw new Error(`Server compiler not found.`);
+        throw new Error(`Server compiler not found`);
     }
     if (compiler.server.options.target !== "node") {
         throw new Error(
-            `Server compiler configuration must be targeting node.`,
+            `Server compiler configuration must be targeting node`,
         );
     }
     /**
-     * @todo we could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here
+     * @todo we could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here\
      */
     const outputFs = compiler.server.outputFileSystem as MemoryFileSystem;
     try {
-        const serverStats = await compiler.onDone("server");
+        const serverStats = await compiler.onDoneOnce("server");
         const serverStatsObject = serverStats.toJson("verbose");
-        logger.info("Applying server stats to stream.");
+        logger.info("Applying bundled server to stream");
 
         const fileName = getFileName(serverStatsObject, "main");
         const buffer = outputFs.readFileSync(fileName);
