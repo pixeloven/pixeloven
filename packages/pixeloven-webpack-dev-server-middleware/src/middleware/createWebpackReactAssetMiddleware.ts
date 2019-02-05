@@ -1,9 +1,9 @@
+import { DynamicMiddleware } from "@pixeloven/express-dynamic-middleware";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import { NextFunction, Request, Response } from "express";
 import { flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
-import DynamicMiddleware from "./DynamicMiddleware";
 
 interface ReactAssetMiddlewareConfig {
     done?: (stats: Stats) => void;

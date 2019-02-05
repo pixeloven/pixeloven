@@ -1,10 +1,10 @@
+import { DynamicMiddleware } from "@pixeloven/express-dynamic-middleware";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import express, { Express, NextFunction, Request, Response } from "express";
 import MemoryFileSystem from "memory-fs";
 import path from "path";
 import requireFromString from "require-from-string";
 import { Stats } from "webpack";
-import DynamicMiddleware from "./DynamicMiddleware";
 import { Module, StatsObject } from "./types";
 
 interface HotServerMiddlewareConfig {
