@@ -39,36 +39,65 @@ class Server {
         const publicPath = path.resolve(process.cwd(), "public");
         if (fs.existsSync(publicPath)) {
             logger.info([
-                `Found "public" directory`, 
-                `Automatically setting up static file serving`
+                `Found "public" directory...`, 
+                `Setting up static file serving`
             ]);
             app.use(this.config.path, express.static(publicPath));
         }
 
         /**
          * Create middleware
-         * @todo have all middleware return a promise
          */
         const webpackDevMiddleware = createWebpackDevMiddleware(
+            this.compiler,
             {
                 publicPath: this.config.path,
                 watchOptions: {
                     poll: this.config.machine !== "host" ? 500 : false,
                 },
             },
-            this.compiler,
         );
         const webpackHotClientMiddleware = createWebpackHotClientMiddleware(
+            this.compiler,
             {
                 publicPath: this.config.path,
             },
-            this.compiler,
         );
+
+
+
+        let refreshCount = 0;
         const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
-            this.compiler,
+            this.compiler, 
+            {
+                done: (stats) => {
+                    if (refreshCount) {
+                        logger.info("---------- Restarting ----------");
+                    } else {
+                        logger.info("---------- Creating ----------");
+                    }
+                    const json = stats.toJson("normal");
+                    logger.info(`Webpack built server ${json.hash} in ${json.time}ms`);
+                    logger.info("Applying bundled server to stream");
+                    
+                    refreshCount++;
+                }, error: (error) => {
+                    logger.error(error.message);
+                }
+            }
         );
         const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
             this.compiler,
+            {
+                done: (stats) => {
+                    const json = stats.toJson("normal");
+                    logger.info(`Webpack built client ${json.hash} in ${json.time}ms`);
+                    logger.info("Applying bundled react assets to stream");
+                    refreshCount++;
+                }, error: (error) => {
+                    logger.error(error.message);
+                }
+            }
         );
         /**
          * Apply middleware to server application

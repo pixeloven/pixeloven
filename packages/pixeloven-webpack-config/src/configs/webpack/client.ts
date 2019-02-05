@@ -331,10 +331,12 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
          */
         ifProduction(
             new ForkTsCheckerWebpackPlugin({
+                silent: true,
                 tsconfig: resolvePath("tsconfig.json"),
             }),
             new ForkTsCheckerWebpackPlugin({
                 async: false,
+                silent: true,
                 tsconfig: resolvePath("tsconfig.json"),
                 watch: resolvePath("src"),
             }),

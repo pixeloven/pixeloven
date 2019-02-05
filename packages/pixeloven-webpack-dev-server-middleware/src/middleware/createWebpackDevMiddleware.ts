@@ -11,20 +11,20 @@ interface DevMiddlewareConfig {
 
 /**
  * Creates webpackDevMiddleware with custom configuration
- * @todo Remove formatWebpackMessages and handle ourselves
- * @todo make more configurable
- *
+ * @todo Create our own formatter
+ *  - https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/typescriptFormatter.js
  * @param config
  * @param compiler
  * @param watchOptions
  */
 const createWebpackDevMiddleware = (
-    config: DevMiddlewareConfig,
     compiler: Compiler,
+    config: DevMiddlewareConfig,
 ) => {
     return webpackDevMiddleware(compiler.combined, {
         ...config,
         index: false,
+        logLevel: "error",
         reporter: (middlewareOptions, reporterOptions) => {
             if (
                 reporterOptions.state &&

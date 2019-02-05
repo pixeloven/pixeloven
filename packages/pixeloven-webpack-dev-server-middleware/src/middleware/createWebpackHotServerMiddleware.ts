@@ -1,4 +1,3 @@
-import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import express, { Express, NextFunction, Request, Response } from "express";
 import MemoryFileSystem from "memory-fs";
@@ -7,6 +6,11 @@ import requireFromString from "require-from-string";
 import { Stats } from "webpack";
 import DynamicMiddleware from "./DynamicMiddleware";
 import { Module, StatsObject } from "./types";
+
+interface HotServerMiddlewareConfig {
+    done?: (stats: Stats) => void;
+    error?: (stats: Error) => void;
+}
 
 /**
  * Checks file is an es module and has a default export
@@ -55,8 +59,9 @@ const getServer = (filename: string, buffer: Buffer) => {
  * Middleware for server bundle
  * @param compiler
  * @todo Could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here
+ * @todo Pass in before and after handlers for logging and such
  */
-function webpackHotServerMiddleware(compiler: Compiler) {
+const webpackHotServerMiddleware = (compiler: Compiler, config: HotServerMiddlewareConfig) => {
     if (!compiler.server) {
         throw new Error(`Server compiler not found`);
     }
@@ -75,17 +80,20 @@ function webpackHotServerMiddleware(compiler: Compiler) {
         const statsObject = stats.toJson("verbose");
         const fileName = getFileName(statsObject, "main");
         const buffer = outputFs.readFileSync(fileName);
-
-        logger.info("Applying bundled server to stream");
         dynamicMiddleware.clean();
         dynamicMiddleware.mount(getServer(fileName, buffer));
+        if (config.done) {
+            config.done(stats);
+        }
     }
 
     try {
         compiler.onDone("server", onDoneHandler);
         return dynamicMiddleware.handle();
     } catch (err) {
-        logger.error(err.message);
+        if (config.error) {
+            config.error(err);
+        }
         return (req: Request, res: Response, next: NextFunction) => {
             next(err);
         };
@@ -98,8 +106,11 @@ function webpackHotServerMiddleware(compiler: Compiler) {
  * @todo improve logging
  * @param compiler
  */
-const createWebpackHotServerMiddleware = (compiler: Compiler) => {
-    return webpackHotServerMiddleware(compiler);
+const createWebpackHotServerMiddleware = (
+    compiler: Compiler,
+    config: HotServerMiddlewareConfig = {}
+) => {
+    return webpackHotServerMiddleware(compiler, config);
 };
 
 export default createWebpackHotServerMiddleware;

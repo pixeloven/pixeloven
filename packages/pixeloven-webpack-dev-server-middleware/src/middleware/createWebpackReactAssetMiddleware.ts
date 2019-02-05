@@ -1,16 +1,21 @@
-import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import { NextFunction, Request, Response } from "express";
 import { flushChunkNames } from "react-universal-component/server";
+import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
 import DynamicMiddleware from "./DynamicMiddleware";
+
+interface ReactAssetMiddlewareConfig {
+    done?: (stats: Stats) => void;
+    error?: (stats: Error) => void;
+}
 
 /**
  * Applies react assets to server requests
  * @todo Add better logging for what assets were discovered
  * @param compiler
  */
-function webpackReactAssetMiddleware(compiler: Compiler) {
+const webpackReactAssetMiddleware = (compiler: Compiler, config: ReactAssetMiddlewareConfig) => {
     if (compiler.client) {
         const dynamicMiddleware = new DynamicMiddleware();
         try {
@@ -19,8 +24,6 @@ function webpackReactAssetMiddleware(compiler: Compiler) {
                 const { scripts, stylesheets } = flushChunks(clientStats, {
                     chunkNames: flushChunkNames(),
                 });
-
-                logger.info("Applying bundled react assets to stream");
                 dynamicMiddleware.clean();
                 dynamicMiddleware.mount((req: Request, res: Response, next: NextFunction) => {
                     req.files = {
@@ -29,18 +32,20 @@ function webpackReactAssetMiddleware(compiler: Compiler) {
                     };
                     next();
                 });
+                if (config.done) {
+                    config.done(stats);
+                }
             });
             return dynamicMiddleware.handle();
         } catch (err) {
-            logger.error(err.message);
+            if (config.error) {
+                config.error(err);
+            }
             return (req: Request, res: Response, next: NextFunction) => {
                 next(err);
             };
         }
     }
-    logger.warn(
-        `Webpack compiler "client" not found starting without`,
-    );
     return (req: Request, res: Response, next: NextFunction) => {
         next();
     };
@@ -51,8 +56,11 @@ function webpackReactAssetMiddleware(compiler: Compiler) {
  * @todo To support before and after hooks with a more unified config we should probably fork this middleware
  * @param compiler
  */
-const createWebpackReactAssetMiddleware = (compiler: Compiler) => {
-    return webpackReactAssetMiddleware(compiler);
+const createWebpackReactAssetMiddleware = (
+    compiler: Compiler, 
+    config: ReactAssetMiddlewareConfig = {}
+) => {
+    return webpackReactAssetMiddleware(compiler, config);
 };
 
 export default createWebpackReactAssetMiddleware;

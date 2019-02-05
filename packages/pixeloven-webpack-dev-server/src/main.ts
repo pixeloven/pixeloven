@@ -29,47 +29,30 @@ const main = (argv: string[]) => {
         /**
          * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
          * @todo bring this back https://github.com/gaearon/react-hot-loader
-         * 
+         * @todo FIX client onDone runs twice which means we are compile an extra time :(
          * @todo 1) Create CLI options for --open (auto-open)
          * @todo 2) Create CLI options for --choose-port (auto-choose-port)
+         * @todo 3) Create CLI options for --machine (host|docker|virtual)
          */
         try {
+            logger.info(`Starting compiler...`);
             const compiler = Compiler.create([
                 webpackClientConfig(process.env),
                 webpackServerConfig(process.env),
             ]);
-    
             /**
-             * When compiler is complete print basic stats
-             * @todo Improve logging across all middleware
-             * @todo print access like storybook
-             * 
-             * @todo FIX client onDone runs twice which means we are compile an extra time :(
-             */
-            compiler.onDone("client", (stats) => {
-                const json = stats.toJson("normal");
-                logger.info(`Webpack built client ${json.hash} in ${json.time}ms`);
-            });
-            compiler.onDone("server", (stats) => {
-                const json = stats.toJson("normal");
-                logger.info(`Webpack built server ${json.hash} in ${json.time}ms`);
-            });
-            logger.info(`Attempting to bind to ${config.host}:${config.port}`);
-            /**
-             * Create and start application
+             * Create application server
              */
             const baseUrl = normalizeUrl(
                 `${config.protocol}://${config.host}:${config.port}/${
                     config.path
                 }`,
             );
+            logger.info(`Connecting server...`);
             const server = new Server(compiler, config);
             server.create().then(app => {
                 app.listen(config.port, config.host, () => {
-                    logger.info([
-                        `Starting development server...`,
-                        `Application created at: ${baseUrl}`
-                    ]);
+                    logger.info(`Started on ${baseUrl}`);
                 });
             });
         } catch (error) {
