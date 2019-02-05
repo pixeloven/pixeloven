@@ -6,7 +6,6 @@ import {
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
 import http from "http";
-import net from "net";
 import config from "./config";
 import Server from "./Server";
 
@@ -51,10 +50,6 @@ const main = (argv: string[]) => {
              * @todo Refresh server if server path files have been touched
              * @todo Improve logging across all middleware
              * @todo print access like storybook
-             * https://blog.cloudboost.io/reloading-the-express-server-without-nodemon-e7fa69294a96
-             * @todo Need to find a better way than to have onDone and onDoneOnce
-             *  - Maybe we track promises internally? Renew them automatically?
-             *  - Or find a way to wait for callback results?
              * 
              * @todo FIX client onDone runs twice which means we are compile an extra time :(
              */

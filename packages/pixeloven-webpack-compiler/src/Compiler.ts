@@ -67,6 +67,11 @@ class Compiler {
         );
     }
 
+    /**
+     * Allows for hooks to be defined for on compile done
+     * @param type
+     * @param callback
+     */
     public onDone(type: Type, handler: Handler) {
         const time = Date.now();
 
@@ -85,38 +90,6 @@ class Compiler {
                 process(handler, this.client);
             case "server":
                 process(handler, this.server);
-        }
-    }
-
-    /**
-     * Allows for hooks to be defined for on compile done
-     * @param type
-     * @param callback
-     */
-    public onDoneOnce(type: Type) {
-        const time = Date.now();
-        const client = this.client;
-        const server = this.server;
-
-        /**
-         * Process compiler with callback
-         * @param compiler
-         */
-        const process = (handler: Handler, compiler?: SingleCompiler) => {
-            if (!compiler) {
-                throw Error("Could not find compiler type.");
-            }
-            compiler.hooks.done.tap(`${Compiler.id}-${time}`, handler);
-        };
-        switch (type) {
-            case "client":
-                return new Promise<Stats>(resolve => {
-                    process(stats => resolve(stats), client);
-                });
-            case "server":
-                return new Promise<Stats>(resolve => {
-                    process(stats => resolve(stats), server);
-                });
         }
     }
 }

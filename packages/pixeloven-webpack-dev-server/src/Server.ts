@@ -38,9 +38,10 @@ class Server {
          */
         const publicPath = path.resolve(process.cwd(), "public");
         if (fs.existsSync(publicPath)) {
-            logger.info(
-                "Static public file directory found. Automatically setting up static file serving.",
-            );
+            logger.info([
+                `Found "public" directory`, 
+                `Automatically setting up static file serving`
+            ]);
             app.use(this.config.path, express.static(publicPath));
         }
 
@@ -63,10 +64,10 @@ class Server {
             },
             this.compiler,
         );
-        const webpackHotServerMiddleware = await createWebpackHotServerMiddleware(
+        const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
             this.compiler,
         );
-        const webpackReactAssetMiddleware = await createWebpackReactAssetMiddleware(
+        const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
             this.compiler,
         );
         /**

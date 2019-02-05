@@ -1,9 +1,11 @@
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Express, NextFunction, Request, Response } from "express";
 import MemoryFileSystem from "memory-fs";
 import path from "path";
 import requireFromString from "require-from-string";
+import { Stats } from "webpack";
+import DynamicMiddleware from "./DynamicMiddleware";
 import { Module, StatsObject } from "./types";
 
 /**
@@ -12,21 +14,6 @@ import { Module, StatsObject } from "./types";
  */
 const interopRequireDefault = (obj: Module) => {
     return obj && obj.__esModule ? obj.default : obj;
-};
-
-/**
- * Returns server application from file name and memory buffer
- * @param filename
- * @param buffer
- */
-const getServer = (filename: string, buffer: Buffer) => {
-    const server = interopRequireDefault(
-        requireFromString(buffer.toString(), filename),
-    );
-    if (Object.getPrototypeOf(server) === express) {
-        throw new Error("Module is not of type Express.Application");
-    }
-    return server as Application;
 };
 
 /**
@@ -50,10 +37,26 @@ const getFileName = (stats: StatsObject, chunkName: string) => {
 }
 
 /**
+ * Returns server application from file name and memory buffer
+ * @param filename
+ * @param buffer
+ */
+const getServer = (filename: string, buffer: Buffer) => {
+    const server = interopRequireDefault(
+        requireFromString(buffer.toString(), filename),
+    );
+    if (Object.getPrototypeOf(server) === express) {
+        throw new Error("Module is not of type Express");
+    }
+    return server as Express;
+};
+
+/**
  * Middleware for server bundle
  * @param compiler
+ * @todo Could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here
  */
-async function webpackHotServerMiddleware(compiler: Compiler) {
+function webpackHotServerMiddleware(compiler: Compiler) {
     if (!compiler.server) {
         throw new Error(`Server compiler not found`);
     }
@@ -62,18 +65,25 @@ async function webpackHotServerMiddleware(compiler: Compiler) {
             `Server compiler configuration must be targeting node`,
         );
     }
-    /**
-     * @todo we could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here\
-     */
+    const dynamicMiddleware = new DynamicMiddleware();
     const outputFs = compiler.server.outputFileSystem as MemoryFileSystem;
-    try {
-        const serverStats = await compiler.onDoneOnce("server");
-        const serverStatsObject = serverStats.toJson("verbose");
-        logger.info("Applying bundled server to stream");
-
-        const fileName = getFileName(serverStatsObject, "main");
+    /**
+     * Create Handler
+     * @param stats 
+     */
+    const onDoneHandler = (stats: Stats) => {
+        const statsObject = stats.toJson("verbose");
+        const fileName = getFileName(statsObject, "main");
         const buffer = outputFs.readFileSync(fileName);
-        return getServer(fileName, buffer);
+
+        logger.info("Applying bundled server to stream");
+        dynamicMiddleware.clean();
+        dynamicMiddleware.mount(getServer(fileName, buffer));
+    }
+
+    try {
+        compiler.onDone("server", onDoneHandler);
+        return dynamicMiddleware.handle();
     } catch (err) {
         logger.error(err.message);
         return (req: Request, res: Response, next: NextFunction) => {
