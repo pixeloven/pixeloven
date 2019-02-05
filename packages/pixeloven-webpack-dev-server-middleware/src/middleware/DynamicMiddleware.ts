@@ -8,7 +8,7 @@ import { Application, Express, NextFunction, Request, Response } from "express";
  * @type Middleware
  * @description Standard middleware
  */
-type Middleware = (req: Request, res: Response, next: NextFunction) => void
+type Middleware = (req: Request, res: Response, next: NextFunction) => void;
 
 /**
  * @type Layer
@@ -18,7 +18,6 @@ type Middleware = (req: Request, res: Response, next: NextFunction) => void
 type Layers = Array<Application | Express | Middleware>;
 
 class DynamicMiddleware {
-
     protected layers: Layers;
 
     constructor(layers: Layers = []) {
@@ -44,11 +43,15 @@ class DynamicMiddleware {
      */
     public handle(): Middleware {
         return (req: Request, res: Response, next: NextFunction) => {
-            async.each(this.layers, (fn, callback) => {
-                fn(req, res, callback);
-            }, (err) => {
-                next(err);
-            });
+            async.each(
+                this.layers,
+                (fn, callback) => {
+                    fn(req, res, callback);
+                },
+                err => {
+                    next(err);
+                },
+            );
         };
     }
 
@@ -62,7 +65,7 @@ class DynamicMiddleware {
 
     /**
      * Removes layer by reference
-     * @param layer 
+     * @param layer
      */
     public unmount(layer: Application | Middleware) {
         this.layers = this.layers.filter(l => l !== layer);

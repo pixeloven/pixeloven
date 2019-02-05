@@ -15,23 +15,28 @@ interface ReactAssetMiddlewareConfig {
  * @todo Add better logging for what assets were discovered
  * @param compiler
  */
-const webpackReactAssetMiddleware = (compiler: Compiler, config: ReactAssetMiddlewareConfig) => {
+const webpackReactAssetMiddleware = (
+    compiler: Compiler,
+    config: ReactAssetMiddlewareConfig,
+) => {
     if (compiler.client) {
         const dynamicMiddleware = new DynamicMiddleware();
         try {
-            compiler.onDone("client", (stats) => {
+            compiler.onDone("client", stats => {
                 const clientStats = stats.toJson("verbose");
                 const { scripts, stylesheets } = flushChunks(clientStats, {
                     chunkNames: flushChunkNames(),
                 });
                 dynamicMiddleware.clean();
-                dynamicMiddleware.mount((req: Request, res: Response, next: NextFunction) => {
-                    req.files = {
-                        css: stylesheets,
-                        js: scripts,
-                    };
-                    next();
-                });
+                dynamicMiddleware.mount(
+                    (req: Request, res: Response, next: NextFunction) => {
+                        req.files = {
+                            css: stylesheets,
+                            js: scripts,
+                        };
+                        next();
+                    },
+                );
                 if (config.done) {
                     config.done(stats);
                 }
@@ -49,7 +54,7 @@ const webpackReactAssetMiddleware = (compiler: Compiler, config: ReactAssetMiddl
     return (req: Request, res: Response, next: NextFunction) => {
         next();
     };
-}
+};
 
 /**
  * Creates webpackHotMiddleware with custom configuration
@@ -57,8 +62,8 @@ const webpackReactAssetMiddleware = (compiler: Compiler, config: ReactAssetMiddl
  * @param compiler
  */
 const createWebpackReactAssetMiddleware = (
-    compiler: Compiler, 
-    config: ReactAssetMiddlewareConfig = {}
+    compiler: Compiler,
+    config: ReactAssetMiddlewareConfig = {},
 ) => {
     return webpackReactAssetMiddleware(compiler, config);
 };

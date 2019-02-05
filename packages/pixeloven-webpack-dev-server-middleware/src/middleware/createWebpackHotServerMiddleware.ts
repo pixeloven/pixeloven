@@ -38,7 +38,7 @@ const getFileName = (stats: StatsObject, chunkName: string) => {
             ? fileName.find(asset => /\.js$/.test(asset))
             : fileName,
     );
-}
+};
 
 /**
  * Returns server application from file name and memory buffer
@@ -61,20 +61,21 @@ const getServer = (filename: string, buffer: Buffer) => {
  * @todo Could pass in fileSystem from devMiddleware instead of hoping that it exists and casting here
  * @todo Pass in before and after handlers for logging and such
  */
-const webpackHotServerMiddleware = (compiler: Compiler, config: HotServerMiddlewareConfig) => {
+const webpackHotServerMiddleware = (
+    compiler: Compiler,
+    config: HotServerMiddlewareConfig,
+) => {
     if (!compiler.server) {
         throw new Error(`Server compiler not found`);
     }
     if (compiler.server.options.target !== "node") {
-        throw new Error(
-            `Server compiler configuration must be targeting node`,
-        );
+        throw new Error(`Server compiler configuration must be targeting node`);
     }
     const dynamicMiddleware = new DynamicMiddleware();
     const outputFs = compiler.server.outputFileSystem as MemoryFileSystem;
     /**
      * Create Handler
-     * @param stats 
+     * @param stats
      */
     const onDoneHandler = (stats: Stats) => {
         const statsObject = stats.toJson("verbose");
@@ -85,7 +86,7 @@ const webpackHotServerMiddleware = (compiler: Compiler, config: HotServerMiddlew
         if (config.done) {
             config.done(stats);
         }
-    }
+    };
 
     try {
         compiler.onDone("server", onDoneHandler);
@@ -98,7 +99,7 @@ const webpackHotServerMiddleware = (compiler: Compiler, config: HotServerMiddlew
             next(err);
         };
     }
-}
+};
 
 /**
  * Creates webpackHotMiddleware with custom configuration
@@ -108,7 +109,7 @@ const webpackHotServerMiddleware = (compiler: Compiler, config: HotServerMiddlew
  */
 const createWebpackHotServerMiddleware = (
     compiler: Compiler,
-    config: HotServerMiddlewareConfig = {}
+    config: HotServerMiddlewareConfig = {},
 ) => {
     return webpackHotServerMiddleware(compiler, config);
 };
