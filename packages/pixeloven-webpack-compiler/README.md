@@ -19,7 +19,7 @@ yarn add @pixeloven/webpack-compiler
 ```
 
 ## Usage
-> Note It is required that we provide a "client" and "server" configuration provide as an array.
+> Note it's required that we provide a "client" and "server" configuration as an array to webpack.
 
 The primary function of this module is to act as a wrapper class for webpack's compiler. Additionally it Provides functionality useful for interfacing with webpack's compiler and it's corresponding configuration and output.
 
