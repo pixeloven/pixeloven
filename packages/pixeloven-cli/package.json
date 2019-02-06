@@ -2,8 +2,10 @@
   "name": "@pixeloven/cli",
   "version": "4.1.1",
   "description": "Command line interface for PixelOven framework",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
   "bin": {
-    "pixeloven-cli": "./bin/task.bash"
+    "pixeloven-cli": "./dist/lib/index.js"
   },
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -16,21 +18,26 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/jest": "23.3.12",
     "gluegun": "3.0.0",
-    "jest": "23.6.0",
-    "jest-config": "23.6.0",
-    "prettier": "1.16.4",
-    "rimraf": "2.6.3",
-    "stylelint": "9.10.1",
-    "stylelint-config-recommended-scss": "3.2.0",
-    "stylelint-scss": "3.5.2",
-    "ts-jest": "23.10.5",
-    "tslint": "5.12.1",
-    "tslint-config-prettier": "1.18.0",
-    "tslint-eslint-rules": "5.4.0",
-    "tslint-react": "3.6.0",
-    "typedoc": "0.14.2",
-    "typescript": "3.3.1"
+    "@pixeloven/core": "^4.1.5"
+  },
+  "devDependencies": {
+    "@pixeloven/tasks": "^4.1.5",
+    "@types/node": "10.12.18"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn compile",
+    "clean": "pixeloven-tasks clean",
+    "compile": "pixeloven-tasks compile:ts",
+    "precompile": "pixeloven-tasks compile:clean",
+    "document": "pixeloven-tasks document:ts src",
+    "predocument": "pixeloven-tasks document:clean",
+    "lint": "yarn lint:ts",
+    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "pretest": "pixeloven-tasks test:clean",
+    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "test": "pixeloven-tasks test --color --coverage",
+    "test:watch": "pixeloven-tasks test:watch"
   }
 }
