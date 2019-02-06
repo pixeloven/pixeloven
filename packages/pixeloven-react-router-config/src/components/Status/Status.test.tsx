@@ -1,4 +1,4 @@
-import { configure, shallow } from "enzyme";
+import { configure, mount } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import * as React from "react";
@@ -22,7 +22,7 @@ describe("@pixeloven/react-router-config", () => {
     describe("Components", () => {
         describe("Status", () => {
             it("should render one <TestComponent /> and not set status code without `statusCode` or `staticContext` props", () => {
-                const wrapper = shallow(
+                const wrapper = mount(
                     <Status>
                         <TestComponent />
                     </Status>,
@@ -31,7 +31,7 @@ describe("@pixeloven/react-router-config", () => {
                 expect(componentProps.staticContext.statusCode).toEqual(200);
             });
             it("should render one <TestComponent /> and not set status code without `statusCode` prop", () => {
-                const wrapper = shallow(
+                const wrapper = mount(
                     <Status staticContext={componentProps.staticContext}>
                         <TestComponent />
                     </Status>,
@@ -40,7 +40,7 @@ describe("@pixeloven/react-router-config", () => {
                 expect(componentProps.staticContext.statusCode).toEqual(200);
             });
             it("should render one <TestComponent /> and status code", () => {
-                const wrapper = shallow(
+                const wrapper = mount(
                     <Status
                         statusCode={404}
                         staticContext={componentProps.staticContext}
