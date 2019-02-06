@@ -9,7 +9,7 @@ const caller = () => {
     require("./index");
 };
 
-describe("@pixeloven/docs", () => {
+describe("@pixeloven/cli", () => {
     describe("index", () => {
         afterAll(() => {
             jest.clearAllMocks();

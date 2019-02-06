@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/docs",
+    "name": "@pixeloven/storybook",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

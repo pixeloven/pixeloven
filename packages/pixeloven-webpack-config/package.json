@@ -24,7 +24,6 @@
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript" :"7.1.0",
     "@babel/plugin-syntax-dynamic-import":"7.2.0",
-    "@pixeloven/cli": "^4.1.1",
     "@pixeloven/core": "^4.1.5",
     "autoprefixer": "9.4.3",
     "babel-loader": "8.0.5",
@@ -46,10 +45,8 @@
     "react-dev-utils": "7.0.1",
     "sass-loader": "7.1.0",
     "time-fix-plugin": "2.0.5",
-    "ts-loader": "5.3.2",
+    "ts-loader": "5.3.3",
     "tsconfig-paths-webpack-plugin": "3.2.0",
-    "tslint": "5.12.0",
-    "typescript": "3.1.6",
     "uglifyjs-webpack-plugin": "2.1.1",
     "url-loader": "1.1.2",
     "webpack": "4.28.4",
@@ -58,7 +55,7 @@
     "webpack-node-externals": "1.7.2"
   },
   "devDependencies": {
-    "@pixeloven/cli": "^4.1.1",
+    "@pixeloven/tasks": "^4.1.5",
     "@types/autoprefixer": "9.1.1",
     "@types/case-sensitive-paths-webpack-plugin": "2.1.2",
     "@types/copy-webpack-plugin": "4.4.2",
@@ -75,17 +72,17 @@
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
-    "clean": "pixeloven-cli clean",
-    "compile": "pixeloven-cli compile:ts",
-    "precompile": "pixeloven-cli compile:clean",
-    "document": "pixeloven-cli document:ts src",
-    "predocument": "pixeloven-cli document:clean",
+    "clean": "pixeloven-tasks clean",
+    "compile": "pixeloven-tasks compile:ts",
+    "precompile": "pixeloven-tasks compile:clean",
+    "document": "pixeloven-tasks document:ts src",
+    "predocument": "pixeloven-tasks document:clean",
     "lint": "yarn lint:ts",
-    "lint:ts": "pixeloven-cli lint:ts src/**/*.{ts,tsx}",
-    "pretest": "pixeloven-cli test:clean",
-    "pretty": "pixeloven-cli pretty src/**/*.{ts,tsx}",
-    "pretty:ts": "pixeloven-cli pretty:ts src/**/*.{ts,tsx}",
-    "test": "pixeloven-cli test --color --coverage",
-    "test:watch": "pixeloven-cli test:watch"
+    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "pretest": "pixeloven-tasks test:clean",
+    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "test": "pixeloven-tasks test --color --coverage",
+    "test:watch": "pixeloven-tasks test:watch"
   }
 }

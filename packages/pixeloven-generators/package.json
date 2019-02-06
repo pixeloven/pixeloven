@@ -21,29 +21,28 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^4.1.1",
     "@pixeloven/core": "^4.1.5",
     "plop": "2.2.0"
   },
   "devDependencies": {
-    "@pixeloven/cli": "^4.1.1",
+    "@pixeloven/tasks": "^4.1.5",
     "@types/inquirer": "0.0.43",
     "@types/node": "10.12.18"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
-    "clean": "pixeloven-cli clean",
-    "compile": "pixeloven-cli compile:ts",
-    "precompile": "pixeloven-cli compile:clean",
+    "clean": "pixeloven-tasks clean",
+    "compile": "pixeloven-tasks compile:ts",
+    "precompile": "pixeloven-tasks compile:clean",
     "postcompile": "cp -r ./src/templates ./dist/lib/templates",
-    "document": "pixeloven-cli document:ts src",
-    "predocument": "pixeloven-cli document:clean",
+    "document": "pixeloven-tasks document:ts src",
+    "predocument": "pixeloven-tasks document:clean",
     "lint": "yarn lint:ts",
-    "lint:ts": "pixeloven-cli lint:ts src/**/*.{ts,tsx}",
-    "pretest": "pixeloven-cli test:clean",
-    "pretty": "pixeloven-cli pretty src/**/*.{ts,tsx}",
-    "pretty:ts": "pixeloven-cli pretty:ts src/**/*.{ts,tsx}",
-    "test": "pixeloven-cli test --color --coverage",
-    "test:watch": "pixeloven-cli test:watch"
+    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "pretest": "pixeloven-tasks test:clean",
+    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "test": "pixeloven-tasks test --color --coverage",
+    "test:watch": "pixeloven-tasks test:watch"
   }
 }
