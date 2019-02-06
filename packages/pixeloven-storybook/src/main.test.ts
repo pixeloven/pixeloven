@@ -17,7 +17,7 @@ const spawnCompleteMock = (sig: string) => {
 
 const testArgv: string[] = [];
 
-describe("@pixeloven/docs", () => {
+describe("@pixeloven/storybook", () => {
     describe("main", () => {
         afterEach(() => {
             jest.restoreAllMocks();

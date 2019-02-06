@@ -1,5 +1,5 @@
 {
-  "name": "@pixeloven/docs",
+  "name": "@pixeloven/storybook",
   "version": "4.1.5",
   "description": "Documentation generators",
   "main": "dist/lib/story.js",

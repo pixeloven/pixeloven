@@ -1,7 +1,7 @@
 import "jest";
 import "./addons";
 
-describe("@pixeloven/docs", () => {
+describe("@pixeloven/storybook", () => {
     describe("configs", () => {
         describe("addons", () => {
             it("register plugins", () => {
