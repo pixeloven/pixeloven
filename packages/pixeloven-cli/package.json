@@ -17,8 +17,9 @@
   },
   "dependencies": {
     "@types/jest": "23.3.12",
-    "jest": "24.1.0",
-    "jest-config": "24.1.0",
+    "gluegun": "3.0.0",
+    "jest": "23.6.0",
+    "jest-config": "23.6.0",
     "prettier": "1.16.4",
     "rimraf": "2.6.3",
     "stylelint": "9.10.1",
@@ -30,6 +31,6 @@
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "3.6.0",
     "typedoc": "0.14.2",
-    "typescript": "3.1.6"
+    "typescript": "3.3.1"
   }
 }

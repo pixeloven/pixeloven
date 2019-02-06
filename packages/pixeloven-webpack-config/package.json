@@ -46,10 +46,8 @@
     "react-dev-utils": "7.0.1",
     "sass-loader": "7.1.0",
     "time-fix-plugin": "2.0.5",
-    "ts-loader": "5.3.2",
+    "ts-loader": "5.3.3",
     "tsconfig-paths-webpack-plugin": "3.2.0",
-    "tslint": "5.12.0",
-    "typescript": "3.1.6",
     "uglifyjs-webpack-plugin": "2.1.1",
     "url-loader": "1.1.2",
     "webpack": "4.28.4",
@@ -58,7 +56,6 @@
     "webpack-node-externals": "1.7.2"
   },
   "devDependencies": {
-    "@pixeloven/cli": "^4.1.1",
     "@types/autoprefixer": "9.1.1",
     "@types/case-sensitive-paths-webpack-plugin": "2.1.2",
     "@types/copy-webpack-plugin": "4.4.2",
