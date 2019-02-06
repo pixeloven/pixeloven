@@ -1,23 +1,30 @@
 import { logger } from "@pixeloven/node-logger";
+import { Compiler } from "@pixeloven/webpack-compiler";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
-import { MultiCompiler } from "webpack";
+import { WatchOptions } from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
-import { Config } from "../config";
+
+interface DevMiddlewareConfig {
+    publicPath: string;
+    watchOptions?: WatchOptions;
+}
 
 /**
  * Creates webpackDevMiddleware with custom configuration
+ * @todo Create our own formatter
+ *  - https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/typescriptFormatter.js
  * @param config
  * @param compiler
  * @param watchOptions
  */
 const createWebpackDevMiddleware = (
-    config: Config,
-    compiler: MultiCompiler,
+    compiler: Compiler,
+    config: DevMiddlewareConfig,
 ) => {
-    return webpackDevMiddleware(compiler, {
+    return webpackDevMiddleware(compiler.combined, {
+        ...config,
         index: false,
-        logLevel: config.logLevel,
-        publicPath: config.path,
+        logLevel: "error",
         reporter: (middlewareOptions, reporterOptions) => {
             if (
                 reporterOptions.state &&
@@ -47,10 +54,6 @@ const createWebpackDevMiddleware = (
             }
         },
         serverSideRender: true,
-        watchOptions: {
-            aggregateTimeout: 200,
-            poll: config.machine !== "host" ? 500 : false,
-        },
     });
 };
 

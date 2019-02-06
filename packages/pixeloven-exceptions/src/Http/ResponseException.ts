@@ -1,7 +1,6 @@
 import Exception from "../Exception";
 
 class HttpResponseException extends Exception {
-
     protected statusCode: number;
 
     constructor(statusCode: number, message: string = "Response Error") {

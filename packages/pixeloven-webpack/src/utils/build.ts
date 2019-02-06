@@ -67,6 +67,7 @@ export function printBuildFileSizesAfterGzip(
 
 /**
  * Create the production build
+ * @todo Handle errors better https://webpack.js.org/api/node/
  * @param config
  * @param previousFileSizes
  */

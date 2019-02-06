@@ -36,10 +36,7 @@ const routes = [
             {
                 component: Blog,
                 exact: true,
-                fetchData: (
-                    dispatch: Dispatch,
-                    params: object,
-                ): void => {
+                fetchData: (dispatch: Dispatch, params: object): void => {
                     dispatch({
                         payload: "posts",
                         type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,

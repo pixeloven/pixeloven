@@ -1,19 +1,12 @@
 import { exit, handleError, normalizeUrl } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
+import { Compiler } from "@pixeloven/webpack-compiler";
 import {
     webpackClientConfig,
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
-import openBrowser from "react-dev-utils/openBrowser";
-import WebpackDevServerUtils from "react-dev-utils/WebpackDevServerUtils";
-import Compiler from "./lib/Compiler";
-import config from "./lib/config";
-import Server from "./lib/Server";
-
-/**
- * Get WebpackDevServerUtils functions
- */
-const { choosePort } = WebpackDevServerUtils;
+import config from "./config";
+import Server from "./Server";
 
 /**
  * Map index to "script"
@@ -33,50 +26,35 @@ const main = (argv: string[]) => {
         logger.error(`Unknown script ${scriptName}.`);
         exit(1);
     } else {
-        const webpackConfig = [
-            webpackClientConfig(process.env),
-            webpackServerConfig(process.env),
-        ];
-        const compiler = new Compiler(webpackConfig);
-
         /**
          * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
          * @todo bring this back https://github.com/gaearon/react-hot-loader
+         * @todo FIX client onDone runs twice which means we are compile an extra time :(
+         * @todo 1) Create CLI options for --open (auto-open)
+         * @todo 2) Create CLI options for --choose-port (auto-choose-port)
+         * @todo 3) Create CLI options for --machine (host|docker|virtual)
          */
         try {
+            logger.info(`Starting compiler...`);
+            const compiler = Compiler.create([
+                webpackClientConfig(process.env),
+                webpackServerConfig(process.env),
+            ]);
             /**
-             * We attempt to use the default port but if it is busy, we offer the user to
-             * run on a different port. `choosePort()` Promise resolves to the next free port.
+             * Create application server
              */
-            const host = config.host;
-            const port = config.port;
-            const protocol = config.protocol;
-            choosePort(host, port)
-                .then((chosenPort: number) => {
-                    logger.info(`Attempting to bind to ${host}:${chosenPort}`);
-                    config.port = chosenPort;
-                    const server = new Server(compiler, config);
-                    server.start((error?: Error) => {
-                        if (error) {
-                            handleError(error);
-                        }
-                        logger.info("Starting development server...");
-                        if (config.machine === "host") {
-                            logger.info(
-                                "Application will launch automatically.",
-                            );
-                            const baseUrl = normalizeUrl(
-                                `${protocol}://${host}:${chosenPort}/${
-                                    config.path
-                                }`,
-                            );
-                            openBrowser(baseUrl);
-                        }
-                    });
-                })
-                .catch((error: Error) => {
-                    handleError(error);
+            const baseUrl = normalizeUrl(
+                `${config.protocol}://${config.host}:${config.port}/${
+                    config.path
+                }`,
+            );
+            logger.info(`Connecting server...`);
+            const server = new Server(compiler, config);
+            server.create().then(app => {
+                app.listen(config.port, config.host, () => {
+                    logger.info(`Started on ${baseUrl}`);
                 });
+            });
         } catch (error) {
             handleError(error);
         }

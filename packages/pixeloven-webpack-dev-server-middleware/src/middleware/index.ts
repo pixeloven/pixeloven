@@ -5,9 +5,12 @@ export {
     default as createWebpackDevMiddleware,
 } from "./createWebpackDevMiddleware";
 export {
-    default as createWebpackHotMiddleware,
-} from "./createWebpackHotMiddleware";
+    default as createWebpackHotClientMiddleware,
+} from "./createWebpackHotClientMiddleware";
 export {
     default as createWebpackHotServerMiddleware,
 } from "./createWebpackHotServerMiddleware";
+export {
+    default as createWebpackReactAssetMiddleware,
+} from "./createWebpackReactAssetMiddleware";
 export { default as errorHandler } from "./errorHandler";

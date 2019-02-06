@@ -13,7 +13,9 @@ describe("@pixeloven/exceptions", () => {
             });
             it(`property should be set to custom string`, () => {
                 const customMsg = "testing";
-                const defaultException = new HttpInternalServerErrorException(customMsg);
+                const defaultException = new HttpInternalServerErrorException(
+                    customMsg,
+                );
                 expect(defaultException.message).toEqual(customMsg);
             });
         });

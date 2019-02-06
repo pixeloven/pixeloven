@@ -1,4 +1,7 @@
-import { convertRouteConfig, matchRoutes } from "@pixeloven/react-router-config";
+import {
+    convertRouteConfig,
+    matchRoutes,
+} from "@pixeloven/react-router-config";
 import { config } from "@server/config";
 import { Html } from "@server/views";
 import { App } from "@shared/components";
