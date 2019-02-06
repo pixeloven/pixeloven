@@ -1,11 +1,11 @@
 {
   "name": "@pixeloven/storybook",
   "version": "4.1.5",
-  "description": "Documentation generators",
+  "description": "Storybook configuration",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
   "bin": {
-    "pixeloven-docs": "./dist/lib/index.js"
+    "pixeloven-storybook": "./dist/lib/index.js"
   },
   "files": [
     "dist/"

@@ -85,7 +85,7 @@
   "scripts": {
     "build": "run-p build:app build:story",
     "build:app": "pixeloven-webpack build",
-    "build:story": "pixeloven-docs build",
+    "build:story": "pixeloven-storybook build",
     "prebuild": "pixeloven-cli compile:clean",
     "clean": "pixeloven-cli clean",
     "development": "pixeloven-webpack-dev-server start",
