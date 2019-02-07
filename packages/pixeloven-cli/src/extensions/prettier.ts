@@ -1,20 +1,25 @@
 import { PixelOvenRunContext } from "../types";
 
-export type PrettierExtension = (args?: string[]) => void;
+export type PrettierExtension = (args?: string[]) => Promise<number>;
 
 export default (context: PixelOvenRunContext) => {
-    context.prettier = async (args: string[] = []) => {
-        const configPath = context.pixeloven.getConfigPath("prettier.json");
+    const prettier = async (args: string[] = []) => {
+        const { pixeloven, print } = context
+        const fileName = "prettier.json";
+        const configPath = context.pixeloven.getConfigPath(fileName);
         if (configPath) {
-            context.pixeloven.runBin("prettier", [
+            print.info(`Configuration file found ${configPath}`);
+            return pixeloven.runBin("prettier", [
                 "--write",
                 "--config",
                 configPath
             ].concat(args));
         } else {
-            context.pixeloven.runBin("prettier", [
+            print.warning(`Unable to find "${fileName}" reverting to default configuration`);
+            return pixeloven.runBin("prettier", [
                 "--write"
             ].concat(args));
         }
     }
+    context.prettier = prettier;
 }

@@ -28,7 +28,7 @@ case $CMD in
     ;;
     "compile:ts")
         if [ -f $tsconfigrc ]; then
-            exe "tsc --pretty --project $tsconfigrc"
+            exe "tsc --pretty --project $tsconfigrc $@"
         else
             error "File not found $tsconfigrc"
         fi

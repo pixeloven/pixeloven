@@ -1,12 +1,11 @@
-import { filesystem, print } from "gluegun";
+import { filesystem } from "gluegun";
 
-export type GetConfigPathFunction = (fileName: string) => string | undefined;
+export type GetConfigPathFunction = (fileName: string) => string | false;
 
 export default (fileName: string) => {
     const configPath = filesystem.path(fileName);
     if (filesystem.exists(configPath)) {
         return configPath;
     }
-    print.warning(`Unable to find "${fileName}" reverting to default configuration`);
-    return;
+    return false;
 }

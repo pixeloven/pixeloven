@@ -11,16 +11,25 @@ export default {
          * @todo also need to validate -- hard to do
          * @todo Also need to intelligently handle file lists and globs so they match up tot he proper call.
          */
+        let statusCode = 0;
         const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
         switch(parameters.first) {
             case "scss": 
-                styleLint(argList);
-                print.success(`Success! Your code is beautify just the way it is.`);
+                statusCode = await styleLint(argList);
+                if (statusCode) {
+                    print.error(`Stylelint exited with status ${statusCode}`);
+                } else {
+                    print.success(`Success! Your code is beautify just the way it is.`);
+                }
                 break;
             case "ts":
             case "tsx":
-                tsLint(argList);
-                print.success(`Success! Your code is beautify just the way it is.`);
+                statusCode = await tsLint(argList);
+                if (statusCode) {
+                    print.error(`Stylelint exited with status ${statusCode}`);
+                } else {
+                    print.success(`Success! Your code is beautify just the way it is.`);
+                }
                 break;
             default:
                 pixeloven.printInvalidArgument();

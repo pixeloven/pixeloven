@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { exit, spawnComplete, spawnBin } from "@pixeloven/core";
+import { exit, spawnBin, spawnComplete } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import path from "path";
 
