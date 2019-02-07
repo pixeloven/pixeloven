@@ -1,12 +1,12 @@
 import { GluegunRunContext, print } from "gluegun";
 
-// https://github.com/aws-amplify/amplify-cli/blob/master/packages/amplify-cli/src/extensions/amplify-helpers/show-all-help.js
-// https://github.com/aws-amplify/amplify-cli/blob/master/packages/amplify-cli/src/extensions/amplify-helpers/show-help.js
+// https://infinitered.github.io/gluegun/#/getting-started
 export default {
     name: "pixeloven",
     run: async (context: GluegunRunContext) => {
         /**
          * @todo Print out usage 
+         * @todo we should be able to use the aliases and chain them. 
          */
         print.info("Coming soon");
     },
