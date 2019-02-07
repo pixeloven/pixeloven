@@ -1,29 +1,29 @@
-import { GluegunRunContext } from "gluegun";
+import { PixelOvenRunContext } from "../types";
 
 export default {
     alias: ["--lint", "-l"],
     name: "lint",
-    run: async (context: GluegunRunContext) => {
-        const { filesystem, parameters, print } = context;
-        const styleLintConfigPath = filesystem.path("stylelintrc.json");
-        if (filesystem.exists(styleLintConfigPath)) {
-            print.warning(`Unable to find "stylelintrc.json" reverting to default configuration`);
-        }
+    run: async (context: PixelOvenRunContext) => {
+        const { parameters, print, pixeloven, styleLint, tsLint } = context;
         /**
-         * @todo Need to pass arguments to linter cmds
-         * @todo Should just support globing and remove the need determine the correct linter by param
+         * @todo Need to handle base case where only "lint"
+         * @todo move this to helper
+         * @todo also need to validate -- hard to do
+         * @todo Also need to intelligently handle file lists and globs so they match up tot he proper call.
          */
+        const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
         switch(parameters.first) {
-            case "scss":
-                print.success(`Successfully linted {scss}`);
+            case "scss": 
+                styleLint(argList);
+                print.success(`Success! Your code is beautify just the way it is.`);
                 break;
             case "ts":
             case "tsx":
-                print.success(`Successfully linted {ts,tsx}`);
+                tsLint(argList);
+                print.success(`Success! Your code is beautify just the way it is.`);
                 break;
             default:
-                print.error("Invalid arguments provided");
-                print.info("Usage: (scss|ts|tsx)");
+                pixeloven.printInvalidArgument();
                 break;
         }
     },

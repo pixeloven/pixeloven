@@ -1,10 +1,10 @@
-import { GluegunRunContext } from "gluegun";
+import { PixelOvenRunContext } from "../types";
 
 export default {
     alias: ["--delete"],
     name: "delete",
-    run: async (context: GluegunRunContext) => {
-        const { filesystem, parameters, print } = context;
+    run: async (context: PixelOvenRunContext) => {
+        const { filesystem, parameters, pixeloven, print } = context;
         switch(parameters.first) {
             case "coverage":
                 filesystem.remove("./coverage");
@@ -19,8 +19,7 @@ export default {
                 print.success(`Successfully deleted directory`);
                 break;
             default:
-                print.error("Invalid arguments provided");
-                print.info("Usage: (coverage|dist|docs)");
+                pixeloven.printInvalidArgument();
                 break;
         }
     },

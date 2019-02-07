@@ -1,11 +1,10 @@
-import { GluegunRunContext, print } from "gluegun";
+import { PixelOvenRunContext } from "../types";
 
-// https://github.com/aws-amplify/amplify-cli/blob/master/packages/amplify-cli/src/extensions/amplify-helpers/show-all-help.js
-// https://github.com/aws-amplify/amplify-cli/blob/master/packages/amplify-cli/src/extensions/amplify-helpers/show-help.js
 export default {
     alias: ["--compile", "-c"],
     name: "compile",
-    run: async (context: GluegunRunContext) => {
+    run: async (context: PixelOvenRunContext) => {
+        const { print } = context;
         /**
          * @todo Compile 
          */

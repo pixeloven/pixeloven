@@ -21,6 +21,7 @@ export const errorHandler = (err: Error) => {
 /**
  * Handle errors
  * @param error
+ * @todo Should handle this better through the Framework
  */
 export const handleError = (error: Error) => {
     if (error.message) {
@@ -90,7 +91,7 @@ export const spawnNode = (name: string, args: string[]) => {
  * @param name
  * @param args
  */
-export const spawnYarn = (name: string, args: string[] = []) => {
+export const spawnBin = (name: string, args: string[] = []) => {
     const yarnArgs: string[] = [];
     const calling = yarnArgs.concat(args);
     return spawn.sync(name, calling, {
@@ -105,19 +106,6 @@ export const spawnYarn = (name: string, args: string[] = []) => {
  */
 export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
     if (result.signal) {
-        if (result.signal === "SIGKILL") {
-            logger.error(
-                "Process exited too early. " +
-                    "This probably means the system ran out of memory or someone called " +
-                    "`kill -9` on the process.",
-            );
-        } else if (result.signal === "SIGTERM") {
-            logger.error(
-                "Process exited too early. " +
-                    "Someone might have called `kill` or `killall`, or the system could " +
-                    "be shutting down.",
-            );
-        }
         exit(1);
     } else {
         exit(result.status);

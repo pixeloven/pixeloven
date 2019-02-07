@@ -4,7 +4,10 @@
         "rootDir": "./src",
         "declarationDir": "./dist/types",
         "outDir": "./dist/lib",
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "paths": {
+            "@*": ["src/*"],
+        },
     },
     "exclude": [
         "./**/*.stories.ts",

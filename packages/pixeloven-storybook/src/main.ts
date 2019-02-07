@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { exit, spawnComplete, spawnYarn } from "@pixeloven/core";
+import { exit, spawnComplete, spawnBin } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import path from "path";
 
@@ -37,7 +37,7 @@ const main = (argv: string[]) => {
         case "build":
         case "build:story": {
             const config = path.resolve(__dirname, "./configs");
-            const result = spawnYarn("build-storybook", [
+            const result = spawnBin("build-storybook", [
                 "-c",
                 config,
                 "-o",
@@ -49,7 +49,7 @@ const main = (argv: string[]) => {
         case "serve":
         case "serve:story": {
             const config = path.resolve(__dirname, "./configs");
-            const result = spawnYarn("start-storybook", [
+            const result = spawnBin("start-storybook", [
                 "--quiet",
                 "--ci",
                 "-s",

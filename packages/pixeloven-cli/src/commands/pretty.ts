@@ -1,48 +1,39 @@
-import { GluegunRunContext } from "gluegun";
+import { PixelOvenRunContext } from "../types";
 
-// https://github.com/aws-amplify/amplify-cli/blob/master/packages/amplify-cli/src/extensions/amplify-helpers/show-all-help.js
-// https://github.com/aws-amplify/amplify-cli/blob/master/packages/amplify-cli/src/extensions/amplify-helpers/show-help.js
+/**
+ * @todo Move to extensions eventually
+ * @param context 
+ */
+
+/**
+ * @todo Need to handle errors better!
+ */
 export default {
     alias: ["--pretty", "-p"],
     name: "pretty",
-    run: async (context: GluegunRunContext) => {
-        const { filesystem, parameters, print } = context;
+    run: async (context: PixelOvenRunContext) => {
+        const { parameters, print, pixeloven, prettier, styleLint, tsLint } = context;
         /**
-         * @todo make into a helper and only do per sub cmd
+         * @todo Need to handle base case where only "pretty"
+         * @todo move this to helper
+         * @todo also need to validate -- hard to do
+         * @todo Also need to intelligently handle file lists and globs so they match up tot he proper call.
          */
-        const prettierConfigPath = filesystem.path("prettier.json");
-        if (filesystem.exists(prettierConfigPath)) {
-            print.warning(`Unable to find "prettier.json" reverting to default configuration`);
-        }
-        const styleLintConfigPath = filesystem.path("stylelint.json");
-        if (filesystem.exists(styleLintConfigPath)) {
-            print.warning(`Unable to find "stylelint.json" reverting to default configuration`);
-        }
-        const tsLintConfigPath = filesystem.path("tslint.json");
-        if (filesystem.exists(tsLintConfigPath)) {
-            print.warning(`Unable to find "tslint.json" reverting to default configuration`);
-        }
-        /**
-         * @todo Need to pass arguments to linter/prettier cmds
-         * @todo Should just support globing and remove the need determine the correct linter by param
-         */
+        const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
         switch(parameters.first) {
-            case "scss":
-                // Run stylelint --fix
-                // Run prettier
-                print.success(`Successfully prettied {scss}`);
+            case "scss": 
+                styleLint(["--fix"].concat(argList));
+                prettier(argList);
+                print.success(`Looks a lot nicer now doesn't it?!`);
                 break;
             case "ts":
             case "tsx":
-                // Run tslint --fix
-                // Run prettier
-                print.success(`Successfully prettied {ts,tsx}`);
+                tsLint(["--fix"].concat(argList));
+                prettier(argList);
+                print.success(`What nice TypeScript you have!`);
                 break;
             default:
-                // Run stylelint --fix
-                // Run tslint --fix
-                // Run prettier
-                print.success(`Successfully prettied {scss,ts,tsx}`);
+                pixeloven.printInvalidArgument();
                 break;
         }
     },
