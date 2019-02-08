@@ -23,13 +23,14 @@
   "dependencies": {
     "gluegun": "3.0.0",
     "@pixeloven/core": "^4.1.5",
-    "@pixeloven/tasks": "^4.1.5"
+    "@pixeloven/tasks": "^4.1.5",
+    "@pixeloven/webpack": "^4.1.5"
   },
   "devDependencies": {
     "@types/node": "10.12.18"
   },
   "peerDependencies": {
-    "@pixeloven/cli": "^4.1.1"
+    "@pixeloven/cli": ">4.1.1"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

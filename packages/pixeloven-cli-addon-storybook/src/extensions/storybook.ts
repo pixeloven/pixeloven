@@ -1,4 +1,3 @@
-import path from "path";
 import { AddonStorybookRunContext } from "../types";
 
 export type StorybookExecutionType = "build" | "start";
@@ -7,19 +6,19 @@ export type StorybookExtension = (type: StorybookExecutionType, args?: string[])
 
 export default (context: AddonStorybookRunContext) => {
     const storybook = async (type: StorybookExecutionType, args: string[] = []) => {
-        const { pixeloven } = context;
+        const { filesystem, pixeloven } = context;
+        const packagePath = require.resolve("@pixeloven/storybook");
+        const configPath = filesystem.path(packagePath, "./config");
         switch (type) {
             case "build": {
-                const config = path.resolve(__dirname, "./configs");
                 return pixeloven.runBin("build-storybook", [
                     "-c",
-                    config,
+                    configPath,
                     "-o",
                     "./dist/public/docs",
                 ].concat(args));
             }
             case "start": {
-                const config = path.resolve(__dirname, "./configs");
                 return pixeloven.runBin("start-storybook", [
                     "--quiet",
                     "--ci",
@@ -28,7 +27,7 @@ export default (context: AddonStorybookRunContext) => {
                     "-p",
                     "9001",
                     "-c",
-                    config,
+                    configPath,
                 ].concat(args));
             }
             default:

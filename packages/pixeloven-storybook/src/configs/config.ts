@@ -5,6 +5,7 @@ import { addDecorator, configure } from "@storybook/react";
 
 /**
  * Import remote assets dynamically
+ * @todo Find a way to do this through a Decorator or something
  */
 import("" + "@src/shared/styles").catch((error: Error) => {
     console.error("Failed to load scss files", error.message);
