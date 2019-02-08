@@ -108,7 +108,7 @@
     "start": "run-p start:app start:story",
     "start:app": "pixeloven-webpack-dev-server start",
     "start:story": "pixeloven-docs serve",
-    "test": "pixeloven-tasks test --color --coverage",
-    "test:watch": "pixeloven-tasks test:watch"
+    "test": "pixeloven-cli test --color --coverage",
+    "test:watch": "pixeloven-cli test watch"
   }
 }

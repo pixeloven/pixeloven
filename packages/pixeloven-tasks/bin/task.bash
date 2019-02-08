@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Declare configuration files
-tsconfigrc="$(pwd)/tsconfig.json"
-tslintrc="$(pwd)/tslint.json"
-prettierrc="$(pwd)/prettierrc.json"
-jestrc="$(pwd)/jestrc.json"
-stylelintrc="$(pwd)/stylelintrc.json"
-typedocrc="$(pwd)/typedoc.json"
+tsconfigConfigPath="$(pwd)/tsconfig.json"
+tslintConfigPath="$(pwd)/tslint.json"
+prettierConfigPath="$(pwd)/prettier.json"
+jestConfigPath="$(pwd)/jest.json"
+stylelintConfigPath="$(pwd)/stylelint.json"
+typedocConfigPath="$(pwd)/typedoc.json"
 
 CMD=$1
 shift
@@ -27,51 +27,59 @@ case $CMD in
         exe "rimraf dist"
     ;;
     "compile:ts")
-        if [ -f $tsconfigrc ]; then
-            exe "tsc --pretty --project $tsconfigrc $@"
+        if [ -f $tsconfigConfigPath ]; then
+            exe "tsc --pretty --project $tsconfigConfigPath $@"
         else
-            error "File not found $tsconfigrc"
+            error "File not found $tsconfigConfigPath"
         fi
     ;;
     "document:clean")
         exe "rimraf docs"
     ;;
     "document:ts")
-        exe "typedoc --options $typedocrc --tsconfig $tsconfigrc $@"
+        if [ -f $typedocConfigPath ]; then
+            if [ -f $tsconfigConfigPath ]; then
+                exe "typedoc --options $typedocConfigPath --tsconfig $tsconfigConfigPath $@"
+            else
+                error "File not found $tsconfigConfigPath"
+            fi
+        else
+            error "File not found $typedocConfigPath"
+        fi
     ;;
     "lint:ts")
-        if [ -f $tslintrc ]; then
-            exe "tslint -t codeFrame --config $tslintrc $@"
+        if [ -f $tslintConfigPath ]; then
+            exe "tslint -t codeFrame --config $tslintConfigPath $@"
         else
-            error "File not found $tslintrc"
+            error "File not found $tslintConfigPath"
         fi
     ;;
     "lint:scss")
-        if [ -f $stylelintrc ]; then
-            exe "stylelint --syntax scss --config $stylelintrc $@" # src/**/*.scss
+        if [ -f $stylelintConfigPath ]; then
+            exe "stylelint --syntax scss --config $stylelintConfigPath $@" # src/**/*.scss
         else
-            error "File not found $stylelintrc"
+            error "File not found $stylelintConfigPath"
         fi
     ;;
     "pretty")
-        if [ -f $prettierrc ]; then
-            exe "prettier --write --config $prettierrc $@" # src/**/*.{scss,ts,tsx}
+        if [ -f $prettierConfigPath ]; then
+            exe "prettier --write --config $prettierConfigPath $@" # src/**/*.{scss,ts,tsx}
         else
-            error "File not found $prettierrc"
+            error "File not found $prettierConfigPath"
         fi
     ;;
     "pretty:ts")
-        if [ -f $tslintrc ]; then
-            exe "tslint -t codeFrame --config $tslintrc --fix $@" # src/**/*.{ts,tsx}
+        if [ -f $tslintConfigPath ]; then
+            exe "tslint -t codeFrame --config $tslintConfigPath --fix $@" # src/**/*.{ts,tsx}
         else
-            error "File not found $tslintrc"
+            error "File not found $tslintConfigPath"
         fi
     ;;
     "pretty:scss")
-        if [ -f $stylelintrc ]; then
-            exe "stylelint --syntax scss --config $stylelintrc --fix $@" # src/**/*.scss
+        if [ -f $stylelintConfigPath ]; then
+            exe "stylelint --syntax scss --config $stylelintConfigPath --fix $@" # src/**/*.scss
         else
-            error "File not found $stylelintrc"
+            error "File not found $stylelintConfigPath"
         fi
     ;;
     "test")
@@ -85,10 +93,10 @@ case $CMD in
         exe "rimraf coverage"
     ;;
     "test:watch")
-        if [ -f $jestrc ]; then
-            exe "jest --watch --config $jestrc --env=jsdom $@"
+        if [ -f $jestConfigPath ]; then
+            exe "jest --watch --config $jestConfigPath --env=jsdom $@"
         else
-            error "File not found $jestrc"
+            error "File not found $jestConfigPath"
         fi
     ;;
 *)

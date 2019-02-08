@@ -5,12 +5,6 @@ export default {
     name: "pretty",
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, prettier, styleLint, tsLint } = context;
-        /**
-         * @todo Need to handle base case where only "pretty"
-         * @todo move this to helper
-         * @todo also need to validate -- hard to do
-         * @todo Also need to intelligently handle file lists and globs so they match up tot he proper call.
-         */
         let statusCode = 0;
         const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
         switch(parameters.first) {
