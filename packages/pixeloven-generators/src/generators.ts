@@ -27,7 +27,7 @@ export const validateWord = (word: string) => {
 
 /**
  * Creates a validator that checks min length
- * @param min 
+ * @param min
  */
 export const makeValidateMinLength = (min: number) => {
     return (str: string) => {
@@ -35,8 +35,8 @@ export const makeValidateMinLength = (min: number) => {
             return true;
         }
         return `Must be a minimum of ${min} characters.`;
-    }
-}
+    };
+};
 
 /**
  * Modifiers for templates
@@ -176,16 +176,14 @@ const generator = (plop: Plop) => {
              * @todo We should ask how many resources are on this service and to name them
              */
             {
-                message:
-                    `What is the "name" a resource on this service? (I.E. location)`,
+                message: `What is the "name" a resource on this service? (I.E. location)`,
                 name: "resourceName",
                 type: "input",
                 validate: validateWord,
             },
             {
                 choices: requestMethods,
-                message:
-                    "How will we be communicating to this first resource?",
+                message: "How will we be communicating to this first resource?",
                 name: "serviceType",
                 type: "list",
             },

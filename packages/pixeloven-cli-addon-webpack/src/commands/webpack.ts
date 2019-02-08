@@ -5,8 +5,11 @@ export default {
     run: async (context: GluegunRunContext) => {
         const { parameters, print, webpack } = context;
         let statusCode = 0;
-        const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
-        switch(parameters.first) {
+        const argList =
+            parameters.array && parameters.array.length
+                ? parameters.array.slice(1)
+                : [];
+        switch (parameters.first) {
             case "build":
                 statusCode = await webpack(argList);
                 if (statusCode) {

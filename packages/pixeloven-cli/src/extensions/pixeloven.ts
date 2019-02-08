@@ -1,6 +1,10 @@
 import { GluegunRunContext } from "gluegun";
-import getConfigPath, { GetConfigPathFunction } from "./pixeloven-helpers/get-config-path";
-import printInvalidArgument, { PrintInvalidArgumentFunction } from "./pixeloven-helpers/print-invalid-argument";
+import getConfigPath, {
+    GetConfigPathFunction,
+} from "./pixeloven-helpers/get-config-path";
+import printInvalidArgument, {
+    PrintInvalidArgumentFunction,
+} from "./pixeloven-helpers/print-invalid-argument";
 import runBin, { RunBinFunction } from "./pixeloven-helpers/run-bin";
 
 export interface PixelOvenExtensions {

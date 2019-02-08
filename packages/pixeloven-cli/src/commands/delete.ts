@@ -5,7 +5,7 @@ export default {
     name: "delete",
     run: async (context: PixelOvenRunContext) => {
         const { filesystem, parameters, pixeloven, print } = context;
-        switch(parameters.first) {
+        switch (parameters.first) {
             case "coverage":
                 filesystem.remove("./coverage");
                 print.success(`Successfully deleted directory`);

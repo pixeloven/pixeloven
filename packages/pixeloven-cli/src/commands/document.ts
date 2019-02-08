@@ -6,8 +6,11 @@ export default {
     run: async (context: PixelOvenRunContext) => {
         const { parameters, pixeloven, print, typeDoc } = context;
         let statusCode = 0;
-        const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
-        switch(parameters.first) {
+        const argList =
+            parameters.array && parameters.array.length
+                ? parameters.array.slice(1)
+                : [];
+        switch (parameters.first) {
             case "ts":
             case "tsx":
                 statusCode = await typeDoc(argList);

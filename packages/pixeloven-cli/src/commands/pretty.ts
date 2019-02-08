@@ -6,8 +6,11 @@ export default {
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, prettier, styleLint, tsLint } = context;
         let statusCode = 0;
-        const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
-        switch(parameters.first) {
+        const argList =
+            parameters.array && parameters.array.length
+                ? parameters.array.slice(1)
+                : [];
+        switch (parameters.first) {
             case "scss":
                 statusCode = await styleLint(["--fix"].concat(argList));
                 if (statusCode) {
