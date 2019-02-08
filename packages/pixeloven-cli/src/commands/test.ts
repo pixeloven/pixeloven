@@ -10,13 +10,20 @@ export default {
         switch(parameters.first) {
             case "watch":
                 statusCode = await jest(["--watch"].concat(argList));
+                if (statusCode) {
+                    print.error(`Jest exited with status ${statusCode}`);
+                } else {
+                    print.success(`Success! Untouchable.`);
+                }
+                break;
             default:
                 statusCode = await jest(argList);
-        }
-        if (statusCode) {
-            print.error(`Jest exited with status ${statusCode}`);
-        } else {
-            print.success(`Success! Untouchable.`);
+                if (statusCode) {
+                    print.error(`Jest exited with status ${statusCode}`);
+                } else {
+                    print.success(`Success! Untouchable.`);
+                }
+                break;
         }
     },
 };

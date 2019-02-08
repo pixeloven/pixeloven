@@ -7,6 +7,9 @@
   "files": [
     "dist/"
   ],
+  "bin": {
+    "pixeloven-webpack": "./dist/lib/index.js"
+  },
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
     "type": "git",

@@ -1,24 +1,24 @@
 import { GluegunRunContext } from "gluegun";
 
 export default {
-    name: "webpack",
+    name: "storybook",
     run: async (context: GluegunRunContext) => {
-        const { parameters, print, webpack } = context;
+        const { parameters, print, storybook } = context;
         let statusCode = 0;
         const argList = parameters.array && parameters.array.length ? parameters.array.slice(1) : [];
         switch(parameters.first) {
             case "build":
-                statusCode = await webpack(argList);
+                statusCode = await storybook(argList);
                 if (statusCode) {
-                    print.error(`Webpack exited with status ${statusCode}`);
+                    print.error(`Storybook exited with status ${statusCode}`);
                 } else {
                     print.success(`Success!`);
                 }
                 break;
             case "start":
-                statusCode = await webpack(argList);
+                statusCode = await storybook(argList);
                 if (statusCode) {
-                    print.error(`Webpack exited with status ${statusCode}`);
+                    print.error(`Storybook exited with status ${statusCode}`);
                 } else {
                     print.success(`Success!`);
                 }

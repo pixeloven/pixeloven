@@ -5,6 +5,7 @@ import { PrettierExtension } from "./extensions/prettier";
 import { StyleLintExtension } from "./extensions/style-lint";
 import { TsLintExtension } from "./extensions/ts-lint";
 import { TscExtension } from "./extensions/tsc";
+import { TypeDocExtension } from "./extensions/type-doc";
 
 export interface PixelOvenRunContext extends GluegunRunContext {
     jest: JestExtension;
@@ -13,4 +14,5 @@ export interface PixelOvenRunContext extends GluegunRunContext {
     styleLint: StyleLintExtension;
     tsc: TscExtension;
     tsLint: TsLintExtension;
+    typeDoc: TypeDocExtension;
 }
