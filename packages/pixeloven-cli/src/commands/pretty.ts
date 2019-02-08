@@ -28,7 +28,7 @@ export default {
             case "tsx":
                 statusCode = await tsLint(["--fix"].concat(argList));
                 if (statusCode) {
-                    print.error(`Tslint exited with status ${statusCode}`);
+                    print.error(`TSLint exited with status ${statusCode}`);
                     break;
                 }
                 statusCode = await prettier(argList);

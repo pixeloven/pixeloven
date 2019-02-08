@@ -28,6 +28,9 @@
   "devDependencies": {
     "@types/node": "10.12.18"
   },
+  "peerDependencies": {
+    "@pixeloven/cli": "^4.1.1"
+  },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-tasks clean",

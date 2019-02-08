@@ -1,8 +1,8 @@
-import { GluegunRunContext } from "gluegun";
+import { AddonWebpackRunContext } from "../types";
 
 export default {
     name: "webpack",
-    run: async (context: GluegunRunContext) => {
+    run: async (context: AddonWebpackRunContext) => {
         const { parameters, print, webpack } = context;
         let statusCode = 0;
         const argList =

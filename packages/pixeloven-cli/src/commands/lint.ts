@@ -25,7 +25,7 @@ export default {
             case "tsx":
                 statusCode = await tsLint(argList);
                 if (statusCode) {
-                    print.error(`Stylelint exited with status ${statusCode}`);
+                    print.error(`TSLint exited with status ${statusCode}`);
                 } else {
                     print.success(
                         `Success! Your code is beautify just the way it is.`,

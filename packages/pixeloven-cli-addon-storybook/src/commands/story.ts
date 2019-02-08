@@ -1,8 +1,14 @@
-import { GluegunRunContext } from "gluegun";
+import { AddonStorybookRunContext } from "../types";
 
+/**
+ * @todo finish porting webpack and storybook
+ * @todo document new CLI and all packages
+ * @todo remove the need for .env for the CLI (use only in project and examples)
+ * @todo I'd also like to make it so the @env package can load without a file being present at all.
+ */
 export default {
     name: "storybook",
-    run: async (context: GluegunRunContext) => {
+    run: async (context: AddonStorybookRunContext) => {
         const { parameters, print, storybook } = context;
         let statusCode = 0;
         const argList =
@@ -11,7 +17,7 @@ export default {
                 : [];
         switch (parameters.first) {
             case "build":
-                statusCode = await storybook(argList);
+                statusCode = await storybook(parameters.first, argList);
                 if (statusCode) {
                     print.error(`Storybook exited with status ${statusCode}`);
                 } else {
@@ -19,7 +25,7 @@ export default {
                 }
                 break;
             case "start":
-                statusCode = await storybook(argList);
+                statusCode = await storybook(parameters.first, argList);
                 if (statusCode) {
                     print.error(`Storybook exited with status ${statusCode}`);
                 } else {
