@@ -51,6 +51,26 @@ jobs:
           paths: 
             - .
 
+  compile-packages:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
+
+        # Run build and test
+      - run:
+          name: Compile source
+          command: yarn compile
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - packages/**/dist
+            - tools/**/dist
+
   lint-packages:
     executor: node-executor
     steps:
@@ -81,7 +101,7 @@ jobs:
             - packages/**/coverage
             - tools/**/coverage
 
-  compile:
+  build-packages:
     executor: node-executor
     steps:
       - attach_workspace:
@@ -89,17 +109,20 @@ jobs:
       - yarn:
           method: "link-packages"
 
-        # Run build and test
+      # Run build
       - run:
-          name: Compile source
-          command: yarn compile
+          name: Create .env file
+          command: yarn env:production
+
+      - run:
+          name: Build source
+          command: yarn build
 
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
-            - packages/**/dist
-            - tools/**/dist
+            - examples/**/dist
 
   lint-examples:
     executor: node-executor
@@ -129,29 +152,6 @@ jobs:
           root: .
           paths: 
             - examples/**/coverage
-
-  build:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Run build
-      - run:
-          name: Create .env file
-          command: yarn env:production
-
-      - run:
-          name: Build source
-          command: yarn build
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/dist
 
   document:
     executor: node-executor
@@ -275,35 +275,34 @@ workflows:
           filters:
             branches:
               ignore: gh-pages
+      - compile-packages:
+          requires:
+            - setup
       - lint-packages:
           requires:
             - setup
       - test-packages:
           requires:
-            - setup
-      - compile:
+            - compile-packages
+      - build-examples:
           requires:
-            - lint-packages
-            - test-packages
+            - compile-packages
       - lint-examples:
           requires:
-            - compile
+            - compile-packages
       - test-examples:
           requires:
-            - compile
-      - build:
-          requires:
-            - lint-examples
-            - test-examples
+            - build-examples
       - document:
           requires:
-            - build
+            - build-examples
           filters:
             branches:
               only: master
       - report:
           requires:
-            - build
+            - test-packages
+            - test-examples
           filters:
             branches:
               only: master
