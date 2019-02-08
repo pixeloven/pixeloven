@@ -9,8 +9,7 @@
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
   ],
   "testMatch": [
-    "<rootDir>/src/**/test/**/*.(j|t)s?(x)",
-    "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+    "<rootDir>/src/**/*.test.(j|t)s?(x)"
   ],
   "testEnvironment": "node",
   "testURL": "http://localhost",
@@ -27,10 +26,10 @@
   ],
   "coverageThreshold": {
     "global": {
-      "branches": 100,
-      "functions": 100,
-      "lines": 100,
-      "statements": 100
+      "branches": 0,
+      "functions": 0,
+      "lines": 0,
+      "statements": 0
     }
   },
   "collectCoverage": true,

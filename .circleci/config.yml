@@ -51,17 +51,7 @@ jobs:
           paths: 
             - .
 
-  lint:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-      - yarn:
-          method: "lint"
-
-  compile:
+  compile-packages:
     executor: node-executor
     steps:
       - attach_workspace:
@@ -81,7 +71,17 @@ jobs:
             - packages/**/dist
             - tools/**/dist
 
-  document:
+  lint-packages:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
+      - yarn:
+          method: "lint --ignore @pixeloven/react-ssr-example"
+
+  test-packages:
     executor: node-executor
     steps:
       - attach_workspace:
@@ -89,20 +89,19 @@ jobs:
       - yarn:
           method: "link-packages"
 
-      # Generate documentation
+      # Run test
       - run:
-          name: Document source
-          command: yarn document
+          name: Test source
+          command: yarn test --ignore @pixeloven/react-ssr-example
 
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
-            - examples/**/docs
-            - packages/**/docs
-            - tools/**/docs
+            - packages/**/coverage
+            - tools/**/coverage
 
-  build:
+  build-examples:
     executor: node-executor
     steps:
       - attach_workspace:
@@ -120,12 +119,23 @@ jobs:
           command: yarn build
 
       # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/dist
+    # @todo Bring back once we complete CLI re-build
+    #   - persist_to_workspace:
+    #       root: .
+    #       paths: 
+    #         - examples/**/dist
 
-  test:
+  lint-examples:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
+      - yarn:
+          method: "lint --scope @pixeloven/react-ssr-example"
+
+  test-examples:
     executor: node-executor
     steps:
       - attach_workspace:
@@ -136,15 +146,13 @@ jobs:
       # Run test
       - run:
           name: Test source
-          command: yarn test
+          command: yarn test --scope @pixeloven/react-ssr-example
 
       # Save project
       - persist_to_workspace:
           root: .
           paths: 
             - examples/**/coverage
-            - packages/**/coverage
-            - tools/**/coverage
 
   report:
     executor: node-executor
@@ -166,6 +174,27 @@ jobs:
       - run:
           name: Report source
           command: yarn report-coverage
+
+  document:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
+
+      # Generate documentation
+      - run:
+          name: Document source
+          command: yarn document
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/docs
+            - packages/**/docs
+            - tools/**/docs
 
   deploy:
     executor: node-executor
@@ -247,37 +276,40 @@ workflows:
           filters:
             branches:
               ignore: gh-pages
-      - lint:
+      - compile-packages:
           requires:
             - setup
-      - compile:
+      - lint-packages:
           requires:
             - setup
-      - document:
+      - test-packages:
           requires:
-            - compile
-            - lint
-      - build:
+            - compile-packages
+      - build-examples:
           requires:
-            - compile
-            - lint
-      - test:
+            - compile-packages
+      - lint-examples:
           requires:
-            - compile
-            - lint
+            - compile-packages
+      - test-examples:
+          requires:
+            - build-examples
       - report:
           requires:
-            - build
-            - document
-            - test
+            - test-packages
+            - test-examples
+          filters:
+            branches:
+              only: master
+      - document:
+          requires:
+            - build-examples
           filters:
             branches:
               only: master
       - deploy:
           requires:
-            - build
             - document
-            - test
           filters:
             branches:
               only: master
