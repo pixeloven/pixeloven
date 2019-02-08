@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-config",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Webpack configuration for client and server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -24,8 +24,8 @@
     "@babel/preset-env": "7.3.1",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.1.0",
-    "@pixeloven/cli": "^4.1.1",
-    "@pixeloven/core": "^4.1.5",
+    "@pixeloven/cli": "^4.2.1",
+    "@pixeloven/core": "^4.2.1",
     "autoprefixer": "9.4.3",
     "babel-loader": "8.0.5",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
