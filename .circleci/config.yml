@@ -101,7 +101,7 @@ jobs:
             - packages/**/coverage
             - tools/**/coverage
 
-  build-packages:
+  build-examples:
     executor: node-executor
     steps:
       - attach_workspace:
