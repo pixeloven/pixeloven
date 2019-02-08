@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/react-ssr-example",
-  "version": "4.1.5",
+  "version": "4.2.0",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -40,8 +40,8 @@
     "@pixeloven/cli": "^4.1.1",
     "@pixeloven/docs": "^4.1.5",
     "@pixeloven/generators": "^4.1.5",
-    "@pixeloven/webpack": "^4.1.5",
-    "@pixeloven/webpack-dev-server": "^4.1.5",
+    "@pixeloven/webpack": "^4.2.0",
+    "@pixeloven/webpack-dev-server": "^4.2.0",
     "@storybook/addon-actions": "4.1.7",
     "@storybook/addon-backgrounds": "4.1.7",
     "@storybook/addon-knobs": "4.1.7",
