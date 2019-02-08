@@ -153,27 +153,6 @@ jobs:
           paths: 
             - examples/**/coverage
 
-  document:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Generate documentation
-      - run:
-          name: Document source
-          command: yarn document
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/docs
-            - packages/**/docs
-            - tools/**/docs
-
   report:
     executor: node-executor
     steps:
@@ -194,6 +173,27 @@ jobs:
       - run:
           name: Report source
           command: yarn report-coverage
+
+  document:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
+
+      # Generate documentation
+      - run:
+          name: Document source
+          command: yarn document
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/docs
+            - packages/**/docs
+            - tools/**/docs
 
   deploy:
     executor: node-executor
@@ -284,25 +284,26 @@ workflows:
       - test-packages:
           requires:
             - compile-packages
-      - build-examples:
-          requires:
-            - compile-packages
+    # @todo Bring back once we complete CLI re-build
+    #   - build-examples:
+    #       requires:
+    #         - compile-packages
       - lint-examples:
           requires:
             - compile-packages
       - test-examples:
           requires:
             - build-examples
-      - document:
-          requires:
-            - build-examples
-          filters:
-            branches:
-              only: master
       - report:
           requires:
             - test-packages
             - test-examples
+          filters:
+            branches:
+              only: master
+      - document:
+          requires:
+            - build-examples
           filters:
             branches:
               only: master
