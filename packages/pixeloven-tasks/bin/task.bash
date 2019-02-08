@@ -83,10 +83,10 @@ case $CMD in
         fi
     ;;
     "test")
-        if [ -f $jestrc ]; then
-            exe "jest --maxWorkers 2 --config $jestrc --env=jsdom $@"
+        if [ -f $jestConfigPath ]; then
+            exe "jest --maxWorkers 2 --config $jestConfigPath --env=jsdom $@"
         else
-            error "File not found $jestrc"
+            error "File not found $jestConfigPath"
         fi
     ;;
     "test:clean")

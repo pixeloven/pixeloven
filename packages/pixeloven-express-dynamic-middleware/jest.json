@@ -9,8 +9,7 @@
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
   ],
   "testMatch": [
-    "<rootDir>/src/**/test/**/*.(j|t)s?(x)",
-    "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+    "<rootDir>/src/**/*.test.(j|t)s?(x)"
   ],
   "testEnvironment": "node",
   "testURL": "http://localhost",
