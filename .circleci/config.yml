@@ -81,26 +81,6 @@ jobs:
             - packages/**/coverage
             - tools/**/coverage
 
-  document-packages:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Generate documentation
-      - run:
-          name: Document source
-          command: yarn document --ignore @pixeloven/react-ssr-example
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - packages/**/docs
-            - tools/**/docs
-
   compile:
     executor: node-executor
     steps:
@@ -150,25 +130,6 @@ jobs:
           paths: 
             - examples/**/coverage
 
-  document-examples:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Generate documentation
-      - run:
-          name: Document source
-          command: yarn document --scope @pixeloven/react-ssr-example
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/docs
-
   build:
     executor: node-executor
     steps:
@@ -191,6 +152,27 @@ jobs:
           root: .
           paths: 
             - examples/**/dist
+
+  document:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - yarn:
+          method: "link-packages"
+
+      # Generate documentation
+      - run:
+          name: Document source
+          command: yarn document
+
+      # Save project
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/docs
+            - packages/**/docs
+            - tools/**/docs
 
   report:
     executor: node-executor
@@ -299,28 +281,26 @@ workflows:
       - test-packages:
           requires:
             - setup
-      - document-packages:
-          requires:
-            - setup
       - compile:
           requires:
             - lint-packages
             - test-packages
-            - document-packages
       - lint-examples:
           requires:
             - compile
       - test-examples:
           requires:
             - compile
-      - document-examples:
-          requires:
-            - compile
       - build:
           requires:
             - lint-examples
             - test-examples
-            - document-examples
+      - document:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
       - report:
           requires:
             - build
@@ -329,7 +309,7 @@ workflows:
               only: master
       - deploy:
           requires:
-            - build
+            - document
           filters:
             branches:
               only: master
