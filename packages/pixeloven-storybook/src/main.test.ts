@@ -7,7 +7,7 @@ const exitMock = (code?: number) => {
     testCode = code;
 };
 
-const spawnYarnMock = (cmd: string) => {
+const spawnBinMock = (cmd: string) => {
     return cmd;
 };
 
@@ -36,26 +36,26 @@ describe("@pixeloven/storybook", () => {
         });
         it('should start cli "build" and pass', () => {
             testArgv.push("/some/path", "yarn", "build");
-            const exitSpawnYarn = jest
-                .spyOn(macros, "spawnYarn")
-                .mockImplementation(spawnYarnMock);
+            const exitspawnBin = jest
+                .spyOn(macros, "spawnBin")
+                .mockImplementation(spawnBinMock);
             const exitSpawnComplete = jest
                 .spyOn(macros, "spawnComplete")
                 .mockImplementation(spawnCompleteMock);
             main(testArgv);
-            expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
+            expect(exitspawnBin).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
         });
         it('should start cli "start" and pass', () => {
             testArgv.push("/some/path", "yarn", "serve");
-            const exitSpawnYarn = jest
-                .spyOn(macros, "spawnYarn")
-                .mockImplementation(spawnYarnMock);
+            const exitspawnBin = jest
+                .spyOn(macros, "spawnBin")
+                .mockImplementation(spawnBinMock);
             const exitSpawnComplete = jest
                 .spyOn(macros, "spawnComplete")
                 .mockImplementation(spawnCompleteMock);
             main(testArgv);
-            expect(exitSpawnYarn).toHaveBeenCalledTimes(1);
+            expect(exitspawnBin).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
         });
     });

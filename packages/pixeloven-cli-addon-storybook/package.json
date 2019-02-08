@@ -1,14 +1,14 @@
 {
-  "name": "@pixeloven/cli",
-  "version": "4.1.1",
-  "description": "Command line interface for PixelOven framework",
+  "name": "@pixeloven/cli-addon-storybook",
+  "version": "4.1.5",
+  "description": "PixelOven CLI addon for storybook based development",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "dist/"
   ],
   "bin": {
-    "pixeloven": "./dist/lib/index.js"
+    "pixeloven-storybook": "./dist/lib/index.js"
   },
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -23,7 +23,6 @@
   "dependencies": {
     "gluegun": "3.0.0",
     "@pixeloven/core": "^4.1.5",
-    "@pixeloven/exceptions": "^4.1.4",
     "@pixeloven/tasks": "^4.1.5"
   },
   "devDependencies": {
