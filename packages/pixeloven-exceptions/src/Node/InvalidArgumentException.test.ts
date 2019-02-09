@@ -1,5 +1,5 @@
 import "jest";
-import NodeInvalidArgumentException from "./ProcessException";
+import NodeInvalidArgumentException from "./InvalidArgumentException";
 
 const name = "NodeInvalidArgumentException";
 const defaultMessage = "Invalid argument exception";
