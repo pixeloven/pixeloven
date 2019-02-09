@@ -1,25 +1,24 @@
-import { resolvePath } from "@pixeloven/core";
-import { build } from "gluegun";
+import fs from "fs";
+import { build, filesystem } from "gluegun";
 
-/**
- * https://github.com/aws-amplify/amplify-cli/blob/master/packages/amplify-cli/src/cli.js
- * @param argv
- */
 async function main(argv: string[]) {
-    const cli = build()
+    const pixelOvenPath = filesystem.path(process.cwd(), "./node_modules", "@pixeloven");
+    const plugins = filesystem.subdirectories(pixelOvenPath);
+    const builder = build()
         .brand("pixeloven")
-        .src(__dirname)
-        .plugins(resolvePath("node_modules"), {
-            hidden: false,
-            matching: "@pixeloven/cli-addon*",
-        })
-        .version() // provides default for version, v, --version, -v
+        .src(__dirname);
+    /**
+     * Adding plugins
+     * @description We need to do it this way because we might have a sym link in our path.
+     */
+    plugins.forEach(plugin => {
+        builder.plugin(filesystem.path(fs.realpathSync(plugin), "./dist/lib"));
+    });
+    const cli = builder 
+        .version()
         .create();
 
-    // and run it
     const context = await cli.run(argv);
-
-    // send it back (for testing, mostly)
     return context;
 }
 
