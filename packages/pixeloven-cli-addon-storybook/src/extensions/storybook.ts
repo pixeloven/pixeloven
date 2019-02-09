@@ -7,6 +7,8 @@ export type StorybookExtension = (type: StorybookExecutionType, args?: string[])
 
 /**
  * @todo Add support for custom config path
+ * @todo Need to clean this up - the cmd and this have similar logic that could be condensed
+ * @todo This should really be two different extensions
  */
 export default (context: AddonStorybookRunContext) => {
     const storybook = async (type: StorybookExecutionType, args: string[] = []) => {

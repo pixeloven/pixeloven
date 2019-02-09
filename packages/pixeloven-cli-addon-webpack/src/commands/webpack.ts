@@ -3,7 +3,7 @@ import { AddonWebpackRunContext } from "../types";
 export default {
     name: "webpack",
     run: async (context: AddonWebpackRunContext) => {
-        const { parameters, print, webpack } = context;
+        const { parameters, print, webpack, webpackDevServer } = context;
         let statusCode = 0;
         const argList =
             parameters.array && parameters.array.length
@@ -14,16 +14,12 @@ export default {
                 statusCode = await webpack(argList);
                 if (statusCode) {
                     print.error(`Webpack exited with status ${statusCode}`);
-                } else {
-                    print.success(`Success!`);
                 }
                 break;
             case "start":
-                // TODO express dev server 
+                statusCode = await webpackDevServer(argList);
                 if (statusCode) {
                     print.error(`Webpack exited with status ${statusCode}`);
-                } else {
-                    print.success(`Success!`);
                 }
                 break;
             default:

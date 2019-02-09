@@ -1,9 +1,9 @@
 import {
     createOrEmptyDir,
-    handleError,
     resolvePath,
 } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
+import { logger } from "@pixeloven/node-logger";
 import {
     webpackClientConfig,
     webpackServerConfig,
@@ -104,8 +104,10 @@ export default async () => {
             buildServerCode(publicBuildPath, environment);
         }
         return 0;
-    } catch (error) {
-        handleError(error);
+    } catch (err) {
+        if (err && err.message) {
+            logger.error(err.message);
+        }
         return 1;
     }
 };
