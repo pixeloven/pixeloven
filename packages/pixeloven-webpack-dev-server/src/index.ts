@@ -9,8 +9,11 @@ import {
 import config from "./config";
 import Server from "./Server";
 
+export { Server };
+
 /**
  * Setup execution
+ * @todo Move this into utils and cli
  */
 export default async () => {
 
