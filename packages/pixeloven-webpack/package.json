@@ -4,9 +4,6 @@
   "description": "Webpack build script",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
-  "bin": {
-    "pixeloven-webpack": "./dist/lib/index.js"
-  },
   "files": [
     "dist/"
   ],

@@ -19,7 +19,7 @@ export default {
                 }
                 break;
             case "start":
-                statusCode = await webpack(argList);
+                // TODO express dev server 
                 if (statusCode) {
                     print.error(`Webpack exited with status ${statusCode}`);
                 } else {
