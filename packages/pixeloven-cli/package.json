@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli",
-  "version": "4.1.1",
+  "version": "4.2.1",
   "description": "Command line interface for PixelOven framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/types.d.ts",

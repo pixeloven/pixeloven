@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/gh-pages",
-  "version": "4.1.5",
+  "version": "4.2.1",
   "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
