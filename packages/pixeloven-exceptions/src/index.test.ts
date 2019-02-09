@@ -12,11 +12,6 @@ describe("@pixeloven/exceptions", () => {
                     "function",
                 );
             });
-            it("should export NodeProcessException", () => {
-                expect(typeof exceptions.NodeProcessException).toEqual(
-                    "function",
-                );
-            });
         });
         describe("Http", () => {
             it("should export HttpBadRequestException", () => {
@@ -48,6 +43,11 @@ describe("@pixeloven/exceptions", () => {
         describe("Node", () => {
             it("should export NodeProcessException", () => {
                 expect(typeof exceptions.NodeProcessException).toEqual(
+                    "function",
+                );
+            });
+            it("should export NodeInvalidArgumentException", () => {
+                expect(typeof exceptions.NodeInvalidArgumentException).toEqual(
                     "function",
                 );
             });
