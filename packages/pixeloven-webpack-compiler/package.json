@@ -18,10 +18,10 @@
     "access": "public"
   },
   "dependencies": {
+    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "webpack": "4.28.4"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "@types/node": "10.12.18",
     "@types/webpack": "4.4.23"
   },

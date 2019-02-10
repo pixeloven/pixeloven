@@ -25,6 +25,7 @@
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.1.0",
     "@pixeloven/core": "^5.0.0-alpha.0",
+    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "autoprefixer": "9.4.3",
     "babel-loader": "8.0.5",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
@@ -55,7 +56,6 @@
     "webpack-node-externals": "1.7.2"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "@types/autoprefixer": "9.1.1",
     "@types/case-sensitive-paths-webpack-plugin": "2.1.2",
     "@types/copy-webpack-plugin": "4.4.2",

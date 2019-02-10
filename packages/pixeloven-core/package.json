@@ -20,12 +20,12 @@
   "dependencies": {
     "@pixeloven/exceptions": "^5.0.0-alpha.0",
     "@pixeloven/node-logger": "^5.0.0-alpha.0",
+    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "cross-spawn": "6.0.5",
     "fs-extra": "7.0.1",
     "webpack": "4.28.4"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "@types/cross-spawn": "6.0.0",
     "@types/fs-extra": "5.0.4",
     "@types/node": "10.12.18",

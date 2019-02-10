@@ -17,8 +17,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "dependencies": {
+    "@pixeloven/tasks": "^5.0.0-alpha.0"
+  },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "@types/node": "10.12.18",
     "@types/react-redux": "7.0.1",
     "@types/react-router": "4.4.3",

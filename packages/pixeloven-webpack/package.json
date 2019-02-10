@@ -21,13 +21,13 @@
     "@pixeloven/core": "^5.0.0-alpha.0",
     "@pixeloven/env": "^5.0.0-alpha.0",
     "@pixeloven/node-logger": "^5.0.0-alpha.0",
+    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "@pixeloven/webpack-config": "^5.0.0-alpha.0",
     "promise": "8.0.2",
     "react-dev-utils": "7.0.1",
     "webpack": "4.28.4"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "@types/node": "10.12.18",
     "@types/webpack": "4.4.23"
   },

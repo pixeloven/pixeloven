@@ -18,10 +18,10 @@
     "access": "public"
   },
   "dependencies": {
+    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "async": "2.6.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0-alpha.0",
     "@types/async": "2.4.0",
     "@types/express": "4.16.0"
   },
