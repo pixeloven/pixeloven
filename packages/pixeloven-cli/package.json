@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli",
-  "version": "4.2.1",
+  "version": "5.0.0-alpha.0",
   "description": "Command line interface for PixelOven framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/types.d.ts",
@@ -21,10 +21,10 @@
     "access": "public"
   },
   "dependencies": {
-    "gluegun": "3.0.0",
-    "@pixeloven/core": "^4.2.1",
-    "@pixeloven/exceptions": "^4.2.1",
-    "@pixeloven/tasks": "^4.2.1"
+    "@pixeloven/core": "^5.0.0-alpha.0",
+    "@pixeloven/exceptions": "^5.0.0-alpha.0",
+    "@pixeloven/tasks": "^5.0.0-alpha.0",
+    "gluegun": "3.0.0"
   },
   "devDependencies": {
     "@types/node": "10.12.18"
