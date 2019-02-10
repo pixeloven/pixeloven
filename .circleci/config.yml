@@ -119,11 +119,10 @@ jobs:
           command: yarn build
 
       # Save project
-    # @todo Bring back once we complete CLI re-build
-    #   - persist_to_workspace:
-    #       root: .
-    #       paths: 
-    #         - examples/**/dist
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - examples/**/dist
 
   lint-examples:
     executor: node-executor
