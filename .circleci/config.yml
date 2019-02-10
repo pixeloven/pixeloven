@@ -281,15 +281,15 @@ workflows:
       - lint-packages:
           requires:
             - setup
-      - test-packages:
-          requires:
-            - compile-packages
       - build-examples:
           requires:
             - compile-packages
       - lint-examples:
           requires:
             - compile-packages
+      - test-packages:
+          requires:
+            - build-examples
       - test-examples:
           requires:
             - build-examples
@@ -302,13 +302,15 @@ workflows:
               only: master
       - document:
           requires:
-            - build-examples
+            - test-packages
+            - test-examples
           filters:
             branches:
               only: master
       - deploy:
           requires:
             - document
+            - report
           filters:
             branches:
               only: master
