@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/tasks",
-  "version": "4.1.5",
+  "version": "4.2.1",
   "description": "Common tasks used during development of PixelOven",
   "bin": {
     "pixeloven-tasks": "./bin/task.bash"
