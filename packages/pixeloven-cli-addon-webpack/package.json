@@ -1,0 +1,55 @@
+{
+  "name": "@pixeloven/cli-addon-webpack",
+  "version": "4.2.1",
+  "description": "PixelOven CLI addon for webpack based development",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "bin": {
+    "pixeloven-webpack": "./dist/lib/index.js"
+  },
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "gluegun": "3.0.0",
+    "@pixeloven/core": "^4.2.1",
+    "@pixeloven/exceptions": "^4.2.1",
+    "@pixeloven/tasks": "^4.2.1"
+  },
+  "devDependencies": {
+    "@pixeloven/cli": "^4.2.1",
+    "@pixeloven/webpack": "^4.2.1",
+    "@pixeloven/webpack-dev-server": "^4.2.1",
+    "@types/node": "10.12.18"
+  },
+  "peerDependencies": {
+    "@pixeloven/cli": ">4.2",
+    "@pixeloven/webpack": ">4.2",
+    "@pixeloven/webpack-dev-server": ">4.2"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn compile",
+    "clean": "pixeloven-tasks clean",
+    "compile": "pixeloven-tasks compile:ts",
+    "precompile": "pixeloven-tasks compile:clean",
+    "document": "pixeloven-tasks document:ts src",
+    "predocument": "pixeloven-tasks document:clean",
+    "lint": "yarn lint:ts",
+    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "pretest": "pixeloven-tasks test:clean",
+    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "test": "pixeloven-tasks test --color --coverage",
+    "test:watch": "pixeloven-tasks test:watch"
+  }
+}

@@ -1,11 +1,18 @@
-import { config } from "@client/config";
-import * as OfflinePluginRuntime from "offline-plugin/runtime";
+// import { config } from "@client/config";
 
 /**
  * Register service workers
+ * @todo Come back to service workers
  */
 export const register = (): void => {
-    if (config.environment === "production") {
-        OfflinePluginRuntime.install();
-    }
+    // try {
+    //     if (config.environment === "production") {
+    //         import("offline-plugin/runtime").then(OfflinePluginRuntime => {
+    //             OfflinePluginRuntime.install();
+    //         });
+    //     }
+    // } catch (err) {
+    //     // Do nothing
+    // }
+    return;
 };

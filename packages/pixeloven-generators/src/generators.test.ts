@@ -2,10 +2,9 @@ import "jest";
 import generator, {
     capitalize,
     lowerCase,
+    makeValidateMinLength,
     plural,
     upperCase,
-    validateComponentType,
-    validateRequestMethod,
     validateWord,
 } from "./generators";
 import { HelperFunction, Plop, PlopGenerator } from "./plop";
@@ -40,7 +39,7 @@ const MockPlop: Plop = {
 describe("@pixeloven/generators", () => {
     describe("plopfile", () => {
         describe("generator", () => {
-            it('should set "generators" and "helpers"', () => {
+            it(`should set "generators" and "helpers"`, () => {
                 generator(MockPlop);
                 expect(typeof MockPlop.getGenerator("component")).toEqual(
                     "object",
@@ -58,34 +57,29 @@ describe("@pixeloven/generators", () => {
                 );
             });
         });
-        describe("validateComponentType", () => {
-            it('should fail with value "test"', () => {
-                expect(typeof validateComponentType("test")).toEqual("string");
-            });
-            it('should pass with value "atom"', () => {
-                const value = validateComponentType("atom");
-                expect(typeof value).toEqual("boolean");
-                expect(value).toEqual(true);
-            });
-        });
         describe("validateWord", () => {
-            it('should fail with value "not_word"', () => {
+            it(`should fail with empty string`, () => {
+                expect(typeof validateWord("")).toEqual("string");
+            });
+            it(`should fail with value "not_word"`, () => {
                 expect(typeof validateWord("not_word")).toEqual("string");
             });
-            it('should pass with value "word"', () => {
+            it(`should pass with value "word"`, () => {
                 const value = validateWord("word");
                 expect(typeof value).toEqual("boolean");
                 expect(value).toEqual(true);
             });
         });
-        describe("validateRequestMethod", () => {
-            it('should fail with value "test"', () => {
-                expect(typeof validateRequestMethod("test")).toEqual("string");
+        describe("validateMinLength", () => {
+            it(`should create min length validator and fail`, () => {
+                const validateMinLength = makeValidateMinLength(2);
+                expect(typeof validateMinLength).toEqual("function");
+                expect(typeof validateMinLength("t")).toEqual("string");
             });
-            it('should pass with value "GET"', () => {
-                const value = validateRequestMethod("GET");
-                expect(typeof value).toEqual("boolean");
-                expect(value).toEqual(true);
+            it(`should create min length validator and pass`, () => {
+                const validateMinLength = makeValidateMinLength(1);
+                expect(typeof validateMinLength).toEqual("function");
+                expect(validateMinLength("t")).toEqual(true);
             });
         });
         describe("capitalize", () => {
@@ -99,7 +93,7 @@ describe("@pixeloven/generators", () => {
             });
         });
         describe("plural", () => {
-            it('should append an "s" to the end of a string', () => {
+            it(`should append an "s" to the end of a string`, () => {
                 expect(plural("test")).toEqual("tests");
             });
         });

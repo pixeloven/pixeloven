@@ -5,7 +5,7 @@ import CopyWebpackPlugin from "copy-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import OfflinePlugin from "offline-plugin";
+// import OfflinePlugin from "offline-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
@@ -323,7 +323,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
                 NODE_ENV: ifProduction("production", "development"),
                 PUBLIC_URL: publicPath,
                 TARGET: target,
-            }
+            },
         }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation
@@ -331,10 +331,12 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
          */
         ifProduction(
             new ForkTsCheckerWebpackPlugin({
+                silent: true,
                 tsconfig: resolvePath("tsconfig.json"),
             }),
             new ForkTsCheckerWebpackPlugin({
                 async: false,
+                silent: true,
                 tsconfig: resolvePath("tsconfig.json"),
                 watch: resolvePath("src"),
             }),
@@ -413,24 +415,25 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
          * the HTML & assets that are part of the Webpack build.
          *
          * @env production
+         * @todo Come back to this later
          */
-        ifProduction(
-            new OfflinePlugin({
-                ServiceWorker: {
-                    events: true,
-                    output: "static/js/sw.js",
-                },
-                appShell: "/offline.html",
-                caches: {
-                    additional: [":externals:"],
-                    externals: ["/offline.html"],
-                    main: [":rest:"],
-                },
-                responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
-                safeToUseOptionalCaches: true,
-            }),
-            undefined,
-        ),
+        // ifProduction(
+        //     new OfflinePlugin({
+        //         ServiceWorker: {
+        //             events: true,
+        //             output: "static/js/sw.js",
+        //         },
+        //         appShell: "/offline.html",
+        //         caches: {
+        //             additional: [":externals:"],
+        //             externals: ["/offline.html"],
+        //             main: [":rest:"],
+        //         },
+        //         responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
+        //         safeToUseOptionalCaches: true,
+        //     }),
+        //     undefined,
+        // ),
         /**
          * This is necessary to emit hot updates (currently CSS only):
          *

@@ -1,5 +1,5 @@
+import { RouteComponentProps } from "@pixeloven/react-router-config";
 import { Icon, Logo } from "@shared/components/atoms";
-import { RouteComponentProps } from "@shared/router";
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { Container, Grid, Header, Segment } from "semantic-ui-react";

@@ -8,32 +8,48 @@ describe("@pixeloven/exceptions", () => {
         });
         describe("File", () => {
             it("should export FileNotFoundException", () => {
-                expect(typeof exceptions.FileNotFoundException).toEqual("function");
-            });
-            it("should export NodeProcessException", () => {
-                expect(typeof exceptions.NodeProcessException).toEqual("function");
+                expect(typeof exceptions.FileNotFoundException).toEqual(
+                    "function",
+                );
             });
         });
         describe("Http", () => {
             it("should export HttpBadRequestException", () => {
-                expect(typeof exceptions.HttpBadRequestException).toEqual("function");
+                expect(typeof exceptions.HttpBadRequestException).toEqual(
+                    "function",
+                );
             });
             it("should export HttpForbiddenException", () => {
-                expect(typeof exceptions.HttpForbiddenException).toEqual("function");
+                expect(typeof exceptions.HttpForbiddenException).toEqual(
+                    "function",
+                );
             });
             it("should export HttpInternalServerErrorException", () => {
-                expect(typeof exceptions.HttpInternalServerErrorException).toEqual("function");
+                expect(
+                    typeof exceptions.HttpInternalServerErrorException,
+                ).toEqual("function");
             });
             it("should export HttpNotFoundException", () => {
-                expect(typeof exceptions.HttpNotFoundException).toEqual("function");
+                expect(typeof exceptions.HttpNotFoundException).toEqual(
+                    "function",
+                );
             });
             it("should export HttpResponseException", () => {
-                expect(typeof exceptions.HttpResponseException).toEqual("function");
+                expect(typeof exceptions.HttpResponseException).toEqual(
+                    "function",
+                );
             });
         });
         describe("Node", () => {
             it("should export NodeProcessException", () => {
-                expect(typeof exceptions.NodeProcessException).toEqual("function");
+                expect(typeof exceptions.NodeProcessException).toEqual(
+                    "function",
+                );
+            });
+            it("should export NodeInvalidArgumentException", () => {
+                expect(typeof exceptions.NodeInvalidArgumentException).toEqual(
+                    "function",
+                );
             });
         });
     });

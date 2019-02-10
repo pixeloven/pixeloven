@@ -27,16 +27,5 @@ describe("Server/Utils/AssetManifest", () => {
             expect(asset.manifest).toHaveProperty("css");
             expect(asset.manifest).toHaveProperty("js");
         });
-        /**
-         * @todo CA-352 can't test this unless we have a way to mock out our entire state
-         */
-        // it("should use webpack stats object and return Manifest", () => {
-        //     const asset = new AssetManifest({
-        //         stats: {}
-        //     });
-        //     expect(typeof asset.manifest).toEqual("object");
-        //     expect(asset.manifest).toHaveProperty("css");
-        //     expect(asset.manifest).toHaveProperty("js");
-        // });
     });
 });

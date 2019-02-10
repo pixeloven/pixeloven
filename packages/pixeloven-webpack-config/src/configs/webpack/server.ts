@@ -40,12 +40,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
     /**
      * Define entrypoint(s) for sever
      */
-    const entry = removeEmpty([
-        ifProduction(
-            resolvePath("src/server/index.ts"),
-            resolvePath("src/server/webpack.ts"),
-        ),
-    ]);
+    const entry = [resolvePath("src/server/index.ts")];
 
     /**
      * All other files that aren't caught by the other loaders will go through this one.
@@ -197,7 +192,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
                 NODE_ENV: ifProduction("production", "development"),
                 PUBLIC_URL: publicPath,
                 TARGET: target,
-            }
+            },
         }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation
@@ -205,10 +200,12 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
          */
         ifProduction(
             new ForkTsCheckerWebpackPlugin({
+                silent: true,
                 tsconfig: resolvePath("tsconfig.json"),
             }),
             new ForkTsCheckerWebpackPlugin({
                 async: false,
+                silent: true,
                 tsconfig: resolvePath("tsconfig.json"),
                 watch: resolvePath("src"),
             }),

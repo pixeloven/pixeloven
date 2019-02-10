@@ -67,6 +67,7 @@ export function printBuildFileSizesAfterGzip(
 
 /**
  * Create the production build
+ * @todo Handle errors better https://webpack.js.org/api/node/
  * @param config
  * @param previousFileSizes
  */
@@ -76,7 +77,7 @@ export function build(
 ) {
     logger.info("Creating an optimized production build...");
     const compiler = webpack(config);
-    return new Promise((resolve, reject) => {
+    return new Promise<BuildInformation>((resolve, reject) => {
         compiler.run((err: Error, stats: Stats) => {
             if (err) {
                 return reject(err);

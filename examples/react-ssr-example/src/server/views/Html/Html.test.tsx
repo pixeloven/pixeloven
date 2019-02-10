@@ -1,4 +1,4 @@
-import { configure, shallow } from "enzyme";
+import { configure, mount } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import * as React from "react";
@@ -12,7 +12,7 @@ describe("Server", () => {
     describe("Views", () => {
         describe("Html", () => {
             it("should render template and `children`", () => {
-                const wrapper = shallow(
+                const wrapper = mount(
                     <Html>
                         <h1>test</h1>
                     </Html>,

@@ -12,34 +12,30 @@ const componentTypes = ["atom", "molecule", "organism", "page", "template"];
 const requestMethods = ["DELETE", "GET", "POST", "PUT"];
 
 /**
- * Validate component type
- * @param componentType
- */
-export const validateComponentType = (componentType: string) => {
-    return !componentTypes.find(value => componentType === value)
-        ? "Component type must be one of the following: atom, molecule, organism, page, template"
-        : true;
-};
-
-/**
  * Validate word
  * @param word
  */
 export const validateWord = (word: string) => {
-    if (/^[a-z]+$/i.test(word.trim())) {
-        return true;
+    if (word.length > 0) {
+        if (/^[a-z]+$/i.test(word.trim())) {
+            return true;
+        }
+        return "Must be a valid alpha string.";
     }
-    return "Must be a valid alpha string.";
+    return `Must be a minimum of 1 character.`;
 };
 
 /**
- * Validate component name
- * @param componentType
+ * Creates a validator that checks min length
+ * @param min
  */
-export const validateRequestMethod = (requestMethod: string) => {
-    return !requestMethods.find(value => requestMethod === value)
-        ? "Must be a valid request method: DELETE, GET, POST, PUT"
-        : true;
+export const makeValidateMinLength = (min: number) => {
+    return (str: string) => {
+        if (str.length >= min) {
+            return true;
+        }
+        return `Must be a minimum of ${min} characters.`;
+    };
 };
 
 /**
@@ -110,16 +106,22 @@ const generator = (plop: Plop) => {
         description: "Generate a new Atomic component",
         prompts: [
             {
-                message: 'What "type" of Atomic component is this?',
+                choices: componentTypes,
+                message: `What "type" of Atomic component is this?`,
                 name: "componentType",
-                type: "input",
-                validate: validateComponentType,
+                type: "list",
             },
             {
                 message: "What is the name of the new component?",
                 name: "componentName",
                 type: "input",
                 validate: validateWord,
+            },
+            {
+                message: "Provide a brief description of this component:",
+                name: "componentDescription",
+                type: "input",
+                validate: makeValidateMinLength(1),
             },
         ],
     });
@@ -165,24 +167,25 @@ const generator = (plop: Plop) => {
         description: "Generate a new service, resource and store boilerplate",
         prompts: [
             {
-                message: 'What is the "name" of the service? (I.E. iss)',
+                message: `What is the "name" of the service? (I.E. iss)`,
                 name: "serviceName",
                 type: "input",
                 validate: validateWord,
             },
+            /**
+             * @todo We should ask how many resources are on this service and to name them
+             */
             {
-                message:
-                    'What is the "name" a resource on this service? (I.E. location)',
+                message: `What is the "name" a resource on this service? (I.E. location)`,
                 name: "resourceName",
                 type: "input",
                 validate: validateWord,
             },
             {
-                message:
-                    "How will we be communicating to this first resource? (I.E. GET, POST, etc)",
+                choices: requestMethods,
+                message: "How will we be communicating to this first resource?",
                 name: "serviceType",
-                type: "input",
-                validate: validateRequestMethod,
+                type: "list",
             },
         ],
     });

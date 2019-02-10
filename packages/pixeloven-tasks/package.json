@@ -1,0 +1,35 @@
+{
+  "name": "@pixeloven/tasks",
+  "version": "4.2.1",
+  "description": "Common tasks used during development of PixelOven",
+  "bin": {
+    "pixeloven-tasks": "./bin/task.bash"
+  },
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@types/jest": "23.3.12",
+    "jest": "23.6.0",
+    "jest-config": "23.6.0",
+    "prettier": "1.16.4",
+    "rimraf": "2.6.3",
+    "stylelint": "9.10.1",
+    "stylelint-config-recommended-scss": "3.2.0",
+    "stylelint-scss": "3.5.2",
+    "ts-jest": "23.10.5",
+    "tslint": "5.12.1",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-react": "3.6.0",
+    "typedoc": "0.14.2",
+    "typescript": "3.3.1"
+  }
+}
