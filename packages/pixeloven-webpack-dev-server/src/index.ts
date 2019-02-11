@@ -1,12 +1,11 @@
 import { normalizeUrl } from "@pixeloven/core";
-import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import {
     webpackClientConfig,
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
-import config from "./config";
+import { createConfig } from "./config";
 import Server from "./Server";
 
 export { Server };
@@ -16,17 +15,10 @@ export { Server };
  * @todo Move this into utils and cli
  */
 export default async () => {
-
     /**
-     * Initialize env vars
+     * Create configuration
      */
-    env.load();
-
-    /**
-     * Set test environment
-     */
-    env.define("BABEL_ENV", "development");
-    env.define("NODE_ENV", "development");
+    const config = createConfig();
 
     /**
      * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example

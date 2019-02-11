@@ -17,22 +17,33 @@ const DEFAULT_PROTOCOL = "http";
 const DEFAULT_PORT = "8080";
 const DEFAULT_MACHINE = "host";
 
-/**
- * ENV file Constants
- * @todo should make methods on env to do this
- */
-const PUBLIC_PATH = env.config("PUBLIC_URL", DEFAULT_PUBLIC_PATH);
-const HOST = env.config("HOST", DEFAULT_HOST);
-const PROTOCOL = env.config("PROTOCOL", DEFAULT_PROTOCOL) as Protocol;
-const PORT = env.config("PORT", DEFAULT_PORT);
-const MACHINE = env.config("MACHINE", DEFAULT_MACHINE) as Machine;
+export const createConfig = () => {
+    /**
+     * Initialize env vars
+     */
+    env.load();
 
-const server: Config = {
-    host: HOST,
-    machine: MACHINE,
-    path: PUBLIC_PATH,
-    port: parseInt(PORT, 10),
-    protocol: PROTOCOL,
-};
+    /**
+     * Set test environment
+     */
+    env.define("BABEL_ENV", "development");
+    env.define("NODE_ENV", "development");
 
-export default server;
+    /**
+     * ENV file Constants
+     */
+    const PUBLIC_PATH = env.config("PUBLIC_URL", DEFAULT_PUBLIC_PATH);
+    const HOST = env.config("HOST", DEFAULT_HOST);
+    const PROTOCOL = env.config("PROTOCOL", DEFAULT_PROTOCOL) as Protocol;
+    const PORT = env.config("PORT", DEFAULT_PORT);
+    const MACHINE = env.config("MACHINE", DEFAULT_MACHINE) as Machine;
+
+    const server: Config = {
+        host: HOST,
+        machine: MACHINE,
+        path: PUBLIC_PATH,
+        port: parseInt(PORT, 10),
+        protocol: PROTOCOL,
+    };
+    return server;
+}
