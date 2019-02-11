@@ -27,7 +27,6 @@ export default async () => {
      * @todo 1) Create CLI options for --open (auto-open)
      * @todo 2) Create CLI options for --choose-port (auto-choose-port)
      * @todo 3) Create CLI options for --machine (host|docker|virtual)
-     * @todo Move this all into our new CLI
      */
     try {
         logger.info(`Starting compiler...`);

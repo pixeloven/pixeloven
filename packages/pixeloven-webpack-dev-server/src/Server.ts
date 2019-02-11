@@ -76,7 +76,6 @@ class Server {
                         `Webpack built server ${json.hash} in ${json.time}ms`,
                     );
                     logger.info("Applying bundled server to stream");
-
                     refreshCount++;
                 },
                 error: error => {
@@ -93,7 +92,6 @@ class Server {
                         `Webpack built client ${json.hash} in ${json.time}ms`,
                     );
                     logger.info("Applying bundled react assets to stream");
-                    refreshCount++;
                 },
                 error: error => {
                     logger.error(error.message);

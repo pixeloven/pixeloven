@@ -83,7 +83,7 @@ class Compiler {
             if (!compiler) {
                 throw Error("Could not find compiler type.");
             }
-            compiler.hooks.done.tap(`${Compiler.id}-${time}`, hand);
+            compiler.hooks.done.tap(`${Compiler.id}-${type}-${time}`, hand);
         };
         switch (type) {
             case "client":
