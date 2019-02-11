@@ -13,6 +13,8 @@ export { Server };
 /**
  * Setup execution
  * @todo Move this into utils and cli
+ * @todo Seems to break on server updates sometimes :(
+ *      I think it has something to do with the compilation stats being sent to the client
  */
 export default async () => {
     /**

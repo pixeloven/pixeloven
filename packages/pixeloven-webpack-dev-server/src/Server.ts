@@ -76,7 +76,6 @@ class Server {
                         `Webpack built server ${json.hash} in ${json.time}ms`,
                     );
                     logger.info("Applying bundled server to stream");
-
                     refreshCount++;
                 },
                 error: error => {
@@ -84,6 +83,10 @@ class Server {
                 },
             },
         );
+        /**
+         * @todo server path is going to client asset middleware
+         * @todo related to why it re-compiles client source twice?
+         */
         const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
             this.compiler,
             {
@@ -93,7 +96,6 @@ class Server {
                         `Webpack built client ${json.hash} in ${json.time}ms`,
                     );
                     logger.info("Applying bundled react assets to stream");
-                    refreshCount++;
                 },
                 error: error => {
                     logger.error(error.message);
