@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-dev-server",
-  "version": "5.0.0-alpha.1",
+  "version": "5.0.0-alpha.3",
   "description": "Webpack Development Server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
