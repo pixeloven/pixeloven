@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-compiler",
-  "version": "5.0.0-alpha.1",
+  "version": "5.0.0-alpha.4",
   "description": "Wrapper class for webpack compiler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
