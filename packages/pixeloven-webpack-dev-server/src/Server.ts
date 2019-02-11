@@ -83,10 +83,6 @@ class Server {
                 },
             },
         );
-        /**
-         * @todo server path is going to client asset middleware
-         * @todo related to why it re-compiles client source twice?
-         */
         const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
             this.compiler,
             {
