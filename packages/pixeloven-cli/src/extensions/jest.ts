@@ -14,10 +14,9 @@ export default (context: PixelOvenRunContext) => {
                 [
                     "--maxWorkers",
                     "2",
-                    "--env",
-                    "jsdom",
                     "--config",
                     configPath,
+                    "--env=jsdom",
                 ].concat(args),
             );
         } else {
@@ -26,7 +25,7 @@ export default (context: PixelOvenRunContext) => {
             );
             return pixeloven.runBin(
                 "jest",
-                ["--maxWorkers", "2", "--env", "jsdom"].concat(args),
+                ["--maxWorkers", "2", "--env=jsdom"].concat(args),
             );
         }
     };
