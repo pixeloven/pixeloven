@@ -5,6 +5,7 @@ import {
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import {
+    BuildOptions,
     webpackClientConfig,
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
@@ -27,10 +28,10 @@ const { measureFileSizesBeforeBuild } = FileSizeReporter;
  * @param path 
  * @param environment 
  */
-const buildClientCode = async (path: string, environment: NodeJS.ProcessEnv) => {
+const buildClientCode = async (path: string, environment: NodeJS.ProcessEnv, options: BuildOptions) => {
     const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(path);
     const results = await build(
-        webpackServerConfig(environment),
+        webpackServerConfig(environment, options),
         previousFileSizes,
     );
     printBuildStatus(results.warnings);
@@ -46,10 +47,10 @@ const buildClientCode = async (path: string, environment: NodeJS.ProcessEnv) => 
  * @param path 
  * @param environment 
  */
-const buildServerCode = async (path: string, environment: NodeJS.ProcessEnv) => {
+const buildServerCode = async (path: string, environment: NodeJS.ProcessEnv, options: BuildOptions) => {
     const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(path);
     const results = await build(
-        webpackClientConfig(environment),
+        webpackClientConfig(environment, options),
         previousFileSizes,
     );
     printBuildStatus(results.warnings);
@@ -65,7 +66,7 @@ const buildServerCode = async (path: string, environment: NodeJS.ProcessEnv) => 
  * @todo We should use the new compiler class here... Also create a Build class similar to our Server class
  * @todo Remove env and pass in process.env... have them set through Cli options
  */
-export default async () => {
+export default async (options: BuildOptions) => {
     try {
         /**
          * Initialize env vars
@@ -94,14 +95,14 @@ export default async () => {
          * @description This lets us display how files changed
          */
         if (hasServerCodePath()) {
-            buildClientCode(privateBuildPath, environment);
+            buildClientCode(privateBuildPath, environment, options);
         }
         /**
          * Handle build for client side JavaScript
          * @description This lets us display how files changed
          */
         if (hasClientCodePath()) {
-            buildServerCode(publicBuildPath, environment);
+            buildServerCode(publicBuildPath, environment, options);
         }
         return 0;
     } catch (err) {
