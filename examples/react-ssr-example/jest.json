@@ -39,7 +39,6 @@
       "statements": 60
     }
   },
-  "collectCoverage": true,
   "collectCoverageFrom": [
     "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
     "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",

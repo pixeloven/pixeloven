@@ -6,12 +6,11 @@ export default {
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, pixeloven, styleLint, tsLint } = context;
         let statusCode = 0;
-        const argList =
-            parameters.array && parameters.array.length
-                ? parameters.array.slice(1)
-                : [];
         switch (parameters.first) {
-            case "scss":
+            case "scss": {
+                const argList = parameters.argv && parameters.argv.length 
+                    ? parameters.argv.slice(4)
+                    : [];
                 statusCode = await styleLint(argList);
                 if (statusCode) {
                     print.error(`Stylelint exited with status ${statusCode}`);
@@ -21,8 +20,12 @@ export default {
                     );
                 }
                 break;
+            }
             case "ts":
-            case "tsx":
+            case "tsx": {
+                const argList = parameters.argv && parameters.argv.length 
+                    ? parameters.argv.slice(4)
+                    : [];
                 statusCode = await tsLint(argList);
                 if (statusCode) {
                     print.error(`TSLint exited with status ${statusCode}`);
@@ -32,6 +35,7 @@ export default {
                     );
                 }
                 break;
+            }
             default:
                 pixeloven.printInvalidArgument();
                 break;

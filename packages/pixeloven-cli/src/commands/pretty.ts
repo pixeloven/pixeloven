@@ -6,12 +6,11 @@ export default {
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, prettier, styleLint, tsLint } = context;
         let statusCode = 0;
-        const argList =
-            parameters.array && parameters.array.length
-                ? parameters.array.slice(1)
-                : [];
         switch (parameters.first) {
-            case "scss":
+            case "scss": {
+                const argList = parameters.argv && parameters.argv.length 
+                    ? parameters.argv.slice(4)
+                    : [];
                 statusCode = await styleLint(["--fix"].concat(argList));
                 if (statusCode) {
                     print.error(`Stylelint exited with status ${statusCode}`);
@@ -24,8 +23,12 @@ export default {
                 }
                 print.success(`Success! Looks a lot nicer now doesn't it?!`);
                 break;
+            }
             case "ts":
-            case "tsx":
+            case "tsx": {
+                const argList = parameters.argv && parameters.argv.length 
+                    ? parameters.argv.slice(4)
+                    : [];
                 statusCode = await tsLint(["--fix"].concat(argList));
                 if (statusCode) {
                     print.error(`TSLint exited with status ${statusCode}`);
@@ -38,9 +41,14 @@ export default {
                 }
                 print.success(`Success! Looks a lot nicer now doesn't it?!`);
                 break;
-            default:
+            }
+            default: {
+                const argList = parameters.argv && parameters.argv.length 
+                    ? parameters.argv.slice(3)
+                    : [];
                 prettier(argList);
                 break;
+            }
         }
     },
 };
