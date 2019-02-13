@@ -16,8 +16,14 @@ import webpack, {
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import webpackNodeExternals from "webpack-node-externals";
+import { BuildOptions } from "../../types";
 
-const config = (env: NodeJS.ProcessEnv): Configuration => {
+const defaultOptions = {
+    withSourceMap: false
+}
+
+
+const config = (env: NodeJS.ProcessEnv, options: BuildOptions = defaultOptions): Configuration => {
     /**
      * Tell webpack what we are making :)
      */
@@ -249,7 +255,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
      */
     return {
         bail: ifProduction(),
-        devtool: ifDevelopment("eval-source-map", false),
+        devtool: options.withSourceMap ? "eval-source-map" : false,
         entry,
         externals: [
             // Exclude from local node_modules dir

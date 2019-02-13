@@ -25,8 +25,13 @@ import webpack, {
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
+import { BuildOptions } from "../../types";
 
-const config = (env: NodeJS.ProcessEnv): Configuration => {
+const defaultOptions = {
+    withSourceMap: false
+}
+
+const config = (env: NodeJS.ProcessEnv, options: BuildOptions = defaultOptions): Configuration => {
     /**
      * @todo optimize builds
      * see if we can use TS Fork (at least for prod build)
@@ -49,6 +54,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
     const environment = env.NODE_ENV || "production";
     const publicPath = env.PUBLIC_URL || "/";
     const buildPath = env.BUILD_PATH || "dist";
+
 
     /**
      * Utility functions to help segment configuration based on environment
@@ -480,7 +486,7 @@ const config = (env: NodeJS.ProcessEnv): Configuration => {
      */
     return {
         bail: ifProduction(),
-        devtool: ifDevelopment("eval-source-map", false),
+        devtool: options.withSourceMap ? "eval-source-map" : false,
         entry,
         mode: ifProduction("production", "development"),
         module,

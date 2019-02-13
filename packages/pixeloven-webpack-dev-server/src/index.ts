@@ -31,8 +31,12 @@ export default async () => {
     try {
         logger.info(`Starting compiler...`);
         const compiler = Compiler.create([
-            webpackClientConfig(process.env),
-            webpackServerConfig(process.env),
+            webpackClientConfig(process.env, {
+                withSourceMap: true
+            }),
+            webpackServerConfig(process.env, {
+                withSourceMap: true
+            }),
         ]);
         /**
          * Create application server

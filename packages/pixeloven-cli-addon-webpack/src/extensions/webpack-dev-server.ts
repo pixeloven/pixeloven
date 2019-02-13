@@ -4,7 +4,7 @@ import { AddonWebpackRunContext } from "../types";
 export type WebpackDevServerExtension = (args?: string[]) => Promise<number>;
 
 export default (context: AddonWebpackRunContext) => {
-    const webpackDevServer = async (args: string[] = []) => {
+    const webpackDevServer = async () => {
         const { pixeloven } = context;
         const pluginPath = pixeloven.resolvePlugin("@pixeloven", "webpack-dev-server");
         if (!pluginPath) {
