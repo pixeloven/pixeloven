@@ -22,6 +22,7 @@
     "@pixeloven/env": "^5.0.0-alpha.1",
     "@pixeloven/node-logger": "^5.0.0-alpha.1",
     "@pixeloven/tasks": "^5.0.0-alpha.1",
+    "@pixeloven/webpack-compiler": "^5.0.0-alpha.4",
     "@pixeloven/webpack-config": "^5.0.0-alpha.7",
     "promise": "8.0.2",
     "react-dev-utils": "7.0.1",

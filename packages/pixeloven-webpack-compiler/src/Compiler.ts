@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import webpack, {
     Compiler as SingleCompiler,
     Configuration,
@@ -41,12 +43,39 @@ class Compiler {
     protected configs: Configuration[];
 
     /**
+     * Client code path
+     */
+    protected clientPath: string;
+
+    /**
+     * Server code path
+     */
+    protected serverPath: string;
+
+    /**
      * Construct compilers
      * @param configs
      */
     constructor(configs: Configuration[]) {
         this.configs = configs;
         this.combined = webpack(configs);
+
+        this.clientPath = path.resolve(process.cwd(), "./src/client");
+        this.serverPath = path.resolve(process.cwd(), "./src/server");
+    }
+
+    /**
+     * Checks if client code path exists
+     */
+    public get hasClientCodePath() { 
+        return fs.existsSync(this.clientPath);
+    }
+
+    /**
+     * Checks if server code path exists
+     */
+    public get hasServerCodePath() { 
+        return fs.existsSync(this.serverPath);
     }
 
     /**
