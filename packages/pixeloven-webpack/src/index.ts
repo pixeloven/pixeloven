@@ -1,65 +1,12 @@
-import {
-    createOrEmptyDir,
-    resolvePath,
-} from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
+import { Compiler } from "@pixeloven/webpack-compiler";
 import {
     BuildOptions,
     webpackClientConfig,
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
-import FileSizeReporter from "react-dev-utils/FileSizeReporter";
-import {
-    build,
-    OpaqueFileSizes,
-    printBuildFileSizesAfterGzip,
-    printBuildStatus,
-} from "./utils/build";
-import { hasClientCodePath, hasServerCodePath } from "./utils/macros";
-
-/**
- * Get print method
- */
-const { measureFileSizesBeforeBuild } = FileSizeReporter;
-
-/**
- * Build client code path
- * @param path 
- * @param environment 
- */
-const buildClientCode = async (path: string, environment: NodeJS.ProcessEnv, options: BuildOptions) => {
-    const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(path);
-    const results = await build(
-        webpackServerConfig(environment, options),
-        previousFileSizes,
-    );
-    printBuildStatus(results.warnings);
-    printBuildFileSizesAfterGzip(
-        path,
-        results.stats,
-        results.previousFileSizes,
-    );
-}
-
-/**
- * Build server code path
- * @param path 
- * @param environment 
- */
-const buildServerCode = async (path: string, environment: NodeJS.ProcessEnv, options: BuildOptions) => {
-    const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(path);
-    const results = await build(
-        webpackClientConfig(environment, options),
-        previousFileSizes,
-    );
-    printBuildStatus(results.warnings);
-    printBuildFileSizesAfterGzip(
-        path,
-        results.stats,
-        results.previousFileSizes,
-    );
-}
+import Build from "./Build";
 
 /**
  * Setup variables and execute
@@ -78,32 +25,19 @@ export default async (options: BuildOptions) => {
          */
         env.define("BABEL_ENV", "production");
         env.define("NODE_ENV", "production");
-
-        /**
-         * Setup build pathing
-         */
-        const privateBuildPath = resolvePath(env.config("BUILD_PATH", "dist"), false);
-        const publicBuildPath = `${privateBuildPath}/public`;
-
+        const path = env.config("BUILD_PATH", "dist");
         const environment = env.config();
-        // TODO be mindful of /docs.. this deletes them :( - Also make storybook configurable ON/OFF
-        createOrEmptyDir(privateBuildPath);
-        createOrEmptyDir(publicBuildPath);
 
         /**
-         * Handle build for server side JavaScript
-         * @description This lets us display how files changed
+         * Create compiler
          */
-        if (hasServerCodePath()) {
-            buildClientCode(privateBuildPath, environment, options);
-        }
-        /**
-         * Handle build for client side JavaScript
-         * @description This lets us display how files changed
-         */
-        if (hasClientCodePath()) {
-            buildServerCode(publicBuildPath, environment, options);
-        }
+        const compiler = Compiler.create([
+            webpackClientConfig(environment, options),
+            webpackServerConfig(environment, options),
+        ])
+
+        const build = new Build(compiler, { path });
+        build.create();
         return 0;
     } catch (err) {
         if (err && err.message) {
