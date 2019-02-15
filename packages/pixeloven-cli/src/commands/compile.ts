@@ -10,9 +10,10 @@ export default {
         switch (parameters.first) {
             case "ts":
             case "tsx": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(4)
+                        : [];
                 statusCode = await tsc(argList);
                 if (statusCode) {
                     print.error(`Tsc exited with status ${statusCode}`);

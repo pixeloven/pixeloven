@@ -1,6 +1,4 @@
-import {
-    createOrEmptyDir
-} from "@pixeloven/core";
+import { createOrEmptyDir } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
@@ -19,7 +17,7 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
  */
 const {
     measureFileSizesBeforeBuild,
-    printFileSizesAfterBuild
+    printFileSizesAfterBuild,
 } = FileSizeReporter;
 
 interface Config {
@@ -27,7 +25,6 @@ interface Config {
 }
 
 class Build {
-
     /**
      * Compiler
      */
@@ -62,7 +59,7 @@ class Build {
     }
 
     /**
-     * @todo make async and 
+     * @todo make async and
      */
     public async create() {
         createOrEmptyDir(this.config.path);
@@ -71,16 +68,24 @@ class Build {
             logger.info("Client code path found...");
             if (this.compiler.client) {
                 logger.info("Compiling client...");
-                const previousFileSizes: string[] = await measureFileSizesBeforeBuild(this.clientPath);
-                this.compiler.client.run(this.handle(this.clientPath, previousFileSizes));
+                const previousFileSizes: string[] = await measureFileSizesBeforeBuild(
+                    this.clientPath,
+                );
+                this.compiler.client.run(
+                    this.handle(this.clientPath, previousFileSizes),
+                );
             }
         }
         if (this.compiler.hasServerCodePath) {
             logger.info("Server code path found...");
             if (this.compiler.server) {
                 logger.info("Compiling server...");
-                const previousFileSizes: string[] = await measureFileSizesBeforeBuild(this.serverPath);
-                this.compiler.server.run(this.handle(this.serverPath, previousFileSizes));
+                const previousFileSizes: string[] = await measureFileSizesBeforeBuild(
+                    this.serverPath,
+                );
+                this.compiler.server.run(
+                    this.handle(this.serverPath, previousFileSizes),
+                );
             }
         }
     }
@@ -124,7 +129,7 @@ class Build {
                     console.log();
                 }
             }
-        }
+        };
     }
 }
 

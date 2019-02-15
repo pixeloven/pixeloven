@@ -1,9 +1,7 @@
 import fs from "fs";
 import { filesystem } from "gluegun";
 
-export type ResolvePluginFunction = (
-    ...paths: string[]
-) => string | false;
+export type ResolvePluginFunction = (...paths: string[]) => string | false;
 
 export default (...paths: string[]) => {
     const nodeModulesPath = filesystem.path(process.cwd(), "./node_modules");

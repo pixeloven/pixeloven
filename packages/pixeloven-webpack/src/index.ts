@@ -34,7 +34,7 @@ export default async (options: BuildOptions) => {
         const compiler = Compiler.create([
             webpackClientConfig(environment, options),
             webpackServerConfig(environment, options),
-        ])
+        ]);
 
         const build = new Build(compiler, { path });
         build.create();

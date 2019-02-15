@@ -5,7 +5,9 @@ import getConfigPath, {
 import printInvalidArgument, {
     PrintInvalidArgumentFunction,
 } from "./pixeloven-helpers/print-invalid-argument";
-import resolvePlugin, { ResolvePluginFunction } from "./pixeloven-helpers/resolve-plugin";
+import resolvePlugin, {
+    ResolvePluginFunction,
+} from "./pixeloven-helpers/resolve-plugin";
 import runBin, { RunBinFunction } from "./pixeloven-helpers/run-bin";
 
 export interface PixelOvenExtensions {

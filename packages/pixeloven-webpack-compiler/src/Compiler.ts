@@ -67,14 +67,14 @@ class Compiler {
     /**
      * Checks if client code path exists
      */
-    public get hasClientCodePath() { 
+    public get hasClientCodePath() {
         return fs.existsSync(this.clientPath);
     }
 
     /**
      * Checks if server code path exists
      */
-    public get hasServerCodePath() { 
+    public get hasServerCodePath() {
         return fs.existsSync(this.serverPath);
     }
 

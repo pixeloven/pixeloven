@@ -8,9 +8,10 @@ export default {
         let statusCode = 0;
         switch (parameters.first) {
             case "watch": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(4)
+                        : [];
                 statusCode = await jest(["--watch"].concat(argList));
                 if (statusCode) {
                     print.error(`Jest exited with status ${statusCode}`);
@@ -20,9 +21,10 @@ export default {
                 break;
             }
             default: {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(3)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(3)
+                        : [];
                 statusCode = await jest(argList);
                 if (statusCode) {
                     print.error(`Jest exited with status ${statusCode}`);

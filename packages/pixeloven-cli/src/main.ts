@@ -2,7 +2,11 @@ import fs from "fs";
 import { build, filesystem } from "gluegun";
 
 async function main(argv: string[]) {
-    const pixelOvenPath = filesystem.path(process.cwd(), "./node_modules", "@pixeloven");
+    const pixelOvenPath = filesystem.path(
+        process.cwd(),
+        "./node_modules",
+        "@pixeloven",
+    );
     const plugins = filesystem.subdirectories(pixelOvenPath);
     const builder = build()
         .brand("pixeloven")
@@ -14,9 +18,7 @@ async function main(argv: string[]) {
     plugins.forEach(plugin => {
         builder.plugin(filesystem.path(fs.realpathSync(plugin), "./dist/lib"));
     });
-    const cli = builder 
-        .version()
-        .create();
+    const cli = builder.version().create();
 
     const context = await cli.run(argv);
     return context;

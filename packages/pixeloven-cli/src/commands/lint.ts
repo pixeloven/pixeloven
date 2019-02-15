@@ -8,9 +8,10 @@ export default {
         let statusCode = 0;
         switch (parameters.first) {
             case "scss": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(4)
+                        : [];
                 statusCode = await styleLint(argList);
                 if (statusCode) {
                     print.error(`Stylelint exited with status ${statusCode}`);
@@ -23,9 +24,10 @@ export default {
             }
             case "ts":
             case "tsx": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(4)
+                        : [];
                 statusCode = await tsLint(argList);
                 if (statusCode) {
                     print.error(`TSLint exited with status ${statusCode}`);

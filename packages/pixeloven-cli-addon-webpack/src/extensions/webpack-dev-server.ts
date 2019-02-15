@@ -6,9 +6,14 @@ export type WebpackDevServerExtension = (args?: string[]) => Promise<number>;
 export default (context: AddonWebpackRunContext) => {
     const webpackDevServer = async () => {
         const { pixeloven } = context;
-        const pluginPath = pixeloven.resolvePlugin("@pixeloven", "webpack-dev-server");
+        const pluginPath = pixeloven.resolvePlugin(
+            "@pixeloven",
+            "webpack-dev-server",
+        );
         if (!pluginPath) {
-            throw new Error("Could not find peer dependency @pixeloven/webpack-dev-server");
+            throw new Error(
+                "Could not find peer dependency @pixeloven/webpack-dev-server",
+            );
         }
         return runner();
     };

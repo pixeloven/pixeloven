@@ -32,19 +32,17 @@ export default async () => {
         logger.info(`Starting compiler...`);
         const compiler = Compiler.create([
             webpackClientConfig(process.env, {
-                withSourceMap: true
+                withSourceMap: true,
             }),
             webpackServerConfig(process.env, {
-                withSourceMap: true
+                withSourceMap: true,
             }),
         ]);
         /**
          * Create application server
          */
         const baseUrl = normalizeUrl(
-            `${config.protocol}://${config.host}:${config.port}/${
-                config.path
-            }`,
+            `${config.protocol}://${config.host}:${config.port}/${config.path}`,
         );
         logger.info(`Connecting server...`);
         const server = new Server(compiler, config);
@@ -54,7 +52,7 @@ export default async () => {
             });
         });
         return 0;
-    } catch(err) {
+    } catch (err) {
         if (err && err.message) {
             logger.error(err.message);
         }

@@ -13,7 +13,7 @@ export default {
         switch (parameters.first) {
             case "build":
                 statusCode = await webpack({
-                    withSourceMap: parameters.options.sourceMap || false
+                    withSourceMap: parameters.options.sourceMap || false,
                 });
                 if (statusCode) {
                     print.error(`Webpack exited with status ${statusCode}`);
