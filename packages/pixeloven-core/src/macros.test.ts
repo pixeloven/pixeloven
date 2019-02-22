@@ -35,7 +35,8 @@ describe("@pixeloven/core", () => {
                     .spyOn(logger, "error")
                     .mockImplementation(logErrorMock);
                 const exitSpy = jest
-                    .spyOn(macros, "exit");
+                    .spyOn(macros, "exit")
+                    .mockImplementation();
                 const error = new Error();
                 macros.handleError(error);
                 expect(logErrorSpy).toHaveBeenCalledTimes(1);

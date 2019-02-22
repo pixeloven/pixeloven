@@ -2,19 +2,6 @@ import * as macros from "@pixeloven/core";
 import "jest";
 import main from "./main";
 
-let testCode: number | undefined;
-const exitMock = (code?: number) => {
-    testCode = code;
-};
-
-const spawnBinMock = (cmd: string) => {
-    return cmd;
-};
-
-const spawnCompleteMock = (sig: string) => {
-    return sig;
-};
-
 const testArgv: string[] = [];
 
 describe("@pixeloven/generators", () => {
@@ -28,23 +15,22 @@ describe("@pixeloven/generators", () => {
         it("should start cli and fail", () => {
             const exitSpy = jest
                 .spyOn(macros, "exit")
-                .mockImplementation(exitMock);
+                .mockImplementation();
             main(testArgv);
             expect(exitSpy).toHaveBeenCalledTimes(1);
-            expect(testCode).toEqual(1);
         });
         it("should start cli and pass", () => {
             testArgv.push("/some/path", "yarn", "generate");
-            const exitspawnBin = jest
+            const exitSpawnBin = jest
                 .spyOn(macros, "spawnBin")
-                .mockImplementation(spawnBinMock);
+                .mockImplementation();
             const exitSpawnComplete = jest
                 .spyOn(macros, "spawnComplete")
-                .mockImplementation(spawnCompleteMock);
+                .mockImplementation();
             main(testArgv);
-            expect(exitspawnBin).toHaveBeenCalledTimes(1);
+            expect(exitSpawnBin).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
-            expect(testCode).toEqual(1);
+
         });
     });
 });

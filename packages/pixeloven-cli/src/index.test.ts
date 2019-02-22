@@ -1,9 +1,5 @@
+import "jest";
 import * as cli from "./main";
-
-let testArgv: string[] = [];
-const cliMock = (argv: string[]) => {
-    testArgv = argv;
-};
 
 const caller = () => {
     require("./index");
@@ -17,11 +13,9 @@ describe("@pixeloven/cli", () => {
         });
         it("should execute main and succeed", () => {
             const cliSpy = jest
-                .spyOn(cli, "default")
-                .mockImplementation(cliMock);
+                .spyOn(cli, "default");
             caller();
             expect(cliSpy).toHaveBeenCalledTimes(1);
-            expect(testArgv).toEqual(process.argv);
         });
     });
 });
