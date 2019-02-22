@@ -3,25 +3,25 @@ import { AxiosRequestConfig } from "axios";
 type MockData = object | string | undefined;
 
 interface MockAxiosInstance {
-    delete<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
-    get<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
-    head<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
-    patch<T>(
+    delete(url: string, config?: AxiosRequestConfig): Promise<string>;
+    get(url: string, config?: AxiosRequestConfig): Promise<string>;
+    head(url: string, config?: AxiosRequestConfig): Promise<string>;
+    patch(
         url: string,
         data?: MockData,
         config?: AxiosRequestConfig,
-    ): Promise<T>;
-    post<T>(
+    ): Promise<string>;
+    post(
         url: string,
         data?: MockData,
         config?: AxiosRequestConfig,
-    ): Promise<T>;
-    put<T>(
+    ): Promise<string>;
+    put(
         url: string,
         data?: MockData,
         config?: AxiosRequestConfig,
-    ): Promise<T>;
-    request<T>(config: AxiosRequestConfig): Promise<T>;
+    ): Promise<string>;
+    request(config: AxiosRequestConfig): Promise<string>;
 }
 
 interface MockAxiosStatic {
@@ -44,7 +44,6 @@ const mockRequest = (config: AxiosRequestConfig) => Promise.resolve("testing");
  */
 const mockRequestToUrl = (
     url: string,
-    data?: MockData,
     config?: AxiosRequestConfig,
 ) => Promise.resolve("testing");
 
