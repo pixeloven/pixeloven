@@ -1,18 +1,16 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
 import { logger, Message } from "@pixeloven/node-logger";
 import spawn from "cross-spawn";
-import fs from "fs-extra";
+import fs, { PathLike } from "fs-extra";
 import "jest";
 import path from "path";
 import * as macros from "./macros";
 
 let resolvePathExists = true;
 const logErrorMock = (message: Message) => message;
-const exitMock = (code?: number) => code;
-const existsSyncMock = (somePath: string) => resolvePathExists;
-const mkdirSyncMock = (somePath: string) => undefined;
-const emptyDirSyncMock = (somePath: string) => undefined;
-const spawnSyncMock = (cmd: string, args: [], options: object) => "testing";
+const existsSyncMock = (somePath: PathLike) => resolvePathExists;
+const mkdirSyncMock = (somePath: PathLike) => undefined;
+const emptyDirSyncMock = (somePath: PathLike) => undefined;
 
 describe("@pixeloven/core", () => {
     describe("macros", () => {
@@ -37,8 +35,7 @@ describe("@pixeloven/core", () => {
                     .spyOn(logger, "error")
                     .mockImplementation(logErrorMock);
                 const exitSpy = jest
-                    .spyOn(macros, "exit")
-                    .mockImplementation(exitMock);
+                    .spyOn(macros, "exit");
                 const error = new Error();
                 macros.handleError(error);
                 expect(logErrorSpy).toHaveBeenCalledTimes(1);
@@ -115,8 +112,7 @@ describe("@pixeloven/core", () => {
         describe("spawnNode", () => {
             it("should spawn a new node caller", () => {
                 const spawnSyncSpy = jest
-                    .spyOn(spawn, "sync")
-                    .mockImplementation(spawnSyncMock);
+                    .spyOn(spawn, "sync");
                 macros.spawnNode("script", ["arg"]);
                 expect(spawnSyncSpy).toHaveBeenCalledTimes(1);
             });
