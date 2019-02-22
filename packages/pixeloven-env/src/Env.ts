@@ -31,6 +31,9 @@ export interface DefaultEnv extends NodeJS.ProcessEnv {
     NODE_ENV: Environment;
 }
 
+/**
+ * @todo Since this is static we should just to an object literal like Logger
+ */
 export class Env {
     /**
      * Default values for env
