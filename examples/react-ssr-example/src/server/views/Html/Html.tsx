@@ -24,6 +24,9 @@ const Html = (props: HtmlProps) => {
         ) : (
             undefined
         );
+    const innerHtml = {
+        __html: `window.INIT_STATE = ${serializedState};`,
+    };
     return (
         <html lang="en">
             <head>
@@ -38,11 +41,7 @@ const Html = (props: HtmlProps) => {
                     You need to enable JavaScript to run this app.
                 </noscript>
                 <div id="root">{props.children}</div>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `window.INIT_STATE = ${serializedState};`,
-                    }}
-                />
+                <script dangerouslySetInnerHTML={innerHtml} />
                 {jsTags}
             </body>
         </html>

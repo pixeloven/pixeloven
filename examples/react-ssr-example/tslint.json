@@ -12,7 +12,8 @@
   "extends": [
     "tslint:latest",
     "tslint-config-prettier",
-    "tslint-eslint-rules"
+    "tslint-eslint-rules",
+    "tslint-react"
   ],
   "rules": {
     "arrow-parens": false,
