@@ -1,6 +1,9 @@
 import fs from "fs";
 import { build, filesystem } from "gluegun";
 
+/**
+ * @todo Looks like we aren't failing in the CLI if a script returns a status of >0
+ */
 async function main(argv: string[]) {
     const pixelOvenPath = filesystem.path(process.cwd(), "./node_modules", "@pixeloven");
     const plugins = filesystem.subdirectories(pixelOvenPath);

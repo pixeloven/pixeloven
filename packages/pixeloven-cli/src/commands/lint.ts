@@ -19,7 +19,7 @@ export default {
                         `Success! Your code is beautify just the way it is.`,
                     );
                 }
-                break;
+                return statusCode
             }
             case "ts":
             case "tsx": {
@@ -34,11 +34,11 @@ export default {
                         `Success! Your code is beautify just the way it is.`,
                     );
                 }
-                break;
+                return statusCode;
             }
             default:
                 pixeloven.printInvalidArgument();
-                break;
         }
+        return 1;
     },
 };
