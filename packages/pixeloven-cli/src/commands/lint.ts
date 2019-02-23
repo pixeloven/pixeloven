@@ -16,6 +16,7 @@ export default {
                     ? parameters.argv.slice(4)
                     : [];
                 statusCode = await styleLint(argList);
+                console.log(statusCode);
                 if (statusCode) {
                     print.error(`Stylelint exited with status ${statusCode}`);
                 } else {
@@ -31,6 +32,7 @@ export default {
                     ? parameters.argv.slice(4)
                     : [];
                 statusCode = await tsLint(argList);
+                console.log(statusCode);
                 if (statusCode) {
                     print.error(`TSLint exited with status ${statusCode}`);
                 } else {
