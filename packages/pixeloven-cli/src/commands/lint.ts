@@ -1,5 +1,9 @@
 import { PixelOvenRunContext } from "../types";
 
+/**
+ * @todo Spawn doesn't show output :(
+ * @todo still need to process exit... think we might just use home backed solution for now.
+ */
 export default {
     alias: ["--lint", "-l"],
     name: "lint",
