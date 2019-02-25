@@ -23,6 +23,7 @@
     "bootstrap": "lerna bootstrap",
     "build-examples": "lerna run build --scope \"@examples/*\"",
     "clean": "lerna clean",
+    "compile": "yarn compile-packages && yarn compile-examples",
     "compile-examples": "lerna run compile --scope \"@examples/*\" && yarn linker",
     "compile-packages": "lerna run compile --scope \"@pixeloven/*\" && yarn linker",
     "compile-tools": "lerna run compile --scope \"@tools/*\" && yarn linker",
