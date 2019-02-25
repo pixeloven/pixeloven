@@ -8,26 +8,25 @@ export default {
         const { parameters, print, typeDoc } = context;
         /**
          * Process results
-         * @param name 
-         * @param status 
+         * @param name
+         * @param status
          */
         const handle = (name: string, status: number) => {
             if (status) {
                 print.error(`${name} exited with status ${status}`);
                 process.exit(status);
             } else {
-                print.success(
-                    `Success! What's up doc(s).`,
-                );
+                print.success(`Success! What's up doc(s).`);
             }
             return status;
-        }
+        };
         switch (parameters.first) {
             case "ts":
             case "tsx": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(4)
+                        : [];
                 const results = await typeDoc(argList);
                 return handle("TypeDoc", results.status);
             }

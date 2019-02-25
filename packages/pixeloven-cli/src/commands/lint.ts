@@ -12,8 +12,8 @@ export default {
         const { parameters, print, styleLint, tsLint } = context;
         /**
          * Process results
-         * @param name 
-         * @param status 
+         * @param name
+         * @param status
          */
         const handle = (name: string, status: number) => {
             if (status) {
@@ -25,20 +25,22 @@ export default {
                 );
             }
             return status;
-        }
+        };
         switch (parameters.first) {
             case "scss": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(4)
+                        : [];
                 const results = await styleLint(argList);
                 return handle("Stylelint", results.status);
             }
             case "ts":
             case "tsx": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
+                const argList =
+                    parameters.argv && parameters.argv.length
+                        ? parameters.argv.slice(4)
+                        : [];
                 const results = await tsLint(argList);
                 return handle("TSLint", results.status);
             }

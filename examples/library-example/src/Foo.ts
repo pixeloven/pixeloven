@@ -6,7 +6,7 @@ class Foo {
 
     /**
      * Create our dummy class
-     * @param value 
+     * @param value
      */
     constructor(value: string) {
         this.bar = value;

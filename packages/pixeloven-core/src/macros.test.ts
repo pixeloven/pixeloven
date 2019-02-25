@@ -34,9 +34,7 @@ describe("@pixeloven/core", () => {
                 const logErrorSpy = jest
                     .spyOn(logger, "error")
                     .mockImplementation(logErrorMock);
-                const exitSpy = jest
-                    .spyOn(macros, "exit")
-                    .mockImplementation();
+                const exitSpy = jest.spyOn(macros, "exit").mockImplementation();
                 const error = new Error();
                 macros.handleError(error);
                 expect(logErrorSpy).toHaveBeenCalledTimes(1);
@@ -112,8 +110,7 @@ describe("@pixeloven/core", () => {
         });
         describe("spawnNode", () => {
             it("should spawn a new node caller", () => {
-                const spawnSyncSpy = jest
-                    .spyOn(spawn, "sync");
+                const spawnSyncSpy = jest.spyOn(spawn, "sync");
                 macros.spawnNode("script", ["arg"]);
                 expect(spawnSyncSpy).toHaveBeenCalledTimes(1);
             });

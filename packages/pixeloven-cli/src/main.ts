@@ -5,7 +5,11 @@ import { build, filesystem } from "gluegun";
  * @todo Looks like we aren't failing in the CLI if a script returns a status of >0
  */
 async function main(argv: string[]) {
-    const pixelOvenPath = filesystem.path(process.cwd(), "./node_modules", "@pixeloven");
+    const pixelOvenPath = filesystem.path(
+        process.cwd(),
+        "./node_modules",
+        "@pixeloven",
+    );
     const plugins = filesystem.subdirectories(pixelOvenPath);
     const builder = build()
         .brand("pixeloven")
@@ -17,9 +21,7 @@ async function main(argv: string[]) {
     plugins.forEach(plugin => {
         builder.plugin(filesystem.path(fs.realpathSync(plugin), "./dist/lib"));
     });
-    const cli = builder 
-        .version()
-        .create();
+    const cli = builder.version().create();
 
     const context = await cli.run(argv);
     return context;

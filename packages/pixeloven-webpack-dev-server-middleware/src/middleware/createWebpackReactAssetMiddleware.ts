@@ -48,7 +48,7 @@ const webpackReactAssetMiddleware = (
                     config.done(stats);
                 }
             }
-        }
+        };
 
         try {
             compiler.onDone("client", onDoneHandler);

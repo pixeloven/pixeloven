@@ -1,7 +1,4 @@
-import { 
-    JestExtension, 
-    PixelOvenRunContext
-} from "../types";
+import { JestExtension, PixelOvenRunContext } from "../types";
 
 export default (context: PixelOvenRunContext) => {
     const jest: JestExtension = async (args: string[] = []) => {

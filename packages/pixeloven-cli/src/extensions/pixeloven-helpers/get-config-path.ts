@@ -5,7 +5,10 @@ import { GetConfigPathFunction } from "../../types";
 /**
  * @todo add options to configure how this works
  */
-const getConfigPath: GetConfigPathFunction = (fileName: string, strict: boolean = false) => {
+const getConfigPath: GetConfigPathFunction = (
+    fileName: string,
+    strict: boolean = false,
+) => {
     const configPath = filesystem.path(fileName);
     if (filesystem.exists(configPath)) {
         print.info(`Configuration file found ${configPath}`);

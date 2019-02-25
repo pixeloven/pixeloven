@@ -10,7 +10,9 @@ export default (context: AddonWebpackRunContext) => {
         const { pixelOven } = context;
         const pluginPath = pixelOven.resolvePlugin("@pixeloven", "webpack");
         if (!pluginPath) {
-            throw new Error("Could not find peer dependency @pixeloven/webpack");
+            throw new Error(
+                "Could not find peer dependency @pixeloven/webpack",
+            );
         }
         return runner(options);
     };

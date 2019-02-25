@@ -12,8 +12,7 @@ describe("@pixeloven/cli", () => {
             jest.restoreAllMocks();
         });
         it("should execute main and succeed", () => {
-            const cliSpy = jest
-                .spyOn(cli, "default");
+            const cliSpy = jest.spyOn(cli, "default");
             caller();
             expect(cliSpy).toHaveBeenCalledTimes(1);
         });

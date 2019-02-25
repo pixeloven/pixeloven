@@ -46,4 +46,4 @@ export const createConfig = () => {
         protocol: PROTOCOL,
     };
     return server;
-}
+};

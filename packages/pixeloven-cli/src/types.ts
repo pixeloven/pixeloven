@@ -12,9 +12,7 @@ export type GetConfigPathFunction = (
     strict?: boolean,
 ) => string | false;
 
-export type ResolvePluginFunction = (
-    ...paths: string[]
-) => string | false;
+export type ResolvePluginFunction = (...paths: string[]) => string | false;
 
 export interface RunResponse {
     stdout?: Buffer | string;

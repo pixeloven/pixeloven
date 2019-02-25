@@ -12,25 +12,23 @@ export default {
         const { parameters, print, webpack, webpackDevServer } = context;
         /**
          * Process results
-         * @param name 
-         * @param status 
+         * @param name
+         * @param status
          */
         const handle = (name: string, status: number) => {
             if (status) {
                 print.error(`${name} exited with status ${status}`);
                 process.exit(status);
             } else {
-                print.success(
-                    `Success! Ready for action.`,
-                );
+                print.success(`Success! Ready for action.`);
             }
             return status;
-        }
+        };
         let statusCode = 0;
         switch (parameters.first) {
             case "build":
                 statusCode = await webpack({
-                    withSourceMap: parameters.options.sourceMap || false
+                    withSourceMap: parameters.options.sourceMap || false,
                 });
                 return handle("Webpack", statusCode);
             case "start":

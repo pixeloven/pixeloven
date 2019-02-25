@@ -6,7 +6,11 @@ export default (context: PixelOvenRunContext) => {
         const fileName = "tslint.json";
         const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {
-            return pixelOven.run(["tslint", "-t", "codeFrame", "--config", configPath].concat(args));
+            return pixelOven.run(
+                ["tslint", "-t", "codeFrame", "--config", configPath].concat(
+                    args,
+                ),
+            );
         }
         return pixelOven.run(["tslint", "-t", "codeFrame"].concat(args));
     };

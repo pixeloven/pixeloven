@@ -9,7 +9,7 @@ const helpers = (context: GluegunRunContext) => {
         getConfigPath,
         resolvePlugin,
         run,
-    }
+    };
     context.pixelOven = pixelOven;
 };
 
