@@ -165,7 +165,7 @@ jobs:
           command: yarn env:production
       - run:
           name: Build source
-          command: build-examples
+          command: yarn build-examples
       - persist_to_workspace:
           root: .
           paths: 
