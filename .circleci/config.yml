@@ -64,36 +64,29 @@ commands:
       - run:
           name: "List Directory"
           command: ls -al << parameters.path >>
-  yarn:
-    description: "Excutes yarn cmds"
-    parameters:
-      method:
-        type: string
-    steps:
-      - run:
-          name: yarn << parameters.method >>
-          command: yarn << parameters.method >>
-
-# Common executor for node based jobs
 executors:
   node-executor:
     docker:
       - image: circleci/node:10.15
     working_directory: ~/pixeloven
-
-
-# Define jobs
 jobs:
   setup:
     executor: node-executor
     steps:
       # @todo We should create a custom docker image with lerna installed or find a way to add lerna to the executor
-      # @todo We should cache node_modules perhaps cache key for each package.json
       - checkout
-      - yarn:
-          method: "install"
-
-      # Save project
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: yarn-deps-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - "./node_modules"
       - persist_to_workspace:
           root: .
           paths: 
