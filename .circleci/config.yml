@@ -291,9 +291,9 @@ workflows:
       - compile-packages:
           requires:
             - setup
-      - document-packages:
-          requires:
-            - setup
+      # - document-packages:
+      #     requires:
+      #       - setup
       - lint-packages:
           requires:
             - compile-packages
@@ -308,10 +308,10 @@ workflows:
           requires:
             - lint-packages
             - test-packages
-      - document-examples:
-          requires:
-            - lint-packages
-            - test-packages
+      # - document-examples:
+      #     requires:
+      #       - lint-packages
+      #       - test-packages
       - lint-examples:
           requires:
             - lint-packages
