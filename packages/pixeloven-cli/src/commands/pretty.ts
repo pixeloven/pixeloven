@@ -28,7 +28,7 @@ export default {
             ? parameters.argv.slice(3)
             : [];
         const prettierResults = await prettier(argList);
-        const status = handle("Prettier", prettierResults.status);
+        const prettierStatus = handle("Prettier", prettierResults.status);
         switch (parameters.first) {
             case "scss": {
                 const results = await styleLint(["--fix"].concat(argList));
@@ -40,6 +40,6 @@ export default {
                 return handle("TSLint", results.status);
             }
         }
-        return status;
+        return prettierStatus;
     },
 };
