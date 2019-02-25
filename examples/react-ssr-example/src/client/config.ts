@@ -14,6 +14,6 @@ export interface Config {
  * Define general config
  */
 export const config: Config = {
-    environment: ENVIRONMENT,
     basePath: BASE_PATH,
+    environment: ENVIRONMENT,
 };

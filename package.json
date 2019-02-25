@@ -29,6 +29,7 @@
     "compile-tools": "lerna run compile --scope \"@tools/*\" && yarn linker",
     "env:production": "lerna run env:production",
     "linker": "lerna link",
+    "lint": "yarn lint-packages && yarn lint-examples",
     "lint-examples": "lerna run lint --scope \"@examples/*\"",
     "lint-packages": "lerna run lint --scope \"@pixeloven/*\"",
     "lint-tools": "lerna run lint --scope \"@tools/*\"",
