@@ -308,7 +308,7 @@ workflows:
           requires:
             - lint-packages
             - test-packages
-      - document-packages:
+      - document-examples:
           requires:
             - lint-packages
             - test-packages
