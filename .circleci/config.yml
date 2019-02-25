@@ -293,30 +293,25 @@ workflows:
       - compile-packages:
           requires:
             - setup
-      - document-packages:
-          requires:
-            - setup
       - lint-packages:
           requires:
             - setup
       - test-packages:
           requires:
-            - setup
+            - compile-packages
+            - lint-packages
       - build-examples:
           requires:
-            - compile-packages
+            - test-packages
       - compile-examples:
           requires:
-            - compile-packages
-      - document-examples:
-          requires:
-            - compile-packages
+            - test-packages
       - lint-examples:
           requires:
-            - compile-packages
+            - test-packages
       - test-examples:
           requires:
-            - compile-packages
+            - test-packages
       - report:
           requires:
             - test-packages
