@@ -1,9 +1,8 @@
 import { PixelOvenRunContext, StyleLintExtension } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const { pixelOven } = context;
-
     const styleLint: StyleLintExtension = async (args: string[] = []) => {
+        const { pixelOven } = context;
         const fileName = "stylelint.json";
         const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {

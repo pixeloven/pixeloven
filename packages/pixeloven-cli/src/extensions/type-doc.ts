@@ -1,9 +1,8 @@
 import { PixelOvenRunContext, TypeDocExtension } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const { pixelOven } = context;
-
     const typeDoc: TypeDocExtension = async (args: string[] = []) => {
+        const { pixelOven } = context;
         const typeDocFileName = "typedoc.json";
         const tsconfigFileName = "tsconfig.json";
         const typeDocConfigPath = pixelOven.getConfigPath(typeDocFileName);

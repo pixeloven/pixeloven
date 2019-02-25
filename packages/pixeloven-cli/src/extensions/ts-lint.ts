@@ -1,9 +1,8 @@
 import { PixelOvenRunContext, TsLintExtension } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const { pixelOven } = context;
-
     const tsLint: TsLintExtension = async (args: string[] = []) => {
+        const { pixelOven } = context;
         const fileName = "tslint.json";
         const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {

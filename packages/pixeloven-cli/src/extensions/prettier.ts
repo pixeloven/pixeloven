@@ -1,9 +1,8 @@
 import { PixelOvenRunContext, PrettierExtension } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const { pixelOven } = context;
-
     const prettier: PrettierExtension = async (args: string[] = []) => {
+        const { pixelOven } = context;
         const fileName = "prettier.json";
         const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {
