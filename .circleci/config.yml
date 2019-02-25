@@ -295,23 +295,22 @@ workflows:
             - setup
       - lint-packages:
           requires:
-            - setup
+            - compile-packages
       - test-packages:
           requires:
             - compile-packages
-            - lint-packages
       - build-examples:
           requires:
-            - test-packages
+            - compile-packages
       - compile-examples:
           requires:
-            - test-packages
+            - compile-packages
       - lint-examples:
           requires:
-            - test-packages
+            - compile-packages
       - test-examples:
           requires:
-            - test-packages
+            - compile-packages
       - report:
           requires:
             - test-packages

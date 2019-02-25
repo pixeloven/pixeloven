@@ -4,9 +4,8 @@ import {
 } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const { pixelOven } = context;
-
     const jest: JestExtension = async (args: string[] = []) => {
+        const { pixelOven } = context;
         const fileName = "jest.json";
         const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {
