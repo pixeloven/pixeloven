@@ -1,6 +1,6 @@
 import { PixelOvenRunContext } from "../types";
 
-export type TypeDocExtension = (args?: string[]) => Promise<number>;
+export type TypeDocExtension = (args?: string[]) => Promise<object>;
 
 export default (context: PixelOvenRunContext) => {
     const typeDoc = async (args: string[] = []) => {
@@ -24,9 +24,9 @@ export default (context: PixelOvenRunContext) => {
             );
         }
         if (typedocConfigPath && tsconfigConfigPath) {
-            return pixeloven.runBin(
-                "typedoc",
+            return pixeloven.run(
                 [
+                    "typedoc",
                     "--options",
                     typedocConfigPath,
                     "--tsconfig",
@@ -34,7 +34,7 @@ export default (context: PixelOvenRunContext) => {
                 ].concat(args),
             );
         } else {
-            return pixeloven.runBin("typedoc", args);
+            return pixeloven.run(["typedoc"].concat(args));
         }
     };
     context.typeDoc = typeDoc;

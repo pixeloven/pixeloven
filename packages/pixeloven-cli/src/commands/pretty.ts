@@ -5,7 +5,7 @@ export default {
     name: "pretty",
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, prettier, styleLint, tsLint } = context;
-        let statusCode = 0;
+        let statusCode = {};
         switch (parameters.first) {
             case "scss": {
                 const argList = parameters.argv && parameters.argv.length 

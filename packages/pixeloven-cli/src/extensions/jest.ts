@@ -1,6 +1,6 @@
 import { PixelOvenRunContext } from "../types";
 
-export type JestExtension = (args?: string[]) => Promise<number>;
+export type JestExtension = (args?: string[]) => Promise<object>;
 
 export default (context: PixelOvenRunContext) => {
     const jest = async (args: string[] = []) => {
@@ -9,9 +9,9 @@ export default (context: PixelOvenRunContext) => {
         const configPath = pixeloven.getConfigPath(fileName);
         if (configPath) {
             print.info(`Configuration file found ${configPath}`);
-            return pixeloven.runBin(
-                "jest",
+            return pixeloven.run(
                 [
+                    "jest",
                     "--maxWorkers",
                     "2",
                     "--config",
@@ -23,9 +23,8 @@ export default (context: PixelOvenRunContext) => {
             print.warning(
                 `Unable to find "${fileName}" reverting to default configuration`,
             );
-            return pixeloven.runBin(
-                "jest",
-                ["--maxWorkers", "2", "--env=jsdom"].concat(args),
+            return pixeloven.run(
+                ["jest", "--maxWorkers", "2", "--env=jsdom"].concat(args),
             );
         }
     };

@@ -4,8 +4,8 @@ export default {
     alias: ["--compile", "-c"],
     name: "compile",
     run: async (context: PixelOvenRunContext) => {
-        const { parameters, pixeloven, print, tsc } = context;
-        let statusCode = 0;
+        const { parameters, print, tsc } = context;
+        let statusCode = {};
 
         switch (parameters.first) {
             case "ts":
@@ -22,7 +22,8 @@ export default {
                 break;
             }
             default:
-                pixeloven.printInvalidArgument();
+                print.error("Invalid argument provided");
+                print.info("Run --help for more details");
                 break;
         }
     },

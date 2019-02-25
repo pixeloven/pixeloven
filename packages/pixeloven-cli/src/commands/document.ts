@@ -4,8 +4,8 @@ export default {
     alias: ["--document"],
     name: "document",
     run: async (context: PixelOvenRunContext) => {
-        const { parameters, pixeloven, print, typeDoc } = context;
-        let statusCode = 0;
+        const { parameters, print, typeDoc } = context;
+        let statusCode = {};
         const argList = parameters.argv && parameters.argv.length 
             ? parameters.argv.slice(4)
             : [];
@@ -20,7 +20,8 @@ export default {
                 }
                 break;
             default:
-                pixeloven.printInvalidArgument();
+                print.error("Invalid argument provided");
+                print.info("Run --help for more details");
                 break;
         }
     },

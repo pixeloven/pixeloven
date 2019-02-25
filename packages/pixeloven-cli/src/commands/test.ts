@@ -5,7 +5,7 @@ export default {
     name: "test",
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, jest } = context;
-        let statusCode = 0;
+        let statusCode = {};
         switch (parameters.first) {
             case "watch": {
                 const argList = parameters.argv && parameters.argv.length 

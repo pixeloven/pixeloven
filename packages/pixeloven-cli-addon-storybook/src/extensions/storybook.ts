@@ -3,7 +3,7 @@ import { AddonStorybookRunContext } from "../types";
 
 export type StorybookExecutionType = "build" | "start";
 
-export type StorybookExtension = (type: StorybookExecutionType, args?: string[]) => Promise<number>;
+export type StorybookExtension = (type: StorybookExecutionType, args?: string[]) => Promise<object>;
 
 /**
  * @todo Add support for custom config path
@@ -21,7 +21,8 @@ export default (context: AddonStorybookRunContext) => {
 
         switch (type) {
             case "build": {
-                return pixeloven.runBin("build-storybook", [
+                return pixeloven.run([
+                    "build-storybook",
                     "-c",
                     configPath,
                     "-o",
@@ -29,7 +30,8 @@ export default (context: AddonStorybookRunContext) => {
                 ].concat(args));
             }
             case "start": {
-                return pixeloven.runBin("start-storybook", [
+                return pixeloven.run([
+                    "start-storybook",
                     "--quiet",
                     "--ci",
                     "-s",

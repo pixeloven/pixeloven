@@ -1,6 +1,6 @@
 import { PixelOvenRunContext } from "../types";
 
-export type TscExtension = (args?: string[]) => Promise<number>;
+export type TscExtension = (args?: string[]) => Promise<object>;
 
 export default (context: PixelOvenRunContext) => {
     const tsc = async (args: string[] = []) => {
@@ -9,15 +9,12 @@ export default (context: PixelOvenRunContext) => {
         const configPath = pixeloven.getConfigPath(fileName);
         if (configPath) {
             print.info(`Configuration file found ${configPath}`);
-            return pixeloven.runBin(
-                "tsc",
-                ["--pretty", "--project", configPath].concat(args),
-            );
+            return pixeloven.run(["tsc", "--pretty", "--project", configPath].concat(args));
         } else {
             print.warning(
                 `Unable to find "${fileName}" reverting to default configuration`,
             );
-            return pixeloven.runBin("tsc", ["--pretty"].concat(args));
+            return pixeloven.run(["tsc", "--pretty"].concat(args));
         }
     };
     context.tsc = tsc;

@@ -9,7 +9,7 @@ export type GetConfigPathFunction = (
 /**
  * @todo add options to configure how this works
  */
-export default (fileName: string, strict: boolean = false) => {
+const getConfigPath: GetConfigPathFunction = (fileName: string, strict: boolean = false) => {
     const configPath = filesystem.path(fileName);
     if (filesystem.exists(configPath)) {
         print.info(`Configuration file found ${configPath}`);
@@ -24,3 +24,5 @@ export default (fileName: string, strict: boolean = false) => {
     }
     return false;
 };
+
+export default getConfigPath;

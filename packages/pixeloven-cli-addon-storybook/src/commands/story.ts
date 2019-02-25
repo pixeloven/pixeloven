@@ -10,7 +10,7 @@ export default {
     name: "story",
     run: async (context: AddonStorybookRunContext) => {
         const { parameters, print, storybook } = context;
-        let statusCode = 0;
+        let statusCode = {};
         const argList =
             parameters.array && parameters.array.length
                 ? parameters.array.slice(1)

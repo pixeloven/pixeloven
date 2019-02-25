@@ -9,7 +9,7 @@ export default {
     name: "lint",
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, pixeloven, styleLint, tsLint } = context;
-        let statusCode = 0;
+        let statusCode = {};
         switch (parameters.first) {
             case "scss": {
                 const argList = parameters.argv && parameters.argv.length 
@@ -43,7 +43,8 @@ export default {
                 return statusCode;
             }
             default:
-                pixeloven.printInvalidArgument();
+                print.error("Invalid argument provided");
+                print.info("Run --help for more details");
         }
         return 1;
     },
