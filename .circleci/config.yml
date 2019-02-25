@@ -212,7 +212,6 @@ jobs:
   deploy:
     executor: node-executor
     steps:
-
       - attach_workspace:
           at: ~/pixeloven
 
@@ -292,6 +291,9 @@ workflows:
       - compile-packages:
           requires:
             - setup
+      - document-packages:
+          requires:
+            - setup
       - lint-packages:
           requires:
             - compile-packages
@@ -303,6 +305,10 @@ workflows:
             - lint-packages
             - test-packages
       - compile-examples:
+          requires:
+            - lint-packages
+            - test-packages
+      - document-packages:
           requires:
             - lint-packages
             - test-packages
