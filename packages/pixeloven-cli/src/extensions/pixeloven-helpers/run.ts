@@ -1,12 +1,5 @@
 import { system } from "gluegun";
-
-export interface RunResponse {
-    stdout?: Buffer | string;
-    status: number;
-    error?: Error;
-}
-
-export type RunFunction = (args: string[]) => Promise<RunResponse>;
+import { RunFunction } from "../../types";
 
 const run: RunFunction = (args: string[]) => {
     return system.spawn(args.join(" "));

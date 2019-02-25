@@ -5,50 +5,41 @@ export default {
     name: "pretty",
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, prettier, styleLint, tsLint } = context;
-        let statusCode = {};
+        /**
+         * Process results
+         * @param name 
+         * @param status 
+         */
+        const handle = (name: string, status: number) => {
+            if (status) {
+                print.error(`${name} exited with status ${status}`);
+                process.exit(status);
+            } else {
+                print.success(
+                    `Success! Looks a lot nicer now doesn't it?!`,
+                );
+            }
+            return status;
+        }
+        /**
+         * Always run prettier
+         */
+        const argList = parameters.argv && parameters.argv.length 
+            ? parameters.argv.slice(3)
+            : [];
+        const prettierResults = await prettier(argList);
+        const status = handle("Prettier", prettierResults.status);
         switch (parameters.first) {
             case "scss": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
-                statusCode = await styleLint(["--fix"].concat(argList));
-                if (statusCode) {
-                    print.error(`Stylelint exited with status ${statusCode}`);
-                    break;
-                }
-                statusCode = await prettier(argList);
-                if (statusCode) {
-                    print.error(`Prettier exited with status ${statusCode}`);
-                    break;
-                }
-                print.success(`Success! Looks a lot nicer now doesn't it?!`);
-                break;
+                const results = await styleLint(["--fix"].concat(argList));
+                return handle("Stylelint", results.status);
             }
             case "ts":
             case "tsx": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
-                statusCode = await tsLint(["--fix"].concat(argList));
-                if (statusCode) {
-                    print.error(`TSLint exited with status ${statusCode}`);
-                    break;
-                }
-                statusCode = await prettier(argList);
-                if (statusCode) {
-                    print.error(`Prettier exited with status ${statusCode}`);
-                    break;
-                }
-                print.success(`Success! Looks a lot nicer now doesn't it?!`);
-                break;
-            }
-            default: {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(3)
-                    : [];
-                prettier(argList);
-                break;
+                const results = await tsLint(["--fix"].concat(argList));
+                return handle("TSLint", results.status);
             }
         }
+        return status;
     },
 };

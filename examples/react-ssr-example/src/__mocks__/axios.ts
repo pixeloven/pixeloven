@@ -42,10 +42,8 @@ const mockRequest = (config: AxiosRequestConfig) => Promise.resolve("testing");
  * @param data
  * @param config
  */
-const mockRequestToUrl = (
-    url: string,
-    config?: AxiosRequestConfig,
-) => Promise.resolve("testing");
+const mockRequestToUrl = (url: string, config?: AxiosRequestConfig) =>
+    Promise.resolve("testing");
 
 /**
  * Mock request to url with data function

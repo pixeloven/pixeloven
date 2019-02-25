@@ -1,0 +1,35 @@
+{
+  "name": "@examples/library-example",
+  "version": "5.0.0-alpha.8",
+  "description": "Simple example for creating a TS based library",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@pixeloven/cli": "^5.0.0-alpha.8"
+  },
+  "scripts": {
+    "compile": "pixeloven compile ts",
+    "document": "pixeloven document ts ./src",
+    "predocument": "pixeloven delete docs",
+    "lint": "yarn run lint:ts",
+    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
+    "precompile": "pixeloven delete dist",
+    "pretest": "pixeloven delete coverage",
+    "pretty": "yarn run pretty:ts",
+    "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
+    "test": "pixeloven test --color --coverage",
+    "test:ci": "pixeloven test --ci",
+    "test:watch": "pixeloven test watch"
+  }
+}

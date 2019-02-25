@@ -1,3 +1,4 @@
+import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
 import { AddonStorybookRunContext } from "../types";
 
 /**
@@ -10,32 +11,35 @@ export default {
     name: "story",
     run: async (context: AddonStorybookRunContext) => {
         const { parameters, print, storybook } = context;
-        let statusCode = {};
+        /**
+         * Process results
+         * @param name 
+         * @param status 
+         */
+        const handle = (name: string, status: number) => {
+            if (status) {
+                print.error(`${name} exited with status ${status}`);
+                process.exit(status);
+            } else {
+                print.success(
+                    `Success! Read me a story please!!`,
+                );
+            }
+            return status;
+        }
         const argList =
             parameters.array && parameters.array.length
                 ? parameters.array.slice(1)
                 : [];
         switch (parameters.first) {
             case "build":
-                statusCode = await storybook(parameters.first, argList);
-                if (statusCode) {
-                    print.error(`Storybook exited with status ${statusCode}`);
-                } else {
-                    print.success(`Success!`);
-                }
-                break;
-            case "start":
-                statusCode = await storybook(parameters.first, argList);
-                if (statusCode) {
-                    print.error(`Storybook exited with status ${statusCode}`);
-                } else {
-                    print.success(`Success!`);
-                }
-                break;
-            default:
-                print.error("Invalid argument provided");
-                print.info("Run --help for more details");
-                break;
+            case "start": {
+                const results = await storybook(parameters.first, argList);
+                return handle("Storybook", results.status);
+            }
+            default: {
+                throw new NodeInvalidArgumentException();
+            }
         }
     },
 };

@@ -1,10 +1,6 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
 import { filesystem, print } from "gluegun";
-
-export type GetConfigPathFunction = (
-    fileName: string,
-    strict?: boolean,
-) => string | false;
+import { GetConfigPathFunction } from "../../types";
 
 /**
  * @todo add options to configure how this works

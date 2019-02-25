@@ -1,15 +1,38 @@
 import { GluegunRunContext } from "gluegun";
-import { JestExtension } from "./extensions/jest";
-import { PixelOvenExtensions } from "./extensions/pixeloven";
-import { PrettierExtension } from "./extensions/prettier";
-import { StyleLintExtension } from "./extensions/style-lint";
-import { TsLintExtension } from "./extensions/ts-lint";
-import { TscExtension } from "./extensions/tsc";
-import { TypeDocExtension } from "./extensions/type-doc";
+
+export type JestExtension = (args?: string[]) => Promise<RunResponse>;
+export type PrettierExtension = (args?: string[]) => Promise<RunResponse>;
+export type StyleLintExtension = (args?: string[]) => Promise<RunResponse>;
+export type TsLintExtension = (args?: string[]) => Promise<RunResponse>;
+export type TscExtension = (args?: string[]) => Promise<RunResponse>;
+export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
+
+export type GetConfigPathFunction = (
+    fileName: string,
+    strict?: boolean,
+) => string | false;
+
+export type ResolvePluginFunction = (
+    ...paths: string[]
+) => string | false;
+
+export interface RunResponse {
+    stdout?: Buffer | string;
+    status: number;
+    error?: Error;
+}
+
+export type RunFunction = (args: string[]) => Promise<RunResponse>;
+
+export interface PixelOvenExtensions {
+    getConfigPath: GetConfigPathFunction;
+    resolvePlugin: ResolvePluginFunction;
+    run: RunFunction;
+}
 
 export interface PixelOvenRunContext extends GluegunRunContext {
     jest: JestExtension;
-    pixeloven: PixelOvenExtensions;
+    pixelOven: PixelOvenExtensions;
     prettier: PrettierExtension;
     styleLint: StyleLintExtension;
     tsc: TscExtension;

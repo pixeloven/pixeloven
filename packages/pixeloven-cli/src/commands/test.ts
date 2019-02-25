@@ -5,31 +5,33 @@ export default {
     name: "test",
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, jest } = context;
-        let statusCode = {};
+        /**
+         * Process results
+         * @param name 
+         * @param status 
+         */
+        const handle = (name: string, status: number) => {
+            if (status) {
+                print.error(`${name} exited with status ${status}`);
+                process.exit(status);
+            } else {
+                print.success(
+                    `Success! Untouchable.`,
+                );
+            }
+            return status;
+        }
+        const argList = parameters.argv && parameters.argv.length 
+            ? parameters.argv.slice(4)
+            : [];
         switch (parameters.first) {
             case "watch": {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(4)
-                    : [];
-                statusCode = await jest(["--watch"].concat(argList));
-                if (statusCode) {
-                    print.error(`Jest exited with status ${statusCode}`);
-                } else {
-                    print.success(`Success! Untouchable.`);
-                }
-                break;
+                const results = await jest(["--watch"].concat(argList));
+                return handle("Jest", results.status);
             }
             default: {
-                const argList = parameters.argv && parameters.argv.length 
-                    ? parameters.argv.slice(3)
-                    : [];
-                statusCode = await jest(argList);
-                if (statusCode) {
-                    print.error(`Jest exited with status ${statusCode}`);
-                } else {
-                    print.success(`Success! Untouchable.`);
-                }
-                break;
+                const results = await jest(argList);
+                return handle("Jest", results.status);
             }
         }
     },

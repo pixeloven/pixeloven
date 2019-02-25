@@ -1,3 +1,4 @@
+import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
 import { PixelOvenRunContext } from "../types";
 
 export default {
@@ -5,26 +6,34 @@ export default {
     name: "compile",
     run: async (context: PixelOvenRunContext) => {
         const { parameters, print, tsc } = context;
-        let statusCode = {};
-
+        /**
+         * Process results
+         * @param name 
+         * @param status 
+         */
+        const handle = (name: string, status: number) => {
+            if (status) {
+                print.error(`${name} exited with status ${status}`);
+                process.exit(status);
+            } else {
+                print.success(
+                    `Success! Beam me up.`,
+                );
+            }
+            return status;
+        }
         switch (parameters.first) {
             case "ts":
             case "tsx": {
                 const argList = parameters.argv && parameters.argv.length 
                     ? parameters.argv.slice(4)
                     : [];
-                statusCode = await tsc(argList);
-                if (statusCode) {
-                    print.error(`Tsc exited with status ${statusCode}`);
-                } else {
-                    print.success(`Success! Beam me up.`);
-                }
-                break;
+                const results = await tsc(argList);
+                return handle("Tsc", results.status);
             }
-            default:
-                print.error("Invalid argument provided");
-                print.info("Run --help for more details");
-                break;
+            default: {
+                throw new NodeInvalidArgumentException();
+            }
         }
     },
 };

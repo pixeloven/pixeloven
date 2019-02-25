@@ -1,41 +1,25 @@
-import { PixelOvenRunContext } from "../types";
-
-export type TypeDocExtension = (args?: string[]) => Promise<object>;
+import { PixelOvenRunContext, TypeDocExtension } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const typeDoc = async (args: string[] = []) => {
-        const { pixeloven, print } = context;
-        const typedocFileName = "typedoc.json";
+    const { pixelOven } = context;
+
+    const typeDoc: TypeDocExtension = async (args: string[] = []) => {
+        const typeDocFileName = "typedoc.json";
         const tsconfigFileName = "tsconfig.json";
-        const typedocConfigPath = pixeloven.getConfigPath(typedocFileName);
-        if (typedocConfigPath) {
-            print.info(`Configuration file found ${typedocConfigPath}`);
-        } else {
-            print.warning(
-                `Unable to find "${typedocFileName}" reverting to default configuration`,
-            );
-        }
-        const tsconfigConfigPath = pixeloven.getConfigPath(tsconfigFileName);
-        if (tsconfigConfigPath) {
-            print.info(`Configuration file found ${tsconfigConfigPath}`);
-        } else {
-            print.warning(
-                `Unable to find "${tsconfigConfigPath}" reverting to default configuration`,
-            );
-        }
-        if (typedocConfigPath && tsconfigConfigPath) {
-            return pixeloven.run(
+        const typeDocConfigPath = pixelOven.getConfigPath(typeDocFileName);
+        const tsconfigConfigPath = pixelOven.getConfigPath(tsconfigFileName);
+        if (typeDocConfigPath && tsconfigConfigPath) {
+            return pixelOven.run(
                 [
                     "typedoc",
                     "--options",
-                    typedocConfigPath,
+                    typeDocConfigPath,
                     "--tsconfig",
                     tsconfigConfigPath,
                 ].concat(args),
             );
-        } else {
-            return pixeloven.run(["typedoc"].concat(args));
         }
+        return pixelOven.run(["typedoc"].concat(args));
     };
     context.typeDoc = typeDoc;
 };

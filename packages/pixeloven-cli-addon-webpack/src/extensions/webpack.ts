@@ -1,16 +1,14 @@
 import runner from "@pixeloven/webpack";
 import { BuildOptions } from "@pixeloven/webpack-config";
-import { AddonWebpackRunContext } from "../types";
-
-export type WebpackExtension = (options: BuildOptions) => Promise<number>;
+import { AddonWebpackRunContext, WebpackExtension } from "../types";
 
 /**
  * @todo Move runner contents into here
  */
 export default (context: AddonWebpackRunContext) => {
-    const webpack = async (options: BuildOptions) => {
-        const { pixeloven } = context;
-        const pluginPath = pixeloven.resolvePlugin("@pixeloven", "webpack");
+    const webpack: WebpackExtension = async (options: BuildOptions) => {
+        const { pixelOven } = context;
+        const pluginPath = pixelOven.resolvePlugin("@pixeloven", "webpack");
         if (!pluginPath) {
             throw new Error("Could not find peer dependency @pixeloven/webpack");
         }
