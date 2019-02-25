@@ -98,7 +98,6 @@ jobs:
           at: ~/pixeloven
       - compile:
           type: "examples"
-
   compile-packages:
     executor: node-executor
     steps:
@@ -166,7 +165,7 @@ jobs:
           command: yarn env:production
       - run:
           name: Build source
-          command: yarn build
+          command: build-examples
       - persist_to_workspace:
           root: .
           paths: 
@@ -301,26 +300,30 @@ workflows:
             - compile-packages
       - build-examples:
           requires:
-            - compile-packages
+            - lint-packages
+            - test-packages
       - compile-examples:
           requires:
-            - compile-packages
+            - lint-packages
+            - test-packages
       - lint-examples:
           requires:
-            - compile-packages
+            - lint-packages
+            - test-packages
       - test-examples:
           requires:
-            - compile-packages
+            - lint-packages
+            - test-packages
       - report:
           requires:
-            - test-packages
             - test-examples
           filters:
             branches:
               only: master
       - deploy:
           requires:
-            - report
+            - build-examples
+            - compile-examples
           filters:
             branches:
               only: master
