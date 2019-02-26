@@ -7,9 +7,6 @@
   "files": [
     "dist/"
   ],
-  "bin": {
-    "pixeloven-storybook": "./dist/lib/index.js"
-  },
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
     "type": "git",
@@ -31,8 +28,8 @@
     "@types/node": "10.12.18"
   },
   "peerDependencies": {
-    "@pixeloven/cli": ">4.2",
-    "@pixeloven/storybook": ">4.2"
+    "@pixeloven/cli": ">5.0.0-beta.0",
+    "@pixeloven/storybook": ">5.0.0-beta.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

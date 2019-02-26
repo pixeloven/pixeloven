@@ -1,16 +1,10 @@
 import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
-import { AddonStorybookRunContext } from "../types";
+import { AddonGhPagesRunContext } from "../types";
 
-/**
- * @todo finish porting webpack and storybook
- * @todo document new CLI and all packages
- * @todo remove the need for .env for the CLI (use only in project and examples)
- * @todo I'd also like to make it so the @env package can load without a file being present at all.
- */
 export default {
-    name: "story",
-    run: async (context: AddonStorybookRunContext) => {
-        const { parameters, print, storybook } = context;
+    name: "gh-pages",
+    run: async (context: AddonGhPagesRunContext) => {
+        const { parameters, print, ghPages } = context;
         /**
          * Process results
          * @param name
@@ -21,7 +15,7 @@ export default {
                 print.error(`${name} exited with status ${status}`);
                 process.exit(status);
             } else {
-                print.success(`Success! Read me a story please.`);
+                print.success(`Success!`);
             }
             return status;
         };
@@ -30,10 +24,9 @@ export default {
                 ? parameters.array.slice(1)
                 : [];
         switch (parameters.first) {
-            case "build":
-            case "start": {
-                const results = await storybook(parameters.first, argList);
-                return handle("Storybook", results.status);
+            case "build": {
+                const results = await ghPages(argList);
+                return handle("Github Pages", results.status);
             }
             default: {
                 throw new NodeInvalidArgumentException();

@@ -105,13 +105,6 @@ jobs:
           at: ~/pixeloven
       - compile:
           type: "packages"
-  compile-tools:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - compile:
-          type: "tools"
   lint-examples:
     executor: node-executor
     steps:
@@ -126,13 +119,6 @@ jobs:
           at: ~/pixeloven
       - lint:
           type: "packages"
-  lint-tools:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - lint:
-          type: "tools"
   test-examples:
     executor: node-executor
     steps:
@@ -148,13 +134,6 @@ jobs:
           at: ~/pixeloven
       - test:
           type: "packages"
-  test-tools:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - test:
-          type: "tools"
   build-examples:
     executor: node-executor
     steps:
@@ -184,13 +163,6 @@ jobs:
           at: ~/pixeloven
       - document:
           type: "packages"
-  document-tools:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - document:
-          type: "tools"
   accept-examples:
     executor: node-executor
     steps:
@@ -231,26 +203,6 @@ jobs:
       - store_artifacts:
           path: packages/**/docs
           destination: packages/docs
-  accept-tools:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - list:
-          path: tools/**/dist
-      - store_artifacts:
-          path: tools/**/dist
-          destination: tools/dist
-      - list:
-          path: tools/**/coverage
-      - store_artifacts:
-          path: tools/**/coverage
-          destination: tools/coverage
-      - list:
-          path: tools/**/docs
-      - store_artifacts:
-          path: tools/**/docs
-          destination: tools/docs
   report:
     executor: node-executor
     steps:
@@ -333,29 +285,10 @@ workflows:
             - document-examples
             - lint-examples
             - test-examples
-      - compile-tools:
-          requires:
-            - accept-packages
-      - document-tools:
-          requires:
-            - accept-packages
-      - lint-tools:
-          requires:
-            - accept-packages
-      - test-tools:
-          requires:
-            - accept-packages
-      - accept-tools:
-          requires:
-            - compile-tools
-            - document-tools
-            - lint-tools
-            - test-tools
       - report:
           requires:
             - accept-packages
             - accept-examples
-            - accept-tools
           filters:
             branches:
               only: master
@@ -363,7 +296,6 @@ workflows:
           requires:
             - accept-packages
             - accept-examples
-            - accept-tools
           filters:
             branches:
               only: master
