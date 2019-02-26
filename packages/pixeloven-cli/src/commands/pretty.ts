@@ -12,10 +12,10 @@ export default {
          */
         const handle = (name: string, status: number) => {
             if (status) {
-                print.error(`${name} exited with status ${status}`);
+                print.error(`${name} exited with status ${status}\n`);
                 process.exit(status);
             } else {
-                print.success(`Success! Looks a lot nicer now doesn't it?!`);
+                print.success(`Success! Looks a lot nicer now doesn't it?!\n`);
             }
             return status;
         };

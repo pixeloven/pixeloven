@@ -339,6 +339,7 @@ workflows:
       - report:
           requires:
             - test-examples
+            - test-tools
           filters:
             branches:
               only: master
@@ -346,6 +347,7 @@ workflows:
           requires:
             - build-examples
             - compile-examples
+            - compile-tools
           filters:
             branches:
               only: master

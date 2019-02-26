@@ -17,11 +17,11 @@ export default {
          */
         const handle = (name: string, status: number) => {
             if (status) {
-                print.error(`${name} exited with status ${status}`);
+                print.error(`${name} exited with status ${status}\n`);
                 process.exit(status);
             } else {
                 print.success(
-                    `Success! Your code is beautify just the way it is.`,
+                    `Success! Your code is beautify just the way it is.\n`,
                 );
             }
             return status;
