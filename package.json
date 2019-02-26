@@ -21,7 +21,8 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build-examples": "lerna run build --scope \"@examples/*\"",
+    "build": "yarn linker && yarn build-examples",
+    "build-examples": "yarn linker && lerna run build --scope \"@examples/*\"",
     "clean": "lerna clean",
     "compile": "yarn compile-packages && yarn compile-examples && yarn compile-tools",
     "compile-examples": "yarn linker && lerna run compile --scope \"@examples/*\"",
