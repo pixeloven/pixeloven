@@ -21,7 +21,7 @@ export default {
                 print.error(`${name} exited with status ${status}`);
                 process.exit(status);
             } else {
-                print.success(`Success! Read me a story please!!`);
+                print.success(`Success! Read me a story please.`);
             }
             return status;
         };

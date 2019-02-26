@@ -4,7 +4,7 @@ import { AddonGhPagesRunContext } from "../types";
 export default {
     name: "gh-pages",
     run: async (context: AddonGhPagesRunContext) => {
-        const { parameters, print, storybook } = context;
+        const { parameters, print, ghPages } = context;
         /**
          * Process results
          * @param name
@@ -15,7 +15,7 @@ export default {
                 print.error(`${name} exited with status ${status}`);
                 process.exit(status);
             } else {
-                print.success(`Success! Read me a story please!!`);
+                print.success(`Success!`);
             }
             return status;
         };
@@ -24,9 +24,8 @@ export default {
                 ? parameters.array.slice(1)
                 : [];
         switch (parameters.first) {
-            case "build":
-            case "start": {
-                const results = await storybook(parameters.first, argList);
+            case "build": {
+                const results = await ghPages(argList);
                 return handle("Storybook", results.status);
             }
             default: {

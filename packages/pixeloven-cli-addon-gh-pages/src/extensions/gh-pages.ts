@@ -1,60 +1,82 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
+import { createOrEmptyDir, handleError, resolvePath } from "@pixeloven/core";
+import { FileNotFoundException } from "@pixeloven/exceptions";
+import { logger } from "@pixeloven/node-logger";
+import fs from "fs-extra";
+import ghpages from "gh-pages";
+import path from "path";
 import {
-    AddonStorybookRunContext,
-    StorybookExecutionType,
-    StorybookExtension,
+    AddonGhPagesRunContext,
+    GhPagesExtension
 } from "../types";
 
 /**
- * @todo Add support for custom config path
- * @todo Need to clean this up - the cmd and this have similar logic that could be condensed
- * @todo This should really be two different extensions
+ * Resolves directory
+ * @todo Should move this into core or as a helper in CLI... or both
+ * @param relativePath
  */
-export default (context: AddonStorybookRunContext) => {
-    const storybook: StorybookExtension = async (
-        type: StorybookExecutionType,
+const resolveDir = (relativePath: string) => {
+    const packagePath = resolvePath(relativePath);
+    const stat = fs.statSync(packagePath);
+    if (stat && stat.isDirectory()) {
+        return packagePath;
+    } else {
+        throw new FileNotFoundException();
+    }
+};
+
+/**
+ * Copies docs to destination
+ * @param containerName
+ * @param relativePath
+ */
+const copyDocs = (containerName: string, packageName: string) => {
+    try {
+        const relativeDocsPath = path.join(containerName, packageName, "docs");
+        const absoluteSourcePath = resolveDir(relativeDocsPath);
+        const relativeDestPath = path.join("docs", relativeDocsPath);
+        const absoluteDestPath = resolvePath(relativeDestPath, false);
+        fs.copySync(absoluteSourcePath, absoluteDestPath);
+        logger.info(`Copied: ${absoluteSourcePath}`);
+    } catch (error) {
+        if (error && error.message) {
+            logger.warn(error.message);
+        }
+    }
+};
+
+/**
+ * Publish dist files
+ * @todo Make docs directory configurable through argv
+ * @todo if argv is empty we should print usage here
+ * @todo need to support the creation of an index page
+ * @todo gh-pages might not support index files with underscores
+ * @todo Type docs should not include readme.md file
+ *      docs
+ *          -> types
+ *          -> coverage
+ *          -> index.html (simple static site created from README.md)
+ */
+export default (context: AddonGhPagesRunContext) => {
+    const ghPages: GhPagesExtension = async (
         args: string[] = [],
     ) => {
-        const { filesystem, pixelOven } = context;
-        const pluginPath = pixelOven.resolvePlugin("@pixeloven", "storybook");
-        if (!pluginPath) {
-            throw new Error(
-                "Could not find peer dependency @pixeloven/storybook",
-            );
-        }
-        const configPath = filesystem.path(pluginPath, "./config");
-
-        switch (type) {
-            case "build": {
-                return pixelOven.run(
-                    [
-                        "build-storybook",
-                        "-c",
-                        configPath,
-                        "-o",
-                        "./dist/public/docs",
-                    ].concat(args),
+        try {
+            const scriptArgs = argv.slice(2);
+    
+            logger.info("Creating global docs directory");
+            createOrEmptyDir("docs");
+    
+            scriptArgs.forEach(containerName => {
+                logger.info(`Resolving ${containerName}`);
+                const examples = fs.readdirSync(containerName);
+                examples.forEach(packageName =>
+                    copyDocs(containerName, packageName),
                 );
-            }
-            case "start": {
-                return pixelOven.run(
-                    [
-                        "start-storybook",
-                        "--quiet",
-                        "--ci",
-                        "-s",
-                        "./public",
-                        "-p",
-                        "9001",
-                        "-c",
-                        configPath,
-                    ].concat(args),
-                );
-            }
-            default: {
-                throw new NodeInvalidArgumentException();
-            }
+            });
+            ghpages.publish("docs", handleError);
+        } catch (error) {
+            handleError(error);
         }
     };
-    context.storybook = storybook;
+    context.ghPages = ghPages;
 };

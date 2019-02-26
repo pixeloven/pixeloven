@@ -5,5 +5,5 @@ export type GhPagesExtension = (
 ) => Promise<RunResponse>;
 
 export interface AddonGhPagesRunContext extends PixelOvenRunContext {
-    storybook: GhPagesExtension;
+    ghPages: GhPagesExtension;
 }
