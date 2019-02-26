@@ -20,11 +20,11 @@ export default {
             return status;
         };
         /**
-         * Always run prettier
+         * @todo if first is not in switch then we don't want to slice here
          */
         const argList =
-            parameters.argv && parameters.argv.length
-                ? parameters.argv.slice(3)
+            parameters.array && parameters.array.length
+                ? parameters.array.slice(1)
                 : [];
         const prettierResults = await prettier(argList);
         const prettierStatus = handle("Prettier", prettierResults.status);

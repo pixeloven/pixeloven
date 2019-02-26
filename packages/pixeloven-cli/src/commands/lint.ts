@@ -26,21 +26,17 @@ export default {
             }
             return status;
         };
+        const argList =
+            parameters.array && parameters.array.length
+                ? parameters.array.slice(1)
+                : [];
         switch (parameters.first) {
             case "scss": {
-                const argList =
-                    parameters.argv && parameters.argv.length
-                        ? parameters.argv.slice(4)
-                        : [];
                 const results = await styleLint(argList);
                 return handle("Stylelint", results.status);
             }
             case "ts":
             case "tsx": {
-                const argList =
-                    parameters.argv && parameters.argv.length
-                        ? parameters.argv.slice(4)
-                        : [];
                 const results = await tsLint(argList);
                 return handle("TSLint", results.status);
             }

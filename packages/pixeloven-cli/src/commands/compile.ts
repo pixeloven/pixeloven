@@ -20,13 +20,13 @@ export default {
             }
             return status;
         };
+        const argList =
+            parameters.array && parameters.array.length
+                ? parameters.array.slice(1)
+                : [];
         switch (parameters.first) {
             case "ts":
             case "tsx": {
-                const argList =
-                    parameters.argv && parameters.argv.length
-                        ? parameters.argv.slice(4)
-                        : [];
                 const results = await tsc(argList);
                 return handle("Tsc", results.status);
             }

@@ -19,17 +19,17 @@ export default {
             }
             return status;
         };
-        const argList =
-            parameters.argv && parameters.argv.length
-                ? parameters.argv.slice(4)
-                : [];
         switch (parameters.first) {
             case "watch": {
+                const argList =
+                    parameters.array && parameters.array.length
+                        ? parameters.array.slice(1)
+                        : [];
                 const results = await jest(["--watch"].concat(argList));
                 return handle("Jest", results.status);
             }
             default: {
-                const results = await jest(argList);
+                const results = await jest(parameters.array);
                 return handle("Jest", results.status);
             }
         }
