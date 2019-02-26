@@ -17,7 +17,6 @@
   "private": true,
   "dependencies": {
     "@pixeloven/core": "^5.0.0-beta.0",
-    "@pixeloven/node-logger": "^5.0.0-alpha.8",
     "@pixeloven/exceptions": "^5.0.0-beta.0",
     "@pixeloven/tasks": "^5.0.0-alpha.8",
     "fs-extra": "7.0.1",

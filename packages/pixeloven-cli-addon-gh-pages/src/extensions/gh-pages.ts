@@ -1,6 +1,5 @@
 import { createOrEmptyDir, handleError, resolvePath } from "@pixeloven/core";
 import { FileNotFoundException } from "@pixeloven/exceptions";
-import { logger } from "@pixeloven/node-logger";
 import fs from "fs-extra";
 import ghpages from "gh-pages";
 import path from "path";
@@ -30,17 +29,14 @@ const resolveDir = (relativePath: string) => {
  * @param relativePath
  */
 const copyDocs = (containerName: string, packageName: string) => {
-    try {
-        const relativeDocsPath = path.join(containerName, packageName, "docs");
-        const absoluteSourcePath = resolveDir(relativeDocsPath);
-        const relativeDestPath = path.join("docs", relativeDocsPath);
-        const absoluteDestPath = resolvePath(relativeDestPath, false);
-        fs.copySync(absoluteSourcePath, absoluteDestPath);
-        logger.info(`Copied: ${absoluteSourcePath}`);
-    } catch (error) {
-        if (error && error.message) {
-            logger.warn(error.message);
-        }
+    const relativeDocsPath = path.join(containerName, packageName, "docs");
+    const absoluteSourcePath = resolveDir(relativeDocsPath);
+    const relativeDestPath = path.join("docs", relativeDocsPath);
+    const absoluteDestPath = resolvePath(relativeDestPath, false);
+    fs.copySync(absoluteSourcePath, absoluteDestPath);
+    return {
+        from: absoluteSourcePath,
+        to: absoluteDestPath
     }
 };
 
@@ -55,25 +51,26 @@ const copyDocs = (containerName: string, packageName: string) => {
  *          -> types
  *          -> coverage
  *          -> index.html (simple static site created from README.md)
+ * 
+ * @todo Need to return a promise here
  */
 export default (context: AddonGhPagesRunContext) => {
     const ghPages: GhPagesExtension = async (
         args: string[] = [],
     ) => {
+        const { print } = context;
         try {
-            const scriptArgs = argv.slice(2);
-    
-            logger.info("Creating global docs directory");
+            print.info("Creating global docs directory");
             createOrEmptyDir("docs");
-    
-            scriptArgs.forEach(containerName => {
-                logger.info(`Resolving ${containerName}`);
+            args.forEach(containerName => {
+                print.info(`Resolving ${containerName}`);
                 const examples = fs.readdirSync(containerName);
-                examples.forEach(packageName =>
-                    copyDocs(containerName, packageName),
-                );
+                examples.forEach(packageName => {
+                    const copied = copyDocs(containerName, packageName);
+                    print.info(`${copied.from} => ${copied.to}`);
+                });
             });
-            ghpages.publish("docs", handleError);
+            ghpages.publish("docs", (err) => print.error(err.message));
         } catch (error) {
             handleError(error);
         }
