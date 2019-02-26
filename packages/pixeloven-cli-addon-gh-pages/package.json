@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/cli-addon-webpack",
+  "name": "@tools/gh-pages",
   "version": "5.0.0-beta.0",
-  "description": "PixelOven CLI addon for webpack based development",
+  "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -14,24 +14,24 @@
   },
   "author": "Brian Gebel",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
+  "private": true,
   "dependencies": {
+    "@pixeloven/core": "^5.0.0-beta.0",
+    "@pixeloven/node-logger": "^5.0.0-alpha.8",
     "@pixeloven/exceptions": "^5.0.0-beta.0",
     "@pixeloven/tasks": "^5.0.0-alpha.8",
-    "gluegun": "3.0.0"
+    "fs-extra": "7.0.1",
+    "gluegun": "3.0.0",
+    "gh-pages": "2.0.1"
   },
   "devDependencies": {
     "@pixeloven/cli": "^5.0.0-beta.0",
-    "@pixeloven/webpack": "^5.0.0-beta.0",
-    "@pixeloven/webpack-dev-server": "^5.0.0-beta.0",
+    "@types/fs-extra": "5.0.4",
+    "@types/gh-pages": "2.0.0",
     "@types/node": "10.12.18"
   },
   "peerDependencies": {
-    "@pixeloven/cli": ">5.0.0-beta.0",
-    "@pixeloven/webpack": ">5.0.0-beta.0",
-    "@pixeloven/webpack-dev-server": ">5.0.0-beta.0"
+    "@pixeloven/cli": ">5.0.0-beta.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
