@@ -191,6 +191,66 @@ jobs:
           at: ~/pixeloven
       - document:
           type: "tools"
+  accept-examples:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - list:
+          path: examples/**/dist
+      - store_artifacts:
+          path: examples/**/dist
+          destination: examples/dist
+      - list:
+          path: examples/**/coverage
+      - store_artifacts:
+          path: examples/**/coverage
+          destination: examples/coverage
+      - list:
+          path: examples/**/docs
+      - store_artifacts:
+          path: examples/**/docs
+          destination: examples/docs
+  accept-packages:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - list:
+          path: packages/**/dist
+      - store_artifacts:
+          path: packages/**/dist
+          destination: packages/dist
+      - list:
+          path: packages/**/coverage
+      - store_artifacts:
+          path: packages/**/coverage
+          destination: packages/coverage
+      - list:
+          path: packages/**/docs
+      - store_artifacts:
+          path: packages/**/docs
+          destination: packages/docs
+  accept-tools:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - list:
+          path: tools/**/dist
+      - store_artifacts:
+          path: tools/**/dist
+          destination: tools/dist
+      - list:
+          path: tools/**/coverage
+      - store_artifacts:
+          path: tools/**/coverage
+          destination: tools/coverage
+      - list:
+          path: tools/**/docs
+      - store_artifacts:
+          path: tools/**/docs
+          destination: tools/docs
   report:
     executor: node-executor
     steps:
@@ -214,64 +274,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/pixeloven
-
-      # Check for compiled & build files
       - list:
-          path: examples/**/dist
-      - list:
-          path: packages/**/dist
-      - list:
-          path: tools/**/dist
-
-       # Save dist artifacts
-      - store_artifacts:
-          path: packages/**/dist
-          destination: packages/dist
-      - store_artifacts:
-          path: examples/**/dist
-          destination: examples/dist
-      - store_artifacts:
-          path: tools/**/dist
-          destination: tools/dist
-
-      # Check for compiled & build files
-      - list:
-          path: examples/**/coverage
-      - list:
-          path: packages/**/coverage
-      - list:
-          path: tools/**/coverage
-
-       # Save coverage artifacts
-      - store_artifacts:
-          path: packages/**/coverage
-          destination: packages/coverage
-      - store_artifacts:
-          path: examples/**/coverage
-          destination: examples/coverage
-      - store_artifacts:
-          path: tools/**/coverage
-          destination: examples/coverage
-
-      # Check for compiled & build files
-      - list:
-          path: examples/**/docs
-      - list:
-          path: packages/**/docs
-      - list:
-          path: tools/**/docs
-
-      # Save docs artifacts
-      - store_artifacts:
-          path: packages/**/docs
-          destination: packages/docs
-      - store_artifacts:
-          path: examples/**/docs
-          destination: examples/docs
-      - store_artifacts:
-          path: tools/**/docs
-          destination: examples/docs
-
+          path: .
       # @todo generate docs and run newly compiled tool to deploy to github pages
       # doc gen might be it's own job though
 
@@ -291,63 +295,74 @@ workflows:
       - compile-packages:
           requires:
             - setup
-      # - document-packages:
-      #     requires:
-      #       - setup
+      - document-packages:
+          requires:
+            - compile-packages
       - lint-packages:
           requires:
             - compile-packages
       - test-packages:
           requires:
             - compile-packages
+      - accept-packages:
+          requires:
+            - compile-packages
+            - document-packages
+            - lint-packages
+            - test-packages
       - build-examples:
           requires:
-            - lint-packages
-            - test-packages
+            - accept-packages
       - compile-examples:
           requires:
-            - lint-packages
-            - test-packages
-      # - document-examples:
-      #     requires:
-      #       - lint-packages
-      #       - test-packages
+            - accept-packages
+      - document-examples:
+          requires:
+            - accept-packages
       - lint-examples:
           requires:
-            - lint-packages
-            - test-packages
+            - accept-packages
       - test-examples:
           requires:
-            - lint-packages
-            - test-packages
+            - accept-packages
+      - accept-examples:
+          requires:
+            - build-examples
+            - compile-examples
+            - document-examples
+            - lint-examples
+            - test-examples
       - compile-tools:
           requires:
-            - lint-packages
-            - test-packages
-      # - document-tools:
-      #     requires:
-      #       - lint-packages
-      #       - test-packages
+            - accept-packages
+      - document-tools:
+          requires:
+            - accept-packages
       - lint-tools:
           requires:
-            - lint-packages
-            - test-packages
+            - accept-packages
       - test-tools:
           requires:
-            - lint-packages
-            - test-packages
+            - accept-packages
+      - accept-tools:
+          requires:
+            - compile-tools
+            - document-tools
+            - lint-tools
+            - test-tools
       - report:
           requires:
-            - test-examples
-            - test-tools
+            - accept-packages
+            - accept-examples
+            - accept-tools
           filters:
             branches:
               only: master
       - deploy:
           requires:
-            - build-examples
-            - compile-examples
-            - compile-tools
+            - accept-packages
+            - accept-examples
+            - accept-tools
           filters:
             branches:
               only: master
