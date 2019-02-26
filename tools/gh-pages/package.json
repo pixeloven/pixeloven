@@ -19,9 +19,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@pixeloven/cli": "^5.0.0-beta.0",
     "@pixeloven/core": "^5.0.0-beta.0",
     "@pixeloven/node-logger": "^5.0.0-alpha.8",
-    "@pixeloven/tasks": "^5.0.0-alpha.8",
     "fs-extra": "7.0.1"
   },
   "devDependencies": {
@@ -30,17 +30,17 @@
     "gh-pages": "2.0.1"
   },
   "scripts": {
-    "clean": "pixeloven-tasks clean",
-    "compile": "pixeloven-tasks compile:ts",
-    "precompile": "pixeloven-tasks compile:clean",
-    "document": "pixeloven-tasks document:ts src",
-    "predocument": "pixeloven-tasks document:clean",
-    "lint": "yarn lint:ts",
-    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
-    "pretest": "pixeloven-tasks test:clean",
-    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
-    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
-    "test": "pixeloven-tasks test --color --coverage",
-    "test:watch": "pixeloven-tasks test:watch"
+    "compile": "pixeloven compile ts",
+    "document": "pixeloven document ts ./src",
+    "predocument": "pixeloven delete docs",
+    "lint": "yarn run lint:ts",
+    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
+    "precompile": "pixeloven delete dist",
+    "pretest": "pixeloven delete coverage",
+    "pretty": "yarn run pretty:ts",
+    "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
+    "test": "pixeloven test --color --coverage",
+    "test:ci": "pixeloven test --ci",
+    "test:watch": "pixeloven test watch"
   }
 }

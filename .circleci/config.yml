@@ -320,6 +320,22 @@ workflows:
           requires:
             - lint-packages
             - test-packages
+      - compile-tools:
+          requires:
+            - lint-packages
+            - test-packages
+      # - document-tools:
+      #     requires:
+      #       - lint-packages
+      #       - test-packages
+      - lint-tools:
+          requires:
+            - lint-packages
+            - test-packages
+      - test-tools:
+          requires:
+            - lint-packages
+            - test-packages
       - report:
           requires:
             - test-examples
