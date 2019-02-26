@@ -1,4 +1,5 @@
-import { createOrEmptyDir, handleError, resolvePath } from "@pixeloven/core";
+import { RunResponse } from "@pixeloven/cli";
+import { createOrEmptyDir, resolvePath } from "@pixeloven/core";
 import { FileNotFoundException } from "@pixeloven/exceptions";
 import fs from "fs-extra";
 import ghpages from "gh-pages";
@@ -59,6 +60,22 @@ export default (context: AddonGhPagesRunContext) => {
         args: string[] = [],
     ) => {
         const { print } = context;
+        /**
+         * Handles error or success
+         * @param err 
+         */
+        let results: RunResponse = {
+            status: 0,
+        };
+        const handler = async (err?: Error) => {
+            if (err) {
+                print.error(err.message);
+                results = {
+                    error: err,
+                    status: 1
+                };
+            }
+        }
         try {
             print.info("Creating global docs directory");
             createOrEmptyDir("docs");
@@ -70,10 +87,11 @@ export default (context: AddonGhPagesRunContext) => {
                     print.info(`${copied.from} => ${copied.to}`);
                 });
             });
-            ghpages.publish("docs", (err) => print.error(err.message));
-        } catch (error) {
-            handleError(error);
+            ghpages.publish("docs", await handler);
+        } catch (err) {
+            await handler(err);
         }
+        return results;
     };
     context.ghPages = ghPages;
 };

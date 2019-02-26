@@ -26,7 +26,7 @@ export default {
         switch (parameters.first) {
             case "build": {
                 const results = await ghPages(argList);
-                return handle("Storybook", results.status);
+                return handle("Github Pages", results.status);
             }
             default: {
                 throw new NodeInvalidArgumentException();
