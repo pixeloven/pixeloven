@@ -1,6 +1,6 @@
 {
   "name": "@tools/gh-pages",
-  "version": "5.0.0-alpha.8",
+  "version": "5.0.0-beta.0",
   "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -19,7 +19,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@pixeloven/core": "^5.0.0-alpha.8",
+    "@pixeloven/core": "^5.0.0-beta.0",
     "@pixeloven/node-logger": "^5.0.0-alpha.8",
     "@pixeloven/tasks": "^5.0.0-alpha.8",
     "fs-extra": "7.0.1"
