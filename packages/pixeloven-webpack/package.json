@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack",
-  "version": "5.0.0-beta.0",
+  "version": "5.0.0-beta.1",
   "description": "Webpack build script",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^5.0.0-beta.0",
-    "@pixeloven/env": "^5.0.0-beta.0",
-    "@pixeloven/node-logger": "^5.0.0-alpha.8",
-    "@pixeloven/tasks": "^5.0.0-alpha.8",
-    "@pixeloven/webpack-config": "^5.0.0-beta.0",
+    "@pixeloven/core": "^5.0.0-beta.1",
+    "@pixeloven/env": "^5.0.0-beta.1",
+    "@pixeloven/node-logger": "^5.0.0-beta.1",
+    "@pixeloven/tasks": "^5.0.0-beta.1",
+    "@pixeloven/webpack-config": "^5.0.0-beta.1",
     "promise": "8.0.2",
     "react-dev-utils": "7.0.1",
     "webpack": "4.28.4"

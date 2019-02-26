@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/env",
-  "version": "5.0.0-beta.0",
+  "version": "5.0.0-beta.1",
   "description": "Environment loader",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,8 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/exceptions": "^5.0.0-beta.0",
-    "@pixeloven/tasks": "^5.0.0-alpha.8",
+    "@pixeloven/exceptions": "^5.0.0-beta.1",
+    "@pixeloven/tasks": "^5.0.0-beta.1",
     "dotenv": "6.1.0"
   },
   "devDependencies": {

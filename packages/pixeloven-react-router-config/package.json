@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/react-router-config",
-  "version": "5.0.0-alpha.8",
+  "version": "5.0.0-beta.1",
   "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/tasks": "^5.0.0-alpha.8"
+    "@pixeloven/tasks": "^5.0.0-beta.1"
   },
   "devDependencies": {
     "@types/node": "10.12.18",
