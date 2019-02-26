@@ -1,24 +1,18 @@
-import { PixelOvenRunContext } from "../types";
-
-export type TsLintExtension = (args?: string[]) => Promise<number>;
+import { PixelOvenRunContext, TsLintExtension } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const tsLint = async (args: string[] = []) => {
-        const { pixeloven, print } = context;
+    const tsLint: TsLintExtension = async (args: string[] = []) => {
+        const { pixelOven } = context;
         const fileName = "tslint.json";
-        const configPath = pixeloven.getConfigPath(fileName);
+        const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {
-            print.info(`Configuration file found ${configPath}`);
-            return pixeloven.runBin(
-                "tslint",
-                ["-t", "codeFrame", "--config", configPath].concat(args),
+            return pixelOven.run(
+                ["tslint", "-t", "codeFrame", "--config", configPath].concat(
+                    args,
+                ),
             );
-        } else {
-            print.warning(
-                `Unable to find "${fileName}" reverting to default configuration`,
-            );
-            return pixeloven.runBin("tslint", ["-t", "codeFrame"].concat(args));
         }
+        return pixelOven.run(["tslint", "-t", "codeFrame"].concat(args));
     };
     context.tsLint = tsLint;
 };

@@ -1,7 +1,4 @@
-import {
-    createOrEmptyDir,
-    resolvePath,
-} from "@pixeloven/core";
+import { createOrEmptyDir, resolvePath } from "@pixeloven/core";
 import { env } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import {
@@ -25,11 +22,17 @@ const { measureFileSizesBeforeBuild } = FileSizeReporter;
 
 /**
  * Build client code path
- * @param path 
- * @param environment 
+ * @param path
+ * @param environment
  */
-const buildClientCode = async (path: string, environment: NodeJS.ProcessEnv, options: BuildOptions) => {
-    const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(path);
+const buildClientCode = async (
+    path: string,
+    environment: NodeJS.ProcessEnv,
+    options: BuildOptions,
+) => {
+    const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(
+        path,
+    );
     const results = await build(
         webpackServerConfig(environment, options),
         previousFileSizes,
@@ -40,15 +43,21 @@ const buildClientCode = async (path: string, environment: NodeJS.ProcessEnv, opt
         results.stats,
         results.previousFileSizes,
     );
-}
+};
 
 /**
  * Build server code path
- * @param path 
- * @param environment 
+ * @param path
+ * @param environment
  */
-const buildServerCode = async (path: string, environment: NodeJS.ProcessEnv, options: BuildOptions) => {
-    const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(path);
+const buildServerCode = async (
+    path: string,
+    environment: NodeJS.ProcessEnv,
+    options: BuildOptions,
+) => {
+    const previousFileSizes: OpaqueFileSizes = await measureFileSizesBeforeBuild(
+        path,
+    );
     const results = await build(
         webpackClientConfig(environment, options),
         previousFileSizes,
@@ -59,7 +68,7 @@ const buildServerCode = async (path: string, environment: NodeJS.ProcessEnv, opt
         results.stats,
         results.previousFileSizes,
     );
-}
+};
 
 /**
  * Setup variables and execute
@@ -82,7 +91,10 @@ export default async (options: BuildOptions) => {
         /**
          * Setup build pathing
          */
-        const privateBuildPath = resolvePath(env.config("BUILD_PATH", "dist"), false);
+        const privateBuildPath = resolvePath(
+            env.config("BUILD_PATH", "dist"),
+            false,
+        );
         const publicBuildPath = `${privateBuildPath}/public`;
 
         const environment = env.config();

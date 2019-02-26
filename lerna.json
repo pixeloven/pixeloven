@@ -1,5 +1,5 @@
 {
-  "lerna": "3.4.3",
+  "lerna": "3.13.0",
   "version": "5.0.0-alpha.8",
   "packages": [
     "examples/*",
@@ -7,8 +7,5 @@
     "tools/*"
   ],
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--no-lockfile"
-  ],
   "useWorkspaces": true
 }

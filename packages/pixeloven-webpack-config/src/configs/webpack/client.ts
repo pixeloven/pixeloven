@@ -28,10 +28,13 @@ import ManifestPlugin from "webpack-manifest-plugin";
 import { BuildOptions } from "../../types";
 
 const defaultOptions = {
-    withSourceMap: false
-}
+    withSourceMap: false,
+};
 
-const config = (env: NodeJS.ProcessEnv, options: BuildOptions = defaultOptions): Configuration => {
+const config = (
+    env: NodeJS.ProcessEnv,
+    options: BuildOptions = defaultOptions,
+): Configuration => {
     /**
      * @todo optimize builds
      * see if we can use TS Fork (at least for prod build)
@@ -54,7 +57,6 @@ const config = (env: NodeJS.ProcessEnv, options: BuildOptions = defaultOptions):
     const environment = env.NODE_ENV || "production";
     const publicPath = env.PUBLIC_URL || "/";
     const buildPath = env.BUILD_PATH || "dist";
-
 
     /**
      * Utility functions to help segment configuration based on environment

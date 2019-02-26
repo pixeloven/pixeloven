@@ -37,7 +37,7 @@ describe("@pixeloven/express-dynamic-middleware", () => {
             const dynamicMiddleware = new DynamicMiddleware([
                 exampleMiddleware,
             ]);
-            it("should return a wrapper middleware and async exec each layer", (done) => {
+            it("should return a wrapper middleware and async exec each layer", done => {
                 const mockRequest = httpMocks.createRequest();
                 const mockResponse = httpMocks.createResponse();
                 const mockNext = jest.fn(done);

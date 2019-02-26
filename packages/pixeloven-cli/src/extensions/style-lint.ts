@@ -1,27 +1,22 @@
-import { PixelOvenRunContext } from "../types";
-
-export type StyleLintExtension = (args?: string[]) => Promise<number>;
+import { PixelOvenRunContext, StyleLintExtension } from "../types";
 
 export default (context: PixelOvenRunContext) => {
-    const stylelint = async (args: string[] = []) => {
-        const { pixeloven, print } = context;
+    const styleLint: StyleLintExtension = async (args: string[] = []) => {
+        const { pixelOven } = context;
         const fileName = "stylelint.json";
-        const configPath = pixeloven.getConfigPath(fileName);
+        const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {
-            print.info(`Configuration file found ${configPath}`);
-            return pixeloven.runBin(
-                "stylelint",
-                ["--syntax", "scss", "--config", configPath].concat(args),
-            );
-        } else {
-            print.warning(
-                `Unable to find "${fileName}" reverting to default configuration`,
-            );
-            return pixeloven.runBin(
-                "stylelint",
-                ["--syntax", "scss"].concat(args),
+            return pixelOven.run(
+                [
+                    "stylelint",
+                    "--syntax",
+                    "scss",
+                    "--config",
+                    configPath,
+                ].concat(args),
             );
         }
+        return pixelOven.run(["stylelint", "--syntax", "scss"].concat(args));
     };
-    context.styleLint = stylelint;
+    context.styleLint = styleLint;
 };

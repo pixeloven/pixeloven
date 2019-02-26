@@ -21,7 +21,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^5.0.0-alpha.8",
     "@pixeloven/exceptions": "^5.0.0-alpha.8",
     "@pixeloven/tasks": "^5.0.0-alpha.8",
     "gluegun": "3.0.0"

@@ -6,6 +6,54 @@ version: 2.1
 
 # Reusable commands
 commands:
+  compile:
+    description: "Compiling"
+    parameters:
+      type:
+        type: string
+    steps:
+      - run:
+          name: Compile source
+          command: yarn compile-<< parameters.type >>
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - << parameters.type >>/**/dist
+  document:
+    description: "Documenting"
+    parameters:
+      type:
+        type: string
+    steps:
+      - run:
+          name: Documenting source
+          command: yarn document-<< parameters.type >>
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - << parameters.type >>/**/docs
+  lint:
+    description: "Linting"
+    parameters:
+      type:
+        type: string
+    steps:
+      - run:
+          name: Linting source
+          command: yarn lint-<< parameters.type >>
+  test:
+    description: "Testing"
+    parameters:
+      type:
+        type: string
+    steps:
+      - run:
+          name: Test source
+          command: yarn test-<< parameters.type >>
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - << parameters.type >>/**/coverage
   list:
     description: "List directory contents"
     parameters:
@@ -16,150 +64,138 @@ commands:
       - run:
           name: "List Directory"
           command: ls -al << parameters.path >>
-  yarn:
-    description: "Excutes yarn cmds"
-    parameters:
-      method:
-        type: string
-    steps:
-      - run:
-          name: yarn << parameters.method >>
-          command: yarn << parameters.method >>
-
-# Common executor for node based jobs
 executors:
   node-executor:
     docker:
       - image: circleci/node:10.15
     working_directory: ~/pixeloven
-
-
-# Define jobs
 jobs:
   setup:
     executor: node-executor
     steps:
       # @todo We should create a custom docker image with lerna installed or find a way to add lerna to the executor
-      # @todo We should cache node_modules perhaps cache key for each package.json
       - checkout
-      - yarn:
-          method: "install"
-
-      # Save project
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: yarn-deps-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - "./node_modules"
       - persist_to_workspace:
           root: .
           paths: 
             - .
-
+  compile-examples:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - compile:
+          type: "examples"
   compile-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-        # Run build and test
-      - run:
-          name: Compile source
-          command: yarn compile
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - packages/**/dist
-            - tools/**/dist
-
+      - compile:
+          type: "packages"
+  compile-tools:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - compile:
+          type: "tools"
+  lint-examples:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - lint:
+          type: "examples"
   lint-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-      - yarn:
-          method: "lint --ignore @pixeloven/react-ssr-example"
+      - lint:
+          type: "packages"
+  lint-tools:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - lint:
+          type: "tools"
+  test-examples:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - test:
+          type: "examples"
 
   test-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Run test
-      - run:
-          name: Test source
-          command: yarn test --ignore @pixeloven/react-ssr-example
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - packages/**/coverage
-            - tools/**/coverage
-
+      - test:
+          type: "packages"
+  test-tools:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - test:
+          type: "tools"
   build-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Run build
       - run:
           name: Create .env file
           command: yarn env:production
-
       - run:
           name: Build source
-          command: yarn build
-
-      # Save project
+          command: yarn build-examples
       - persist_to_workspace:
           root: .
           paths: 
             - examples/**/dist
-
-  lint-examples:
+  document-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-      - yarn:
-          method: "lint --scope @pixeloven/react-ssr-example"
-
-  test-examples:
+      - document:
+          type: "examples"
+  document-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Run test
-      - run:
-          name: Test source
-          command: yarn test --scope @pixeloven/react-ssr-example
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/coverage
-
+      - document:
+          type: "packages"
+  document-tools:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - document:
+          type: "tools"
   report:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
 
       # Check for coverage files for reporting
       - list:
@@ -173,32 +209,9 @@ jobs:
       - run:
           name: Report source
           command: yarn report-coverage
-
-  document:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - yarn:
-          method: "link-packages"
-
-      # Generate documentation
-      - run:
-          name: Document source
-          command: yarn document
-
-      # Save project
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/docs
-            - packages/**/docs
-            - tools/**/docs
-
   deploy:
     executor: node-executor
     steps:
-
       - attach_workspace:
           at: ~/pixeloven
 
@@ -278,39 +291,45 @@ workflows:
       - compile-packages:
           requires:
             - setup
+      # - document-packages:
+      #     requires:
+      #       - setup
       - lint-packages:
-          requires:
-            - setup
-      - build-examples:
-          requires:
-            - compile-packages
-      - lint-examples:
           requires:
             - compile-packages
       - test-packages:
           requires:
-            - build-examples
+            - compile-packages
+      - build-examples:
+          requires:
+            - lint-packages
+            - test-packages
+      - compile-examples:
+          requires:
+            - lint-packages
+            - test-packages
+      # - document-examples:
+      #     requires:
+      #       - lint-packages
+      #       - test-packages
+      - lint-examples:
+          requires:
+            - lint-packages
+            - test-packages
       - test-examples:
           requires:
-            - build-examples
+            - lint-packages
+            - test-packages
       - report:
           requires:
-            - test-packages
-            - test-examples
-          filters:
-            branches:
-              only: master
-      - document:
-          requires:
-            - test-packages
             - test-examples
           filters:
             branches:
               only: master
       - deploy:
           requires:
-            - document
-            - report
+            - build-examples
+            - compile-examples
           filters:
             branches:
               only: master

@@ -1,15 +1,14 @@
 import fs from "fs";
 import { filesystem } from "gluegun";
+import { ResolvePluginFunction } from "../../types";
 
-export type ResolvePluginFunction = (
-    ...paths: string[]
-) => string | false;
-
-export default (...paths: string[]) => {
+const resolvePlugin: ResolvePluginFunction = (...paths: string[]) => {
     const nodeModulesPath = filesystem.path(process.cwd(), "./node_modules");
     const plugin = filesystem.path(nodeModulesPath, ...paths);
     if (fs.existsSync(plugin)) {
         return filesystem.path(fs.realpathSync(plugin), "./dist/lib");
     }
-    return;
+    return false;
 };
+
+export default resolvePlugin;

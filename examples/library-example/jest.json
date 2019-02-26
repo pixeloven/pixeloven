@@ -1,0 +1,37 @@
+{
+  "bail": true,
+  "verbose": true,
+  "preset": "ts-jest",
+  "transform": {
+    "^.+\\.(ts)$": "ts-jest"
+  },
+  "transformIgnorePatterns": [
+    "[/\\\\]node_modules[/\\\\].+\\.(js|mjs|ts)$"
+  ],
+  "testMatch": [
+    "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+  ],
+  "testEnvironment": "node",
+  "testURL": "http://localhost",
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  },
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{js,ts}",
+    "!**/node_modules/**"
+  ]
+}

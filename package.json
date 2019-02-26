@@ -20,22 +20,35 @@
     ]
   },
   "scripts": {
-    "build": "lerna run build",
     "bootstrap": "lerna bootstrap",
+    "build": "yarn linker && yarn build-examples",
+    "build-examples": "yarn linker && lerna run build --scope \"@examples/*\"",
     "clean": "lerna clean",
-    "compile": "lerna run compile",
+    "compile": "yarn compile-packages && yarn compile-examples && yarn compile-tools",
+    "compile-examples": "yarn linker && lerna run compile --scope \"@examples/*\"",
+    "compile-packages": "yarn linker && lerna run compile --scope \"@pixeloven/*\"",
+    "compile-tools": "yarn linker && lerna run compile --scope \"@tools/*\"",
     "env:production": "lerna run env:production",
-    "link-packages": "lerna link",
-    "lint": "lerna run lint",
-    "test": "lerna run test",
-    "pretty": "lerna run pretty",
-    "pretty:ts": "lerna run pretty:ts",
-    "pretty:scss": "lerna run pretty:scss",
-    "document": "lerna run document",
+    "linker": "lerna link",
+    "lint": "yarn lint-packages && yarn lint-examples && yarn lint-tools",
+    "lint-examples": "yarn linker && lerna run lint --scope \"@examples/*\"",
+    "lint-packages": "yarn linker && lerna run lint --scope \"@pixeloven/*\"",
+    "lint-tools": "yarn linker && lerna run lint --scope \"@tools/*\"",
+    "test": "yarn test-packages && yarn test-examples && yarn test-tools",
+    "test-examples": "yarn linker && lerna run test --scope \"@examples/*\"",
+    "test-packages": "yarn linker && lerna run test --scope \"@pixeloven/*\"",
+    "test-tools": "yarn linker && lerna run test --scope \"@tools/*\"",
+    "pretty": "yarn linker && lerna run pretty",
+    "pretty-examples": "yarn linker && lerna run pretty --scope \"@examples/*\"",
+    "pretty-packages": "yarn linker && lerna run pretty --scope \"@pixeloven/*\"",
+    "pretty-tools": "yarn linker && lerna run pretty --scope \"@tools/*\"",
+    "document": "yarn document-packages && yarn document-examples && yarn document-tools",
+    "document-examples": "yarn linker && lerna run document --scope \"@examples/*\"",
+    "document-packages": "yarn linker && lerna run document --scope \"@pixeloven/*\"",
+    "document-tools": "yarn linker && lerna run document --scope \"@tools/*\"",
     "deploy:docs": "po-gh-pages examples packages tools",
-    "report-coverage": "cat ./packages/**/coverage/lcov.info | codecov",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release"
+    "report-coverage": "cat ./**/**/coverage/lcov.info | codecov",
+    "commit": "git-cz"
   },
   "husky": {
     "hooks": {
@@ -61,19 +74,12 @@
     }
   },
   "devDependencies": {
-    "@pixeloven/gh-pages": "^5.0.0-alpha.0",
+    "@tools/gh-pages": "^5.0.0-alpha.8",
     "@commitlint/cli": "7.2.1",
     "@commitlint/config-conventional": "7.1.2",
     "codecov": "3.1.0",
-    "cz-lerna-changelog": "2.0.2",
     "husky": "1.3.1",
-    "lerna": "3.8.0",
-    "lint-staged": "8.1.0",
-    "semantic-release": "15.13.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
-    }
+    "lerna": "3.13.0",
+    "lint-staged": "8.1.0"
   }
 }

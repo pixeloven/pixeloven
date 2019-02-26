@@ -1,26 +1,16 @@
 import { GluegunRunContext } from "gluegun";
-import getConfigPath, {
-    GetConfigPathFunction,
-} from "./pixeloven-helpers/get-config-path";
-import printInvalidArgument, {
-    PrintInvalidArgumentFunction,
-} from "./pixeloven-helpers/print-invalid-argument";
-import resolvePlugin, { ResolvePluginFunction } from "./pixeloven-helpers/resolve-plugin";
-import runBin, { RunBinFunction } from "./pixeloven-helpers/run-bin";
+import { PixelOvenExtensions } from "../types";
+import getConfigPath from "./pixeloven-helpers/get-config-path";
+import resolvePlugin from "./pixeloven-helpers/resolve-plugin";
+import run from "./pixeloven-helpers/run";
 
-export interface PixelOvenExtensions {
-    getConfigPath: GetConfigPathFunction;
-    printInvalidArgument: PrintInvalidArgumentFunction;
-    resolvePlugin: ResolvePluginFunction;
-    runBin: RunBinFunction;
-}
-
-export default (context: GluegunRunContext) => {
-    const pixeloven = {
+const helpers = (context: GluegunRunContext) => {
+    const pixelOven: PixelOvenExtensions = {
         getConfigPath,
-        printInvalidArgument,
         resolvePlugin,
-        runBin,
+        run,
     };
-    context.pixeloven = pixeloven;
+    context.pixelOven = pixelOven;
 };
+
+export default helpers;

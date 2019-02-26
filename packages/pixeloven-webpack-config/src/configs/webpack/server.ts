@@ -19,11 +19,13 @@ import webpackNodeExternals from "webpack-node-externals";
 import { BuildOptions } from "../../types";
 
 const defaultOptions = {
-    withSourceMap: false
-}
+    withSourceMap: false,
+};
 
-
-const config = (env: NodeJS.ProcessEnv, options: BuildOptions = defaultOptions): Configuration => {
+const config = (
+    env: NodeJS.ProcessEnv,
+    options: BuildOptions = defaultOptions,
+): Configuration => {
     /**
      * Tell webpack what we are making :)
      */

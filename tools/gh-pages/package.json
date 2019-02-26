@@ -1,5 +1,5 @@
 {
-  "name": "@pixeloven/gh-pages",
+  "name": "@tools/gh-pages",
   "version": "5.0.0-alpha.8",
   "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",

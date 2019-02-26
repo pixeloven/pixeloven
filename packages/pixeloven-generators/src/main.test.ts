@@ -13,9 +13,7 @@ describe("@pixeloven/generators", () => {
             jest.clearAllMocks();
         });
         it("should start cli and fail", () => {
-            const exitSpy = jest
-                .spyOn(macros, "exit")
-                .mockImplementation();
+            const exitSpy = jest.spyOn(macros, "exit").mockImplementation();
             main(testArgv);
             expect(exitSpy).toHaveBeenCalledTimes(1);
         });
@@ -30,7 +28,6 @@ describe("@pixeloven/generators", () => {
             main(testArgv);
             expect(exitSpawnBin).toHaveBeenCalledTimes(1);
             expect(exitSpawnComplete).toHaveBeenCalledTimes(1);
-
         });
     });
 });
