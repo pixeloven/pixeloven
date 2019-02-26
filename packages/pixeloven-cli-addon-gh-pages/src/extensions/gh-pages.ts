@@ -4,10 +4,7 @@ import { FileNotFoundException } from "@pixeloven/exceptions";
 import fs from "fs-extra";
 import ghpages from "gh-pages";
 import path from "path";
-import {
-    AddonGhPagesRunContext,
-    GhPagesExtension
-} from "../types";
+import { AddonGhPagesRunContext, GhPagesExtension } from "../types";
 
 /**
  * Resolves directory
@@ -37,8 +34,8 @@ const copyDocs = (containerName: string, packageName: string) => {
     fs.copySync(absoluteSourcePath, absoluteDestPath);
     return {
         from: absoluteSourcePath,
-        to: absoluteDestPath
-    }
+        to: absoluteDestPath,
+    };
 };
 
 /**
@@ -52,17 +49,15 @@ const copyDocs = (containerName: string, packageName: string) => {
  *          -> types
  *          -> coverage
  *          -> index.html (simple static site created from README.md)
- * 
+ *
  * @todo Need to return a promise here
  */
 export default (context: AddonGhPagesRunContext) => {
-    const ghPages: GhPagesExtension = async (
-        args: string[] = [],
-    ) => {
+    const ghPages: GhPagesExtension = async (args: string[] = []) => {
         const { print } = context;
         /**
          * Handles error or success
-         * @param err 
+         * @param err
          */
         let results: RunResponse = {
             status: 0,
@@ -72,10 +67,10 @@ export default (context: AddonGhPagesRunContext) => {
                 print.error(err.message);
                 results = {
                     error: err,
-                    status: 1
+                    status: 1,
                 };
             }
-        }
+        };
         try {
             print.info("Creating global docs directory");
             createOrEmptyDir("docs");
