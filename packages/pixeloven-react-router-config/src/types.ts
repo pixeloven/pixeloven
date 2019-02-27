@@ -1,3 +1,4 @@
+/* tslint:disable no-any */
 import { ConnectedComponentClass } from "react-redux";
 import {
     RouteComponentProps as DefaultRouteComponentProps,
@@ -8,15 +9,10 @@ import { Dispatch } from "redux";
 /**
  * @todo Need a better way to do this than to pass any
  */
-/* tslint:disable no-any */
 type Params = any;
-// interface Params {
-//     [key: string]: object | number | string;
-// }
-/* tslint:enable no-any */
 
 /**
- * @todo Need make this not dependent on redux
+ * @todo Need make this less dependent on redux
  */
 export type RouteFetchDataFunction = (
     dispatch: Dispatch,

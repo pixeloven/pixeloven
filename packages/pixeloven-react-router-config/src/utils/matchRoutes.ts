@@ -12,6 +12,7 @@ interface MatchedRoutes {
  * @param pathname
  *
  * @todo Scope whether root match might need to be whatever public path instead of always "/"
+ * @todo Should we handle setting statusCode here if possible?
  */
 export const computeRootMatch = (pathname: string): match => {
     return {
@@ -33,7 +34,6 @@ const matchRoutes = (
             : matches.length
             ? matches[matches.length - 1].matched // use parent match
             : computeRootMatch(pathname); // use default "root" match
-
         if (matched) {
             matches.push({ route, matched });
             if (route.routes) {
