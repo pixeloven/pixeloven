@@ -168,6 +168,8 @@ const config = (
      *
      * @todo Make configurable for CI and performance. Babel can also provide caching and polyfill
      * @todo Babel probably doesn't need to be run for server config
+     * 
+     * @todo Need to break some of this into packages for story book as well?
      */
     const typeScriptRule: RuleSetRule = {
         include: resolvePath("src"),
