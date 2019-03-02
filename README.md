@@ -67,3 +67,11 @@ Below are just some of the up coming ideas for improvements.
 
 ## Our Commitment
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!
+
+## Planned
+1) node-mocks-http replace with supertest
+2) Update middleware and examples
+3) Finish re-write of build
+4) Unify all logging
+5) Remove .env as a requirement
+6) Update generators to have more react 16.8 features

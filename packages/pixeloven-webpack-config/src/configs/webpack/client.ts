@@ -5,7 +5,6 @@ import CopyWebpackPlugin from "copy-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-// import OfflinePlugin from "offline-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
@@ -83,6 +82,7 @@ const config = (
      */
     const entry = {
         main: removeEmpty([
+            require.resolve("@babel/polyfill"),
             ifDevelopment(
                 `webpack-hot-middleware/client?reload=true&path=__webpack_hmr`,
                 undefined,
@@ -101,7 +101,7 @@ const config = (
                 ">1%",
                 "last 4 versions",
                 "Firefox ESR",
-                "not ie < 9", // React doesn"t support IE8 anyway
+                "not ie < 9",
             ],
             flexbox: "no-2009",
         }),
@@ -181,11 +181,29 @@ const config = (
             {
                 loader: require.resolve("babel-loader"),
                 options: {
+                    // Add decrators support and polyfill
                     plugins: [
+                        [
+                            require.resolve("@babel/plugin-proposal-decorators"),
+                            {
+                                legacy: true
+                            }
+                        ],
+                        [
+                            require.resolve("@babel/plugin-proposal-class-properties"),
+                            {
+                                loose : true
+                            },
+                        ],
                         require.resolve("@babel/plugin-syntax-dynamic-import"),
                     ],
                     presets: [
-                        require.resolve("@babel/preset-env"),
+                        [
+                            require.resolve("@babel/preset-env"),
+                            {
+                                useBuiltIns: "entry"
+                            }
+                        ],
                         require.resolve("@babel/preset-react"),
                         require.resolve("@babel/preset-typescript"),
                     ],
@@ -418,30 +436,6 @@ const config = (
             }),
             undefined,
         ),
-        /**
-         * Generate a service worker script that will pre-cache, and keep up to date,
-         * the HTML & assets that are part of the Webpack build.
-         *
-         * @env production
-         * @todo Come back to this later
-         */
-        // ifProduction(
-        //     new OfflinePlugin({
-        //         ServiceWorker: {
-        //             events: true,
-        //             output: "static/js/sw.js",
-        //         },
-        //         appShell: "/offline.html",
-        //         caches: {
-        //             additional: [":externals:"],
-        //             externals: ["/offline.html"],
-        //             main: [":rest:"],
-        //         },
-        //         responseStrategy: "network-first", // 'cache-first' // TODO any way to do this and detect offline?
-        //         safeToUseOptionalCaches: true,
-        //     }),
-        //     undefined,
-        // ),
         /**
          * This is necessary to emit hot updates (currently CSS only):
          *

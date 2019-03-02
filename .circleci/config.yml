@@ -84,7 +84,7 @@ jobs:
           name: Install dependencies
           command: yarn install
       - save_cache:
-          key: yarn-deps-v1-{{ checksum "yarn.lock" }}
+          key: node-v1-{{ checksum "yarn.lock" }}
           paths:
             - "./node_modules"
       - persist_to_workspace:
