@@ -105,15 +105,19 @@ const config = (
                     // Add decrators support and polyfill
                     plugins: [
                         [
-                            require.resolve("@babel/plugin-proposal-decorators"),
+                            require.resolve(
+                                "@babel/plugin-proposal-decorators",
+                            ),
                             {
-                                legacy: true
-                            }
+                                legacy: true,
+                            },
                         ],
                         [
-                            require.resolve("@babel/plugin-proposal-class-properties"),
+                            require.resolve(
+                                "@babel/plugin-proposal-class-properties",
+                            ),
                             {
-                                loose : true
+                                loose: true,
                             },
                         ],
                         require.resolve("@babel/plugin-syntax-dynamic-import"),
@@ -122,8 +126,8 @@ const config = (
                         [
                             require.resolve("@babel/preset-env"),
                             {
-                                useBuiltIns: "entry"
-                            }
+                                useBuiltIns: "entry",
+                            },
                         ],
                         require.resolve("@babel/preset-react"),
                         require.resolve("@babel/preset-typescript"),

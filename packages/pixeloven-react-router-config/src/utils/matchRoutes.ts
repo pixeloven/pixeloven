@@ -14,7 +14,7 @@ interface MatchedRoutes {
  * @todo Scope whether root match might need to be whatever public path instead of always "/"
  * @todo Should we handle setting statusCode here if possible
  * @todo Should have a setting to act like a <switch> so that it only matches the first?
- * 
+ *
  * @todo If a server knows a statusCode ahead of time (like failed api response) we should be able to do matching on both status and path
  */
 export const computeRootMatch = (pathname: string): match => {

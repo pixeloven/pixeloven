@@ -55,7 +55,7 @@ export const lowerCase = (txt: string) => txt.toLowerCase();
  * @todo should create a generator to create an app based on these paths
  * @todo should create a generator to create package (current template)
  * @todo https://github.com/amwmedia/plop/blob/master/example/plopfile.js
- * 
+ *
  * @todo Add options to generate functional vs Class... also with state or without
  */
 const componentPath = resolvePath("src/shared/components", false);

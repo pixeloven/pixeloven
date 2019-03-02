@@ -1,5 +1,4 @@
 import { config } from "@client/config";
-import { register } from "@client/serviceWorkers";
 import { convertRouteConfig } from "@pixeloven/react-router-config";
 import { App } from "@shared/components";
 import routeConfig from "@shared/routes";
@@ -40,8 +39,6 @@ renderMethod(<AppWrapper />, root);
 /**
  * Register service workers
  */
-register();
-
 if (module.hot) {
     module.hot.accept();
 }
