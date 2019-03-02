@@ -214,8 +214,6 @@ jobs:
           path: examples/**/coverage/lcov.info
       - list:
           path: packages/**/coverage/lcov.info
-      - list:
-          path: tools/**/coverage/lcov.info
 
       # Run test and report
       - run:
@@ -228,7 +226,6 @@ jobs:
           at: ~/pixeloven
       - list:
           path: .
-      # @todo Should move the tools into packages and just keep private
       # @todo generate docs and run newly compiled tool to deploy to github pages
       # doc gen might be it's own job though
 
