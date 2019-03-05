@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-dev-server",
-  "version": "5.0.0-beta.4",
+  "version": "5.0.0-beta.5",
   "description": "Webpack Development Server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -24,7 +24,7 @@
     "@pixeloven/node-logger": "^5.0.0-beta.1",
     "@pixeloven/tasks": "^5.0.0-beta.1",
     "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
-    "@pixeloven/webpack-config": "^5.0.0-beta.4",
+    "@pixeloven/webpack-config": "^5.0.0-beta.5",
     "@pixeloven/webpack-dev-server-middleware": "^5.0.0-beta.1",
     "express": "4.16.4"
   },

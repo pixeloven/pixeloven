@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/storybook",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0-beta.5",
   "description": "Storybook configuration",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
