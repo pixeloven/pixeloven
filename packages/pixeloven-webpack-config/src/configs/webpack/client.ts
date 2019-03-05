@@ -8,9 +8,9 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
+import TerserPlugin from "terser-webpack-plugin";
 import TimeFixPlugin from "time-fix-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
-import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 import webpack, {
     Configuration,
     DevtoolModuleFilenameTemplateInfo,
@@ -251,26 +251,18 @@ const config = (
         minimize: ifProduction(),
         minimizer: ifProduction(
             [
+
                 /**
                  * Minify the code JavaScript
                  *
                  * @env production
                  */
-                new UglifyJsPlugin({
-                    cache: true,
-                    parallel: true,
-                    sourceMap: false,
-                    uglifyOptions: {
-                        compress: {
-                            comparisons: false,
-                            warnings: false,
-                        },
-                        output: {
-                            ascii_only: true,
-                            comments: false,
-                        },
-                    },
-                }),
+                new TerserPlugin({
+                    extractComments: "all",
+                    terserOptions: {
+                        safari10: true,
+                    }
+                  }),
                 new OptimizeCSSAssetsPlugin(),
             ],
             [],
