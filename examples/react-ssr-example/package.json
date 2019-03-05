@@ -1,6 +1,6 @@
 {
   "name": "@examples/react-ssr-example",
-  "version": "5.0.0-beta.6",
+  "version": "5.0.0-beta.7",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -38,12 +38,12 @@
     "@babel/core": "7.2.2",
     "@pixeloven/cli": "^5.0.0-beta.1",
     "@pixeloven/cli-addon-storybook": "^5.0.0-beta.5",
-    "@pixeloven/cli-addon-webpack": "^5.0.0-beta.6",
+    "@pixeloven/cli-addon-webpack": "^5.0.0-beta.7",
     "@pixeloven/generators": "^5.0.0-beta.4",
     "@pixeloven/react-router-config": "^5.0.0-beta.4",
     "@pixeloven/storybook": "^5.0.0-beta.5",
-    "@pixeloven/webpack": "^5.0.0-beta.6",
-    "@pixeloven/webpack-dev-server": "^5.0.0-beta.6",
+    "@pixeloven/webpack": "^5.0.0-beta.7",
+    "@pixeloven/webpack-dev-server": "^5.0.0-beta.7",
     "@storybook/addon-actions": "4.1.7",
     "@storybook/addon-backgrounds": "4.1.7",
     "@storybook/addon-knobs": "4.1.7",

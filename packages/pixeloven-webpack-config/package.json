@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-config",
-  "version": "5.0.0-beta.6",
+  "version": "5.0.0-beta.7",
   "description": "Webpack configuration for client and server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
