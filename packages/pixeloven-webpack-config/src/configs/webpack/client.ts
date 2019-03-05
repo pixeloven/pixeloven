@@ -202,7 +202,7 @@ const config = (
                         [
                             require.resolve("@babel/preset-env"),
                             {
-                                useBuiltIns: "entry",
+                                useBuiltIns: false,
                             },
                         ],
                         require.resolve("@babel/preset-react"),
