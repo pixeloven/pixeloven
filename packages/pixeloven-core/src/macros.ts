@@ -74,19 +74,6 @@ export const normalizeUrl = (item: string) =>
     item.replace(/([^:]\/)\/+/g, "$1");
 
 /**
- * Spawn node script
- * @param name
- * @param args
- */
-export const spawnNode = (name: string, args: string[]) => {
-    const nodeArgs: string[] = [];
-    const calling = nodeArgs.concat(name).concat(args);
-    return spawn.sync("node", calling, {
-        stdio: "inherit",
-    });
-};
-
-/**
  * Spawn yarn cmd
  * @param name
  * @param args

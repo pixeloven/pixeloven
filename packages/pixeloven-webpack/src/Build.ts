@@ -20,7 +20,7 @@ const {
     printFileSizesAfterBuild,
 } = FileSizeReporter;
 
-interface Config {
+export interface Config {
     path: string;
 }
 

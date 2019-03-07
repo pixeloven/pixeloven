@@ -16,7 +16,7 @@ import webpack, {
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import webpackNodeExternals from "webpack-node-externals";
-import { BuildOptions } from "../../types";
+import { ConfigOptions } from "../../types";
 
 const defaultOptions = {
     withSourceMap: false,
@@ -24,7 +24,7 @@ const defaultOptions = {
 
 const config = (
     env: NodeJS.ProcessEnv,
-    options: BuildOptions = defaultOptions,
+    options: ConfigOptions = defaultOptions,
 ): Configuration => {
     /**
      * Tell webpack what we are making :)

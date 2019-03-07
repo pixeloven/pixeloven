@@ -1,3 +1,4 @@
+import { Machine, Protocol } from "@pixeloven/env";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import {
@@ -10,7 +11,14 @@ import {
 import express from "express";
 import fs from "fs";
 import path from "path";
-import { Config } from "./config";
+
+export interface Config {
+    host: string;
+    port: number;
+    protocol: Protocol;
+    path: string;
+    machine: Machine;
+}
 
 class Server {
     protected compiler: Compiler;

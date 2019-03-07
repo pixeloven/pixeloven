@@ -108,12 +108,5 @@ describe("@pixeloven/core", () => {
                 expect(macros.normalizeUrl(url)).toEqual(expectedUrl);
             });
         });
-        describe("spawnNode", () => {
-            it("should spawn a new node caller", () => {
-                const spawnSyncSpy = jest.spyOn(spawn, "sync");
-                macros.spawnNode("script", ["arg"]);
-                expect(spawnSyncSpy).toHaveBeenCalledTimes(1);
-            });
-        });
     });
 });

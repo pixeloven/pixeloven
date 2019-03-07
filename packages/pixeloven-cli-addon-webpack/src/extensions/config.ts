@@ -1,12 +1,5 @@
 import { env, Machine, Protocol } from "@pixeloven/env";
-
-export interface Config {
-    host: string;
-    port: number;
-    protocol: Protocol;
-    path: string;
-    machine: Machine;
-}
+import { Config } from "@pixeloven/webpack-dev-server";
 
 /**
  * Default Constants

@@ -1,7 +1,10 @@
+import { normalizeUrl } from "@pixeloven/core";
 import { Build } from "@pixeloven/webpack";
 import { Compiler } from "@pixeloven/webpack-compiler";
-import { BuildOptions, webpackClientConfig, webpackServerConfig } from "@pixeloven/webpack-config";
-import { AddonWebpackRunContext, WebpackExtension } from "../types";
+import { webpackClientConfig, webpackServerConfig } from "@pixeloven/webpack-config";
+import { Server } from "@pixeloven/webpack-dev-server";
+import { AddonWebpackRunContext, WebpackExtensionOptions, WebpackExtensionType } from "../types";
+import { createConfig } from "./config";
 
 /**
  * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
@@ -12,26 +15,44 @@ import { AddonWebpackRunContext, WebpackExtension } from "../types";
  * @todo 3) Create CLI options for --machine (host|docker|virtual)
  */
 export default (context: AddonWebpackRunContext) => {
-    const webpack: WebpackExtension = async (options: BuildOptions) => {
+    const webpack = async (options: WebpackExtensionOptions) => {
         const { print } = context;
-        try {
-            print.info("Initializing Webpack Compiler");
-            const compiler = Compiler.create([
-                webpackClientConfig(process.env, {
-                    withSourceMap: true,
-                }),
-                webpackServerConfig(process.env, {
-                    withSourceMap: true,
-                }),
+        const getCompile = () => {
+            return Compiler.create([
+                webpackClientConfig(process.env, options.configOptions),
+                webpackServerConfig(process.env, options.configOptions),
             ]);
-            const build = new Build(compiler, {
-                path: "./dist"
-            });
-            await build.client();
-            await build.server();
-            return 0
+        }
+        try {
+            switch(options.type) {
+                case WebpackExtensionType.build: {
+                    const webpackCompiler = getCompile();
+                    const build = new Build(webpackCompiler, {
+                        path: "./dist" // TODO configurable
+                    });
+                    await build.client();
+                    await build.server();
+                }
+                case WebpackExtensionType.start: {
+                    const webpackCompiler = getCompile();
+                    const serverConfig = createConfig();
+                    const baseUrl = normalizeUrl(
+                        `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/${serverConfig.path}`,
+                    );
+                    print.info(`Connecting server...`);
+                    const server = new Server(webpackCompiler, serverConfig);
+                    server.create().then(app => {
+                        app.listen(serverConfig.port, serverConfig.host, () => {
+                            print.success(`Started on ${baseUrl}`);
+                        });
+                    });
+                }
+            }
+            return 0;
         } catch(err) {
-            print.error(err.message);
+            if (err && err.message) {
+                print.error(err.message);
+            }
             return 1;
         }
     };
