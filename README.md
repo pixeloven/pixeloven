@@ -81,3 +81,4 @@ We are committed to providing a safe place for everyone. Please review our [code
 2) Remove react-dev-utils
 3) Add help to CLI and documentation
 4) Reach 90-100% test coverage
+5) Expose storybook addons through library

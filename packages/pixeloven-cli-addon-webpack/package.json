@@ -21,6 +21,7 @@
     "@pixeloven/core": "^5.0.0-beta.1",
     "@pixeloven/env": "^5.0.0-beta.1",
     "@pixeloven/exceptions": "^5.0.0-beta.1",
+    "@pixeloven/tasks": "^5.0.0-beta.1",
     "@pixeloven/webpack": "^5.0.0-beta.7",
     "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
     "@pixeloven/webpack-config": "^5.0.0-beta.7",
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "@pixeloven/cli": "^5.0.0-beta.1",
-    "@pixeloven/tasks": "^5.0.0-beta.1",
     "@types/node": "10.12.18"
   },
   "peerDependencies": {

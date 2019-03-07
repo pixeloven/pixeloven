@@ -1,10 +1,17 @@
 import { normalizeUrl } from "@pixeloven/core";
 import { Build } from "@pixeloven/webpack";
 import { Compiler } from "@pixeloven/webpack-compiler";
-import { webpackClientConfig, webpackServerConfig } from "@pixeloven/webpack-config";
+import {
+    webpackClientConfig,
+    webpackServerConfig,
+} from "@pixeloven/webpack-config";
 import { Server } from "@pixeloven/webpack-dev-server";
-import { AddonWebpackRunContext, WebpackExtensionOptions, WebpackExtensionType } from "../types";
-import { createConfig } from "./config";
+import { createConfig } from "../config";
+import {
+    AddonWebpackRunContext,
+    WebpackExtensionOptions,
+    WebpackExtensionType,
+} from "../types";
 
 /**
  * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
@@ -13,6 +20,8 @@ import { createConfig } from "./config";
  * @todo 1) Create CLI options for --open (auto-open)
  * @todo 2) Create CLI options for --choose-port (auto-choose-port)
  * @todo 3) Create CLI options for --machine (host|docker|virtual)
+ *
+ * @todo Make build and dev-server configurable through CLI.
  */
 export default (context: AddonWebpackRunContext) => {
     const webpack = async (options: WebpackExtensionOptions) => {
@@ -22,13 +31,13 @@ export default (context: AddonWebpackRunContext) => {
                 webpackClientConfig(process.env, options.configOptions),
                 webpackServerConfig(process.env, options.configOptions),
             ]);
-        }
+        };
         try {
-            switch(options.type) {
+            switch (options.type) {
                 case WebpackExtensionType.build: {
                     const webpackCompiler = getCompile();
                     const build = new Build(webpackCompiler, {
-                        path: "./dist" // TODO configurable
+                        path: "./dist", // TODO configurable
                     });
                     await build.client();
                     await build.server();
@@ -37,7 +46,9 @@ export default (context: AddonWebpackRunContext) => {
                     const webpackCompiler = getCompile();
                     const serverConfig = createConfig();
                     const baseUrl = normalizeUrl(
-                        `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/${serverConfig.path}`,
+                        `${serverConfig.protocol}://${serverConfig.host}:${
+                            serverConfig.port
+                        }/${serverConfig.path}`,
                     );
                     print.info(`Connecting server...`);
                     const server = new Server(webpackCompiler, serverConfig);
@@ -49,7 +60,7 @@ export default (context: AddonWebpackRunContext) => {
                 }
             }
             return 0;
-        } catch(err) {
+        } catch (err) {
             if (err && err.message) {
                 print.error(err.message);
             }

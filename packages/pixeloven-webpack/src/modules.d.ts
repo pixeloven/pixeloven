@@ -5,4 +5,3 @@
  */
 declare module "react-dev-utils/formatWebpackMessages";
 declare module "react-dev-utils/FileSizeReporter";
-

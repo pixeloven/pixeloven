@@ -26,10 +26,14 @@ export default {
         };
 
         if (!parameters.first) {
-            throw new NodeInvalidArgumentException("Must provide a webpack run type.");
+            throw new NodeInvalidArgumentException(
+                "Must provide a webpack run type.",
+            );
         }
         if (!WebpackExtensionType.hasOwnProperty(parameters.first)) {
-            throw new NodeInvalidArgumentException("Invalid run type provided.");
+            throw new NodeInvalidArgumentException(
+                "Invalid run type provided.",
+            );
         }
         const statusCode = await webpack({
             configOptions: {
@@ -38,6 +42,5 @@ export default {
             type: WebpackExtensionType.build,
         });
         return handle("Webpack", statusCode);
-
     },
 };

@@ -20,11 +20,11 @@
   "dependencies": {
     "@pixeloven/core": "^5.0.0-beta.1",
     "@pixeloven/node-logger": "^5.0.0-beta.1",
+    "@pixeloven/tasks": "^5.0.0-beta.1",
     "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
     "react-dev-utils": "7.0.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0-beta.1",
     "@types/node": "10.12.18",
     "@types/webpack": "4.4.23"
   },

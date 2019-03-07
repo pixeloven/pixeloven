@@ -104,8 +104,8 @@ class Build {
 
     /**
      * @todo Return stats as part of the promise for the CLI to handle
-     * @param path 
-     * @param fileSizes 
+     * @param path
+     * @param fileSizes
      */
     private handle(path: string, fileSizes: string[]) {
         return (err: Error, stats: Stats) => {
