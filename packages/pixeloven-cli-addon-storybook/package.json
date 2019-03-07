@@ -20,16 +20,15 @@
   "dependencies": {
     "@pixeloven/exceptions": "^5.0.0-beta.1",
     "@pixeloven/tasks": "^5.0.0-beta.1",
+    "@pixeloven/storybook": "^5.0.0-beta.5",
     "gluegun": "3.0.0"
   },
   "devDependencies": {
     "@pixeloven/cli": "^5.0.0-beta.1",
-    "@pixeloven/storybook": "^5.0.0-beta.5",
     "@types/node": "10.12.18"
   },
   "peerDependencies": {
-    "@pixeloven/cli": ">5.0.0-beta.0",
-    "@pixeloven/storybook": ">5.0.0-beta.0"
+    "@pixeloven/cli": ">5.0.0-beta.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
