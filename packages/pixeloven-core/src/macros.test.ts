@@ -1,6 +1,5 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
 import { logger, Message } from "@pixeloven/node-logger";
-import spawn from "cross-spawn";
 import fs, { PathLike } from "fs-extra";
 import "jest";
 import path from "path";
