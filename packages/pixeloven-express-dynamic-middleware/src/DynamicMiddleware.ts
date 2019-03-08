@@ -13,7 +13,6 @@ type Middleware = (req: Request, res: Response, next: NextFunction) => void;
 /**
  * @type Layer
  * @description Represents a new application layer. Either a new Application layer or middleware.
- * @todo Make this it's own package eventually
  */
 type Layers = Array<Application | Express | Middleware>;
 

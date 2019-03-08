@@ -2,7 +2,8 @@ import fs from "fs";
 import { build, filesystem } from "gluegun";
 
 /**
- * @todo Looks like we aren't failing in the CLI if a script returns a status of >0
+ * Run CLI
+ * @param argv
  */
 async function main(argv: string[]) {
     const pixelOvenPath = filesystem.path(
@@ -19,7 +20,11 @@ async function main(argv: string[]) {
      * @description We need to do it this way because we might have a sym link in our path.
      */
     plugins.forEach(plugin => {
-        builder.plugin(filesystem.path(fs.realpathSync(plugin), "./dist/lib"));
+        if (plugin.includes("cli-addon")) {
+            builder.plugin(
+                filesystem.path(fs.realpathSync(plugin), "./dist/lib"),
+            );
+        }
     });
     const cli = builder.version().create();
 

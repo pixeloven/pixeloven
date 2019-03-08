@@ -1,6 +1,5 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
 import { logger, Message } from "@pixeloven/node-logger";
-import spawn from "cross-spawn";
 import fs, { PathLike } from "fs-extra";
 import "jest";
 import path from "path";
@@ -106,13 +105,6 @@ describe("@pixeloven/core", () => {
                 const url = "https://localhost:8080//test/resource///woot";
                 const expectedUrl = "https://localhost:8080/test/resource/woot";
                 expect(macros.normalizeUrl(url)).toEqual(expectedUrl);
-            });
-        });
-        describe("spawnNode", () => {
-            it("should spawn a new node caller", () => {
-                const spawnSyncSpy = jest.spyOn(spawn, "sync");
-                macros.spawnNode("script", ["arg"]);
-                expect(spawnSyncSpy).toHaveBeenCalledTimes(1);
             });
         });
     });

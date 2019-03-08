@@ -24,7 +24,7 @@ import webpack, {
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
-import { BuildOptions } from "../../types";
+import { ConfigOptions } from "../../types";
 
 const defaultOptions = {
     withSourceMap: false,
@@ -32,7 +32,7 @@ const defaultOptions = {
 
 const config = (
     env: NodeJS.ProcessEnv,
-    options: BuildOptions = defaultOptions,
+    options: ConfigOptions = defaultOptions,
 ): Configuration => {
     /**
      * @todo optimize builds

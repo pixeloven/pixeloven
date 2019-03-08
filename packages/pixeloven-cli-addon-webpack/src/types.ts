@@ -1,10 +1,19 @@
 import { PixelOvenRunContext } from "@pixeloven/cli";
-import { BuildOptions } from "@pixeloven/webpack-config";
+import { ConfigOptions } from "@pixeloven/webpack-config";
 
-export type WebpackExtension = (options: BuildOptions) => Promise<number>;
-export type WebpackDevServerExtension = (args?: string[]) => Promise<number>;
+export enum WebpackExtensionType {
+    build = "build",
+    start = "start",
+}
+
+export interface WebpackExtensionOptions {
+    type: WebpackExtensionType;
+    configOptions: ConfigOptions;
+}
+export type WebpackExtension = (
+    options: WebpackExtensionOptions,
+) => Promise<number>;
 
 export interface AddonWebpackRunContext extends PixelOvenRunContext {
     webpack: WebpackExtension;
-    webpackDevServer: WebpackDevServerExtension;
 }

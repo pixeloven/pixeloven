@@ -1,4 +1,4 @@
 /**
  * Register libraries here
  */
-export { default as Compiler } from "./Compiler";
+export { default as Compiler, Handler, Type } from "./Compiler";

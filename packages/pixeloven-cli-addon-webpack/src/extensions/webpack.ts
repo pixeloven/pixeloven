@@ -1,20 +1,73 @@
-import runner from "@pixeloven/webpack";
-import { BuildOptions } from "@pixeloven/webpack-config";
-import { AddonWebpackRunContext, WebpackExtension } from "../types";
+import { normalizeUrl } from "@pixeloven/core";
+import { Build } from "@pixeloven/webpack";
+import { Compiler } from "@pixeloven/webpack-compiler";
+import {
+    webpackClientConfig,
+    webpackServerConfig,
+} from "@pixeloven/webpack-config";
+import { Server } from "@pixeloven/webpack-dev-server";
+import { createConfig } from "../config";
+import {
+    AddonWebpackRunContext,
+    WebpackExtensionOptions,
+    WebpackExtensionType,
+} from "../types";
 
 /**
- * @todo Move runner contents into here
+ * @todo can we use any of this https://github.com/glenjamin/ultimate-hot-reloading-example
+ * @todo bring this back https://github.com/gaearon/react-hot-loader
+ * @todo FIX client onDone runs twice which means we are compile an extra time :(
+ * @todo 1) Create CLI options for --open (auto-open)
+ * @todo 2) Create CLI options for --choose-port (auto-choose-port)
+ * @todo 3) Create CLI options for --machine (host|docker|virtual)
+ *
+ * @todo Make build and dev-server configurable through CLI.
  */
 export default (context: AddonWebpackRunContext) => {
-    const webpack: WebpackExtension = async (options: BuildOptions) => {
-        const { pixelOven } = context;
-        const pluginPath = pixelOven.resolvePlugin("@pixeloven", "webpack");
-        if (!pluginPath) {
-            throw new Error(
-                "Could not find peer dependency @pixeloven/webpack",
-            );
+    const webpack = async (options: WebpackExtensionOptions) => {
+        const { print } = context;
+        const getCompile = () => {
+            return Compiler.create([
+                webpackClientConfig(process.env, options.configOptions),
+                webpackServerConfig(process.env, options.configOptions),
+            ]);
+        };
+        try {
+            switch (options.type) {
+                case WebpackExtensionType.build: {
+                    const webpackCompiler = getCompile();
+                    const build = new Build(webpackCompiler, {
+                        path: "./dist", // TODO configurable
+                    });
+                    let statusCode = 0;
+                    statusCode += await build.client();
+                    statusCode += await build.server();
+                    return statusCode;
+                }
+                case WebpackExtensionType.start: {
+                    const webpackCompiler = getCompile();
+                    const serverConfig = createConfig();
+                    const baseUrl = normalizeUrl(
+                        `${serverConfig.protocol}://${serverConfig.host}:${
+                            serverConfig.port
+                        }/${serverConfig.path}`,
+                    );
+                    print.info(`Connecting server...`);
+                    const server = new Server(webpackCompiler, serverConfig);
+                    server.create().then(app => {
+                        app.listen(serverConfig.port, serverConfig.host, () => {
+                            print.success(`Started on ${baseUrl}`);
+                        });
+                    });
+                    return 0;
+                }
+            }
+        } catch (err) {
+            if (err && err.message) {
+                print.error(err.message);
+            }
         }
-        return runner(options);
+        return 1;
     };
     context.webpack = webpack;
 };

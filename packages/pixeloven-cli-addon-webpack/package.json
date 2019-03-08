@@ -18,20 +18,22 @@
     "access": "public"
   },
   "dependencies": {
+    "@pixeloven/core": "^5.0.0-beta.1",
+    "@pixeloven/env": "^5.0.0-beta.1",
     "@pixeloven/exceptions": "^5.0.0-beta.1",
     "@pixeloven/tasks": "^5.0.0-beta.1",
+    "@pixeloven/webpack": "^5.0.0-beta.7",
+    "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
+    "@pixeloven/webpack-config": "^5.0.0-beta.7",
+    "@pixeloven/webpack-dev-server": "^5.0.0-beta.7",
     "gluegun": "3.0.0"
   },
   "devDependencies": {
     "@pixeloven/cli": "^5.0.0-beta.1",
-    "@pixeloven/webpack": "^5.0.0-beta.7",
-    "@pixeloven/webpack-dev-server": "^5.0.0-beta.7",
     "@types/node": "10.12.18"
   },
   "peerDependencies": {
-    "@pixeloven/cli": ">5.0.0-beta.0",
-    "@pixeloven/webpack": ">5.0.0-beta.0",
-    "@pixeloven/webpack-dev-server": ">5.0.0-beta.0"
+    "@pixeloven/cli": ">5.0.0-beta.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

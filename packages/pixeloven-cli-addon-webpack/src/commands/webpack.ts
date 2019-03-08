@@ -1,5 +1,5 @@
 import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
-import { AddonWebpackRunContext } from "../types";
+import { AddonWebpackRunContext, WebpackExtensionType } from "../types";
 
 /**
  * @todo Need to document options here
@@ -9,7 +9,7 @@ import { AddonWebpackRunContext } from "../types";
 export default {
     name: "webpack",
     run: async (context: AddonWebpackRunContext) => {
-        const { parameters, print, webpack, webpackDevServer } = context;
+        const { parameters, print, webpack } = context;
         /**
          * Process results
          * @param name
@@ -24,19 +24,23 @@ export default {
             }
             return status;
         };
-        let statusCode = 0;
-        switch (parameters.first) {
-            case "build":
-                statusCode = await webpack({
-                    withSourceMap: parameters.options.sourceMap || false,
-                });
-                return handle("Webpack", statusCode);
-            case "start":
-                statusCode = await webpackDevServer();
-                return handle("Webpack Dev Server", statusCode);
-            default: {
-                throw new NodeInvalidArgumentException();
-            }
+
+        if (!parameters.first) {
+            throw new NodeInvalidArgumentException(
+                "Must provide a webpack run type.",
+            );
         }
+        if (!WebpackExtensionType.hasOwnProperty(parameters.first)) {
+            throw new NodeInvalidArgumentException(
+                "Invalid run type provided.",
+            );
+        }
+        const statusCode = await webpack({
+            configOptions: {
+                withSourceMap: parameters.options.sourceMap || false,
+            },
+            type: WebpackExtensionType.build,
+        });
+        return handle("Webpack", statusCode);
     },
 };

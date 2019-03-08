@@ -11,7 +11,6 @@ describe("@pixeloven/core", () => {
             expect(typeof exported.normalizeUrl).toEqual("function");
             expect(typeof exported.resolvePath).toEqual("function");
             expect(typeof exported.spawnComplete).toEqual("function");
-            expect(typeof exported.spawnNode).toEqual("function");
             expect(typeof exported.spawnBin).toEqual("function");
         });
     });
