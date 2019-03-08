@@ -41,6 +41,7 @@ export default (context: AddonWebpackRunContext) => {
                     });
                     await build.client();
                     await build.server();
+                    return 0;
                 }
                 case WebpackExtensionType.start: {
                     const webpackCompiler = getCompile();
@@ -57,15 +58,15 @@ export default (context: AddonWebpackRunContext) => {
                             print.success(`Started on ${baseUrl}`);
                         });
                     });
+                    return 0;
                 }
             }
-            return 0;
         } catch (err) {
             if (err && err.message) {
                 print.error(err.message);
             }
-            return 1;
         }
+        return 1;
     };
     context.webpack = webpack;
 };

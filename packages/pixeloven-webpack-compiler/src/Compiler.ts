@@ -7,8 +7,8 @@ import webpack, {
     Stats,
 } from "webpack";
 
-type Type = "client" | "server";
-type Handler = (stats: Stats) => void;
+export type Type = "client" | "server";
+export type Handler = (stats: Stats) => void;
 
 class Compiler {
     public static id = "PixelOvenWebpackCompiler";
