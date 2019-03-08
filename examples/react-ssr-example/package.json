@@ -39,6 +39,7 @@
     "@pixeloven/cli-addon-storybook": "^5.0.0-beta.1",
     "@pixeloven/cli-addon-webpack": "^5.0.0-beta.7",
     "@pixeloven/generators": "^5.0.0-beta.4",
+    "@pixeloven/storybook": "^5.0.0-beta.1",
     "@storybook/addon-actions": "4.1.7",
     "@storybook/addon-backgrounds": "4.1.7",
     "@storybook/addon-knobs": "4.1.7",
