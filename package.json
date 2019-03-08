@@ -26,7 +26,6 @@
     "compile": "yarn compile-packages && yarn compile-examples",
     "compile-examples": "yarn linker && lerna run compile --scope \"@examples/*\"",
     "compile-packages": "yarn linker && lerna run compile --scope \"@pixeloven/*\"",
-    "env:production": "lerna run env:production",
     "linker": "lerna link",
     "lint": "yarn lint-packages && yarn lint-examples",
     "lint-examples": "yarn linker && lerna run lint --scope \"@examples/*\"",

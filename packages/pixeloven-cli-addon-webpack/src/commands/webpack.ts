@@ -39,7 +39,12 @@ export default {
          * @todo Remove machine param in favor of something more generic
          */
         const statusCode = await webpack({
+            buildOptions: {
+                path: "./dist",
+            },
             compilerOptions: {
+                buildPath: "./dist",
+                publicPath: parameters.options.publicPath,
                 withSourceMap: parameters.options.sourceMap,
             },
             serverOptions: {

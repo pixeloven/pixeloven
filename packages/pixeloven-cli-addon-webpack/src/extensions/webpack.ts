@@ -28,9 +28,7 @@ export default (context: AddonWebpackRunContext) => {
             switch (options.type) {
                 case WebpackExtensionType.build: {
                     const compiler = getCompiler(options.compilerOptions);
-                    const builder = getBuilder(compiler, {
-                        path: "./dist", // TODO configurable
-                    });
+                    const builder = getBuilder(compiler, options.buildOptions);
                     let statusCode = 0;
                     statusCode += await builder.client();
                     statusCode += await builder.server();

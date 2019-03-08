@@ -28,27 +28,17 @@ import { Config } from "../../types";
 
 const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     /**
-     * @todo optimize builds
-     * see if we can use TS Fork (at least for prod build)
-     * see how we can use babels cache
-     * @todo implement tslint-loader if we can do ts fork in development
-     */
-    /**
-     * Tell webpack what we are making :)
+     * Set local options
      */
     const name = "client";
     const target = "web";
+    const publicPath = options.publicPath;
+    const buildPath = options.buildPath;
 
     /**
-     * Webpack uses `publicPath` to determine where the app is being served from.
-     * It requires a trailing slash, or the file assets will get an incorrect path.
-     *
-     * @todo DEV needs to be / to serve assets :( but this breaks the bundle.js (server side is fine)
-     * @todo Maybe do this in Output instead of here because some stuff might still need this.
+     * Set env variables
      */
     const environment = env.NODE_ENV || "production";
-    const publicPath = env.PUBLIC_URL || "/";
-    const buildPath = env.BUILD_PATH || "dist";
 
     /**
      * Utility functions to help segment configuration based on environment
@@ -322,19 +312,15 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
          */
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         /**
-         * Define environmental variables base on entry point
+         * Does a string replacement for specific env variables
          * @description Provides entry point specific env variables
-         *
+         * @todo Unify PUBLIC_URL: publicPath with same name
          * @env all
          */
         new webpack.EnvironmentPlugin({
-            ...process.env,
-            ...{
-                NAME: name,
-                NODE_ENV: ifProduction("production", "development"),
-                PUBLIC_URL: publicPath,
-                TARGET: target,
-            },
+            NAME: name,
+            PUBLIC_URL: publicPath,
+            TARGET: target,
         }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation

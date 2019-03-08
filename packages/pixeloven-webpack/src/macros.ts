@@ -23,6 +23,8 @@ const defaultBuildOptions = {
  * Default compiler options
  */
 const defaultCompilerOptions = {
+    buildPath: "./dist",
+    publicPath: "/",
     withSourceMap: false,
 };
 
