@@ -1,5 +1,7 @@
 import { PixelOvenRunContext } from "@pixeloven/cli";
-import { ConfigOptions } from "@pixeloven/webpack-config";
+import { Config as BuildConfig } from "@pixeloven/webpack-builder";
+import { Config as CompilerConfig } from "@pixeloven/webpack-config";
+import { Config as ServerConfig } from "@pixeloven/webpack-dev-server";
 
 export enum WebpackExtensionType {
     build = "build",
@@ -8,7 +10,9 @@ export enum WebpackExtensionType {
 
 export interface WebpackExtensionOptions {
     type: WebpackExtensionType;
-    configOptions: ConfigOptions;
+    buildOptions?: BuildConfig;
+    compilerOptions?: CompilerConfig;
+    serverOptions?: ServerConfig;
 }
 export type WebpackExtension = (
     options: WebpackExtensionOptions,

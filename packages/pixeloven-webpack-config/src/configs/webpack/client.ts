@@ -24,16 +24,9 @@ import webpack, {
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
-import { ConfigOptions } from "../../types";
+import { Config } from "../../types";
 
-const defaultOptions = {
-    withSourceMap: false,
-};
-
-const config = (
-    env: NodeJS.ProcessEnv,
-    options: ConfigOptions = defaultOptions,
-): Configuration => {
+const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     /**
      * @todo optimize builds
      * see if we can use TS Fork (at least for prod build)

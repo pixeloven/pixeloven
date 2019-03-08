@@ -35,11 +35,21 @@ export default {
                 "Invalid run type provided.",
             );
         }
+        /**
+         * @todo Remove machine param in favor of something more generic
+         */
         const statusCode = await webpack({
-            configOptions: {
-                withSourceMap: parameters.options.sourceMap || false,
+            compilerOptions: {
+                withSourceMap: parameters.options.sourceMap,
             },
-            type: WebpackExtensionType.build,
+            serverOptions: {
+                host: parameters.options.host,
+                machine: parameters.options.machine,
+                path: parameters.options.path,
+                port: parameters.options.port,
+                protocol: parameters.options.protocol,
+            },
+            type: WebpackExtensionType[parameters.first],
         });
         return handle("Webpack", statusCode);
     },

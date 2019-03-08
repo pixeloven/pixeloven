@@ -22,15 +22,16 @@
     "@pixeloven/exceptions": "^5.0.0-beta.1",
     "@pixeloven/node-logger": "^5.0.0-beta.1",
     "@pixeloven/tasks": "^5.0.0-beta.1",
-    "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
-    "@pixeloven/webpack-config": "^5.0.0-beta.7",
     "@pixeloven/webpack-dev-server-middleware": "^5.0.0-beta.1",
     "express": "4.16.4"
   },
   "devDependencies": {
-    "@pixeloven/env": "^5.0.0-beta.1",
+    "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
     "@types/express": "4.16.0",
     "@types/node": "10.12.18"
+  },
+  "peerDependencies": {
+    "@pixeloven/webpack-compiler": ">5.0.0-beta.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

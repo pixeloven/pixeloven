@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/webpack",
+  "name": "@pixeloven/webpack-builder",
   "version": "5.0.0-beta.7",
-  "description": "Webpack wrapper for CLI integration",
+  "description": "Webpack build handler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -18,18 +18,18 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/exceptions": "^5.0.0-beta.1",
+    "@pixeloven/core": "^5.0.0-beta.1",
+    "@pixeloven/node-logger": "^5.0.0-beta.1",
     "@pixeloven/tasks": "^5.0.0-beta.1",
-    "gluegun": "3.0.0"
+    "react-dev-utils": "7.0.1"
   },
   "devDependencies": {
-    "@pixeloven/cli": "^5.0.0-beta.1",
-    "@pixeloven/webpack": "^5.0.0-beta.7",
-    "@types/node": "10.12.18"
+    "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
+    "@types/node": "10.12.18",
+    "@types/webpack": "4.4.23"
   },
   "peerDependencies": {
-    "@pixeloven/cli": ">5.0.0-beta.0",
-    "@pixeloven/webpack": "^5.0.0-beta.7"
+    "@pixeloven/webpack-compiler": ">5.0.0-beta.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
