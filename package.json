@@ -50,21 +50,19 @@
     }
   },
   "lint-staged": {
-    "linter": {
-      "examples/**/*.{ts,tsx}": [
-        "yarn pretty",
-        "yarn pretty:ts",
-        "yarn pretty:scss",
-        "yarn lint",
-        "git add"
-      ],
-      "packages/**/*.{scss,ts,tsx}": [
-        "yarn pretty",
-        "yarn pretty:ts",
-        "yarn lint",
-        "git add"
-      ]
-    }
+    "examples/**/*.{ts,tsx}": [
+      "yarn pretty",
+      "yarn pretty:ts",
+      "yarn pretty:scss",
+      "yarn lint",
+      "git add"
+    ],
+    "packages/**/*.{scss,ts,tsx}": [
+      "yarn pretty",
+      "yarn pretty:ts",
+      "yarn lint",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@commitlint/cli": "7.2.1",
