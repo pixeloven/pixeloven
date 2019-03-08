@@ -39,9 +39,10 @@ export default (context: AddonWebpackRunContext) => {
                     const build = new Build(webpackCompiler, {
                         path: "./dist", // TODO configurable
                     });
-                    await build.client();
-                    await build.server();
-                    return 0;
+                    let statusCode = 0;
+                    statusCode += await build.client();
+                    statusCode += await build.server();
+                    return statusCode;
                 }
                 case WebpackExtensionType.start: {
                     const webpackCompiler = getCompile();
