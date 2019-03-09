@@ -41,6 +41,23 @@ const defaultServerOptions = {
 };
 
 /**
+ * Cleanup and merge options
+ * @param defaults
+ * @param options
+ */
+function mergeOptions<T>(defaults: T, options: Partial<T>): T {
+    Object.keys(options).forEach(key => {
+        if (options[key] === undefined) {
+            delete options[key];
+        }
+    });
+    return {
+        ...defaults,
+        ...options,
+    };
+}
+
+/**
  * Create build from compiler and options
  * @param compiler
  * @param options
@@ -49,10 +66,7 @@ export function getBuilder(
     compiler: Compiler,
     options: Partial<BuildConfig> = {},
 ) {
-    /**
-     * @todo validate partial
-     */
-    const config = Object.assign({}, options, defaultBuildOptions);
+    const config = mergeOptions(defaultBuildOptions, options);
     return new Build(compiler, config);
 }
 
@@ -62,10 +76,7 @@ export function getBuilder(
  * @param options
  */
 export function getCompiler(options: Partial<CompilerConfig> = {}) {
-    /**
-     * @todo validate partial
-     */
-    const config = Object.assign({}, options, defaultCompilerOptions);
+    const config = mergeOptions(defaultCompilerOptions, options);
     return Compiler.create([
         webpackClientConfig(process.env, config),
         webpackServerConfig(process.env, config),
@@ -81,9 +92,6 @@ export function getServer(
     compiler: Compiler,
     options: Partial<ServerConfig> = {},
 ) {
-    /**
-     * @todo validate partial
-     */
-    const config = Object.assign({}, options, defaultServerOptions);
+    const config = mergeOptions(defaultServerOptions, options);
     return new Server(compiler, config);
 }

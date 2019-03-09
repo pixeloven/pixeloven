@@ -98,7 +98,7 @@
     "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
     "production": "node ./dist/server.js",
     "start": "yarn start:app && yarn start:story",
-    "start:app": "pixeloven webpack start --host 0.0.0.0 --protocol https",
+    "start:app": "pixeloven webpack start --host 0.0.0.0 --protocol http --port 48080",
     "start:story": "pixeloven story start",
     "test": "pixeloven test --color --coverage",
     "test:watch": "pixeloven test watch"
