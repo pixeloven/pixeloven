@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack",
-  "version": "5.0.0-beta.7",
+  "version": "5.0.0",
   "description": "Webpack wrapper for CLI integration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,10 +18,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/webpack-builder": "^5.0.0-beta.7",
-    "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
-    "@pixeloven/webpack-config": "^5.0.0-beta.7",
-    "@pixeloven/webpack-dev-server": "^5.0.0-beta.7"
+    "@pixeloven/webpack-builder": "^5.0.0",
+    "@pixeloven/webpack-compiler": "^5.0.0",
+    "@pixeloven/webpack-config": "^5.0.0",
+    "@pixeloven/webpack-dev-server": "^5.0.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

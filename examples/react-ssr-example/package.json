@@ -1,6 +1,6 @@
 {
   "name": "@examples/react-ssr-example",
-  "version": "5.0.0-beta.7",
+  "version": "5.0.0",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@pixeloven/react-router-config": "^5.0.0-beta.4",
+    "@pixeloven/react-router-config": "^5.0.0",
     "axios": "0.18.0",
     "classnames": "2.2.6",
     "express": "4.16.4",
@@ -35,12 +35,12 @@
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
-    "@pixeloven/cli": "^5.0.0-beta.1",
-    "@pixeloven/cli-addon-storybook": "^5.0.0-beta.1",
-    "@pixeloven/cli-addon-webpack": "^5.0.0-beta.7",
-    "@pixeloven/generators": "^5.0.0-beta.4",
-    "@pixeloven/storybook": "^5.0.0-beta.1",
-    "@pixeloven/webpack": "^5.0.0-beta.7",
+    "@pixeloven/cli": "^5.0.0",
+    "@pixeloven/cli-addon-storybook": "^5.0.0",
+    "@pixeloven/cli-addon-webpack": "^5.0.0",
+    "@pixeloven/generators": "^5.0.0",
+    "@pixeloven/storybook": "^5.0.0",
+    "@pixeloven/webpack": "^5.0.0",
     "@storybook/addon-actions": "4.1.7",
     "@storybook/addon-backgrounds": "4.1.7",
     "@storybook/addon-knobs": "4.1.7",
