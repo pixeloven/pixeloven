@@ -1,4 +1,4 @@
-import { Machine, Protocol } from "@pixeloven/env";
+import { normalizeUrl } from "@pixeloven/core";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import {
@@ -11,14 +11,7 @@ import {
 import express from "express";
 import fs from "fs";
 import path from "path";
-
-export interface Config {
-    host: string;
-    port: number;
-    protocol: Protocol;
-    path: string;
-    machine: Machine;
-}
+import { Config } from "./types";
 
 class Server {
     protected compiler: Compiler;
@@ -39,7 +32,7 @@ class Server {
      * @param compilerConfig
      * @param onComplete
      */
-    public async create() {
+    public async start() {
         const app = express();
         /**
          * @todo Support coverage and type docs. Plus storybook docs
@@ -114,7 +107,20 @@ class Server {
         app.use(webpackReactAssetMiddleware);
         app.use(webpackHotServerMiddleware);
         app.use(errorHandler);
-        return app;
+        return new Promise<number>((resolve, reject) => {
+            const baseUrl = normalizeUrl(
+                `${this.config.protocol}://${this.config.host}:${
+                    this.config.port
+                }/${this.config.path}`,
+            );
+            app.listen(this.config.port, this.config.host, (err: Error) => {
+                if (err) {
+                    return reject(err);
+                }
+                logger.info(`Started on ${baseUrl}`);
+                return resolve(0);
+            });
+        });
     }
 }
 

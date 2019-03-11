@@ -35,11 +35,28 @@ export default {
                 "Invalid run type provided.",
             );
         }
+        /**
+         * @todo Remove machine param in favor of something more generic
+         *
+         * @todo source map doesn't seem to be sent all the way through any more?
+         */
         const statusCode = await webpack({
-            configOptions: {
-                withSourceMap: parameters.options.sourceMap || false,
+            buildOptions: {
+                path: "./dist",
             },
-            type: WebpackExtensionType.build,
+            compilerOptions: {
+                buildPath: "./dist",
+                publicPath: parameters.options.publicPath,
+                withSourceMap: parameters.options.sourceMap,
+            },
+            serverOptions: {
+                host: parameters.options.host,
+                machine: parameters.options.machine,
+                path: parameters.options.path,
+                port: parameters.options.port,
+                protocol: parameters.options.protocol,
+            },
+            type: WebpackExtensionType[parameters.first],
         });
         return handle("Webpack", statusCode);
     },

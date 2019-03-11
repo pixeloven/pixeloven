@@ -17,10 +17,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@pixeloven/tasks": "^5.0.0-beta.1"
-  },
   "devDependencies": {
+    "@pixeloven/tasks": "^5.0.0-beta.1",
     "@types/node": "10.12.18"
   },
   "scripts": {

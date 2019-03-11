@@ -16,7 +16,10 @@ const app = express();
  */
 if (config.environment === "production") {
     app.use(assetPath(path.resolve(__dirname, "public/asset-manifest.json")));
-    app.use(config.baseUrl, express.static(path.resolve(__dirname, "public")));
+    app.use(
+        config.publicPath,
+        express.static(path.resolve(__dirname, "public")),
+    );
 }
 server(app);
 

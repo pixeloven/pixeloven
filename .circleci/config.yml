@@ -140,9 +140,6 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
       - run:
-          name: Create .env file
-          command: yarn env:production
-      - run:
           name: Build source
           command: yarn build-examples
       - persist_to_workspace:

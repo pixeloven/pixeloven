@@ -1,21 +1,15 @@
 /**
  * General configuration for server
  */
-const DOMAIN = process.env.DOMAIN || "pixeloven.com";
-const ENVIRONMENT = process.env.NODE_ENV || "production";
-const MACHINE = process.env.MACHINE || "host";
+const PUBLIC_PATH = process.env.PUBLIC_PATH || "/";
 const TARGET = process.env.TARGET || "web";
 
 export interface Config {
-    domain: string;
-    environment: string;
-    machine: string;
+    publicPath: string;
     target: string;
 }
 
 export const config: Config = {
-    domain: DOMAIN,
-    environment: ENVIRONMENT,
-    machine: MACHINE,
+    publicPath: PUBLIC_PATH,
     target: TARGET,
 };

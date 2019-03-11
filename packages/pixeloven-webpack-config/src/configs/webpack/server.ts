@@ -16,29 +16,21 @@ import webpack, {
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import webpackNodeExternals from "webpack-node-externals";
-import { ConfigOptions } from "../../types";
+import { Config } from "../../types";
 
-const defaultOptions = {
-    withSourceMap: false,
-};
-
-const config = (
-    env: NodeJS.ProcessEnv,
-    options: ConfigOptions = defaultOptions,
-): Configuration => {
+const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     /**
-     * Tell webpack what we are making :)
+     * Set local options
      */
     const name = "server";
     const target = "node";
+    const publicPath = options.publicPath;
+    const buildPath = options.buildPath;
 
     /**
-     * Webpack uses `publicPath` to determine where the app is being served from.
-     * It requires a trailing slash, or the file assets will get an incorrect path.
+     * Set env variables
      */
     const environment = env.NODE_ENV || "production";
-    const publicPath = env.PUBLIC_URL || "/";
-    const buildPath = env.BUILD_PATH || "dist";
 
     /**
      * Utility functions to help segment configuration based on environment
@@ -216,13 +208,9 @@ const config = (
          * @env all
          */
         new webpack.EnvironmentPlugin({
-            ...process.env,
-            ...{
-                NAME: name,
-                NODE_ENV: ifProduction("production", "development"),
-                PUBLIC_URL: publicPath,
-                TARGET: target,
-            },
+            NAME: name,
+            PUBLIC_PATH: publicPath,
+            TARGET: target,
         }),
         /**
          * Perform type checking and linting in a separate process to speed up compilation

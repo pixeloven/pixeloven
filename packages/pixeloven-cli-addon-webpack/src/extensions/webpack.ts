@@ -1,12 +1,4 @@
-import { normalizeUrl } from "@pixeloven/core";
-import { Build } from "@pixeloven/webpack";
-import { Compiler } from "@pixeloven/webpack-compiler";
-import {
-    webpackClientConfig,
-    webpackServerConfig,
-} from "@pixeloven/webpack-config";
-import { Server } from "@pixeloven/webpack-dev-server";
-import { createConfig } from "../config";
+import { getBuilder, getCompiler, getServer } from "@pixeloven/webpack";
 import {
     AddonWebpackRunContext,
     WebpackExtensionOptions,
@@ -25,41 +17,28 @@ import {
  */
 export default (context: AddonWebpackRunContext) => {
     const webpack = async (options: WebpackExtensionOptions) => {
-        const { print } = context;
-        const getCompile = () => {
-            return Compiler.create([
-                webpackClientConfig(process.env, options.configOptions),
-                webpackServerConfig(process.env, options.configOptions),
-            ]);
-        };
+        const { pixelOven, print } = context;
+        const pluginPath = pixelOven.resolvePlugin("@pixeloven", "webpack");
+        if (!pluginPath) {
+            throw new Error(
+                "Could not find peer dependency @pixeloven/webpack",
+            );
+        }
         try {
             switch (options.type) {
                 case WebpackExtensionType.build: {
-                    const webpackCompiler = getCompile();
-                    const build = new Build(webpackCompiler, {
-                        path: "./dist", // TODO configurable
-                    });
+                    const compiler = getCompiler(options.compilerOptions);
+                    const builder = getBuilder(compiler, options.buildOptions);
                     let statusCode = 0;
-                    statusCode += await build.client();
-                    statusCode += await build.server();
+                    statusCode += await builder.client();
+                    statusCode += await builder.server();
                     return statusCode;
                 }
                 case WebpackExtensionType.start: {
-                    const webpackCompiler = getCompile();
-                    const serverConfig = createConfig();
-                    const baseUrl = normalizeUrl(
-                        `${serverConfig.protocol}://${serverConfig.host}:${
-                            serverConfig.port
-                        }/${serverConfig.path}`,
-                    );
+                    const compiler = getCompiler(options.compilerOptions);
                     print.info(`Connecting server...`);
-                    const server = new Server(webpackCompiler, serverConfig);
-                    server.create().then(app => {
-                        app.listen(serverConfig.port, serverConfig.host, () => {
-                            print.success(`Started on ${baseUrl}`);
-                        });
-                    });
-                    return 0;
+                    const server = getServer(compiler, options.serverOptions);
+                    return await server.start();
                 }
             }
         } catch (err) {

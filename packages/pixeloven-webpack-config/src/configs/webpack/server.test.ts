@@ -24,14 +24,22 @@ describe("@pixeloven/webpack", () => {
                 it("should export webpack config targeting node for development", () => {
                     const env = process.env;
                     env.NODE_ENV = "development";
-                    const config = server(env);
+                    const config = server(env, {
+                        buildPath: "./dist",
+                        publicPath: "/",
+                        withSourceMap: true,
+                    });
                     expect(config.mode).toEqual("development");
                     expect(config.target).toEqual("node");
                 });
                 it("should export webpack config targeting node for production", () => {
                     const env = process.env;
                     env.NODE_ENV = "production";
-                    const config = server(env);
+                    const config = server(env, {
+                        buildPath: "./dist",
+                        publicPath: "/",
+                        withSourceMap: true,
+                    });
                     expect(config.mode).toEqual("production");
                     expect(config.target).toEqual("node");
                 });
