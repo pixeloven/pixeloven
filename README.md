@@ -69,16 +69,16 @@ Below are just some of the up coming ideas for improvements.
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!
 
 ## Planned v5
-1) node-mocks-http replace with supertest
-2) Update middleware and examples
-3) Finish re-write of build
-4) Remove .env as a requirement
-5) Update generators to have more react 16.8 features
-6) Unify all logging - use something more standard than webpack-log
+1) Finish re-write of build
+2) Remove .env as a requirement
+3) Update generators to have more react 16.8 features
 
 ## Planned v6
 1) Move generators to use gluegun
-2) Remove react-dev-utils
-3) Add help to CLI and documentation
-4) Reach 90-100% test coverage
-5) Expose storybook addons through library
+2) Unify all logging - use something more standard than webpack-log
+3) Remove react-dev-utils
+4) Add help to CLI and documentation
+5) Reach 90-100% test coverage
+6) Expose storybook addons through library
+7) Update middleware and examples
+8) node-mocks-http replace with supertest
