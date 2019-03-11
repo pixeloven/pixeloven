@@ -72,7 +72,6 @@ export function getBuilder(
 
 /**
  * Returns a compiler with our custom configuration
- * @todo move static method into here
  * @param options
  */
 export function getCompiler(options: Partial<CompilerConfig> = {}) {
@@ -95,3 +94,5 @@ export function getServer(
     const config = mergeOptions(defaultServerOptions, options);
     return new Server(compiler, config);
 }
+
+// TODO Set .env here or in CLI???

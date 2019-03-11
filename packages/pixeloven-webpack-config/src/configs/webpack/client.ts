@@ -319,7 +319,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
          */
         new webpack.EnvironmentPlugin({
             NAME: name,
-            PUBLIC_URL: publicPath,
+            PUBLIC_PATH: publicPath,
             TARGET: target,
         }),
         /**

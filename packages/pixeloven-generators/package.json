@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@pixeloven/core": "^5.0.0-beta.1",
-    "@pixeloven/tasks": "^5.0.0-beta.1",
     "plop": "2.2.0"
   },
   "devDependencies": {
+    "@pixeloven/tasks": "^5.0.0-beta.1",
     "@types/inquirer": "0.0.43",
     "@types/node": "10.12.18"
   },

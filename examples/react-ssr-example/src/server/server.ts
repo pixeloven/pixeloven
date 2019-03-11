@@ -15,24 +15,14 @@ const server = (app: Application) => {
      */
     app.use(
         expressWinston.logger({
-            transports: [
-                new winston.transports.Console(),
-                new winston.transports.File({
-                    filename: "storage/logs/info.log",
-                    level: "info",
-                }),
-                new winston.transports.File({
-                    filename: "storage/logs/error.log",
-                    level: "error",
-                }),
-            ],
+            transports: [new winston.transports.Console()],
         }),
     );
 
     /**
      * Register endpoints
      */
-    app.use(config.baseUrl, health);
+    app.use(config.publicPath, health);
     app.use(renderer);
     app.use(errorHandler);
 };

@@ -18,7 +18,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/tasks": "^5.0.0-beta.1",
     "@pixeloven/webpack-builder": "^5.0.0-beta.7",
     "@pixeloven/webpack-compiler": "^5.0.0-beta.1",
     "@pixeloven/webpack-config": "^5.0.0-beta.7",
