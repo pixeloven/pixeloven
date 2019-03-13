@@ -1,11 +1,11 @@
 import {
     convertRouteConfig,
     matchRoutes,
+    RouteProps,
 } from "@pixeloven/react-router-config";
-import { config } from "@server/config";
-import { Html } from "@server/views";
+import { Body, Head } from "@server/views";
 import { App } from "@shared/components";
-import routeConfig from "@shared/routes";
+import routeConfig, { unknownErrorRoutes } from "@shared/routes";
 import { configureStore, rootSaga } from "@shared/store";
 import { NextFunction, Request, Response } from "express";
 import * as React from "react";
@@ -13,72 +13,109 @@ import { renderToString } from "react-dom/server";
 import { Helmet } from "react-helmet";
 import { Provider } from "react-redux";
 import { StaticContext, StaticRouter } from "react-router";
+import { Store } from "redux";
+
+interface ContentProps {
+    routes: RouteProps[];
+    store: Store;
+}
 
 /**
- * Renderer middleware
- * @description Renders react application to html
- * @param req
- * @param res
- * @param next
+ * @param publicPath needed to help tell our router how to resolve public paths
  */
-export default (req: Request, res: Response, next: NextFunction): void => {
-    const store = configureStore(false);
-    const staticContext: StaticContext = {
-        statusCode: 200,
-    };
-    const routes = convertRouteConfig(routeConfig, config.publicPath);
+export default (publicPath: string) => {
+    return (req: Request, res: Response, next: NextFunction): void => {
+        const staticContext: StaticContext = {
+            statusCode: 200,
+        };
+        try {
+            const store = configureStore("server");
+            const routes = convertRouteConfig(routeConfig, publicPath);
+            const matchedRoutes = matchRoutes(routes, req.path);
 
-    // run saga middleware and then proceed with rendering once END action is received
-    store
-        .runSaga(rootSaga)
-        .done.then(() => {
-            const helmet = Helmet.renderStatic();
-            const markup = renderToString(
-                <Html
-                    files={req.files}
-                    helmet={helmet}
-                    initialState={store.getState()}
-                >
-                    <Provider store={store}>
+            /**
+             * Encapsulate application head
+             * @param props
+             */
+            const head = () => {
+                const helmet = Helmet.renderStatic();
+                return <Head files={req.files} helmet={helmet} />;
+            };
+
+            /**
+             * Encapsulate application content
+             * @param props
+             */
+            const content = (props: ContentProps) => (
+                <Body files={req.files} initialState={props.store.getState()}>
+                    <Provider store={props.store}>
                         <StaticRouter
                             location={req.url}
                             context={staticContext}
                         >
-                            <App routes={routes} />
+                            <App routes={props.routes} />
                         </StaticRouter>
                     </Provider>
-                </Html>,
+                </Body>
             );
-            res.status(staticContext.statusCode || 200).send(
-                `<!DOCTYPE html>${markup}`,
-            );
-        })
-        .catch(error => {
-            next(error);
-        });
 
-    /**
-     * This likely will break prod build and we should find a better way
-     * @todo perhaps by modifying nginx proxy on the docker side so that this is needed
-     */
-    const relativeUrlPath = req.url.replace(config.publicPath, "/");
-
-    /**
-     * Finds any matching routes attempts to init state on each
-     */
-    try {
-        const matchedRoutes = matchRoutes(routes, relativeUrlPath);
-        matchedRoutes.forEach(matchedRoute => {
-            if (matchedRoute.route.fetchData) {
-                matchedRoute.route.fetchData(
-                    store.dispatch,
-                    matchedRoute.matched.params,
-                );
-            }
-        });
-    } catch (e) {
-        console.error(e);
-    }
-    // dispatch END action so sagas stop listening after they're resolved
-    store.close();
+            /**
+             * Setup store to render application after sagas have complete
+             * @todo react-helmet-async instead
+             */
+            store
+                .runSaga(rootSaga)
+                .done.then(() => {
+                    const contentString = renderToString(
+                        content({
+                            routes,
+                            store,
+                        }),
+                    );
+                    const headString = renderToString(head());
+                    res.write(headString);
+                    res.write(contentString);
+                    res.write(`</html>`);
+                    res.end();
+                })
+                .catch(error => {
+                    const contentString = renderToString(
+                        content({
+                            routes: unknownErrorRoutes,
+                            store,
+                        }),
+                    );
+                    const headString = renderToString(head());
+                    res.write(headString);
+                    res.write(contentString);
+                    res.write(`</html>`);
+                    res.end();
+                });
+            /**
+             * @todo Make this logic available in package
+             * @todo Display some dummy info from JSON file
+             */
+            let matchedStatusCodeCount = 0;
+            matchedRoutes.forEach(matchedRoute => {
+                if (matchedRoute.route.statusCode && !matchedStatusCodeCount) {
+                    staticContext.statusCode = matchedRoute.route.statusCode;
+                    matchedStatusCodeCount++;
+                }
+                if (matchedRoute.route.fetchData) {
+                    matchedRoute.route.fetchData(
+                        store.dispatch,
+                        matchedRoute.matched.params,
+                    );
+                }
+            });
+            res.status(staticContext.statusCode || 200);
+            res.write(`<!DOCTYPE html><html lang="en">`);
+            /**
+             * Dispatch END action so sagas stop listening after they're resolved
+             */
+            store.close();
+        } catch (e) {
+            next(e);
+        }
+    };
 };

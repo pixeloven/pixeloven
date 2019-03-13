@@ -83,7 +83,7 @@
   "scripts": {
     "cli": "pixeloven",
     "build": "yarn build:app && yarn build:story",
-    "build:app": "pixeloven webpack build --source-map --public-path=\"/\" ",
+    "build:app": "pixeloven webpack build --source-map --public-path /",
     "build:story": "pixeloven story build",
     "prebuild": "pixeloven delete dist",
     "document": "pixeloven document ts ./src",
@@ -96,9 +96,9 @@
     "pretty": "yarn pretty:ts && yarn pretty:scss",
     "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
     "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
-    "production": "node ./dist/server.js",
+    "production": "node ./dist/server.js", 
     "start": "yarn start:app && yarn start:story",
-    "start:app": "pixeloven webpack start --host 0.0.0.0 --protocol http --port 48080",
+    "start:app": "pixeloven webpack start --host 0.0.0.0 --path /example/ --port 48080 --protocol http",
     "start:story": "pixeloven story start",
     "test": "pixeloven test --color --coverage",
     "test:watch": "pixeloven test watch"

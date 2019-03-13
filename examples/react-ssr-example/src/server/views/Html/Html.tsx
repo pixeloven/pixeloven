@@ -1,4 +1,4 @@
-import { Link, Script } from "@server/views";
+import { Body, Head } from "@server/views";
 import { State } from "@shared/store/types";
 import * as React from "react";
 import { HelmetData } from "react-helmet";
@@ -6,44 +6,18 @@ import { HelmetData } from "react-helmet";
 interface HtmlProps {
     children: React.ReactNode;
     files?: Express.Files;
-    helmet?: HelmetData;
     initialState?: State;
+    helmet?: HelmetData;
+    lang: string;
 }
 
 const Html = (props: HtmlProps) => {
-    const serializedState = JSON.stringify(props.initialState);
-    const cssTags =
-        props.files && props.files.css ? (
-            <Link href={props.files.css} rel="stylesheet" type="text/css" />
-        ) : (
-            undefined
-        );
-    const jsTags =
-        props.files && props.files.js ? (
-            <Script src={props.files.js} />
-        ) : (
-            undefined
-        );
-    const innerHtml = {
-        __html: `window.INIT_STATE = ${serializedState};`,
-    };
     return (
-        <html lang="en">
-            <head>
-                {props.helmet && props.helmet.title.toComponent()}
-                {props.helmet && props.helmet.meta.toComponent()}
-                {props.helmet && props.helmet.link.toComponent()}
-                <Link href="favicon.ico" rel="icon" />
-                {cssTags}
-            </head>
-            <body>
-                <noscript>
-                    You need to enable JavaScript to run this app.
-                </noscript>
-                <div id="root">{props.children}</div>
-                <script dangerouslySetInnerHTML={innerHtml} />
-                {jsTags}
-            </body>
+        <html lang={props.lang}>
+            <Head files={props.files} helmet={props.helmet} />
+            <Body files={props.files} initialState={props.initialState}>
+                {props.children}
+            </Body>
         </html>
     );
 };
