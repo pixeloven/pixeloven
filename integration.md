@@ -103,7 +103,7 @@ PROTOCOL=http
 PUBLIC_URL=/
 BUILD_PATH=dist
 LOG_LEVEL=debug
-MACHINE=docker
+ 
 ``` 
 > Note the MACHINE variable only applies while running the development server.
 

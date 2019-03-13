@@ -42,17 +42,17 @@ export default {
          */
         const statusCode = await webpack({
             buildOptions: {
-                path: "./dist",
+                outputPath: "./dist",
             },
             compilerOptions: {
-                buildPath: "./dist",
-                publicPath: parameters.options.publicPath,
+                outputPath: "./dist",
+                path: parameters.options.path,
                 withSourceMap: parameters.options.sourceMap,
             },
             serverOptions: {
                 host: parameters.options.host,
-                machine: parameters.options.machine,
                 path: parameters.options.path,
+                poll: parameters.options.poll,
                 port: parameters.options.port,
                 protocol: parameters.options.protocol,
             },

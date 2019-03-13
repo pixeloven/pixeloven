@@ -32,8 +32,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      */
     const name = "client";
     const target = "web";
-    const publicPath = options.publicPath;
-    const buildPath = options.buildPath;
+    const publicPath = options.path;
+    const buildPath = options.outputPath;
 
     /**
      * Set env variables

@@ -7,35 +7,38 @@ import {
 } from "@pixeloven/webpack-config";
 import {
     Config as ServerConfig,
-    Machine,
     Protocol,
     Server,
 } from "@pixeloven/webpack-dev-server";
 
 /**
+ * @todo Unify params for build and dev server
+ * @todo Should we set ENV here? Or should this be up to the application?
+ */
+
+/**
  * Default compiler options
  */
 const defaultBuildOptions = {
-    path: "./dist",
+    outputPath: "./dist",
 };
 
 /**
  * Default compiler options
  */
 const defaultCompilerOptions = {
-    buildPath: "./dist",
-    publicPath: "/",
+    outputPath: "./dist",
+    path: "/",
     withSourceMap: false,
 };
 
 /**
  * Default compiler options
- * @todo Remove machine and replace with something more generic
  */
 const defaultServerOptions = {
     host: "localhost",
-    machine: Machine.host,
     path: "/",
+    poll: 500,
     port: 8080,
     protocol: Protocol.http,
 };
@@ -92,7 +95,6 @@ export function getServer(
     options: Partial<ServerConfig> = {},
 ) {
     const config = mergeOptions(defaultServerOptions, options);
+    console.log(config);
     return new Server(compiler, config);
 }
-
-// TODO Set .env here or in CLI???

@@ -49,14 +49,14 @@
     }
   },
   "lint-staged": {
-    "examples/**/*.{ts,tsx}": [
-      "yarn pretty",
-      "yarn lint",
+    "{examples,packages}/**/*.scss": [
+      "lerna run pixeloven pretty scss",
+      "lerna run pixeloven lint scss",
       "git add"
     ],
-    "packages/**/*.{scss,ts,tsx}": [
-      "yarn pretty",
-      "yarn lint",
+    "{examples,packages}/**/*.{ts,tsx}": [
+      "lerna run pixeloven pretty ts",
+      "lerna run pixeloven lint ts",
       "git add"
     ]
   },

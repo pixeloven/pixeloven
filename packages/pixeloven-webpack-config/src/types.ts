@@ -1,5 +1,5 @@
 export interface Config {
-    buildPath: string;
-    publicPath: string;
+    outputPath: string;
+    path: string;
     withSourceMap: boolean;
 }

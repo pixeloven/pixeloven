@@ -24,7 +24,7 @@ const server = (app: Application, config: Config) => {
      * Define render middleware
      * @todo Apply only for Production
      */
-    if (config.environment === "production") {
+    if (config.environment.node === "production") {
         app.use(
             assetPath(path.resolve(__dirname, "public/asset-manifest.json")),
         );
