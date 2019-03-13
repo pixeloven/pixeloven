@@ -20,9 +20,6 @@ interface ContentProps {
     store: Store;
 }
 
-/**
- * @param publicPath needed to help tell our router how to resolve public paths
- */
 export default (publicPath: string) => {
     return (req: Request, res: Response, next: NextFunction): void => {
         const staticContext: StaticContext = {

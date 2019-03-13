@@ -4,7 +4,7 @@
  *              Example: process.env.NAME might become "client" or "server"
  */
 const NAME = process.env.NAME || "client";
-const PUBLIC_PATH = process.env.PUBLIC_PATH || "/";
+const PUBLIC_PATH = process.env.PUBLIC_PATH || "/example/";
 const TARGET = process.env.TARGET || "web";
 
 export interface Config {

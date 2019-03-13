@@ -23,11 +23,11 @@ export interface Config extends SharedConfig {
  * General configuration for server
  * @todo This all should be server config and be exposed to the client through the store if needed
  */
-const HOST = process.env.HOST || "localhost";
+const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || "8080";
-const PROTOCOL = process.env.PROTOCOL || "https";
-const NODE_ENV = process.env.NODE_ENV || "production";
-const ENVIRONMENT = process.env.ENVIRONMENT || "production";
+const PROTOCOL = process.env.PROTOCOL || "http";
+const NODE_ENV = process.env.NODE_ENV || "development";
+const ENVIRONMENT = process.env.ENVIRONMENT || "development";
 
 /**
  * @todo CA-543 Remove machine config and set to environment.host

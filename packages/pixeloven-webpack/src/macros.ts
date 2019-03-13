@@ -95,6 +95,5 @@ export function getServer(
     options: Partial<ServerConfig> = {},
 ) {
     const config = mergeOptions(defaultServerOptions, options);
-    console.log(config);
     return new Server(compiler, config);
 }
