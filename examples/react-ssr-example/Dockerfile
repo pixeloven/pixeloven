@@ -2,6 +2,7 @@ FROM node:10
 LABEL description="React SSR Example"
 
 # TODO probably need to move this to the root of the project if we want to use this for more than an example.
+# TODO add reverse proxy to show a prod env
 
 # WORKDIR /tmp/src/app/
 # ADD . /tmp/src/app/
