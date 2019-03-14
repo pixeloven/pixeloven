@@ -22,7 +22,7 @@ const routes = convertRouteConfig(routeConfig, config.publicPath);
  * Wrap application with container, router and store
  */
 const AppWrapper = () => (
-    <Provider store={configureStore(true)}>
+    <Provider store={configureStore("client")}>
         <BrowserRouter>
             <App routes={routes} />
         </BrowserRouter>

@@ -1,15 +1,16 @@
-import { Application } from "express";
+import express, { Application } from "express";
 import expressWinston from "express-winston";
+import path from "path";
 import winston from "winston";
-import { config } from "./config";
+import { Config } from "./config";
 import { health } from "./controllers";
-import { errorHandler, renderer } from "./middleware";
+import { assetPath, renderer } from "./middleware";
 
 /**
  * Define server logic here
  * @param app
  */
-const server = (app: Application) => {
+const server = (app: Application, config: Config) => {
     /**
      * Setup express logger
      */
@@ -20,11 +21,24 @@ const server = (app: Application) => {
     );
 
     /**
+     * Define render middleware
+     * @todo Apply only for Production
+     */
+    if (config.environment.node === "production") {
+        app.use(
+            assetPath(path.resolve(__dirname, "public/asset-manifest.json")),
+        );
+        app.use(
+            config.publicPath,
+            express.static(path.resolve(__dirname, "public")),
+        );
+    }
+
+    /**
      * Register endpoints
      */
     app.use(config.publicPath, health);
-    app.use(renderer);
-    app.use(errorHandler);
+    app.use(renderer(config.publicPath));
 };
 
 export default server;

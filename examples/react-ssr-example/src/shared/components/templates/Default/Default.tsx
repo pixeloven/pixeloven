@@ -8,8 +8,8 @@ class Default extends React.PureComponent<RouteComponentProps> {
     public render(): React.ReactNode {
         const { routes, match } = this.props;
         const items: MenuItem[] = [
-            { name: "Home", path: "/", active: true },
-            { name: "Blog", path: "/blog", active: false },
+            { name: "Home", path: "/example/", active: true },
+            { name: "Blog", path: "/example/blog", active: false },
         ];
         items.forEach((item, index) => {
             items[index].active = match.isExact

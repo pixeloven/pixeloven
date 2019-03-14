@@ -9,6 +9,8 @@ declare namespace Express {
     }
 
     export interface Request {
+        language: string;
+        locale: string;
         files?: Files;
     }
 }

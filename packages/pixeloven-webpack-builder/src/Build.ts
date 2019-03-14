@@ -20,7 +20,7 @@ const {
 } = FileSizeReporter;
 
 export interface Config {
-    path: string;
+    outputPath: string;
 }
 
 class Build {
@@ -53,15 +53,15 @@ class Build {
         this.compiler = compiler;
         this.config = config;
 
-        this.clientPath = `${config.path}/public`;
-        this.serverPath = config.path;
+        this.clientPath = `${config.outputPath}/public`;
+        this.serverPath = config.outputPath;
     }
 
     /**
      * Build client code path
      */
     public async client() {
-        createOrEmptyDir(this.config.path);
+        createOrEmptyDir(this.config.outputPath);
         logger.info("Creating an optimized production build...");
         if (this.compiler.hasClientCodePath) {
             logger.info("Client code path found...");

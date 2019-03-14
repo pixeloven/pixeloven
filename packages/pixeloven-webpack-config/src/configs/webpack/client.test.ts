@@ -25,8 +25,8 @@ describe("@pixeloven/webpack", () => {
                     const env = process.env;
                     env.NODE_ENV = "development";
                     const config = client(env, {
-                        buildPath: "./dist",
-                        publicPath: "/",
+                        outputPath: "./dist",
+                        path: "/",
                         withSourceMap: true,
                     });
                     expect(config.mode).toEqual("development");
@@ -36,8 +36,8 @@ describe("@pixeloven/webpack", () => {
                     const env = process.env;
                     env.NODE_ENV = "production";
                     const config = client(env, {
-                        buildPath: "./dist",
-                        publicPath: "/",
+                        outputPath: "./dist",
+                        path: "/",
                         withSourceMap: true,
                     });
                     expect(config.mode).toEqual("production");

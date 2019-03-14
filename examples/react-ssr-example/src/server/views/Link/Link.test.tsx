@@ -1,4 +1,4 @@
-import { configure, mount } from "enzyme";
+import { configure, shallow } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import * as React from "react";
@@ -13,7 +13,7 @@ describe("Server", () => {
         describe("StyleSheetTags", () => {
             it("should render an `link` elem with an `href` attr", () => {
                 const assetFile = "assets/css/main.css";
-                const wrapper = mount(
+                const wrapper = shallow(
                     <Link href={[assetFile]} rel="stylesheet" />,
                 );
                 const linkTag = wrapper.find("link");
@@ -25,7 +25,7 @@ describe("Server", () => {
                     "assets/css/main.css",
                     "assets/css/vendor.css",
                 ];
-                const wrapper = mount(
+                const wrapper = shallow(
                     <Link href={assetFiles} rel="stylesheet" />,
                 );
                 const linkTags = wrapper.find("link");

@@ -29,20 +29,6 @@ This package has the following requirements for development. Keep in mind that t
 
 Please consider reviewing our [contribution guide](./contribution.md) for details on how to get started. Any information regarding development, testing and/or integration can be found there.
 
-### Environment Variables
-First simply create an `.env` file at the root of this project. Then copy the contents of shown below into the newly created file.
-```text
-PORT=48080
-HOST=0.0.0.0
-PROTOCOL=http
-PUBLIC_URL=/f/
-BUILD_PATH=dist
-LOG_LEVEL=debug
-MACHINE=docker
-``` 
-If developing without docker it is required to keep `PROTOCOL` to **http** otherwise the development server will fail to spin up. If you only plan on using this environment outside of docker for storybook only then you can safely remove the `MACHINE` key. However, without it watching inside of docker may not work properly.
-
-
 ## Directory Structure
 ```
 root

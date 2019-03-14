@@ -12,6 +12,8 @@ import {
 } from "redux-saga";
 import { rootReducer, rootSaga } from "./";
 
+type Target = "client" | "server";
+
 export interface Store extends DefaultStore {
     runSaga: SagaMiddleware<{}>["run"];
     close: () => Action;
@@ -19,11 +21,11 @@ export interface Store extends DefaultStore {
 
 /**
  * Setup store and saga middleware
- * @todo: CA-114 refactor configureStore() with webpack
+ * @todo Set locale here
  */
-export const configureStore = (clientSide: boolean): Store => {
+export const configureStore = (target: Target): Store => {
     const initialState =
-        clientSide && window.INIT_STATE ? window.INIT_STATE : {};
+        target === "client" && window.INIT_STATE ? window.INIT_STATE : {};
 
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
@@ -35,7 +37,7 @@ export const configureStore = (clientSide: boolean): Store => {
         ),
     ) as Store;
 
-    if (clientSide) {
+    if (target === "client") {
         sagaMiddleware.run(rootSaga);
     } else {
         store.runSaga = sagaMiddleware.run;

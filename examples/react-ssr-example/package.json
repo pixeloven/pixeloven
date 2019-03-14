@@ -73,8 +73,9 @@
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
     "node-mocks-http": "1.7.3",
+    "npm-run-all": "4.1.5",
     "redux-saga-test-plan": "3.7.0",
-    "sinon": "7.2.2",
+    "sinon": "7.2.7",
     "supertest": "3.3.0"
   },
   "devEngines": {
@@ -83,7 +84,7 @@
   "scripts": {
     "cli": "pixeloven",
     "build": "yarn build:app && yarn build:story",
-    "build:app": "pixeloven webpack build --source-map --public-path=\"/\" ",
+    "build:app": "pixeloven webpack build --path /example/",
     "build:story": "pixeloven story build",
     "prebuild": "pixeloven delete dist",
     "document": "pixeloven document ts ./src",
@@ -96,10 +97,10 @@
     "pretty": "yarn pretty:ts && yarn pretty:scss",
     "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
     "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
-    "production": "node ./dist/server.js",
-    "start": "yarn start:app && yarn start:story",
-    "start:app": "pixeloven webpack start --host 0.0.0.0 --protocol http --port 48080",
-    "start:story": "pixeloven story start",
+    "start": "run-p start:app start:story",
+    "start:app": "NODE_ENV=development pixeloven webpack start --host 0.0.0.0 --path /example/ --port 8080 --protocol http",
+    "start:story": "NODE_ENV=development pixeloven story start",
+    "start:prod": "NODE_ENV=production node ./dist/server.js",
     "test": "pixeloven test --color --coverage",
     "test:watch": "pixeloven test watch"
   }
