@@ -8,9 +8,6 @@ describe("@server/config", () => {
     it("contains publicPath property", () => {
         expect(config).toHaveProperty("publicPath");
     });
-    it("contains domain property", () => {
-        expect(config).toHaveProperty("domain");
-    });
     it("contains environment property", () => {
         expect(config).toHaveProperty("environment");
     });
