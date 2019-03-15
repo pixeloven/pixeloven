@@ -27,6 +27,7 @@
     "ts",
     "tsx"
   ],
+  "maxConcurrency": 2,
   "coveragePathIgnorePatterns": [
     "/node_modules/",
     "/test/"
