@@ -1,0 +1,25 @@
+import * as React from "react";
+
+import "./{{componentName}}.scss";
+
+interface {{componentName}}Props {
+    exampleProp?: string;
+}
+
+{{#if includeState}}
+interface State {
+    exampleState?: string;
+}
+
+class {{componentName}} extends React.Component<{{componentName}}Props, State> {
+{{else}}
+class {{componentName}} extends React.Component<{{componentName}}Props> {
+{{/if}}
+    public render() {
+        const { exampleProp } = this.props;
+
+        return exampleProp ? <div>{exampleProp}</div> : false;
+    }
+}
+
+export default {{componentName}};

@@ -9,15 +9,16 @@ configure({
     adapter: new ReactSixteenAdapter(),
 });
 
-describe("Shared/Components/{{capitalize (plural componentType)}}", () => {
-    describe("{{componentName}}", () => {
-        it("should not render anything", () => {
-            const wrapper = shallow(<{{componentName}} />);
-            expect(wrapper.type()).toBeNull();
-        });
-        it("should render \"div\" with property \"example\"", () => {
-            const wrapper = shallow(<{{componentName}} example={"example"} />);
-            expect(wrapper.find("div").text()).toEqual("example");
-        });
+describe("Shared/Components/{{capitalize (plural componentType)}}/{{componentName}}", () => {
+    it("should not render anything", () => {
+        const wrapper = shallow(<{{componentName}} />);
+
+        expect(wrapper.type()).toBeNull();
+    });
+
+    it("should render \"div\" with property \"example\"", () => {
+        const wrapper = shallow(<{{componentName}} exampleProp={"example"} />)
+
+        expect(wrapper.find("div").text()).toEqual("example");
     });
 });

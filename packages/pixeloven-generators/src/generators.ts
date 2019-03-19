@@ -2,9 +2,14 @@ import { resolvePath } from "@pixeloven/core";
 import { Plop } from "./plop";
 
 /**
- * Acceptable types
+ * Acceptable atomic types
  */
-const componentTypes = ["atom", "molecule", "organism", "page", "template"];
+const atomicTypes = ["atom", "molecule", "organism", "page", "template"];
+
+/**
+ * Acceptable component types
+ */
+const componentTypes = ["function", "class"];
 
 /**
  * Allowed request methods
@@ -70,37 +75,37 @@ const generator = (plop: Plop) => {
         actions: [
             {
                 abortOnFail: true,
-                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/README.md`,
+                path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/README.md`,
                 templateFile: "templates/Component/README.md.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/index.ts`,
+                path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/index.ts`,
                 templateFile: "templates/Component/index.ts.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.tsx`,
-                templateFile: "templates/Component/Component.tsx.hbs",
+                path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.tsx`,
+                templateFile: "templates/Component/{{componentType}}.Component.tsx.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.stories.tsx`,
+                path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.stories.tsx`,
                 templateFile: "templates/Component/Component.stories.tsx.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.test.tsx`,
+                path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.test.tsx`,
                 templateFile: "templates/Component/Component.test.tsx.hbs",
                 type: "add",
             },
             {
                 abortOnFail: true,
-                path: `${componentPath}/{{plural (lowerCase componentType)}}/{{componentName}}/{{componentName}}.scss`,
+                path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.scss`,
                 templateFile: "templates/Component/Component.scss.hbs",
                 type: "add",
             },
@@ -108,10 +113,22 @@ const generator = (plop: Plop) => {
         description: "Generate a new Atomic component",
         prompts: [
             {
-                choices: componentTypes,
+                choices: atomicTypes,
                 message: `What "type" of Atomic component is this?`,
+                name: "atomicType",
+                type: "list",
+            },
+            {
+                choices: componentTypes,
+                message: "Is this a functional or class component?",
                 name: "componentType",
                 type: "list",
+            },
+            {
+                default: true,
+                message: "Will this component need to manage state?",
+                name: "includeState",
+                type: "confirm",
             },
             {
                 message: "What is the name of the new component?",

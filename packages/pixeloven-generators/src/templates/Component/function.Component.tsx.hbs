@@ -1,0 +1,20 @@
+import React{{#if includeState}}, { useState }{{/if}} from "react";
+
+import "./{{componentName}}.scss";
+
+interface {{componentName}}Props {
+    exampleProp?: string;
+}
+
+function {{componentName}}(props: {{componentName}}Props) {
+    const { exampleProp } = props;
+    {{#if includeState}}
+    const [exampleState] = useState(0);
+
+    return exampleProp ? <div>{exampleProp} {exampleState}</div> : false;
+    {{else}}
+    return exampleProp ? <div>{exampleProp}</div> : false;
+    {{/if}}
+}
+
+export default {{componentName}};
