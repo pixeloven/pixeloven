@@ -53,6 +53,7 @@ class Server {
             publicPath: this.config.path,
             watchOptions: {
                 poll: this.config.poll,
+                ignored: this.config.ignored,
             },
         });
         const webpackHotClientMiddleware = createWebpackHotClientMiddleware(

@@ -37,6 +37,7 @@ const defaultCompilerOptions = {
  */
 const defaultServerOptions = {
     host: "localhost",
+    ignored: /node_modules/,
     path: "/",
     poll: 500,
     port: 8080,
