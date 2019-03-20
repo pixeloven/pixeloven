@@ -14,9 +14,10 @@ const convertRouteConfig = (
     return routeConfig.map(route => {
         let path = parentRoute;
         if (route.path) {
-            path = typeof route.path === "function" 
-                ? normalizeUrl(route.path(parentRoute))
-                : route.path;
+            path =
+                typeof route.path === "function"
+                    ? normalizeUrl(route.path(parentRoute))
+                    : route.path;
         }
         const routes =
             route.routes && route.routes.length

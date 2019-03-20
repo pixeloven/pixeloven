@@ -73,13 +73,13 @@ describe("@pixeloven/react-router-config", () => {
                 const actual = convertRouteConfig([
                     {
                         component: TestComponent,
-                        path: "/path"
+                        path: "/path",
                     },
                 ]);
                 expect(actual).toEqual([
                     {
                         component: TestComponent,
-                        path: "/path"
+                        path: "/path",
                     },
                 ]);
             });
