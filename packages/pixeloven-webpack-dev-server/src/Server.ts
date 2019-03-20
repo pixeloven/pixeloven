@@ -52,8 +52,8 @@ class Server {
         const webpackDevMiddleware = createWebpackDevMiddleware(this.compiler, {
             publicPath: this.config.path,
             watchOptions: {
-                poll: this.config.poll,
                 ignored: this.config.ignored,
+                poll: this.config.poll,
             },
         });
         const webpackHotClientMiddleware = createWebpackHotClientMiddleware(

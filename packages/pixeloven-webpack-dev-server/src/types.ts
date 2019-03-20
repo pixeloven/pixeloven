@@ -9,5 +9,5 @@ export interface Config {
     protocol: Protocol;
     path: string;
     poll: number | boolean;
-    ignored: string | RegExp | Array<string>;
+    ignored: RegExp | string | string[];
 }
