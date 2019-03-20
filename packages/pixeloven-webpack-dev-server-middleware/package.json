@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-dev-server-middleware",
-  "version": "5.0.0",
+  "version": "5.2.0",
   "description": "Webpack Development Server middleware",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,8 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/express-dynamic-middleware": "^5.0.0",
-    "@pixeloven/node-logger": "^5.0.0",
+    "@pixeloven/express-dynamic-middleware": "^5.2.0",
+    "@pixeloven/node-logger": "^5.2.0",
     "ansi-html": "0.0.7",
     "html-entities": "1.2.1",
     "react-dev-utils": "7.0.1",
@@ -30,8 +30,8 @@
     "webpack-hot-middleware": "2.24.3"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.0.0",
-    "@pixeloven/webpack-compiler": "^5.0.0",
+    "@pixeloven/tasks": "^5.2.0",
+    "@pixeloven/webpack-compiler": "^5.2.0",
     "@types/express": "4.16.0",
     "@types/html-entities": "1.2.16",
     "@types/memory-fs": "0.3.2",
