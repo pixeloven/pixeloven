@@ -51,9 +51,9 @@ export default {
             },
             serverOptions: {
                 host:     parameters.options.host,
+                ignored:  parameters.options.ignored,
                 path:     parameters.options.path,
                 poll:     parameters.options.poll,
-                ignored:  parameters.options.ignored,
                 port:     parameters.options.port,
                 protocol: parameters.options.protocol,
             },
