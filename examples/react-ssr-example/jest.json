@@ -27,8 +27,6 @@
     "ts",
     "tsx"
   ],
-  "maxConcurrency": 2,
-  "collectCoverage": true,
   "coveragePathIgnorePatterns": [
     "/node_modules/",
     "/test/"
@@ -41,7 +39,7 @@
       "statements": 60
     }
   },
-  "collectCoverageFrom": [
+   "collectCoverageFrom": [
     "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
     "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",
     "!<rootDir>/src/**/styles/**",

@@ -18,8 +18,6 @@
     "json",
     "ts"
   ],
-  "maxConcurrency": 2,
-  "collectCoverage": true,
   "coveragePathIgnorePatterns": [
     "/node_modules/"
   ],
@@ -31,7 +29,7 @@
       "statements": 100
     }
   },
-  "collectCoverageFrom": [
+   "collectCoverageFrom": [
     "<rootDir>/src/**/*.{js,ts}",
     "!**/node_modules/**"
   ]

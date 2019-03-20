@@ -25,7 +25,7 @@ function getArgList(
         parameters.array && parameters.array.length
             ? parameters.array.slice(index)
             : [];
-    if (Array.isArray(parameters.raw)) {
+    if (type === "withOptions" && Array.isArray(parameters.raw)) {
         if (parameters.raw.length) {
             const rawIndex = args.length
                 ? parameters.raw.indexOf(args[0])
