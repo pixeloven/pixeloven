@@ -69,6 +69,20 @@ describe("@pixeloven/react-router-config", () => {
                 const actual = convertRouteConfig(customNestedRoutes);
                 expect(actual).toEqual(createNestedConvertedRoutes());
             });
+            it("should convert custom nested config with string path", () => {
+                const actual = convertRouteConfig([
+                    {
+                        component: TestComponent,
+                        path: "/path"
+                    },
+                ]);
+                expect(actual).toEqual([
+                    {
+                        component: TestComponent,
+                        path: "/path"
+                    },
+                ]);
+            });
         });
     });
 });

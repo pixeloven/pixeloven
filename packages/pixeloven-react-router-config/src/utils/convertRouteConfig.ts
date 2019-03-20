@@ -1,3 +1,4 @@
+import { normalizeUrl } from "@pixeloven/core";
 import { RouteConfig, RouteProps } from "../types";
 
 /**
@@ -11,9 +12,12 @@ const convertRouteConfig = (
     parentRoute: string = "",
 ): RouteProps[] => {
     return routeConfig.map(route => {
-        const path = route.path
-            ? route.path(parentRoute).replace("//", "/")
-            : parentRoute;
+        let path = parentRoute;
+        if (route.path) {
+            path = typeof route.path === "function" 
+                ? normalizeUrl(route.path(parentRoute))
+                : route.path;
+        }
         const routes =
             route.routes && route.routes.length
                 ? convertRouteConfig(route.routes, path)

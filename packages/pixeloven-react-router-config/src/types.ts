@@ -41,7 +41,7 @@ export type RouteResolvePath = (parentPath: string) => string;
 export interface RouteConfig {
     component: RouteComponent<Params>;
     exact?: boolean;
-    path?: RouteResolvePath;
+    path?: RouteResolvePath | string;
     fetchData?: RouteFetchDataFunction;
     routes?: RouteConfig[];
     statusCode?: number;

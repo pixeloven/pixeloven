@@ -2,6 +2,7 @@ import { DynamicMiddleware } from "@pixeloven/express-dynamic-middleware";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import { NextFunction, Request, Response } from "express";
+import { normalize} from "path";
 import { flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
@@ -9,6 +10,7 @@ import flushChunks from "webpack-flush-chunks";
 interface ReactAssetMiddlewareConfig {
     done?: (stats: Stats) => void;
     error?: (stats: Error) => void;
+    publicPath: string;
 }
 
 /**
@@ -38,8 +40,8 @@ const webpackReactAssetMiddleware = (
                 dynamicMiddleware.mount(
                     (req: Request, res: Response, next: NextFunction) => {
                         req.files = {
-                            css: stylesheets,
-                            js: scripts,
+                            css: stylesheets.map(file => normalize(`/${config.publicPath}/${file}`)),
+                            js: scripts.map(file => normalize(`/${config.publicPath}/${file}`)),
                         };
                         next();
                     },
@@ -74,7 +76,9 @@ const webpackReactAssetMiddleware = (
  */
 const createWebpackReactAssetMiddleware = (
     compiler: Compiler,
-    config: ReactAssetMiddlewareConfig = {},
+    config: ReactAssetMiddlewareConfig = {
+        publicPath: "/"
+    },
 ) => {
     return webpackReactAssetMiddleware(compiler, config);
 };
