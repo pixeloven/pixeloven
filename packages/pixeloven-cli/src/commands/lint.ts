@@ -26,6 +26,7 @@ export default {
             }
             return status;
         };
+        console.log(parameters.array);
         const argList =
             parameters.array && parameters.array.length
                 ? parameters.array.slice(1)

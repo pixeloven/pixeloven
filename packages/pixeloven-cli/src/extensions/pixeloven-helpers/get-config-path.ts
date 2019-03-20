@@ -1,14 +1,13 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
 import { filesystem, print } from "gluegun";
-import { GetConfigPathFunction } from "../../types";
 
 /**
  * @todo add options to configure how this works
  */
-const getConfigPath: GetConfigPathFunction = (
+function getConfigPath(
     fileName: string,
     strict: boolean = false,
-) => {
+) {
     const configPath = filesystem.path(fileName);
     if (filesystem.exists(configPath)) {
         print.info(`Configuration file found ${configPath}`);

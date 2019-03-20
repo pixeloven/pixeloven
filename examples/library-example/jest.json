@@ -18,7 +18,6 @@
     "json",
     "ts"
   ],
-  "collectCoverage": true,
   "coveragePathIgnorePatterns": [
     "/node_modules/"
   ],

@@ -14,7 +14,7 @@ const routes = [{
     path: "/test",
 }];
 
-<Routes config={routes} />
+<Routes as="switch" config={routes} />
 ```
 
 
