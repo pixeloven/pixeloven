@@ -25,13 +25,15 @@ function getArgList(
         parameters.array && parameters.array.length
             ? parameters.array.slice(index)
             : [];
-    if (type === "withOptions" && Array.isArray(parameters.raw)) {
-        if (parameters.raw.length) {
-            const rawIndex = args.length
-                ? parameters.raw.indexOf(args[0])
-                : parameters.raw.indexOf(cmd);
-            return parameters.raw.slice(rawIndex);
-        }
+    if (
+        type === "withOptions" &&
+        Array.isArray(parameters.raw) &&
+        parameters.raw.length
+    ) {
+        const rawIndex = args.length
+            ? parameters.raw.indexOf(args[0])
+            : parameters.raw.indexOf(cmd);
+        return parameters.raw.slice(rawIndex);
     }
     return args;
 }

@@ -3,7 +3,7 @@ import getArgList from "./get-arg-list";
 
 const array = ["watch"];
 const options = {
-    "coverage": true
+    coverage: true,
 };
 const raw = ["/path/to/node", "/path/to/cli", "watch", "--coverage"];
 
@@ -25,26 +25,36 @@ describe("@pixeloven/cli", () => {
                 const argList = getArgList("test", {
                     array,
                     options,
-                    raw
+                    raw,
                 });
                 expect(argList.length).toEqual(1);
                 expect(argList).toEqual(["watch"]);
             });
             it("should return args list and ignore first arg", () => {
-                const argList = getArgList("test", {
-                    array,
-                    options,
-                    raw
-                }, 1, "default");
+                const argList = getArgList(
+                    "test",
+                    {
+                        array,
+                        options,
+                        raw,
+                    },
+                    1,
+                    "default",
+                );
                 expect(argList.length).toEqual(0);
                 expect(argList).toEqual([]);
             });
             it("should return args list with raw options included", () => {
-                const argList = getArgList("test", {
-                    array,
-                    options,
-                    raw
-                }, 0, "withOptions");
+                const argList = getArgList(
+                    "test",
+                    {
+                        array,
+                        options,
+                        raw,
+                    },
+                    0,
+                    "withOptions",
+                );
                 expect(argList.length).toEqual(2);
                 expect(argList).toEqual(["watch", "--coverage"]);
             });
