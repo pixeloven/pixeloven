@@ -7,15 +7,13 @@ export default (context: PixelOvenRunContext) => {
         const configPath = pixelOven.getConfigPath(fileName);
         const cmd = ["jest"];
         if (configPath) {
-            return pixelOven.run(cmd.concat([
-                "--config",
-                configPath,
-                "--env=jsdom"
-            ]).concat(args));
+            return pixelOven.run(
+                cmd
+                    .concat(["--config", configPath, "--env=jsdom"])
+                    .concat(args),
+            );
         }
-        return pixelOven.run(cmd.concat([
-            "--env=jsdom"
-        ]).concat(args));
+        return pixelOven.run(cmd.concat(["--env=jsdom"]).concat(args));
     };
     context.jest = jest;
 };

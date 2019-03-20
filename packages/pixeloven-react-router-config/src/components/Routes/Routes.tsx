@@ -4,7 +4,7 @@ import { RouteProps } from "../../types";
 import { Status } from "../Status";
 
 export interface RoutesProps {
-    as?: "switch"
+    as?: "switch";
     config: RouteProps[];
 }
 
@@ -26,27 +26,16 @@ function Routes(props: RoutesProps) {
                         statusCode={route.statusCode}
                         staticContext={componentProps.staticContext}
                     >
-                        <route.component
-                            {...componentProps}
-                            {...route}
-                        />
+                        <route.component {...componentProps} {...route} />
                     </Status>
                 );
             }}
         />
     ));
     if (as === "switch") {
-        return (
-            <Switch>
-                {routes}
-            </Switch>
-        );
+        return <Switch>{routes}</Switch>;
     }
-    return (
-        <React.Fragment>
-            {routes}
-        </React.Fragment>
-    );
-};
+    return <React.Fragment>{routes}</React.Fragment>;
+}
 
 export default Routes;

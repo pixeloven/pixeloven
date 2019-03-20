@@ -8,6 +8,6 @@ function resolvePlugin(...paths: string[]) {
         return filesystem.path(fs.realpathSync(plugin), "./dist/lib");
     }
     return false;
-};
+}
 
 export default resolvePlugin;

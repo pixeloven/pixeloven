@@ -1,9 +1,6 @@
-import {
-    GluegunParameters,
-    GluegunRunContext,
-} from "gluegun";
+import { GluegunParameters, GluegunRunContext } from "gluegun";
 
-type ArgType = "default" | "withOptions"
+type ArgType = "default" | "withOptions";
 
 export type JestExtension = (args?: string[]) => Promise<RunResponse>;
 export type PrettierExtension = (args?: string[]) => Promise<RunResponse>;
@@ -12,7 +9,12 @@ export type TsLintExtension = (args?: string[]) => Promise<RunResponse>;
 export type TscExtension = (args?: string[]) => Promise<RunResponse>;
 export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
 
-export type GetArgListFunction = (cmd: string, parameters: GluegunParameters, index?: number, type?: ArgType) => string[];
+export type GetArgListFunction = (
+    cmd: string,
+    parameters: GluegunParameters,
+    index?: number,
+    type?: ArgType,
+) => string[];
 
 export type GetConfigPathFunction = (
     fileName: string,

@@ -8,7 +8,7 @@ import {
 
 /**
  * Sets up pixelOven helpers
- * @param context 
+ * @param context
  */
 function helpers(context: PixelOvenRunContext) {
     context.pixelOven = {
@@ -17,6 +17,6 @@ function helpers(context: PixelOvenRunContext) {
         resolvePlugin,
         run,
     };
-};
+}
 
 export default helpers;
