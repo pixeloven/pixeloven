@@ -29,8 +29,7 @@
       "statements": 100
     }
   },
-  "collectCoverage": true,
-  "collectCoverageFrom": [
+   "collectCoverageFrom": [
     "<rootDir>/src/**/*.{js,ts}",
     "!**/node_modules/**"
   ]

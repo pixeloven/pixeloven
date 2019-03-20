@@ -34,7 +34,7 @@ class App extends React.Component<Props, State> {
         return (
             <React.Fragment>
                 <Helmet titleTemplate="%s | React App" />
-                <Routes config={this.props.routes} />
+                <Routes as="switch" config={this.props.routes} />
             </React.Fragment>
         );
     }

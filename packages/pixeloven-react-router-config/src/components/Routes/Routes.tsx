@@ -4,39 +4,38 @@ import { RouteProps } from "../../types";
 import { Status } from "../Status";
 
 export interface RoutesProps {
+    as?: "switch";
     config: RouteProps[];
 }
 
 /**
- * @param props
+ * Creates Routes
+ * @param props RoutesProps
  */
-const Routes = (props: RoutesProps) => {
-    const { config } = props;
-    return (
-        <Switch>
-            {config.map((route, key) => (
-                <Route
-                    key={key}
-                    exact={route.exact}
-                    path={route.path}
-                    strict={route.strict}
-                    render={componentProps => {
-                        return (
-                            <Status
-                                statusCode={route.statusCode}
-                                staticContext={componentProps.staticContext}
-                            >
-                                <route.component
-                                    {...componentProps}
-                                    {...route}
-                                />
-                            </Status>
-                        );
-                    }}
-                />
-            ))}
-        </Switch>
-    );
-};
+function Routes(props: RoutesProps) {
+    const { as, config } = props;
+    const routes = config.map((route, key) => (
+        <Route
+            key={key}
+            exact={route.exact}
+            path={route.path}
+            strict={route.strict}
+            render={componentProps => {
+                return (
+                    <Status
+                        statusCode={route.statusCode}
+                        staticContext={componentProps.staticContext}
+                    >
+                        <route.component {...componentProps} {...route} />
+                    </Status>
+                );
+            }}
+        />
+    ));
+    if (as === "switch") {
+        return <Switch>{routes}</Switch>;
+    }
+    return <React.Fragment>{routes}</React.Fragment>;
+}
 
 export default Routes;

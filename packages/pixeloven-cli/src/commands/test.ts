@@ -4,7 +4,7 @@ export default {
     alias: ["--test", "-t"],
     name: "test",
     run: async (context: PixelOvenRunContext) => {
-        const { parameters, print, jest } = context;
+        const { parameters, pixelOven, print, jest } = context;
         /**
          * Process results
          * @param name
@@ -21,15 +21,23 @@ export default {
         };
         switch (parameters.first) {
             case "watch": {
-                const argList =
-                    parameters.array && parameters.array.length
-                        ? parameters.array.slice(1)
-                        : [];
+                const argList = pixelOven.getArgList(
+                    "test",
+                    parameters,
+                    1,
+                    "withOptions",
+                );
                 const results = await jest(["--watch"].concat(argList));
                 return handle("Jest", results.status);
             }
             default: {
-                const results = await jest(parameters.array);
+                const argList = pixelOven.getArgList(
+                    "test",
+                    parameters,
+                    0,
+                    "withOptions",
+                );
+                const results = await jest(argList);
                 return handle("Jest", results.status);
             }
         }

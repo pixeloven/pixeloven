@@ -32,7 +32,6 @@
       "statements": 0
     }
   },
-  "collectCoverage": true,
   "collectCoverageFrom": [
     "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
     "!**/node_modules/**"

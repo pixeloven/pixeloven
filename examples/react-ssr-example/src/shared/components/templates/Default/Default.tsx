@@ -22,7 +22,7 @@ class Default extends React.PureComponent<RouteComponentProps> {
                     <MainMenu as={Link} items={items} fixed={false} />
                 </Container>
                 <Container fluid={true}>
-                    {routes && <Routes config={routes} />}
+                    {routes && <Routes as="switch" config={routes} />}
                 </Container>
                 <Container fluid={true}>
                     <Segment inverted={true} vertical={true} textAlign="center">
