@@ -18,6 +18,8 @@
     "json",
     "ts"
   ],
+  "maxConcurrency": 2,
+  "collectCoverage": true,
   "coveragePathIgnorePatterns": [
     "/node_modules/"
   ],
