@@ -1,6 +1,5 @@
 import {
-    convertRouteConfig,
-    matchRoutes,
+    Router,
     RouteProps,
 } from "@pixeloven/react-router-config";
 import { Body, Head } from "@server/views";
@@ -27,8 +26,8 @@ export default (publicPath: string) => {
         };
         try {
             const store = configureStore("server");
-            const routes = convertRouteConfig(routeConfig, publicPath);
-            const matchedRoutes = matchRoutes(routes, req.path);
+            const routes = Router.getConfig(routeConfig, publicPath);
+            const matchedRoutes = Router.getMatches(routes, req.path);
 
             /**
              * Encapsulate application head
@@ -91,10 +90,12 @@ export default (publicPath: string) => {
             /**
              * @todo Make this logic available in package
              * @todo Display some dummy info from JSON file
+             * @todo make this so it can act like a switch - or sust handle this logic in the component
              */
             let matchedStatusCodeCount = 0;
             matchedRoutes.forEach(matchedRoute => {
                 if (matchedRoute.route.statusCode && !matchedStatusCodeCount) {
+                    console.log(matchedRoute.route);
                     staticContext.statusCode = matchedRoute.route.statusCode;
                     matchedStatusCodeCount++;
                 }

@@ -2,7 +2,7 @@ import { configure } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import * as React from "react";
-import convertRouteConfig from "./convertRouteConfig";
+import getConfig from "./getConfig";
 
 configure({
     adapter: new ReactSixteenAdapter(),
@@ -58,19 +58,19 @@ describe("@pixeloven/react-router-config", () => {
     describe("Utils", () => {
         describe("convertRouteConfig", () => {
             it("should convert custom simple config without pathing", () => {
-                const actual = convertRouteConfig(customSimpleRoutes);
+                const actual = getConfig(customSimpleRoutes);
                 expect(actual).toEqual(createSimpleConvertedRoutes());
             });
             it("should convert custom nested config with custom parentPath", () => {
-                const actual = convertRouteConfig(customNestedRoutes, "/root");
+                const actual = getConfig(customNestedRoutes, "/root");
                 expect(actual).toEqual(createNestedConvertedRoutes("/root"));
             });
             it("should convert custom nested config without custom parentPath", () => {
-                const actual = convertRouteConfig(customNestedRoutes);
+                const actual = getConfig(customNestedRoutes);
                 expect(actual).toEqual(createNestedConvertedRoutes());
             });
             it("should convert custom nested config with string path", () => {
-                const actual = convertRouteConfig([
+                const actual = getConfig([
                     {
                         component: TestComponent,
                         path: "/path",

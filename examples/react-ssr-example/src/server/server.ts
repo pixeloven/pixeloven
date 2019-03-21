@@ -26,7 +26,7 @@ const server = (app: Application, config: Config) => {
      */
     if (config.environment.node === "production") {
         app.use(
-            assetPath(path.resolve(__dirname, "public/asset-manifest.json")),
+            assetPath(config.publicPath, path.resolve(__dirname, "public/asset-manifest.json")),
         );
         app.use(
             config.publicPath,

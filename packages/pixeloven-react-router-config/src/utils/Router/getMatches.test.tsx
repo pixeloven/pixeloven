@@ -2,7 +2,7 @@ import { configure } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import * as React from "react";
-import matchRoutes, { computeRootMatch } from "./matchRoutes";
+import getMatches from "./getMatches";
 
 configure({
     adapter: new ReactSixteenAdapter(),
@@ -37,18 +37,18 @@ describe("@pixeloven/react-router-config", () => {
     describe("Utils", () => {
         describe("matchRoutes", () => {
             it("should match just the parent route", () => {
-                const matched = matchRoutes(routes, "/testing");
+                const matched = getMatches(routes, "/testing");
                 expect(matched.length).toEqual(1);
                 expect(matched[0].route.path).toEqual("/testing");
             });
             it("should match one child and it's parent", () => {
-                const matched = matchRoutes(routes, "/testing/bar");
+                const matched = getMatches(routes, "/testing/bar");
                 expect(matched.length).toEqual(2);
                 expect(matched[0].route.path).toEqual("/testing");
                 expect(matched[1].route.path).toEqual("/testing/bar");
             });
             it("should match to root path", () => {
-                const matched = matchRoutes(
+                const matched = getMatches(
                     [
                         {
                             component: TestComponent,
@@ -59,7 +59,7 @@ describe("@pixeloven/react-router-config", () => {
                 expect(matched.length).toEqual(1);
             });
             it("should match parent and child to root path", () => {
-                const matched = matchRoutes(
+                const matched = getMatches(
                     [
                         {
                             component: TestComponent,
@@ -75,17 +75,8 @@ describe("@pixeloven/react-router-config", () => {
                 expect(matched.length).toEqual(2);
             });
             it("should match no routes", () => {
-                const matched = matchRoutes(routes, "/wrong");
+                const matched = getMatches(routes, "/wrong");
                 expect(matched.length).toEqual(0);
-            });
-        });
-        describe("computeRootMatch", () => {
-            it("should return root match", () => {
-                const matched = computeRootMatch("/");
-                expect(matched.isExact).toEqual(true);
-                expect(matched.params).toEqual({});
-                expect(matched.path).toEqual("/");
-                expect(matched.url).toEqual("/");
             });
         });
     });

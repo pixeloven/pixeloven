@@ -1,2 +1,2 @@
-export { default as convertRouteConfig } from "./convertRouteConfig";
-export { default as matchRoutes } from "./matchRoutes";
+export { default as Router } from "./Router";
+

@@ -7,7 +7,7 @@ export interface StatusProps {
     staticContext?: StaticContext;
 }
 
-const Status = (props: StatusProps) => {
+function Status(props: StatusProps) {
     const { children, statusCode, staticContext } = props;
     if (staticContext && statusCode) {
         staticContext.statusCode = statusCode;

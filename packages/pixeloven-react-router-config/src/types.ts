@@ -1,5 +1,6 @@
 /* tslint:disable no-any */
 import { ConnectedComponentClass } from "react-redux";
+import { match } from "react-router";
 import {
     RouteComponentProps as DefaultRouteComponentProps,
     RouteProps as DefaultRouteProps,
@@ -10,6 +11,11 @@ import { Dispatch } from "redux";
  * @todo Need a better way to do this than to pass any
  */
 type Params = any;
+
+export interface MatchedRoutes {
+    matched: match;
+    route: RouteProps;
+}
 
 /**
  * @todo Need make this less dependent on redux

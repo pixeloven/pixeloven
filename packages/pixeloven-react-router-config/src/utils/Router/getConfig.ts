@@ -1,16 +1,15 @@
 import { normalizeUrl } from "@pixeloven/core";
-import { RouteConfig, RouteProps } from "../types";
+import { RouteConfig, RouteProps } from "../../types";
 
 /**
- * Convert custom route config to v4
- * @todo Add support for path to be a string instead of a function
+ * Map custom route config to react router v4 RouteProps
  * @param routeConfig
  * @param parentRoute
  */
-const convertRouteConfig = (
+function getConfig (
     routeConfig: RouteConfig[],
     parentRoute: string = "",
-): RouteProps[] => {
+): RouteProps[] {
     return routeConfig.map(route => {
         let path = parentRoute;
         if (route.path) {
@@ -21,7 +20,7 @@ const convertRouteConfig = (
         }
         const routes =
             route.routes && route.routes.length
-                ? convertRouteConfig(route.routes, path)
+                ? getConfig(route.routes, path)
                 : undefined;
         const results = {
             ...route,
@@ -37,4 +36,4 @@ const convertRouteConfig = (
     });
 };
 
-export default convertRouteConfig;
+export default getConfig;
