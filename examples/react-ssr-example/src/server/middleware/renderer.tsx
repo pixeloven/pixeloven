@@ -24,7 +24,9 @@ export default (publicPath: string) => {
         try {
             const store = configureStore("server");
             const routes = Router.getConfig(routeConfig, publicPath);
-            const matchedRoutes = Router.getMatches(routes, req.path);
+            const matchedRoutes = Router.getMatches(routes, {
+                path: req.path,
+            });
 
             /**
              * Encapsulate application head
@@ -92,7 +94,6 @@ export default (publicPath: string) => {
             let matchedStatusCodeCount = 0;
             matchedRoutes.forEach(matchedRoute => {
                 if (matchedRoute.route.statusCode && !matchedStatusCodeCount) {
-                    console.log(matchedRoute.route);
                     staticContext.statusCode = matchedRoute.route.statusCode;
                     matchedStatusCodeCount++;
                 }

@@ -28,7 +28,7 @@ function computeRootMatch(path: string) {
  * @param matches
  *
  * @todo We should have this be generator and return an iterator object?
- * 
+ *
  * @todo Scope whether root match might need to be whatever public path instead of always "/"
  * @todo Should we handle setting statusCode here if possible
  * @todo Should have a setting to act like a <switch> so that it only matches the first?

@@ -44,4 +44,3 @@ describe("@pixeloven/react-router-config", () => {
         });
     });
 });
-

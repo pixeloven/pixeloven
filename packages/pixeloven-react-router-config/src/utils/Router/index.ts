@@ -3,5 +3,5 @@ import getMatches from "./getMatches";
 
 export default {
     getConfig,
-    getMatches
-}
+    getMatches,
+};

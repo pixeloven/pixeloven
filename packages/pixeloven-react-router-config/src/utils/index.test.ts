@@ -1,7 +1,5 @@
 import "jest";
-import {
-    Router
-} from "./index";
+import { Router } from "./index";
 
 describe("@pixeloven/react-router-config", () => {
     describe("utils/index", () => {
