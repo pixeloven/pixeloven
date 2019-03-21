@@ -1,10 +1,5 @@
 import { matchPath } from "react-router";
-import { MatchedRoutes, MatchType, RouteProps } from "../../types";
-
-interface MatchOptions {
-    as?: MatchType;
-    path: string; // TODO we should make this PathLike??
-}
+import { MatchedRoutes, MatchOptions, RouteProps } from "../../types";
 
 /**
  * Copied form Router.computeRootMatch(pathname) version 4.4.0-beta

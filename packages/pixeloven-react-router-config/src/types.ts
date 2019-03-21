@@ -14,6 +14,14 @@ type Params = any;
 
 export type MatchType = "switch" | "default";
 
+/**
+ * @todo we should make this PathLike??
+ */
+export interface MatchOptions {
+    as?: MatchType;
+    path: string;
+}
+
 export interface MatchedRoutes {
     matched: match;
     route: RouteProps;
