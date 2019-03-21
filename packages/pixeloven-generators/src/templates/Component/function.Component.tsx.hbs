@@ -1,6 +1,7 @@
 import React{{#if includeState}}, { useState }{{/if}} from "react";
 
-import "./{{componentName}}.scss";
+{{#if includeStrings}}import {tStrings} from "./{{componentName}}.strings";{{/if}}
+{{#if includeStyles}}import "./{{componentName}}.scss";{{/if}}
 
 interface {{componentName}}Props {
     exampleProp?: string;
@@ -12,6 +13,8 @@ function {{componentName}}(props: {{componentName}}Props) {
     const [exampleState] = useState(0);
 
     return exampleProp ? <div>{exampleProp} {exampleState}</div> : false;
+    {{else if includeStrings}}
+    return exampleProp ? <div>{exampleProp} with translated {tStrings.exampleString}</div> : false;
     {{else}}
     return exampleProp ? <div>{exampleProp}</div> : false;
     {{/if}}
