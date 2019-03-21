@@ -12,7 +12,7 @@ export interface Plop {
 export interface PlopGenerator {
     description: string;
     prompts: inquirer.Question[];
-    actions: ActionType[] | Function;
+    actions: ActionType[] | ( (answers: AnswerConfig) => ActionType[] );
 }
 
 export type ActionType =
@@ -33,6 +33,11 @@ export interface ActionConfig {
     force?: boolean;
     data?: object;
     abortOnFail?: boolean;
+}
+
+export interface AnswerConfig {
+    includeStyles?: boolean;
+    includeStrings?:boolean;
 }
 
 export interface PlopCfg {

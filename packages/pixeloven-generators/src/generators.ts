@@ -72,7 +72,7 @@ const generator = (plop: Plop) => {
     plop.setHelper("lowerCase", lowerCase);
 
     plop.setGenerator("component", {
-        actions: (answers: object) => {
+        actions: (answers) => {
             const actions = [
                 {
                     abortOnFail: true,
@@ -106,7 +106,7 @@ const generator = (plop: Plop) => {
                 },
             ];
 
-            if (answers["includeStyles"]) {
+            if (answers.includeStyles) {
                 actions.push({
                     abortOnFail: true,
                     path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.scss`,
@@ -115,7 +115,7 @@ const generator = (plop: Plop) => {
                 });
             }
 
-            if (answers["includeStrings"]) {
+            if (answers.includeStrings) {
                 actions.push({
                     abortOnFail: true,
                     path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.strings.tsx`,
