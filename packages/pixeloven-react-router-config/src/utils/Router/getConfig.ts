@@ -1,5 +1,11 @@
-import { normalizeUrl } from "@pixeloven/core";
 import { RouteConfig, RouteProps } from "../../types";
+
+/**
+ * Normalize Url
+ * @param item 
+ */
+const normalizeUrl = (item: string) =>
+    item.replace(/([^:]\/)\/+/g, "$1");
 
 /**
  * Map custom route config to react router v4 RouteProps
