@@ -68,9 +68,7 @@ describe("@pixeloven/react-router-config", () => {
     describe("utils/Router", () => {
         describe("matchRoutes", () => {
             it("should match to root path", () => {
-                const matched = getMatches(basicRouteConfig, {
-                    path: "/",
-                });
+                const matched = getMatches(basicRouteConfig);
                 expect(matched.length).toEqual(1);
             });
             it("should match no routes", () => {
@@ -102,6 +100,7 @@ describe("@pixeloven/react-router-config", () => {
             });
             it("should match the parent route and two children", () => {
                 const matched = getMatches(pathRouteConfigWithChildren, {
+                    as: "default",
                     path: "/switch/partial",
                 });
                 expect(matched.length).toEqual(3);
@@ -109,16 +108,15 @@ describe("@pixeloven/react-router-config", () => {
                 expect(matched[1].route.path).toEqual("/switch/partial");
                 expect(matched[2].route.path).toEqual("/switch/partial");
             });
-            // it("should match the parent route and one child with switch style behavior", () => {
-            //     const matched = getMatches(pathRouteConfigWithChildren, {
-            //         as: "switch",
-            //         path: "/param",
-            //     });
-            //     expect(matched.length).toEqual(3);
-            //     expect(matched[0].route.path).toEqual("/param");
-            //     expect(matched[1].route.path).toEqual("/param/foo");
-            //     expect(matched[2].route.path).toEqual("/param/bar");
-            // });
+            it("should match the parent route and one child with switch style behavior", () => {
+                const matched = getMatches(pathRouteConfigWithChildren, {
+                    as: "switch",
+                    path: "/switch/partial",
+                });
+                expect(matched.length).toEqual(2);
+                expect(matched[0].route.path).toEqual("/switch");
+                expect(matched[1].route.path).toEqual("/switch/partial");
+            });
         });
     });
 });

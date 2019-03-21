@@ -49,7 +49,7 @@ function getMatches(
          * We want to mimic a switch and skip after the first match
          */
         if (options.as === "switch" && levelMatchCount) {
-            break;
+            continue;
         }
         const matched = route.path
             ? matchPath(options.path, route)

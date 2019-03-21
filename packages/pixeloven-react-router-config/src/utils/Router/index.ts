@@ -1,2 +1,7 @@
-export { default as getConfig } from "./getConfig";
-export { default as getMatches } from "./getMatches";
+import getConfig from "./getConfig";
+import getMatches from "./getMatches";
+
+export default {
+    getConfig,
+    getMatches
+}
