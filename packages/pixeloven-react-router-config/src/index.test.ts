@@ -6,8 +6,9 @@ describe("@pixeloven/react-router-config", () => {
         it("should export components and utils", () => {
             expect(typeof exported.Routes).toEqual("function");
             expect(typeof exported.Status).toEqual("function");
-            expect(typeof exported.matchRoutes).toEqual("function");
-            expect(typeof exported.convertRouteConfig).toEqual("function");
+            expect(typeof exported.Router).toEqual("object");
+            expect(typeof exported.Router.getConfig).toEqual("function");
+            expect(typeof exported.Router.getMatches).toEqual("function");
         });
     });
 });

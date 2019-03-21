@@ -12,6 +12,8 @@ import { Dispatch } from "redux";
  */
 type Params = any;
 
+export type MatchType = "switch" | "default";
+
 export interface MatchedRoutes {
     matched: match;
     route: RouteProps;

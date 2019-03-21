@@ -13,6 +13,6 @@ function Status(props: StatusProps) {
         staticContext.statusCode = statusCode;
     }
     return <React.Fragment>{children}</React.Fragment>;
-};
+}
 
 export default Status;

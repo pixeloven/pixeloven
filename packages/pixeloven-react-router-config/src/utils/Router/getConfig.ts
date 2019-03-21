@@ -6,7 +6,7 @@ import { RouteConfig, RouteProps } from "../../types";
  * @param routeConfig
  * @param parentRoute
  */
-function getConfig (
+function getConfig(
     routeConfig: RouteConfig[],
     parentRoute: string = "",
 ): RouteProps[] {
@@ -34,6 +34,6 @@ function getConfig (
         });
         return results;
     });
-};
+}
 
 export default getConfig;

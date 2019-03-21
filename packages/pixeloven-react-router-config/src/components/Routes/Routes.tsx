@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
-import { RouteProps } from "../../types";
+import { MatchType, RouteProps } from "../../types";
 import { Status } from "../Status";
 
 export interface RoutesProps {
-    as?: "switch";
+    as?: MatchType;
     config: RouteProps[];
 }
 

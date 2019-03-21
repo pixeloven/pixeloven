@@ -1,7 +1,4 @@
-import {
-    Router,
-    RouteProps,
-} from "@pixeloven/react-router-config";
+import { RouteProps, Router } from "@pixeloven/react-router-config";
 import { Body, Head } from "@server/views";
 import { App } from "@shared/components";
 import routeConfig, { unknownErrorRoutes } from "@shared/routes";

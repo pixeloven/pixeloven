@@ -39,8 +39,12 @@ export class AssetManifest {
                 fs.readFileSync(manifestPath, "utf8"),
             ) as Manifest;
             return {
-                css: this.filter(manifestFile, "css").map(file => normalize(`/${this.config.publicPath}/${file}`)),
-                js: this.filter(manifestFile, "js").map(file => normalize(`/${this.config.publicPath}/${file}`)),
+                css: this.filter(manifestFile, "css").map(file =>
+                    normalize(`/${this.config.publicPath}/${file}`),
+                ),
+                js: this.filter(manifestFile, "js").map(file =>
+                    normalize(`/${this.config.publicPath}/${file}`),
+                ),
             };
         }
         return undefined;

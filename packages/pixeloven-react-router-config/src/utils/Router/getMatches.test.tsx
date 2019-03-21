@@ -12,7 +12,38 @@ const TestComponent = () => {
     return <div>testing</div>;
 };
 
-const routes = [
+const basicRouteConfig = [
+    {
+        component: TestComponent,
+    },
+];
+
+const basicRouteConfigWithChild = [
+    {
+        component: TestComponent,
+        routes: [
+            {
+                component: TestComponent,
+            },
+        ],
+    },
+];
+
+const pathRouteConfigWithChildren = [
+    {
+        component: TestComponent,
+        path: "/switch",
+        routes: [
+            {
+                component: TestComponent,
+                path: "/switch/partial",
+            },
+            {
+                component: TestComponent,
+                path: "/switch/partial",
+            },
+        ],
+    },
     {
         component: TestComponent,
         path: "/testing",
@@ -34,50 +65,60 @@ const routes = [
 ];
 
 describe("@pixeloven/react-router-config", () => {
-    describe("Utils", () => {
+    describe("utils/Router", () => {
         describe("matchRoutes", () => {
-            it("should match just the parent route", () => {
-                const matched = getMatches(routes, "/testing");
+            it("should match to root path", () => {
+                const matched = getMatches(basicRouteConfig, {
+                    path: "/",
+                });
+                expect(matched.length).toEqual(1);
+            });
+            it("should match no routes", () => {
+                const matched = getMatches(pathRouteConfigWithChildren, {
+                    path: "/missing",
+                });
+                expect(matched.length).toEqual(0);
+            });
+            it("should match parent and child to root path", () => {
+                const matched = getMatches(basicRouteConfigWithChild, {
+                    path: "/",
+                });
+                expect(matched.length).toEqual(2);
+            });
+            it("should match the parent route", () => {
+                const matched = getMatches(pathRouteConfigWithChildren, {
+                    path: "/testing",
+                });
                 expect(matched.length).toEqual(1);
                 expect(matched[0].route.path).toEqual("/testing");
             });
-            it("should match one child and it's parent", () => {
-                const matched = getMatches(routes, "/testing/bar");
+            it("should match the parent route and one child", () => {
+                const matched = getMatches(pathRouteConfigWithChildren, {
+                    path: "/testing/bar",
+                });
                 expect(matched.length).toEqual(2);
                 expect(matched[0].route.path).toEqual("/testing");
                 expect(matched[1].route.path).toEqual("/testing/bar");
             });
-            it("should match to root path", () => {
-                const matched = getMatches(
-                    [
-                        {
-                            component: TestComponent,
-                        },
-                    ],
-                    "/",
-                );
-                expect(matched.length).toEqual(1);
+            it("should match the parent route and two children", () => {
+                const matched = getMatches(pathRouteConfigWithChildren, {
+                    path: "/switch/partial",
+                });
+                expect(matched.length).toEqual(3);
+                expect(matched[0].route.path).toEqual("/switch");
+                expect(matched[1].route.path).toEqual("/switch/partial");
+                expect(matched[2].route.path).toEqual("/switch/partial");
             });
-            it("should match parent and child to root path", () => {
-                const matched = getMatches(
-                    [
-                        {
-                            component: TestComponent,
-                            routes: [
-                                {
-                                    component: TestComponent,
-                                },
-                            ],
-                        },
-                    ],
-                    "/",
-                );
-                expect(matched.length).toEqual(2);
-            });
-            it("should match no routes", () => {
-                const matched = getMatches(routes, "/wrong");
-                expect(matched.length).toEqual(0);
-            });
+            // it("should match the parent route and one child with switch style behavior", () => {
+            //     const matched = getMatches(pathRouteConfigWithChildren, {
+            //         as: "switch",
+            //         path: "/param",
+            //     });
+            //     expect(matched.length).toEqual(3);
+            //     expect(matched[0].route.path).toEqual("/param");
+            //     expect(matched[1].route.path).toEqual("/param/foo");
+            //     expect(matched[2].route.path).toEqual("/param/bar");
+            // });
         });
     });
 });

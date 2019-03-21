@@ -19,38 +19,37 @@ const TestComponent = () => {
 };
 
 describe("@pixeloven/react-router-config", () => {
-    describe("Components", () => {
-        describe("Status", () => {
-            it("should render one <TestComponent /> and not set status code without `statusCode` or `staticContext` props", () => {
-                const wrapper = mount(
-                    <Status>
-                        <TestComponent />
-                    </Status>,
-                );
-                expect(wrapper.find("TestComponent").length).toEqual(1);
-                expect(componentProps.staticContext.statusCode).toEqual(200);
-            });
-            it("should render one <TestComponent /> and not set status code without `statusCode` prop", () => {
-                const wrapper = mount(
-                    <Status staticContext={componentProps.staticContext}>
-                        <TestComponent />
-                    </Status>,
-                );
-                expect(wrapper.find("TestComponent").length).toEqual(1);
-                expect(componentProps.staticContext.statusCode).toEqual(200);
-            });
-            it("should render one <TestComponent /> and status code", () => {
-                const wrapper = mount(
-                    <Status
-                        statusCode={404}
-                        staticContext={componentProps.staticContext}
-                    >
-                        <TestComponent />
-                    </Status>,
-                );
-                expect(wrapper.find("TestComponent").length).toEqual(1);
-                expect(componentProps.staticContext.statusCode).toEqual(404);
-            });
+    describe("components/Status", () => {
+        it("should render one <TestComponent /> and not set status code without `statusCode` or `staticContext` props", () => {
+            const wrapper = mount(
+                <Status>
+                    <TestComponent />
+                </Status>,
+            );
+            expect(wrapper.find("TestComponent").length).toEqual(1);
+            expect(componentProps.staticContext.statusCode).toEqual(200);
+        });
+        it("should render one <TestComponent /> and not set status code without `statusCode` prop", () => {
+            const wrapper = mount(
+                <Status staticContext={componentProps.staticContext}>
+                    <TestComponent />
+                </Status>,
+            );
+            expect(wrapper.find("TestComponent").length).toEqual(1);
+            expect(componentProps.staticContext.statusCode).toEqual(200);
+        });
+        it("should render one <TestComponent /> and status code", () => {
+            const wrapper = mount(
+                <Status
+                    statusCode={404}
+                    staticContext={componentProps.staticContext}
+                >
+                    <TestComponent />
+                </Status>,
+            );
+            expect(wrapper.find("TestComponent").length).toEqual(1);
+            expect(componentProps.staticContext.statusCode).toEqual(404);
         });
     });
 });
+
