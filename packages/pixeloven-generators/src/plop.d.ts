@@ -37,7 +37,7 @@ export interface ActionConfig {
 
 export interface AnswerConfig {
     includeStyles?: boolean;
-    includeStrings?:boolean;
+    includeStrings?: boolean;
 }
 
 export interface PlopCfg {
