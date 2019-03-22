@@ -89,7 +89,6 @@ export default (publicPath: string) => {
             /**
              * @todo Make this logic available in package
              * @todo Display some dummy info from JSON file
-             * @todo make this so it can act like a switch - or sust handle this logic in the component
              */
             let matchedStatusCodeCount = 0;
             matchedRoutes.forEach(matchedRoute => {
