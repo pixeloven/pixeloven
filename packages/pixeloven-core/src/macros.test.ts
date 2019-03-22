@@ -1,12 +1,10 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
-import { logger, Message } from "@pixeloven/node-logger";
 import fs, { PathLike } from "fs-extra";
 import "jest";
 import path from "path";
 import * as macros from "./macros";
 
 let resolvePathExists = true;
-const logErrorMock = (message: Message) => message;
 const existsSyncMock = (somePath: PathLike) => resolvePathExists;
 const mkdirSyncMock = (somePath: PathLike) => undefined;
 const emptyDirSyncMock = (somePath: PathLike) => undefined;
@@ -26,18 +24,6 @@ describe("@pixeloven/core", () => {
                     macros.errorHandler(new Error("error"));
                 };
                 expect(caller).toThrowError();
-            });
-        });
-        describe("handleError", () => {
-            it("should log error and exit", () => {
-                const logErrorSpy = jest
-                    .spyOn(logger, "error")
-                    .mockImplementation(logErrorMock);
-                const exitSpy = jest.spyOn(macros, "exit").mockImplementation();
-                const error = new Error();
-                macros.handleError(error);
-                expect(logErrorSpy).toHaveBeenCalledTimes(1);
-                expect(exitSpy).toHaveBeenCalledTimes(1);
             });
         });
         describe("resolvePath", () => {

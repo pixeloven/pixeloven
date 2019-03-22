@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@pixeloven/exceptions": "^5.3.0",
-    "@pixeloven/node-logger": "^5.3.0",
     "cross-spawn": "6.0.5",
     "fs-extra": "7.0.1",
     "webpack": "4.28.4"
