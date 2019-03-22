@@ -18,12 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "webpack": "4.28.4"
+    "webpack": "4.29.6"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^5.3.0",
     "@types/node": "10.12.18",
-    "@types/webpack": "4.4.23"
+    "@types/webpack": "4.4.26"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

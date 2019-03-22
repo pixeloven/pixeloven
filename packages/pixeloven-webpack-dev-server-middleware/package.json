@@ -25,7 +25,7 @@
     "react-dev-utils": "7.0.1",
     "react-universal-component": "3.0.3",
     "require-from-string": "2.0.2",
-    "webpack-dev-middleware": "3.5.1",
+    "webpack-dev-middleware": "3.6.1",
     "webpack-flush-chunks": "2.0.3",
     "webpack-hot-middleware": "2.24.3"
   },
@@ -38,9 +38,9 @@
     "@types/node": "10.12.18",
     "@types/require-from-string": "1.2.0",
     "@types/source-map-support": "0.4.1",
-    "@types/webpack": "4.4.23",
+    "@types/webpack": "4.4.26",
     "@types/webpack-dev-middleware": "2.0.2",
-    "@types/webpack-hot-middleware": "2.16.4"
+    "@types/webpack-hot-middleware": "2.16.5"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

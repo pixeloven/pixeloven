@@ -68,7 +68,7 @@
     "@types/storybook__addon-options": "4.0.0",
     "@types/storybook__react": "4.0.0",
     "@types/supertest": "2.0.7",
-    "@types/webpack": "4.4.23",
+    "@types/webpack": "4.4.26",
     "babel-loader": "8.0.5",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",

@@ -20,15 +20,13 @@
   "dependencies": {
     "@pixeloven/exceptions": "^5.3.0",
     "cross-spawn": "6.0.5",
-    "fs-extra": "7.0.1",
-    "webpack": "4.28.4"
+    "fs-extra": "7.0.1"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^5.3.0",
     "@types/cross-spawn": "6.0.0",
     "@types/fs-extra": "5.0.4",
-    "@types/node": "10.12.18",
-    "@types/webpack": "4.4.23"
+    "@types/node": "10.12.18"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
