@@ -1,4 +1,5 @@
 import { RouteProps, Router } from "@pixeloven/react-router-config";
+import { Config } from "@server/config";
 import { Body, Head } from "@server/views";
 import { App } from "@shared/components";
 import routeConfig, { unknownErrorRoutes } from "@shared/routes";
@@ -16,14 +17,14 @@ interface ContentProps {
     store: Store;
 }
 
-export default (publicPath: string) => {
+export default (config: Config) => {
     return (req: Request, res: Response, next: NextFunction): void => {
         const staticContext: StaticContext = {
             statusCode: 200,
         };
         try {
             const store = configureStore("server");
-            const routes = Router.getConfig(routeConfig, publicPath);
+            const routes = Router.getConfig(routeConfig, config.publicPath);
             const matchedRoutes = Router.getMatches(routes, {
                 as: "switch",
                 path: req.path,
