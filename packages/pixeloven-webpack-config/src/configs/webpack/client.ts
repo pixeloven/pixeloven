@@ -64,11 +64,12 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     /**
      * Define entrypoint(s) for client
      */
+    const hmrPath = path.normalize(`/${publicPath}/__webpack_hmr`);
     const entry = {
         main: removeEmpty([
             require.resolve("@babel/polyfill"),
             ifDevelopment(
-                `webpack-hot-middleware/client?reload=true&path=__webpack_hmr`,
+                `webpack-hot-middleware/client?path=${hmrPath}`,
                 undefined,
             ),
             resolvePath("src/client/index.tsx"),
@@ -102,7 +103,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 "[path][name].[contenthash].[ext]",
                 "[path][name].[hash].[ext]",
             ),
-            outputPath: "static/media/"
+            outputPath: "static/media/",
         },
     };
 
@@ -149,7 +150,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      * Define rule for transpiling TypeScript
      * @description Un-comment transpileOnly to Disable type checker - will use it in ForkTsCheckerWebpackPlugin at the cost of overlay.
      * Babel loader is present to support react-hot-loader.
-     * 
+     *
      * @todo Need to break some of this into packages for story book as well?
      */
     const typeScriptRule: RuleSetRule = {
