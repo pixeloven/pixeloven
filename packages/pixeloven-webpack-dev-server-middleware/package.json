@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-dev-server-middleware",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "description": "Webpack Development Server middleware",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^5.3.0",
-    "@pixeloven/webpack-compiler": "^5.3.0",
+    "@pixeloven/webpack-compiler": "^5.3.2",
     "@types/express": "4.16.0",
     "@types/html-entities": "1.2.16",
     "@types/memory-fs": "0.3.2",

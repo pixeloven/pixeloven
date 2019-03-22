@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli-addon-webpack",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "description": "PixelOven CLI addon for webpack based development",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "@pixeloven/cli": "^5.3.0",
     "@pixeloven/tasks": "^5.3.0",
-    "@pixeloven/webpack": "^5.3.1",
+    "@pixeloven/webpack": "^5.3.2",
     "@types/node": "10.12.18"
   },
   "peerDependencies": {

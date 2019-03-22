@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/storybook",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "description": "Storybook configuration",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@babel/core": "7.4.0",
     "@emotion/core": "0.13.1",
-    "@pixeloven/core": "^5.3.1",
+    "@pixeloven/core": "^5.3.2",
     "babel-loader": "8.0.5",
     "css-loader": "1.0.1",
     "deepmerge": "3.1.0",
