@@ -25,6 +25,7 @@ export default (publicPath: string) => {
             const store = configureStore("server");
             const routes = Router.getConfig(routeConfig, publicPath);
             const matchedRoutes = Router.getMatches(routes, {
+                as: "switch",
                 path: req.path,
             });
 
