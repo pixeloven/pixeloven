@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/node-logger",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Node logger",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -21,7 +21,7 @@
     "webpack-log": "2.0.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.2.0",
+    "@pixeloven/tasks": "^5.3.0",
     "@types/inquirer": "0.0.43",
     "@types/node": "10.12.18"
   },

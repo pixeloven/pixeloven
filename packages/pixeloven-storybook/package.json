@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/storybook",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Storybook configuration",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@babel/core": "7.2.2",
     "@emotion/core": "0.13.1",
-    "@pixeloven/core": "^5.2.0",
+    "@pixeloven/core": "^5.3.0",
     "babel-loader": "8.0.5",
     "css-loader": "1.0.1",
     "deepmerge": "3.1.0",
@@ -31,7 +31,7 @@
     "webpack": "4.28.4"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^5.2.0",
+    "@pixeloven/tasks": "^5.3.0",
     "@types/mini-css-extract-plugin": "0.2.0",
     "@types/node": "10.12.18",
     "@types/storybook__addon-actions": "3.4.1",
