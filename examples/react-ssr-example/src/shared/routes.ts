@@ -28,10 +28,9 @@ const routes = [
         routes: [
             // Home Page
             {
-                // TODO fix this to no longer 404
                 component: Home,
                 exact: true,
-                path: (parentPath: string) => `${parentPath}/`,
+                path: "/example/",
             },
             // Blog Main
             {
@@ -43,13 +42,13 @@ const routes = [
                         type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
                     });
                 },
-                path: (parentPath: string) => `${parentPath}/blog`,
+                path: "/example/blog",
             },
             // Blog Page
             {
                 component: Blog,
                 exact: true,
-                path: (parentPath: string) => `${parentPath}/blog/:post`,
+                path: "/example/:post",
             },
             // 404 Page
             {

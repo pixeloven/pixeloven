@@ -1,5 +1,4 @@
 import { FileNotFoundException } from "@pixeloven/exceptions";
-import { logger } from "@pixeloven/node-logger";
 import { SpawnSyncReturns } from "child_process";
 import spawn from "cross-spawn";
 import fs from "fs-extra";
@@ -16,21 +15,6 @@ export const exit = process.exit;
  */
 export const errorHandler = (err: Error) => {
     throw err;
-};
-
-/**
- * Handle errors
- * @param error
- * @todo Should handle this better through the Framework
- */
-export const handleError = (error: Error) => {
-    if (error.message) {
-        logger.error(error.message);
-    }
-    if (error.stack) {
-        logger.error(error.stack);
-    }
-    exit(1);
 };
 
 /**

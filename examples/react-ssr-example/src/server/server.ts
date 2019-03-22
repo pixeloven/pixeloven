@@ -41,7 +41,7 @@ const server = (app: Application, config: Config) => {
      * Register endpoints
      */
     app.use(config.publicPath, health);
-    app.use(renderer(config.publicPath));
+    app.use(renderer(config));
 };
 
 export default server;

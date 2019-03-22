@@ -36,7 +36,7 @@ To start let's define our route configuration. Create a file `routes.{js,ts}` in
 shared
 └── routes.ts
 ```
-In this file create we'll create our route defintions.
+In this file create we'll create our route definitions.
 ```javascript
 import { Home } from "@shared/components/pages";
 import { Default } from "@shared/components/templates";
@@ -60,7 +60,6 @@ const routes = [
 ];
 
 export default routes;
-
 ```
 
 ### Implementation 
@@ -73,9 +72,9 @@ interface Props {
     routes: RouteProps[];
 }
 
-class App extends React.PureComponent<Props> {
+class App extends React.Component<Props> {
     public render(): React.ReactNode {
-        return <Routes config={routes} />
+        return <Routes as="switch" config={routes} />
     }
 }
 ```
@@ -83,18 +82,18 @@ Of course this next step is option but here to highlight that nested routes are 
 ```javascript
 import { Routes, RouteComponentProps } from "@pixeloven/react-router-config";
 
-class Default extends React.PureComponent<RouteComponentProps> {
-    public render(): React.ReactNode {
-        return <Routes config={routes} />
+class Default extends React.Component<RouteComponentProps> {
+    public render() {
+        return <Routes as="switch" config={routes} />
     }
 }
 ```
 Finally we arrive home with our simple little page.
 ```javascript
-import { Routes, RouteComponentProps } from "@pixeloven/react-router-config";
+import { RouteComponentProps } from "@pixeloven/react-router-config";
 
-class Home extends React.PureComponent<RouteComponentProps> {
-    public render(): React.ReactNode {
+class Home extends React.Component<RouteComponentProps> {
+    public render() {
         return <div>I'm Home!</div>;
     }
 }
@@ -103,23 +102,35 @@ class Home extends React.PureComponent<RouteComponentProps> {
 ### Integration 
 On both the client and server side we should integrate our unified routes with our application like so.
 ```javascript
-import { convertRouteConfig } from "@pixeloven/react-router-config";
+import { Router } from "@pixeloven/react-router-config";
 import { App } from "@shared/components";
 import routes from "@shared/routes";
 
-const routeConfig = convertRouteConfig(routes);
+//...
+
+/**
+ * Parent Path or sometimes called base path tells the config where all routes start.
+ * Defaults to "/"
+ */
+const parentPath = "/example/";
+const routeConfig = Router.getConfig(routes, parentPath);
 
 <App routes={routeConfig} />
 
 ```
-At this point it is up to your application structure to determine the best approuch for this step. This configuration also adds some opinions about how to fetch data from the server side but doesn't offer up any requirements for how that data is then used. 
+At this point it is up to your application structure to determine the best approach for this step. This configuration also adds some opinions about how to fetch data from the server side but doesn't offer up any requirements for how that data is then used. 
 
 For example if we wanted to fetch data on the server side to push into our application state we might do something like the following.
 ```javascript
 import { matchRoutes } from "@pixeloven/react-router-config";
 import routes from "@shared/routes";
 
-const matchedRoutes = matchRoutes(routes, relativeUrlPath);
+//...
+
+const matchedRoutes =  Router.getMatches(routes, {
+    as: "switch",
+    path: req.path // Ex: Express request object
+});
 matchedRoutes.forEach(matchedRoute => {
     if (matchedRoute.route.fetchData) {
         matchedRoute.route.fetchData(
@@ -129,4 +140,4 @@ matchedRoutes.forEach(matchedRoute => {
     }
 });
 ```
-Now in this example we are passing *dispatch* in for use to presumably dispatch actions for some side-effects. However, this could be any callback desired.
+Now in this example we are passing *dispatch* in for use to presumably dispatch actions for some side-effects. Currently this feature has a dependency on redux.

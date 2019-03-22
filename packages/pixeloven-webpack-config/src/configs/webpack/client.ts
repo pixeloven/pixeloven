@@ -33,7 +33,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const name = "client";
     const target = "web";
     const publicPath = options.path;
-    const buildPath = options.outputPath;
+    const outputPath = options.outputPath;
+    const publicOutputPath = path.normalize(`${outputPath}/public`);
 
     /**
      * Set env variables
@@ -63,11 +64,12 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     /**
      * Define entrypoint(s) for client
      */
+    const hmrPath = path.normalize(`/${publicPath}/__webpack_hmr`);
     const entry = {
         main: removeEmpty([
             require.resolve("@babel/polyfill"),
             ifDevelopment(
-                `webpack-hot-middleware/client?reload=true&path=__webpack_hmr`,
+                `webpack-hot-middleware/client?path=${hmrPath}`,
                 undefined,
             ),
             resolvePath("src/client/index.tsx"),
@@ -98,8 +100,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         loader: require.resolve("file-loader"),
         options: {
             name: ifProduction(
-                "[name].[contenthash].[ext]",
-                "[name].[hash].[ext]",
+                "[path][name].[contenthash].[ext]",
+                "[path][name].[hash].[ext]",
             ),
             outputPath: "static/media/",
         },
@@ -146,11 +148,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
 
     /**
      * Define rule for transpiling TypeScript
-     * @description Uncomment transpileOnly to Disable type checker - will use it in ForkTsCheckerWebpackPlugin at the cost of overlay.
+     * @description Un-comment transpileOnly to Disable type checker - will use it in ForkTsCheckerWebpackPlugin at the cost of overlay.
      * Babel loader is present to support react-hot-loader.
-     *
-     * @todo Make configurable for CI and performance. Babel can also provide caching and polyfill
-     * @todo Babel probably doesn't need to be run for server config
      *
      * @todo Need to break some of this into packages for story book as well?
      */
@@ -161,7 +160,6 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             {
                 loader: require.resolve("babel-loader"),
                 options: {
-                    // Add decrators support and polyfill
                     plugins: [
                         [
                             require.resolve(
@@ -272,7 +270,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             "static/js/[name].[contenthash].js",
             "static/js/[name].[hash].js",
         ),
-        path: resolvePath(`${buildPath}/public`, false),
+        path: resolvePath(publicOutputPath, false),
         publicPath,
     });
 
@@ -387,7 +385,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         ifProduction(
             new HtmlWebpackPlugin({
                 filename: resolvePath(
-                    `${buildPath}/public/offline.html`,
+                    `${publicOutputPath}/offline.html`,
                     false,
                 ),
                 inject: true,

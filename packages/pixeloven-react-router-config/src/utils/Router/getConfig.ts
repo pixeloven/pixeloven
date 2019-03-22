@@ -2,10 +2,9 @@ import { RouteConfig, RouteProps } from "../../types";
 
 /**
  * Normalize Url
- * @param item 
+ * @param item
  */
-const normalizeUrl = (item: string) =>
-    item.replace(/([^:]\/)\/+/g, "$1");
+const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
 
 /**
  * Map custom route config to react router v4 RouteProps
