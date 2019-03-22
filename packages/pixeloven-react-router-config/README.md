@@ -60,7 +60,6 @@ const routes = [
 ];
 
 export default routes;
-
 ```
 
 ### Implementation 
