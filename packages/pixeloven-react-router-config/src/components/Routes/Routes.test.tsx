@@ -21,28 +21,26 @@ const routes = [
 ];
 
 describe("@pixeloven/react-router-config", () => {
-    describe("Components", () => {
-        describe("Routes", () => {
-            it("should render just two <Route /> components", () => {
-                const wrapper = mount(
-                    <MemoryRouter>
-                        <Routes config={routes} />
-                    </MemoryRouter>,
-                );
-                const switchWrapper = wrapper.find("Switch");
-                expect(switchWrapper.length).toEqual(0);
-                expect(wrapper.find("Route").length).toEqual(1);
-            });
-            it("should render one <Switch /> and two <Route /> components", () => {
-                const wrapper = mount(
-                    <MemoryRouter>
-                        <Routes as="switch" config={routes} />
-                    </MemoryRouter>,
-                );
-                const switchWrapper = wrapper.find("Switch");
-                expect(switchWrapper.length).toEqual(1);
-                expect(switchWrapper.find("Route").length).toEqual(1);
-            });
+    describe("components/Routes", () => {
+        it("should render just two <Route /> components", () => {
+            const wrapper = mount(
+                <MemoryRouter>
+                    <Routes config={routes} />
+                </MemoryRouter>,
+            );
+            const switchWrapper = wrapper.find("Switch");
+            expect(switchWrapper.length).toEqual(0);
+            expect(wrapper.find("Route").length).toEqual(1);
+        });
+        it("should render one <Switch /> and two <Route /> components", () => {
+            const wrapper = mount(
+                <MemoryRouter>
+                    <Routes as="switch" config={routes} />
+                </MemoryRouter>,
+            );
+            const switchWrapper = wrapper.find("Switch");
+            expect(switchWrapper.length).toEqual(1);
+            expect(switchWrapper.find("Route").length).toEqual(1);
         });
     });
 });

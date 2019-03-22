@@ -1,4 +1,4 @@
-import { convertRouteConfig } from "@pixeloven/react-router-config";
+import { Router } from "@pixeloven/react-router-config";
 import { App } from "@shared/components";
 import { config } from "@shared/config";
 import routeConfig from "@shared/routes";
@@ -17,7 +17,7 @@ const root = document.getElementById("root");
 /**
  * Get route config
  */
-const routes = convertRouteConfig(routeConfig, config.publicPath);
+const routes = Router.getConfig(routeConfig, config.publicPath);
 /**
  * Wrap application with container, router and store
  */

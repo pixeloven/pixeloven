@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
-import { RouteProps } from "../../types";
+import { MatchType, RouteProps } from "../../types";
 import { Status } from "../Status";
 
 export interface RoutesProps {
-    as?: "switch";
+    as?: MatchType;
     config: RouteProps[];
 }
 
@@ -20,16 +20,14 @@ function Routes(props: RoutesProps) {
             exact={route.exact}
             path={route.path}
             strict={route.strict}
-            render={componentProps => {
-                return (
-                    <Status
-                        statusCode={route.statusCode}
-                        staticContext={componentProps.staticContext}
-                    >
-                        <route.component {...componentProps} {...route} />
-                    </Status>
-                );
-            }}
+            render={componentProps => (
+                <Status
+                    statusCode={route.statusCode}
+                    staticContext={componentProps.staticContext}
+                >
+                    <route.component {...componentProps} {...route} />
+                </Status>
+            )}
         />
     ));
     if (as === "switch") {

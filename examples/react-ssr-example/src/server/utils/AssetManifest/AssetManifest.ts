@@ -1,17 +1,19 @@
 import fs from "fs";
-import path from "path";
+import { normalize, resolve } from "path";
 
 interface Manifest {
     [key: string]: string;
 }
 
 interface ManifestConfig {
-    fileName?: string;
+    fileName: string;
+    publicPath: string;
 }
 
 export class AssetManifest {
     protected config: ManifestConfig = {
         fileName: "public/asset-manifest.json",
+        publicPath: "/",
     };
 
     /**
@@ -31,17 +33,19 @@ export class AssetManifest {
      * Return manifest
      */
     public get manifest() {
-        if (this.config.fileName) {
-            const manifestPath = path.resolve(this.config.fileName);
-            if (fs.existsSync(manifestPath)) {
-                const manifestFile = JSON.parse(
-                    fs.readFileSync(manifestPath, "utf8"),
-                ) as Manifest;
-                return {
-                    css: this.filter(manifestFile, "css"),
-                    js: this.filter(manifestFile, "js"),
-                };
-            }
+        const manifestPath = resolve(this.config.fileName);
+        if (fs.existsSync(manifestPath)) {
+            const manifestFile = JSON.parse(
+                fs.readFileSync(manifestPath, "utf8"),
+            ) as Manifest;
+            return {
+                css: this.filter(manifestFile, "css").map(file =>
+                    normalize(`/${this.config.publicPath}/${file}`),
+                ),
+                js: this.filter(manifestFile, "js").map(file =>
+                    normalize(`/${this.config.publicPath}/${file}`),
+                ),
+            };
         }
         return undefined;
     }

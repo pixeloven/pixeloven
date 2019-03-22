@@ -1,8 +1,4 @@
-import {
-    convertRouteConfig,
-    matchRoutes,
-    RouteProps,
-} from "@pixeloven/react-router-config";
+import { RouteProps, Router } from "@pixeloven/react-router-config";
 import { Body, Head } from "@server/views";
 import { App } from "@shared/components";
 import routeConfig, { unknownErrorRoutes } from "@shared/routes";
@@ -27,8 +23,10 @@ export default (publicPath: string) => {
         };
         try {
             const store = configureStore("server");
-            const routes = convertRouteConfig(routeConfig, publicPath);
-            const matchedRoutes = matchRoutes(routes, req.path);
+            const routes = Router.getConfig(routeConfig, publicPath);
+            const matchedRoutes = Router.getMatches(routes, {
+                path: req.path,
+            });
 
             /**
              * Encapsulate application head

@@ -98,6 +98,7 @@ class Server {
                 error: error => {
                     logger.error(error.message);
                 },
+                publicPath: this.config.path,
             },
         );
         /**

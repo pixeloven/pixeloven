@@ -28,6 +28,7 @@ const routes = [
         routes: [
             // Home Page
             {
+                // TODO fix this to no longer 404
                 component: Home,
                 exact: true,
                 path: (parentPath: string) => `${parentPath}/`,

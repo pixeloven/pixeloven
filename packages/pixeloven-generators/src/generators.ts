@@ -88,7 +88,8 @@ const generator = (plop: Plop) => {
             {
                 abortOnFail: true,
                 path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.tsx`,
-                templateFile: "templates/Component/{{componentType}}.Component.tsx.hbs",
+                templateFile:
+                    "templates/Component/{{componentType}}.Component.tsx.hbs",
                 type: "add",
             },
             {

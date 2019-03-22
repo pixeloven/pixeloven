@@ -1,5 +1,6 @@
 /* tslint:disable no-any */
 import { ConnectedComponentClass } from "react-redux";
+import { match } from "react-router";
 import {
     RouteComponentProps as DefaultRouteComponentProps,
     RouteProps as DefaultRouteProps,
@@ -10,6 +11,21 @@ import { Dispatch } from "redux";
  * @todo Need a better way to do this than to pass any
  */
 type Params = any;
+
+export type MatchType = "switch" | "default";
+
+/**
+ * @todo we should make this PathLike??
+ */
+export interface MatchOptions {
+    as?: MatchType;
+    path: string;
+}
+
+export interface MatchedRoutes {
+    matched: match;
+    route: RouteProps;
+}
 
 /**
  * @todo Need make this less dependent on redux
@@ -41,7 +57,7 @@ export type RouteResolvePath = (parentPath: string) => string;
 export interface RouteConfig {
     component: RouteComponent<Params>;
     exact?: boolean;
-    path?: RouteResolvePath;
+    path?: RouteResolvePath | string;
     fetchData?: RouteFetchDataFunction;
     routes?: RouteConfig[];
     statusCode?: number;
