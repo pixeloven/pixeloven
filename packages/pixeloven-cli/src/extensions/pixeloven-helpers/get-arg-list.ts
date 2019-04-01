@@ -1,6 +1,9 @@
 import { GluegunParameters } from "gluegun";
 
-type ArgType = "default" | "withOptions";
+interface GetArgListOptions {
+    offset: number,
+    type: "default" | "withOptions"
+}
 
 /**
  * Returns an arg list
@@ -18,24 +21,36 @@ type ArgType = "default" | "withOptions";
 function getArgList(
     cmd: string,
     parameters: GluegunParameters,
-    index = 0,
-    type: ArgType = "default",
-) {
-    const args =
-        parameters.array && parameters.array.length
-            ? parameters.array.slice(index)
-            : [];
-    if (
-        type === "withOptions" &&
-        Array.isArray(parameters.raw) &&
-        parameters.raw.length
-    ) {
-        const rawIndex = args.length
-            ? parameters.raw.indexOf(args[0])
-            : parameters.raw.indexOf(cmd);
-        return parameters.raw.slice(rawIndex);
+    options: GetArgListOptions = {
+        offset: 0,
+        type: "default"
     }
-    return args;
+) {
+    const getArgs = () => {
+        if (parameters.array && parameters.array.length) {
+            const argIndex = parameters.array.indexOf(cmd) + options.offset;
+            return parameters.array.slice(argIndex);
+        }
+        return [];
+    }
+    const getArgsWithOptions = () => {
+        if (
+            Array.isArray(parameters.raw) &&
+            parameters.raw.length
+        ) {
+            const rawIndex = parameters.raw.indexOf(cmd) + options.offset;
+            return parameters.raw.slice(rawIndex);
+        }
+        return [];
+    }
+    switch (options.type) {
+        case "withOptions": {
+            return getArgsWithOptions()
+        }
+        default: {
+            return getArgs()
+        }
+    }
 }
 
 export default getArgList;

@@ -22,10 +22,12 @@ export default {
         switch (parameters.first) {
             case "watch": {
                 const argList = pixelOven.getArgList(
-                    "test",
+                    "watch",
                     parameters,
-                    1,
-                    "withOptions",
+                    {
+                        offset: 1,
+                        type: "withOptions"
+                    },
                 );
                 const results = await jest(["--watch"].concat(argList));
                 return handle("Jest", results.status);
@@ -34,8 +36,10 @@ export default {
                 const argList = pixelOven.getArgList(
                     "test",
                     parameters,
-                    0,
-                    "withOptions",
+                    {
+                        offset: 0,
+                        type: "withOptions"
+                    },
                 );
                 const results = await jest(argList);
                 return handle("Jest", results.status);
