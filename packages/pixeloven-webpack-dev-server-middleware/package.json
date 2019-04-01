@@ -35,7 +35,6 @@
     "@types/express": "4.16.0",
     "@types/html-entities": "1.2.16",
     "@types/memory-fs": "0.3.2",
-    "@types/node": "10.12.18",
     "@types/require-from-string": "1.2.0",
     "@types/source-map-support": "0.4.1",
     "@types/webpack": "4.4.26",

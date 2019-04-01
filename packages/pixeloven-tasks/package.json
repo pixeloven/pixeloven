@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@types/jest": "24.0.11",
+    "@types/node": "10.14.4",
     "jest": "24.5.0",
     "jest-config": "24.5.0",
     "jest-haste-map": "24.5.0",

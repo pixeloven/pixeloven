@@ -25,8 +25,7 @@
   "devDependencies": {
     "@pixeloven/tasks": "^5.3.0",
     "@types/cross-spawn": "6.0.0",
-    "@types/fs-extra": "5.0.4",
-    "@types/node": "10.12.18"
+    "@types/fs-extra": "5.0.4"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

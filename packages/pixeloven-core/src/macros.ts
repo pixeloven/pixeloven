@@ -10,14 +10,6 @@ import path from "path";
 export const exit = process.exit;
 
 /**
- *
- * @param err Generic error handler
- */
-export const errorHandler = (err: Error) => {
-    throw err;
-};
-
-/**
  * Resolve relative path
  * @param relativePath
  * @param strict if true returns
