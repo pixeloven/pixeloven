@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/gh-pages",
-  "version": "5.3.2",
+  "version": "5.3.4",
   "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -25,7 +25,7 @@
     "gluegun": "3.0.0"
   },
   "devDependencies": {
-    "@pixeloven/cli": "^5.3.0",
+    "@pixeloven/cli": "^5.3.4",
     "@pixeloven/tasks": "^5.3.0",
     "@types/fs-extra": "5.0.4",
     "@types/gh-pages": "2.0.0",
