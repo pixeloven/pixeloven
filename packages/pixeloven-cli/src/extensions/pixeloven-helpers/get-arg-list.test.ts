@@ -5,7 +5,7 @@ const array = ["watch"];
 const options = {
     coverage: true,
 };
-const raw = ["/path/to/node", "/path/to/cli", "watch", "--coverage"];
+const raw = ["/path/to/node", "/path/to/cli", "test", "watch", "--coverage"];
 
 describe("@pixeloven/cli", () => {
     describe("extensions/pixeloven-helpers", () => {
@@ -38,11 +38,13 @@ describe("@pixeloven/cli", () => {
                         options,
                         raw,
                     },
-                    1,
-                    "default",
+                    {
+                        offset: 1,
+                        type: "default"
+                    }
                 );
-                expect(argList.length).toEqual(0);
-                expect(argList).toEqual([]);
+                expect(argList.length).toEqual(1);
+                expect(argList).toEqual(["watch"]);
             });
             it("should return args list with raw options included", () => {
                 const argList = getArgList(
@@ -52,11 +54,13 @@ describe("@pixeloven/cli", () => {
                         options,
                         raw,
                     },
-                    0,
-                    "withOptions",
+                    {
+                        offset: 0,
+                        type: "withOptions"
+                    }
                 );
-                expect(argList.length).toEqual(2);
-                expect(argList).toEqual(["watch", "--coverage"]);
+                expect(argList.length).toEqual(3);
+                expect(argList).toEqual(["test", "watch", "--coverage"]);
             });
         });
     });
