@@ -12,8 +12,19 @@ export interface Plop {
 export interface PlopGenerator {
     description: string;
     prompts: inquirer.Question[];
-    actions: ActionConfig[];
+    actions: ActionType[] | ( (answers: AnswerConfig) => ActionType[] );
 }
+
+export type ActionType =
+  | string
+  | ActionConfig
+  | CustomActionFunction;
+
+export type CustomActionFunction = (
+    answers: object,
+    config?: ActionConfig,
+    plopfileApi?: NodePlopAPI
+) => Promise<string> | string; // Check return type?
 
 export interface ActionConfig {
     type: string;
@@ -22,6 +33,11 @@ export interface ActionConfig {
     force?: boolean;
     data?: object;
     abortOnFail?: boolean;
+}
+
+export interface AnswerConfig {
+    includeStyles?: boolean;
+    includeStrings?: boolean;
 }
 
 export interface PlopCfg {
