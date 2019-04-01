@@ -31,7 +31,7 @@
     "@types/node": "10.12.18"
   },
   "peerDependencies": {
-    "@pixeloven/webpack-compiler": ">5.0.0-beta.0"
+    "@pixeloven/webpack-compiler": ">5.0.0"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
