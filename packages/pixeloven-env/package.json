@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^5.3.0",
-    "@types/dotenv": "6.1.0"
+    "@types/dotenv": "6.1.1"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
