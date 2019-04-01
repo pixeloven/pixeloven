@@ -18,6 +18,8 @@
 
 .a-avatar--anonymous {
     font-size: 20px;
-    // Magic number to properly position the icon canvas
+    /**
+     * Magic number to properly position the icon canvas
+     */
     line-height: 34px;
 }

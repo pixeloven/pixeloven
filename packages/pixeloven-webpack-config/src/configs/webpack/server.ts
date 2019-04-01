@@ -62,8 +62,15 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      * Handle css/scss
      */
     const scssRule: RuleSetRule = {
-        loader: require.resolve("css-loader/locals"),
         test: /\.(scss|sass|css)$/i,
+        use: removeEmpty([
+            {
+                loader: require.resolve("css-loader"),
+                options: {
+                    exportOnlyLocals: true
+                }
+            },
+        ]),
     };
 
     /**
@@ -118,7 +125,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                         [
                             require.resolve("@babel/preset-env"),
                             {
-                                useBuiltIns: "entry",
+                                useBuiltIns: false,
                             },
                         ],
                         require.resolve("@babel/preset-react"),
