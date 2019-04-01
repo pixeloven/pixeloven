@@ -115,15 +115,6 @@ const generator = (plop: Plop) => {
                 });
             }
 
-            if (answers.includeStrings) {
-                actions.push({
-                    abortOnFail: true,
-                    path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.strings.tsx`,
-                    templateFile: "templates/Component/Component.strings.tsx.hbs",
-                    type: "add",
-                });
-            }
-
             return actions;
         },
         description: "Generate a new Atomic component",
@@ -144,12 +135,6 @@ const generator = (plop: Plop) => {
                 default: true,
                 message: "Will this component need to manage state?",
                 name: "includeState",
-                type: "confirm",
-            },
-            {
-                default: true,
-                message: "Will this component need to manage translated strings?",
-                name: "includeStrings",
                 type: "confirm",
             },
             {
