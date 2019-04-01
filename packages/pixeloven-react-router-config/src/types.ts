@@ -37,7 +37,7 @@ export type RouteFetchDataFunction = (
 
 export type RouteComponent<T = {}> =
     | React.ComponentType<DefaultRouteComponentProps<T>>
-    | ConnectedComponentClass<object, DefaultRouteComponentProps<T>>;
+    | ConnectedComponentClass<any, DefaultRouteComponentProps<T>>;
 
 export interface RouteComponentProps<T = {}>
     extends DefaultRouteComponentProps<T> {

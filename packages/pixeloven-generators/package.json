@@ -26,8 +26,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^5.3.0",
-    "@types/inquirer": "0.0.43",
-    "@types/node": "10.12.18"
+    "@types/inquirer": "0.0.43"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

@@ -18,14 +18,6 @@ describe("@pixeloven/core", () => {
             jest.restoreAllMocks();
             resolvePathExists = true;
         });
-        describe("errorHandler", () => {
-            it("should re-throw error", () => {
-                const caller = () => {
-                    macros.errorHandler(new Error("error"));
-                };
-                expect(caller).toThrowError();
-            });
-        });
         describe("resolvePath", () => {
             it('should resolve path "strict" successfully', () => {
                 resolvePathExists = true;

@@ -5,7 +5,6 @@ describe("@pixeloven/core", () => {
     describe("index", () => {
         it("should export macros", () => {
             expect(typeof exported.createOrEmptyDir).toEqual("function");
-            expect(typeof exported.errorHandler).toEqual("function");
             expect(typeof exported.exit).toEqual("function");
             expect(typeof exported.normalizeUrl).toEqual("function");
             expect(typeof exported.resolvePath).toEqual("function");
