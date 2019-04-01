@@ -77,3 +77,4 @@ We are committed to providing a safe place for everyone. Please review our [code
 6) Expose storybook addons through library
 7) Update middleware and examples
 8) node-mocks-http replace with supertest
+9) remove copy-webpack-plugin in favor of co-locating assets

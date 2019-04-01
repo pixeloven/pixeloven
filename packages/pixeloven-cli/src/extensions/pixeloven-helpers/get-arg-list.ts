@@ -1,8 +1,8 @@
 import { GluegunParameters } from "gluegun";
 
 interface GetArgListOptions {
-    offset: number,
-    type: "default" | "withOptions"
+    offset: number;
+    type: "default" | "withOptions";
 }
 
 /**
@@ -23,8 +23,8 @@ function getArgList(
     parameters: GluegunParameters,
     options: GetArgListOptions = {
         offset: 0,
-        type: "default"
-    }
+        type: "default",
+    },
 ) {
     const getArgs = () => {
         if (parameters.array && parameters.array.length) {
@@ -32,23 +32,20 @@ function getArgList(
             return parameters.array.slice(argIndex);
         }
         return [];
-    }
+    };
     const getArgsWithOptions = () => {
-        if (
-            Array.isArray(parameters.raw) &&
-            parameters.raw.length
-        ) {
+        if (Array.isArray(parameters.raw) && parameters.raw.length) {
             const rawIndex = parameters.raw.indexOf(cmd) + options.offset;
             return parameters.raw.slice(rawIndex);
         }
         return [];
-    }
+    };
     switch (options.type) {
         case "withOptions": {
-            return getArgsWithOptions()
+            return getArgsWithOptions();
         }
         default: {
-            return getArgs()
+            return getArgs();
         }
     }
 }
