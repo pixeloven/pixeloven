@@ -46,7 +46,8 @@
     "@types/storybook__addon-knobs": "4.0.0",
     "@types/storybook__addon-notes": "4.0.0",
     "@types/storybook__addon-options": "4.0.0",
-    "@types/storybook__react": "4.0.0"
+    "@types/storybook__react": "4.0.0",
+    "@types/storybook-readme" :"5.0.0"
   },
   "peerDependencies": {
     "react": ">=16.3",

@@ -9,14 +9,14 @@ import storybook, { newModule } from "./webpack.config";
 describe("@pixeloven/storybook", () => {
     describe("configs", () => {
         describe("webpack.config", () => {
-            it("webpack config returns defaultConfig untouched", () => {
+            it("webpack config returns config untouched", () => {
                 const config = {} as Configuration;
                 const expectedConfig = {} as Configuration;
                 expect(storybook({config})).toEqual(
                     expectedConfig,
                 );
             });
-            it("webpack config returns defaultConfig and merges the module config", () => {
+            it("webpack config returns config and merges the module config", () => {
                 const config = {
                     module: {},
                 } as Configuration;
@@ -27,7 +27,7 @@ describe("@pixeloven/storybook", () => {
                     expectedConfig,
                 );
             });
-            it("webpack config returns defaultConfig and defines an alias to resolve", () => {
+            it("webpack config returns config and defines an alias to resolve", () => {
                 const config = {
                     resolve: {},
                 } as Configuration;
@@ -35,12 +35,12 @@ describe("@pixeloven/storybook", () => {
                 expect(actualConfig.resolve).toHaveProperty("alias");
                 expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
-            it("webpack config returns defaultConfig and adds an alias to resolve", () => {
+            it("webpack config returns config and adds an alias to resolve", () => {
                 const config = {
                     resolve: {
                         alias: {
                             original: "testing",
-                        },
+                        }
                     },
                 } as Configuration;
                 const actualConfig = storybook({config});
@@ -48,14 +48,26 @@ describe("@pixeloven/storybook", () => {
                 expect(actualConfig.resolve).toHaveProperty("alias.original");
                 expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
-            it("webpack config returns defaultConfig and defines extensions to resolve ", () => {
+            it("webpack config returns config and adds an modules to resolve", () => {
+                const config = {
+                    resolve: {
+                        alias: {
+                            original: "testing",
+                        },
+                        modules: [],
+                    },
+                } as Configuration;
+                const actualConfig = storybook({config});
+                expect(actualConfig.resolve).toHaveProperty("modules");
+            });
+            it("webpack config returns config and defines extensions to resolve ", () => {
                 const config = {
                     resolve: {},
                 } as Configuration;
                 const actualConfig = storybook({config});
                 expect(actualConfig.resolve).toHaveProperty("extensions");
             });
-            it("webpack config returns defaultConfig and adds extensions to resolve ", () => {
+            it("webpack config returns config and adds extensions to resolve ", () => {
                 const config = {
                     resolve: {
                         extensions: [".text"],
@@ -63,6 +75,15 @@ describe("@pixeloven/storybook", () => {
                 } as Configuration;
                 const actualConfig = storybook({config});
                 expect(actualConfig.resolve).toHaveProperty("extensions");
+            });
+            it("webpack config returns config and adds plugins to resolve ", () => {
+                const config = {
+                    resolve: {
+                        plugins: [],
+                    },
+                } as Configuration;
+                const actualConfig = storybook({config});
+                expect(actualConfig.resolve).toHaveProperty("plugins");
             });
         });
     });
