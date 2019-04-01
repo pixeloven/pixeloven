@@ -1,6 +1,6 @@
 import "jest";
 import { Configuration } from "webpack";
-import config, { newModule } from "./webpack.config";
+import storybook, { newModule } from "./webpack.config";
 
 /**
  * @todo should create a generator to do this but for now let's disable this rule here
@@ -10,64 +10,58 @@ describe("@pixeloven/storybook", () => {
     describe("configs", () => {
         describe("webpack.config", () => {
             it("webpack config returns defaultConfig untouched", () => {
-                const baseConfig = {} as Configuration;
-                const defaultConfig = {} as Configuration;
+                const config = {} as Configuration;
                 const expectedConfig = {} as Configuration;
-                expect(config(baseConfig, {}, defaultConfig)).toEqual(
+                expect(storybook({config})).toEqual(
                     expectedConfig,
                 );
             });
             it("webpack config returns defaultConfig and merges the module config", () => {
-                const baseConfig = {} as Configuration;
-                const defaultConfig = {
+                const config = {
                     module: {},
                 } as Configuration;
                 const expectedConfig = {
                     module: newModule,
                 } as Configuration;
-                expect(config(baseConfig, {}, defaultConfig)).toEqual(
+                expect(storybook({config})).toEqual(
                     expectedConfig,
                 );
             });
             it("webpack config returns defaultConfig and defines an alias to resolve", () => {
-                const baseConfig = {} as Configuration;
-                const defaultConfig = {
+                const config = {
                     resolve: {},
                 } as Configuration;
-                const actualConfig = config(baseConfig, {}, defaultConfig);
+                const actualConfig = storybook({config});
                 expect(actualConfig.resolve).toHaveProperty("alias");
                 expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
             it("webpack config returns defaultConfig and adds an alias to resolve", () => {
-                const baseConfig = {} as Configuration;
-                const defaultConfig = {
+                const config = {
                     resolve: {
                         alias: {
                             original: "testing",
                         },
                     },
                 } as Configuration;
-                const actualConfig = config(baseConfig, {}, defaultConfig);
+                const actualConfig = storybook({config});
                 expect(actualConfig.resolve).toHaveProperty("alias");
                 expect(actualConfig.resolve).toHaveProperty("alias.original");
                 expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
             it("webpack config returns defaultConfig and defines extensions to resolve ", () => {
-                const baseConfig = {} as Configuration;
-                const defaultConfig = {
+                const config = {
                     resolve: {},
                 } as Configuration;
-                const actualConfig = config(baseConfig, {}, defaultConfig);
+                const actualConfig = storybook({config});
                 expect(actualConfig.resolve).toHaveProperty("extensions");
             });
             it("webpack config returns defaultConfig and adds extensions to resolve ", () => {
-                const baseConfig = {} as Configuration;
-                const defaultConfig = {
+                const config = {
                     resolve: {
                         extensions: [".text"],
                     },
                 } as Configuration;
-                const actualConfig = config(baseConfig, {}, defaultConfig);
+                const actualConfig = storybook({config});
                 expect(actualConfig.resolve).toHaveProperty("extensions");
             });
         });
