@@ -67,8 +67,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             {
                 loader: require.resolve("css-loader"),
                 options: {
-                    exportOnlyLocals: true
-                }
+                    exportOnlyLocals: true,
+                },
             },
         ]),
     };

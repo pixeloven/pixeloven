@@ -1,8 +1,8 @@
 import { GluegunParameters, GluegunRunContext } from "gluegun";
 
 interface GetArgListOptions {
-    offset: number,
-    type: "default" | "withOptions"
+    offset: number;
+    type: "default" | "withOptions";
 }
 
 export type JestExtension = (args?: string[]) => Promise<RunResponse>;
@@ -15,7 +15,7 @@ export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
 export type GetArgListFunction = (
     cmd: string,
     parameters: GluegunParameters,
-    options: GetArgListOptions
+    options: GetArgListOptions,
 ) => string[];
 
 export type GetConfigPathFunction = (

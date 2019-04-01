@@ -4,7 +4,14 @@ import { Plop } from "./plop";
 /**
  * Acceptable atomic types
  */
-const atomicTypes = ["atom", "molecule", "organism", "page", "partial", "template"];
+const atomicTypes = [
+    "atom",
+    "molecule",
+    "organism",
+    "page",
+    "partial",
+    "template",
+];
 
 /**
  * Acceptable component types
