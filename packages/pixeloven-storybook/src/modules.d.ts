@@ -11,5 +11,4 @@ declare module "*.md";
  * @description Consult DefinitelyTyped before declaring below
  * http://definitelytyped.org/
  */
-declare module "storybook-readme";
 declare module "tsconfig-paths-webpack-plugin";

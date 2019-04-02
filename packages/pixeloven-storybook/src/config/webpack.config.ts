@@ -3,6 +3,10 @@ import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import { Configuration, Module, RuleSetRule } from "webpack";
 import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
+interface Options {
+    config: Configuration
+}
+
 export const newScssRule: RuleSetRule = {
     loaders: [
         require.resolve("style-loader"),
@@ -34,39 +38,33 @@ export const newModule: Module = {
 
 /**
  * Extend webpack config for storybook
- * @param baseConfig
- * @param env
- * @param defaultConfig
  */
-export default (
-    baseConfig: Configuration,
-    env: object,
-    defaultConfig: Configuration,
-) => {
-    if (defaultConfig.module) {
-        defaultConfig.module = deepmerge(defaultConfig.module, newModule);
+export default (options: Options) => {
+    const { config } = options;
+    if (config.module) {
+        config.module = deepmerge(config.module, newModule);
     }
-    if (defaultConfig.resolve) {
+    if (config.resolve) {
         // Aliases
-        if (defaultConfig.resolve.alias) {
-            defaultConfig.resolve.alias["@src"] = resolveSourceRoot();
+        if (config.resolve.alias) {
+            config.resolve.alias["@src"] = resolveSourceRoot();
         } else {
-            defaultConfig.resolve.alias = {
+            config.resolve.alias = {
                 "@src": resolveSourceRoot(),
             };
         }
         // Extensions
-        if (defaultConfig.resolve.extensions) {
-            defaultConfig.resolve.extensions.push(".ts", ".tsx");
+        if (config.resolve.extensions) {
+            config.resolve.extensions.push(".ts", ".tsx");
         } else {
-            defaultConfig.resolve.extensions = [".ts", ".tsx"];
+            config.resolve.extensions = [".ts", ".tsx"];
         }
         // Modules
-        if (defaultConfig.resolve.modules) {
-            defaultConfig.resolve.modules.push(resolveSourceRoot());
-            defaultConfig.resolve.modules.push("node_modules");
+        if (config.resolve.modules) {
+            config.resolve.modules.push(resolveSourceRoot());
+            config.resolve.modules.push("node_modules");
         } else {
-            defaultConfig.resolve.modules = [
+            config.resolve.modules = [
                 resolveSourceRoot(),
                 "node_modules",
             ];
@@ -75,11 +73,11 @@ export default (
         const tsPathPlugin = new TsconfigPathsPlugin({
             configFile: resolveTsConfig(),
         });
-        if (defaultConfig.resolve.plugins) {
-            defaultConfig.resolve.plugins.push(tsPathPlugin);
+        if (config.resolve.plugins) {
+            config.resolve.plugins.push(tsPathPlugin);
         } else {
-            defaultConfig.resolve.plugins = [tsPathPlugin];
+            config.resolve.plugins = [tsPathPlugin];
         }
     }
-    return defaultConfig;
+    return config;
 };
