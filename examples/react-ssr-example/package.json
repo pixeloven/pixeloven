@@ -1,6 +1,6 @@
 {
   "name": "@examples/react-ssr-example",
-  "version": "5.3.4",
+  "version": "6.0.0-alpha.0",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@pixeloven/react-router-config": "^5.3.0",
+    "@pixeloven/react-router-config": "^6.0.0-alpha.0",
     "axios": "0.18.0",
     "classnames": "2.2.6",
     "express": "4.16.4",
@@ -35,12 +35,12 @@
   },
   "devDependencies": {
     "@babel/core": "7.4.0",
-    "@pixeloven/cli": "^5.3.4",
-    "@pixeloven/cli-addon-storybook": "^5.3.4",
-    "@pixeloven/cli-addon-webpack": "^5.3.4",
-    "@pixeloven/generators": "^5.3.3",
-    "@pixeloven/storybook": "^5.3.2",
-    "@pixeloven/webpack": "^5.3.2",
+    "@pixeloven/cli": "^6.0.0-alpha.0",
+    "@pixeloven/cli-addon-storybook": "^6.0.0-alpha.0",
+    "@pixeloven/cli-addon-webpack": "^6.0.0-alpha.0",
+    "@pixeloven/generators": "^6.0.0-alpha.0",
+    "@pixeloven/storybook": "^6.0.0-alpha.0",
+    "@pixeloven/webpack": "^6.0.0-alpha.0",
     "@types/classnames": "2.2.6",
     "@types/enzyme": "3.1.15",
     "@types/enzyme-adapter-react-16": "1.0.3",
