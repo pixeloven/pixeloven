@@ -1,20 +1,24 @@
+import classNames from "classnames";
 import React{{#if includeState}}, { useState }{{/if}} from "react";
+{{#if includeStyles}}
 
 import "./{{componentName}}.scss";
+{{/if}}
 
 interface {{componentName}}Props {
-    exampleProp?: string;
+    className?: string;
 }
 
 function {{componentName}}(props: {{componentName}}Props) {
-    const { exampleProp } = props;
-    {{#if includeState}}
-    const [exampleState] = useState(0);
+    const { className } = props;
+    const  {{componentName}}Classes = classNames(className, "example-class");
+    {{#if includeState}}const [exampleState] = useState(0);{{/if}}
 
-    return exampleProp ? <div>{exampleProp} {exampleState}</div> : false;
-    {{else}}
-    return exampleProp ? <div>{exampleProp}</div> : false;
-    {{/if}}
+    return (
+        <div className={ {{componentName}}Classes }>
+            Function component{{#if includeState}} with {exampleState} state{{/if}}
+        </div>
+    );
 }
 
 export default {{componentName}};
