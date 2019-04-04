@@ -4,7 +4,7 @@ import { Configuration, Module, RuleSetRule } from "webpack";
 import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
 interface Options {
-    config: Configuration
+    config: Configuration;
 }
 
 export const newScssRule: RuleSetRule = {
@@ -64,10 +64,7 @@ export default (options: Options) => {
             config.resolve.modules.push(resolveSourceRoot());
             config.resolve.modules.push("node_modules");
         } else {
-            config.resolve.modules = [
-                resolveSourceRoot(),
-                "node_modules",
-            ];
+            config.resolve.modules = [resolveSourceRoot(), "node_modules"];
         }
         // Plugins
         const tsPathPlugin = new TsconfigPathsPlugin({

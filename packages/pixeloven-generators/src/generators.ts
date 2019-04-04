@@ -79,7 +79,7 @@ const generator = (plop: Plop) => {
     plop.setHelper("lowerCase", lowerCase);
 
     plop.setGenerator("component", {
-        actions: (answers) => {
+        actions: answers => {
             const actions = [
                 {
                     abortOnFail: true,
@@ -96,13 +96,15 @@ const generator = (plop: Plop) => {
                 {
                     abortOnFail: true,
                     path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.tsx`,
-                    templateFile: "templates/Component/{{componentType}}.Component.tsx.hbs",
+                    templateFile:
+                        "templates/Component/{{componentType}}.Component.tsx.hbs",
                     type: "add",
                 },
                 {
                     abortOnFail: true,
                     path: `${componentPath}/{{plural (lowerCase atomicType)}}/{{componentName}}/{{componentName}}.stories.tsx`,
-                    templateFile: "templates/Component/Component.stories.tsx.hbs",
+                    templateFile:
+                        "templates/Component/Component.stories.tsx.hbs",
                     type: "add",
                 },
                 {

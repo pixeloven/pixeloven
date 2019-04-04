@@ -12,9 +12,7 @@ describe("@pixeloven/storybook", () => {
             it("webpack config returns config untouched", () => {
                 const config = {} as Configuration;
                 const expectedConfig = {} as Configuration;
-                expect(storybook({config})).toEqual(
-                    expectedConfig,
-                );
+                expect(storybook({ config })).toEqual(expectedConfig);
             });
             it("webpack config returns config and merges the module config", () => {
                 const config = {
@@ -23,15 +21,13 @@ describe("@pixeloven/storybook", () => {
                 const expectedConfig = {
                     module: newModule,
                 } as Configuration;
-                expect(storybook({config})).toEqual(
-                    expectedConfig,
-                );
+                expect(storybook({ config })).toEqual(expectedConfig);
             });
             it("webpack config returns config and defines an alias to resolve", () => {
                 const config = {
                     resolve: {},
                 } as Configuration;
-                const actualConfig = storybook({config});
+                const actualConfig = storybook({ config });
                 expect(actualConfig.resolve).toHaveProperty("alias");
                 expect(actualConfig.resolve).toHaveProperty("alias.@src");
             });
@@ -40,10 +36,10 @@ describe("@pixeloven/storybook", () => {
                     resolve: {
                         alias: {
                             original: "testing",
-                        }
+                        },
                     },
                 } as Configuration;
-                const actualConfig = storybook({config});
+                const actualConfig = storybook({ config });
                 expect(actualConfig.resolve).toHaveProperty("alias");
                 expect(actualConfig.resolve).toHaveProperty("alias.original");
                 expect(actualConfig.resolve).toHaveProperty("alias.@src");
@@ -57,14 +53,14 @@ describe("@pixeloven/storybook", () => {
                         modules: [],
                     },
                 } as Configuration;
-                const actualConfig = storybook({config});
+                const actualConfig = storybook({ config });
                 expect(actualConfig.resolve).toHaveProperty("modules");
             });
             it("webpack config returns config and defines extensions to resolve ", () => {
                 const config = {
                     resolve: {},
                 } as Configuration;
-                const actualConfig = storybook({config});
+                const actualConfig = storybook({ config });
                 expect(actualConfig.resolve).toHaveProperty("extensions");
             });
             it("webpack config returns config and adds extensions to resolve ", () => {
@@ -73,7 +69,7 @@ describe("@pixeloven/storybook", () => {
                         extensions: [".text"],
                     },
                 } as Configuration;
-                const actualConfig = storybook({config});
+                const actualConfig = storybook({ config });
                 expect(actualConfig.resolve).toHaveProperty("extensions");
             });
             it("webpack config returns config and adds plugins to resolve ", () => {
@@ -82,7 +78,7 @@ describe("@pixeloven/storybook", () => {
                         plugins: [],
                     },
                 } as Configuration;
-                const actualConfig = storybook({config});
+                const actualConfig = storybook({ config });
                 expect(actualConfig.resolve).toHaveProperty("plugins");
             });
         });

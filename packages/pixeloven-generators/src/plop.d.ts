@@ -12,18 +12,15 @@ export interface Plop {
 export interface PlopGenerator {
     description: string;
     prompts: inquirer.Question[];
-    actions: ActionType[] | ( (answers: AnswerConfig) => ActionType[] );
+    actions: ActionType[] | ((answers: AnswerConfig) => ActionType[]);
 }
 
-export type ActionType =
-  | string
-  | ActionConfig
-  | CustomActionFunction;
+export type ActionType = string | ActionConfig | CustomActionFunction;
 
 export type CustomActionFunction = (
     answers: object,
     config?: ActionConfig,
-    plopfileApi?: NodePlopAPI
+    plopfileApi?: NodePlopAPI,
 ) => Promise<string> | string; // Check return type?
 
 export interface ActionConfig {
