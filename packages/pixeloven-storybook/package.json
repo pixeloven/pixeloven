@@ -42,12 +42,11 @@
     "@pixeloven/tasks": "^6.0.0-alpha.0",
     "@types/mini-css-extract-plugin": "0.2.0",
     "@types/storybook-readme": "5.0.0",
-    "@types/storybook__addon-actions": "3.4.1",
-    "@types/storybook__addon-backgrounds": "4.1.0",
-    "@types/storybook__addon-knobs": "4.0.0",
-    "@types/storybook__addon-notes": "4.0.0",
-    "@types/storybook__addon-options": "4.0.0",
-    "@types/storybook__react": "4.0.0"
+    "@types/storybook__addon-actions": "3.4.2",
+    "@types/storybook__addon-backgrounds": "4.1.1",
+    "@types/storybook__addon-knobs": "4.0.4",
+    "@types/storybook__addon-options": "4.0.1",
+    "@types/storybook__react": "4.0.1"
   },
   "peerDependencies": {
     "react": ">=16.3",
