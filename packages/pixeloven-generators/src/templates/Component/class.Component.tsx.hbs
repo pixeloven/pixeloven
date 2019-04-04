@@ -1,29 +1,31 @@
+import classNames from "classnames";
 import * as React from "react";
+{{#if includeStyles}}
 
-{{#if includeStrings}}import {tStrings} from "./{{componentName}}.strings";{{/if}}
-{{#if includeStyles}}import "./{{componentName}}.scss";{{/if}}
+import "./{{componentName}}.scss";
+{{/if}}
 
 interface {{componentName}}Props {
-    exampleProp?: string;
+    className?: string;
 }
 
 {{#if includeState}}
 interface State {
     exampleState?: string;
 }
-
-class {{componentName}} extends React.Component<{{componentName}}Props, State> {
-{{else}}
-class {{componentName}} extends React.Component<{{componentName}}Props> {
 {{/if}}
-    public render() {
-        const { exampleProp } = this.props;
 
-        {{#if includeStrings}}
-        return exampleProp ? <div>{exampleProp} with translated {tStrings.exampleString}</div> : false;
-        {{else}}
-        return exampleProp ? <div>{exampleProp}</div> : false;
-        {{/if}}
+class {{componentName}} extends React.Component<{{componentName}}Props{{#if includeState}}, State{{/if}}> {
+    public render() {
+        const { className } = this.props;
+        const  {{componentName}}Classes = classNames(className, "example-class");
+        {{#if includeState}}const { exampleState } = this.state;{{/if}}
+
+        return (
+            <div className={ {{componentName}}Classes }>
+                Class component{{#if includeState}} with {exampleState} state{{/if}}
+            </div>
+        );
     }
 }
 
