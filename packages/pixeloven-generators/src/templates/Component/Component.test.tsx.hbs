@@ -10,7 +10,7 @@ configure({
 });
 
 describe("Shared/Components/{{capitalize (plural atomicType)}}/{{componentName}}", () => {
-    it("should not render anything", () => {
+    it("should render a `div` element by default", () => {
         const wrapper = shallow(<{{componentName}} />);
 
         expect(wrapper.find("div").length).toEqual(1);
