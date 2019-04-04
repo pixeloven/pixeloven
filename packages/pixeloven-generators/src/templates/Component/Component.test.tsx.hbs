@@ -9,8 +9,8 @@ configure({
     adapter: new ReactSixteenAdapter(),
 });
 
-describe("Shared/Components/{{capitalize (plural atomicTypes)}}/{{componentName}}", () => {
-    it("should render a `div` element by default", () => {
+describe("Shared/Components/{{capitalize (plural atomicType)}}/{{componentName}}", () => {
+    it("should not render anything", () => {
         const wrapper = shallow(<{{componentName}} />);
 
         expect(wrapper.find("div").length).toEqual(1);
