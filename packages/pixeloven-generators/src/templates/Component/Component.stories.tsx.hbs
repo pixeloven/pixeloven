@@ -9,5 +9,5 @@ import Readme from "./README.md";
 storiesOf("Components/{{capitalize (plural atomicTypes)}}/{{componentName}}", module)
     .addDecorator(withReadme(Readme))
     .add("default", () => {
-        return <{{componentName}} exampleProp={"example prop"} />;
+        return <{{componentName}} className={"story-class"} />;
     });

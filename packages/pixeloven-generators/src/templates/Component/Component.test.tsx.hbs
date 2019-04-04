@@ -10,15 +10,16 @@ configure({
 });
 
 describe("Shared/Components/{{capitalize (plural atomicTypes)}}/{{componentName}}", () => {
-    it("should not render anything", () => {
+    it("should render a `div` element by default", () => {
         const wrapper = shallow(<{{componentName}} />);
 
-        expect(wrapper.type()).toBeNull();
+        expect(wrapper.find("div").length).toEqual(1);
     });
 
-    it("should render \"div\" with property \"example\"", () => {
-        const wrapper = shallow(<{{componentName}} exampleProp={"example"} />)
+    it("should extend passed classes", () => {
+        const wrapper = shallow(<{{componentName}} className={"test-class"} />);
 
-        expect(wrapper.find("div").text()).toEqual("example");
+         expect(wrapper.hasClass("example-class")).toBe(true);
++        expect(wrapper.hasClass("test-class")).toBe(true);
     });
 });
