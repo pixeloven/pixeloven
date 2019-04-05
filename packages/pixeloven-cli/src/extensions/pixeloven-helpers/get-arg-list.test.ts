@@ -40,8 +40,8 @@ describe("@pixeloven/cli", () => {
                     },
                     {
                         offset: 1,
-                        type: "default"
-                    }
+                        type: "default",
+                    },
                 );
                 expect(argList.length).toEqual(1);
                 expect(argList).toEqual(["watch"]);
@@ -56,8 +56,8 @@ describe("@pixeloven/cli", () => {
                     },
                     {
                         offset: 0,
-                        type: "withOptions"
-                    }
+                        type: "withOptions",
+                    },
                 );
                 expect(argList.length).toEqual(3);
                 expect(argList).toEqual(["test", "watch", "--coverage"]);

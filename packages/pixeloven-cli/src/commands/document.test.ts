@@ -1,12 +1,12 @@
 import "jest";
 import sinon from "sinon";
-import webpackModule from "./webpack";
+import documentModule from "./document";
 
 const sandbox = sinon.createSandbox();
 
-describe("@pixeloven/cli-addon-webpack", () => {
+describe("@pixeloven/cli", () => {
     describe("commands", () => {
-        describe("webpack", () => {
+        describe("document", () => {
             afterEach(() => {
                 sandbox.reset();
             });
@@ -14,9 +14,9 @@ describe("@pixeloven/cli-addon-webpack", () => {
                 sandbox.restore();
             });
             it("should contains required props", () => {
-                expect(webpackModule.alias).toEqual(["--webpack", "-w"]);
-                expect(webpackModule.name).toEqual("webpack");
-                expect(typeof webpackModule.run).toEqual("function");
+                expect(documentModule.alias).toEqual(["--document"]);
+                expect(documentModule.name).toEqual("document");
+                expect(typeof documentModule.run).toEqual("function");
             });
         });
     });

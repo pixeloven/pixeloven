@@ -10,12 +10,9 @@ import path from "path";
 export const exit = process.exit;
 
 /**
- *
- * @param err Generic error handler
+ * Simple wrapper for process exit
  */
-export const errorHandler = (err: Error) => {
-    throw err;
-};
+export const cwd = () => process.cwd();
 
 /**
  * Resolve relative path
@@ -27,7 +24,7 @@ export const resolvePath = (
     strict: boolean = true,
 ): string => {
     const absolutePath = path.resolve(
-        fs.realpathSync(process.cwd()),
+        fs.realpathSync(cwd()),
         relativePath,
     );
     if (strict && !fs.existsSync(absolutePath)) {

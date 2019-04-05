@@ -1,19 +1,19 @@
 import express, { Request } from "express";
 import fs from "fs";
 import "jest";
-import sinon, { SinonSandbox } from "sinon";
+import sinon from "sinon";
 import request from "supertest";
 import assetPath from "./assetPath";
 
-let sandbox: SinonSandbox;
+const sandbox = sinon.createSandbox();
 
 describe("Server/Middleware", () => {
     describe("assetPath", () => {
-        beforeEach(() => {
-            sandbox = sinon.createSandbox();
-        });
         afterEach(() => {
             sandbox.restore();
+        });
+        beforeEach(() => {
+            sandbox.reset();
         });
         it(`should create default middleware without files`, done => {
             let testReq: Request;

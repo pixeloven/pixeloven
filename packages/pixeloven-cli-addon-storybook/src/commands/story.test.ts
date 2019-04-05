@@ -1,14 +1,23 @@
 import "jest";
-import story from "./story";
+import sinon from "sinon";
+import storyModule from "./story";
+
+const sandbox = sinon.createSandbox();
 
 describe("@pixeloven/cli-addon-storybook", () => {
     describe("commands", () => {
-        afterAll(() => {
-            jest.clearAllMocks();
-            jest.restoreAllMocks();
-        });
-        it("should be named", () => {
-            expect(story.name).toEqual("story");
+        describe("story", () => {
+            afterEach(() => {
+                sandbox.reset();
+            });
+            afterAll(() => {
+                sandbox.restore();
+            });
+            it("should contains required props", () => {
+                expect(storyModule.alias).toEqual(["--story", "-s"]);
+                expect(storyModule.name).toEqual("story");
+                expect(typeof storyModule.run).toEqual("function");
+            });
         });
     });
 });

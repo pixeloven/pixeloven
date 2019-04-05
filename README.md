@@ -68,11 +68,6 @@ Below are just some of the up coming ideas for improvements.
 ## Our Commitment
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!
 
-## Planned v5
-1) Finish re-write of build
-2) Remove .env as a requirement
-3) Update generators to have more react 16.8 features
-
 ## Planned v6
 1) Move generators to use gluegun
 2) Unify all logging - use something more standard than webpack-log
@@ -82,3 +77,4 @@ We are committed to providing a safe place for everyone. Please review our [code
 6) Expose storybook addons through library
 7) Update middleware and examples
 8) node-mocks-http replace with supertest
+9) remove copy-webpack-plugin in favor of co-locating assets
