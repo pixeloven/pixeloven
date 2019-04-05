@@ -1,25 +1,29 @@
 import * as core from "@pixeloven/core";
 import "jest";
-import sinon, { SinonSandbox } from "sinon";
+import sinon from "sinon";
 import client from "./client";
 
-let sandbox: SinonSandbox;
+const sandbox = sinon.createSandbox();
 
 describe("@pixeloven/webpack", () => {
     describe("configs", () => {
         describe("webpack", () => {
             describe("client", () => {
-                beforeEach(() => {
-                    sandbox = sinon.createSandbox();
+                afterAll(() => {
+                    sandbox.reset();
+                });
+                afterEach(() => {
+                    sandbox.reset();
+                });
+                beforeAll(() => {
                     sandbox
                         .stub(core, "resolvePath")
                         .call(
                             (relativePath: string, strict?: boolean) =>
                                 `/test/path/${relativePath}`,
+                            "something",
+                            false
                         );
-                });
-                afterEach(() => {
-                    sandbox.restore();
                 });
                 it("should export webpack config targeting web for development", () => {
                     const env = process.env;

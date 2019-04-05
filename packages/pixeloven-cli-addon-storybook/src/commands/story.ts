@@ -8,6 +8,7 @@ import { AddonStorybookRunContext } from "../types";
  * @todo I'd also like to make it so the @env package can load without a file being present at all.
  */
 export default {
+    alias: ["--story", "-s"],
     name: "story",
     run: async (context: AddonStorybookRunContext) => {
         const { parameters, print, storybook } = context;
