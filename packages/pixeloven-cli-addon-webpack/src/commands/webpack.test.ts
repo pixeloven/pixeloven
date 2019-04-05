@@ -1,14 +1,23 @@
 import "jest";
-import webpack from "./webpack";
+import sinon from "sinon";
+import webpackModule from "./webpack";
+
+const sandbox = sinon.createSandbox();
 
 describe("@pixeloven/cli-addon-webpack", () => {
     describe("commands", () => {
-        afterAll(() => {
-            jest.clearAllMocks();
-            jest.restoreAllMocks();
-        });
-        it("should be named", () => {
-            expect(webpack.name).toEqual("webpack");
+        describe("webpack", () => {
+            afterEach(() => {
+                sandbox.reset();
+            });
+            afterAll(() => {
+                sandbox.restore();
+            });
+            it("should contains required props", () => {
+                expect(webpackModule.alias).toEqual(["--webpack", "-w"]);
+                expect(webpackModule.name).toEqual("webpack");
+                expect(typeof webpackModule.run).toEqual("function");
+            });
         });
     });
 });

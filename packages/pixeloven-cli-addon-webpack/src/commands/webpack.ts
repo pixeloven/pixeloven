@@ -7,6 +7,7 @@ import { AddonWebpackRunContext, WebpackExtensionType } from "../types";
  * --source-map Allows build with or without sourcemaps
  */
 export default {
+    alias: ["--webpack", "-w"],
     name: "webpack",
     run: async (context: AddonWebpackRunContext) => {
         const { parameters, print, webpack } = context;

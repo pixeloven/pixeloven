@@ -1,14 +1,22 @@
 import "jest";
-import ghPages from "./gh-pages";
+import sinon from "sinon";
+import ghPagesModule from "./gh-pages";
 
-describe("@pixeloven/cli-addon-storybook", () => {
+const sandbox = sinon.createSandbox();
+
+describe("@pixeloven/cli-addon-gh-pages", () => {
     describe("commands", () => {
-        afterAll(() => {
-            jest.clearAllMocks();
-            jest.restoreAllMocks();
-        });
-        it("should be named", () => {
-            expect(ghPages.name).toEqual("gh-pages");
+        describe("gh-pages", () => {
+            afterEach(() => {
+                sandbox.reset();
+            });
+            afterAll(() => {
+                sandbox.restore();
+            });
+            it("should contains required props", () => {
+                expect(ghPagesModule.name).toEqual("gh-pages");
+                expect(typeof ghPagesModule.run).toEqual("function");
+            });
         });
     });
 });
