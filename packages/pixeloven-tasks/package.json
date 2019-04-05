@@ -34,5 +34,10 @@
     "tslint-react": "4.0.0",
     "typedoc": "0.14.2",
     "typescript": "3.4.1"
+  },
+  "devDependencies": {
+    "@types/sinon": "7.0.11",
+    "sinon": "7.3.1",
+    "ts-mockito" :"2.3.1"
   }
 }
