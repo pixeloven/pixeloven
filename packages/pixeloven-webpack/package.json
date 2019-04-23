@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack",
-  "version": "6.0.0-alpha.3",
+  "version": "6.0.0-alpha.4",
   "description": "Webpack wrapper for CLI integration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@pixeloven/webpack-builder": "^6.0.0-alpha.2",
     "@pixeloven/webpack-compiler": "^6.0.0-alpha.2",
-    "@pixeloven/webpack-config": "^6.0.0-alpha.3",
+    "@pixeloven/webpack-config": "^6.0.0-alpha.4",
     "@pixeloven/webpack-dev-server": "^6.0.0-alpha.2"
   },
   "scripts": {
