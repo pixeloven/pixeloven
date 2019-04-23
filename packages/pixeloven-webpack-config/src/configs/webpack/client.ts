@@ -100,10 +100,9 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         loader: require.resolve("file-loader"),
         options: {
             name: ifProduction(
-                "[path][name].[contenthash].[ext]",
-                "[path][name].[hash].[ext]",
+                "static/media/[name].[contenthash].[ext]",
+                "static/media/[name].[hash].[ext]",
             ),
-            outputPath: "static/media/",
         },
     };
 
