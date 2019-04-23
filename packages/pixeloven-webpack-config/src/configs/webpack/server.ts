@@ -55,6 +55,10 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         loader: require.resolve("file-loader"),
         options: {
             emitFile: false,
+            name: ifProduction(
+                "static/media/[name].[contenthash].[ext]",
+                "static/media/[name].[hash].[ext]",
+            ),
         },
     };
 
