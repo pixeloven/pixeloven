@@ -134,19 +134,6 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     };
 
     /**
-     * Define rule for static assets
-     * @description "url" loader works like "file" loader except that it embeds assets
-     * smaller than specified limit in bytes as data URLs to avoid requests.
-     */
-    const staticFileRule: RuleSetRule = {
-        loader: require.resolve("url-loader"),
-        options: {
-            limit: 10000,
-        },
-        test: /\.(bmp|png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-    };
-
-    /**
      * Define rule for transpiling TypeScript
      * @description Un-comment transpileOnly to Disable type checker - will use it in ForkTsCheckerWebpackPlugin at the cost of overlay.
      * Babel loader is present to support react-hot-loader.
@@ -207,7 +194,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const module: Module = {
         rules: [
             {
-                oneOf: [staticFileRule, typeScriptRule, scssRule, catchAllRule],
+                oneOf: [typeScriptRule, scssRule, catchAllRule],
             },
         ],
         strictExportPresence: true,

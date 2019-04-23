@@ -9,7 +9,7 @@ const sandbox = sinon.createSandbox();
 
 describe("Server/Middleware", () => {
     describe("assetPath", () => {
-        afterEach(() => {
+        afterAll(() => {
             sandbox.restore();
         });
         beforeEach(() => {
