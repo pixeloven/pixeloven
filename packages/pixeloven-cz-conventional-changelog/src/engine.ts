@@ -6,6 +6,11 @@ import rightPad from "right-pad";
 import wrap from "word-wrap";
 import { Answers, CommitFunction, Options } from "./types";
 
+/**
+ * @todo Break out common code for other version of changelog
+ * @todo Add hook logic into CLI for easy integration
+ */
+
 interface ConventionalAnswers extends Answers {
     isBreaking: boolean;
     isIssueAffected: boolean;
