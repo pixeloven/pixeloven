@@ -83,3 +83,4 @@ We are committed to providing a safe place for everyone. Please review our [code
 2) Remove semantic UI deps in main example
 3) Update examples to be more specific
 4) Break middleware up into smaller packages
+5) Create component library for the server side components and views
