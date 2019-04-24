@@ -186,17 +186,6 @@ export default (options: Options) => {
                     width: options.maxLineWidth,
                 };
 
-                // parentheses are only needed when a scope is present
-                const scope = answers.scope ? "(" + answers.scope + ")" : "";
-
-                // Hard limit this line in the validate
-                const head = answers.type + scope + ": " + answers.subject;
-
-                // Wrap these lines at options.maxLineWidth characters
-                const body = answers.body
-                    ? wrap(answers.body, wrapOptions)
-                    : "";
-
                 // Apply breaking change prefix, removing it if already present
                 let breaking = answers.breaking ? answers.breaking.trim() : "";
                 breaking = breaking
@@ -208,6 +197,17 @@ export default (options: Options) => {
                 const issues = answers.issues
                     ? wrap(answers.issues, wrapOptions)
                     : "";
+                // parentheses are only needed when a scope is present
+                const scope = answers.scope ? "(" + answers.scope + ")" : "";
+
+                // Hard limit this line in the validate
+                const head = answers.type + scope + ": " + answers.subject;
+
+                // Wrap these lines at options.maxLineWidth characters
+                const body = answers.body
+                    ? wrap(answers.body, wrapOptions)
+                    : "";
+
                 const footer = filter([ breaking, issues ]).join('\n\n');
 
                 commit(filter([head, body, footer]).join("\n\n"));
