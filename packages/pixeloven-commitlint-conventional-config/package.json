@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/cz-simplified-changelog",
+  "name": "@pixeloven/commitlint-conventional-config",
   "version": "6.0.0-alpha.2",
-  "description": "Commit citizen changelog configuration",
+  "description": "Commitlint conventional configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -16,9 +16,6 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "conventional-commit-types": "^2.0.0"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.2"

@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/commitlint-simplified-config",
+  "name": "@pixeloven/cz-conventional-changelog",
   "version": "6.0.0-alpha.2",
-  "description": "Commitlint simplified configuration",
+  "description": "Commit citizen conventional changelog configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -17,8 +17,18 @@
   "publishConfig": {
     "access": "public"
   },
+  "dependencies": {
+    "chalk": "2.4.2",
+    "conventional-commit-types": "2.1.1",
+    "lodash.map": "4.6.0",
+    "longest": "2.0.1",
+    "right-pad": "1.0.1",
+    "word-wrap": "1.2.3"
+  },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.2"
+    "@pixeloven/tasks": "^6.0.0-alpha.2",
+    "@types/lodash.map": "4.6.13",
+    "commitizen": "3.1.1"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
