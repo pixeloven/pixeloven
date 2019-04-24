@@ -12,6 +12,6 @@ describe("Atom Logo Component", () => {
     it("should render an `img` elem with an `href` attr", () => {
         const wrapper = shallow(<Logo speed={"30s"} />);
         expect(wrapper.type()).toBe("img");
-        expect(wrapper.find("img").props().href).toBe("/static/media/logo.svg");
+        expect(wrapper.find("img").props().src).toBe("test-file-stub");
     });
 });

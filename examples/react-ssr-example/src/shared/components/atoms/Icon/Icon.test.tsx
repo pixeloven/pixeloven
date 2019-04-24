@@ -13,7 +13,7 @@ describe("Atom Icon Component", () => {
         const wrapper = shallow(<Icon iconType="test" iconName="icon" />);
         expect(wrapper.type()).toBe("svg");
         expect(wrapper.find("use").props().href).toBe(
-            "/static/media/test-icons.svg#test-icon",
+            "test-file-stub#test-icon",
         );
     });
 

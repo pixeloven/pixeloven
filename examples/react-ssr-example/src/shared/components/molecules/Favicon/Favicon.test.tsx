@@ -10,7 +10,7 @@ configure({
 
 describe("Shared/Components/Atoms/Link", () => {
     it("should render an `Link` component with an `href` attr", () => {
-        const assetFile = "assets/css/main.css";
+        const assetFile = "test-file-stub";
         const wrapper = shallow(<Favicon />);
         const linkTag = wrapper.find("Link");
         expect(linkTag.length).toEqual(1);
