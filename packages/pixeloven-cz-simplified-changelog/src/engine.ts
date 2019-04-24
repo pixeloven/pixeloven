@@ -113,7 +113,10 @@ export default (options: Options) => {
                         );
                     },
                     name: "subject",
-                    transformer: (subject: string, answers: SimplifiedAnswers) => {
+                    transformer: (
+                        subject: string,
+                        answers: SimplifiedAnswers,
+                    ) => {
                         const filteredSubject = filterSubject(subject);
                         const color =
                             filteredSubject.length <=
@@ -208,7 +211,7 @@ export default (options: Options) => {
                     ? wrap(answers.body, wrapOptions)
                     : "";
 
-                const footer = filter([ breaking, issues ]).join('\n\n');
+                const footer = filter([breaking, issues]).join("\n\n");
 
                 commit(filter([head, body, footer]).join("\n\n"));
             });

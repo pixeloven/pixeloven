@@ -14,13 +14,7 @@ class AppLogo extends React.Component<Props> {
             animationDuration: speed || "20s",
         };
 
-        return (
-            <img
-                className="a-logo"
-                src={logo}
-                style={logoStyle}
-            />
-        );
+        return <img className="a-logo" src={logo} style={logoStyle} />;
     }
 }
 
