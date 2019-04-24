@@ -36,9 +36,7 @@ function Icon(props: Props) {
             viewBox="0 0 19 19"
             className={iconClasses}
         >
-            <use
-                href={`${icons}#${iconType}-${iconName}`}
-            />
+            <use href={`${icons}#${iconType}-${iconName}`} />
         </svg>
     );
 }

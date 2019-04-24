@@ -29,6 +29,6 @@ function Link(props: LinkProps) {
           ))
         : undefined;
     return <React.Fragment>{files}</React.Fragment>;
-};
+}
 
 export default Link;

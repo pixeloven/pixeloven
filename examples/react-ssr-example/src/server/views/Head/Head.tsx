@@ -23,6 +23,6 @@ function Head(props: HtmlProps) {
             {cssTags}
         </head>
     );
-};
+}
 
 export default Head;
