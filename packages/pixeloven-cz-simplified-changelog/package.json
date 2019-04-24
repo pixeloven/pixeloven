@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/cz-conventional-changelog",
+  "name": "@pixeloven/cz-simplified-changelog",
   "version": "6.0.0-alpha.2",
-  "description": "Commit citizen conventional changelog configuration",
+  "description": "Commit citizen simplified changelog prompt",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [

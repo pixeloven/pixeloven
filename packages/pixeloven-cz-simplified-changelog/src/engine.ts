@@ -13,12 +13,11 @@ import { Answers, CommitFunction, Options } from "./types";
  *          - Or make a new one
  */
 
-interface ConventionalAnswers extends Answers {
+interface SimplifiedAnswers extends Answers {
     isBreaking: boolean;
     isIssueAffected: boolean;
     issues: string;
     breaking: string;
-    breakingBody: string;
 }
 
 const filter = (array: string[]) => {
@@ -27,13 +26,13 @@ const filter = (array: string[]) => {
     });
 };
 
-const headerLength = (answers: Answers) => {
+const headerLength = (answers: SimplifiedAnswers) => {
     return (
         answers.type.length + 2 + (answers.scope ? answers.scope.length + 2 : 0)
     );
 };
 
-const maxSummaryLength = (options: Options, answers: Answers) => {
+const maxSummaryLength = (options: Options, answers: SimplifiedAnswers) => {
     return options.maxHeaderWidth - headerLength(answers);
 };
 
@@ -106,7 +105,7 @@ export default (options: Options) => {
                     filter: (subject: string) => {
                         return filterSubject(subject);
                     },
-                    message: (answers: Answers) => {
+                    message: (answers: SimplifiedAnswers) => {
                         return (
                             "Write a short, imperative tense description of the change (max " +
                             maxSummaryLength(options, answers) +
@@ -114,7 +113,7 @@ export default (options: Options) => {
                         );
                     },
                     name: "subject",
-                    transformer: (subject: string, answers: Answers) => {
+                    transformer: (subject: string, answers: SimplifiedAnswers) => {
                         const filteredSubject = filterSubject(subject);
                         const color =
                             filteredSubject.length <=
@@ -126,7 +125,7 @@ export default (options: Options) => {
                         );
                     },
                     type: "input",
-                    validate: (subject: string, answers: Answers) => {
+                    validate: (subject: string, answers: SimplifiedAnswers) => {
                         const filteredSubject = filterSubject(subject);
                         return filteredSubject.length === 0
                             ? "subject is required"
@@ -154,30 +153,13 @@ export default (options: Options) => {
                     type: "confirm",
                 },
                 {
-                    default: "-",
-                    message:
-                        "A BREAKING CHANGE commit requires a body. Please enter a longer description of the commit itself:\n",
-                    name: "breakingBody",
-                    type: "input",
-                    validate: (breakingBody: string, answers: Answers) => {
-                        return (
-                            breakingBody.trim().length > 0 ||
-                            "Body is required for BREAKING CHANGE"
-                        );
-                    },
-                    when: (answers: ConventionalAnswers) => {
-                        return answers.isBreaking && !answers.body;
-                    },
-                },
-                {
                     message: "Describe the breaking changes:\n",
                     name: "breaking",
                     type: "input",
-                    when: (answers: ConventionalAnswers) => {
+                    when: (answers: SimplifiedAnswers) => {
                         return answers.isBreaking;
                     },
                 },
-
                 {
                     default: options.defaultIssues ? true : false,
                     message: "Does this change affect any open issues?",
@@ -185,31 +167,17 @@ export default (options: Options) => {
                     type: "confirm",
                 },
                 {
-                    default: "-",
-                    message:
-                        "If issues are closed, the commit requires a body. Please enter a longer description of the commit itself:\n",
-                    name: "issuesBody",
-                    type: "input",
-                    when: (answers: ConventionalAnswers) => {
-                        return (
-                            answers.isIssueAffected &&
-                            !answers.body &&
-                            !answers.breakingBody
-                        );
-                    },
-                },
-                {
                     default: options.defaultIssues
                         ? options.defaultIssues
                         : undefined,
-                    message: `Add issue references (e.g. "fix #123", "re #123".):\n`,
+                    message: `Add issue references (e.g. "#123" or "PO-1000"):\n`,
                     name: "issues",
                     type: "input",
-                    when: (answers: ConventionalAnswers) => {
+                    when: (answers: SimplifiedAnswers) => {
                         return answers.isIssueAffected;
                     },
                 },
-            ]).then((answers: ConventionalAnswers) => {
+            ]).then((answers: SimplifiedAnswers) => {
                 const wrapOptions = {
                     cut: false,
                     indent: "",
@@ -231,19 +199,18 @@ export default (options: Options) => {
 
                 // Apply breaking change prefix, removing it if already present
                 let breaking = answers.breaking ? answers.breaking.trim() : "";
-
                 breaking = breaking
                     ? "BREAKING CHANGE: " +
                       breaking.replace(/^BREAKING CHANGE: /, "")
                     : "";
-
                 breaking = breaking ? wrap(breaking, wrapOptions) : "";
 
                 const issues = answers.issues
                     ? wrap(answers.issues, wrapOptions)
                     : "";
+                const footer = filter([ breaking, issues ]).join('\n\n');
 
-                commit(filter([head, body, breaking, issues]).join("\n\n"));
+                commit(filter([head, body, footer]).join("\n\n"));
             });
         },
     };

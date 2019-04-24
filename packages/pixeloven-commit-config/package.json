@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/commitlint-conventional-config",
+  "name": "@pixeloven/commit-config",
   "version": "6.0.0-alpha.2",
-  "description": "Commitlint conventional configuration",
+  "description": "Commit lint configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
