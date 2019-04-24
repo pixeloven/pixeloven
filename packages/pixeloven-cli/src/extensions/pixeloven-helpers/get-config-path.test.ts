@@ -16,7 +16,7 @@ describe("@pixeloven/cli", () => {
             });
             afterEach(() => {
                 jest.clearAllMocks();
-            })
+            });
             afterAll(() => {
                 jest.restoreAllMocks();
             });
@@ -31,16 +31,14 @@ describe("@pixeloven/cli", () => {
                 mockExists.mockReturnValue(false);
                 const caller = () => {
                     getConfigPath("test.json", true);
-                }
+                };
                 expect(caller).toThrowError();
                 expect(mockExists.mock.calls.length).toEqual(1);
             });
             it("should return path", () => {
                 mockExists.mockReturnValue(true);
-                mockPath.mockReturnValue("test.json")
-                const path = getConfigPath(
-                    "test.json"
-                );
+                mockPath.mockReturnValue("test.json");
+                const path = getConfigPath("test.json");
                 expect(path).toEqual("test.json");
                 expect(mockExists.mock.calls.length).toEqual(1);
                 expect(mockPrint.mock.calls.length).toEqual(0);

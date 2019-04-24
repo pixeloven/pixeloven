@@ -22,7 +22,7 @@ describe("@pixeloven/webpack", () => {
                             (relativePath: string, strict?: boolean) =>
                                 `/test/path/${relativePath}`,
                             "something",
-                            false
+                            false,
                         );
                 });
                 it("should export webpack config targeting web for development", () => {

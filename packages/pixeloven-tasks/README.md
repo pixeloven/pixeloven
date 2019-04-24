@@ -19,7 +19,7 @@ yarn add --dev @pixeloven/tasks
 ```
 
 ## Usage
-> Note this package was originally created to encapsulate common dependecies and scripts used during the development of PixelOven. For a full public CLI experience please see [@pixeloven/cli](https://www.npmjs.com/package/@pixeloven/cli).
+> Note this package was originally created to encapsulate common dependencies and scripts used during the development of PixelOven. For a full public CLI experience please see [@pixeloven/cli](https://www.npmjs.com/package/@pixeloven/cli).
 
 When making a libraries similar to the ones seen in [PixelOven](https://github.com/pixeloven/pixeloven) we can use this simple wrapper for common tasks like linting, compiling and testing. 
 

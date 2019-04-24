@@ -13,14 +13,6 @@
   ],
   "testEnvironment": "node",
   "testURL": "http://localhost",
-  "maxConcurrency" : 1,
-  "moduleNameMapper": {
-    "@client/(.*)$": "<rootDir>/src/client/$1",
-    "@server/(.*)$": "<rootDir>/src/server/$1",
-    "@shared/(.*)$": "<rootDir>/src/shared/$1",
-    ".+\\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/files.ts",
-    ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/src/__mocks__/styles.ts"
-  },
   "moduleFileExtensions": [
     "js",
     "json",
@@ -34,16 +26,14 @@
   ],
   "coverageThreshold": {
     "global": {
-      "branches": 60,
-      "functions": 60,
-      "lines": 60,
-      "statements": 60
+      "branches": 0,
+      "functions": 0,
+      "lines": 0,
+      "statements": 0
     }
   },
-   "collectCoverageFrom": [
+  "collectCoverageFrom": [
     "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
-    "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",
-    "!<rootDir>/src/**/styles/**",
     "!**/node_modules/**"
   ]
 }

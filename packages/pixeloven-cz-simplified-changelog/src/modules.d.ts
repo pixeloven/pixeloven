@@ -1,7 +1,6 @@
 /**
  * Declare file formats not covered by typescript automatically
  */
-declare module "*.ico";
 declare module "*.svg";
 declare module "*.png";
 declare module "*.jpg";
@@ -12,4 +11,7 @@ declare module "*.md";
  * @description Consult DefinitelyTyped before declaring below
  * http://definitelytyped.org/
  */
-declare module "storybook-readme";
+declare module "commitizen";
+declare module "conventional-commit-types";
+declare module "longest";
+declare module "right-pad";

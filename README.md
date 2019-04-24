@@ -75,6 +75,11 @@ We are committed to providing a safe place for everyone. Please review our [code
 4) Add help to CLI and documentation
 5) Reach 90-100% test coverage
 6) Expose storybook addons through library
-7) Update middleware and examples
-8) node-mocks-http replace with supertest
-9) remove copy-webpack-plugin in favor of co-locating assets
+7) node-mocks-http replace with supertest
+8) Create a commit CLI wrapper for commit lint... with config for both citizen and commitlint
+
+## Planned v7
+1) Add gatsby support
+2) Remove semantic UI deps in main example
+3) Update examples to be more specific
+4) Break middleware up into smaller packages

@@ -1,0 +1,38 @@
+{
+  "name": "@pixeloven/commit-config",
+  "version": "6.0.0-alpha.2",
+  "description": "Commit lint configuration",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@pixeloven/tasks": "^6.0.0-alpha.2"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn compile",
+    "clean": "pixeloven-tasks clean",
+    "compile": "pixeloven-tasks compile:ts",
+    "precompile": "pixeloven-tasks compile:clean",
+    "document": "pixeloven-tasks document:ts src",
+    "predocument": "pixeloven-tasks document:clean",
+    "lint": "yarn lint:ts",
+    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "pretest": "pixeloven-tasks test:clean",
+    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "test": "pixeloven-tasks test --color --coverage",
+    "test:watch": "pixeloven-tasks test:watch"
+  }
+}

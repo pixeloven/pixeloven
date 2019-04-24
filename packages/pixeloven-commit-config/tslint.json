@@ -1,0 +1,25 @@
+{
+  "defaultSeverity": "error",
+  "linterOptions": {
+    "exclude": [
+      "dist",
+      "coverage",
+      "node_modules"
+    ]
+  },
+  "extends": [
+    "tslint:latest",
+    "tslint-config-prettier",
+    "tslint-eslint-rules"
+  ],
+  "rules": {
+    "arrow-parens": false,
+    "prefer-object-spread": false,
+    "interface-name": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "no-console": false,
+    "no-any": true,
+    "no-null-keyword": true
+  }
+}

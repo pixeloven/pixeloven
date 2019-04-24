@@ -12,7 +12,7 @@ interface LinkProps {
  * Renders Style sheet tags from an array
  * @param props
  */
-const Link = (props: LinkProps) => {
+function Link(props: LinkProps) {
     if (typeof props.href === "string") {
         return (
             <link
@@ -29,6 +29,6 @@ const Link = (props: LinkProps) => {
           ))
         : undefined;
     return <React.Fragment>{files}</React.Fragment>;
-};
+}
 
 export default Link;

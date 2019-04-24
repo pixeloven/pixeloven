@@ -1,9 +1,7 @@
 import { resolvePath } from "@pixeloven/core";
 import autoprefixer from "autoprefixer";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
-import CopyWebpackPlugin from "copy-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
@@ -322,20 +320,6 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 watch: resolvePath("src"),
             }),
         ),
-
-        /**
-         * Copy files
-         * @env production
-         */
-        ifProduction(
-            new CopyWebpackPlugin([
-                {
-                    from: resolvePath("public"),
-                    ignore: ["*.html"],
-                },
-            ]),
-            undefined,
-        ),
         /**
          * Extract css to file
          * @env production
@@ -360,34 +344,6 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         ifProduction(
             new ManifestPlugin({
                 fileName: "asset-manifest.json",
-            }),
-            undefined,
-        ),
-        /**
-         * Generates html file for offline use
-         *
-         * @env production
-         */
-        ifProduction(
-            new HtmlWebpackPlugin({
-                filename: resolvePath(
-                    `${publicOutputPath}/offline.html`,
-                    false,
-                ),
-                inject: true,
-                minify: {
-                    collapseWhitespace: true,
-                    keepClosingSlash: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeRedundantAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true,
-                },
-                template: resolvePath("public/offline.html"),
             }),
             undefined,
         ),
