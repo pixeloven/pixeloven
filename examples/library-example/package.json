@@ -1,6 +1,6 @@
 {
   "name": "@examples/library-example",
-  "version": "6.0.0-alpha.2",
+  "version": "6.0.0-alpha.5",
   "description": "Simple example for creating a TS based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@pixeloven/cli": "^6.0.0-alpha.2"
+    "@pixeloven/cli": "^6.0.0-alpha.5"
   },
   "scripts": {
     "compile": "pixeloven compile ts",

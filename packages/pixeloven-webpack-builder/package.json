@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-builder",
-  "version": "6.0.0-alpha.2",
+  "version": "6.0.0-alpha.5",
   "description": "Webpack build handler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,13 +18,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-alpha.2",
-    "@pixeloven/node-logger": "^6.0.0-alpha.2",
+    "@pixeloven/core": "^6.0.0-alpha.5",
+    "@pixeloven/node-logger": "^6.0.0-alpha.5",
     "react-dev-utils": "8.0.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.2",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.2",
+    "@pixeloven/tasks": "^6.0.0-alpha.5",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.5",
     "@types/webpack": "4.4.26"
   },
   "peerDependencies": {
