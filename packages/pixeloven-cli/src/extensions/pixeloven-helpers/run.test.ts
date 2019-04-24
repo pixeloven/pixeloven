@@ -23,9 +23,11 @@ describe("@pixeloven/cli", () => {
             });
             it("should run cmd from list of args", () => {
                 const testPromise = testSpawnPromise();
-                mockSpawn.withArgs("jest --watch", {
-                    stdio: "inherit",
-                }).returns(testSpawnPromise());
+                mockSpawn
+                    .withArgs("jest --watch", {
+                        stdio: "inherit",
+                    })
+                    .returns(testSpawnPromise());
                 const promise = run(args);
                 expect(promise).toEqual(testPromise);
             });

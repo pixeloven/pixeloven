@@ -23,10 +23,7 @@ export const resolvePath = (
     relativePath: string,
     strict: boolean = true,
 ): string => {
-    const absolutePath = path.resolve(
-        fs.realpathSync(cwd()),
-        relativePath,
-    );
+    const absolutePath = path.resolve(fs.realpathSync(cwd()), relativePath);
     if (strict && !fs.existsSync(absolutePath)) {
         throw new FileNotFoundException(
             `No such file or directory ${absolutePath}.`,
