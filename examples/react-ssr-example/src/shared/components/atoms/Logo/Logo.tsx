@@ -7,15 +7,12 @@ interface Props {
     speed?: string;
 }
 
-class AppLogo extends React.Component<Props> {
-    public render() {
-        const { speed } = this.props;
-        const logoStyle = {
-            animationDuration: speed || "20s",
-        };
-
-        return <img className="a-logo" src={logo} style={logoStyle} />;
-    }
+function Logo(props: Props) {
+    const { speed } = props;
+    const logoStyle = {
+        animationDuration: speed || "20s",
+    };
+    return <img className="a-logo" src={logo} style={logoStyle} />;
 }
 
-export default AppLogo;
+export default Logo;
