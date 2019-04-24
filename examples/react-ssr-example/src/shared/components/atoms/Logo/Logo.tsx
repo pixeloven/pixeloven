@@ -1,4 +1,5 @@
 import * as React from "react";
+import logo from "./Logo.svg";
 
 import "./Logo.scss";
 
@@ -16,7 +17,7 @@ class AppLogo extends React.Component<Props> {
         return (
             <img
                 className="a-logo"
-                src={"/static/media/logo.svg"}
+                src={logo}
                 style={logoStyle}
             />
         );
