@@ -9,6 +9,8 @@ import { Answers, CommitFunction, Options } from "./types";
 /**
  * @todo Break out common code for other version of changelog
  * @todo Add hook logic into CLI for easy integration
+ * @todo Update examples to include this stuff???
+ *          - Or make a new one
  */
 
 interface ConventionalAnswers extends Answers {
