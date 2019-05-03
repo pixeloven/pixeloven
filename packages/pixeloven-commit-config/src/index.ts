@@ -1,7 +1,7 @@
 /**
  * @todo Make a single configuration file for both commit lint and commit citizen
  */
-module.exports = {
+export default {
     rules: {
         "body-leading-blank": [1, "always"],
         "footer-leading-blank": [1, "always"],
