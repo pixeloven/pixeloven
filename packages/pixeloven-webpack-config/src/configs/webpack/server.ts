@@ -92,7 +92,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             {
                 loader: require.resolve("babel-loader"),
                 options: {
-                    // Add decrators support and polyfill
+                    // Add decorators support and polyfill
                     plugins: [
                         [
                             require.resolve(

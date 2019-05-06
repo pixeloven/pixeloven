@@ -62,7 +62,7 @@ The structure of this application should be considered living. As new requiremen
 * `dist` this is a transient directory. It should not be relied on for adding any permanent files. All production files can be found here.
 * `coverage` this is a transient directory. It should not be relied on for adding any permanent files. All test coverage files can be found here.
 * `node_modules` I would hope this is understood ;) but this is also a transient directory used to store our applications dependencies.
-* `public` all static files that can be served to the public.
+* `public` all static files that can be served to the public during development.
 * `src` alright the fun part! Contains all the source files used to build our application.
 
 ### Source files

@@ -1,3 +1,6 @@
+/**
+ * @todo Make a single configuration file for both commit lint and commit citizen
+ */
 export default {
     rules: {
         "body-leading-blank": [1, "always"],
