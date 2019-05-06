@@ -39,7 +39,6 @@ export default {
         /**
          * @todo source map doesn't seem to be sent all the way through any more?
          */
-        console.log(parameters.options);
         const statusCode = await webpack({
             buildOptions: {
                 outputPath: "./dist",
