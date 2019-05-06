@@ -5,7 +5,14 @@ export default {
     alias: ["--pretty", "-p"],
     name: "pretty",
     run: async (context: PixelOvenRunContext) => {
-        const { parameters, pixelOven, print, prettier, styleLint, tsLint } = context;
+        const {
+            parameters,
+            pixelOven,
+            print,
+            prettier,
+            styleLint,
+            tsLint,
+        } = context;
         /**
          * Process results
          * @param name
@@ -16,12 +23,12 @@ export default {
                 print.error(`${name} exited with status ${status}\n`);
                 process.exit(status);
             } else {
-                print.success(`\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+                print.success(
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
             }
             return status;
         };
-
-
 
         switch (parameters.first) {
             case "scss": {
@@ -30,10 +37,18 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                const prettierStatus = handle("Prettier", prettierResults.status);
+                const prettierStatus = handle(
+                    "Prettier",
+                    prettierResults.status,
+                );
 
-                const styleLintResults = await styleLint(["--fix"].concat(argList));
-                const styleLintStatus = handle("Stylelint", styleLintResults.status);
+                const styleLintResults = await styleLint(
+                    ["--fix"].concat(argList),
+                );
+                const styleLintStatus = handle(
+                    "Stylelint",
+                    styleLintResults.status,
+                );
                 return prettierStatus + styleLintStatus;
             }
             case "ts": {
@@ -42,7 +57,10 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                const prettierStatus = handle("Prettier", prettierResults.status);
+                const prettierStatus = handle(
+                    "Prettier",
+                    prettierResults.status,
+                );
 
                 const tsLintResults = await tsLint(["--fix"].concat(argList));
                 const tsLintStatus = handle("TSLint", tsLintResults.status);
@@ -54,7 +72,10 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                const prettierStatus = handle("Prettier", prettierResults.status);
+                const prettierStatus = handle(
+                    "Prettier",
+                    prettierResults.status,
+                );
 
                 const tsLintResults = await tsLint(["--fix"].concat(argList));
                 const tsLintStatus = handle("TSLint", tsLintResults.status);

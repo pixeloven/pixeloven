@@ -203,7 +203,10 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const node: Node = {
         child_process: "empty",
         dgram: "empty",
+        dns: "mock",
         fs: "empty",
+        http2: "empty",
+        module: "empty",
         net: "empty",
         tls: "empty",
     };
