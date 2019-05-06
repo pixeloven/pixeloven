@@ -37,10 +37,9 @@ export default {
             );
         }
         /**
-         * @todo Remove machine param in favor of something more generic
-         *
          * @todo source map doesn't seem to be sent all the way through any more?
          */
+        console.log(parameters.options);
         const statusCode = await webpack({
             buildOptions: {
                 outputPath: "./dist",
