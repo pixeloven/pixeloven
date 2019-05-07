@@ -25,6 +25,7 @@ import ManifestPlugin from "webpack-manifest-plugin";
 import { Config } from "../../types";
 
 const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
+    console.log(options);
     /**
      * Set local options
      */
@@ -225,7 +226,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                  */
                 new TerserPlugin({
                     extractComments: "all",
-                    sourceMap: true,
+                    sourceMap: options.withSourceMap,
                     terserOptions: {
                         safari10: true,
                     },
