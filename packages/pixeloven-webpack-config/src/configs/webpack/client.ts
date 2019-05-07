@@ -25,7 +25,6 @@ import ManifestPlugin from "webpack-manifest-plugin";
 import { Config } from "../../types";
 
 const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
-    console.log(options);
     /**
      * Set local options
      */
