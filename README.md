@@ -77,6 +77,7 @@ We are committed to providing a safe place for everyone. Please review our [code
 6) Expose storybook addons through library
 7) node-mocks-http replace with supertest
 8) Create a commit CLI wrapper for commit lint... with config for both citizen and commitlint
+9) Get docs working for github
 
 ## Planned v7
 1) Add gatsby support
@@ -84,3 +85,6 @@ We are committed to providing a safe place for everyone. Please review our [code
 3) Update examples to be more specific
 4) Break middleware up into smaller packages
 5) Create component library for the server side components and views
+6) Make @core wrap super common deps and @tasks a simple local cli wrapper with no deps
+7) Make smaller dep core addons
+8) Break webpack config into smaller parts - reuse between storybbook and webpack compiler

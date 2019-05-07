@@ -16,28 +16,25 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/jest": "24.0.11",
+    "@types/jest": "24.0.12",
     "@types/node": "10.14.4",
+    "@types/sinon": "7.0.11",
     "jest": "24.5.0",
     "jest-config": "24.5.0",
     "jest-haste-map": "24.5.0",
     "jest-resolve": "24.5.0",
     "prettier": "1.16.4",
     "rimraf": "2.6.3",
+    "sinon": "7.3.2",
     "stylelint": "9.10.1",
     "stylelint-config-recommended-scss": "3.2.0",
     "stylelint-scss": "3.5.4",
-    "ts-jest": "24.0.1",
-    "tslint": "5.14.0",
+    "ts-jest": "24.0.2",
+    "tslint": "5.16.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "4.0.0",
     "typedoc": "0.14.2",
-    "typescript": "3.4.1"
-  },
-  "devDependencies": {
-    "@types/sinon": "7.0.11",
-    "sinon": "7.3.1",
-    "ts-mockito": "2.3.1"
+    "typescript": "3.4.5"
   }
 }

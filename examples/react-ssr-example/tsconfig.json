@@ -35,10 +35,9 @@
     "skipLibCheck": true
   },
   "exclude": [
-    "dist",
-    "coverage",
-    "public",
-    "node_modules",
-    "**/node_modules/*"
+    "./dist",
+    "./coverage",
+    "./public",
+    "./node_modules"
   ]
 }
