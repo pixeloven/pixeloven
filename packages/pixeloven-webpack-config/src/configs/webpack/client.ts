@@ -225,6 +225,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                  */
                 new TerserPlugin({
                     extractComments: "all",
+                    sourceMap: true,
                     terserOptions: {
                         safari10: true,
                     },
