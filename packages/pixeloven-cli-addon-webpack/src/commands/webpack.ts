@@ -37,8 +37,6 @@ export default {
             );
         }
         /**
-         * @todo Remove machine param in favor of something more generic
-         *
          * @todo source map doesn't seem to be sent all the way through any more?
          */
         const statusCode = await webpack({

@@ -1,7 +1,13 @@
 /**
- * @todo Make a single configuration file for both commit lint and commit citizen
+ * @todo Need to tailor this to be more JIRA/Bitbucket and GFM specific
+ *          - We can create our own standard off of this: https://github.com/klauskpm/cz-simple-changelog
+ * 
+ * @description: We are currently following a strict standard defined by the open source community based on Angular development.
+ *               Rules can be adjusted for our needs based on the following docs: 
+ * 
+ * @url https://conventional-changelog.github.io/commitlint/#/reference-configuration
  */
-export default {
+module.exports = {
     rules: {
         "body-leading-blank": [1, "always"],
         "footer-leading-blank": [1, "always"],
