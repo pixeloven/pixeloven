@@ -87,4 +87,8 @@ We are committed to providing a safe place for everyone. Please review our [code
 5) Create component library for the server side components and views
 6) Make @core wrap super common deps and @tasks a simple local cli wrapper with no deps
 7) Make smaller dep core addons
-8) Break webpack config into smaller parts - reuse between storybbook and webpack compiler
+8) Break webpack config into smaller parts - reuse between storybook and webpack compiler
+
+## Planned v8
+1) Create a unified configuration (perhaps an addon?) for the CLI
+2) Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
