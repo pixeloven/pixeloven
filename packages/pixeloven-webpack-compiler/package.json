@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.6",
-    "@types/webpack": "4.4.29"
+    "@types/webpack": "4.4.31"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

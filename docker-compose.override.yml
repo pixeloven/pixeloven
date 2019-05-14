@@ -8,9 +8,7 @@ services:
       context: .
     command: "yarn start"
     volumes:
-      - .:/usr/src/app
-      # @todo how to do this for the package specific modules???
-      - node_modules:/usr/src/app/node_modules
+      - ./examples/react-ssr-example:/usr/src/app/examples/react-ssr-example
     environment:
       BABEL_ENV: development
       ENVIRONMENT: development

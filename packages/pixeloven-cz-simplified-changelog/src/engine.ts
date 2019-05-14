@@ -11,8 +11,8 @@ import { Answers, CommitFunction, Options } from "./types";
  * @todo Add hook logic into CLI for easy integration
  * @todo Update examples to include this stuff???
  *          - Or make a new one
+ * @todo Re-write this using our CLI
  */
-
 interface SimplifiedAnswers extends Answers {
     isBreaking: boolean;
     isIssueAffected: boolean;
