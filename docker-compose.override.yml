@@ -9,6 +9,7 @@ services:
     command: "yarn start"
     volumes:
       - .:/usr/src/app
+      # @todo how to do this for the package specific modules???
       - node_modules:/usr/src/app/node_modules
     environment:
       BABEL_ENV: development
