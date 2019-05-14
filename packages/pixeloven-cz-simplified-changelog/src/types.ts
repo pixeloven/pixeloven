@@ -32,7 +32,6 @@ export type CommitTypeList = { [K in CommitTypeKeys]: CommitTypeObject };
 
 export interface Options {
     defaultBody: string;
-    defaultIssues: string;
     defaultScope: string;
     defaultSubject: string;
     defaultType: string;
