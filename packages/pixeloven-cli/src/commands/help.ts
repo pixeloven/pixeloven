@@ -1,9 +1,9 @@
-import { PixelOvenRunContext } from "../types";
+import { GluegunRunContext } from "gluegun";
 
 export default {
     alias: ["--help", "-h"],
     name: "help",
-    run: async (context: PixelOvenRunContext) => {
+    run: async (context: GluegunRunContext) => {
         const { print } = context;
         print.info("Coming soon");
     },

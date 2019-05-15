@@ -44,28 +44,28 @@ describe("@pixeloven/cli", () => {
             });
             it("should print error", async () => {
                 const context = await cli.run("delete nothing");
-                context.print.error = jest.fn();
                 expect(mockFileRemove.callCount).toEqual(0);
                 expect(mockPrintError.callCount).toEqual(1);
                 expect(mockPrintInfo.callCount).toEqual(1);
+                expect(context.commandName).toEqual("delete");
             });
             it("should delete coverage", async () => {
                 const context = await cli.run("delete coverage");
-                context.print.error = jest.fn();
                 expect(mockFileRemove.callCount).toEqual(1);
                 expect(mockPrintSuccess.callCount).toEqual(1);
+                expect(context.commandName).toEqual("delete");
             });
             it("should delete dist", async () => {
                 const context = await cli.run("delete dist");
-                context.print.error = jest.fn();
                 expect(mockFileRemove.callCount).toEqual(1);
                 expect(mockPrintSuccess.callCount).toEqual(1);
+                expect(context.commandName).toEqual("delete");
             });
             it("should delete docs", async () => {
                 const context = await cli.run("delete docs");
-                context.print.error = jest.fn();
                 expect(mockFileRemove.callCount).toEqual(1);
                 expect(mockPrintSuccess.callCount).toEqual(1);
+                expect(context.commandName).toEqual("delete");
             });
         });
     });
