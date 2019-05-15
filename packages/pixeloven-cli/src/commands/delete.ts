@@ -1,9 +1,9 @@
-import { PixelOvenRunContext } from "../types";
+import { GluegunRunContext } from "gluegun";
 
 export default {
     alias: ["--delete"],
     name: "delete",
-    run: async (context: PixelOvenRunContext) => {
+    run: async (context: GluegunRunContext) => {
         const { filesystem, parameters, print } = context;
         switch (parameters.first) {
             case "coverage":
