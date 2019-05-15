@@ -29,8 +29,8 @@ const webpackReactAssetMiddleware = (
              * @todo Find a way for the compiler to filter these out.
              */
             if (stats.compilation.compiler.name === "client") {
-                const clientStats = stats.toJson("verbose");
-                const { scripts, stylesheets } = flushChunks(clientStats, {
+                // const clientStats = stats.toJson("verbose");
+                const { scripts, stylesheets } = flushChunks(stats, {
                     chunkNames: flushChunkNames(),
                 });
                 logger.info("---------- Assets Discovered ----------");

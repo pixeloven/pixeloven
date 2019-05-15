@@ -1,0 +1,4 @@
+.git
+.circleci
+.github
+**/node_modules

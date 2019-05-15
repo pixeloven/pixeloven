@@ -8,9 +8,9 @@ services:
       context: .
     command: "yarn start"
     volumes:
-      - .:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
+      - ./examples/react-ssr-example:/usr/src/app/examples/react-ssr-example
     environment:
       BABEL_ENV: development
       ENVIRONMENT: development
       NODE_ENV: development
+      TSC_WATCHFILE: UseFsEventsWithFallbackDynamicPolling

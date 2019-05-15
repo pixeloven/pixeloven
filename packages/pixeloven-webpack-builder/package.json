@@ -25,7 +25,7 @@
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.6",
     "@pixeloven/webpack-compiler": "^6.0.0-alpha.6",
-    "@types/webpack": "4.4.29"
+    "@types/webpack": "4.4.31"
   },
   "peerDependencies": {
     "@pixeloven/webpack-compiler": ">5.0.0"

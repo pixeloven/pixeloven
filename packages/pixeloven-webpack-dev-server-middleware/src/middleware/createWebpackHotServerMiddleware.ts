@@ -5,7 +5,7 @@ import MemoryFileSystem from "memory-fs";
 import path from "path";
 import requireFromString from "require-from-string";
 import { Stats } from "webpack";
-import { Module, StatsObject } from "./types";
+import { Module } from "./types";
 
 interface HotServerMiddlewareConfig {
     done?: (stats: Stats) => void;
@@ -26,9 +26,12 @@ const interopRequireDefault = (obj: Module) => {
  * @param stats
  * @param chunkName
  */
-const getFileName = (stats: StatsObject, chunkName: string) => {
-    const outputPath = stats.outputPath;
-    const fileName = stats.assetsByChunkName[chunkName];
+const getFileName = (stats: Stats.ToJsonOutput, chunkName: string) => {
+    /**
+     * @todo We should probably error out if outputPath is empty
+     */
+    const outputPath = stats.outputPath || "";
+    const fileName = stats.assetsByChunkName && stats.assetsByChunkName[chunkName];
     if (!fileName) {
         throw Error(`Asset chunk ${chunkName} could not be found.`);
     }

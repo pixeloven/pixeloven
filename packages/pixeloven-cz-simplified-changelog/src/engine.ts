@@ -11,13 +11,16 @@ import { Answers, CommitFunction, Options } from "./types";
  * @todo Add hook logic into CLI for easy integration
  * @todo Update examples to include this stuff???
  *          - Or make a new one
+ * @todo Re-write this using our CLI
+ * 
+ * @todo Remove and/or Re-define scope question (maybe it can be the ticket field?)
+ * @todo Should make most fields required
+ * @todo Define better validation
+ * 
+ * @todo Remove commit types json and define here instead??? -- do after we convert to new CLI style
  */
-
 interface SimplifiedAnswers extends Answers {
-    isBreaking: boolean;
-    isIssueAffected: boolean;
     issues: string;
-    breaking: string;
 }
 
 const filter = (array: string[]) => {
@@ -150,35 +153,9 @@ export default (options: Options) => {
                     type: "input",
                 },
                 {
-                    default: false,
-                    message: "Are there any breaking changes?",
-                    name: "isBreaking",
-                    type: "confirm",
-                },
-                {
-                    message: "Describe the breaking changes:\n",
-                    name: "breaking",
-                    type: "input",
-                    when: (answers: SimplifiedAnswers) => {
-                        return answers.isBreaking;
-                    },
-                },
-                {
-                    default: options.defaultIssues ? true : false,
-                    message: "Does this change affect any open issues?",
-                    name: "isIssueAffected",
-                    type: "confirm",
-                },
-                {
-                    default: options.defaultIssues
-                        ? options.defaultIssues
-                        : undefined,
                     message: `Add issue references (e.g. "#123" or "PO-1000"):\n`,
                     name: "issues",
-                    type: "input",
-                    when: (answers: SimplifiedAnswers) => {
-                        return answers.isIssueAffected;
-                    },
+                    type: "input"
                 },
             ]).then((answers: SimplifiedAnswers) => {
                 const wrapOptions = {
@@ -188,15 +165,6 @@ export default (options: Options) => {
                     trim: true,
                     width: options.maxLineWidth,
                 };
-
-                // Apply breaking change prefix, removing it if already present
-                let breaking = answers.breaking ? answers.breaking.trim() : "";
-                breaking = breaking
-                    ? "BREAKING CHANGE: " +
-                      breaking.replace(/^BREAKING CHANGE: /, "")
-                    : "";
-                breaking = breaking ? wrap(breaking, wrapOptions) : "";
-
                 const issues = answers.issues
                     ? wrap(answers.issues, wrapOptions)
                     : "";
@@ -211,7 +179,7 @@ export default (options: Options) => {
                     ? wrap(answers.body, wrapOptions)
                     : "";
 
-                const footer = filter([breaking, issues]).join("\n\n");
+                const footer = filter([issues]).join("\n\n");
 
                 commit(filter([head, body, footer]).join("\n\n"));
             });
