@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@pixeloven/exceptions": "^6.0.0-alpha.6",
-    "gluegun": "3.0.0"
+    "gluegun": "3.2.2"
   },
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-alpha.6",
