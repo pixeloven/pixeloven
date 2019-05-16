@@ -1,11 +1,10 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
-import { PixelOvenRunContext } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 export default {
     alias: ["--compile", "-c"],
     name: "compile",
-    run: async (context: PixelOvenRunContext) => {
-        const { parameters, print, tsc } = context;
+    run: async (toolbox: PixelOvenToolbox) => {
+        const { parameters, print, tsc } = toolbox;
         /**
          * Process results
          * @param name
@@ -28,10 +27,12 @@ export default {
             case "ts":
             case "tsx": {
                 const results = await tsc(argList);
-                return handle("Tsc", results.status);
+                handle("Tsc", results.status);
             }
             default: {
-                throw new NodeInvalidArgumentException();
+                print.error("Invalid argument provided");
+                print.info("Run --help for more details");
+                break;
             }
         }
     },

@@ -1,10 +1,10 @@
 import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
-import { PixelOvenRunContext } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 export default {
     alias: ["--document"],
     name: "document",
-    run: async (context: PixelOvenRunContext) => {
+    run: async (context: PixelOvenToolbox) => {
         const { parameters, print, typeDoc } = context;
         /**
          * Process results

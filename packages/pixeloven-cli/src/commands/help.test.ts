@@ -1,6 +1,7 @@
 import "jest";
 
 import { build, print } from "gluegun";
+import { resolve } from "path";
 import sinon from "sinon";
 import helpModule from "./help";
 
@@ -9,9 +10,7 @@ import helpModule from "./help";
  */
 const cli = build()
     .brand("pixeloven")
-    .src(__dirname)
-    .command(helpModule)
-    .version()
+    .src(resolve(__dirname, "../"))
     .create();
 
 const sandbox = sinon.createSandbox();

@@ -1,6 +1,6 @@
-import { PixelOvenRunContext, TypeDocExtension } from "../types";
+import { PixelOvenToolbox, TypeDocExtension } from "../types";
 
-export default (context: PixelOvenRunContext) => {
+export default (context: PixelOvenToolbox) => {
     const typeDoc: TypeDocExtension = async (args: string[] = []) => {
         const { pixelOven } = context;
         const typeDocFileName = "typedoc.json";

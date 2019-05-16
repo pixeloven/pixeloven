@@ -1,6 +1,7 @@
 import "jest";
 
 import { build, filesystem, print } from "gluegun";
+import { resolve } from "path";
 import sinon from "sinon";
 import deleteModule from "./delete";
 
@@ -9,9 +10,7 @@ import deleteModule from "./delete";
  */
 const cli = build()
     .brand("pixeloven")
-    .src(__dirname)
-    .command(deleteModule)
-    .version()
+    .src(resolve(__dirname, "../"))
     .create();
 
 const sandbox = sinon.createSandbox();

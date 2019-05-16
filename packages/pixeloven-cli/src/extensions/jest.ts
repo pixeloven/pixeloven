@@ -1,9 +1,9 @@
-import { JestExtension, PixelOvenRunContext } from "../types";
+import { JestExtension, PixelOvenToolbox } from "../types";
 
 /**
  * @todo Need to restructure these to make them more testable
  */
-export default (context: PixelOvenRunContext) => {
+export default (context: PixelOvenToolbox) => {
     const jest: JestExtension = async (args: string[] = []) => {
         const { pixelOven } = context;
         const fileName = "jest.json";

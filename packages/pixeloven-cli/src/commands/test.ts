@@ -1,9 +1,9 @@
-import { PixelOvenRunContext } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 export default {
     alias: ["--test", "-t"],
     name: "test",
-    run: async (context: PixelOvenRunContext) => {
+    run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, print, jest } = context;
         /**
          * Process results

@@ -1,6 +1,6 @@
-import { PixelOvenRunContext, StyleLintExtension } from "../types";
+import { PixelOvenToolbox, StyleLintExtension } from "../types";
 
-export default (context: PixelOvenRunContext) => {
+export default (context: PixelOvenToolbox) => {
     const styleLint: StyleLintExtension = async (args: string[] = []) => {
         const { pixelOven } = context;
         const fileName = "stylelint.json";

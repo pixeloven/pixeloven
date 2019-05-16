@@ -1,6 +1,6 @@
-import { PixelOvenRunContext, PrettierExtension } from "../types";
+import { PixelOvenToolbox, PrettierExtension } from "../types";
 
-export default (context: PixelOvenRunContext) => {
+export default (context: PixelOvenToolbox) => {
     const prettier: PrettierExtension = async (args: string[] = []) => {
         const { pixelOven } = context;
         const fileName = "prettier.json";

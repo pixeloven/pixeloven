@@ -1,8 +1,8 @@
-import { PixelOvenRunContext } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 export default {
     name: "pixeloven",
-    run: async (context: PixelOvenRunContext) => {
+    run: async (context: PixelOvenToolbox) => {
         const { print } = context;
         /**
          * @todo Print out usage

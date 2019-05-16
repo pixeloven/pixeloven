@@ -1,10 +1,10 @@
-import { GluegunRunContext } from "gluegun";
+import { PixelOvenToolbox } from "../types";
 
 export default {
     alias: ["--delete"],
     name: "delete",
-    run: async (context: GluegunRunContext) => {
-        const { filesystem, parameters, print } = context;
+    run: async (toolbox: PixelOvenToolbox) => {
+        const { filesystem, parameters, print } = toolbox;
         switch (parameters.first) {
             case "coverage":
                 filesystem.remove("./coverage");

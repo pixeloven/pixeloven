@@ -1,4 +1,4 @@
-import { PixelOvenRunContext } from "../types";
+import { PixelOvenToolbox } from "../types";
 import {
     getArgList,
     getConfigPath,
@@ -10,7 +10,7 @@ import {
  * Sets up pixelOven helpers
  * @param context
  */
-function helpers(context: PixelOvenRunContext) {
+function helpers(context: PixelOvenToolbox) {
     context.pixelOven = {
         getArgList,
         getConfigPath,

@@ -1,10 +1,10 @@
 import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
-import { PixelOvenRunContext } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 export default {
     alias: ["--lint", "-l"],
     name: "lint",
-    run: async (context: PixelOvenRunContext) => {
+    run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, print, styleLint, tsLint } = context;
         /**
          * Process results
