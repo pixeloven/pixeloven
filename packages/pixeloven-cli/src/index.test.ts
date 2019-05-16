@@ -1,11 +1,8 @@
-import "jest";
-import sinon from "sinon";
+import { Sandbox } from "./testing";
 
 import * as main from "./main";
 
-const sandbox = sinon.createSandbox();
-
-const mainSpy = sandbox.mock(main);
+const mockMain = Sandbox.mock(main).expects("default");
 
 const caller = () => {
     require("./index");
@@ -14,38 +11,14 @@ const caller = () => {
 describe("@pixeloven/cli", () => {
     describe("index", () => {
         afterAll(() => {
-            sandbox.restore();
+            Sandbox.restore();
         });
         afterEach(() => {
-            sandbox.reset();
+            Sandbox.reset();
         });
-        it("should execute main and succeed", () => {
-            mainSpy.expects("default").once();
+        it("should execute main", () => {
             caller();
-            mainSpy.verify();
+            expect(mockMain.callCount).toEqual(1);
         });
     });
 });
-
-// import "jest";
-
-// import { system } from "gluegun";
-// import { resolve } from "path"
-
-// const src = resolve(__dirname)
-
-// const cli = async (cmd: string) =>
-//   system.run('node ' + resolve(src, "bin", 'pixeloven') + ` ${cmd}`)
-
-// describe("@pixeloven/cli", () => {
-//     describe("index", () => {
-//         afterAll(() => {
-//             jest.clearAllMocks();
-//             jest.restoreAllMocks();
-//         });
-//         it("should return cli version", async () => {
-//             const output = await cli('--version')
-//             expect(output).toContain('0.0.1')
-//         });
-//     });
-// });

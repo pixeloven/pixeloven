@@ -2,7 +2,7 @@ import "jest";
 import * as helpers from "./index";
 
 describe("@pixeloven/cli", () => {
-    describe("extensions/pixeloven-helpers", () => {
+    describe("toolbox", () => {
         describe("index", () => {
             it("should export all helpers", () => {
                 expect(helpers).toHaveProperty("getArgList");

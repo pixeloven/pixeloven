@@ -13,7 +13,7 @@ async function testSpawnPromise() {
 }
 
 describe("@pixeloven/cli", () => {
-    describe("extensions/pixeloven-helpers", () => {
+    describe("toolbox", () => {
         describe("run", () => {
             afterEach(() => {
                 sandbox.reset();
