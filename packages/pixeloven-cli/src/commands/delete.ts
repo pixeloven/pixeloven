@@ -4,7 +4,7 @@ export default {
     alias: ["--delete"],
     name: "delete",
     run: async (toolbox: PixelOvenToolbox) => {
-        const { filesystem, parameters, print } = toolbox;
+        const { filesystem, pixelOven, parameters, print } = toolbox;
         switch (parameters.first) {
             case "coverage":
                 filesystem.remove("./coverage");
@@ -19,8 +19,7 @@ export default {
                 print.success(`Successfully deleted directory`);
                 break;
             default:
-                print.error("Invalid argument provided");
-                print.info("Run --help for more details");
+                pixelOven.invalidArgument();
                 break;
         }
     },

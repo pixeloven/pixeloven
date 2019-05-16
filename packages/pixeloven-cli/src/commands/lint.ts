@@ -4,7 +4,7 @@ export default {
     alias: ["--lint", "-l"],
     name: "lint",
     run: async (context: PixelOvenToolbox) => {
-        const { parameters, pixelOven, print, styleLint, tsLint } = context;
+        const { parameters, pixelOven, styleLint, tsLint } = context;
         switch (parameters.first) {
             case "scss": {
                 const argList = pixelOven.getArgList("scss", parameters, {
@@ -46,8 +46,7 @@ export default {
                 break;
             }
             default: {
-                print.error("Invalid argument provided");
-                print.info("Run --help for more details");
+                pixelOven.invalidArgument();
                 break;
             }
         }

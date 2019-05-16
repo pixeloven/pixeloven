@@ -4,7 +4,7 @@ export default {
     alias: ["--document"],
     name: "document",
     run: async (toolbox: PixelOvenToolbox) => {
-        const { parameters, pixelOven, print, typeDoc } = toolbox;
+        const { parameters, pixelOven, typeDoc } = toolbox;
         const argList =
             parameters.array && parameters.array.length
                 ? parameters.array.slice(1)
@@ -21,8 +21,7 @@ export default {
                 break;
             }
             default: {
-                print.error("Invalid argument provided");
-                print.info("Run --help for more details");
+                pixelOven.invalidArgument();
                 break;
             }
         }

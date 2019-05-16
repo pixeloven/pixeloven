@@ -6,7 +6,7 @@ const mockPrintSuccess = Mock.print.expects("success");
 
 describe("@pixeloven/cli", () => {
     describe("toolbox", () => {
-        describe("run", () => {
+        describe("exit", () => {
             afterAll(() => {
                 Sandbox.restore();
                 mockPrintError.restore();

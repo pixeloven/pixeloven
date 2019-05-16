@@ -4,7 +4,7 @@ export default {
     alias: ["--compile", "-c"],
     name: "compile",
     run: async (toolbox: PixelOvenToolbox) => {
-        const { parameters, pixelOven, print, tsc } = toolbox;
+        const { parameters, pixelOven, tsc } = toolbox;
         const argList =
             parameters.array && parameters.array.length
                 ? parameters.array.slice(1)
@@ -17,8 +17,7 @@ export default {
                 break;
             }
             default: {
-                print.error("Invalid argument provided");
-                print.info("Run --help for more details");
+                pixelOven.invalidArgument();
                 break;
             }
         }

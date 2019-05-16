@@ -12,6 +12,8 @@ export type TsLintExtension = (args?: string[]) => Promise<RunResponse>;
 export type TscExtension = (args?: string[]) => Promise<RunResponse>;
 export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
 
+export type GeneralFunction = () => void;
+
 export type ExitFunction = (
     cmd: string,
     status: number,
@@ -43,6 +45,7 @@ export interface PixelOvenExtensions {
     exit: ExitFunction;
     getArgList: GetArgListFunction;
     getConfigPath: GetConfigPathFunction;
+    invalidArgument: GeneralFunction;
     resolvePlugin: ResolvePluginFunction;
     run: RunFunction;
 }

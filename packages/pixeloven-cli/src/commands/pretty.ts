@@ -4,14 +4,7 @@ export default {
     alias: ["--pretty", "-p"],
     name: "pretty",
     run: async (context: PixelOvenToolbox) => {
-        const {
-            parameters,
-            pixelOven,
-            print,
-            prettier,
-            styleLint,
-            tsLint,
-        } = context;
+        const { parameters, pixelOven, prettier, styleLint, tsLint } = context;
         /**
          * @todo might need to break these apart since the linters can't accept the same params as prettier
          *      - Might just rely on the underlying cli more directly instead of having these aliases
@@ -77,8 +70,8 @@ export default {
                 break;
             }
             default: {
-                print.error("Invalid argument provided");
-                print.info("Run --help for more details");
+                pixelOven.invalidArgument();
+                break;
             }
         }
     },

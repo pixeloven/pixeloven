@@ -2,6 +2,7 @@ import {
     exit,
     getArgList,
     getConfigPath,
+    invalidArgument,
     resolvePlugin,
     run,
 } from "../toolbox";
@@ -12,6 +13,7 @@ export default (context: PixelOvenToolbox) => {
         exit,
         getArgList,
         getConfigPath,
+        invalidArgument,
         resolvePlugin,
         run,
     };
