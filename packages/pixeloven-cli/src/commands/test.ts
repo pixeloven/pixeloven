@@ -4,21 +4,7 @@ export default {
     alias: ["--test", "-t"],
     name: "test",
     run: async (context: PixelOvenToolbox) => {
-        const { parameters, pixelOven, print, jest } = context;
-        /**
-         * Process results
-         * @param name
-         * @param status
-         */
-        const handle = (name: string, status: number) => {
-            if (status) {
-                print.error(`${name} exited with status ${status}\n`);
-                process.exit(status);
-            } else {
-                print.success(`Success! Untouchable.\n`);
-            }
-            return status;
-        };
+        const { parameters, pixelOven, jest } = context;
         switch (parameters.first) {
             case "watch": {
                 const argList = pixelOven.getArgList("watch", parameters, {
@@ -26,7 +12,8 @@ export default {
                     type: "withOptions",
                 });
                 const results = await jest(["--watch"].concat(argList));
-                return handle("Jest", results.status);
+                pixelOven.exit("Jest", results.status, `Success! Untouchable.\n`);
+                break;
             }
             default: {
                 const argList = pixelOven.getArgList("test", parameters, {
@@ -34,7 +21,8 @@ export default {
                     type: "withOptions",
                 });
                 const results = await jest(argList);
-                return handle("Jest", results.status);
+                pixelOven.exit("Jest", results.status, `Success! Untouchable.\n`);
+                break;
             }
         }
     },

@@ -1,4 +1,3 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
 import { PixelOvenToolbox } from "../types";
 
 export default {
@@ -6,22 +5,6 @@ export default {
     name: "lint",
     run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, print, styleLint, tsLint } = context;
-        /**
-         * Process results
-         * @param name
-         * @param status
-         */
-        const handle = (name: string, status: number) => {
-            if (status) {
-                print.error(`${name} exited with status ${status}\n`);
-                process.exit(status);
-            } else {
-                print.success(
-                    `Success! Your code is beautify just the way it is.\n`,
-                );
-            }
-            return status;
-        };
         switch (parameters.first) {
             case "scss": {
                 const argList = pixelOven.getArgList("scss", parameters, {
@@ -29,7 +12,8 @@ export default {
                     type: "withOptions",
                 });
                 const results = await styleLint(argList);
-                return handle("Stylelint", results.status);
+                pixelOven.exit("Stylelint", results.status, `Success! Your SCSS is beautify just the way it is.\n`);
+                break;
             }
             case "ts": {
                 const argList = pixelOven.getArgList("ts", parameters, {
@@ -37,7 +21,8 @@ export default {
                     type: "withOptions",
                 });
                 const results = await tsLint(argList);
-                return handle("TSLint", results.status);
+                pixelOven.exit("TSLint", results.status, `Success! Your TypeScript is beautify just the way it is.\n`);
+                break;
             }
             case "tsx": {
                 const argList = pixelOven.getArgList("tsx", parameters, {
@@ -45,10 +30,13 @@ export default {
                     type: "withOptions",
                 });
                 const results = await tsLint(argList);
-                return handle("TSLint", results.status);
+                pixelOven.exit("TSLint", results.status, `Success! Your TypeScript is beautify just the way it is.\n`);
+                break;
             }
             default: {
-                throw new NodeInvalidArgumentException();
+                print.error("Invalid argument provided");
+                print.info("Run --help for more details");
+                break;
             }
         }
     },

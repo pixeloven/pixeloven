@@ -32,9 +32,7 @@ describe("@pixeloven/cli", () => {
                 expect(context.commandName).toEqual("compile");
             });
             it("should compile ts,tsx files", async () => {
-                // const context = await cli.run("compile ts");
-                // expect(mockPrintInfo.callCount).toEqual(1);
-                // expect(context.commandName).toEqual("compile");
+                //
             });
         });
     });

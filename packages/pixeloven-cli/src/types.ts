@@ -15,7 +15,7 @@ export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
 export type ExitFunction = (
     cmd: string,
     status: number,
-    success: string,
+    success?: string,
 ) => void;
 
 export type GetArgListFunction = (

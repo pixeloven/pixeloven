@@ -5,16 +5,16 @@ import { print } from "gluegun";
  * @description Useful handling status codes and printing results
  * @param cmd 
  * @param status
- * @param success
+ * @param msg
  * 
  * @todo Should add a debug mode and spit out the entire error?
  */
-function exit(cmd: string, status: number, success: string = "Success") {
+function exit(cmd: string, status: number, msg: string = "Success!") {
     if (status) {
         print.error(`${name} exited with status ${status}\n`);
         process.exit(status);
     } else {
-        print.success(success);
+        print.success(msg);
     }
     return status;
 };

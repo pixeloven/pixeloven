@@ -1,25 +1,10 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
 import { PixelOvenToolbox } from "../types";
 
 export default {
     alias: ["--document"],
     name: "document",
-    run: async (context: PixelOvenToolbox) => {
-        const { parameters, print, typeDoc } = context;
-        /**
-         * Process results
-         * @param name
-         * @param status
-         */
-        const handle = (name: string, status: number) => {
-            if (status) {
-                print.error(`${name} exited with status ${status}\n`);
-                process.exit(status);
-            } else {
-                print.success(`Success! What's up doc(s)?\n`);
-            }
-            return status;
-        };
+    run: async (toolbox: PixelOvenToolbox) => {
+        const { parameters, pixelOven, print, typeDoc } = toolbox;
         const argList =
             parameters.array && parameters.array.length
                 ? parameters.array.slice(1)
@@ -28,10 +13,13 @@ export default {
             case "ts":
             case "tsx": {
                 const results = await typeDoc(argList);
-                return handle("TypeDoc", results.status);
+                pixelOven.exit("TypeDoc", results.status, `Success! What's up doc(s)?\n`);
+                break;
             }
             default: {
-                throw new NodeInvalidArgumentException();
+                print.error("Invalid argument provided");
+                print.info("Run --help for more details");
+                break;
             }
         }
     },
