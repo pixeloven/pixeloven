@@ -1,30 +1,17 @@
-import "jest";
-
-import { build, print } from "gluegun";
-import { resolve } from "path";
-import sinon from "sinon";
+import { cli, Mock, Sandbox} from "../testing";
 import helpModule from "./help";
 
-/**
- * @todo Need to figure out how to get this working with PixelOvenContext
- */
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, "../"))
-    .create();
-
-const sandbox = sinon.createSandbox();
-const mockPrintInfo = sandbox.mock(print).expects("info");
+const mockPrintInfo = Mock.print.expects("info");
 
 describe("@pixeloven/cli", () => {
     describe("commands", () => {
         describe("help", () => {
             afterAll(() => {
-                sandbox.restore();
+                Sandbox.restore();
                 mockPrintInfo.restore();
             });
             afterEach(() => {
-                sandbox.reset();
+                Sandbox.reset();
                 mockPrintInfo.reset();
             });
             it("should contains required props", () => {

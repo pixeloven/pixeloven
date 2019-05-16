@@ -1,36 +1,23 @@
-import "jest";
-
-import { build, filesystem, print } from "gluegun";
-import { resolve } from "path";
-import sinon from "sinon";
+import { cli, Mock, Sandbox} from "../testing";
 import deleteModule from "./delete";
 
-/**
- * @todo Need to figure out how to get this working with PixelOvenContext
- */
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, "../"))
-    .create();
-
-const sandbox = sinon.createSandbox();
-const mockFileRemove = sandbox.mock(filesystem).expects("remove");
-const mockPrintError = sandbox.mock(print).expects("error");
-const mockPrintInfo = sandbox.mock(print).expects("info");
-const mockPrintSuccess = sandbox.mock(print).expects("success");
+const mockFileRemove = Mock.filesystem.expects("remove");
+const mockPrintError = Mock.print.expects("error");
+const mockPrintInfo = Mock.print.expects("info");
+const mockPrintSuccess = Mock.print.expects("success");
 
 describe("@pixeloven/cli", () => {
     describe("commands", () => {
         describe("delete", () => {
             afterAll(() => {
-                sandbox.restore();
+                Sandbox.restore();
                 mockFileRemove.restore();
                 mockPrintError.restore();
                 mockPrintInfo.restore();
                 mockPrintSuccess.restore();
             });
             afterEach(() => {
-                sandbox.reset();
+                Sandbox.reset();
                 mockFileRemove.reset();
                 mockPrintError.reset();
                 mockPrintInfo.reset();

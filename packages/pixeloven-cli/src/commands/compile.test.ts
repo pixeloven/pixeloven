@@ -1,34 +1,21 @@
-import "jest";
-
-import { build, print } from "gluegun";
-import { resolve } from "path";
-import sinon from "sinon";
+import { cli, Mock, Sandbox} from "../testing";
 import compileModule from "./compile";
 
-/**
- * @todo Need to figure out how to get this working with PixelOvenContext
- */
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, "../"))
-    .create();
-
-const sandbox = sinon.createSandbox();
-const mockPrintError = sandbox.mock(print).expects("error");
-const mockPrintInfo = sandbox.mock(print).expects("info");
-const mockPrintSuccess = sandbox.mock(print).expects("success");
+const mockPrintError = Mock.print.expects("error");
+const mockPrintInfo = Mock.print.expects("info");
+const mockPrintSuccess = Mock.print.expects("success");
 
 describe("@pixeloven/cli", () => {
     describe("commands", () => {
         describe("compile", () => {
             afterAll(() => {
-                sandbox.restore();
+                Sandbox.restore();
                 mockPrintError.restore();
                 mockPrintInfo.restore();
                 mockPrintSuccess.restore();
             });
             afterEach(() => {
-                sandbox.reset();
+                Sandbox.reset();
                 mockPrintError.reset();
                 mockPrintInfo.reset();
                 mockPrintSuccess.reset();
@@ -45,7 +32,7 @@ describe("@pixeloven/cli", () => {
                 expect(context.commandName).toEqual("compile");
             });
             it("should compile ts,tsx files", async () => {
-                // const context = await cli.run("compile");
+                // const context = await cli.run("compile ts");
                 // expect(mockPrintInfo.callCount).toEqual(1);
                 // expect(context.commandName).toEqual("compile");
             });
