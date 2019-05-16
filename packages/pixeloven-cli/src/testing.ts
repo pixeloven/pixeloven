@@ -14,4 +14,4 @@ export const Sandbox = sinon.createSandbox();
 export const Mock = {
     filesystem: Sandbox.mock(filesystem),
     print: Sandbox.mock(print),
-}
+};

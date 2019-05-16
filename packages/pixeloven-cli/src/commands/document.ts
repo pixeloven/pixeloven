@@ -13,7 +13,11 @@ export default {
             case "ts":
             case "tsx": {
                 const results = await typeDoc(argList);
-                pixelOven.exit("TypeDoc", results.status, `Success! What's up doc(s)?\n`);
+                pixelOven.exit(
+                    "TypeDoc",
+                    results.status,
+                    `Success! What's up doc(s)?\n`,
+                );
                 break;
             }
             default: {

@@ -51,7 +51,7 @@ export interface PixelOvenOptions {
 }
 
 export interface PixelOvenToolbox extends GluegunToolbox {
-    config: PixelOvenOptions
+    config: PixelOvenOptions;
     jest: JestExtension;
     pixelOven: PixelOvenExtensions;
     prettier: PrettierExtension;

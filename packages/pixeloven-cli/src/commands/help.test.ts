@@ -1,4 +1,4 @@
-import { cli, Mock, Sandbox} from "../testing";
+import { cli, Mock, Sandbox } from "../testing";
 import helpModule from "./help";
 
 const mockPrintInfo = Mock.print.expects("info");

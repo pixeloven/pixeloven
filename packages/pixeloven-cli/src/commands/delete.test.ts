@@ -1,4 +1,4 @@
-import { cli, Mock, Sandbox} from "../testing";
+import { cli, Mock, Sandbox } from "../testing";
 import deleteModule from "./delete";
 
 const mockFileRemove = Mock.filesystem.expects("remove");

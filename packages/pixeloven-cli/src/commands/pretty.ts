@@ -23,11 +23,19 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                pixelOven.exit("Prettier", prettierResults.status, `\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+                pixelOven.exit(
+                    "Prettier",
+                    prettierResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
                 const styleLintResults = await styleLint(
                     ["--fix"].concat(argList),
                 );
-                pixelOven.exit("Stylelint", styleLintResults.status, `\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+                pixelOven.exit(
+                    "Stylelint",
+                    styleLintResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
                 break;
             }
             case "ts": {
@@ -36,9 +44,17 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                pixelOven.exit("Prettier", prettierResults.status, `\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+                pixelOven.exit(
+                    "Prettier",
+                    prettierResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
                 const tsLintResults = await tsLint(["--fix"].concat(argList));
-                pixelOven.exit("TSLint", tsLintResults.status, `\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+                pixelOven.exit(
+                    "TSLint",
+                    tsLintResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
                 break;
             }
             case "tsx": {
@@ -47,9 +63,17 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                pixelOven.exit("Prettier", prettierResults.status, `\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+                pixelOven.exit(
+                    "Prettier",
+                    prettierResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
                 const tsLintResults = await tsLint(["--fix"].concat(argList));
-                pixelOven.exit("TSLint", tsLintResults.status, `\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+                pixelOven.exit(
+                    "TSLint",
+                    tsLintResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
                 break;
             }
             default: {

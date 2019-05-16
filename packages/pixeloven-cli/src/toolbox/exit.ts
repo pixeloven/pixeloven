@@ -3,10 +3,10 @@ import { print } from "gluegun";
 /**
  * Run cmd from arg list.
  * @description Useful handling status codes and printing results
- * @param cmd 
+ * @param cmd
  * @param status
  * @param msg
- * 
+ *
  * @todo Should add a debug mode and spit out the entire error?
  */
 function exit(cmd: string, status: number, msg: string = "Success!") {
@@ -17,6 +17,6 @@ function exit(cmd: string, status: number, msg: string = "Success!") {
         print.success(msg);
     }
     return status;
-};
+}
 
 export default exit;

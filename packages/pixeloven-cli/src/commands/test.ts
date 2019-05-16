@@ -12,7 +12,11 @@ export default {
                     type: "withOptions",
                 });
                 const results = await jest(["--watch"].concat(argList));
-                pixelOven.exit("Jest", results.status, `Success! Untouchable.\n`);
+                pixelOven.exit(
+                    "Jest",
+                    results.status,
+                    `Success! Untouchable.\n`,
+                );
                 break;
             }
             default: {
@@ -21,7 +25,11 @@ export default {
                     type: "withOptions",
                 });
                 const results = await jest(argList);
-                pixelOven.exit("Jest", results.status, `Success! Untouchable.\n`);
+                pixelOven.exit(
+                    "Jest",
+                    results.status,
+                    `Success! Untouchable.\n`,
+                );
                 break;
             }
         }

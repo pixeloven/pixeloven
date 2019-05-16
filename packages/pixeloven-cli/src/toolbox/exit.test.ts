@@ -1,4 +1,4 @@
-import { Mock, Sandbox} from "../testing";
+import { Mock, Sandbox } from "../testing";
 import exit from "./exit";
 
 const mockPrintError = Mock.print.expects("error");

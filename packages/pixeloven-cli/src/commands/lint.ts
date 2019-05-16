@@ -12,7 +12,11 @@ export default {
                     type: "withOptions",
                 });
                 const results = await styleLint(argList);
-                pixelOven.exit("Stylelint", results.status, `Success! Your SCSS is beautify just the way it is.\n`);
+                pixelOven.exit(
+                    "Stylelint",
+                    results.status,
+                    `Success! Your SCSS is beautify just the way it is.\n`,
+                );
                 break;
             }
             case "ts": {
@@ -21,7 +25,11 @@ export default {
                     type: "withOptions",
                 });
                 const results = await tsLint(argList);
-                pixelOven.exit("TSLint", results.status, `Success! Your TypeScript is beautify just the way it is.\n`);
+                pixelOven.exit(
+                    "TSLint",
+                    results.status,
+                    `Success! Your TypeScript is beautify just the way it is.\n`,
+                );
                 break;
             }
             case "tsx": {
@@ -30,7 +38,11 @@ export default {
                     type: "withOptions",
                 });
                 const results = await tsLint(argList);
-                pixelOven.exit("TSLint", results.status, `Success! Your TypeScript is beautify just the way it is.\n`);
+                pixelOven.exit(
+                    "TSLint",
+                    results.status,
+                    `Success! Your TypeScript is beautify just the way it is.\n`,
+                );
                 break;
             }
             default: {
