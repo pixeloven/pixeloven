@@ -12,6 +12,12 @@ export type TsLintExtension = (args?: string[]) => Promise<RunResponse>;
 export type TscExtension = (args?: string[]) => Promise<RunResponse>;
 export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
 
+export type ExitFunction = (
+    cmd: string,
+    status: number,
+    success: string,
+) => void;
+
 export type GetArgListFunction = (
     cmd: string,
     parameters: GluegunParameters,
@@ -34,6 +40,7 @@ export interface RunResponse {
 export type RunFunction = (args: string[]) => Promise<RunResponse>;
 
 export interface PixelOvenExtensions {
+    exit: ExitFunction;
     getArgList: GetArgListFunction;
     getConfigPath: GetConfigPathFunction;
     resolvePlugin: ResolvePluginFunction;

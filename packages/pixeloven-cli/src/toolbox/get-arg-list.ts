@@ -17,6 +17,10 @@ interface GetArgListOptions {
  * @param parameters
  * @param index
  * @param type
+ * 
+ * @todo Add support for cmd to be a pattern like {ts,tsx}
+ * @todo Move all helpers to toolbox folder
+ * 
  */
 function getArgList(
     cmd: string,

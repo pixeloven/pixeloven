@@ -28,6 +28,7 @@ export default {
             case "tsx": {
                 const results = await tsc(argList);
                 handle("Tsc", results.status);
+                break;
             }
             default: {
                 print.error("Invalid argument provided");
