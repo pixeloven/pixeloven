@@ -7,7 +7,7 @@ const mockExists = jest.fn();
 const mockPath = jest.fn();
 
 describe("@pixeloven/cli", () => {
-    describe("extensions/pixeloven-helpers", () => {
+    describe("toolbox", () => {
         describe("get-config-path", () => {
             beforeEach(() => {
                 filesystem.exists = mockExists;

@@ -1,22 +1,20 @@
-import { PixelOvenRunContext } from "../types";
 import {
+    exit,
     getArgList,
     getConfigPath,
+    invalidArgument,
     resolvePlugin,
     run,
-} from "./pixeloven-helpers";
+} from "../toolbox";
+import { PixelOvenToolbox } from "../types";
 
-/**
- * Sets up pixelOven helpers
- * @param context
- */
-function helpers(context: PixelOvenRunContext) {
+export default (context: PixelOvenToolbox) => {
     context.pixelOven = {
+        exit,
         getArgList,
         getConfigPath,
+        invalidArgument,
         resolvePlugin,
         run,
     };
-}
-
-export default helpers;
+};

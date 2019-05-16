@@ -1,8 +1,11 @@
-import { PixelOvenRunContext, TscExtension } from "../types";
+import { PixelOvenToolbox, TscExtension } from "../types";
 
-export default (context: PixelOvenRunContext) => {
+/**
+ * @todo Import ts instead of calling bin?
+ */
+export default (toolbox: PixelOvenToolbox) => {
     const tsc: TscExtension = async (args: string[] = []) => {
-        const { pixelOven } = context;
+        const { pixelOven } = toolbox;
         const fileName = "tsconfig.json";
         const configPath = pixelOven.getConfigPath(fileName);
         if (configPath) {
@@ -12,5 +15,5 @@ export default (context: PixelOvenRunContext) => {
         }
         return pixelOven.run(["tsc", "--pretty"].concat(args));
     };
-    context.tsc = tsc;
+    toolbox.tsc = tsc;
 };

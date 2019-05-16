@@ -1,5 +1,8 @@
-import "jest";
-import * as cli from "./main";
+import { Sandbox } from "./testing";
+
+import * as main from "./main";
+
+const mockMain = Sandbox.mock(main).expects("default");
 
 const caller = () => {
     require("./index");
@@ -8,13 +11,14 @@ const caller = () => {
 describe("@pixeloven/cli", () => {
     describe("index", () => {
         afterAll(() => {
-            jest.clearAllMocks();
-            jest.restoreAllMocks();
+            Sandbox.restore();
         });
-        it("should execute main and succeed", () => {
-            const cliSpy = jest.spyOn(cli, "default");
+        afterEach(() => {
+            Sandbox.reset();
+        });
+        it("should execute main", () => {
             caller();
-            expect(cliSpy).toHaveBeenCalledTimes(1);
+            expect(mockMain.callCount).toEqual(1);
         });
     });
 });

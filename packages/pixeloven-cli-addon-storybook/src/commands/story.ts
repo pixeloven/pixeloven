@@ -1,4 +1,3 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
 import { AddonStorybookRunContext } from "../types";
 
 /**
@@ -11,21 +10,7 @@ export default {
     alias: ["--story", "-s"],
     name: "story",
     run: async (context: AddonStorybookRunContext) => {
-        const { parameters, print, storybook } = context;
-        /**
-         * Process results
-         * @param name
-         * @param status
-         */
-        const handle = (name: string, status: number) => {
-            if (status) {
-                print.error(`${name} exited with status ${status}`);
-                process.exit(status);
-            } else {
-                print.success(`Success! Read me a story please.`);
-            }
-            return status;
-        };
+        const { parameters, pixelOven, storybook } = context;
         const argList =
             parameters.array && parameters.array.length
                 ? parameters.array.slice(1)
@@ -34,10 +19,16 @@ export default {
             case "build":
             case "start": {
                 const results = await storybook(parameters.first, argList);
-                return handle("Storybook", results.status);
+                pixelOven.exit(
+                    "Github Pages",
+                    results.status,
+                    `Success! Read me a story please.\n`,
+                );
+                break;
             }
             default: {
-                throw new NodeInvalidArgumentException();
+                pixelOven.invalidArgument();
+                break;
             }
         }
     },

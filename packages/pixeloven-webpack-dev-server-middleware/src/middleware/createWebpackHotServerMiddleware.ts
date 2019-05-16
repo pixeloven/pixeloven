@@ -31,7 +31,8 @@ const getFileName = (stats: Stats.ToJsonOutput, chunkName: string) => {
      * @todo We should probably error out if outputPath is empty
      */
     const outputPath = stats.outputPath || "";
-    const fileName = stats.assetsByChunkName && stats.assetsByChunkName[chunkName];
+    const fileName =
+        stats.assetsByChunkName && stats.assetsByChunkName[chunkName];
     if (!fileName) {
         throw Error(`Asset chunk ${chunkName} could not be found.`);
     }

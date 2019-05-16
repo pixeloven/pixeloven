@@ -8,7 +8,7 @@ const options = {
 const raw = ["/path/to/node", "/path/to/cli", "test", "watch", "--coverage"];
 
 describe("@pixeloven/cli", () => {
-    describe("extensions/pixeloven-helpers", () => {
+    describe("toolbox", () => {
         describe("get-arg-list", () => {
             afterAll(() => {
                 jest.clearAllMocks();

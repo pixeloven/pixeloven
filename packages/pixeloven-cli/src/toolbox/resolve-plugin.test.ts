@@ -15,7 +15,7 @@ const moduleName = "testing";
 const fullPath = `${nodeModulesPath}${moduleName}`;
 
 describe("@pixeloven/cli", () => {
-    describe("extensions/pixeloven-helpers", () => {
+    describe("toolbox", () => {
         describe("resolve-plugin", () => {
             afterEach(() => {
                 sandbox.reset();

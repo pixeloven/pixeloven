@@ -10,22 +10,11 @@ export default {
     alias: ["--webpack", "-w"],
     name: "webpack",
     run: async (context: AddonWebpackRunContext) => {
-        const { parameters, print, webpack } = context;
-        /**
-         * Process results
-         * @param name
-         * @param status
-         */
-        const handle = (name: string, status: number) => {
-            if (status) {
-                print.error(`${name} exited with status ${status}`);
-                process.exit(status);
-            } else {
-                print.success(`Success! Ready for action.`);
-            }
-            return status;
-        };
+        const { parameters, pixelOven, webpack } = context;
 
+        /**
+         * @todo Move these checks into the extension - try catch that
+         */
         if (!parameters.first) {
             throw new NodeInvalidArgumentException(
                 "Must provide a webpack run type.",
@@ -58,6 +47,10 @@ export default {
             },
             type: WebpackExtensionType[parameters.first],
         });
-        return handle("Webpack", statusCode);
+        pixelOven.exit(
+            "Webpack",
+            statusCode,
+            `Success! Pack your bags we're going home. \n`,
+        );
     },
 };

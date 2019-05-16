@@ -1,35 +1,14 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
-import { PixelOvenRunContext } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 export default {
     alias: ["--pretty", "-p"],
     name: "pretty",
-    run: async (context: PixelOvenRunContext) => {
-        const {
-            parameters,
-            pixelOven,
-            print,
-            prettier,
-            styleLint,
-            tsLint,
-        } = context;
+    run: async (context: PixelOvenToolbox) => {
+        const { parameters, pixelOven, prettier, styleLint, tsLint } = context;
         /**
-         * Process results
-         * @param name
-         * @param status
+         * @todo might need to break these apart since the linters can't accept the same params as prettier
+         *      - Might just rely on the underlying cli more directly instead of having these aliases
          */
-        const handle = (name: string, status: number) => {
-            if (status) {
-                print.error(`${name} exited with status ${status}\n`);
-                process.exit(status);
-            } else {
-                print.success(
-                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
-                );
-            }
-            return status;
-        };
-
         switch (parameters.first) {
             case "scss": {
                 const argList = pixelOven.getArgList("scss", parameters, {
@@ -37,19 +16,20 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                const prettierStatus = handle(
+                pixelOven.exit(
                     "Prettier",
                     prettierResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
                 );
-
                 const styleLintResults = await styleLint(
                     ["--fix"].concat(argList),
                 );
-                const styleLintStatus = handle(
+                pixelOven.exit(
                     "Stylelint",
                     styleLintResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
                 );
-                return prettierStatus + styleLintStatus;
+                break;
             }
             case "ts": {
                 const argList = pixelOven.getArgList("ts", parameters, {
@@ -57,14 +37,18 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                const prettierStatus = handle(
+                pixelOven.exit(
                     "Prettier",
                     prettierResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
                 );
-
                 const tsLintResults = await tsLint(["--fix"].concat(argList));
-                const tsLintStatus = handle("TSLint", tsLintResults.status);
-                return prettierStatus + tsLintStatus;
+                pixelOven.exit(
+                    "TSLint",
+                    tsLintResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
+                break;
             }
             case "tsx": {
                 const argList = pixelOven.getArgList("tsx", parameters, {
@@ -72,17 +56,22 @@ export default {
                     type: "withOptions",
                 });
                 const prettierResults = await prettier(argList);
-                const prettierStatus = handle(
+                pixelOven.exit(
                     "Prettier",
                     prettierResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
                 );
-
                 const tsLintResults = await tsLint(["--fix"].concat(argList));
-                const tsLintStatus = handle("TSLint", tsLintResults.status);
-                return prettierStatus + tsLintStatus;
+                pixelOven.exit(
+                    "TSLint",
+                    tsLintResults.status,
+                    `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
+                );
+                break;
             }
             default: {
-                throw new NodeInvalidArgumentException();
+                pixelOven.invalidArgument();
+                break;
             }
         }
     },

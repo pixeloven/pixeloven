@@ -12,11 +12,11 @@ import { Answers, CommitFunction, Options } from "./types";
  * @todo Update examples to include this stuff???
  *          - Or make a new one
  * @todo Re-write this using our CLI
- * 
+ *
  * @todo Remove and/or Re-define scope question (maybe it can be the ticket field?)
  * @todo Should make most fields required
  * @todo Define better validation
- * 
+ *
  * @todo Remove commit types json and define here instead??? -- do after we convert to new CLI style
  */
 interface SimplifiedAnswers extends Answers {
@@ -155,7 +155,7 @@ export default (options: Options) => {
                 {
                     message: `Add issue references (e.g. "#123" or "PO-1000"):\n`,
                     name: "issues",
-                    type: "input"
+                    type: "input",
                 },
             ]).then((answers: SimplifiedAnswers) => {
                 const wrapOptions = {
