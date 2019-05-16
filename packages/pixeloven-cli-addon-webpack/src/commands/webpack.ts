@@ -47,6 +47,10 @@ export default {
             },
             type: WebpackExtensionType[parameters.first],
         });
-        pixelOven.exit("Webpack", statusCode, `Success! Pack your bags we're going home. \n`);
+        pixelOven.exit(
+            "Webpack",
+            statusCode,
+            `Success! Pack your bags we're going home. \n`,
+        );
     },
 };

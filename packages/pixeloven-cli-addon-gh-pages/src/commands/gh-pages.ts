@@ -11,7 +11,11 @@ export default {
         switch (parameters.first) {
             case "build": {
                 const results = await ghPages(argList);
-                pixelOven.exit("Github Pages", results.status, `Success! Opening doc-ing bay. :)\n`);
+                pixelOven.exit(
+                    "Github Pages",
+                    results.status,
+                    `Success! Opening doc-ing bay. :)\n`,
+                );
                 break;
             }
             default: {

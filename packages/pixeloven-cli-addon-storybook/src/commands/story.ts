@@ -19,7 +19,11 @@ export default {
             case "build":
             case "start": {
                 const results = await storybook(parameters.first, argList);
-                pixelOven.exit("Github Pages", results.status, `Success! Read me a story please.\n`);
+                pixelOven.exit(
+                    "Github Pages",
+                    results.status,
+                    `Success! Read me a story please.\n`,
+                );
                 break;
             }
             default: {
