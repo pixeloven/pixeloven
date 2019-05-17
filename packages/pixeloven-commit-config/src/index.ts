@@ -1,12 +1,13 @@
 /**
  * @todo Make a single configuration file for both commit lint and commit citizen
+ * @todo Make our issues text in the CLI Scope instead...
  */
 module.exports = {
     rules: {
         "body-leading-blank": [1, "always"],
         "footer-leading-blank": [1, "always"],
         "header-max-length": [2, "always", 72],
-        "scope-case": [2, "always", "lower-case"],
+        "scope-case": [2, "always", ["pascal-case", "lower-case", "upper-case"]],
         "subject-case": [
             2,
             "never",
