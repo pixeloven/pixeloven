@@ -94,13 +94,8 @@ export default (options: Options) => {
                     type: "list",
                 },
                 {
-                    default: options.defaultScope,
-                    filter: (value: string) => {
-                        return value.trim().toLowerCase();
-                    },
-                    message:
-                        "What is the scope of this change (e.g. component or file name): (press enter to skip)",
-                    name: "scope",
+                    message: `Provide the scope/issue references (e.g. index.ts, "#123" or "PO-1000"):\n`,
+                    name: "issues",
                     type: "input",
                 },
                 {
@@ -152,11 +147,6 @@ export default (options: Options) => {
                     name: "body",
                     type: "input",
                 },
-                {
-                    message: `Add issue references (e.g. "#123" or "PO-1000"):\n`,
-                    name: "issues",
-                    type: "input",
-                },
             ]).then((answers: SimplifiedAnswers) => {
                 const wrapOptions = {
                     cut: false,
@@ -168,20 +158,17 @@ export default (options: Options) => {
                 const issues = answers.issues
                     ? wrap(answers.issues, wrapOptions)
                     : "";
-                // parentheses are only needed when a scope is present
-                const scope = answers.scope ? "(" + answers.scope + ")" : "";
+                const scope = issues ? "(" + issues + ")" : "";
 
                 // Hard limit this line in the validate
-                const head = answers.type + scope + ": " + answers.subject;
+                const subject = answers.type + scope + ": " + answers.subject;
 
                 // Wrap these lines at options.maxLineWidth characters
                 const body = answers.body
                     ? wrap(answers.body, wrapOptions)
                     : "";
 
-                const footer = filter([issues]).join("\n\n");
-
-                commit(filter([head, body, footer]).join("\n\n"));
+                commit(filter([subject, body]).join("\n\n"));
             });
         },
     };

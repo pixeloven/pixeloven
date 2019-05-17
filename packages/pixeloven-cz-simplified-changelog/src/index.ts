@@ -15,7 +15,6 @@ import conventionalCommitTypes from "conventional-commit-types";
 const config = configLoader.load();
 const defaultOptions: Options = {
     defaultBody: process.env.CZ_BODY || config.defaultBody,
-    defaultScope: process.env.CZ_SCOPE || config.defaultScope,
     defaultSubject: process.env.CZ_SUBJECT || config.defaultSubject,
     defaultType: process.env.CZ_TYPE || config.defaultType,
     maxHeaderWidth:
