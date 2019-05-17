@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-builder",
-  "version": "6.0.0-alpha.7",
+  "version": "6.0.0-alpha.8",
   "description": "Webpack build handler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.7",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.7",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.8",
     "@types/webpack": "4.4.29"
   },
   "peerDependencies": {
