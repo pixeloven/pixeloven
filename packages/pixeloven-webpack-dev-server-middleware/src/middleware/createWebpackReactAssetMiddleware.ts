@@ -25,31 +25,35 @@ const webpackReactAssetMiddleware = (
     if (compiler.client) {
         const dynamicMiddleware = new DynamicMiddleware();
         const onDoneHandler = (stats: Stats) => {
-            /**
-             * @todo Find a way for the compiler to filter these out.
-             */
             if (stats.compilation.compiler.name === "client") {
-                // const clientStats = stats.toJson("verbose");
-                const { scripts, stylesheets } = flushChunks(stats, {
-                    chunkNames: flushChunkNames(),
-                });
-                logger.info("---------- Assets Discovered ----------");
-                logger.info(stylesheets);
-                logger.info(scripts);
-                dynamicMiddleware.clean();
-                dynamicMiddleware.mount(
-                    (req: Request, res: Response, next: NextFunction) => {
-                        req.files = {
-                            css: stylesheets.map(file =>
-                                normalize(`/${config.publicPath}/${file}`),
-                            ),
-                            js: scripts.map(file =>
-                                normalize(`/${config.publicPath}/${file}`),
-                            ),
-                        };
-                        next();
-                    },
-                );
+                try {
+                    /**
+                     * @todo The typing on flushChunks is wrong... it should be Stats.JsonObject (in latest @types/webpack)
+                     */
+                    const clientStats = stats.toJson("verbose");
+                    const { scripts, stylesheets } = flushChunks(clientStats, {
+                        chunkNames: flushChunkNames(),
+                    });
+                    logger.info("---------- Assets Discovered ----------");
+                    logger.info(stylesheets);
+                    logger.info(scripts);
+                    dynamicMiddleware.clean();
+                    dynamicMiddleware.mount(
+                        (req: Request, res: Response, next: NextFunction) => {
+                            req.files = {
+                                css: stylesheets.map(file =>
+                                    normalize(`/${config.publicPath}/${file}`),
+                                ),
+                                js: scripts.map(file =>
+                                    normalize(`/${config.publicPath}/${file}`),
+                                ),
+                            };
+                            next();
+                        },
+                    );
+                } catch (e) {
+                    logger.error(e);
+                }
                 if (config.done) {
                     config.done(stats);
                 }

@@ -36,7 +36,7 @@
     "@types/html-entities": "1.2.16",
     "@types/memory-fs": "0.3.2",
     "@types/require-from-string": "1.2.0",
-    "@types/webpack": "4.4.31",
+    "@types/webpack": "4.4.29",
     "@types/webpack-dev-middleware": "2.0.2",
     "@types/webpack-hot-middleware": "2.16.5"
   },
