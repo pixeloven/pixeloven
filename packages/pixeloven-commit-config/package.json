@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/commit-config",
-  "version": "6.0.0-alpha.9",
+  "version": "6.0.0-alpha.10",
   "description": "Commit lint configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
