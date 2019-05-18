@@ -1,14 +1,10 @@
 import "jest";
-import { Level, logger, Message } from "./index";
+import { logger } from "./index";
 
 describe("@pixeloven/node-logger", () => {
     describe("index", () => {
-        it("should export logger, Level and Message", () => {
-            const level: Level = "info";
-            const message: Message = "test";
+        it("should export logger", () => {
             expect(typeof logger).toEqual("object");
-            expect(typeof level).toEqual("string");
-            expect(typeof message).toEqual("string");
         });
     });
 });

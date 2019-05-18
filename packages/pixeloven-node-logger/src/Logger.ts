@@ -1,51 +1,52 @@
-import log from "webpack-log";
+import winston from "winston";
 
-export type Message = string | string[];
-/**
- * @todo Need to support import { LogLevel } from "@pixeloven/env";
- */
-export type Level = "error" | "info" | "warn";
+type Level = "error" | "info" | "warn";
 
-export interface LoggerInstance {
-    error: (message: Message) => void;
-    info: (message: Message) => void;
-    warn: (message: Message) => void;
-}
+type Message = string | string[];
 
 /**
- * Log Instance name
+ * Standard logger options shared by both our middleware and our logger endpoint
  */
-export const logInstanceName = "core";
+const loggerOptions = {
+    transports: [
+        new winston.transports.Console()
+    ],
+};
 
 /**
- * Create logger
- * @todo Eventually write my own logger instead of wrapping webpack-log
+ * Creates a log instance
  */
-export const logInstance = log({ name: logInstanceName });
+const loggerInstance = winston.createLogger(loggerOptions);
 
 /**
  * Logs a message as a specific
  * @param message
  * @param level
+ * 
+ * @todo Add ability to log meta data
  */
-const messenger = (message: Message, level: Level): void => {
-    if (Array.isArray(message)) {
-        message.map((item: string) => {
-            logInstance[level](item);
+function log(level: Level, msg: Message) {
+    if (Array.isArray(msg)) {
+        msg.map((item: string) => {
+            loggerInstance[level](item);
         });
     } else {
-        logInstance[level](message);
+        loggerInstance[level](msg);
     }
 };
 
 /**
- * Simple wrapper for webpack-log
- * @todo Add a success log state
+ * Simple wrapper for winston
  */
-const Logger: LoggerInstance = {
-    error: (message: Message): void => messenger(message, "error"),
-    info: (message: Message): void => messenger(message, "info"),
-    warn: (message: Message): void => messenger(message, "warn"),
+const Logger = {
+    error: (msg: Message) => log("error", msg),
+    info: (msg: Message) => log("info", msg),
+    warn: (msg: Message) => log("warn", msg),
+
+    /**
+     * @description Helpers for testing
+     */
+    getInstance: () => loggerInstance
 };
 
 export default Logger;

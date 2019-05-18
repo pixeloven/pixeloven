@@ -1,5 +1,7 @@
 import "jest";
-import Logger, { logInstance } from "./Logger";
+import Logger from "./Logger";
+
+const logInstance = Logger.getInstance();
 
 describe("@pixeloven/node-logger", () => {
     describe("Logger", () => {

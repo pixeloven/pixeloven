@@ -18,11 +18,10 @@
     "access": "public"
   },
   "dependencies": {
-    "webpack-log": "2.0.0"
+    "winston": "3.2.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
-    "@types/inquirer": "0.0.43"
+    "@pixeloven/tasks": "^6.0.0-alpha.7"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
