@@ -25,7 +25,7 @@ describe("@pixeloven/cli", () => {
             it("should print error and info plus provided message", () => {
                 invalidArgument("Why did you do that?");
                 expect(mockPrintError.callCount).toEqual(1);
-                expect(mockPrintInfo.callCount).toEqual(2);
+                expect(mockPrintInfo.callCount).toEqual(1);
             });
         });
     });

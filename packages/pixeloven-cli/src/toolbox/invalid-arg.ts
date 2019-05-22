@@ -6,10 +6,7 @@ import { print } from "gluegun";
  * @param message
  */
 function invalidArgument(message?: string) {
-    print.error("Invalid argument provided");
-    if (message) {
-        print.info(message);
-    }
+    print.error(`Invalid argument provided. ${message}`);
     print.info("Run --help for more details");
 }
 
