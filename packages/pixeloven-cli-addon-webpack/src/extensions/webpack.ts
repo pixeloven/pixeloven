@@ -1,6 +1,6 @@
 import { getBuilder, getCompiler, getServer } from "@pixeloven/webpack";
 import {
-    AddonWebpackRunContext,
+    AddonWebpackToolbox,
     WebpackExtensionOptions,
     WebpackExtensionType,
 } from "../types";
@@ -15,9 +15,9 @@ import {
  *
  * @todo Make build and dev-server configurable through CLI.
  */
-export default (context: AddonWebpackRunContext) => {
+export default (toolbox: AddonWebpackToolbox) => {
     const webpack = async (options: WebpackExtensionOptions) => {
-        const { pixelOven, print } = context;
+        const { pixelOven, print } = toolbox;
         const pluginPath = pixelOven.resolvePlugin("@pixeloven", "webpack");
         if (!pluginPath) {
             throw new Error(
@@ -48,5 +48,5 @@ export default (context: AddonWebpackRunContext) => {
         }
         return 1;
     };
-    context.webpack = webpack;
+    toolbox.webpack = webpack;
 };
