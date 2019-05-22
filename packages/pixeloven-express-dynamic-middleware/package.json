@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/express-dynamic-middleware",
-  "version": "6.0.0-alpha.7",
+  "version": "6.0.0-alpha.12",
   "description": "Express dynamic middleware",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",

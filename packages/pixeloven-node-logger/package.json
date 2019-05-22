@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/node-logger",
-  "version": "6.0.0-alpha.7",
+  "version": "6.0.0-alpha.12",
   "description": "Node logger",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",

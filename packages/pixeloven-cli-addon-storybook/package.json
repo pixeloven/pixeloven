@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli-addon-storybook",
-  "version": "6.0.0-alpha.13",
+  "version": "6.0.0-alpha.12",
   "description": "PixelOven CLI addon for storybook based development",
   "main": "dist/lib/index.js",
   "types": "dist/types/types.d.ts",
