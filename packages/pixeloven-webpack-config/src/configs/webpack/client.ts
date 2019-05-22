@@ -33,6 +33,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const outputPath = options.outputPath;
     const publicOutputPath = path.normalize(`${outputPath}/public`);
+    const recordsPath = path.resolve(`${outputPath}/${name}-records.json`);
 
     /**
      * Set env variables
@@ -406,6 +407,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         output,
         performance,
         plugins,
+        profile: options.withProfiling,
+        recordsPath,
         resolve,
         target,
     };

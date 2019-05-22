@@ -26,7 +26,7 @@ export default {
             );
         }
         /**
-         * @todo source map doesn't seem to be sent all the way through any more?
+         * @todo Need to type the all the options for this CLI
          */
         const statusCode = await webpack({
             buildOptions: {
@@ -35,6 +35,7 @@ export default {
             compilerOptions: {
                 outputPath: "./dist",
                 path: parameters.options.path,
+                withProfiling: parameters.options.profile,
                 withSourceMap: parameters.options.sourceMap,
             },
             serverOptions: {
