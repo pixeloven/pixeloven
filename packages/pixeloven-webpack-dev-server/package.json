@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-dev-server",
-  "version": "6.0.0-alpha.13",
+  "version": "6.0.0-alpha.14",
   "description": "Webpack Development Server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,15 +18,15 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-alpha.13",
-    "@pixeloven/exceptions": "^6.0.0-alpha.13",
-    "@pixeloven/node-logger": "^6.0.0-alpha.13",
-    "@pixeloven/webpack-dev-server-middleware": "^6.0.0-alpha.13",
+    "@pixeloven/core": "^6.0.0-alpha.14",
+    "@pixeloven/exceptions": "^6.0.0-alpha.14",
+    "@pixeloven/node-logger": "^6.0.0-alpha.14",
+    "@pixeloven/webpack-dev-server-middleware": "^6.0.0-alpha.14",
     "express": "4.16.4"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.13",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.13",
+    "@pixeloven/tasks": "^6.0.0-alpha.14",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.14",
     "@types/express": "4.16.1"
   },
   "peerDependencies": {
