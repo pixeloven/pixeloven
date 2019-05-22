@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/commit-config",
-  "version": "6.0.0-alpha.15",
+  "version": "6.0.0-alpha.16",
   "description": "Commit lint configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.15"
+    "@pixeloven/tasks": "^6.0.0-alpha.16"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

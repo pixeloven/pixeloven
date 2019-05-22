@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-compiler",
-  "version": "6.0.0-alpha.15",
+  "version": "6.0.0-alpha.16",
   "description": "Wrapper class for webpack compiler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -21,7 +21,7 @@
     "webpack": "4.29.6"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.15",
+    "@pixeloven/tasks": "^6.0.0-alpha.16",
     "@types/webpack": "4.4.32"
   },
   "scripts": {
