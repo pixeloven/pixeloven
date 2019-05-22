@@ -1,3 +1,4 @@
+/* tslint:disable no-any */
 import { DynamicMiddleware } from "@pixeloven/express-dynamic-middleware";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
@@ -31,7 +32,6 @@ const webpackReactAssetMiddleware = (
                      * @todo The typing on flushChunks is wrong... it should be Stats.JsonObject (in latest @types/webpack)
                      */
                     const clientStats = stats.toJson("verbose");
-                    /* tslint:disable-next-line no-any */
                     const { scripts, stylesheets } = flushChunks(
                         clientStats as any,
                         {
