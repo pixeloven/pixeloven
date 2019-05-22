@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/commit-config",
-  "version": "6.0.0-alpha.12",
+  "version": "6.0.0-alpha.13",
   "description": "Commit lint configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.12"
+    "@pixeloven/tasks": "^6.0.0-alpha.13"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",
