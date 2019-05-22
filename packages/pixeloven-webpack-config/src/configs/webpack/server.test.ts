@@ -31,6 +31,7 @@ describe("@pixeloven/webpack", () => {
                     const config = server(env, {
                         outputPath: "./dist",
                         path: "/",
+                        withProfiling: true,
                         withSourceMap: true,
                     });
                     expect(config.mode).toEqual("development");
@@ -42,6 +43,7 @@ describe("@pixeloven/webpack", () => {
                     const config = server(env, {
                         outputPath: "./dist",
                         path: "/",
+                        withProfiling: true,
                         withSourceMap: true,
                     });
                     expect(config.mode).toEqual("production");
