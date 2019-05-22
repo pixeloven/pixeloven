@@ -34,7 +34,6 @@
     "@pixeloven/cli": ">5.0.0"
   },
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "precompile": "pixeloven-tasks compile:clean",

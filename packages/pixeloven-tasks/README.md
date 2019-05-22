@@ -26,7 +26,6 @@ When making a libraries similar to the ones seen in [PixelOven](https://github.c
 Example of usage in `package.json`
 ```json
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "precompile": "pixeloven-tasks compile:clean",
