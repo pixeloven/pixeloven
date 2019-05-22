@@ -31,7 +31,8 @@ const webpackReactAssetMiddleware = (
                      * @todo The typing on flushChunks is wrong... it should be Stats.JsonObject (in latest @types/webpack)
                      */
                     const clientStats = stats.toJson("verbose");
-                    const { scripts, stylesheets } = flushChunks(clientStats, {
+                    /* tslint:disable-next-line no-any */
+                    const { scripts, stylesheets } = flushChunks(clientStats as any, {
                         chunkNames: flushChunkNames(),
                     });
                     logger.info("---------- Assets Discovered ----------");
