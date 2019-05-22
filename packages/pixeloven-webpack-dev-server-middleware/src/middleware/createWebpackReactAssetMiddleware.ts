@@ -32,9 +32,12 @@ const webpackReactAssetMiddleware = (
                      */
                     const clientStats = stats.toJson("verbose");
                     /* tslint:disable-next-line no-any */
-                    const { scripts, stylesheets } = flushChunks(clientStats as any, {
-                        chunkNames: flushChunkNames(),
-                    });
+                    const { scripts, stylesheets } = flushChunks(
+                        clientStats as any,
+                        {
+                            chunkNames: flushChunkNames(),
+                        },
+                    );
                     logger.info("---------- Assets Discovered ----------");
                     logger.info(stylesheets);
                     logger.info(scripts);
