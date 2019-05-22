@@ -29,6 +29,7 @@ const defaultBuildOptions = {
 const defaultCompilerOptions = {
     outputPath: "./dist",
     path: "/",
+    withProfiling: false,
     withSourceMap: false,
 };
 

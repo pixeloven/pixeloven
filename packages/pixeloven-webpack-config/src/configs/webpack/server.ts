@@ -1,6 +1,7 @@
 import { resolvePath } from "@pixeloven/core";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TimeFixPlugin from "time-fix-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
@@ -26,6 +27,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const target = "node";
     const publicPath = options.path;
     const buildPath = options.outputPath;
+    const recordsPath = path.resolve(`${buildPath}/${name}-records.json`);
 
     /**
      * Set env variables
@@ -282,6 +284,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         output,
         performance,
         plugins,
+        profile: options.withProfiling,
+        recordsPath,
         resolve,
         target,
     };

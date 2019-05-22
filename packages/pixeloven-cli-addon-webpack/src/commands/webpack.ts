@@ -1,32 +1,20 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
-import { AddonWebpackRunContext, WebpackExtensionType } from "../types";
+import { AddonWebpackToolbox, WebpackExtensionType } from "../types";
 
-/**
- * @todo Need to document options here
- * @todo Need to move build logic in here
- * --source-map Allows build with or without sourcemaps
- */
 export default {
     alias: ["--webpack", "-w"],
     name: "webpack",
-    run: async (context: AddonWebpackRunContext) => {
-        const { parameters, pixelOven, webpack } = context;
-
-        /**
-         * @todo Move these checks into the extension - try catch that
-         */
+    run: async (toolbox: AddonWebpackToolbox) => {
+        const { parameters, pixelOven, webpack } = toolbox;
         if (!parameters.first) {
-            throw new NodeInvalidArgumentException(
-                "Must provide a webpack run type.",
-            );
+            pixelOven.invalidArgument("Must provide a webpack run type.");
+            return;
         }
         if (!WebpackExtensionType.hasOwnProperty(parameters.first)) {
-            throw new NodeInvalidArgumentException(
-                "Invalid run type provided.",
-            );
+            pixelOven.invalidArgument("Invalid run type provided.");
+            return;
         }
         /**
-         * @todo source map doesn't seem to be sent all the way through any more?
+         * @todo Need to type the all the options for this CLI
          */
         const statusCode = await webpack({
             buildOptions: {
@@ -35,6 +23,7 @@ export default {
             compilerOptions: {
                 outputPath: "./dist",
                 path: parameters.options.path,
+                withProfiling: parameters.options.profile,
                 withSourceMap: parameters.options.sourceMap,
             },
             serverOptions: {

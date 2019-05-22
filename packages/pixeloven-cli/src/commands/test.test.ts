@@ -1,17 +1,14 @@
-import "jest";
-import sinon from "sinon";
+import { Sandbox } from "../testing";
 import testModule from "./test";
-
-const sandbox = sinon.createSandbox();
 
 describe("@pixeloven/cli", () => {
     describe("commands", () => {
         describe("test", () => {
             afterEach(() => {
-                sandbox.reset();
+                Sandbox.reset();
             });
             afterAll(() => {
-                sandbox.restore();
+                Sandbox.restore();
             });
             it("should contains required props", () => {
                 expect(testModule.alias).toEqual(["--test", "-t"]);
