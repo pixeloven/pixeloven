@@ -18,15 +18,15 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-alpha.7",
-    "@pixeloven/exceptions": "^6.0.0-alpha.7",
-    "@pixeloven/node-logger": "^6.0.0-alpha.7",
-    "@pixeloven/webpack-dev-server-middleware": "^6.0.0-alpha.13",
+    "@pixeloven/core": "^6.0.0-alpha.12",
+    "@pixeloven/exceptions": "^6.0.0-alpha.12",
+    "@pixeloven/node-logger": "^6.0.0-alpha.12",
+    "@pixeloven/webpack-dev-server-middleware": "^6.0.0-alpha.12",
     "express": "4.16.4"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.13",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.12",
     "@types/express": "4.16.1"
   },
   "peerDependencies": {

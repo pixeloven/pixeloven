@@ -18,12 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/exceptions": "^6.0.0-alpha.7",
+    "@pixeloven/exceptions": "^6.0.0-alpha.12",
     "cross-spawn": "6.0.5",
     "fs-extra": "7.0.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
     "@types/cross-spawn": "6.0.0",
     "@types/fs-extra": "5.0.5"
   },

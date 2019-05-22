@@ -18,13 +18,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-alpha.7",
-    "@pixeloven/node-logger": "^6.0.0-alpha.7",
+    "@pixeloven/core": "^6.0.0-alpha.12",
+    "@pixeloven/node-logger": "^6.0.0-alpha.12",
     "react-dev-utils": "8.0.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.13",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.12",
     "@types/webpack": "4.4.32"
   },
   "peerDependencies": {

@@ -18,10 +18,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/webpack-builder": "^6.0.0-alpha.13",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.13",
-    "@pixeloven/webpack-config": "^6.0.0-alpha.13",
-    "@pixeloven/webpack-dev-server": "^6.0.0-alpha.13"
+    "@pixeloven/webpack-builder": "^6.0.0-alpha.12",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.12",
+    "@pixeloven/webpack-config": "^6.0.0-alpha.12",
+    "@pixeloven/webpack-dev-server": "^6.0.0-alpha.12"
   },
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn compile",

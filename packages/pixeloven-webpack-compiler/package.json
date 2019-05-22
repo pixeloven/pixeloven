@@ -21,7 +21,7 @@
     "webpack": "4.29.6"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
     "@types/webpack": "4.4.32"
   },
   "scripts": {

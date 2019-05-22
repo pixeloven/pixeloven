@@ -18,8 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/express-dynamic-middleware": "^6.0.0-alpha.7",
-    "@pixeloven/node-logger": "^6.0.0-alpha.7",
+    "@pixeloven/express-dynamic-middleware": "^6.0.0-alpha.12",
+    "@pixeloven/node-logger": "^6.0.0-alpha.12",
     "ansi-html": "0.0.7",
     "html-entities": "1.2.1",
     "react-dev-utils": "8.0.0",
@@ -30,8 +30,8 @@
     "webpack-hot-middleware": "2.25.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.13",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.12",
     "@types/express": "4.16.1",
     "@types/html-entities": "1.2.16",
     "@types/memory-fs": "0.3.2",

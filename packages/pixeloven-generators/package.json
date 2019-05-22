@@ -21,11 +21,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-alpha.7",
+    "@pixeloven/core": "^6.0.0-alpha.12",
     "plop": "2.2.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
     "@types/inquirer": "0.0.43"
   },
   "scripts": {

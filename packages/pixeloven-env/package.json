@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/exceptions": "^6.0.0-alpha.7",
+    "@pixeloven/exceptions": "^6.0.0-alpha.12",
     "dotenv": "6.1.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
     "@types/dotenv": "6.1.1"
   },
   "scripts": {

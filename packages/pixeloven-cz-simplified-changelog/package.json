@@ -26,7 +26,7 @@
     "word-wrap": "1.2.3"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
+    "@pixeloven/tasks": "^6.0.0-alpha.12",
     "@types/lodash.map": "4.6.13",
     "commitizen": "3.1.1"
   },
