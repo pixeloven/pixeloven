@@ -3,7 +3,7 @@ import Readme from "./README.md";
 
 import { boolean, text } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import * as React from "react";
+import React from "react";
 import Icon from "./Icon";
 
 storiesOf("Components/Atoms/Icon", module)

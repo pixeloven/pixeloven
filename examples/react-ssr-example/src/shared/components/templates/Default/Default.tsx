@@ -1,5 +1,5 @@
 import { RouteComponentProps, Routes } from "@pixeloven/react-router-config";
-import * as React from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Icon, Responsive, Segment } from "semantic-ui-react";
 import { MainMenu, MenuItem } from "../../molecules";

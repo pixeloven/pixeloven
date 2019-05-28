@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StaticContext } from "react-router";
 
 export interface StatusProps {

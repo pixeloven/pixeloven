@@ -1,5 +1,5 @@
 import { Link } from "@shared/components";
-import * as React from "react";
+import React from "react";
 import favicon from "./favicon.ico";
 
 function Favicon() {

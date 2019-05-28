@@ -1,6 +1,6 @@
 import { Script } from "@server/views";
 import { State } from "@shared/store/types";
-import * as React from "react";
+import React from "react";
 
 interface BodyProps {
     children: React.ReactNode;
