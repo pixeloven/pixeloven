@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Container, Menu } from "semantic-ui-react";
 import { MenuItem, MenuItemArray } from "../";
 

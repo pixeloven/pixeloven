@@ -5,7 +5,7 @@ import { App } from "@shared/components";
 import routeConfig, { unknownErrorRoutes } from "@shared/routes";
 import { configureStore, rootSaga } from "@shared/store";
 import { NextFunction, Request, Response } from "express";
-import * as React from "react";
+import React from "react";
 import { renderToString } from "react-dom/server";
 import { Helmet } from "react-helmet";
 import { Provider } from "react-redux";

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Menu, MenuItemProps } from "semantic-ui-react";
 
 export interface MenuItem {

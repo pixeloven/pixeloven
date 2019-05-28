@@ -1,5 +1,5 @@
 import { RouteComponentProps } from "@pixeloven/react-router-config";
-import * as React from "react";
+import React from "react";
 import { Container, Grid } from "semantic-ui-react";
 
 class NoMatch extends React.Component<RouteComponentProps> {
