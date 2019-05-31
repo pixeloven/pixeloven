@@ -98,6 +98,45 @@ yarn linker
 
 From here you can run any of the `pixeloven` commands within the example projects. If you make any package changes you'll need to recompile from the package directory and relink from the main project root. To make things easier we suggest keeping three terminal tabs open, one of the main project root, one of the package root you're editing, and one of the example project root.
 
+### Committing
+> Note commit formatting is helpful for us to auto tag our releases. The actual version doesn't matter as much as tracking our changes in a highly discoverable way.
+
+### Commit Linting
+When executing a standard commit `git commit` the a pre-commit hook will check the format of the message `-m`.
+
+Invalid commit might look like:
+```bash
+git commit -m "I did some work"
+```
+versus a valid commit:
+```bash
+git commit -m "chore: i did some work"
+git commit -m "fix(#123): i did some work"
+```
+Currently the linter will accept either of the above formats however knowing what starting tag to use may be more difficult. To facilitate this we can run an interactive console.
+
+### Commit Console
+> Note this console is meant to guide your commits but is not necessary to commit code.  
+```bash
+yarn commit
+```
+
+To start you will be presented with a menu of commit tag types.
+```
+feat:     A new feature 
+fix:      A bug fix 
+docs:     Documentation only changes 
+style:    Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) 
+refactor: A code change that neither fixes a bug nor adds a feature 
+perf:     A code change that improves performance 
+test:     Adding missing tests or correcting existing tests
+build:    Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm) 
+ci:       Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) 
+chore:    Other changes that don't modify src or test files 
+revert:   Reverts a previous commit 
+```
+A few more options will be presented to help guide your commit.
+
 ## Pull Requests
 
 Keep in mind that this project is a mono-repo design. If you encounter any issue when running scripts it is recommended to run `yarn clean` at the root of this project and re run the setup above.
