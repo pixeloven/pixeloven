@@ -19,7 +19,7 @@ describe("Shared/Components/{{capitalize (plural atomicType)}}/{{componentName}}
     it("should extend passed classes", () => {
         const wrapper = shallow(<{{componentName}} className={"test-class"} />);
 
-         expect(wrapper.hasClass("example-class")).toBe(true);
-+        expect(wrapper.hasClass("test-class")).toBe(true);
+        expect(wrapper.hasClass("example-class")).toBe(true);
+        expect(wrapper.hasClass("test-class")).toBe(true);
     });
 });
