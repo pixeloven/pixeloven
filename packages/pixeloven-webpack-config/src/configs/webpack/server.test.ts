@@ -33,6 +33,7 @@ describe("@pixeloven/webpack", () => {
                         path: "/",
                         withProfiling: true,
                         withSourceMap: true,
+                        withStats: true,
                     });
                     expect(config.mode).toEqual("development");
                     expect(config.target).toEqual("node");
@@ -45,6 +46,7 @@ describe("@pixeloven/webpack", () => {
                         path: "/",
                         withProfiling: true,
                         withSourceMap: true,
+                        withStats: true,
                     });
                     expect(config.mode).toEqual("production");
                     expect(config.target).toEqual("node");
