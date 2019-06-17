@@ -1,16 +1,7 @@
-import {
-    Action,
-    applyMiddleware,
-    createStore,
-    Store as DefaultStore,
-} from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import {
-    default as createSagaMiddleware,
-    END,
-    SagaMiddleware,
-} from "redux-saga";
-import { rootReducer, rootSaga } from "./";
+import {Action, applyMiddleware, createStore, Store as DefaultStore} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
+import {default as createSagaMiddleware, END, SagaMiddleware} from "redux-saga";
+import {rootReducer, rootSaga} from "./";
 
 type Target = "client" | "server";
 
@@ -21,11 +12,9 @@ export interface Store extends DefaultStore {
 
 /**
  * Setup store and saga middleware
- * @todo Set locale here
  */
 export const configureStore = (target: Target): Store => {
-    const initialState =
-        target === "client" && window.INIT_STATE ? window.INIT_STATE : {};
+    const initialState = target === "client" && window.initialState ? window.initialState : {};
 
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
