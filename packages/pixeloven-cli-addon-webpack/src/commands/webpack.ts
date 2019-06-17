@@ -25,6 +25,7 @@ export default {
                 path: parameters.options.path,
                 withProfiling: parameters.options.profile,
                 withSourceMap: parameters.options.sourceMap,
+                withStats: parameters.options.stats,
             },
             serverOptions: {
                 host: parameters.options.host,

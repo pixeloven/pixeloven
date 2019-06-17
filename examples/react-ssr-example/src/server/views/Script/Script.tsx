@@ -14,7 +14,12 @@ function Script(props: ScriptProps) {
     }
     const files = props.src
         ? props.src.map((src, index) => (
-              <script key={index} type="text/javascript" src={src} defer={true} />
+              <script
+                  key={index}
+                  type="text/javascript"
+                  src={src}
+                  defer={true}
+              />
           ))
         : undefined;
     return <React.Fragment>{files}</React.Fragment>;

@@ -43,8 +43,9 @@ With either of the above cmds there are options that can help with all phases of
 ### Webpack configuration options
 | Name | Default | Description |
 | --- | --- | --- |
-| `--profile` |  `false` | Sets a flag for webpack to output "records" with profiling and stats. |
+| `--profile` |  `false` | Sets a flag for webpack to output "records" with profiling. |
 | `--source-map` |  `false` | Sets a flag for webpack to include source mapping. |
+| `--stats` |  `false` | Sets a flag for webpack to output "stats" for `webpack-bundle-analyzer`. |
 
 ### Development server configuration options
 | Name | Default | Description |

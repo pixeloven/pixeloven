@@ -68,7 +68,7 @@
   "scripts": {
     "cli": "pixeloven",
     "build": "yarn build:dev && yarn build:story",
-    "build:dev": "pixeloven webpack build --profile --source-map --path /",
+    "build:dev": "pixeloven webpack build --profile --source-map --stats --path /",
     "build:prod": "pixeloven webpack build --path /",
     "build:story": "pixeloven story build",
     "prebuild": "pixeloven delete dist",

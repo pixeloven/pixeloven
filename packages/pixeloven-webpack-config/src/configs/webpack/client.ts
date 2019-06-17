@@ -20,6 +20,7 @@ import webpack, {
     Resolve,
     RuleSetRule,
 } from "webpack";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 import { Config } from "../../types";
@@ -33,7 +34,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const outputPath = options.outputPath;
     const publicOutputPath = path.normalize(`${outputPath}/public`);
-    const recordsPath = path.resolve(`${outputPath}/${name}-records.json`);
+    const recordsPath = path.resolve(`${outputPath}/${name}-profile.json`);
+    const statsFilename = path.resolve(`${outputPath}/${name}-stats.json`);
 
     /**
      * Set env variables
@@ -250,9 +252,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                         const packageName = mod.context.match(
                             /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
                         )[1];
-
                         // npm package names are URL-safe, but some servers don't like @ symbols
-                        return `pkg.${packageName.replace("@", "")}`;
+                        return `vendor~${packageName.replace("@", "")}`;
                     },
                 },
             },
@@ -361,6 +362,19 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             ),
         }),
         /**
+         * Generate a stats file for webpack-bundle-analyzer
+         * @env production
+         */
+        ifProduction(
+            new BundleAnalyzerPlugin({
+                analyzerMode: "disabled",
+                generateStatsFile: options.withStats,
+                logLevel: "silent",
+                statsFilename,
+            }),
+            undefined,
+        ),
+        /**
          * Generate a manifest file which contains a mapping of all asset filenames
          * to their corresponding output file so that tools can pick it up without
          * having to parse `index.html`.
@@ -432,6 +446,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         profile: options.withProfiling,
         recordsPath,
         resolve,
+        stats: "verbose",
         target,
     };
 };
