@@ -1,5 +1,5 @@
 import React from "react";
-import {HelmetData} from "react-helmet";
+import { HelmetData } from "react-helmet";
 
 interface HtmlProps {
     children: React.ReactNode;
@@ -8,7 +8,7 @@ interface HtmlProps {
 }
 
 function Html(props: HtmlProps) {
-    const {children, helmet, lang} = props;
+    const { children, helmet, lang } = props;
     const htmlAttrs = helmet ? helmet.htmlAttributes.toComponent() : {};
     return (
         <html lang={lang} {...htmlAttrs}>

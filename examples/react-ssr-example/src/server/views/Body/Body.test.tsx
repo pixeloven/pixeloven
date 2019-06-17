@@ -1,4 +1,4 @@
-import {configure, shallow} from "enzyme";
+import { configure, shallow } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import React from "react";
@@ -12,18 +12,14 @@ const contentString = "<h1>test</h1>";
 
 const files = {
     js: ["main.js"],
-}
+};
 
 describe("Server", () => {
     describe("Views", () => {
         describe("Body", () => {
             it("should render body with child string", () => {
                 const wrapper = shallow(
-                    <Body
-                        files={files}
-                    >
-                        {contentString}
-                    </Body>,
+                    <Body files={files}>{contentString}</Body>,
                 );
                 expect(wrapper.find("body").length).toEqual(1);
                 expect(wrapper.find("div").length).toEqual(2);

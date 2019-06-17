@@ -1,7 +1,7 @@
-import {Script} from "@server/views";
-import {State} from "@shared/store/types";
+import { Script } from "@server/views";
+import { State } from "@shared/store/types";
 import React from "react";
-import {HelmetData} from "react-helmet";
+import { HelmetData } from "react-helmet";
 
 interface BodyProps {
     children: string;
@@ -14,15 +14,18 @@ interface BodyProps {
 }
 
 function Body(props: BodyProps) {
-    const bodyAttrs = props.helmet ? props.helmet.bodyAttributes.toComponent() : {};
+    const bodyAttrs = props.helmet
+        ? props.helmet.bodyAttributes.toComponent()
+        : {};
     const serializedState = JSON.stringify(props.initialState);
-    const jsTags = props.files && props.files.js ? <Script src={props.files.js} /> : false;
+    const jsTags =
+        props.files && props.files.js ? <Script src={props.files.js} /> : false;
     const innerHtml = {
         __html: props.children,
-    }
+    };
     const initialState = {
         __html: `window.initialState = ${serializedState};`,
-    }
+    };
     return (
         <body {...bodyAttrs}>
             <noscript>You need to enable JavaScript to run this app.</noscript>

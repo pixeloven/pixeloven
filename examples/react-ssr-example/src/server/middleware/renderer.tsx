@@ -50,14 +50,24 @@ const Content = (props: ContentRenderProps) => (
 
 /**
  * Render application from templates
- * @param req 
- * @param routes 
- * @param staticContext 
- * @param store 
+ * @param req
+ * @param routes
+ * @param staticContext
+ * @param store
  */
-function render(req: Request, routes: RouteProps[], staticContext: StaticContext, store: Store) {
+function render(
+    req: Request,
+    routes: RouteProps[],
+    staticContext: StaticContext,
+    store: Store,
+) {
     const contentString = renderToString(
-        <Content req={req} routes={routes} staticContext={staticContext} store={store} />,
+        <Content
+            req={req}
+            routes={routes}
+            staticContext={staticContext}
+            store={store}
+        />,
     );
     const helmetData = Helmet.renderStatic();
     const output = renderToString(
@@ -75,7 +85,10 @@ export function errorHandler(config: Config) {
         };
         try {
             const store = configureStore("server");
-            const routes = Router.getConfig(unknownErrorRoutes, config.publicPath);
+            const routes = Router.getConfig(
+                unknownErrorRoutes,
+                config.publicPath,
+            );
             store
                 .runSaga(rootSaga)
                 .done.then(() => {
@@ -129,7 +142,10 @@ export function renderer(config: Config) {
                 });
             matchedRoutes.forEach(matchedRoute => {
                 if (matchedRoute.route.fetchData) {
-                    matchedRoute.route.fetchData(store.dispatch, matchedRoute.matched.params);
+                    matchedRoute.route.fetchData(
+                        store.dispatch,
+                        matchedRoute.matched.params,
+                    );
                 }
             });
 

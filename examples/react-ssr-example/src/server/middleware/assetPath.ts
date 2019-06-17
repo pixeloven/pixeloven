@@ -1,5 +1,5 @@
-import {AssetManifest} from "@server/utils";
-import {NextFunction, Request, Response} from "express";
+import { AssetManifest } from "@server/utils";
+import { NextFunction, Request, Response } from "express";
 
 /**
  * Define assets for template

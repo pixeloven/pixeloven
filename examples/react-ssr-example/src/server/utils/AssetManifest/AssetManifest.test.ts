@@ -1,7 +1,7 @@
 import fs from "fs";
 import "jest";
-import sinon, {SinonSandbox} from "sinon";
-import {AssetManifest} from "./AssetManifest";
+import sinon, { SinonSandbox } from "sinon";
+import { AssetManifest } from "./AssetManifest";
 
 describe("Server/Utils/AssetManifest", () => {
     describe("manifest", () => {
