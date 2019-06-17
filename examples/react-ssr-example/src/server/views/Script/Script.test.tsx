@@ -1,4 +1,4 @@
-import { configure, shallow } from "enzyme";
+import {configure, shallow} from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import React from "react";

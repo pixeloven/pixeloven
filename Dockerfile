@@ -16,7 +16,7 @@ RUN apt-get update && \
 ENV HOST "0.0.0.0"
 ENV PORT "8080"
 ENV PROTOCOL "http"
-ENV PUBLIC_PATH "/example/"
+ENV PUBLIC_PATH "/"
 
 # Build application
 RUN yarn bootstrap && \

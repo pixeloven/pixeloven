@@ -30,7 +30,7 @@ const routes = [
             {
                 component: Home,
                 exact: true,
-                path: "/example/",
+                path: "/",
             },
             // Blog Main
             {
@@ -42,13 +42,7 @@ const routes = [
                         type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
                     });
                 },
-                path: "/example/blog",
-            },
-            // Blog Page
-            {
-                component: Blog,
-                exact: true,
-                path: "/example/:post",
+                path: "/blog",
             },
             // 404 Page
             {

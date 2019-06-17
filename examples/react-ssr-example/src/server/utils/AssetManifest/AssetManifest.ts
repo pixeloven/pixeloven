@@ -1,5 +1,5 @@
 import fs from "fs";
-import { normalize, resolve } from "path";
+import {normalize, resolve} from "path";
 
 interface Manifest {
     [key: string]: string;
@@ -35,16 +35,10 @@ export class AssetManifest {
     public get manifest() {
         const manifestPath = resolve(this.config.fileName);
         if (fs.existsSync(manifestPath)) {
-            const manifestFile = JSON.parse(
-                fs.readFileSync(manifestPath, "utf8"),
-            ) as Manifest;
+            const manifestFile = JSON.parse(fs.readFileSync(manifestPath, "utf8")) as Manifest;
             return {
-                css: this.filter(manifestFile, "css").map(file =>
-                    normalize(`/${this.config.publicPath}/${file}`),
-                ),
-                js: this.filter(manifestFile, "js").map(file =>
-                    normalize(`/${this.config.publicPath}/${file}`),
-                ),
+                css: this.filter(manifestFile, "css").map(file => normalize(`/${this.config.publicPath}/${file}`)),
+                js: this.filter(manifestFile, "js").map(file => normalize(`/${this.config.publicPath}/${file}`)),
             };
         }
         return undefined;
