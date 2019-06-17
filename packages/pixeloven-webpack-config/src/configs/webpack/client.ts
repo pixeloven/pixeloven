@@ -239,9 +239,6 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
          * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
          * @todo https://itnext.io/react-router-and-webpack-v4-code-splitting-using-splitchunksplugin-f0a48f110312
          * @todo Also see how we can prevent specific vendor packages from being added to vendor js
-         *
-         * @todo Updating hashing to use this plugin - should help prevent hashes from changing if files don't change
-         * https://webpack.js.org/plugins/hashed-module-ids-plugin/
          */
         splitChunks: {
             cacheGroups: {
