@@ -4,7 +4,7 @@ import path from "path";
 import winston from "winston";
 import { Config } from "./config";
 import { health } from "./controllers";
-import { assetPath, renderer } from "./middleware";
+import { assetPath, errorHandler, renderer } from "./middleware";
 
 /**
  * Define server logic here
@@ -42,6 +42,16 @@ const server = (app: Application, config: Config) => {
      */
     app.use(config.publicPath, health);
     app.use(renderer(config));
+
+    /**
+     * Setup express error handling
+     */
+    app.use(
+        expressWinston.errorLogger({
+            transports: [new winston.transports.Console()],
+        }),
+    );
+    app.use(errorHandler(config));
 };
 
 export default server;

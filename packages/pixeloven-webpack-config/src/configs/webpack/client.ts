@@ -20,6 +20,7 @@ import webpack, {
     Resolve,
     RuleSetRule,
 } from "webpack";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 import { Config } from "../../types";
@@ -33,7 +34,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const outputPath = options.outputPath;
     const publicOutputPath = path.normalize(`${outputPath}/public`);
-    const recordsPath = path.resolve(`${outputPath}/${name}-records.json`);
+    const recordsPath = path.resolve(`${outputPath}/${name}-profile.json`);
+    const statsFilename = path.resolve(`${outputPath}/${name}-stats.json`);
 
     /**
      * Set env variables
@@ -241,7 +243,23 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
          * @todo Also see how we can prevent specific vendor packages from being added to vendor js
          */
         splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name(mod) {
+                        // get the name. E.g. node_modules/packageName/not/this/part.js
+                        // or node_modules/packageName
+                        const packageName = mod.context.match(
+                            /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+                        )[1];
+                        // npm package names are URL-safe, but some servers don't like @ symbols
+                        return `vendor~${packageName.replace("@", "")}`;
+                    },
+                },
+            },
             chunks: "all",
+            maxInitialRequests: Infinity,
+            minSize: 0,
         },
     };
 
@@ -289,6 +307,11 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
          * @env development
          */
         ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
+        /**
+         * Helps prevent hashes from updating if a bundle hasn't changed.
+         * @env all
+         */
+        new webpack.HashedModuleIdsPlugin(),
         /**
          * Moment.js is an extremely popular library that bundles large locale files
          * by default due to how Webpack interprets its code. This is a practical
@@ -338,6 +361,19 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 "static/css/main.css",
             ),
         }),
+        /**
+         * Generate a stats file for webpack-bundle-analyzer
+         * @env production
+         */
+        ifProduction(
+            new BundleAnalyzerPlugin({
+                analyzerMode: "disabled",
+                generateStatsFile: options.withStats,
+                logLevel: "silent",
+                statsFilename,
+            }),
+            undefined,
+        ),
         /**
          * Generate a manifest file which contains a mapping of all asset filenames
          * to their corresponding output file so that tools can pick it up without
@@ -410,6 +446,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         profile: options.withProfiling,
         recordsPath,
         resolve,
+        stats: "verbose",
         target,
     };
 };

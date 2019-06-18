@@ -15,6 +15,7 @@ import webpack, {
     Resolve,
     RuleSetRule,
 } from "webpack";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import webpackNodeExternals from "webpack-node-externals";
 import { Config } from "../../types";
@@ -27,7 +28,8 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const target = "node";
     const publicPath = options.path;
     const buildPath = options.outputPath;
-    const recordsPath = path.resolve(`${buildPath}/${name}-records.json`);
+    const recordsPath = path.resolve(`${buildPath}/${name}-profile.json`);
+    const statsFilename = path.resolve(`${buildPath}/${name}-stats.json`);
 
     /**
      * Set env variables
@@ -213,6 +215,19 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             TARGET: target,
         }),
         /**
+         * Generate a stats file for webpack-bundle-analyzer
+         * @env production
+         */
+        ifProduction(
+            new BundleAnalyzerPlugin({
+                analyzerMode: "disabled",
+                generateStatsFile: options.withStats,
+                logLevel: "silent",
+                statsFilename,
+            }),
+            undefined,
+        ),
+        /**
          * Perform type checking and linting in a separate process to speed up compilation
          * @env all
          */
@@ -287,6 +302,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         profile: options.withProfiling,
         recordsPath,
         resolve,
+        stats: "verbose",
         target,
     };
 };

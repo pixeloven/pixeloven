@@ -31,6 +31,7 @@ const defaultCompilerOptions = {
     path: "/",
     withProfiling: false,
     withSourceMap: false,
+    withStats: false,
 };
 
 /**

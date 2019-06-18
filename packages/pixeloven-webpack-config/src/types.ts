@@ -3,4 +3,5 @@ export interface Config {
     path: string;
     withProfiling: boolean;
     withSourceMap: boolean;
+    withStats: boolean;
 }
