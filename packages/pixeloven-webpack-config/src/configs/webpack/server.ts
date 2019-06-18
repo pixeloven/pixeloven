@@ -216,16 +216,20 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         }),
         /**
          * Generate a stats file for webpack-bundle-analyzer
+         * @todo Make more configurable
          * @env production
          */
         ifProduction(
             new BundleAnalyzerPlugin({
-                analyzerMode: "disabled",
+                analyzerMode: "static",
                 generateStatsFile: options.withStats,
                 logLevel: "silent",
                 statsFilename,
             }),
-            undefined,
+            new BundleAnalyzerPlugin({
+                analyzerMode: "server",
+                analyzerPort: 8082
+            }),
         ),
         /**
          * Perform type checking and linting in a separate process to speed up compilation

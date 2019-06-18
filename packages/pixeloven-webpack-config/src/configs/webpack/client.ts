@@ -34,8 +34,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const outputPath = options.outputPath;
     const publicOutputPath = path.normalize(`${outputPath}/public`);
-    const recordsPath = path.resolve(`${outputPath}/${name}-profile.json`);
-    const statsFilename = path.resolve(`${outputPath}/${name}-stats.json`);
+    const recordsPath = path.resolve(`${outputPath}/${name}-stats.json`);
 
     /**
      * Set env variables
@@ -363,6 +362,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         }),
         /**
          * Generate a stats file for webpack-bundle-analyzer
+         * @todo Make more configurable
          * @env production
          */
         ifProduction(
@@ -370,9 +370,12 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 analyzerMode: "disabled",
                 generateStatsFile: options.withStats,
                 logLevel: "silent",
-                statsFilename,
+                statsFilename: recordsPath,
             }),
-            undefined,
+            new BundleAnalyzerPlugin({
+                analyzerMode: "server",
+                analyzerPort: 8081
+            }),
         ),
         /**
          * Generate a manifest file which contains a mapping of all asset filenames
