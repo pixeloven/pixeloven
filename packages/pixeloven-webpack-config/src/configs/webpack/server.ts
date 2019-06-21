@@ -29,6 +29,10 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const buildPath = options.outputPath;
     const recordsPath = path.resolve(`${buildPath}/${name}-profile.json`);
+
+    /**
+     * Setup for stats
+     */
     const statsFilename = path.resolve(`${buildPath}/${name}-stats.json`);
 
     /**
@@ -216,19 +220,32 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         }),
         /**
          * Generate a stats file for webpack-bundle-analyzer
-         * @todo Make more configurable
+         * @todo How to make this more configurable
+         *      --stats default eq false 
+         *      --stats-port default eq +1 --port
+         *      --stats-host default eq --host
+         *      --stats-dir default eq "stats/"
+         * 
+         * @todo we should do this with the other transient types types too
+         * @todo also make build handle std libraries with webpack
+         * @todo also make bundling more configurable
+         * @todo need to some how report bundle analyzer host setup maybe we don't silence logs for now?
+         * 
          * @env production
          */
         ifProduction(
             new BundleAnalyzerPlugin({
-                analyzerMode: "static",
+                analyzerMode: options.withStats ? "static" : "disabled",
                 generateStatsFile: options.withStats,
                 logLevel: "silent",
                 statsFilename,
             }),
             new BundleAnalyzerPlugin({
-                analyzerMode: "server",
-                analyzerPort: 8082
+                analyzerHost: options.withStatsHost,
+                analyzerMode: options.withStats ? "server" : "disabled",
+                analyzerPort: options.withStatsPort,
+                logLevel: "silent",
+                openAnalyzer: false
             }),
         ),
         /**
