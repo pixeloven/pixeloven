@@ -264,15 +264,26 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             //     },
             // },
             cacheGroups: {
-                default: false,
 
+                // common chunk
+                common: {
+                    chunks: "async",
+                    enforce: true,
+                    minChunks: 2,
+                    name: "common",
+                    priority: 10,
+                    reuseExistingChunk: true,
+                },
+                default: false,
                 // vendor chunk
                 vendor: {
                     // sync + async chunks
                     chunks: "all",
+                    name: "vendor",
                     // import file path containing node_modules
                     test: /[\\/]node_modules[\\/]/
                 },
+                
                 vendors: false,
             }
         },
