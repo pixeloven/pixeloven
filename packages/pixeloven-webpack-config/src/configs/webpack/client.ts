@@ -277,13 +277,11 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 default: false,
                 // vendor chunk
                 vendor: {
-                    // sync + async chunks
                     chunks: "all",
                     name: "vendor",
-                    // import file path containing node_modules
-                    test: /[\\/]node_modules[\\/]/
+                    priority: 20,
+                    test: /[\\/]node_modules[\\/]/,
                 },
-                
                 vendors: false,
             }
         },
