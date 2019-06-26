@@ -264,7 +264,6 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             //     },
             // },
             cacheGroups: {
-
                 // common chunk
                 common: {
                     chunks: "async",
