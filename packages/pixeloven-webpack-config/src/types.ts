@@ -1,17 +1,22 @@
-// enum StatTypes {
-//     "static" = "static"
-// }
+/**
+ * @description General settings for BundleAnalyzerPlugin
+ */
+interface StatsConfig {
+    withStats: boolean;
+    withStatsDir: string;
+}
 
-// Dev = "dynamic" 
-// Build = "static" + json file 
+/**
+ * @description Development server settings for BundleAnalyzerPlugin
+ */
+interface StatsServerConfig extends StatsConfig {
+    withStatsHost: string;
+    withStatsPort: number;
+}
 
-export interface Config {
+export interface Config extends StatsServerConfig {
     outputPath: string;
     path: string;
     withProfiling: boolean;
     withSourceMap: boolean;
-    withStats: boolean;
-    withStatsDir: string;
-    withStatsHost: string;
-    withStatsPort: number;
 }

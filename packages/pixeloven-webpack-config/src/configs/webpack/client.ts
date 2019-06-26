@@ -37,6 +37,13 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const recordsPath = path.resolve(`${outputPath}/${name}-stats.json`);
 
     /**
+     * Setup for stats
+     */
+    const statsDir = options.withStatsDir;
+    const statsFilename = path.resolve(`${statsDir}/${name}-stats.json`);
+    const reportFilename = path.resolve(`${statsDir}/${name}-report.html`);
+
+    /**
      * Set env variables
      */
     const environment = env.NODE_ENV || "production";
@@ -362,19 +369,25 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         }),
         /**
          * Generate a stats file for webpack-bundle-analyzer
-         * @todo Make more configurable
-         * @env production
+         * @todo Need to find our own logging solution
+         * 
+         * @env all
          */
         ifProduction(
             new BundleAnalyzerPlugin({
-                analyzerMode: "disabled",
+                analyzerMode: options.withStats ? "static" : "disabled",
                 generateStatsFile: options.withStats,
-                logLevel: "silent",
-                statsFilename: recordsPath,
+                // logLevel: "silent",
+                openAnalyzer: false,
+                reportFilename,
+                statsFilename,
             }),
             new BundleAnalyzerPlugin({
-                analyzerMode: "server",
-                analyzerPort: 8081
+                analyzerHost: options.withStatsHost,
+                analyzerMode: options.withStats ? "server" : "disabled",
+                analyzerPort: options.withStatsPort,
+                // logLevel: "silent",
+                openAnalyzer: false
             }),
         ),
         /**

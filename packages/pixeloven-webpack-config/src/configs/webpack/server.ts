@@ -33,8 +33,10 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     /**
      * Setup for stats
      */
-    const statsFilename = path.resolve(`${buildPath}/${name}-stats.json`);
-
+    const statsDir = options.withStatsDir;
+    const statsFilename = path.resolve(`${statsDir}/${name}-stats.json`);
+    const reportFilename = path.resolve(`${statsDir}/${name}-report.html`);
+    
     /**
      * Set env variables
      */
@@ -220,31 +222,25 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         }),
         /**
          * Generate a stats file for webpack-bundle-analyzer
-         * @todo How to make this more configurable
-         *      --stats default eq false 
-         *      --stats-port default eq +1 --port
-         *      --stats-host default eq --host
-         *      --stats-dir default eq "stats/"
+         * @todo Scope breaking config for client and server from each other so ports can be different
+         * @todo Need to find our own logging solution
          * 
-         * @todo we should do this with the other transient types types too
-         * @todo also make build handle std libraries with webpack
-         * @todo also make bundling more configurable
-         * @todo need to some how report bundle analyzer host setup maybe we don't silence logs for now?
-         * 
-         * @env production
+         * @env all
          */
         ifProduction(
             new BundleAnalyzerPlugin({
                 analyzerMode: options.withStats ? "static" : "disabled",
                 generateStatsFile: options.withStats,
-                logLevel: "silent",
+                // logLevel: "silent",
+                openAnalyzer: false,
+                reportFilename,
                 statsFilename,
             }),
             new BundleAnalyzerPlugin({
                 analyzerHost: options.withStatsHost,
                 analyzerMode: options.withStats ? "server" : "disabled",
-                analyzerPort: options.withStatsPort,
-                logLevel: "silent",
+                analyzerPort: options.withStatsPort + 1,
+                // logLevel: "silent",
                 openAnalyzer: false
             }),
         ),

@@ -26,6 +26,9 @@ export default {
                 withProfiling: parameters.options.profile,
                 withSourceMap: parameters.options.sourceMap,
                 withStats: parameters.options.stats,
+                withStatsDir: parameters.options.statsDir,
+                withStatsHost: parameters.options.statsHost,
+                withStatsPort: parameters.options.statsPort,
             },
             serverOptions: {
                 host: parameters.options.host,
