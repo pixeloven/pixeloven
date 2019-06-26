@@ -34,8 +34,14 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const outputPath = options.outputPath;
     const publicOutputPath = path.normalize(`${outputPath}/public`);
-    const recordsPath = path.resolve(`${outputPath}/${name}-profile.json`);
-    const statsFilename = path.resolve(`${outputPath}/${name}-stats.json`);
+    const recordsPath = path.resolve(`${outputPath}/${name}-stats.json`);
+
+    /**
+     * Setup for stats
+     */
+    const statsDir = options.withStatsDir;
+    const statsFilename = path.resolve(`${statsDir}/${name}-stats.json`);
+    const reportFilename = path.resolve(`${statsDir}/${name}-report.html`);
 
     /**
      * Set env variables
@@ -237,29 +243,46 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             ],
             [],
         ),
-        /**
-         * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-         * @todo https://itnext.io/react-router-and-webpack-v4-code-splitting-using-splitchunksplugin-f0a48f110312
-         * @todo Also see how we can prevent specific vendor packages from being added to vendor js
-         */
         splitChunks: {
+            /**
+             * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+             * @todo https://itnext.io/react-router-and-webpack-v4-code-splitting-using-splitchunksplugin-f0a48f110312
+             * @todo Also see how we can prevent specific vendor packages from being added to vendor js
+             */
+            // cacheGroups: {
+            //     vendor: {
+            //         test: /[\\/]node_modules[\\/]/,
+            //         name(mod) {
+            //             // get the name. E.g. node_modules/packageName/not/this/part.js
+            //             // or node_modules/packageName
+            //             const packageName = mod.context.match(
+            //                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+            //             )[1];
+            //             // npm package names are URL-safe, but some servers don't like @ symbols
+            //             return `vendor~${packageName.replace("@", "")}`;
+            //         },
+            //     },
+            // },
             cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name(mod) {
-                        // get the name. E.g. node_modules/packageName/not/this/part.js
-                        // or node_modules/packageName
-                        const packageName = mod.context.match(
-                            /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-                        )[1];
-                        // npm package names are URL-safe, but some servers don't like @ symbols
-                        return `vendor~${packageName.replace("@", "")}`;
-                    },
+                // common chunk
+                common: {
+                    chunks: "async",
+                    enforce: true,
+                    minChunks: 2,
+                    name: "common",
+                    priority: 10,
+                    reuseExistingChunk: true,
                 },
-            },
-            chunks: "all",
-            maxInitialRequests: Infinity,
-            minSize: 0,
+                default: false,
+                // vendor chunk
+                vendor: {
+                    chunks: "all",
+                    name: "vendor",
+                    priority: 20,
+                    test: /[\\/]node_modules[\\/]/,
+                },
+                vendors: false,
+            }
         },
     };
 
@@ -363,16 +386,26 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         }),
         /**
          * Generate a stats file for webpack-bundle-analyzer
-         * @env production
+         * @todo Need to find our own logging solution
+         * 
+         * @env all
          */
         ifProduction(
             new BundleAnalyzerPlugin({
-                analyzerMode: "disabled",
+                analyzerMode: options.withStats ? "static" : "disabled",
                 generateStatsFile: options.withStats,
-                logLevel: "silent",
+                // logLevel: "silent",
+                openAnalyzer: false,
+                reportFilename,
                 statsFilename,
             }),
-            undefined,
+            new BundleAnalyzerPlugin({
+                analyzerHost: options.withStatsHost,
+                analyzerMode: options.withStats ? "server" : "disabled",
+                analyzerPort: options.withStatsPort,
+                // logLevel: "silent",
+                openAnalyzer: false
+            }),
         ),
         /**
          * Generate a manifest file which contains a mapping of all asset filenames

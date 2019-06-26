@@ -29,8 +29,14 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const buildPath = options.outputPath;
     const recordsPath = path.resolve(`${buildPath}/${name}-profile.json`);
-    const statsFilename = path.resolve(`${buildPath}/${name}-stats.json`);
 
+    /**
+     * Setup for stats
+     */
+    const statsDir = options.withStatsDir;
+    const statsFilename = path.resolve(`${statsDir}/${name}-stats.json`);
+    const reportFilename = path.resolve(`${statsDir}/${name}-report.html`);
+    
     /**
      * Set env variables
      */
@@ -216,16 +222,27 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         }),
         /**
          * Generate a stats file for webpack-bundle-analyzer
-         * @env production
+         * @todo Scope breaking config for client and server from each other so ports can be different
+         * @todo Need to find our own logging solution
+         * 
+         * @env all
          */
         ifProduction(
             new BundleAnalyzerPlugin({
-                analyzerMode: "disabled",
+                analyzerMode: options.withStats ? "static" : "disabled",
                 generateStatsFile: options.withStats,
-                logLevel: "silent",
+                // logLevel: "silent",
+                openAnalyzer: false,
+                reportFilename,
                 statsFilename,
             }),
-            undefined,
+            new BundleAnalyzerPlugin({
+                analyzerHost: options.withStatsHost,
+                analyzerMode: options.withStats ? "server" : "disabled",
+                analyzerPort: options.withStatsPort + 1,
+                // logLevel: "silent",
+                openAnalyzer: false
+            }),
         ),
         /**
          * Perform type checking and linting in a separate process to speed up compilation

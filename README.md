@@ -92,3 +92,4 @@ We are committed to providing a safe place for everyone. Please review our [code
 ## Planned v8
 1) Create a unified configuration (perhaps an addon?) for the CLI
 2) Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
+3) Create our own all in one dashboard like Jarvis + BundleAnalyzerPlugin + console (read only)

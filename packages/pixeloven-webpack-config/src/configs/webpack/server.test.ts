@@ -34,6 +34,9 @@ describe("@pixeloven/webpack", () => {
                         withProfiling: true,
                         withSourceMap: true,
                         withStats: true,
+                        withStatsDir: "./stats",
+                        withStatsHost: "localhost",
+                        withStatsPort: 8082,
                     });
                     expect(config.mode).toEqual("development");
                     expect(config.target).toEqual("node");
@@ -47,6 +50,9 @@ describe("@pixeloven/webpack", () => {
                         withProfiling: true,
                         withSourceMap: true,
                         withStats: true,
+                        withStatsDir: "./stats",
+                        withStatsHost: "localhost",
+                        withStatsPort: 8082,
                     });
                     expect(config.mode).toEqual("production");
                     expect(config.target).toEqual("node");

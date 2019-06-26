@@ -46,6 +46,9 @@ With either of the above cmds there are options that can help with all phases of
 | `--profile` |  `false` | Sets a flag for webpack to output "records" with profiling. |
 | `--source-map` |  `false` | Sets a flag for webpack to include source mapping. |
 | `--stats` |  `false` | Sets a flag for webpack to output "stats" for `webpack-bundle-analyzer`. |
+| `--stats-dir` |  `./stats` | Provides directory path for stats output. Generally the default value is recommended. |
+| `--stats-host` |  `false` | Host development server will be running on. Generally the default value is recommended. |
+| `--stats-port` |  `8081+1` | Sets the base port for both client and server "stats" using `webpack-bundle-analyzer`. Requires two consecutive open ports. |
 
 ### Development server configuration options
 | Name | Default | Description |
