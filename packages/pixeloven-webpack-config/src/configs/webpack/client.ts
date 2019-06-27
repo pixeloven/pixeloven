@@ -243,6 +243,9 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             ],
             [],
         ),
+        /**
+         * @todo Make configurable v8 (include ability to provide these rules in json form)
+         */
         splitChunks: {
             cacheGroups: {
                 coreJs: {
