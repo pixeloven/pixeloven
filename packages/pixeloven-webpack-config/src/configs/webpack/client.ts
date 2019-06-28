@@ -388,7 +388,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         /**
          * Generate a stats file for webpack-bundle-analyzer
          * @todo Need to find our own logging solution
-         * 
+         *
          * @env all
          */
         ifProduction(
@@ -405,7 +405,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 analyzerMode: options.withStats ? "server" : "disabled",
                 analyzerPort: options.withStatsPort,
                 // logLevel: "silent",
-                openAnalyzer: false
+                openAnalyzer: false,
             }),
         ),
         /**
