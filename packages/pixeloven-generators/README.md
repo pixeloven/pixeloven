@@ -17,3 +17,11 @@ or using yarn:
 ```sh
 yarn add @pixeloven/generators
 ```
+
+## Generating components
+
+Refer to [the component instrucions](https://github.com/pixeloven/pixeloven/blob/master/packages/pixeloven-generators/component.md)
+
+## Generating stores
+
+Refer to [the store instrucions](https://github.com/pixeloven/pixeloven/blob/master/packages/pixeloven-generators/store.md)
