@@ -1,6 +1,8 @@
+import "jest";
+
 import React from "react";
 import * as ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 
 const TestComponent = () => {
@@ -18,9 +20,9 @@ describe("App", () => {
     it("renders without crashing", () => {
         const div = document.createElement("div");
         ReactDOM.render(
-            <BrowserRouter basename="/">
+            <MemoryRouter>
                 <App routes={routes} />
-            </BrowserRouter>,
+            </MemoryRouter>,
             div,
         );
         ReactDOM.unmountComponentAtNode(div);

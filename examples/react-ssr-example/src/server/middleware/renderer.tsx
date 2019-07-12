@@ -91,7 +91,7 @@ export function errorHandler(config: Config) {
             );
             store
                 .runSaga(rootSaga)
-                .done.then(() => {
+                .toPromise().then(() => {
                     const output = render(req, routes, staticContext, store);
                     const statusCode = staticContext.statusCode || 500;
                     res.write(output);
@@ -130,7 +130,7 @@ export function renderer(config: Config) {
              */
             store
                 .runSaga(rootSaga)
-                .done.then(() => {
+                .toPromise().then(() => {
                     const output = render(req, routes, staticContext, store);
                     const statusCode = staticContext.statusCode || 200;
                     res.write(output);

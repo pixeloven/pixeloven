@@ -8,7 +8,7 @@ type Message = string | string[];
  * @todo Add colors and what not
  * @todo replace the print function in the cli with this one
  * @todo can we replace storybooks logger? or make our looks similar
- * 
+ *
  * @todo we can extend the AbstractConfigSetLevels and others for specific functionality
  * @todo we want our logger to look good!
  */
@@ -26,7 +26,7 @@ const loggerOptions = {
         error: 0,
         info: 1,
         success: 2,
-        warn: 3
+        warn: 3,
     },
     transports: [
         new winston.transports.Console({
@@ -35,7 +35,7 @@ const loggerOptions = {
                 winston.format.metadata({ key: "meta" }),
                 customConsoleFormat,
             ),
-        })
+        }),
     ],
 };
 
@@ -48,7 +48,7 @@ const loggerInstance = winston.createLogger(loggerOptions);
  * Logs a message as a specific
  * @param message
  * @param level
- * 
+ *
  * @todo Add ability to log meta data
  */
 function log(level: Level, msg: Message) {
@@ -59,11 +59,11 @@ function log(level: Level, msg: Message) {
     } else {
         loggerInstance[level](msg);
     }
-};
+}
 
 /**
  * Simple wrapper for winston
- * 
+ *
  * @todo Need to add success but it's not a given type for winston so we need to extend it.
  */
 const Logger = {
@@ -74,7 +74,7 @@ const Logger = {
     /**
      * @description Helpers for testing
      */
-    getInstance: () => loggerInstance
+    getInstance: () => loggerInstance,
 };
 
 export default Logger;

@@ -70,9 +70,9 @@ export const spawnBin = (name: string, args: string[] = []) => {
  * @todo should use the core logger here
  */
 export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
-    if (result.signal) {
-        exit(1);
-    } else {
+    if (result.signal && result.status) {
         exit(result.status);
+    } else {
+        exit(1);
     }
 };
