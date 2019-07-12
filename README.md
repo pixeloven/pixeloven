@@ -76,13 +76,13 @@ We are committed to providing a safe place for everyone. Please review our [code
 5) Reach 90-100% test coverage
 6) Expose storybook addons through library
 7) node-mocks-http replace with supertest
-8) Create a commit CLI wrapper for commit lint... with config for both citizen and commitlint
+8) Make client/server compilation configurable - we want to be able to use webpack in a library sense too - what about agnostic?
 9) Get docs working for github
 
 ## Planned v7
-1) Add gatsby support
-2) Remove semantic UI deps in main example
-3) Update examples to be more specific
+1) Add static site generation support
+2) Add support for PWA
+3) Remove semantic UI deps in main example
 4) Break middleware up into smaller packages
 5) Create component library for the server side components and views
 6) Make @core wrap super common deps and @tasks a simple local cli wrapper with no deps
@@ -93,3 +93,5 @@ We are committed to providing a safe place for everyone. Please review our [code
 1) Create a unified configuration (perhaps an addon?) for the CLI
 2) Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
 3) Create our own all in one dashboard like Jarvis + BundleAnalyzerPlugin + console (read only)
+4) Create a commit CLI wrapper for commit lint... with config for both citizen and commitlint
+5) Update examples to be more specific
