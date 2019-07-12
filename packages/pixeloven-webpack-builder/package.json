@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-builder",
-  "version": "6.0.0-alpha.8",
+  "version": "6.0.0-alpha.19",
   "description": "Webpack build handler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,20 +18,19 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-alpha.7",
-    "@pixeloven/node-logger": "^6.0.0-alpha.7",
+    "@pixeloven/core": "^6.0.0-alpha.19",
+    "@pixeloven/node-logger": "^6.0.0-alpha.19",
     "react-dev-utils": "8.0.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
-    "@pixeloven/webpack-compiler": "^6.0.0-alpha.8",
-    "@types/webpack": "4.4.29"
+    "@pixeloven/tasks": "^6.0.0-alpha.19",
+    "@pixeloven/webpack-compiler": "^6.0.0-alpha.19",
+    "@types/webpack": "4.4.32"
   },
   "peerDependencies": {
     "@pixeloven/webpack-compiler": ">5.0.0"
   },
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "precompile": "pixeloven-tasks compile:clean",

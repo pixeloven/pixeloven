@@ -19,23 +19,28 @@ import {
 /**
  * Default compiler options
  */
-const defaultBuildOptions = {
+const defaultBuildOptions: BuildConfig = {
     outputPath: "./dist",
 };
 
 /**
  * Default compiler options
  */
-const defaultCompilerOptions = {
+const defaultCompilerOptions: CompilerConfig = {
     outputPath: "./dist",
     path: "/",
+    withProfiling: false,
     withSourceMap: false,
+    withStats: false,
+    withStatsDir: "./stats",
+    withStatsHost: "localhost",
+    withStatsPort: 8081,
 };
 
 /**
  * Default compiler options
  */
-const defaultServerOptions = {
+const defaultServerOptions: ServerConfig = {
     host: "localhost",
     ignored: /node_modules/,
     path: "/",

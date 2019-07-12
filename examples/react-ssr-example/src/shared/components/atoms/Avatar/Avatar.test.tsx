@@ -1,7 +1,7 @@
 import { configure, shallow } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
-import * as React from "react";
+import React from "react";
 import Avatar from "./Avatar";
 
 configure({

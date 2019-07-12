@@ -3,6 +3,7 @@ build
 coverage
 dist
 docs
+stats
 
 # Dependency directories
 node_modules

@@ -20,6 +20,7 @@ import webpack, {
     Resolve,
     RuleSetRule,
 } from "webpack";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 import { Config } from "../../types";
@@ -33,6 +34,14 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const publicPath = options.path;
     const outputPath = options.outputPath;
     const publicOutputPath = path.normalize(`${outputPath}/public`);
+    const recordsPath = path.resolve(`${outputPath}/${name}-stats.json`);
+
+    /**
+     * Setup for stats
+     */
+    const statsDir = options.withStatsDir;
+    const statsFilename = path.resolve(`${statsDir}/${name}-stats.json`);
+    const reportFilename = path.resolve(`${statsDir}/${name}-report.html`);
 
     /**
      * Set env variables
@@ -235,12 +244,46 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             [],
         ),
         /**
-         * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-         * @todo https://itnext.io/react-router-and-webpack-v4-code-splitting-using-splitchunksplugin-f0a48f110312
-         * @todo Also see how we can prevent specific vendor packages from being added to vendor js
+         * @todo Make configurable v8 (include ability to provide these rules in json form)
          */
         splitChunks: {
+            cacheGroups: {
+                coreJs: {
+                    name: "vendor~core-js",
+                    test: /[\\/]node_modules[\\/](core-js)[\\/]/,
+                },
+                lodash: {
+                    name: "vendor~lodash",
+                    test: /[\\/]node_modules[\\/](lodash)[\\/]/,
+                },
+                moment: {
+                    name: "vendor~moment",
+                    test: /[\\/]node_modules[\\/](moment)[\\/]/,
+                },
+                react: {
+                    name: "vendor~react",
+                    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                },
+                vendor: {
+                    name: "vendor~main",
+                    /**
+                     * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+                     */
+                    // name(mod) {
+                    //     // get the name. E.g. node_modules/packageName/not/this/part.js
+                    //     // or node_modules/packageName
+                    //     const packageName = mod.context.match(
+                    //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+                    //     )[1];
+                    //     // npm package names are URL-safe, but some servers don't like @ symbols
+                    //     return `vendor~${packageName.replace("@", "")}`;
+                    // },
+                    test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
+                },
+            },
             chunks: "all",
+            maxInitialRequests: Infinity,
+            minSize: 0,
         },
     };
 
@@ -288,6 +331,11 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
          * @env development
          */
         ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
+        /**
+         * Helps prevent hashes from updating if a bundle hasn't changed.
+         * @env all
+         */
+        new webpack.HashedModuleIdsPlugin(),
         /**
          * Moment.js is an extremely popular library that bundles large locale files
          * by default due to how Webpack interprets its code. This is a practical
@@ -337,6 +385,29 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 "static/css/main.css",
             ),
         }),
+        /**
+         * Generate a stats file for webpack-bundle-analyzer
+         * @todo Need to find our own logging solution
+         *
+         * @env all
+         */
+        ifProduction(
+            new BundleAnalyzerPlugin({
+                analyzerMode: options.withStats ? "static" : "disabled",
+                generateStatsFile: options.withStats,
+                // logLevel: "silent",
+                openAnalyzer: false,
+                reportFilename,
+                statsFilename,
+            }),
+            new BundleAnalyzerPlugin({
+                analyzerHost: options.withStatsHost,
+                analyzerMode: options.withStats ? "server" : "disabled",
+                analyzerPort: options.withStatsPort,
+                // logLevel: "silent",
+                openAnalyzer: false,
+            }),
+        ),
         /**
          * Generate a manifest file which contains a mapping of all asset filenames
          * to their corresponding output file so that tools can pick it up without
@@ -406,7 +477,10 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         output,
         performance,
         plugins,
+        profile: options.withProfiling,
+        recordsPath,
         resolve,
+        stats: "verbose",
         target,
     };
 };

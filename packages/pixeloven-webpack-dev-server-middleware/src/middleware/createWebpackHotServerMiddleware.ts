@@ -25,7 +25,7 @@ const interopRequireDefault = (obj: Module) => {
  * @description If source maps are generated `assetsByChunkName.main` will be an array of filenames.
  * @param stats
  * @param chunkName
- * 
+ *
  * @todo We have to use any here until we can upgrade @types/webpack
  */
 /* tslint:disable-next-line no-any */

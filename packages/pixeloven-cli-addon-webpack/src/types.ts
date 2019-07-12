@@ -18,6 +18,6 @@ export type WebpackExtension = (
     options: WebpackExtensionOptions,
 ) => Promise<number>;
 
-export interface AddonWebpackRunContext extends PixelOvenToolbox {
+export interface AddonWebpackToolbox extends PixelOvenToolbox {
     webpack: WebpackExtension;
 }

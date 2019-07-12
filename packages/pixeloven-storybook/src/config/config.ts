@@ -6,6 +6,8 @@ import { addDecorator, configure } from "@storybook/react";
 /**
  * Import remote assets dynamically
  * @todo Find a way to do this through a Decorator or something
+ * @todo Make readme the default if it exists?  Can we hide actions? what does it even do?
+ * @todo what happened to brackgrounds?
  */
 import("" + "@src/shared/styles").catch((error: Error) => {
     console.error("Failed to load scss files", error.message);
@@ -13,6 +15,7 @@ import("" + "@src/shared/styles").catch((error: Error) => {
 
 /**
  * Setup storybook addons
+ * @todo options in menu are overriden after you do anything how can we prevent this?
  */
 addDecorator(
     withOptions({

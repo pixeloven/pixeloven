@@ -1,24 +1,25 @@
 import { configure, shallow } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
-import * as React from "react";
+import React from "react";
 import Body from "./Body";
 
 configure({
     adapter: new ReactSixteenAdapter(),
 });
 
+const contentString = "<h1>test</h1>";
+
+const files = {
+    js: ["main.js"],
+};
+
 describe("Server", () => {
     describe("Views", () => {
         describe("Body", () => {
-            it("should render body with child", () => {
-                const files = {
-                    js: ["main.js"],
-                };
+            it("should render body with child string", () => {
                 const wrapper = shallow(
-                    <Body files={files}>
-                        <h1>test</h1>
-                    </Body>,
+                    <Body files={files}>{contentString}</Body>,
                 );
                 expect(wrapper.find("body").length).toEqual(1);
                 expect(wrapper.find("div").length).toEqual(2);
@@ -35,12 +36,6 @@ describe("Server", () => {
                         .first()
                         .props().id,
                 ).toEqual("portal");
-                expect(
-                    wrapper
-                        .find("div")
-                        .last()
-                        .find("h1").length,
-                ).toEqual(1);
             });
         });
     });

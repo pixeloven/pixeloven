@@ -33,6 +33,7 @@
     "test": "yarn test-packages && yarn test-examples",
     "test-examples": "yarn linker && lerna run test --scope \"@examples/*\"",
     "test-packages": "yarn linker && lerna run test --scope \"@pixeloven/*\"",
+    "preversion": "yarn lint-packages && yarn compile-packages && yarn test-packages",
     "pretty": "yarn linker && lerna run pretty",
     "pretty-examples": "yarn linker && lerna run pretty --scope \"@examples/*\"",
     "pretty-packages": "yarn linker && lerna run pretty --scope \"@pixeloven/*\"",

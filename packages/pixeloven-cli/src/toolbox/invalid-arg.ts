@@ -1,15 +1,12 @@
 import { print } from "gluegun";
 
 /**
- * Run cmd from arg list.
+ * Print method for invalid argument
  * @description Useful for calling existing CLI
- * @param args
- *
- * @todo should do a process.exit here to make things more testable we should use the abstraction in @core
- * @todo Also might be better to break this into a more general print object
+ * @param message
  */
-function invalidArgument() {
-    print.error("Invalid argument provided");
+function invalidArgument(message?: string) {
+    print.error(`Invalid argument provided. ${message}`);
     print.info("Run --help for more details");
 }
 

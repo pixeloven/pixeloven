@@ -1,6 +1,7 @@
 import { resolvePath } from "@pixeloven/core";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TimeFixPlugin from "time-fix-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
@@ -14,6 +15,7 @@ import webpack, {
     Resolve,
     RuleSetRule,
 } from "webpack";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import webpackNodeExternals from "webpack-node-externals";
 import { Config } from "../../types";
@@ -26,6 +28,14 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const target = "node";
     const publicPath = options.path;
     const buildPath = options.outputPath;
+    const recordsPath = path.resolve(`${buildPath}/${name}-profile.json`);
+
+    /**
+     * Setup for stats
+     */
+    const statsDir = options.withStatsDir;
+    const statsFilename = path.resolve(`${statsDir}/${name}-stats.json`);
+    const reportFilename = path.resolve(`${statsDir}/${name}-report.html`);
 
     /**
      * Set env variables
@@ -211,6 +221,30 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             TARGET: target,
         }),
         /**
+         * Generate a stats file for webpack-bundle-analyzer
+         * @todo Scope breaking config for client and server from each other so ports can be different
+         * @todo Need to find our own logging solution
+         *
+         * @env all
+         */
+        ifProduction(
+            new BundleAnalyzerPlugin({
+                analyzerMode: options.withStats ? "static" : "disabled",
+                generateStatsFile: options.withStats,
+                // logLevel: "silent",
+                openAnalyzer: false,
+                reportFilename,
+                statsFilename,
+            }),
+            new BundleAnalyzerPlugin({
+                analyzerHost: options.withStatsHost,
+                analyzerMode: options.withStats ? "server" : "disabled",
+                analyzerPort: options.withStatsPort + 1,
+                // logLevel: "silent",
+                openAnalyzer: false,
+            }),
+        ),
+        /**
          * Perform type checking and linting in a separate process to speed up compilation
          * @env all
          */
@@ -282,7 +316,10 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         output,
         performance,
         plugins,
+        profile: options.withProfiling,
+        recordsPath,
         resolve,
+        stats: "verbose",
         target,
     };
 };

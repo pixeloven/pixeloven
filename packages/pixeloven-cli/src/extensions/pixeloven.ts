@@ -8,8 +8,8 @@ import {
 } from "../toolbox";
 import { PixelOvenToolbox } from "../types";
 
-export default (context: PixelOvenToolbox) => {
-    context.pixelOven = {
+export default (toolbox: PixelOvenToolbox) => {
+    toolbox.pixelOven = {
         exit,
         getArgList,
         getConfigPath,

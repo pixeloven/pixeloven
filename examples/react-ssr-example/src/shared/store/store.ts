@@ -21,11 +21,10 @@ export interface Store extends DefaultStore {
 
 /**
  * Setup store and saga middleware
- * @todo Set locale here
  */
 export const configureStore = (target: Target): Store => {
     const initialState =
-        target === "client" && window.INIT_STATE ? window.INIT_STATE : {};
+        target === "client" && window.initialState ? window.initialState : {};
 
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(

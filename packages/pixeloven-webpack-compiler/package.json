@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-compiler",
-  "version": "6.0.0-alpha.8",
+  "version": "6.0.0-alpha.19",
   "description": "Wrapper class for webpack compiler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -21,11 +21,10 @@
     "webpack": "4.29.6"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.7",
-    "@types/webpack": "4.4.29"
+    "@pixeloven/tasks": "^6.0.0-alpha.19",
+    "@types/webpack": "4.4.32"
   },
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn compile",
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "precompile": "pixeloven-tasks compile:clean",

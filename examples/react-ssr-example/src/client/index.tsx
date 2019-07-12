@@ -3,7 +3,7 @@ import { App } from "@shared/components";
 import { config } from "@shared/config";
 import routeConfig from "@shared/routes";
 import { configureStore } from "@shared/store";
-import * as React from "react";
+import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";

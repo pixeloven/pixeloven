@@ -1,22 +1,23 @@
-import "jest";
-import sinon from "sinon";
+import { cli, Sandbox } from "../testing";
 import webpackModule from "./webpack";
-
-const sandbox = sinon.createSandbox();
 
 describe("@pixeloven/cli-addon-webpack", () => {
     describe("commands", () => {
         describe("webpack", () => {
             afterEach(() => {
-                sandbox.reset();
+                Sandbox.reset();
             });
             afterAll(() => {
-                sandbox.restore();
+                Sandbox.restore();
             });
             it("should contains required props", () => {
                 expect(webpackModule.alias).toEqual(["--webpack", "-w"]);
                 expect(webpackModule.name).toEqual("webpack");
                 expect(typeof webpackModule.run).toEqual("function");
+            });
+            xit("should throw an error without run type", async () => {
+                const context = await cli.run("webpack");
+                expect(context.commandName).toEqual("webpack");
             });
         });
     });

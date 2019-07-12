@@ -1,5 +1,5 @@
 import { RouteComponentProps, Routes } from "@pixeloven/react-router-config";
-import * as React from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Icon, Responsive, Segment } from "semantic-ui-react";
 import { MainMenu, MenuItem } from "../../molecules";
@@ -8,8 +8,8 @@ class Default extends React.PureComponent<RouteComponentProps> {
     public render(): React.ReactNode {
         const { routes, match } = this.props;
         const items: MenuItem[] = [
-            { name: "Home", path: "/example/", active: true },
-            { name: "Blog", path: "/example/blog", active: false },
+            { name: "Home", path: "/", active: true },
+            { name: "Blog", path: "/blog", active: false },
         ];
         items.forEach((item, index) => {
             items[index].active = match.isExact

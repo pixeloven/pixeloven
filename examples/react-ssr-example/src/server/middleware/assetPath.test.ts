@@ -17,7 +17,7 @@ describe("Server/Middleware", () => {
         });
         it(`should create default middleware without files`, done => {
             let testReq: Request;
-            const handler = assetPath("/f/", "asset-manifest.json");
+            const handler = assetPath("/", "asset-manifest.json");
             const app = express();
             app.use(handler);
             app.use((req, res) => {
@@ -41,7 +41,7 @@ describe("Server/Middleware", () => {
             sandbox
                 .stub(fs, "readFileSync")
                 .returns(`{"file.js":"/file.js", "file.css":"/file.css"}`);
-            const handler = assetPath("/f/", "asset-manifest.json");
+            const handler = assetPath("/", "asset-manifest.json");
             const app = express();
             app.use(handler);
             app.use((req, res) => {

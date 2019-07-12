@@ -29,7 +29,7 @@ describe("@pixeloven/cli", () => {
                 expect(typeof deleteModule.run).toEqual("function");
             });
             it("should print error", async () => {
-                const context = await cli.run("delete nothing");
+                const context = await cli.run("delete");
                 expect(mockFileRemove.callCount).toEqual(0);
                 expect(mockPrintError.callCount).toEqual(1);
                 expect(mockPrintInfo.callCount).toEqual(1);

@@ -11,7 +11,7 @@ interface {{componentName}}Props {
 
 function {{componentName}}(props: {{componentName}}Props) {
     const { className } = props;
-    const  {{componentName}}Classes = classNames(className, "example-class");
+    const {{componentName}}Classes = classNames(className, "example-class");
     {{#if includeState}}const [exampleState] = useState(0);{{/if}}
 
     return (
