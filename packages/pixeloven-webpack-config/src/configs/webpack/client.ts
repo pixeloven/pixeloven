@@ -244,6 +244,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             [],
         ),
         /**
+         * @todo See how we can stop vendors-main (no s)
          * @todo Make configurable v8 (include ability to provide these rules in json form)
          */
         splitChunks: {

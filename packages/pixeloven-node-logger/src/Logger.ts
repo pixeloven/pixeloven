@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import winston from "winston";
 
 type Level = "error" | "info" | "warn";
@@ -8,12 +9,25 @@ type Message = string | string[];
  * @todo Add colors and what not
  * @todo replace the print function in the cli with this one
  * @todo can we replace storybooks logger? or make our looks similar
- *
+ * @todo We should create a success level
+ * 
  * @todo we can extend the AbstractConfigSetLevels and others for specific functionality
  * @todo we want our logger to look good!
  */
 const customConsoleFormat = winston.format.printf(info => {
-    return `${info.level.toUpperCase()}: ${info.meta.timestamp} ${
+    const getColor = () => {
+        switch(info.level) {
+            case "error":
+                return chalk.red
+            case "info":
+                return chalk.green
+            case "warning":
+                return chalk.yellow
+        }
+        return chalk.white
+    };
+    const color = getColor();
+    return `${color(info.level.toUpperCase())}: ${info.meta.timestamp} ${
         info.message
     }`;
 });
