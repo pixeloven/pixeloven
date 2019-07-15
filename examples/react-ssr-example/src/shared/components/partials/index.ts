@@ -1,4 +1,4 @@
 /**
- * Register Organisms here
+ * Register Partials here
  */
 // export { default as Example } from "./Example/Example";
