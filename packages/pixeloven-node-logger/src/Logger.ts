@@ -78,8 +78,6 @@ function log(level: Level, msg: Message) {
 
 /**
  * Simple wrapper for winston
- *
- * @todo Need to add success but it's not a given type for winston so we need to extend it.
  */
 const Logger = {
     error: (msg: Message) => log("error", msg),
