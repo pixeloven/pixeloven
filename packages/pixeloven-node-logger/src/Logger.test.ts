@@ -43,22 +43,22 @@ describe("@pixeloven/node-logger", () => {
         /**
          * @todo Need to add success but it's not a given type for winston so we need to extend it.
          */
-        // describe("success", () => {
-        //     const spySuccess = jest
-        //         .spyOn(logInstance, "success")
-        //         .mockImplementation();
-        //     afterEach(() => {
-        //         jest.clearAllMocks();
-        //     });
-        //     it('should log "string" to console', () => {
-        //         Logger.success("test1");
-        //         expect(spySuccess).toHaveBeenCalledTimes(1);
-        //     });
-        //     it('should log "string[]" to console', () => {
-        //         Logger.success(["test1", "test2"]);
-        //         expect(spySuccess).toHaveBeenCalledTimes(2);
-        //     });
-        // });
+        describe("success", () => {
+            const spySuccess = jest
+                .spyOn(logInstance, "info")
+                .mockImplementation();
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+            it('should log "string" to console', () => {
+                Logger.success("test1");
+                expect(spySuccess).toHaveBeenCalledTimes(1);
+            });
+            it('should log "string[]" to console', () => {
+                Logger.success(["test1", "test2"]);
+                expect(spySuccess).toHaveBeenCalledTimes(2);
+            });
+        });
         describe("warn", () => {
             const spyWarn = jest
                 .spyOn(logInstance, "warn")

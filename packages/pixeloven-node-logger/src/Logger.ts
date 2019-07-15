@@ -21,7 +21,7 @@ const customConsoleFormat = winston.format.printf(info => {
             case "info":
                 return chalk.blue
             case "success":
-                    return chalk.green
+                return chalk.green
             case "warning":
                 return chalk.yellow
         }
@@ -67,12 +67,15 @@ const loggerInstance = winston.createLogger(loggerOptions);
  * @todo Add ability to log meta data
  */
 function log(level: Level, msg: Message) {
+    const leveledLogger = loggerInstance.hasOwnProperty(level)
+        ? loggerInstance[level]
+        : loggerInstance.info;
     if (Array.isArray(msg)) {
         msg.map((item: string) => {
-            loggerInstance[level](item);
+            leveledLogger(item);
         });
     } else {
-        loggerInstance[level](msg);
+        leveledLogger(msg);
     }
 }
 
