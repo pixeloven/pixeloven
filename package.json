@@ -19,14 +19,14 @@
     ]
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "yarn install && yarn lerna bootstrap",
     "build": "yarn linker && yarn build-examples",
     "build-examples": "yarn linker && lerna run build --scope \"@examples/*\"",
-    "clean": "lerna clean",
+    "clean": "yarn lerna clean",
     "compile": "yarn compile-packages && yarn compile-examples",
     "compile-examples": "yarn linker && lerna run compile --scope \"@examples/*\"",
     "compile-packages": "yarn linker && lerna run compile --scope \"@pixeloven/*\"",
-    "linker": "lerna link",
+    "linker": "yarn lerna link",
     "lint": "yarn lint-packages && yarn lint-examples",
     "lint-examples": "yarn linker && lerna run lint --scope \"@examples/*\"",
     "lint-packages": "yarn linker && lerna run lint --scope \"@pixeloven/*\"",
@@ -66,7 +66,7 @@
     "@commitlint/config-conventional": "7.6.0",
     "codecov": "3.5.0",
     "husky": "2.3.0",
-    "lerna": "3.14.1",
+    "lerna": "3.15.0",
     "lint-staged": "8.1.7"
   }
 }
