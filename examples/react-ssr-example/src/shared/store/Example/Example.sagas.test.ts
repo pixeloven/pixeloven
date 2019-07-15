@@ -29,7 +29,6 @@ describe("Shared/Store/Example", () => {
                     payload: "test-url",
                     type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
                 };
-
                 return expectSaga(workExample, action)
                     .provide([
                         [call(getExample, action.payload), mockHttpResponse],
