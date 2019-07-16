@@ -39,7 +39,7 @@
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",
-    "react-dev-utils": "8.0.0",
+    "react-dev-utils": "9.0.1",
     "sass-loader": "7.1.0",
     "terser-webpack-plugin": "1.2.4",
     "time-fix-plugin": "2.0.6",

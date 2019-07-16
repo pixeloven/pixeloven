@@ -18,6 +18,9 @@ interface CustomLevels extends winston.Logger {
  * @todo we want our logger to look good!
  */
 const customConsoleFormat = winston.format.printf(info => {
+    /**
+     * Can we just use the colors provided by winston or does that apply to the whole line?
+     */
     const getColor = () => {
         switch(info.level) {
             case "error":
@@ -32,7 +35,7 @@ const customConsoleFormat = winston.format.printf(info => {
         return chalk.white
     };
     const color = getColor();
-    return `${color(info.level.toUpperCase())}: ${info.meta.timestamp} ${
+    return `${color(info.level.toUpperCase())}: ${chalk.gray(info.meta.timestamp)} ${
         info.message
     }`;
 });

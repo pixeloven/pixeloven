@@ -20,7 +20,7 @@
   "dependencies": {
     "@pixeloven/core": "^6.0.0-alpha.19",
     "@pixeloven/node-logger": "^6.0.0-alpha.19",
-    "react-dev-utils": "8.0.0"
+    "react-dev-utils": "9.0.1"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.19",
