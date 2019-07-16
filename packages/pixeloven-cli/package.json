@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@pixeloven/exceptions": "^6.0.0-alpha.19",
+    "@pixeloven/node-loggers": "^6.0.0-alpha.19",
     "@pixeloven/tasks": "^6.0.0-alpha.19",
     "gluegun": "3.2.2"
   },

@@ -62,7 +62,7 @@ const loggerOptions = {
 /**
  * Creates a log instance
  */
-const loggerInstance: CustomLevels = winston.createLogger(loggerOptions) as CustomLevels;
+const loggerInstance = winston.createLogger(loggerOptions) as CustomLevels;
 
 /**
  * Logs a message as a specific
