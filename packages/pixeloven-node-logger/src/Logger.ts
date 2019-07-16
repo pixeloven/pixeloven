@@ -5,6 +5,10 @@ type Level = "error" | "info" | "success" | "warn";
 
 type Message = string | string[];
 
+interface CustomLevels extends winston.Logger {
+    success: winston.LeveledLogMethod;
+}
+
 /**
  * @todo Add colors and what not
  * @todo replace the print function in the cli with this one
@@ -22,7 +26,7 @@ const customConsoleFormat = winston.format.printf(info => {
                 return chalk.blue
             case "success":
                 return chalk.green
-            case "warning":
+            case "warn":
                 return chalk.yellow
         }
         return chalk.white
@@ -50,6 +54,7 @@ const loggerOptions = {
                 winston.format.metadata({ key: "meta" }),
                 customConsoleFormat,
             ),
+            level: "warn"
         }),
     ],
 };
@@ -57,7 +62,7 @@ const loggerOptions = {
 /**
  * Creates a log instance
  */
-const loggerInstance = winston.createLogger(loggerOptions);
+const loggerInstance: CustomLevels = winston.createLogger(loggerOptions) as CustomLevels;
 
 /**
  * Logs a message as a specific
@@ -67,15 +72,12 @@ const loggerInstance = winston.createLogger(loggerOptions);
  * @todo Add ability to log meta data
  */
 function log(level: Level, msg: Message) {
-    const leveledLogger = loggerInstance.hasOwnProperty(level)
-        ? loggerInstance[level]
-        : loggerInstance.info;
     if (Array.isArray(msg)) {
         msg.map((item: string) => {
-            leveledLogger(item);
+            loggerInstance.log(level, item);
         });
     } else {
-        leveledLogger(msg);
+        loggerInstance.log(level, msg);
     }
 }
 

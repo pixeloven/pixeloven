@@ -42,7 +42,7 @@ const createWebpackDevMiddleware = (
                         logger.warn(stats.warnings);
                         logger.warn("Compiled with warnings.");
                     } else {
-                        logger.info("Compiled successfully.");
+                        logger.success("Compiled successfully.");
                     }
                 } else {
                     logger.error(

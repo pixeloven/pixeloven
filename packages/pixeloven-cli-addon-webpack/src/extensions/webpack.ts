@@ -36,7 +36,6 @@ export default (toolbox: AddonWebpackToolbox) => {
                 }
                 case WebpackExtensionType.start: {
                     const compiler = getCompiler(options.compilerOptions);
-                    print.info(`Connecting server...`);
                     const server = getServer(compiler, options.serverOptions);
                     return await server.start();
                 }
