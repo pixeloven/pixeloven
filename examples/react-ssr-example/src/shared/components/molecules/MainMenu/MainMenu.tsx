@@ -38,7 +38,7 @@ class MainMenu extends React.Component<Props> {
             <Menu
                 borderless={true}
                 style={menuStyles}
-                {...fixed && { fixed: "top" }}
+                {...(fixed && { fixed: "top" })}
             >
                 <Container text={true}>
                     <MenuItemArray as={as} items={items} />

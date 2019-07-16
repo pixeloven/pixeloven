@@ -1,51 +1,97 @@
-import log from "webpack-log";
+import chalk from "chalk";
+import winston from "winston";
 
-export type Message = string | string[];
-/**
- * @todo Need to support import { LogLevel } from "@pixeloven/env";
- */
-export type Level = "error" | "info" | "warn";
+type Level = "error" | "info" | "success" | "warn";
 
-export interface LoggerInstance {
-    error: (message: Message) => void;
-    info: (message: Message) => void;
-    warn: (message: Message) => void;
-}
+type Message = string | string[];
 
 /**
- * Log Instance name
+ * @todo Add colors and what not
+ * @todo replace the print function in the cli with this one
+ * @todo can we replace storybooks logger? or make our looks similar
+ * 
+ * @todo we can extend the AbstractConfigSetLevels and others for specific functionality
+ * @todo we want our logger to look good!
  */
-export const logInstanceName = "core";
+const customConsoleFormat = winston.format.printf(info => {
+    const getColor = () => {
+        switch(info.level) {
+            case "error":
+                return chalk.red
+            case "info":
+                return chalk.blue
+            case "success":
+                return chalk.green
+            case "warning":
+                return chalk.yellow
+        }
+        return chalk.white
+    };
+    const color = getColor();
+    return `${color(info.level.toUpperCase())}: ${info.meta.timestamp} ${
+        info.message
+    }`;
+});
 
 /**
- * Create logger
- * @todo Eventually write my own logger instead of wrapping webpack-log
+ * Standard logger options shared by both our middleware and our logger endpoint
  */
-export const logInstance = log({ name: logInstanceName });
+const loggerOptions = {
+    levels: {
+        error: 0,
+        info: 1,
+        success: 2,
+        warn: 3,
+    },
+    transports: [
+        new winston.transports.Console({
+            format: winston.format.combine(
+                winston.format.timestamp(),
+                winston.format.metadata({ key: "meta" }),
+                customConsoleFormat,
+            ),
+        }),
+    ],
+};
+
+/**
+ * Creates a log instance
+ */
+const loggerInstance = winston.createLogger(loggerOptions);
 
 /**
  * Logs a message as a specific
  * @param message
  * @param level
+ *
+ * @todo Add ability to log meta data
  */
-const messenger = (message: Message, level: Level): void => {
-    if (Array.isArray(message)) {
-        message.map((item: string) => {
-            logInstance[level](item);
+function log(level: Level, msg: Message) {
+    const leveledLogger = loggerInstance.hasOwnProperty(level)
+        ? loggerInstance[level]
+        : loggerInstance.info;
+    if (Array.isArray(msg)) {
+        msg.map((item: string) => {
+            leveledLogger(item);
         });
     } else {
-        logInstance[level](message);
+        leveledLogger(msg);
     }
-};
+}
 
 /**
- * Simple wrapper for webpack-log
- * @todo Add a success log state
+ * Simple wrapper for winston
  */
-const Logger: LoggerInstance = {
-    error: (message: Message): void => messenger(message, "error"),
-    info: (message: Message): void => messenger(message, "info"),
-    warn: (message: Message): void => messenger(message, "warn"),
+const Logger = {
+    error: (msg: Message) => log("error", msg),
+    info: (msg: Message) => log("info", msg),
+    success: (msg: Message) => log("success", msg),
+    warn: (msg: Message) => log("warn", msg),
+
+    /**
+     * @description Helpers for testing
+     */
+    getInstance: () => loggerInstance,
 };
 
 export default Logger;

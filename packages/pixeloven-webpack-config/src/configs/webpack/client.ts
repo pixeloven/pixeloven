@@ -244,6 +244,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             [],
         ),
         /**
+         * @todo See how we can stop vendors-main (no s)
          * @todo Make configurable v8 (include ability to provide these rules in json form)
          */
         splitChunks: {
@@ -388,7 +389,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         /**
          * Generate a stats file for webpack-bundle-analyzer
          * @todo Need to find our own logging solution
-         * 
+         *
          * @env all
          */
         ifProduction(
@@ -405,7 +406,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 analyzerMode: options.withStats ? "server" : "disabled",
                 analyzerPort: options.withStatsPort,
                 // logLevel: "silent",
-                openAnalyzer: false
+                openAnalyzer: false,
             }),
         ),
         /**

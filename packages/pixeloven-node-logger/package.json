@@ -18,7 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "webpack-log": "2.0.0"
+    "chalk": "2.4.2",
+    "winston": "3.2.1"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.19",

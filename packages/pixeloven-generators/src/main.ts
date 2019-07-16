@@ -10,9 +10,7 @@ const mapScriptIndex = (index: string) => index === "generate";
 
 /**
  * Setup execution
- * @todo Should make my own plop
- *   generators: { [name: string]: PlopGenerator };
- *   helpers: { [name: string]: HelperFunction };
+ * @todo What if we just use this in the CLI directly instead of converting it all to gluegun ejs right now?
  * @description Based on https://github.com/amwmedia/node-plop/blob/master/index.d.ts
  */
 const main = (argv: string[]) => {

@@ -36,7 +36,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
     const statsDir = options.withStatsDir;
     const statsFilename = path.resolve(`${statsDir}/${name}-stats.json`);
     const reportFilename = path.resolve(`${statsDir}/${name}-report.html`);
-    
+
     /**
      * Set env variables
      */
@@ -224,7 +224,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
          * Generate a stats file for webpack-bundle-analyzer
          * @todo Scope breaking config for client and server from each other so ports can be different
          * @todo Need to find our own logging solution
-         * 
+         *
          * @env all
          */
         ifProduction(
@@ -241,7 +241,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
                 analyzerMode: options.withStats ? "server" : "disabled",
                 analyzerPort: options.withStatsPort + 1,
                 // logLevel: "silent",
-                openAnalyzer: false
+                openAnalyzer: false,
             }),
         ),
         /**

@@ -112,9 +112,7 @@ class Server {
         return new Promise<number>((resolve, reject) => {
             try {
                 const baseUrl = normalizeUrl(
-                    `${this.config.protocol}://${this.config.host}:${
-                        this.config.port
-                    }/${this.config.path}`,
+                    `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.path}`,
                 );
                 app.listen(this.config.port, this.config.host, () => {
                     logger.info(`Started on ${baseUrl}`);
