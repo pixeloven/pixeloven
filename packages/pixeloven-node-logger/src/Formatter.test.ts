@@ -36,6 +36,10 @@ describe("@pixeloven/node-logger", () => {
                 const color = Formatter.getColor("warn");
                 expect(typeof color).toEqual("function");
             });
+            it(`should get "default" color function`, () => {
+                const color = Formatter.getColor();
+                expect(typeof color).toEqual("function");
+            });
         });
     });
 });

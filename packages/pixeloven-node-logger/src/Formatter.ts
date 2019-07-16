@@ -4,7 +4,7 @@ import winston from "winston";
 /**
  * Can we just use the colors provided by winston or does that apply to the whole line?
  */
-function getColor(level: string) {
+function getColor(level?: string) {
     switch(level) {
         case "error":
             return chalk.red;
