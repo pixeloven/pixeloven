@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/core",
-  "version": "6.0.0-alpha.19",
+  "version": "6.0.0-alpha.22",
   "description": "Core Framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,12 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/exceptions": "^6.0.0-alpha.19",
+    "@pixeloven/exceptions": "^6.0.0-alpha.22",
     "cross-spawn": "6.0.5",
     "fs-extra": "7.0.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.19",
+    "@pixeloven/tasks": "^6.0.0-alpha.22",
     "@types/cross-spawn": "6.0.0",
     "@types/fs-extra": "5.0.5"
   },
