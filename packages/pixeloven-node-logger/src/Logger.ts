@@ -1,37 +1,6 @@
-import chalk from "chalk";
 import winston from "winston";
-
-type Level = "error" | "info" | "success" | "warn";
-
-type Message = string | string[];
-
-/**
- * @todo Add colors and what not
- * @todo replace the print function in the cli with this one
- * @todo can we replace storybooks logger? or make our looks similar
- * 
- * @todo we can extend the AbstractConfigSetLevels and others for specific functionality
- * @todo we want our logger to look good!
- */
-const customConsoleFormat = winston.format.printf(info => {
-    const getColor = () => {
-        switch(info.level) {
-            case "error":
-                return chalk.red
-            case "info":
-                return chalk.blue
-            case "success":
-                return chalk.green
-            case "warning":
-                return chalk.yellow
-        }
-        return chalk.white
-    };
-    const color = getColor();
-    return `${color(info.level.toUpperCase())}: ${info.meta.timestamp} ${
-        info.message
-    }`;
-});
+import Formatter from "./Formatter";
+import {Level, Logger, Message} from "./types";
 
 /**
  * Standard logger options shared by both our middleware and our logger endpoint
@@ -48,8 +17,9 @@ const loggerOptions = {
             format: winston.format.combine(
                 winston.format.timestamp(),
                 winston.format.metadata({ key: "meta" }),
-                customConsoleFormat,
+                Formatter.console,
             ),
+            level: "warn"
         }),
     ],
 };
@@ -57,7 +27,7 @@ const loggerOptions = {
 /**
  * Creates a log instance
  */
-const loggerInstance = winston.createLogger(loggerOptions);
+const loggerInstance = winston.createLogger(loggerOptions) as Logger;
 
 /**
  * Logs a message as a specific
@@ -67,22 +37,16 @@ const loggerInstance = winston.createLogger(loggerOptions);
  * @todo Add ability to log meta data
  */
 function log(level: Level, msg: Message) {
-    const leveledLogger = loggerInstance.hasOwnProperty(level)
-        ? loggerInstance[level]
-        : loggerInstance.info;
     if (Array.isArray(msg)) {
         msg.map((item: string) => {
-            leveledLogger(item);
+            loggerInstance.log(level, item);
         });
     } else {
-        leveledLogger(msg);
+        loggerInstance.log(level, msg);
     }
 }
 
-/**
- * Simple wrapper for winston
- */
-const Logger = {
+export default {
     error: (msg: Message) => log("error", msg),
     info: (msg: Message) => log("info", msg),
     success: (msg: Message) => log("success", msg),
@@ -93,5 +57,3 @@ const Logger = {
      */
     getInstance: () => loggerInstance,
 };
-
-export default Logger;

@@ -148,7 +148,7 @@ class Build {
                             );
                         }
                     } else {
-                        logger.info("Compiled successfully.");
+                        logger.success("Compiled successfully.");
                         logger.info("File sizes after gzip:\n");
                         printFileSizesAfterBuild(
                             stats,

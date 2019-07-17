@@ -74,10 +74,10 @@ class Server {
                         logger.info("---------- Creating ----------");
                     }
                     const json = stats.toJson("normal");
-                    logger.info(
+                    logger.success(
                         `Webpack built server ${json.hash} in ${json.time}ms`,
                     );
-                    logger.info("Applying bundled server to stream");
+                    logger.info("Applying bundled server to stream.");
                     refreshCount++;
                 },
                 error: error => {
@@ -90,10 +90,10 @@ class Server {
             {
                 done: stats => {
                     const json = stats.toJson("normal");
-                    logger.info(
+                    logger.success(
                         `Webpack built client ${json.hash} in ${json.time}ms`,
                     );
-                    logger.info("Applying bundled react assets to stream");
+                    logger.info("Applying bundled react assets to stream.");
                 },
                 error: error => {
                     logger.error(error.message);
@@ -109,13 +109,14 @@ class Server {
         app.use(webpackReactAssetMiddleware);
         app.use(webpackHotServerMiddleware);
         app.use(errorHandler);
+        logger.info(`---------- Connecting Server ----------`);
         return new Promise<number>((resolve, reject) => {
             try {
                 const baseUrl = normalizeUrl(
                     `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.path}`,
                 );
                 app.listen(this.config.port, this.config.host, () => {
-                    logger.info(`Started on ${baseUrl}`);
+                    logger.success(`Started on ${baseUrl}`);
                     return resolve(0);
                 });
             } catch (err) {
