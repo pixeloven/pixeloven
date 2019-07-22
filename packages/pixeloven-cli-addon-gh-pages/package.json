@@ -18,20 +18,16 @@
     "access": "public"
   },
   "dependencies": {
+    "@pixeloven/cli": "^6.0.0-alpha.22",
     "@pixeloven/core": "^6.0.0-alpha.22",
     "@pixeloven/exceptions": "^6.0.0-alpha.22",
     "fs-extra": "7.0.1",
-    "gh-pages": "2.0.1",
-    "gluegun": "3.2.2"
+    "gh-pages": "2.0.1"
   },
   "devDependencies": {
-    "@pixeloven/cli": "^6.0.0-alpha.22",
     "@pixeloven/tasks": "^6.0.0-alpha.22",
     "@types/fs-extra": "5.0.4",
     "@types/gh-pages": "2.0.0"
-  },
-  "peerDependencies": {
-    "@pixeloven/cli": ">5.0.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

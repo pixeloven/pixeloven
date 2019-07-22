@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-alpha.22",
+    "@pixeloven/cli-addon-generators": "^6.0.0-alpha.22",
     "@pixeloven/cli-addon-storybook": "^6.0.0-alpha.22",
     "@pixeloven/cli-addon-webpack": "^6.0.0-alpha.22",
     "@pixeloven/generators": "^6.0.0-alpha.22",

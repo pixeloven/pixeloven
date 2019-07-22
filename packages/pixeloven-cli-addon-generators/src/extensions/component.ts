@@ -1,5 +1,6 @@
 import {
-    AddonGeneratorsToolbox
+    AddonGeneratorsToolbox,
+    CreateComponentOptions
 } from "../types";
 
 /**
@@ -13,9 +14,13 @@ import {
  * @todo Make build and dev-server configurable through CLI.
  */
 export default (toolbox: AddonGeneratorsToolbox) => {
-    const component = async () => {
-        // const { pixelOven, print } = toolbox;
-
+    const createComponent = async (options: CreateComponentOptions) => {
+        const {componentAtomicType, componentName} = options;
+        const { template } = toolbox;
+        template.generate({
+            target: `src/components/${componentAtomicType}/${componentName}.ts`,
+            template: 'templates/component.ejk',
+        });
     };
-    toolbox.component = component;
+    toolbox.createComponent = createComponent;
 };

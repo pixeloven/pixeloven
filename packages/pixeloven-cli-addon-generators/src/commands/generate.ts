@@ -4,7 +4,7 @@ export default {
     alias: ["--generate", "-g"],
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
-        const { prompt } = toolbox;
+        const { createComponent, prompt } = toolbox;
 
         /**
          * Starting generator type
@@ -42,13 +42,13 @@ export default {
             },
             {
                 default: true,
-                message: "Will this component need to manage state?",
+                message: "Will this component need to manage state? (Y/N)",
                 name: "includeState",
                 type: "confirm",
             },
             {
                 default: true,
-                message: "Will this component require a stylesheet?",
+                message: "Will this component require a stylesheet? (Y/N)",
                 name: "includeStyles",
                 type: "confirm",
             },
@@ -73,7 +73,11 @@ export default {
 
         switch (generatorType) {
             case "component": {
-                await prompt.ask(askComponentQuestions)
+                const {componentAtomicType, componentName} = await prompt.ask(askComponentQuestions);
+                createComponent({
+                    componentAtomicType,
+                    componentName,
+                });
             }
             default: {
                 //

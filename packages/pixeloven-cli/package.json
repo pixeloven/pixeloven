@@ -23,7 +23,7 @@
   "dependencies": {
     "@pixeloven/exceptions": "^6.0.0-alpha.22",
     "@pixeloven/tasks": "^6.0.0-alpha.22",
-    "gluegun": "3.2.2"
+    "gluegun": "3.3.2"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

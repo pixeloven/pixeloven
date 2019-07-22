@@ -1,3 +1,13 @@
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
-export type AddonGeneratorsToolbox = PixelOvenToolbox;
+export interface CreateComponentOptions {
+    componentAtomicType: string,
+    componentName: string,
+}
+
+export type CreateComponentExtension = (options: CreateComponentOptions) => Promise<void>;
+
+export interface AddonGeneratorsToolbox extends PixelOvenToolbox {
+    createComponent: CreateComponentExtension;
+}
+
