@@ -18,8 +18,8 @@ export default (toolbox: AddonGeneratorsToolbox) => {
         const {componentAtomicType, componentName} = options;
         const { template } = toolbox;
         template.generate({
-            target: `src/components/${componentAtomicType}/${componentName}.ts`,
-            template: 'templates/component.ejk',
+            target: `src/components/${componentAtomicType}/${componentName}.ts`,   
+            template: 'component.ejs',
         });
     };
     toolbox.createComponent = createComponent;

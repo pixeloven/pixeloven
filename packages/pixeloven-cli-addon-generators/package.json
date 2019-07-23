@@ -27,6 +27,7 @@
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "precompile": "pixeloven-tasks compile:clean",
+    "postcompile": "cp -r ./src/templates ./dist/lib/templates",
     "document": "pixeloven-tasks document:ts src",
     "predocument": "pixeloven-tasks document:clean",
     "lint": "yarn lint:ts",
