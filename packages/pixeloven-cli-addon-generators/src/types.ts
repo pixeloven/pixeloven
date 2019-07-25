@@ -1,8 +1,9 @@
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
 export interface CreateComponentOptions {
-    componentAtomicType: string,
-    componentName: string,
+    componentAtomicType: string;
+    componentHasState: boolean;
+    componentName: string;
 }
 
 export type CreateComponentExtension = (options: CreateComponentOptions) => Promise<void>;

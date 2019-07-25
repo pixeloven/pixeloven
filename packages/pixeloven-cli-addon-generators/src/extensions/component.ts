@@ -17,15 +17,17 @@ import {
  */
 export default (toolbox: AddonGeneratorsToolbox) => {
     const createComponent = async (options: CreateComponentOptions) => {
-        const {componentAtomicType, componentName} = options;
+        const {componentAtomicType, componentName, componentHasState} = options;
         const { template } = toolbox;
         template.generate({
             props: {
                 component: {
+                    hasState: componentHasState,
+                    name: componentName,
                 }
             },
             target: `src/components/${componentAtomicType}/${componentName}.ts`,   
-            template: 'component.ejs',
+            template: 'component/functional.ejs',
         });
     };
     toolbox.createComponent = createComponent;
