@@ -1,1 +1,26 @@
-HI!!!!
+import classNames from "classnames";
+import React<% if (component.includeState) { %>, { useState }<% } %> from "react";
+
+<% if (component.name) { %>
+import "./<%= component.name %>.scss";
+<% } %>
+
+interface <%= component.name %>Props {
+    className?: string;
+}
+
+function <%= component.name %>(props: <%= component.name %>Props) {
+    const { className } = props;
+    const customClasses = classNames(className, "example-class");
+    <% if (component.includeState) { %>
+        const [exampleState] = useState(0);
+    <% } %>
+
+    return (
+        <div className={customClasses}>
+            Function component<% if (component.includeState) { %> with {exampleState} state<% } %>
+        </div>
+    );
+}
+
+export default <%= component.name %>;

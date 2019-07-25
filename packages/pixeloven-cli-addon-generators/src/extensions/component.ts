@@ -11,6 +11,8 @@ import {
  * @todo 2) Create CLI options for --choose-port (auto-choose-port)
  * @todo 3) Create CLI options for --machine (host|docker|virtual)
  *
+ * @todo 4) Make logging to json would be nice
+ * 
  * @todo Make build and dev-server configurable through CLI.
  */
 export default (toolbox: AddonGeneratorsToolbox) => {
@@ -18,6 +20,10 @@ export default (toolbox: AddonGeneratorsToolbox) => {
         const {componentAtomicType, componentName} = options;
         const { template } = toolbox;
         template.generate({
+            props: {
+                component: {
+                }
+            },
             target: `src/components/${componentAtomicType}/${componentName}.ts`,   
             template: 'component.ejs',
         });
