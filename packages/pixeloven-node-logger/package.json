@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.22",
-    "@types/inquirer": "0.0.43"
+    "@types/inquirer": "6.0.3"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
