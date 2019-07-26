@@ -38,6 +38,10 @@ const webpackReactAssetMiddleware = (
                             chunkNames: flushChunkNames(),
                         },
                     );
+                    /**
+                     * @todo we should show sizes and remove the react dev utils
+                     * @todo make logging as json an option...
+                     */
                     logger.info("---------- Assets Discovered ----------");
                     logger.info(stylesheets);
                     logger.info(scripts);

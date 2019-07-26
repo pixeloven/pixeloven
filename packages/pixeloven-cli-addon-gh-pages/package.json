@@ -22,7 +22,7 @@
     "@pixeloven/exceptions": "^6.0.0-alpha.22",
     "fs-extra": "7.0.1",
     "gh-pages": "2.0.1",
-    "gluegun": "3.2.2"
+    "gluegun": "3.3.2"
   },
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-alpha.22",

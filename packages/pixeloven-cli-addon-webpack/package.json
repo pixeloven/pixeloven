@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "gluegun": "3.2.2"
+    "gluegun": "3.3.2"
   },
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-alpha.22",
