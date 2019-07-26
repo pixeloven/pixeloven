@@ -2,7 +2,7 @@
 
 Pixeloven comes with it’s own store generator to produce all the files you need to start working on a fresh store. To begin:
 
-1. Run `yarn generate`.
+1. Run `yarn pixeloven-generators`.
 2. Choose `store`.
 3. Give the service a name (our naming convention is `PascaleCase`).
 4. Give the service resource a name (our naming convention is `PascaleCase`).
