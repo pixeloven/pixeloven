@@ -70,16 +70,14 @@ We are committed to providing a safe place for everyone. Please review our [code
 
 ## Planned v6
 1) Move generators to use gluegun
-2) Unify all logging - use something more standard than webpack-log
+2) Unify all logging and make json logging a thing
 3) Remove react-dev-utils
 4) Add help to CLI and documentation
 5) Reach 90-100% test coverage
-6) Expose storybook addons through library
-7) node-mocks-http replace with supertest
-8) Make client/server compilation configurable - we want to be able to use webpack in a library sense too - what about agnostic?
-9) Get docs working for github
-10) Remove docs option for now... need to find a better solution
-11) Get audit into build and make sure it passes without critical
+6) node-mocks-http replace with supertest
+7) Make client/server compilation configurable - we want to be able to use webpack in a library sense too
+8) Remove TypeDocs option for now... need to find a better solution (http://caolan.github.io/async/v3/). Make Github addon work
+9) Get audit into build and make sure it passes without critical
 
 ## Planned v7
 1) Add static site generation support

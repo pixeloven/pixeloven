@@ -22,8 +22,7 @@
     "winston": "3.2.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.22",
-    "@types/inquirer": "6.0.3"
+    "@pixeloven/tasks": "^6.0.0-alpha.22"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

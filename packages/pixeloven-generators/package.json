@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@pixeloven/core": "^6.0.0-alpha.22",
-    "plop": "2.2.0"
+    "plop": "2.4.0"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.22",
