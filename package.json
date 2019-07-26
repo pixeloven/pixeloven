@@ -63,8 +63,14 @@
     "@commitlint/cli": "8.1.0",
     "@commitlint/config-conventional": "8.1.0",
     "codecov": "3.5.0",
+    "commitizen": "4.0.3",
     "husky": "3.0.1",
     "lerna": "3.16.4",
     "lint-staged": "9.2.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@commitlint/config-conventional"
+    }
   }
 }
