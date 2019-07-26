@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/core": "7.4.4",
+    "@babel/core": "7.5.5",
     "@pixeloven/core": "^6.0.0-alpha.22",
     "@storybook/addon-actions": "5.0.11",
     "@storybook/addon-backgrounds": "5.0.11",
@@ -27,7 +27,7 @@
     "@storybook/addons": "5.0.11",
     "@storybook/core": "5.0.11",
     "@storybook/react": "5.0.11",
-    "babel-loader": "8.0.5",
+    "babel-loader": "8.0.6",
     "css-loader": "2.1.1",
     "deepmerge": "3.2.0",
     "sass-loader": "7.1.0",
