@@ -2,7 +2,7 @@
 
 Pixeloven comes with it’s own component generator to produce all the files you need to start working on a fresh component. To begin:
 
-1. Run `yarn generate`.
+1. Run `yarn pixeloven-generators`.
 2. Choose `component`.
 3. Choose the atomic level of the component.
 4. Choose the type of component to build (most cases it should be `function`).
