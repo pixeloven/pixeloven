@@ -73,7 +73,7 @@
     "prebuild": "pixeloven delete dist",
     "document": "pixeloven document ts ./src",
     "predocument": "pixeloven delete docs",
-    "generate": "pixeloven-generators generate",
+    "generate": "pixeloven generate",
     "lint": "yarn lint:ts && yarn lint:scss",
     "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
     "lint:scss": "pixeloven lint scss ./src/**/*.scss",

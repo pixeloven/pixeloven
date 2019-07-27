@@ -1,22 +1,41 @@
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
-export enum AtomicDesignType {
-    "atom" = 1,
-    "molecule" = 2,
-    "organism" = 3,
-    "page" = 4,
-    "partial" = 5,
-    "template" = 6,
+export enum GeneratorType {
+    App,
+    Component,
+    Package,
+    Store
 }
 
-export enum ProgrammingParadigmType {
-    "functional" = 1,
-    "classical" = 2
+export type GeneratorStrings = keyof typeof GeneratorType
+
+export enum AtomicDesignType {
+    Atom,
+    Molecule,
+    Organism,
+    Page,
+    Partial,
+    Template
+}
+
+export type AtomicDesignTypeStrings = keyof typeof AtomicDesignType
+
+export enum ProgrammingParadigm {
+    Functional,
+    Classical
+}
+
+export type ProgrammingParadigmStrings = keyof typeof ProgrammingParadigm
+
+
+export interface CreateOptions {
+    generatorType: GeneratorStrings;
 }
 
 export interface CreateComponentOptions {
-    componentAtomicType: AtomicDesignType;
-    componentParadigmType: ProgrammingParadigmType;
+    componentAtomicType: AtomicDesignTypeStrings;
+    componentDescription: string;
+    componentParadigmType: ProgrammingParadigmStrings;
     componentHasState: boolean;
     componentHasStyle: boolean;
     componentName: string;

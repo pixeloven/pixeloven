@@ -4,9 +4,6 @@
   "description": "Helper functions for code generation",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
-  "bin": {
-    "pixeloven-generators": "./dist/lib/index.js"
-  },
   "files": [
     "dist/"
   ],

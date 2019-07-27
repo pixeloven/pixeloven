@@ -1,45 +1,62 @@
-import { AddonGeneratorsToolbox } from "../types";
+/**
+ * @todo Remove as any once https://github.com/infinitered/gluegun/pull/564 is merged
+ */
+/* tslint:disable no-any */
+import { Validation } from "@pixeloven/generators";
+import { 
+    AddonGeneratorsToolbox, 
+    AtomicDesignType,
+    CreateComponentOptions, 
+    CreateOptions,
+    GeneratorType,
+    ProgrammingParadigm
+} from "../types";
 
+/**
+ * @todo Might need to do some work for this to support the new proposed project layout...
+ * @url https://github.com/SBoudrias/Inquirer.js/
+ */
 export default {
     alias: ["--generate", "-g"],
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
-        // const { createComponent, prompt } = toolbox;
-        const { prompt } = toolbox;
+        const { createComponent, print, pixelOven, prompt } = toolbox;
+        // todo create generator for library
+        // todo crete generator for addon
+        // todo crete generator for state
+        // Partial generators? 
+        // Might need to ask questions about is this new or existing, App, CLI -> addon? Might need drop down like behavior
+
+        function getKeys<T>(object: T) {
+            return Object.keys(object).filter(key => typeof object[key] === "number");
+        }
 
         /**
          * Starting generator type
          * @todo create CLI Addon, library, project generators
          */
-        const askGeneratorType = {
-            choices: ['component', 'package', "project"],
+        const askCreateQuestions = [{
+            choices: getKeys(GeneratorType),
             message: 'What would you like to generate?',
             name: 'generatorType',
             type: 'select',
-        };
+        }];
 
         /**
          * Acceptable atomic types
          */
-        const askComponentQuestions = [
+        const askCreateComponentQuestions = [
             {
-                choices: [
-                    "atom",
-                    "molecule",
-                    "organism",
-                    "page",
-                    "partial",
-                    "template",
-                ],
+                choices: getKeys(AtomicDesignType),
                 message: `What "type" of Atomic component is this?`,
                 name: "componentAtomicType",
-                type: "list",
+                type: 'select',
             },
             {
-                choices: ["function", "class"],
-                message: "Is this a functional or class component?",
+                choices: getKeys(ProgrammingParadigm),
+                message: "Is this a functional or classical component?",
                 name: "componentParadigmType",
-                type: "list",
+                type: 'select',
             },
             {
                 default: true,
@@ -57,61 +74,37 @@ export default {
                 message: "What is the name of the new component?",
                 name: "componentName",
                 type: "input",
-                // validate: validateWord,
+                validate: Validation.isAWord,
             },
             {
                 message: "Provide a brief description of this component:",
                 name: "componentDescription",
                 type: "input",
-                // validate: makeValidateMinLength(1),
+                validate: Validation.minLength(1),
             },
         ];
-        
-        /**
-         * Ask for generator type
-         */
-        const { generatorType } = await prompt.ask([askGeneratorType])
-
+        const { generatorType } = await prompt.ask<CreateOptions>(askCreateQuestions) as any;
         switch (generatorType) {
-            case "component": {
-                // TODO how to type these
-                // const {
-                //     componentAtomicType,
-                //     componentDescription,
-                //     componentHasState,
-                //     componentHasStyle,
-                //     componentName,
-                //     componentParadigmType
-                // } = await prompt.ask(askComponentQuestions);
-                await prompt.ask(askComponentQuestions);
-                // TODO Need to validate fields
-
-                // createComponent({
-                //     componentAtomicType,
-                //     componentName,
-                // });
+            case "App": {
+                print.info("Coming Soon");
+                break;
+            }
+            case "Component": {
+                const options = await prompt.ask<CreateComponentOptions>(askCreateComponentQuestions) as any;
+                createComponent(options);
+            }
+            case "Package": {
+                print.info("Coming Soon");
+                break;
+            }
+            case "Store": {
+                print.info("Coming Soon");
+                break;
             }
             default: {
-                //
+                pixelOven.invalidArgument();
+                break;
             }
         }
-
-        // todo remove generator for state
-        // todo create generator for library
-        // todo crete generator for addon
-        //
-
-        // switch (parameters.first) {
-        //     case "component"
-        // }
-
-
-        // const semicolon = toolbox.options.useSemicolons && ';'
-      
-        // await toolbox.template.generate({
-        //   template: 'component.njk',
-        //   target: `app/components/${name}-view.js`,
-        //   props: { name, semicolon },
-        // })
     },
 };

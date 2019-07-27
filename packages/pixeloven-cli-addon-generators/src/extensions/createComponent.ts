@@ -1,8 +1,6 @@
 import {
     AddonGeneratorsToolbox,
-    AtomicDesignType,
     CreateComponentOptions,
-    ProgrammingParadigmType,
 } from "../types";
 
 /**
@@ -21,11 +19,12 @@ export default (toolbox: AddonGeneratorsToolbox) => {
     const createComponent = async (options: CreateComponentOptions) => {
         const {componentAtomicType, componentParadigmType, componentName, componentHasState, componentHasStyle} = options;
         const { template } = toolbox;
-        const atomicType = AtomicDesignType[componentAtomicType];
-        const paradigmType = ProgrammingParadigmType[componentParadigmType];
+        /**
+         * @todo Need to lower cases all this
+         */
         const props = {
             component: {
-                atomicType,
+                atomicType: componentAtomicType,
                 hasState: componentHasState,
                 hasStyle: componentHasStyle,
                 name: componentName,
@@ -33,29 +32,32 @@ export default (toolbox: AddonGeneratorsToolbox) => {
         };
         template.generate({
             props,
-            target: `src/components/${atomicType}/${componentName}/${componentName}.tsx`,   
-            template: `component/${paradigmType}.Component.tsx.ejs`,
+            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.tsx`,   
+            template: `component/${componentParadigmType}.Component.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/components/${atomicType}/${componentName}/${componentName}.scss`,   
+            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.scss`,   
             template: `component/Component.scss`,
         });
         template.generate({
             props,
-            target: `src/components/${atomicType}/${componentName}/${componentName}.stories.tsx`,   
+            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.stories.tsx`,   
             template: `component/Component.stories.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/components/${atomicType}/${componentName}/${componentName}.test.tsx`,   
+            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.test.tsx`,   
             template: `component/Component.test.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/components/${atomicType}/${componentName}/${componentName}.ts`,   
+            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.ts`,   
             template: `component/index.ts.ejs`,
         });
     };
+    /**
+     * @todo namespace this a little better... like .create .modify etc
+     */
     toolbox.createComponent = createComponent;
 };
