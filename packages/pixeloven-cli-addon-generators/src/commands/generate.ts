@@ -43,13 +43,13 @@ export default {
             {
                 default: true,
                 message: "Will this component need to manage state? (Y/N)",
-                name: "includeState",
+                name: "componentHasState",
                 type: "confirm",
             },
             {
                 default: true,
                 message: "Will this component require a stylesheet? (Y/N)",
-                name: "includeStyles",
+                name: "componentHasStyle",
                 type: "confirm",
             },
             {
@@ -73,6 +73,7 @@ export default {
 
         switch (generatorType) {
             case "component": {
+                // TODO how to type these
                 const {componentAtomicType, componentName} = await prompt.ask(askComponentQuestions);
                 createComponent({
                     componentAtomicType,

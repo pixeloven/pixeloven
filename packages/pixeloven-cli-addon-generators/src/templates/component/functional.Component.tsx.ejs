@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React<% if (component.hasState) { %>, { useState }<% } %> from "react";
 
-<% if (component.name) { %>
+<% if (component.hasStyles) { %>
 import "./<%= component.name %>.scss";
 <% } %>
 
@@ -9,11 +9,17 @@ interface <%= component.name %>Props {
     className?: string;
 }
 
+<% if (component.hasState) { %>
+interface <%= component.name %>State {
+    exampleState?: string;
+}
+<% } %>
+
 function <%= component.name %>(props: <%= component.name %>Props) {
     const { className } = props;
     const exampleClasses = classNames(className, "example-class");
     <% if (component.hasState) { %>
-        const [exampleState] = useState(0);
+    const [exampleState] = useState<<%= component.name %>State>(0);
     <% } %>
 
     return (

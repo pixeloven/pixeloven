@@ -1,6 +1,8 @@
 import {
     AddonGeneratorsToolbox,
-    CreateComponentOptions
+    AtomicDesignType,
+    CreateComponentOptions,
+    ProgrammingParadigmType,
 } from "../types";
 
 /**
@@ -17,17 +19,42 @@ import {
  */
 export default (toolbox: AddonGeneratorsToolbox) => {
     const createComponent = async (options: CreateComponentOptions) => {
-        const {componentAtomicType, componentName, componentHasState} = options;
+        const {componentAtomicType, componentParadigmType, componentName, componentHasState, componentHasStyle} = options;
         const { template } = toolbox;
+        const atomicType = AtomicDesignType[componentAtomicType];
+        const paradigmType = ProgrammingParadigmType[componentParadigmType];
+        const props = {
+            component: {
+                atomicType,
+                hasState: componentHasState,
+                hasStyle: componentHasStyle,
+                name: componentName,
+            }
+        };
         template.generate({
-            props: {
-                component: {
-                    hasState: componentHasState,
-                    name: componentName,
-                }
-            },
-            target: `src/components/${componentAtomicType}/${componentName}.ts`,   
-            template: 'component/functional.ejs',
+            props,
+            target: `src/components/${atomicType}/${componentName}/${componentName}.tsx`,   
+            template: `component/${paradigmType}.Component.tsx.ejs`,
+        });
+        template.generate({
+            props,
+            target: `src/components/${atomicType}/${componentName}/${componentName}.scss`,   
+            template: `component/Component.scss`,
+        });
+        template.generate({
+            props,
+            target: `src/components/${atomicType}/${componentName}/${componentName}.stories.tsx`,   
+            template: `component/Component.stories.tsx.ejs`,
+        });
+        template.generate({
+            props,
+            target: `src/components/${atomicType}/${componentName}/${componentName}.test.tsx`,   
+            template: `component/Component.test.tsx.ejs`,
+        });
+        template.generate({
+            props,
+            target: `src/components/${atomicType}/${componentName}/${componentName}.ts`,   
+            template: `component/index.ts.ejs`,
         });
     };
     toolbox.createComponent = createComponent;

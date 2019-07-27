@@ -1,0 +1,34 @@
+import classNames from "classnames";
+import React<% if (component.hasState) { %>, { useState }<% } %> from "react";
+
+<% if (component.hasStyles) { %>
+import "./<%= component.name %>.scss";
+<% } %>
+
+interface <%= component.name %>Props {
+    className?: string;
+}
+
+<% if (component.hasState) { %>
+interface <%= component.name %>State {
+    exampleState?: string;
+}
+<% } %>
+
+class <%= component.name %> extends React.Component<<%= component.name %>Props<% if (component.hasState) { %>,<%= component.name %>State<% } %>> {
+    public render() {
+        const { className } = props;
+        const exampleClasses = classNames(className, "example-class");
+        <% if (component.hasState) { %>
+        const { exampleState } = this.state;
+        <% } %>
+
+        return (
+            <div className={exampleClasses}>
+                Function component<% if (component.hasState) { %> with {exampleState} state<% } %>
+            </div>
+        );
+    }
+}
+
+export default <%= component.name %>;
