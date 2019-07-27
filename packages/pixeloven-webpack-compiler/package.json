@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "webpack": "4.29.6"
+    "webpack": "4.38.0"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.22",
-    "@types/webpack": "4.4.32"
+    "@types/webpack": "4.32.1"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

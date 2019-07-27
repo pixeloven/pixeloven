@@ -4,7 +4,8 @@ export default {
     alias: ["--generate", "-g"],
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
-        const { createComponent, prompt } = toolbox;
+        // const { createComponent, prompt } = toolbox;
+        const { prompt } = toolbox;
 
         /**
          * Starting generator type
@@ -74,11 +75,21 @@ export default {
         switch (generatorType) {
             case "component": {
                 // TODO how to type these
-                const {componentAtomicType, componentName} = await prompt.ask(askComponentQuestions);
-                createComponent({
-                    componentAtomicType,
-                    componentName,
-                });
+                // const {
+                //     componentAtomicType,
+                //     componentDescription,
+                //     componentHasState,
+                //     componentHasStyle,
+                //     componentName,
+                //     componentParadigmType
+                // } = await prompt.ask(askComponentQuestions);
+                await prompt.ask(askComponentQuestions);
+                // TODO Need to validate fields
+
+                // createComponent({
+                //     componentAtomicType,
+                //     componentName,
+                // });
             }
             default: {
                 //

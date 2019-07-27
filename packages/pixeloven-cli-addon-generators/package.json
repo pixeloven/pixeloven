@@ -18,7 +18,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^6.0.0-alpha.22"
+    "@pixeloven/cli": "^6.0.0-alpha.22",
+    "@pixeloven/generators": "^6.0.0-alpha.22"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-alpha.22"
