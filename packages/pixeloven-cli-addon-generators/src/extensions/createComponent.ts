@@ -18,7 +18,7 @@ import {
 export default (toolbox: AddonGeneratorsToolbox) => {
     const createComponent = async (options: CreateComponentOptions) => {
         const {componentAtomicType, componentParadigmType, componentName, componentHasState, componentHasStyle} = options;
-        const { template } = toolbox;
+        const { strings, template } = toolbox;
         /**
          * @todo Need to lower cases all this
          */
@@ -29,30 +29,32 @@ export default (toolbox: AddonGeneratorsToolbox) => {
                 hasStyle: componentHasStyle,
                 name: componentName,
             }
-        };
+        }; 
+        const atomicType = strings.lowerCase(componentAtomicType);
+        const paradigmType = strings.lowerCase(componentParadigmType);
         template.generate({
             props,
-            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.tsx`,   
-            template: `component/${componentParadigmType}.Component.tsx.ejs`,
+            target: `src/components/${atomicType}/${componentName}/${componentName}.tsx`,   
+            template: `component/${paradigmType}.Component.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.scss`,   
+            target: `src/components/${atomicType}/${componentName}/${componentName}.scss`,   
             template: `component/Component.scss`,
         });
         template.generate({
             props,
-            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.stories.tsx`,   
+            target: `src/components/${atomicType}/${componentName}/${componentName}.stories.tsx`,   
             template: `component/Component.stories.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.test.tsx`,   
+            target: `src/components/${atomicType}/${componentName}/${componentName}.test.tsx`,   
             template: `component/Component.test.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/components/${componentAtomicType}/${componentName}/${componentName}.ts`,   
+            target: `src/components/${atomicType}/${componentName}/${componentName}.ts`,   
             template: `component/index.ts.ejs`,
         });
     };

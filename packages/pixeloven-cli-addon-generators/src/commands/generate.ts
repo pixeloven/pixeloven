@@ -9,7 +9,7 @@ import {
     CreateComponentOptions, 
     CreateOptions,
     GeneratorType,
-    ProgrammingParadigm
+    ProgrammingParadigm,
 } from "../types";
 
 /**
@@ -35,15 +35,32 @@ export default {
          * Starting generator type
          * @todo create CLI Addon, library, project generators
          */
-        const askCreateQuestions = [{
-            choices: getKeys(GeneratorType),
-            message: 'What would you like to generate?',
-            name: 'generatorType',
-            type: 'select',
-        }];
+        const askCreateQuestions = [
+            // {
+            //     choices: getKeys(ProjectType),
+            //     filter: (txt: string) => !!ProjectType[txt],
+            //     message: 'Is this a new or existing project?',
+            //     name: 'isNewProject',
+            //     type: 'select',
+            // },
+            {
+                choices: getKeys(GeneratorType),
+                message: 'What would you like to generate?',
+                name: 'generatorType',
+                type: 'select',
+            }
+        ];
 
         /**
          * Acceptable atomic types
+         * 
+         * @todo Ask for locationTypes
+         *          Root (./src/components)
+         *          App (./apps/{app}/src/components)
+         *          Package (./package/{package}/src/components)
+         *      Then if App or Package we need to search the first level dir an have them pick one
+         * @todo The store one is only going to support root for now. It's not as widely used since the pattern isn't as well established.
+         * 
          */
         const askCreateComponentQuestions = [
             {

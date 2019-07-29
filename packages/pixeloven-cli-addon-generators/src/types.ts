@@ -1,5 +1,10 @@
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
+export enum ProjectType {
+    New,
+    Existing
+}
+
 export enum GeneratorType {
     App,
     Component,
