@@ -6,8 +6,9 @@ import { Validation } from "@pixeloven/generators";
 import { 
     AddonGeneratorsToolbox, 
     AtomicDesignType,
-    CreateComponentOptions, 
+    CreateComponentOptions,
     CreateOptions,
+    CreateStoreOptions,
     GeneratorType,
     ProgrammingParadigm,
 } from "../types";
@@ -20,7 +21,7 @@ export default {
     alias: ["--generate", "-g"],
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
-        const { createComponent, print, pixelOven, prompt } = toolbox;
+        const { createComponent, createStore, print, pixelOven, prompt } = toolbox;
         // todo create generator for library
         // todo crete generator for addon
         // todo crete generator for state
@@ -109,13 +110,15 @@ export default {
             case "Component": {
                 const options = await prompt.ask<CreateComponentOptions>(askCreateComponentQuestions) as any;
                 createComponent(options);
+                break;
             }
             case "Package": {
                 print.info("Coming Soon");
                 break;
             }
             case "Store": {
-                print.info("Coming Soon");
+                const options = await prompt.ask<CreateStoreOptions>(askCreateComponentQuestions) as any;
+                createStore(options);
                 break;
             }
             default: {

@@ -1,30 +1,24 @@
 import classNames from "classnames";
-import React<% if (props.hasState) { %>, { useState }<% } %> from "react";
-
+import React<% if (props.hasState) { %>, { useEffect, useState }<% } %> from "react";
 <% if (props.hasStyles) { %>
 import "./<%= props.name %>.scss";
 <% } %>
-
 interface <%= props.name %>Props {
     className?: string;
 }
-
-<% if (props.hasState) { %>
-interface <%= props.name %>State {
-    exampleState?: string;
-}
-<% } %>
 
 function <%= props.name %>(props: <%= props.name %>Props) {
     const { className } = props;
     const exampleClasses = classNames(className, "example-class");
     <% if (props.hasState) { %>
-    const [exampleState] = useState<<%= props.name %>State>(0);
+    const [isExample, setExample] = useState(false);
+    useEffect(() => {
+        console.log(`Example state changed! ${isExample}`);
+    }, [isExample]);
     <% } %>
-
     return (
         <div className={exampleClasses}>
-            Function component<% if (props.hasState) { %> with {exampleState} state<% } %>
+            Function component<% if (props.hasState) { %> with <a onClick={() => setExample(!isExample)}>example state</a> {isExample ? "on" : "off"}<% } %>
         </div>
     );
 }

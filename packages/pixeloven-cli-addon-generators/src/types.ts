@@ -46,9 +46,15 @@ export interface CreateComponentOptions {
     componentName: string;
 }
 
+export interface CreateStoreOptions {
+    storeServiceType: string;
+}
+
 export type CreateComponentExtension = (options: CreateComponentOptions) => Promise<void>;
+export type CreateStoreExtension = (options: CreateStoreOptions) => Promise<void>;
 
 export interface AddonGeneratorsToolbox extends PixelOvenToolbox {
     createComponent: CreateComponentExtension;
+    createStore: CreateStoreExtension;
 }
 

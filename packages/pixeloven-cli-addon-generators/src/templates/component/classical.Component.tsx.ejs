@@ -1,28 +1,23 @@
 import classNames from "classnames";
-import React<% if (props.hasState) { %>, { useState }<% } %> from "react";
-
+import React from "react";
 <% if (props.hasStyles) { %>
 import "./<%= props.name %>.scss";
 <% } %>
-
 interface <%= props.name %>Props {
     className?: string;
 }
-
 <% if (props.hasState) { %>
 interface <%= props.name %>State {
     exampleState?: string;
 }
 <% } %>
-
 class <%= props.name %> extends React.Component<<%= props.name %>Props<% if (props.hasState) { %>,<%= props.name %>State<% } %>> {
     public render() {
-        const { className } = props;
+        const { className } = this.props;
         const exampleClasses = classNames(className, "example-class");
         <% if (props.hasState) { %>
         const { exampleState } = this.state;
         <% } %>
-
         return (
             <div className={exampleClasses}>
                 Function component<% if (props.hasState) { %> with {exampleState} state<% } %>
