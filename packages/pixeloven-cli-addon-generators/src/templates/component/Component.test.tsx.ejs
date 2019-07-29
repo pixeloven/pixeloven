@@ -3,20 +3,20 @@ import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import React from "react";
 
-import <%= component.name %> from "./<%= component.name %>";
+import <%= props.name %> from "./<%= props.name %>";
 
 configure({
     adapter: new ReactSixteenAdapter(),
 });
 
-describe("shared/components/<%= component.atomicType %>/<%= component.name %>", () => {
+describe("shared/components/<%= props.atomicType %>/<%= props.name %>", () => {
     it("should render a `div` element by default", () => {
-        const wrapper = shallow(<<%= component.name %> />);
+        const wrapper = shallow(<<%= props.name %> />);
         expect(wrapper.find("div").length).toEqual(1);
     });
 
     it("should extend passed classes", () => {
-        const wrapper = shallow(<<%= component.name %> className={"test-class"} />);
+        const wrapper = shallow(<<%= props.name %> className={"test-class"} />);
         expect(wrapper.hasClass("example-class")).toBe(true);
         expect(wrapper.hasClass("test-class")).toBe(true);
     });

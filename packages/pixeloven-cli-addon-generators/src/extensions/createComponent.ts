@@ -19,16 +19,11 @@ export default (toolbox: AddonGeneratorsToolbox) => {
     const createComponent = async (options: CreateComponentOptions) => {
         const {componentAtomicType, componentParadigmType, componentName, componentHasState, componentHasStyle} = options;
         const { strings, template } = toolbox;
-        /**
-         * @todo Need to lower cases all this
-         */
         const props = {
-            component: {
-                atomicType: componentAtomicType,
-                hasState: componentHasState,
-                hasStyle: componentHasStyle,
-                name: componentName,
-            }
+            atomicType: componentAtomicType,
+            hasState: componentHasState,
+            hasStyle: componentHasStyle,
+            name: componentName,
         }; 
         const atomicType = strings.lowerCase(componentAtomicType);
         const paradigmType = strings.lowerCase(componentParadigmType);
@@ -40,7 +35,7 @@ export default (toolbox: AddonGeneratorsToolbox) => {
         template.generate({
             props,
             target: `src/components/${atomicType}/${componentName}/${componentName}.scss`,   
-            template: `component/Component.scss`,
+            template: `component/Component.scss.ejs`,
         });
         template.generate({
             props,

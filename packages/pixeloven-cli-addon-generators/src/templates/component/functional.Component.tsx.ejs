@@ -1,32 +1,32 @@
 import classNames from "classnames";
-import React<% if (component.hasState) { %>, { useState }<% } %> from "react";
+import React<% if (props.hasState) { %>, { useState }<% } %> from "react";
 
-<% if (component.hasStyles) { %>
-import "./<%= component.name %>.scss";
+<% if (props.hasStyles) { %>
+import "./<%= props.name %>.scss";
 <% } %>
 
-interface <%= component.name %>Props {
+interface <%= props.name %>Props {
     className?: string;
 }
 
-<% if (component.hasState) { %>
-interface <%= component.name %>State {
+<% if (props.hasState) { %>
+interface <%= props.name %>State {
     exampleState?: string;
 }
 <% } %>
 
-function <%= component.name %>(props: <%= component.name %>Props) {
+function <%= props.name %>(props: <%= props.name %>Props) {
     const { className } = props;
     const exampleClasses = classNames(className, "example-class");
-    <% if (component.hasState) { %>
-    const [exampleState] = useState<<%= component.name %>State>(0);
+    <% if (props.hasState) { %>
+    const [exampleState] = useState<<%= props.name %>State>(0);
     <% } %>
 
     return (
         <div className={exampleClasses}>
-            Function component<% if (component.hasState) { %> with {exampleState} state<% } %>
+            Function component<% if (props.hasState) { %> with {exampleState} state<% } %>
         </div>
     );
 }
 
-export default <%= component.name %>;
+export default <%= props.name %>;
