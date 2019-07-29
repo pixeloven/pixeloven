@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/storybook",
-  "version": "6.0.0-alpha.22",
+  "version": "6.0.0-alpha.23",
   "description": "Storybook configuration",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@babel/core": "7.5.5",
-    "@pixeloven/core": "^6.0.0-alpha.22",
+    "@pixeloven/core": "^6.0.0-alpha.23",
     "@storybook/addon-actions": "5.1.9",
     "@storybook/addon-backgrounds": "5.1.9",
     "@storybook/addon-knobs": "5.1.9",
@@ -39,7 +39,7 @@
     "webpack": "4.38.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.22",
+    "@pixeloven/tasks": "^6.0.0-alpha.23",
     "@types/mini-css-extract-plugin": "0.2.1",
     "@types/storybook-readme": "5.0.3",
     "@types/storybook__addon-knobs": "4.0.4",
