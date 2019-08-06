@@ -4,6 +4,10 @@ import { filesystem } from "gluegun";
 export const nodeModulesPath = "./node_modules";
 export const distPath = "./dist/lib";
 
+/**
+ * @todo Does not work with lerna repos
+ * @param paths 
+ */
 function resolvePlugin(...paths: string[]) {
     const plugin = filesystem.path(process.cwd(), nodeModulesPath, ...paths);
     if (fs.existsSync(plugin)) {

@@ -17,13 +17,7 @@ import {
  */
 export default (toolbox: AddonWebpackToolbox) => {
     const webpack = async (options: WebpackExtensionOptions) => {
-        const { pixelOven, print } = toolbox;
-        const pluginPath = pixelOven.resolvePlugin("@pixeloven", "webpack");
-        if (!pluginPath) {
-            throw new Error(
-                "Could not find peer dependency @pixeloven/webpack",
-            );
-        }
+        const { print } = toolbox;
         try {
             switch (options.type) {
                 case WebpackExtensionType.build: {

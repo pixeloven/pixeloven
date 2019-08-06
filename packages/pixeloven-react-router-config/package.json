@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/react-router-config",
-  "version": "6.0.0-alpha.22",
+  "version": "6.0.0-beta.0",
   "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.22",
+    "@pixeloven/tasks": "^6.0.0-beta.0",
+    "@types/react": "16.8.23",
     "@types/react-redux": "7.1.1",
     "@types/react-router": "5.0.3",
     "@types/react-router-dom": "4.3.4",

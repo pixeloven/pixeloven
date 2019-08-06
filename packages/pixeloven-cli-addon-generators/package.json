@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^6.0.0-alpha.22",
-    "@pixeloven/generators": "^6.0.0-alpha.22"
+    "@pixeloven/cli": "^6.0.0-beta.0",
+    "@pixeloven/generators": "^6.0.0-beta.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-alpha.22"
+    "@pixeloven/tasks": "^6.0.0-beta.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
