@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "all:bootstrap": "yarn install && yarn packages:compile && yarn all:linker",
+    "all:build": "yarn examples:build",
     "all:clean": "lerna clean --yes && rm -rf node_modules",
     "all:commit": "git-cz",
     "all:compile": "yarn packages:compile && yarn examples:compile",
