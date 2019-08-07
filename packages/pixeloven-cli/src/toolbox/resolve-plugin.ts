@@ -5,13 +5,26 @@ export const nodeModulesPath = "./node_modules";
 export const distPath = "./dist/lib";
 
 /**
- * @todo Does not work with lerna repos
+ * Exported for testing purposes
+ * @param path 
+ */
+export function fsExists(path: fs.PathLike) {
+    return fs.existsSync(path)
+}
+
+/**
+ * Resolves plugin path
  * @param paths 
  */
 function resolvePlugin(...paths: string[]) {
-    const plugin = filesystem.path(process.cwd(), nodeModulesPath, ...paths);
-    if (fs.existsSync(plugin)) {
-        const realPath = fs.realpathSync(plugin);
+    const callerPath = filesystem.path(process.cwd(), nodeModulesPath, ...paths);
+    if (fsExists(callerPath)) {
+        const realPath = fs.realpathSync(callerPath);
+        return filesystem.path(realPath, distPath);
+    }
+    const scriptPath = filesystem.path(__dirname, "../..", nodeModulesPath, ...paths);
+    if (fsExists(scriptPath)) {
+        const realPath = fs.realpathSync(scriptPath);
         return filesystem.path(realPath, distPath);
     }
     return false;
