@@ -62,3 +62,8 @@ With either of the above cmds there are options that can help with all phases of
 
 > Note below are some recommendations based on learn A few notes for development. 
 It is recommended to keep polling on for cross platform purposes. File watching can be CPU intensive if a system falls back to fs.watchFile versus utilizing file system events with fs.watch. This is often common on linux machines.
+
+## TODO
+1) add cli: pixeloven to lib template
+2) add lint-stage to devDeps to libs
+3) Fix lintstage to work in this repo like in SSR
