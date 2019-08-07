@@ -20,7 +20,7 @@
     "all:bootstrap": "yarn install && yarn packages:compile && yarn all:linker",
     "all:clean": "lerna clean --yes && rm -rf node_modules",
     "all:commit": "git-cz",
-    "all:compile": "yarn all:linker && lerna run compile",
+    "all:compile": "yarn packages:compile && yarn examples:compile",
     "all:linker": "lerna link",
     "all:lint": "yarn all:linker && lerna run lint",
     "all:lint:ts": "yarn all:linker && lerna run lint:ts",
