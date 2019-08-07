@@ -56,7 +56,6 @@
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
     "node-mocks-http": "1.7.3",
-    "npm-run-all": "4.1.5",
     "redux-saga-test-plan": "4.0.0-beta.3",
     "supertest": "3.3.0"
   },
@@ -80,7 +79,7 @@
     "pretty": "yarn pretty:ts && yarn pretty:scss",
     "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
     "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
-    "start": "run-p start:app start:story",
+    "start": "start:app & start:story",
     "start:app": "NODE_ENV=development pixeloven webpack start --source-map --host 0.0.0.0 --path / --port 8080 --protocol http --stats",
     "start:story": "NODE_ENV=development pixeloven story start",
     "start:prod": "NODE_ENV=production node ./dist/server.js",
