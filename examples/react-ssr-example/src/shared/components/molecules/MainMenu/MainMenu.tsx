@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Menu } from "semantic-ui-react";
-import { MenuItem, MenuItemArray } from "../";
 
 import "./MainMenu.scss";
 
@@ -16,36 +15,39 @@ const fixedMenuStyle = {
     boxShadow: "none",
 };
 
-interface DefaultProps {
-    as: string;
-}
-
-interface Props {
-    as?: string | React.ReactNode;
+interface MainMenuProps {
+    as?: React.ReactNode | string;
     fixed?: boolean;
-    items: MenuItem[];
 }
 
-class MainMenu extends React.Component<Props> {
-    public static defaultProps: DefaultProps = {
-        as: "a",
-    };
-
-    public render(): React.ReactNode {
-        const { as, fixed, items } = this.props;
-        const menuStyles = fixed ? fixedMenuStyle : menuStyle;
-        return (
-            <Menu
-                borderless={true}
-                style={menuStyles}
-                {...(fixed && { fixed: "top" })}
-            >
-                <Container text={true}>
-                    <MenuItemArray as={as} items={items} />
-                </Container>
-            </Menu>
-        );
-    }
+function MainMenu(props: MainMenuProps){
+    const { as, fixed } = props;
+    const menuStyles = fixed ? fixedMenuStyle : menuStyle;
+    const [activeItem, setActiveItem] = useState("home")
+    return (
+        <Menu
+            borderless={true}
+            style={menuStyles}
+            {...(fixed && { fixed: "top" })}
+        >
+            <Container>
+                <Menu.Item
+                    as={as}
+                    to="/"
+                    name="home"
+                    active={activeItem === "home"}
+                    onClick={() => setActiveItem("home")}
+                />
+                <Menu.Item
+                    as={as}
+                    to="/blog"
+                    name="blog"
+                    active={activeItem === "blog"}
+                    onClick={() => setActiveItem("blog")}
+                />
+            </Container>
+        </Menu>
+    );
 }
 
 export default MainMenu;
