@@ -6,6 +6,7 @@ import "@storybook/addon-options/register";
 // Panels
 import "@storybook/addon-backgrounds/register";
 import "@storybook/addon-notes/register";
+import "@storybook/addon-viewport/register";
 
 // Tabs
 import "@storybook/addon-knobs/register";
