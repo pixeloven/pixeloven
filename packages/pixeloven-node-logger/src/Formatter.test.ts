@@ -4,7 +4,7 @@ import Formatter from "./Formatter";
 describe("@pixeloven/node-logger", () => {
     describe("Formatter", () => {
         describe("console", () => {
-            it('should create winston formatter', () => {
+            it("should create winston formatter", () => {
                 expect(typeof Formatter.console).toEqual("object");
             });
         });

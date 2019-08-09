@@ -1,6 +1,6 @@
 {
-  "name": "@pixeloven/gh-pages",
-  "version": "6.0.0-beta.0",
+  "name": "@pixeloven/cli-addon-gh-pages",
+  "version": "6.0.0-beta.2",
   "description": "Publishes project docs to GitHub Pages",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,14 +18,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^6.0.0-beta.0",
-    "@pixeloven/core": "^6.0.0-beta.0",
-    "@pixeloven/exceptions": "^6.0.0-beta.0",
+    "@pixeloven/cli": "^6.0.0-beta.2",
+    "@pixeloven/core": "^6.0.0-beta.2",
+    "@pixeloven/exceptions": "^6.0.0-beta.2",
     "fs-extra": "7.0.1",
     "gh-pages": "2.0.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.0",
+    "@pixeloven/tasks": "^6.0.0-beta.2",
     "@types/fs-extra": "5.0.4",
     "@types/gh-pages": "2.0.0"
   },

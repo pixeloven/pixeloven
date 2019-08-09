@@ -1,20 +1,14 @@
-import { withReadme } from "storybook-readme";
 import Readme from "./README.md";
 
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { MainMenu, MenuItem } from "../";
+import MainMenu from "./MainMenu";
 
-const items: MenuItem[] = [
-    { name: "Home", path: "/", active: true },
-    { name: "About", path: "/about", active: false },
-    { name: "Blog", path: "/blog", active: false },
-];
-
-storiesOf("Components/Organisms/MainMenu", module)
-    .addDecorator(withReadme(Readme))
+storiesOf("Components/Molecules/MainMenu", module)
     .add("default", () => {
         const value = boolean("fixed", true);
-        return <MainMenu fixed={value} items={items} />;
+        return <MainMenu as="a" fixed={value} />;
+    }, {
+        notes: { markdown: Readme },
     });

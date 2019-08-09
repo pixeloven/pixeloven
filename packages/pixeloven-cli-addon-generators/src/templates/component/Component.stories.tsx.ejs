@@ -1,13 +1,13 @@
 import {storiesOf} from "@storybook/react";
 import React from "react";
-import {withReadme} from "storybook-readme";
 
 import <%= props.name %> from "./<%= props.name %>";
 
 import Readme from "./README.md";
 
 storiesOf("components/<%= props.atomicType %>/<%= props.name %>", module)
-    .addDecorator(withReadme(Readme))
     .add("default", () => {
         return <<%= props.name %> className={"story-class"} />;
+    }, {
+        notes: { markdown: Readme },
     });

@@ -31,14 +31,14 @@ describe("@pixeloven/cli", () => {
                 const path = resolvePlugin(moduleName);
                 expect(path).toEqual(false);
                 expect(mockExists.called).toEqual(true);
-                expect(mockPath.calledOnce).toEqual(true);
+                expect(mockPath.callCount).toEqual(2);
             });
             it("should resolve plugin", () => {
                 mockExists.returns(true);
                 const path = resolvePlugin(moduleName);
                 expect(path).toEqual(fullPath);
-                expect(mockExists.calledOnce).toEqual(true);
-                expect(mockPath.calledTwice).toEqual(true);
+                expect(mockExists.callCount).toEqual(1);
+                expect(mockPath.callCount).toEqual(2);
                 expect(mockRealPath.called).toEqual(true);
             });
         });

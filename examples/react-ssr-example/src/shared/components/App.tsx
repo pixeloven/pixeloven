@@ -7,9 +7,7 @@ interface Props {
 }
 
 function App(props: Props) {
-    const {
-        routes
-    } = props;
+    const { routes } = props;
     return (
         <React.Fragment>
             <Helmet titleTemplate="%s | React App" />

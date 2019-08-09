@@ -6,28 +6,54 @@ import { build, filesystem } from "gluegun";
  * @param argv
  */
 async function main(argv: string[]) {
-    const pixelOvenPath = filesystem.path(
+    /**
+     * Create CLI builder
+     */
+    const builder = build()
+        .brand("pixeloven")
+        .src(__dirname);
+
+    /**
+     * Add plugins
+     * @param plugins
+     */
+    function addPlugins(plugins: string[]) {
+        plugins.forEach(plugin => {
+            if (plugin.includes("cli-addon")) {
+                builder.plugin(
+                    filesystem.path(fs.realpathSync(plugin), "./dist/lib"),
+                );
+            }
+        });
+    }
+
+    /**
+     * Get plugins in the callers path
+     */
+    const callingPath = filesystem.path(
         process.cwd(),
         "./node_modules",
         "@pixeloven",
     );
-    const plugins = filesystem.subdirectories(pixelOvenPath);
-    const builder = build()
-        .brand("pixeloven")
-        .src(__dirname);
-    /**
-     * Adding plugins
-     * @description We need to do it this way because we might have a sym link in our path.
-     */
-    plugins.forEach(plugin => {
-        if (plugin.includes("cli-addon")) {
-            builder.plugin(
-                filesystem.path(fs.realpathSync(plugin), "./dist/lib"),
-            );
-        }
-    });
-    const cli = builder.version().create();
+    const callingPathPlugins = filesystem.subdirectories(callingPath);
+    addPlugins(callingPathPlugins);
 
+    /**
+     * Get plugins in the script path
+     */
+    const scriptPath = filesystem.path(
+        __dirname,
+        "../../", // Back out of dist/lib
+        "./node_modules",
+        "@pixeloven",
+    );
+    const scriptPathPlugins = filesystem.subdirectories(scriptPath);
+    addPlugins(scriptPathPlugins);
+
+    /**
+     * Create CLI and return context
+     */
+    const cli = builder.version().create();
     const context = await cli.run(argv);
     return context;
 }
