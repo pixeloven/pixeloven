@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Container, Menu } from "semantic-ui-react";
 
 import "./MainMenu.scss";
@@ -20,10 +20,10 @@ interface MainMenuProps {
     fixed?: boolean;
 }
 
-function MainMenu(props: MainMenuProps){
+function MainMenu(props: MainMenuProps) {
     const { as, fixed } = props;
     const menuStyles = fixed ? fixedMenuStyle : menuStyle;
-    const [activeItem, setActiveItem] = useState("home")
+    const [activeItem, setActiveItem] = useState("home");
     return (
         <Menu
             borderless={true}

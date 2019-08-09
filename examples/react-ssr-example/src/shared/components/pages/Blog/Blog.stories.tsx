@@ -3,7 +3,7 @@ import Readme from "./README.md";
 
 import { storiesOf } from "@storybook/react";
 
-import {createLocation, createMemoryHistory} from "history";
+import { createLocation, createMemoryHistory } from "history";
 import React from "react";
 import Blog from "./Blog";
 
@@ -19,5 +19,5 @@ const match = {
 storiesOf("Components/Pages/Blog", module)
     .addDecorator(withReadme(Readme))
     .add("default", () => {
-        return <Blog history={history} location={location} match={match}/>;
+        return <Blog history={history} location={location} match={match} />;
     });

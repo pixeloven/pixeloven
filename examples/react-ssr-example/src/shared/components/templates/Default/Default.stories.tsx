@@ -3,9 +3,9 @@ import Readme from "./README.md";
 
 import { storiesOf } from "@storybook/react";
 
-import {createLocation, createMemoryHistory} from "history";
+import { createLocation, createMemoryHistory } from "history";
 import React from "react";
-import {MemoryRouter} from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 
 import Default from "./Default";
 
@@ -22,6 +22,6 @@ storiesOf("Components/Templates/Default", module)
     .addDecorator(withReadme(Readme))
     .add("default", () => (
         <MemoryRouter>
-            <Default history={history} location={location} match={match}/>
+            <Default history={history} location={location} match={match} />
         </MemoryRouter>
     ));
