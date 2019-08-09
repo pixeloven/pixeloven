@@ -7,9 +7,4 @@ declare module "*.png";
 declare module "*.jpg";
 declare module "*.md";
 
-/**
- * Declare packages not explicitly defined
- * @description Consult DefinitelyTyped before declaring below
- * http://definitelytyped.org/
- */
-declare module "storybook-readme";
+

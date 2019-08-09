@@ -6,7 +6,6 @@ import { build, filesystem } from "gluegun";
  * @param argv
  */
 async function main(argv: string[]) {
-
     /**
      * Create CLI builder
      */
@@ -16,7 +15,7 @@ async function main(argv: string[]) {
 
     /**
      * Add plugins
-     * @param plugins 
+     * @param plugins
      */
     function addPlugins(plugins: string[]) {
         plugins.forEach(plugin => {

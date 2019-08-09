@@ -1,13 +1,13 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { withReadme } from "storybook-readme";
 
 import { {{componentName}} } from "@shared/components/{{plural atomicType}}";
 
 import Readme from "./README.md";
 
 storiesOf("Components/{{capitalize (plural atomicType)}}/{{componentName}}", module)
-    .addDecorator(withReadme(Readme))
     .add("default", () => {
         return <{{componentName}} className={"story-class"} />;
+    }, {
+        notes: { markdown: Readme },
     });
