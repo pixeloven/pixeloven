@@ -1,4 +1,3 @@
-import { withReadme } from "storybook-readme";
 import Readme from "./README.md";
 
 import { storiesOf } from "@storybook/react";
@@ -17,7 +16,8 @@ const match = {
 };
 
 storiesOf("Components/Pages/NoMatch", module)
-    .addDecorator(withReadme(Readme))
     .add("default", () => {
         return <NoMatch history={history} location={location} match={match} />;
+    }, {
+        notes: { markdown: Readme },
     });

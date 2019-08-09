@@ -25,9 +25,7 @@ describe("@pixeloven/node-logger", () => {
             });
         });
         describe("info", () => {
-            const spyInfo = jest
-                .spyOn(logInstance, "log")
-                .mockImplementation();
+            const spyInfo = jest.spyOn(logInstance, "log").mockImplementation();
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -60,9 +58,7 @@ describe("@pixeloven/node-logger", () => {
             });
         });
         describe("warn", () => {
-            const spyWarn = jest
-                .spyOn(logInstance, "log")
-                .mockImplementation();
+            const spyWarn = jest.spyOn(logInstance, "log").mockImplementation();
             afterEach(() => {
                 jest.clearAllMocks();
             });

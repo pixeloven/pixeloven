@@ -1,4 +1,3 @@
-import { withReadme } from "storybook-readme";
 import Readme from "./README.md";
 
 import { boolean, text } from "@storybook/addon-knobs";
@@ -7,7 +6,6 @@ import React from "react";
 import Icon from "./Icon";
 
 storiesOf("Components/Atoms/Icon", module)
-    .addDecorator(withReadme(Readme))
     .add("Default", () => {
         const fontSize = text("container font-size", "");
         const fontColor = text("container color", "");
@@ -31,4 +29,6 @@ storiesOf("Components/Atoms/Icon", module)
                 {`${isBeforeText ? "Trailing text" : ""}`}
             </div>
         );
+    }, {
+        notes: { markdown: Readme },
     });

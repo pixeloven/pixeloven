@@ -1,4 +1,5 @@
-import { withA11y } from '@storybook/addon-a11y';
+import { withA11y } from "@storybook/addon-a11y";
+import { withBackgrounds } from "@storybook/addon-backgrounds";
 import { withKnobs } from "@storybook/addon-knobs";
 import { addDecorator, addParameters, configure } from "@storybook/react";
 
@@ -12,18 +13,25 @@ import("" + "@src/shared/styles").catch((error: Error) => {
 });
 
 addDecorator(withA11y);
+addDecorator(withBackgrounds);
 addDecorator(withKnobs);
 
 /**
  * Setup storybook addons
- * @todo options in menu are overriden after you do anything how can we prevent this?
+ * @todo Make this configurable through universal config
  */
-addParameters({ 
+addParameters({
     a11y: {
         config: {},
         options: {
-          checks: { 'color-contrast': { options: { noScroll: true } } },
-          restoreScroll: true,
+            checks: {
+                "color-contrast": {
+                    options: {
+                        noScroll: true,
+                    },
+                },
+            },
+            restoreScroll: true,
         },
     },
     backgrounds: [
@@ -35,7 +43,7 @@ addParameters({
     ],
     options: {
         isFullScreen: false,
-        panelPosition: 'right',
+        panelPosition: "right",
         showSearchBox: false,
         theme: {
             brandTitle: "Storybook React",

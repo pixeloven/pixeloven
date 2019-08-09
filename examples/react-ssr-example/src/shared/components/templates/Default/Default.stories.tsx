@@ -1,4 +1,3 @@
-import { withReadme } from "storybook-readme";
 import Readme from "./README.md";
 
 import { storiesOf } from "@storybook/react";
@@ -19,9 +18,10 @@ const match = {
 };
 
 storiesOf("Components/Templates/Default", module)
-    .addDecorator(withReadme(Readme))
     .add("default", () => (
         <MemoryRouter>
             <Default history={history} location={location} match={match} />
         </MemoryRouter>
-    ));
+    ), {
+        notes: { markdown: Readme },
+    });

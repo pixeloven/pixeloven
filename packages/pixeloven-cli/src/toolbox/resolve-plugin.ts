@@ -6,23 +6,32 @@ export const distPath = "./dist/lib";
 
 /**
  * Exported for testing purposes
- * @param path 
+ * @param path
  */
 export function fsExists(path: fs.PathLike) {
-    return fs.existsSync(path)
+    return fs.existsSync(path);
 }
 
 /**
  * Resolves plugin path
- * @param paths 
+ * @param paths
  */
 function resolvePlugin(...paths: string[]) {
-    const callerPath = filesystem.path(process.cwd(), nodeModulesPath, ...paths);
+    const callerPath = filesystem.path(
+        process.cwd(),
+        nodeModulesPath,
+        ...paths,
+    );
     if (fsExists(callerPath)) {
         const realPath = fs.realpathSync(callerPath);
         return filesystem.path(realPath, distPath);
     }
-    const scriptPath = filesystem.path(__dirname, "../..", nodeModulesPath, ...paths);
+    const scriptPath = filesystem.path(
+        __dirname,
+        "../..",
+        nodeModulesPath,
+        ...paths,
+    );
     if (fsExists(scriptPath)) {
         const realPath = fs.realpathSync(scriptPath);
         return filesystem.path(realPath, distPath);

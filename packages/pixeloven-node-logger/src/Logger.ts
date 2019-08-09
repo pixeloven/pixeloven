@@ -1,6 +1,6 @@
 import winston from "winston";
 import Formatter from "./Formatter";
-import {Level, Logger, Message} from "./types";
+import { Level, Logger, Message } from "./types";
 
 /**
  * Standard logger options shared by both our middleware and our logger endpoint
@@ -19,7 +19,7 @@ const loggerOptions = {
                 winston.format.metadata({ key: "meta" }),
                 Formatter.console,
             ),
-            level: "warn"
+            level: "warn",
         }),
     ],
 };
