@@ -44,8 +44,6 @@ async function main(argv: string[]) {
     const scriptPath = filesystem.path(
         __dirname,
         "../../", // Back out of dist/lib
-        "./node_modules",
-        "@pixeloven",
     );
     const scriptPathPlugins = filesystem.subdirectories(scriptPath);
     addPlugins(scriptPathPlugins);
