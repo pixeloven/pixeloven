@@ -28,7 +28,7 @@ function resolvePlugin(...paths: string[]) {
     }
     const scriptPath = filesystem.path(
         __dirname,
-        "../../../", // Back out of cli/dist/lib
+        "../../../../../", // Back out of @pixeloven/cli/dist/lib
         ...paths,
     );
     if (fsExists(scriptPath)) {
