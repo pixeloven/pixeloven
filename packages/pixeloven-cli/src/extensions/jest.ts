@@ -2,6 +2,7 @@ import { JestExtension, PixelOvenToolbox } from "../types";
 
 /**
  * @todo Need to restructure these to make them more testable
+ * @todo we should also use jest directly instead of running in another process
  */
 export default (context: PixelOvenToolbox) => {
     const jest: JestExtension = async (args: string[] = []) => {
@@ -12,11 +13,11 @@ export default (context: PixelOvenToolbox) => {
         if (configPath) {
             return pixelOven.run(
                 cmd
-                    .concat(["--config", configPath, "--env=jsdom"])
+                    .concat(["--config", configPath])
                     .concat(args),
             );
         }
-        return pixelOven.run(cmd.concat(["--env=jsdom"]).concat(args));
+        return pixelOven.run(cmd.concat(args));
     };
     context.jest = jest;
 };

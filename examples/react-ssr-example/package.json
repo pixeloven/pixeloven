@@ -83,7 +83,7 @@
     "start:app": "NODE_ENV=development pixeloven webpack start --source-map --host 0.0.0.0 --path / --port 8080 --protocol http --stats",
     "start:story": "NODE_ENV=development pixeloven story start",
     "start:prod": "NODE_ENV=production node ./dist/server.js",
-    "test": "NODE_ENV=testing pixeloven test --maxWorkers 2 --color --coverage",
+    "test": "NODE_ENV=testing pixeloven test --color --coverage",
     "test:watch": "NODE_ENV=testing pixeloven test watch --color"
   }
 }

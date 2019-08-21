@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import "jest";
 
 import React from "react";
