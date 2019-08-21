@@ -2,41 +2,18 @@
   "bail": true,
   "verbose": true,
   "preset": "ts-jest",
-  "coveragePathIgnorePatterns": [
-    "<rootDir>/node_modules"
-  ],
-  "coverageThreshold": {
-    "global": {
-      "branches": 50,
-      "functions": 65,
-      "lines": 75,
-      "statements": 75
-    }
-  },
-  "collectCoverageFrom": [
-    "<rootDir>/src/**/*.{ts,tsx}",
-    "!<rootDir>/src/**/*.stories.{ts,tsx}",
-    "!<rootDir>/src/**/styles/**",
-    "!**/node_modules/**"
-  ],
-  "testMatch": [
-    "<rootDir>/src/**/?(*.)test.ts?(x)"
-  ],
-  "testPathIgnorePatterns": [
-    "<rootDir>/node_modules"
-  ],
-  "testEnvironment": "node",
-  "testURL": "http://localhost",
   "transform": {
-    "^.+\\.(js|jsx)$": "babel-jest",
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
   "transformIgnorePatterns": [
-    "<rootDir>/node_modules"
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
   ],
-  "moduleDirectories": [
-    "node_modules"
+  "testMatch": [
+    "<rootDir>/src/**/*.test.(j|t)s?(x)"
   ],
+  "testEnvironment": "node",
+  "testURL": "http://localhost",
+  "maxConcurrency" : 1,
   "moduleNameMapper": {
     "@client/(.*)$": "<rootDir>/src/client/$1",
     "@server/(.*)$": "<rootDir>/src/server/$1",
@@ -46,9 +23,27 @@
   },
   "moduleFileExtensions": [
     "js",
+    "json",
     "jsx",
     "ts",
     "tsx"
   ],
-  "maxConcurrency": 1
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/test/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 50,
+      "functions": 50,
+      "lines": 50,
+      "statements": 50
+    }
+  },
+   "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",
+    "!<rootDir>/src/**/styles/**",
+    "!**/node_modules/**"
+  ]
 }

@@ -36,7 +36,7 @@
     "@types/html-entities": "1.2.16",
     "@types/memory-fs": "0.3.2",
     "@types/require-from-string": "1.2.0",
-    "@types/webpack": "4.39.0",
+    "@types/webpack": "4.32.1",
     "@types/webpack-dev-middleware": "2.0.3",
     "@types/webpack-hot-middleware": "2.16.5"
   },
@@ -52,7 +52,6 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
-    "test:ci": "pixeloven-tasks test --ci",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }

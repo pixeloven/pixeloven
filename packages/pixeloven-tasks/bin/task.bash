@@ -84,7 +84,7 @@ case $CMD in
     ;;
     "test")
         if [ -f $jestConfigPath ]; then
-            exe "jest --config $jestConfigPath $@"
+            exe "jest --maxWorkers 2 --config $jestConfigPath --env=jsdom $@"
         else
             error "File not found $jestConfigPath"
         fi
@@ -94,7 +94,7 @@ case $CMD in
     ;;
     "test:watch")
         if [ -f $jestConfigPath ]; then
-            exe "jest --watch --config $jestConfigPath $@"
+            exe "jest --watch --config $jestConfigPath --env=jsdom $@"
         else
             error "File not found $jestConfigPath"
         fi

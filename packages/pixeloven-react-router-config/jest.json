@@ -2,44 +2,38 @@
   "bail": true,
   "verbose": true,
   "preset": "ts-jest",
-  "coveragePathIgnorePatterns": [
-    "<rootDir>/node_modules"
-  ],
-  "coverageThreshold": {
-    "global": {
-      "branches": 60,
-      "functions": 60,
-      "lines": 60,
-      "statements": 60
-    }
-  },
-  "collectCoverageFrom": [
-    "<rootDir>/src/**/*.{ts,tsx}",
-    "!**/node_modules/**"
-  ],
-  "testMatch": [
-    "<rootDir>/src/**/?(*.)test.ts?(x)"
-  ],
-  "testPathIgnorePatterns": [
-    "<rootDir>/node_modules"
-  ],
-  "testEnvironment": "node",
-  "testURL": "http://localhost",
   "transform": {
-    "^.+\\.(js|jsx)$": "babel-jest",
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
   "transformIgnorePatterns": [
-    "<rootDir>/node_modules"
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
   ],
-  "moduleDirectories": [
-    "node_modules"
+  "testMatch": [
+    "<rootDir>/src/**/*.test.(j|t)s?(x)"
   ],
+  "testEnvironment": "node",
+  "testURL": "http://localhost",
   "moduleFileExtensions": [
     "js",
+    "json",
     "jsx",
     "ts",
     "tsx"
   ],
-  "maxConcurrency": 1
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/test/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  },
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**"
+  ]
 }

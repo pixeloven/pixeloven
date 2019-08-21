@@ -19,13 +19,10 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.2",
-    "@types/enzyme-adapter-react-16": "1.0.5",
     "@types/react": "16.8.23",
     "@types/react-redux": "7.1.1",
     "@types/react-router": "5.0.3",
     "@types/react-router-dom": "4.3.4",
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.14.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-router": "5.0.1",
@@ -49,7 +46,6 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
-    "test:ci": "pixeloven-tasks test --ci",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }

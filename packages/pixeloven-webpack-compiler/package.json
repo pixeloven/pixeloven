@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.2",
-    "@types/webpack": "4.39.0"
+    "@types/webpack": "4.32.1"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
@@ -36,7 +36,6 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
-    "test:ci": "pixeloven-tasks test --ci",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }

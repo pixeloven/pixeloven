@@ -39,7 +39,6 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
-    "test:ci": "pixeloven-tasks test --ci",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }
