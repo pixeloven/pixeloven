@@ -1,6 +1,10 @@
+/**
+ * @jest-environment jsdom
+ */
+import "jest";
+
 import { configure, mount } from "enzyme";
 import ReactSixteenAdapter from "enzyme-adapter-react-16";
-import "jest";
 import React from "react";
 import Status from "./Status";
 

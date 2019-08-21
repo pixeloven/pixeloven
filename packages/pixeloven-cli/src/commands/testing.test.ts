@@ -1,5 +1,5 @@
 import { Sandbox } from "../testing";
-import testModule from "./test";
+import testModule from "./testing";
 
 describe("@pixeloven/cli", () => {
     describe("commands", () => {

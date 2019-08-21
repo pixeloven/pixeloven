@@ -50,5 +50,5 @@
     "ts",
     "tsx"
   ],
-  "maxConcurrency": 2
+  "maxConcurrency": 1
 }
