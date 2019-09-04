@@ -11,11 +11,11 @@ interface {{componentName}}Props {
 
 function {{componentName}}(props: {{componentName}}Props) {
     const { className } = props;
-    const {{componentName}}Classes = classNames(className, "example-class");
+    const {{camelCase componentName}}Classes = classNames(className, "{{firstChar atomicType}}-{{kebabCase componentName}}");
     {{#if includeState}}const [exampleState] = useState(0);{{/if}}
 
     return (
-        <div className={ {{componentName}}Classes }>
+        <div className={ {{camelCase componentName}}Classes }>
             Function component{{#if includeState}} with {exampleState} state{{/if}}
         </div>
     );

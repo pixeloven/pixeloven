@@ -54,11 +54,37 @@ export const makeValidateMinLength = (min: number) => {
  * Modifiers for templates
  * @param txt
  */
+export const firstChar = (txt: string) => txt.charAt(0).toLowerCase();
 export const capitalize = (txt: string) =>
     txt.charAt(0).toUpperCase() + txt.toLowerCase().slice(1);
 export const plural = (txt: string) => `${txt}s`;
 export const upperCase = (txt: string) => txt.toUpperCase();
 export const lowerCase = (txt: string) => txt.toLowerCase();
+export const camelCase = (txt: string) => {
+    const a = txt.replace(/-/g, "- ").split(/[\s]/);
+    const b = a.map((item, index) => {
+      return index < 1 ? item.charAt(0).toLowerCase() + item.slice(1) : item;
+    });
+
+    return b.join("");
+}
+export const pascalCase = (s: string) => {
+    const a = s.replace(/-/g, "- ").split(/[\s]/);
+    const b = a.map((item, index) => {
+      return item.charAt(0).toUpperCase() + item.slice(1);
+    });
+
+    return b.join("");
+}
+export const kebabCase = (s: string) => {
+    const a = s.split(/(?=[A-Z])/);
+    const b = a.map((item, index) => {
+      return item.charAt(0).toLowerCase() + item.slice(1);
+    });
+
+    return b.join("-");
+}
+
 
 /**
  * @todo should check filesystem for serviceName, and components etc
@@ -77,6 +103,10 @@ const generator = (plop: Plop) => {
     plop.setHelper("plural", plural);
     plop.setHelper("upperCase", upperCase);
     plop.setHelper("lowerCase", lowerCase);
+    plop.setHelper("camelCase", camelCase);
+    plop.setHelper("pascalCase", pascalCase);
+    plop.setHelper("kebabCase", kebabCase);
+    plop.setHelper("firstChar", firstChar);
 
     plop.setGenerator("component", {
         actions: answers => {
