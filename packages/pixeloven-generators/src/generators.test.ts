@@ -1,8 +1,12 @@
 import "jest";
 import generator, {
+    camelCase,
     capitalize,
+    firstChar,
+    kebabCase,
     lowerCase,
     makeValidateMinLength,
+    pascalCase,
     plural,
     upperCase,
     validateWord,
@@ -82,6 +86,11 @@ describe("@pixeloven/generators", () => {
                 expect(validateMinLength("t")).toEqual(true);
             });
         });
+        describe("firstChar", () => {
+            it("should return the first character as lower case", () => {
+                expect(firstChar("Test")).toEqual("t");
+            })
+        })
         describe("capitalize", () => {
             it("should lower case word and upper case first letter", () => {
                 expect(capitalize("TEST")).toEqual("Test");
@@ -100,6 +109,27 @@ describe("@pixeloven/generators", () => {
         describe("upperCase", () => {
             it("should upper case word", () => {
                 expect(upperCase("test")).toEqual("TEST");
+            });
+        });
+        describe("camelCase", () => {
+            it("should camel case word", () => {
+                expect(camelCase("TestWord")).toEqual("testWord");
+                expect(camelCase("Test word")).toEqual("testWord");
+                expect(camelCase("Test-word")).toEqual("testWord");
+            });
+        });
+        describe("pascalCase", () => {
+            it("should pascal case word", () => {
+                expect(pascalCase("testWord")).toEqual("TestWord");
+                expect(pascalCase("test word")).toEqual("TestWord");
+                expect(pascalCase("test-word")).toEqual("TestWord");
+            });
+        });
+        describe("kebabCase", () => {
+            it("should kebab case word", () => {
+                expect(kebabCase("test word")).toEqual("test-word");
+                expect(kebabCase("TestWord")).toEqual("test-word");
+                expect(kebabCase("testWord")).toEqual("test-word");
             });
         });
     });
