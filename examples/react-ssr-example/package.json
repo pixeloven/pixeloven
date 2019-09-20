@@ -70,6 +70,7 @@
     "build:production": "pixeloven webpack build --stats --path /",
     "build:story": "pixeloven story build",
     "prebuild": "pixeloven delete dist",
+    "precommit": "lint-staged",
     "document": "pixeloven document ts ./src",
     "predocument": "pixeloven delete docs",
     "generate": "pixeloven-generators generate",
