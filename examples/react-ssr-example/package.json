@@ -55,6 +55,7 @@
     "babel-loader": "8.0.5",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
+    "lint-staged": "9.2.5",
     "node-mocks-http": "1.7.3",
     "redux-saga-test-plan": "4.0.0-beta.3",
     "supertest": "3.3.0"
@@ -85,5 +86,17 @@
     "start:prod": "NODE_ENV=production node ./dist/server.js",
     "test": "NODE_ENV=testing pixeloven test --maxWorkers 2 --color --coverage",
     "test:watch": "NODE_ENV=testing pixeloven test watch --color"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
   }
 }

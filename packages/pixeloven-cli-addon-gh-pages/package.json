@@ -28,7 +28,8 @@
     "@pixeloven/cli": "^6.0.0-beta.7",
     "@pixeloven/tasks": "^6.0.0-beta.2",
     "@types/fs-extra": "5.0.4",
-    "@types/gh-pages": "2.0.0"
+    "@types/gh-pages": "2.0.0",
+    "lint-staged": "9.2.5"
   },
   "peerDependencies": {
     "@pixeloven/cli": ">5.0.0"
@@ -46,5 +47,17 @@
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
     "test:watch": "pixeloven-tasks test:watch"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
   }
 }
