@@ -28,8 +28,7 @@ function resolvePlugin(...paths: string[]) {
     }
     const scriptPath = filesystem.path(
         __dirname,
-        "../..",
-        nodeModulesPath,
+        "../../../../../", // Back out of @pixeloven/cli/dist/lib
         ...paths,
     );
     if (fsExists(scriptPath)) {

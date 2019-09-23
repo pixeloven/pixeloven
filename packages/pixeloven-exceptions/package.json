@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/exceptions",
-  "version": "6.0.0-beta.2",
+  "version": "6.0.0-beta.7",
   "description": "Exceptions and exception handlers",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.2"
+    "@pixeloven/tasks": "^6.0.0-beta.7"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
