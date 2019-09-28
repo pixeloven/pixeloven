@@ -70,6 +70,8 @@ executors:
       - image: circleci/node:10.15
     working_directory: ~/pixeloven
 jobs:
+  # @todo Need to rethink this cache mechanism. Even if cache works we still need to do yarn install????
+  # @todo How can we split the build for packages and applications?
   setup:
     executor: node-executor
     steps:
