@@ -22,3 +22,4 @@ RUN npm install -g npm && \
     npm install -g pm2
 
 # @TODO we should publish this so we can pull it down for development
+# @TODO we should do the same thing with an nginx proxy??? Then it can be an easy deploy system???
