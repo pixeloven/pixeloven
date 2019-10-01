@@ -130,7 +130,6 @@ jobs:
           at: ~/pixeloven
       - test:
           type: "examples"
-
   test-packages:
     executor: node-executor
     steps:
