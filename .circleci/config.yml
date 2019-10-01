@@ -222,7 +222,7 @@ workflows:
               ignore: gh-pages
       - compile-examples:
           requires:
-            - compile-examples
+            - setup
       - document-examples:
           requires:
             - compile-examples
@@ -234,7 +234,7 @@ workflows:
             - compile-examples
       - build-examples:
           requires:
-            - accept-packages
+            - compile-examples
       - report-examples:
           requires:
             - test-examples
