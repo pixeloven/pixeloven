@@ -202,9 +202,6 @@ jobs:
       - store_artifacts:
           path: packages/**/docs
           destination: packages/docs
-      - run:
-          name: "Linking"
-          command: yarn all:linker
   report:
     executor: node-executor
     steps:
