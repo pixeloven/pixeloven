@@ -25,7 +25,9 @@ commands:
       - persist_to_workspace:
           root: .
           paths: 
-            .
+            - "node_modules"
+            - "examples/**/node_modules"
+            - "packages/**/node_modules"
   compile:
     description: "Compiling"
     parameters:
@@ -51,7 +53,7 @@ commands:
       - persist_to_workspace:
           root: .
           paths: 
-            .
+            - << parameters.type >>/**/docs
   lint:
     description: "Linting"
     parameters:
@@ -73,7 +75,7 @@ commands:
       - persist_to_workspace:
           root: .
           paths: 
-            .
+            - << parameters.type >>/**/coverage
   list:
     description: "List directory contents"
     parameters:
@@ -105,6 +107,10 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
       - checkout
+      - persist_to_workspace:
+          root: .
+          paths: 
+            .
       - setup
   compile-examples:
     executor: node-executor
