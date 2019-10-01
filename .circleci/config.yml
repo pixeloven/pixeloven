@@ -67,7 +67,7 @@ commands:
 executors:
   node-executor:
     docker:
-      - image: circleci/node:10.15
+      - image: circleci/node:10.16
     working_directory: ~/pixeloven
 jobs:
   # @todo Need to rethink this cache mechanism. Even if cache works we still need to do yarn install????
@@ -86,7 +86,7 @@ jobs:
           name: Install dependencies
           command: yarn install
       - save_cache:
-          key: node-v1-{{ checksum "yarn.lock" }}
+          key: node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "./node_modules"
       - persist_to_workspace:
@@ -169,19 +169,19 @@ jobs:
           at: ~/pixeloven
       - list:
           path: examples/**/dist
-      - store_artifacts:
-          path: examples/**/dist
-          destination: examples/**/dist
+      # - store_artifacts:
+      #     path: examples/**/dist
+      #     destination: examples/**/dist
       - list:
           path: examples/**/coverage
-      - store_artifacts:
-          path: examples/**/coverage
-          destination: examples/**/coverage
+      # - store_artifacts:
+      #     path: examples/**/coverage
+      #     destination: examples/**/coverage
       - list:
           path: examples/**/docs
-      - store_artifacts:
-          path: examples/**/docs
-          destination: examples/**/docs
+      # - store_artifacts:
+      #     path: examples/**/docs
+      #     destination: examples/**/docs
   accept-packages:
     executor: node-executor
     steps:
@@ -189,19 +189,19 @@ jobs:
           at: ~/pixeloven
       - list:
           path: packages/**/dist
-      - store_artifacts:
-          path: packages/**/dist
-          destination: packages/**/dist
+      # - store_artifacts:
+      #     path: packages/**/dist
+      #     destination: packages/**/dist
       - list:
           path: packages/**/coverage
-      - store_artifacts:
-          path: packages/**/coverage
-          destination: packages/**/coverage
+      # - store_artifacts:
+      #     path: packages/**/coverage
+      #     destination: packages/**/coverage
       - list:
           path: packages/**/docs
-      - store_artifacts:
-          path: packages/**/docs
-          destination: packages/**/docs
+      # - store_artifacts:
+      #     path: packages/**/docs
+      #     destination: packages/**/docs
   report:
     executor: node-executor
     steps:
