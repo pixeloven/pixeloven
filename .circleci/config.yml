@@ -171,17 +171,17 @@ jobs:
           path: examples/**/dist
       - store_artifacts:
           path: examples/**/dist
-          destination: examples/dist
+          destination: examples/**/dist
       - list:
           path: examples/**/coverage
       - store_artifacts:
           path: examples/**/coverage
-          destination: examples/coverage
+          destination: examples/**/coverage
       - list:
           path: examples/**/docs
       - store_artifacts:
           path: examples/**/docs
-          destination: examples/docs
+          destination: examples/**/docs
   accept-packages:
     executor: node-executor
     steps:
@@ -191,17 +191,17 @@ jobs:
           path: packages/**/dist
       - store_artifacts:
           path: packages/**/dist
-          destination: packages/dist
+          destination: packages/**/dist
       - list:
           path: packages/**/coverage
       - store_artifacts:
           path: packages/**/coverage
-          destination: packages/coverage
+          destination: packages/**/coverage
       - list:
           path: packages/**/docs
       - store_artifacts:
           path: packages/**/docs
-          destination: packages/docs
+          destination: packages/**/docs
   report:
     executor: node-executor
     steps:
