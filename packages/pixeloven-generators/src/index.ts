@@ -1,7 +1,2 @@
-#!/usr/bin/env node
-import main from "./main";
+export {default as Validation} from "./Validation";
 
-/**
- * Execute CLI
- */
-main(process.argv);

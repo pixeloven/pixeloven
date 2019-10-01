@@ -1,12 +1,9 @@
 {
   "name": "@pixeloven/generators",
-  "version": "6.0.0-beta.3",
-  "description": "Common code generators",
+  "version": "6.0.0-beta.7",
+  "description": "Helper functions for code generation",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
-  "bin": {
-    "pixeloven-generators": "./dist/lib/index.js"
-  },
   "files": [
     "dist/"
   ],
@@ -21,18 +18,15 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-beta.2",
-    "plop": "2.4.0"
+    "@pixeloven/core": "^6.0.0-beta.7"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.2",
-    "@types/inquirer": "6.0.3"
+    "@pixeloven/tasks": "^6.0.0-beta.7"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "precompile": "pixeloven-tasks compile:clean",
-    "postcompile": "cp -r ./src/templates ./dist/lib/templates",
     "document": "pixeloven-tasks document:ts src",
     "predocument": "pixeloven-tasks document:clean",
     "lint": "yarn lint:ts",
@@ -41,6 +35,7 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
+    "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }

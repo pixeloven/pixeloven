@@ -1,4 +1,4 @@
-# Javascript Node CircleCI 2.0 configuration file
+# Javascript Node CircleCI 2.1 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
@@ -6,6 +6,28 @@ version: 2.1
 
 # Reusable commands
 commands:
+  setup:
+    steps:
+      - restore_cache:
+          keys:
+            - node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node-v2-{{ .Branch }}-
+            - node-v2-
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "node_modules"
+            - "examples/**/node_modules"
+            - "packages/**/node_modules"
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - "node_modules"
+            - "examples/**/node_modules"
+            - "packages/**/node_modules"
   compile:
     description: "Compiling"
     parameters:
@@ -18,7 +40,7 @@ commands:
       - persist_to_workspace:
           root: .
           paths: 
-            - << parameters.type >>/**/dist
+            .
   document:
     description: "Documenting"
     parameters:
@@ -49,7 +71,7 @@ commands:
     steps:
       - run:
           name: Test source
-          command: yarn << parameters.type >>:test
+          command: yarn << parameters.type >>:test:ci
       - persist_to_workspace:
           root: .
           paths: 
@@ -64,33 +86,32 @@ commands:
       - run:
           name: "List Directory"
           command: ls -al << parameters.path >>
+  report-coverage:
+    description: "Reporting coverage"
+    parameters:
+      type:
+        type: string
+    steps:
+      - run:
+          name: Reporting coverage for << parameters.type >>
+          command: yarn << parameters.type >>:report:coverage
 executors:
   node-executor:
     docker:
-      - image: circleci/node:10.15
+      - image: circleci/node:10.16
     working_directory: ~/pixeloven
 jobs:
   setup:
     executor: node-executor
     steps:
-      # @todo We should create a custom docker image with lerna installed or find a way to add lerna to the executor
+      - attach_workspace:
+          at: ~/pixeloven
       - checkout
-      - restore_cache:
-          keys:
-            - node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          key: node-v1-{{ checksum "yarn.lock" }}
-          paths:
-            - "./node_modules"
       - persist_to_workspace:
           root: .
           paths: 
-            - .
+            .
+      - setup
   compile-examples:
     executor: node-executor
     steps:
@@ -126,7 +147,6 @@ jobs:
           at: ~/pixeloven
       - test:
           type: "examples"
-
   test-packages:
     executor: node-executor
     steps:
@@ -142,10 +162,6 @@ jobs:
       - run:
           name: Build source
           command: yarn examples:build
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/dist
   document-examples:
     executor: node-executor
     steps:
@@ -160,77 +176,24 @@ jobs:
           at: ~/pixeloven
       - document:
           type: "packages"
-  accept-examples:
+  report-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-      - list:
-          path: examples/**/dist
-      - store_artifacts:
-          path: examples/**/dist
-          destination: examples/dist
-      - list:
-          path: examples/**/coverage
-      - store_artifacts:
-          path: examples/**/coverage
-          destination: examples/coverage
-      - list:
-          path: examples/**/docs
-      - store_artifacts:
-          path: examples/**/docs
-          destination: examples/docs
-  accept-packages:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - list:
-          path: packages/**/dist
-      - store_artifacts:
-          path: packages/**/dist
-          destination: packages/dist
-      - list:
-          path: packages/**/coverage
-      - store_artifacts:
-          path: packages/**/coverage
-          destination: packages/coverage
-      - list:
-          path: packages/**/docs
-      - store_artifacts:
-          path: packages/**/docs
-          destination: packages/docs
-  report:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-
-      # Check for coverage files for reporting
       - list:
           path: examples/**/coverage/lcov.info
-      - list:
-          path: packages/**/coverage/lcov.info
-
-      # Run test and report
-      - run:
-          name: Report source
-          command: yarn all:report:coverage
-  deploy:
+      - report-coverage:
+          type: "examples"
+  report-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: .
-      # @todo generate docs and run newly compiled tool to deploy to github pages
-      # doc gen might be it's own job though
-
-      # @todo need to do this https://github.com/atlassian/lerna-semantic-release
-      # @todo would be nice to also deploy the above to a special branch for github
-      # https://blog.frederikring.com/articles/deploying-github-pages-circle-ci/
-      # should add the typedocs as well.
-
+          path: packages/**/coverage/lcov.info
+      - report-coverage:
+          type: "packages"
 workflows:
   version: 2.1
   runner:
@@ -251,45 +214,35 @@ workflows:
       - test-packages:
           requires:
             - compile-packages
-      - accept-packages:
+      - compile-examples:
           requires:
-            - compile-packages
             - document-packages
             - lint-packages
             - test-packages
-      - build-examples:
-          requires:
-            - accept-packages
-      - compile-examples:
-          requires:
-            - accept-packages
       - document-examples:
           requires:
-            - accept-packages
+            - compile-examples
       - lint-examples:
           requires:
-            - accept-packages
+            - compile-examples
       - test-examples:
           requires:
-            - accept-packages
-      - accept-examples:
-          requires:
-            - build-examples
             - compile-examples
+      - build-examples:
+          requires:
             - document-examples
             - lint-examples
             - test-examples
-      - report:
+      # @todo Eventually we want to split the package and example workflow
+      - report-packages:
           requires:
-            - accept-packages
-            - accept-examples
+            - test-packages
           filters:
             branches:
               only: master
-      - deploy:
+      - report-examples:
           requires:
-            - accept-packages
-            - accept-examples
+            - test-examples
           filters:
             branches:
               only: master

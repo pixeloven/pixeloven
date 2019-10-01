@@ -31,7 +31,7 @@
     "pretty": "yarn run pretty:ts",
     "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
     "test": "pixeloven test --color --coverage",
-    "test:ci": "pixeloven test --ci",
+    "test:ci": "pixeloven test --ci --coverage",
     "test:watch": "pixeloven test watch"
   },
   "lint-staged": {

@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cz-simplified-changelog",
-  "version": "6.0.0-beta.2",
+  "version": "6.0.0-beta.7",
   "description": "Commit citizen simplified changelog prompt",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -26,7 +26,7 @@
     "word-wrap": "1.2.3"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.2",
+    "@pixeloven/tasks": "^6.0.0-beta.7",
     "@types/lodash.map": "4.6.13",
     "commitizen": "4.0.3"
   },
@@ -42,6 +42,7 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
+    "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }
