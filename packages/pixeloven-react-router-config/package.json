@@ -27,6 +27,7 @@
     "@types/react-router-dom": "4.3.4",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
+    "lint-staged": "9.2.5",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-router": "5.0.1",
@@ -52,5 +53,17 @@
     "test": "pixeloven-tasks test --color --coverage",
     "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
   }
 }

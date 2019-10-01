@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.7",
-    "@types/dotenv": "6.1.1"
+    "@types/dotenv": "6.1.1",
+    "lint-staged": "9.2.5"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
@@ -39,5 +40,17 @@
     "test": "pixeloven-tasks test --color --coverage",
     "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
   }
 }
