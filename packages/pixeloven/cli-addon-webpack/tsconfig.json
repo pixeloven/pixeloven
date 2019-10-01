@@ -1,0 +1,18 @@
+{
+    "extends": "../../../tsconfig",
+    "compilerOptions": {
+        "rootDir": "./src",
+        "declarationDir": "./dist/types",
+        "outDir": "./dist/lib",
+        "skipLibCheck": true
+    },
+    "exclude": [
+        "./**/*.stories.ts",
+        "./**/*.spec.ts",
+        "./**/*.test.ts",
+        "./coverage",
+        "./dist",
+        "./docs",
+        "./node_modules"
+    ],
+}
