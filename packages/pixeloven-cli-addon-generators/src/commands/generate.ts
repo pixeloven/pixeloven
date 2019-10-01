@@ -8,7 +8,6 @@ import {
     AtomicDesignType,
     CreateComponentOptions,
     CreateOptions,
-    CreateStoreOptions,
     GeneratorType,
     ProgrammingParadigm,
 } from "../types";
@@ -21,7 +20,7 @@ export default {
     alias: ["--generate", "-g"],
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
-        const { createComponent, createStore, print, pixelOven, prompt } = toolbox;
+        const { createComponent, print, pixelOven, prompt } = toolbox;
         // todo create generator for library
         // todo crete generator for addon
         // todo crete generator for state
@@ -114,11 +113,6 @@ export default {
             }
             case "Package": {
                 print.info("Coming Soon");
-                break;
-            }
-            case "Store": {
-                const options = await prompt.ask<CreateStoreOptions>(askCreateComponentQuestions) as any;
-                createStore(options);
                 break;
             }
             default: {

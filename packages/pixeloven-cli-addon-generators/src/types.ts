@@ -8,8 +8,7 @@ export enum ProjectType {
 export enum GeneratorType {
     App,
     Component,
-    Package,
-    Store
+    Package
 }
 
 export type GeneratorStrings = keyof typeof GeneratorType
@@ -46,15 +45,9 @@ export interface CreateComponentOptions {
     componentName: string;
 }
 
-export interface CreateStoreOptions {
-    storeServiceType: string;
-}
-
 export type CreateComponentExtension = (options: CreateComponentOptions) => Promise<void>;
-export type CreateStoreExtension = (options: CreateStoreOptions) => Promise<void>;
 
 export interface AddonGeneratorsToolbox extends PixelOvenToolbox {
     createComponent: CreateComponentExtension;
-    createStore: CreateStoreExtension;
 }
 
