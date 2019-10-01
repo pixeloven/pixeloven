@@ -16,6 +16,14 @@
     "examples/*",
     "packages/*"
   ],
+  "devDependencies": {
+    "@commitlint/cli": "8.2.0",
+    "@commitlint/config-conventional": "8.2.0",
+    "codecov": "3.5.0",
+    "commitizen": "4.0.3",
+    "husky": "3.0.5",
+    "lerna": "3.16.4"
+  },
   "scripts": {
     "all:bootstrap": "yarn install && yarn packages:compile",
     "all:build": "yarn examples:build",
@@ -59,30 +67,9 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lerna run --concurrency 1 --stream precommit --since HEAD"
     }
-  },
-  "lint-staged": {
-    "{examples,packages}/**/*.scss": [
-      "lerna run pixeloven pretty scss",
-      "lerna run pixeloven lint scss",
-      "git add"
-    ],
-    "{examples,packages}/**/*.{ts,tsx}": [
-      "lerna run pixeloven pretty ts",
-      "lerna run pixeloven lint ts",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "@commitlint/cli": "8.1.0",
-    "@commitlint/config-conventional": "8.1.0",
-    "codecov": "3.5.0",
-    "commitizen": "4.0.3",
-    "husky": "3.0.1",
-    "lerna": "3.16.4",
-    "lint-staged": "9.2.1"
   },
   "config": {
     "commitizen": {

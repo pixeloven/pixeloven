@@ -56,6 +56,7 @@
     "babel-loader": "8.0.5",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
+    "lint-staged": "9.2.5",
     "node-mocks-http": "1.7.3",
     "redux-saga-test-plan": "4.0.0-beta.3",
     "supertest": "3.3.0"
@@ -75,15 +76,27 @@
     "pretty": "yarn pretty:ts && yarn pretty:scss",
     "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
     "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
+    "prebuild": "pixeloven delete dist",
+    "precommit": "lint-staged",
+    "predocument": "pixeloven delete docs",
+    "pretest": "pixeloven delete coverage",
     "start:development": "pixeloven webpack start --source-map --host 0.0.0.0 --path / --port 8080 --protocol http --stats",
     "start:production": "node ./dist/server.js",
     "start:story": "pixeloven story start",
     "test": "pixeloven test --color --coverage",
     "test:ci": "pixeloven test --ci --findRelatedTests",
-    "test:watch": "pixeloven test watch",
-    "prebuild": "pixeloven delete dist",
-    "precommit": "lint-staged",
-    "predocument": "pixeloven delete docs",
-    "pretest": "pixeloven delete coverage"
+    "test:watch": "pixeloven test watch"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
   }
 }

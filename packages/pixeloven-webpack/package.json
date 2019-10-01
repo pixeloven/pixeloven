@@ -23,19 +23,35 @@
     "@pixeloven/webpack-config": "^6.0.0-beta.7",
     "@pixeloven/webpack-dev-server": "^6.0.0-beta.7"
   },
+  "devDependencies": {
+    "lint-staged": "9.2.5"
+  },
   "scripts": {
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
-    "precompile": "pixeloven-tasks compile:clean",
     "document": "pixeloven-tasks document:ts src",
-    "predocument": "pixeloven-tasks document:clean",
     "lint": "yarn lint:ts",
     "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
-    "pretest": "pixeloven-tasks test:clean",
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "precompile": "pixeloven-tasks compile:clean",
+    "precommit": "lint-staged",
+    "predocument": "pixeloven-tasks document:clean",
+    "pretest": "pixeloven-tasks test:clean",
     "test": "pixeloven-tasks test --color --coverage",
     "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
   }
 }
