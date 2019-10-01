@@ -49,7 +49,7 @@ commands:
     steps:
       - run:
           name: Test source
-          command: yarn << parameters.type >>:test
+          command: yarn << parameters.type >>:test:ci
       - persist_to_workspace:
           root: .
           paths: 
@@ -79,16 +79,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
+            - node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node-v2-{{ .Branch }}-
+            - node-v2-
       - run:
           name: Install dependencies
           command: yarn install
       - save_cache:
-          key: node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
-            - "./node_modules"
+            - "node_modules"
+            - "examples/**/node_modules"
+            - "packages/**/node_modules"
       - persist_to_workspace:
           root: .
           paths: 
