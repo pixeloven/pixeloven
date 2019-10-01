@@ -214,15 +214,11 @@ workflows:
       - test-packages:
           requires:
             - compile-packages
-      - report-packages:
-          requires:
-            - test-packages
-          filters:
-            branches:
-              only: master
       - compile-examples:
           requires:
-            - report-packages
+            - document-packages
+            - lint-packages
+            - test-packages
       - document-examples:
           requires:
             - compile-examples
@@ -234,7 +230,16 @@ workflows:
             - compile-examples
       - build-examples:
           requires:
-            - compile-examples
+            - document-examples
+            - lint-examples
+            - test-examples
+      # @todo Eventually we want to split the package and example workflow
+      - report-packages:
+          requires:
+            - test-packages
+          filters:
+            branches:
+              only: master
       - report-examples:
           requires:
             - test-examples
