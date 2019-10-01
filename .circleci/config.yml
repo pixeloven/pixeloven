@@ -214,15 +214,9 @@ workflows:
           filters:
             branches:
               only: master
-  examples:
-    jobs:
-      - setup:
-          filters:
-            branches:
-              ignore: gh-pages
       - compile-examples:
           requires:
-            - setup
+            - report-packages
       - document-examples:
           requires:
             - compile-examples
