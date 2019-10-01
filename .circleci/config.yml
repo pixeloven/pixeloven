@@ -6,6 +6,28 @@ version: 2.1
 
 # Reusable commands
 commands:
+  setup:
+    steps:
+      - restore_cache:
+          keys:
+            - node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node-v2-{{ .Branch }}-
+            - node-v2-
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "node_modules"
+            - "examples/**/node_modules"
+            - "packages/**/node_modules"
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - "node_modules"
+            - "examples/**/node_modules"
+            - "packages/**/node_modules"
   compile:
     description: "Compiling"
     parameters:
@@ -70,31 +92,11 @@ executors:
       - image: circleci/node:10.16
     working_directory: ~/pixeloven
 jobs:
-  # @todo Need to rethink this cache mechanism. Even if cache works we still need to do yarn install????
-  # @todo How can we split the build for packages and applications?
   setup:
     executor: node-executor
     steps:
-      # @todo We should create a custom docker image with lerna installed or find a way to add lerna to the executor
       - checkout
-      - restore_cache:
-          keys:
-            - node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - node-v2-{{ .Branch }}-
-            - node-v2-
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          key: node-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - "node_modules"
-            - "examples/**/node_modules"
-            - "packages/**/node_modules"
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - .
+      - setup
   compile-examples:
     executor: node-executor
     steps:
@@ -145,10 +147,6 @@ jobs:
       - run:
           name: Build source
           command: yarn examples:build
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - examples/**/dist
   document-examples:
     executor: node-executor
     steps:
@@ -163,59 +161,15 @@ jobs:
           at: ~/pixeloven
       - document:
           type: "packages"
-  accept-examples:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - list:
-          path: examples/**/dist
-      # - store_artifacts:
-      #     path: examples/**/dist
-      #     destination: examples/**/dist
-      - list:
-          path: examples/**/coverage
-      # - store_artifacts:
-      #     path: examples/**/coverage
-      #     destination: examples/**/coverage
-      - list:
-          path: examples/**/docs
-      # - store_artifacts:
-      #     path: examples/**/docs
-      #     destination: examples/**/docs
-  accept-packages:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - list:
-          path: packages/**/dist
-      # - store_artifacts:
-      #     path: packages/**/dist
-      #     destination: packages/**/dist
-      - list:
-          path: packages/**/coverage
-      # - store_artifacts:
-      #     path: packages/**/coverage
-      #     destination: packages/**/coverage
-      - list:
-          path: packages/**/docs
-      # - store_artifacts:
-      #     path: packages/**/docs
-      #     destination: packages/**/docs
   report:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
-
-      # Check for coverage files for reporting
       - list:
           path: examples/**/coverage/lcov.info
       - list:
           path: packages/**/coverage/lcov.info
-
-      # Run test and report
       - run:
           name: Report source
           command: yarn all:report:coverage
