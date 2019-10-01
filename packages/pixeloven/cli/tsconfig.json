@@ -17,5 +17,5 @@
         "./dist",
         "./docs",
         "./node_modules"
-    ],
+    ]
 }
