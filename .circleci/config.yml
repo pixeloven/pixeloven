@@ -104,7 +104,13 @@ jobs:
   setup:
     executor: node-executor
     steps:
+      - attach_workspace:
+          at: ~/pixeloven
       - checkout
+      - persist_to_workspace:
+          root: .
+          paths: 
+            .
       - setup
   compile-examples:
     executor: node-executor
