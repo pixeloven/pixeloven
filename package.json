@@ -41,6 +41,7 @@
     "examples:pretty": "lerna run pretty --scope @examples/*",
     "examples:pretty:ts": "lerna run pretty:ts --scope @examples/*",
     "examples:pretty:scss": "lerna run pretty:scss --scope @examples/*",
+    "examples:report:coverage": "cat ./examples/**/coverage/lcov.info | codecov",
     "examples:test": "lerna run test --scope @examples/*",
     "examples:test:ci": "lerna run test:ci --scope @examples/*",
     "packages:compile": "lerna run compile --scope @pixeloven/* && yarn all:linker",
@@ -51,6 +52,7 @@
     "packages:pretty": "lerna run pretty --scope @pixeloven/*",
     "packages:pretty:ts": "lerna run pretty:ts --scope @pixeloven/*",
     "packages:pretty:scss": "lerna run pretty:scss --scope @pixeloven/*",
+    "packages:report:coverage": "cat ./packages/**/coverage/lcov.info | codecov",
     "packages:test": "lerna run test --scope @pixeloven/*",
     "packages:test:ci": "lerna run test:ci --scope @pixeloven/*",
     "preversion": "yarn all:bootstrap && yarn all:lint && yarn all:compile && yarn all:build && yarn all:test"

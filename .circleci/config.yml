@@ -86,6 +86,15 @@ commands:
       - run:
           name: "List Directory"
           command: ls -al << parameters.path >>
+  report-coverage:
+    description: "Reporting coverage"
+    parameters:
+      type:
+        type: string
+    steps:
+      - run:
+          name: Reporting coverage for << parameters.type >>
+          command: yarn << parameters.type >>:report:coverage
 executors:
   node-executor:
     docker:
@@ -161,36 +170,27 @@ jobs:
           at: ~/pixeloven
       - document:
           type: "packages"
-  report:
+  report-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
           path: examples/**/coverage/lcov.info
-      - list:
-          path: packages/**/coverage/lcov.info
-      - run:
-          name: Report source
-          command: yarn all:report:coverage
-  deploy:
+      - report-coverage:
+          type: "examples"
+  report-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: .
-      # @todo generate docs and run newly compiled tool to deploy to github pages
-      # doc gen might be it's own job though
-
-      # @todo need to do this https://github.com/atlassian/lerna-semantic-release
-      # @todo would be nice to also deploy the above to a special branch for github
-      # https://blog.frederikring.com/articles/deploying-github-pages-circle-ci/
-      # should add the typedocs as well.
-
+          path: packages/**/coverage/lcov.info
+      - report-coverage:
+          type: "packages"
 workflows:
   version: 2.1
-  runner:
+  packages:
     jobs:
       - setup:
           filters:
@@ -208,45 +208,36 @@ workflows:
       - test-packages:
           requires:
             - compile-packages
-      - accept-packages:
+      - report-packages:
           requires:
-            - compile-packages
-            - document-packages
-            - lint-packages
             - test-packages
-      - build-examples:
-          requires:
-            - accept-packages
-      - compile-examples:
-          requires:
-            - accept-packages
-      - document-examples:
-          requires:
-            - accept-packages
-      - lint-examples:
-          requires:
-            - accept-packages
-      - test-examples:
-          requires:
-            - accept-packages
-      - accept-examples:
-          requires:
-            - build-examples
-            - compile-examples
-            - document-examples
-            - lint-examples
-            - test-examples
-      - report:
-          requires:
-            - accept-packages
-            - accept-examples
           filters:
             branches:
               only: master
-      - deploy:
+  examples:
+    jobs:
+      - setup:
+          filters:
+            branches:
+              ignore: gh-pages
+      - compile-examples:
+          requires:
+            - compile-examples
+      - document-examples:
+          requires:
+            - compile-examples
+      - lint-examples:
+          requires:
+            - compile-examples
+      - test-examples:
+          requires:
+            - compile-examples
+      - build-examples:
           requires:
             - accept-packages
-            - accept-examples
+      - report-examples:
+          requires:
+            - test-examples
           filters:
             branches:
               only: master
