@@ -190,7 +190,7 @@ jobs:
           type: "packages"
 workflows:
   version: 2.1
-  packages:
+  runner:
     jobs:
       - setup:
           filters:
