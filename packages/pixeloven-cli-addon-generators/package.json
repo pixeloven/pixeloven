@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/cli-addon-gh-pages",
+  "name": "@pixeloven/cli-addon-generators",
   "version": "6.0.0-beta.7",
-  "description": "Publishes project docs to GitHub Pages",
+  "description": "PixelOven CLI Common code generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -19,20 +19,16 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^6.0.0-beta.7",
-    "@pixeloven/core": "^6.0.0-beta.7",
-    "@pixeloven/exceptions": "^6.0.0-beta.7",
-    "fs-extra": "7.0.1",
-    "gh-pages": "2.0.1"
+    "@pixeloven/generators": "^6.0.0-beta.7"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.7",
-    "@types/fs-extra": "5.0.4",
-    "@types/gh-pages": "2.0.0"
+    "@pixeloven/tasks": "^6.0.0-beta.7"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "precompile": "pixeloven-tasks compile:clean",
+    "postcompile": "cp -r ./src/templates ./dist/lib/templates",
     "document": "pixeloven-tasks document:ts src",
     "predocument": "pixeloven-tasks document:clean",
     "lint": "yarn lint:ts",

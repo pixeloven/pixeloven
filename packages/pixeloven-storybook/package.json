@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/storybook",
-  "version": "6.0.0-beta.3",
+  "version": "6.0.0-beta.7",
   "description": "Storybook configuration",
   "main": "dist/lib/story.js",
   "types": "dist/types/index.d.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@babel/core": "7.5.5",
-    "@pixeloven/core": "^6.0.0-beta.2",
+    "@pixeloven/core": "^6.0.0-beta.7",
     "@storybook/addon-a11y": "5.1.10",
     "@storybook/addon-actions": "5.1.10",
     "@storybook/addon-backgrounds": "5.1.10",
@@ -41,7 +41,7 @@
     "webpack": "4.38.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.2",
+    "@pixeloven/tasks": "^6.0.0-beta.7",
     "@types/mini-css-extract-plugin": "0.8.0",
     "@types/storybook__addon-knobs": "5.0.3",
     "@types/storybook__addon-options": "4.0.2",
@@ -64,6 +64,7 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
+    "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }

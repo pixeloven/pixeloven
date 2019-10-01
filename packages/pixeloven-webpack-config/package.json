@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-config",
-  "version": "6.0.0-beta.2",
+  "version": "6.0.0-beta.7",
   "description": "Webpack configuration for client and server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -26,7 +26,7 @@
     "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",
-    "@pixeloven/core": "^6.0.0-beta.2",
+    "@pixeloven/core": "^6.0.0-beta.7",
     "autoprefixer": "9.6.1",
     "babel-loader": "8.0.6",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
@@ -54,13 +54,13 @@
     "webpack-node-externals": "1.7.2"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.2",
+    "@pixeloven/tasks": "^6.0.0-beta.7",
     "@types/autoprefixer": "9.5.0",
     "@types/case-sensitive-paths-webpack-plugin": "2.1.2",
     "@types/mini-css-extract-plugin": "0.8.0",
     "@types/optimize-css-assets-webpack-plugin": "1.3.4",
     "@types/terser-webpack-plugin": "1.2.1",
-    "@types/webpack": "4.32.1",
+    "@types/webpack": "4.39.2",
     "@types/webpack-bundle-analyzer": "2.13.2",
     "@types/webpack-config-utils": "2.3.0",
     "@types/webpack-manifest-plugin": "2.0.0",
@@ -78,6 +78,7 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
+    "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }

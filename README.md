@@ -78,6 +78,8 @@ We are committed to providing a safe place for everyone. Please review our [code
 7) Make client/server compilation configurable - we want to be able to use webpack in a library sense too
 8) Remove TypeDocs option for now... need to find a better solution (http://caolan.github.io/async/v3/). Make Github addon work
 9) Get audit into build and make sure it passes without critical
+10) Break out react deps into packages
+11) Restructure and fix example into smaller parts
 
 ## Planned v7
 1) Add static site generation support

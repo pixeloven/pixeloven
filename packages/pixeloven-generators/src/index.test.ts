@@ -1,27 +1,10 @@
-import * as cli from "./main";
-
-let testArgv: string[] = [];
-const cliMock = (argv: string[]) => {
-    testArgv = argv;
-};
-
-const caller = () => {
-    require("./index");
-};
+import "jest";
+import { Validation } from "./index";
 
 describe("@pixeloven/generators", () => {
     describe("index", () => {
-        afterAll(() => {
-            jest.clearAllMocks();
-            jest.restoreAllMocks();
-        });
-        it("should execute main and succeed", () => {
-            const cliSpy = jest
-                .spyOn(cli, "default")
-                .mockImplementation(cliMock);
-            caller();
-            expect(cliSpy).toHaveBeenCalledTimes(1);
-            expect(testArgv).toEqual(process.argv);
+        it("should export Validation", () => {
+            expect(typeof Validation).toEqual("object");
         });
     });
 });

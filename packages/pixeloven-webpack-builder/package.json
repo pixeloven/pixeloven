@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/webpack-builder",
-  "version": "6.0.0-beta.3",
+  "version": "6.0.0-beta.7",
   "description": "Webpack build handler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,14 +18,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-beta.2",
-    "@pixeloven/node-logger": "^6.0.0-beta.3",
+    "@pixeloven/core": "^6.0.0-beta.7",
+    "@pixeloven/node-logger": "^6.0.0-beta.7",
     "react-dev-utils": "9.0.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.2",
-    "@pixeloven/webpack-compiler": "^6.0.0-beta.2",
-    "@types/webpack": "4.32.1"
+    "@pixeloven/tasks": "^6.0.0-beta.7",
+    "@pixeloven/webpack-compiler": "^6.0.0-beta.7",
+    "@types/webpack": "4.39.2"
   },
   "peerDependencies": {
     "@pixeloven/webpack-compiler": ">5.0.0"
@@ -42,6 +42,7 @@
     "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "test": "pixeloven-tasks test --color --coverage",
+    "test:ci": "pixeloven-tasks test --ci --coverage",
     "test:watch": "pixeloven-tasks test:watch"
   }
 }

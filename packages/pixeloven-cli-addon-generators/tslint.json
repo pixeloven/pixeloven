@@ -2,25 +2,20 @@
   "defaultSeverity": "error",
   "linterOptions": {
     "exclude": [
-      ".circleci",
       "dist",
       "coverage",
-      "node_modules",
-      "public"
+      "node_modules"
     ]
   },
   "extends": [
     "tslint:latest",
     "tslint-config-prettier",
-    "tslint-eslint-rules",
-    "tslint-react"
+    "tslint-eslint-rules"
   ],
   "rules": {
     "arrow-parens": false,
-    "jsx-no-lambda": false,
-    "jsx-wrap-multiline" : false,
-    "jsx-no-lambda" : false,
-    "interface-name" : false,
+    "prefer-object-spread": false,
+    "interface-name": false,
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
     "no-console": false,
