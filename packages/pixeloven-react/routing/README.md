@@ -1,4 +1,4 @@
-# @pixeloven/react-router-config
+# @pixeloven-react/routing
 
 > Pixel Oven React router config.
 
@@ -9,13 +9,13 @@ See our website [pixeloven-react-router-config](https://github.com/pixeloven/pix
 Using npm:
 
 ```sh
-npm install --save @pixeloven/react-router-config
+npm install --save @pixeloven-react/routing
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/react-router-config
+yarn add @pixeloven-react/routing
 ```
 
 ## Usage
