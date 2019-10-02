@@ -10,21 +10,15 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - node-v3-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - node-v3-{{ .Branch }}-
-            - node-v3-
+            - node-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node-v4-{{ .Branch }}-
+            - node-v4-
       - run:
           name: Install dependencies
           command: yarn install
       - save_cache:
-          key: node-v3-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: node-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
-            - "node_modules"
-            - "examples/**/node_modules"
-            - "packages/**/**/node_modules"
-      - persist_to_workspace:
-          root: .
-          paths: 
             - "node_modules"
             - "examples/**/node_modules"
             - "packages/**/**/node_modules"
@@ -107,11 +101,11 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
       - checkout
+      - setup
       - persist_to_workspace:
           root: .
           paths: 
             .
-      - setup
   compile-examples:
     executor: node-executor
     steps:
