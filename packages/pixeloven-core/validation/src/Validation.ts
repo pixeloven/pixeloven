@@ -2,7 +2,7 @@
  * Validate word
  * @param word
  */
-function isAWord(word: string) {
+export function isAWord(word: string) {
     if (word.length > 0) {
         if (/^[a-z]+$/i.test(word.trim())) {
             return true;
@@ -16,7 +16,7 @@ function isAWord(word: string) {
  * Creates a validator that checks min length
  * @param min
  */
-function minLength(min: number) {
+export function minLength(min: number) {
     return (str: string) => {
         if (str.length >= min) {
             return true;
@@ -25,7 +25,3 @@ function minLength(min: number) {
     };
 }
 
-export default {
-    isAWord,
-    minLength,
-};
