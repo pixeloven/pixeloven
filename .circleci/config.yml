@@ -20,7 +20,7 @@ commands:
           key: node-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
-            - "examples/**/**/node_modules"
+            - "apps/**/**/node_modules"
             - "packages/**/**/node_modules"
   compile:
     description: "Compiling"
@@ -31,10 +31,6 @@ commands:
       - run:
           name: Compile source
           command: yarn << parameters.type >>:compile
-      - persist_to_workspace:
-          root: .
-          paths: 
-            .
   document:
     description: "Documenting"
     parameters:
@@ -44,10 +40,6 @@ commands:
       - run:
           name: Documenting source
           command: yarn << parameters.type >>:document
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - << parameters.type >>/**/**/docs
   lint:
     description: "Linting"
     parameters:
@@ -66,10 +58,6 @@ commands:
       - run:
           name: Test source
           command: yarn << parameters.type >>:test:ci
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - << parameters.type >>/**/**/coverage
   list:
     description: "List directory contents"
     parameters:
@@ -106,13 +94,6 @@ jobs:
           root: .
           paths: 
             .
-  compile-examples:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - compile:
-          type: "examples"
   compile-packages:
     executor: node-executor
     steps:
@@ -120,13 +101,10 @@ jobs:
           at: ~/pixeloven
       - compile:
           type: "packages"
-  lint-examples:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - lint:
-          type: "examples"
+      - persist_to_workspace:
+          root: .
+          paths: 
+            .
   lint-packages:
     executor: node-executor
     steps:
@@ -134,13 +112,6 @@ jobs:
           at: ~/pixeloven
       - lint:
           type: "packages"
-  test-examples:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - test:
-          type: "examples"
   test-packages:
     executor: node-executor
     steps:
@@ -148,21 +119,6 @@ jobs:
           at: ~/pixeloven
       - test:
           type: "packages"
-  build-examples:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - run:
-          name: Build source
-          command: yarn examples:build
-  document-examples:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: ~/pixeloven
-      - document:
-          type: "examples"
   document-packages:
     executor: node-executor
     steps:
@@ -170,24 +126,67 @@ jobs:
           at: ~/pixeloven
       - document:
           type: "packages"
-  report-examples:
+  accept-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: examples/**/coverage/lcov.info
-      - report-coverage:
-          type: "examples"
+          path: packages/**/**
   report-packages:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: packages/**/coverage/lcov.info
+          path: packages/**/**/coverage/lcov.info
       - report-coverage:
           type: "packages"
+  lint-apps:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - lint:
+          type: "apps"
+  test-apps:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - test:
+          type: "apps"
+  document-apps:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - document:
+          type: "apps"
+  build-apps:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - run:
+          name: Build source
+          command: yarn apps:build
+  accept-apps:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - list:
+          path: apps/**/**
+  report-apps:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - list:
+          path: apps/**/**/coverage/lcov.info
+      - report-coverage:
+          type: "apps"
 workflows:
   version: 2.1
   runner:
@@ -208,35 +207,34 @@ workflows:
       - test-packages:
           requires:
             - compile-packages
-      - compile-examples:
+      - accept-packages:
           requires:
             - document-packages
             - lint-packages
             - test-packages
-      - document-examples:
-          requires:
-            - compile-examples
-      - lint-examples:
-          requires:
-            - compile-examples
-      - test-examples:
-          requires:
-            - compile-examples
-      - build-examples:
-          requires:
-            - document-examples
-            - lint-examples
-            - test-examples
-      # @todo Eventually we want to split the package and example workflow
       - report-packages:
           requires:
-            - test-packages
+            - accept-packages
           filters:
             branches:
               only: master
-      - report-examples:
+      - document-apps:
           requires:
-            - test-examples
+            - accept-packages
+      - lint-apps:
+          requires:
+            - accept-packages
+      - test-apps:
+          requires:
+            - accept-packages
+      - build-apps:
+          requires:
+            - document-apps
+            - lint-apps
+            - test-apps
+      - report-apps:
+          requires:
+            - build-apps
           filters:
             branches:
               only: master
