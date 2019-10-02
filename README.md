@@ -68,32 +68,28 @@ Below are just some of the up coming ideas for improvements.
 ## Our Commitment
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!
 
-## Planned v6
-1) Restructure with scoped namespaces. Also create a deprecated section so we can redirect people.
-2) Unify all logging and make json logging a thing
-3) Remove react-dev-utils
-4) Add help to CLI and documentation
-5) Reach 90-100% test coverage
-6) node-mocks-http replace with supertest
-7) Make client/server compilation configurable - we want to be able to use webpack in a library sense too
-8) Remove TypeDocs option for now... need to find a better solution (http://caolan.github.io/async/v3/). Make Github addon work
-9) Get audit into build and make sure it passes without critical
-10) Break out react deps into packages
-11) Restructure and fix example into smaller parts
+## Planned v6 Release
+* Restructure with scoped namespaces. Also create a deprecated section so we can redirect people.
+* Restructure examples. Name apps and create one example and one for pixeloven.com
+* Cleanup deps and move functions into core & add tests
+* Abstract some shared app deps and what not to other packages (they can remain private for now)
+* Restructure and fix example into smaller parts
+* Custom commit CLI addon with linting and features to help aid mono repos
+* Break middleware up into smaller packages
+* Remove semantic UI deps in main example and replace with a more accesible option
+* Document everything and host storybook, docs, etc
 
-## Planned v7
-1) Add static site generation support
-2) Add support for PWA
-3) Remove semantic UI deps in main example
-4) Break middleware up into smaller packages
-5) Create component library for the server side components and views
-6) Make @core wrap super common deps and @tasks a simple local cli wrapper with no deps
-7) Make smaller dep core addons
-8) Break webpack config into smaller parts - reuse between storybook and webpack compiler
-
-## Planned v8
-1) Create a unified configuration (perhaps an addon?) for the CLI
-2) Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
-3) Create our own all in one dashboard like Jarvis + BundleAnalyzerPlugin + console (read only)
-4) Create a commit CLI wrapper for commit lint... with config for both citizen and commitlint
-5) Update examples to be more specific
+## After v6 Release
+* Unify all logging and make json logging a thing
+* Remove react-dev-utils
+* Add help to CLI and documentation
+* Reach 90-100% test coverage
+* node-mocks-http replace with supertest
+* Make client/server compilation configurable
+* Audit deps/build and make sure it passes without critical
+* Add static site generation support
+* Add support for PWA
+* Create a unified configuration (perhaps an addon?) for the CLI
+* Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
+* Create our own all in one dashboard like Jarvis + BundleAnalyzerPlugin + console (read only)
+* PixelOven site with coverage, storybook, etc all hosted with a unified theme.

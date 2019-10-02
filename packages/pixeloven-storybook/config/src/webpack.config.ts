@@ -1,7 +1,8 @@
+import { resolveSourceRoot, resolveTsConfig } from "@pixeloven-core/filesystem";
 import deepmerge from "deepmerge";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import { Configuration, Module, RuleSetRule } from "webpack";
-import { resolveSourceRoot, resolveTsConfig } from "./macros";
+
 
 interface Options {
     config: Configuration;

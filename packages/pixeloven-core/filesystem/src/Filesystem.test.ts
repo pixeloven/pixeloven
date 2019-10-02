@@ -78,5 +78,15 @@ describe("@pixeloven-core/filesystem", () => {
                 expect(emptyDirSyncSpy).toHaveBeenCalledTimes(1);
             });
         });
+        describe("resolveSourceRoot", () => {
+            it("should resolve src root", () => {
+                expect(Filesystem.resolveSourceRoot()).toContain("/src");
+            });
+        });
+        describe("resolveTsConfig", () => {
+            it("should resolve ts config", () => {
+                expect(Filesystem.resolveTsConfig()).toContain("/tsconfig.json");
+            });
+        });
     });
 });
