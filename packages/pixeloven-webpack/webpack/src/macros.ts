@@ -2,7 +2,7 @@ import {
     Config as CompilerConfig,
     webpackClientConfig,
     webpackServerConfig,
-} from "@pixeloven/webpack-config";
+} from "@pixeloven-webpack/config";
 
 import { Build, Config as BuildConfig } from "@pixeloven-webpack/bundler";
 import { Compiler } from "@pixeloven-webpack/compiler";

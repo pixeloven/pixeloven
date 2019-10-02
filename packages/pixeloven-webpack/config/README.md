@@ -1,4 +1,4 @@
-# @pixeloven/webpack-config
+# @pixeloven-webpack/config
 
 > Pixel Oven webpack config
 
@@ -9,11 +9,11 @@ See our website [pixeloven-webpack-config](https://github.com/pixeloven/pixelove
 Using npm:
 
 ```sh
-npm install --save @pixeloven/webpack-config
+npm install --save @pixeloven-webpack/config
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/webpack-config
+yarn add @pixeloven-webpack/config
 ```

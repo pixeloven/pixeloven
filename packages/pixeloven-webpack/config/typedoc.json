@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/webpack-config",
+    "name": "@pixeloven-webpack/config",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",
