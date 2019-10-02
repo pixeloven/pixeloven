@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@pixeloven-core/common": "^6.0.0-beta.7",
+    "@pixeloven-webpack/config": "^6.0.0-beta.7",
     "webpack": "4.38.0"
   },
   "devDependencies": {
