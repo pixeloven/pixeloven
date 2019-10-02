@@ -1,4 +1,4 @@
-import { Build, Config as BuildConfig } from "@pixeloven-webpack/build";
+import { Build, Config as BuildConfig } from "@pixeloven-webpack/bundler";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import {
     Config as CompilerConfig,
