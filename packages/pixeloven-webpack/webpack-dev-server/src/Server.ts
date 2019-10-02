@@ -1,4 +1,4 @@
-import { logger } from "@pixeloven/node-logger";
+import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import {
     createWebpackDevMiddleware,

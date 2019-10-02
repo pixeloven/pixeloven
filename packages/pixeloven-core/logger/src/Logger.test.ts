@@ -3,7 +3,7 @@ import Logger from "./Logger";
 
 const logInstance = Logger.getInstance();
 
-describe("@pixeloven/node-logger", () => {
+describe("@pixeloven-core/logger", () => {
     describe("Logger", () => {
         afterAll(() => {
             jest.restoreAllMocks();

@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/node-logger",
+    "name": "@pixeloven-core/logger",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

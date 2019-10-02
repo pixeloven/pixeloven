@@ -1,5 +1,5 @@
 {
-  "name": "@pixeloven/node-logger",
+  "name": "@pixeloven-core/logger",
   "version": "6.0.0-beta.7",
   "description": "Node logger",
   "main": "dist/lib/index.js",

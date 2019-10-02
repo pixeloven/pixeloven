@@ -1,4 +1,4 @@
-import { logger } from "@pixeloven/node-logger";
+import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import { WatchOptions } from "webpack";

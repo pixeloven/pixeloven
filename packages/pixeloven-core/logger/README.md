@@ -29,7 +29,7 @@ The primary function of this module is to act as a CLI logger. This logger consi
 
 
 ```javascript
-import { logger } from "@pixeloven/node-logger";
+import { logger } from "@pixeloven-core/logger";
 
 logger.info("Some stuff happened");
 logger.warn("But not danger seems to be approaching");

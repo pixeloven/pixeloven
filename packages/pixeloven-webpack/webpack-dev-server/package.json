@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@pixeloven-core/exceptions": "^6.0.0-beta.7",
-    "@pixeloven/node-logger": "^6.0.0-beta.7",
+    "@pixeloven-core/logger": "^6.0.0-beta.7",
     "@pixeloven/webpack-dev-server-middleware": "^6.0.0-beta.7",
     "express": "4.16.4"
   },

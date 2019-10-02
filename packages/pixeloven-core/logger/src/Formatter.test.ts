@@ -1,7 +1,7 @@
 import "jest";
 import Formatter from "./Formatter";
 
-describe("@pixeloven/node-logger", () => {
+describe("@pixeloven-core/logger", () => {
     describe("Formatter", () => {
         describe("console", () => {
             it("should create winston formatter", () => {
