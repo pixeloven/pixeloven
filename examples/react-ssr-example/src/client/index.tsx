@@ -1,4 +1,4 @@
-import { Router } from "@pixeloven/react-router-config";
+import { Router } from "@pixeloven-react/routing";
 import { App } from "@shared/components";
 import { config } from "@shared/config";
 import routeConfig from "@shared/routes";

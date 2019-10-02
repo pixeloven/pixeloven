@@ -64,7 +64,7 @@ const pathRouteConfigWithChildren = [
     },
 ];
 
-describe("@pixeloven/react-router-config", () => {
+describe("@pixeloven-react/routing", () => {
     describe("utils/Router", () => {
         describe("matchRoutes", () => {
             it("should match to root path", () => {

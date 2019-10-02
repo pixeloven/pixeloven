@@ -65,7 +65,7 @@ export default routes;
 ### Implementation 
 Next let's implement our shared Routes component. In the example above we created a simple nested structure with **Default** as out `template` and **Home** as our `page`. First up we need to add out `Routes` component to our Application.
 ```javascript
-import { Routes, RouteProps } from "@pixeloven/react-router-config";
+import { Routes, RouteProps } from "@pixeloven-react/routing";
 import routes from "@shared/routes";
 
 interface Props {
@@ -80,7 +80,7 @@ class App extends React.Component<Props> {
 ```
 Of course this next step is option but here to highlight that nested routes are supported. For this example we have defined a simple **Default** template that might have shared components common across our application.
 ```javascript
-import { Routes, RouteComponentProps } from "@pixeloven/react-router-config";
+import { Routes, RouteComponentProps } from "@pixeloven-react/routing";
 
 class Default extends React.Component<RouteComponentProps> {
     public render() {
@@ -90,7 +90,7 @@ class Default extends React.Component<RouteComponentProps> {
 ```
 Finally we arrive home with our simple little page.
 ```javascript
-import { RouteComponentProps } from "@pixeloven/react-router-config";
+import { RouteComponentProps } from "@pixeloven-react/routing";
 
 class Home extends React.Component<RouteComponentProps> {
     public render() {
@@ -102,7 +102,7 @@ class Home extends React.Component<RouteComponentProps> {
 ### Integration 
 On both the client and server side we should integrate our unified routes with our application like so.
 ```javascript
-import { Router } from "@pixeloven/react-router-config";
+import { Router } from "@pixeloven-react/routing";
 import { App } from "@shared/components";
 import routes from "@shared/routes";
 
@@ -122,7 +122,7 @@ At this point it is up to your application structure to determine the best appro
 
 For example if we wanted to fetch data on the server side to push into our application state we might do something like the following.
 ```javascript
-import { matchRoutes } from "@pixeloven/react-router-config";
+import { matchRoutes } from "@pixeloven-react/routing";
 import routes from "@shared/routes";
 
 //...

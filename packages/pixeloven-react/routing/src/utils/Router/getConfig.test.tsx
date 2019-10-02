@@ -54,7 +54,7 @@ const createNestedConvertedRoutes = (path: string = "") => [
     },
 ];
 
-describe("@pixeloven/react-router-config", () => {
+describe("@pixeloven-react/routing", () => {
     describe("Utils", () => {
         describe("convertRouteConfig", () => {
             it("should convert custom simple config without pathing", () => {

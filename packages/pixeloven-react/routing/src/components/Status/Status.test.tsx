@@ -18,7 +18,7 @@ const TestComponent = () => {
     return <div>testing</div>;
 };
 
-describe("@pixeloven/react-router-config", () => {
+describe("@pixeloven-react/routing", () => {
     describe("components/Status", () => {
         it("should render one <TestComponent /> and not set status code without `statusCode` or `staticContext` props", () => {
             const wrapper = mount(

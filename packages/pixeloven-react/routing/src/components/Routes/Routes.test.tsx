@@ -20,7 +20,7 @@ const routes = [
     },
 ];
 
-describe("@pixeloven/react-router-config", () => {
+describe("@pixeloven-react/routing", () => {
     describe("components/Routes", () => {
         it("should render just two <Route /> components", () => {
             const wrapper = mount(

@@ -1,4 +1,4 @@
-import { RouteComponentProps } from "@pixeloven/react-router-config";
+import { RouteComponentProps } from "@pixeloven-react/routing";
 import { Icon, Logo } from "@shared/components/atoms";
 import React from "react";
 import { Helmet } from "react-helmet";

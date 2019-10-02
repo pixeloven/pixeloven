@@ -1,4 +1,4 @@
-import { RouteComponentProps } from "@pixeloven/react-router-config";
+import { RouteComponentProps } from "@pixeloven-react/routing";
 import React from "react";
 import { Container, Grid } from "semantic-ui-react";
 

@@ -1,4 +1,4 @@
-import { RouteProps, Routes } from "@pixeloven/react-router-config";
+import { RouteProps, Routes } from "@pixeloven-react/routing";
 import React from "react";
 import { Helmet } from "react-helmet";
 

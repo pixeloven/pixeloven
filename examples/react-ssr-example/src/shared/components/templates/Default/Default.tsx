@@ -1,4 +1,4 @@
-import { RouteComponentProps, Routes } from "@pixeloven/react-router-config";
+import { RouteComponentProps, Routes } from "@pixeloven-react/routing";
 import { MainMenu } from "@shared/components/molecules";
 import React from "react";
 import { Link } from "react-router-dom";

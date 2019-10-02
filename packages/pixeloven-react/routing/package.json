@@ -1,5 +1,5 @@
 {
-  "name": "@pixeloven/react-router-config",
+  "name": "@pixeloven-react/routing",
   "version": "6.0.0-beta.7",
   "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
