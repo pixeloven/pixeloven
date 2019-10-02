@@ -10,14 +10,14 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - node-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - node-v4-{{ .Branch }}-
-            - node-v4-
+            - node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - run:
           name: Install dependencies
           command: yarn install
       - save_cache:
-          key: node-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: node-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
             - "apps/**/**/node_modules"
