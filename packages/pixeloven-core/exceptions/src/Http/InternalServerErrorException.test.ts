@@ -5,7 +5,7 @@ const name = "HttpInternalServerErrorException";
 const defaultMessage = "Internal Server Error";
 const exception = new HttpInternalServerErrorException();
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("HttpInternalServerErrorException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

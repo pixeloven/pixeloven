@@ -5,7 +5,7 @@ const name = "HttpResponseException";
 const defaultMessage = "Response Error";
 const exception = new HttpResponseException(400);
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("HttpResponseException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

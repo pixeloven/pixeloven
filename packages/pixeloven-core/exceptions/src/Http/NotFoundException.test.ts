@@ -5,7 +5,7 @@ const name = "HttpNotFoundException";
 const defaultMessage = "Not Found";
 const exception = new HttpNotFoundException();
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("HttpNotFoundException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

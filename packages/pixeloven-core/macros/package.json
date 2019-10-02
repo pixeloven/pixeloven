@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/generators",
+  "name": "@pixeloven-core/macros",
   "version": "6.0.0-beta.7",
-  "description": "Helper functions for code generation",
+  "description": "Core Framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -18,10 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-beta.7"
+    "@pixeloven-core/exceptions": "^6.0.0-beta.7",
+    "fs-extra": "7.0.1"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.7",
+    "@types/fs-extra": "5.0.5",
     "lint-staged": "9.2.5"
   },
   "scripts": {
@@ -41,14 +43,9 @@
     "test:watch": "pixeloven-tasks test:watch"
   },
   "lint-staged": {
-    "src/**/*.{scss}": [
-      "yarn pixeloven pretty scss",
-      "yarn pixeloven lint scss",
-      "git add"
-    ],
     "src/**/*.{ts,tsx}": [
-      "yarn pixeloven pretty ts",
-      "yarn pixeloven lint ts",
+      "pixeloven-tasks pretty:ts",
+      "pixeloven-tasks lint:ts",
       "git add"
     ]
   }

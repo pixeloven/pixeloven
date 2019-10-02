@@ -1,6 +1,4 @@
-import { FileNotFoundException } from "@pixeloven/exceptions";
-import { SpawnSyncReturns } from "child_process";
-import spawn from "cross-spawn";
+import { FileNotFoundException } from "@pixeloven-core/exceptions";
 import fs from "fs-extra";
 import path from "path";
 
@@ -10,7 +8,7 @@ import path from "path";
 export const exit = process.exit;
 
 /**
- * Simple wrapper for process exit
+ * Simple wrapper for process cwd()
  */
 export const cwd = () => process.cwd();
 
@@ -50,29 +48,3 @@ export const createOrEmptyDir = (fullPath: string) => {
  */
 export const normalizeUrl = (item: string) =>
     item.replace(/([^:]\/)\/+/g, "$1");
-
-/**
- * Spawn yarn cmd
- * @param name
- * @param args
- */
-export const spawnBin = (name: string, args: string[] = []) => {
-    const yarnArgs: string[] = [];
-    const calling = yarnArgs.concat(args);
-    return spawn.sync(name, calling, {
-        stdio: "inherit",
-    });
-};
-
-/**
- * Check signal returned by execution and close process
- * @param result
- * @todo should use the core logger here
- */
-export const spawnComplete = (result: SpawnSyncReturns<Buffer>) => {
-    if (result.signal && result.status) {
-        exit(result.status);
-    } else {
-        exit(1);
-    }
-};

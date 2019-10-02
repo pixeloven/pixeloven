@@ -5,7 +5,7 @@ const name = "Exception";
 const message = "testing";
 const exception = new Exception(message);
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("Exception", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

@@ -1,4 +1,4 @@
-# @pixeloven/generators
+# @pixeloven-core/validation
 
 > Pixel Oven generators
 

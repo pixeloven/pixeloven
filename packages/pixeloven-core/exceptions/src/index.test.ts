@@ -1,7 +1,7 @@
 import "jest";
 import * as exceptions from "./index";
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("index", () => {
         it("should export Exception", () => {
             expect(typeof exceptions.Exception).toEqual("function");

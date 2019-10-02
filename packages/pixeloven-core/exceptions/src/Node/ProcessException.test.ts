@@ -5,7 +5,7 @@ const name = "NodeProcessException";
 const defaultMessage = "Node Process Error";
 const exception = new NodeProcessException();
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("NodeProcessException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

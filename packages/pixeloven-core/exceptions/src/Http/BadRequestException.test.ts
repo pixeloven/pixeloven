@@ -5,7 +5,7 @@ const name = "HttpBadRequestException";
 const defaultMessage = "Bad Request";
 const exception = new HttpBadRequestException();
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("HttpBadRequestException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

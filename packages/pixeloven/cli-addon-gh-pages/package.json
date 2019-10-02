@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@pixeloven/cli": "^6.0.0-beta.7",
-    "@pixeloven/core": "^6.0.0-beta.7",
-    "@pixeloven/exceptions": "^6.0.0-beta.7",
+    "@pixeloven-core/macros": "^6.0.0-beta.7",
+    "@pixeloven-core/exceptions": "^6.0.0-beta.7",
     "fs-extra": "7.0.1",
     "gh-pages": "2.0.1"
   },
@@ -47,14 +47,9 @@
     "test:watch": "pixeloven-tasks test:watch"
   },
   "lint-staged": {
-    "src/**/*.{scss}": [
-      "yarn pixeloven pretty scss",
-      "yarn pixeloven lint scss",
-      "git add"
-    ],
     "src/**/*.{ts,tsx}": [
-      "yarn pixeloven pretty ts",
-      "yarn pixeloven lint ts",
+      "pixeloven-tasks pretty:ts",
+      "pixeloven-tasks lint:ts",
       "git add"
     ]
   }

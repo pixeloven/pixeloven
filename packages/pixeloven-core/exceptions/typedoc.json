@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/exceptions",
+    "name": "@pixeloven-core/exceptions",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

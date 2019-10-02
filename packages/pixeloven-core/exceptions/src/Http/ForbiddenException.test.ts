@@ -5,7 +5,7 @@ const name = "ForbiddenException";
 const defaultMessage = "Forbidden";
 const exception = new ForbiddenException();
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("ForbiddenException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

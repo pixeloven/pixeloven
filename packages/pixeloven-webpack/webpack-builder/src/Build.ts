@@ -1,4 +1,4 @@
-import { createOrEmptyDir } from "@pixeloven/core";
+import { createOrEmptyDir } from "@pixeloven-core/macros";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";

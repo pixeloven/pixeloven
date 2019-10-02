@@ -5,7 +5,7 @@ const name = "NodeInvalidArgumentException";
 const defaultMessage = "Invalid argument exception";
 const exception = new NodeInvalidArgumentException();
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("NodeInvalidArgumentException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

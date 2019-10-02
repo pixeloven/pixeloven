@@ -69,7 +69,7 @@ Below are just some of the up coming ideas for improvements.
 We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!
 
 ## Planned v6
-1) Move generators to use gluegun
+1) Restructure with scoped namespaces. Also create a deprecated section so we can redirect people.
 2) Unify all logging and make json logging a thing
 3) Remove react-dev-utils
 4) Add help to CLI and documentation

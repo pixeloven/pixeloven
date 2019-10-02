@@ -1,4 +1,4 @@
-# @pixeloven/exceptions
+# @pixeloven-core/exceptions
 
 > Pixel Oven exceptions.
 
@@ -9,11 +9,11 @@ See our website [pixeloven-exceptions](https://github.com/pixeloven/pixeloven) f
 Using npm:
 
 ```sh
-npm install --save @pixeloven/exceptions
+npm install --save @pixeloven-core/exceptions
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/exceptions
+yarn add @pixeloven-core/exceptions
 ```

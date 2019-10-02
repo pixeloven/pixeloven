@@ -1,4 +1,4 @@
-import { NodeInvalidArgumentException } from "@pixeloven/exceptions";
+import { NodeInvalidArgumentException } from "@pixeloven-core/exceptions";
 import {
     AddonStorybookRunContext,
     StorybookExecutionType,

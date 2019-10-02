@@ -5,7 +5,7 @@ const name = "FileNotFoundException";
 const defaultMessage = "File Not Found";
 const exception = new FileNotFoundException();
 
-describe("@pixeloven/exceptions", () => {
+describe("@pixeloven-core/exceptions", () => {
     describe("FileNotFoundException", () => {
         describe("exception.message", () => {
             it(`property should be set to default string`, () => {

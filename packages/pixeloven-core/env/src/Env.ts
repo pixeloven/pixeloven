@@ -1,4 +1,4 @@
-import { NodeProcessException } from "@pixeloven/exceptions";
+import { NodeProcessException } from "@pixeloven-core/exceptions";
 import dotenv from "dotenv";
 
 export type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent";

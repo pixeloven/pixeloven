@@ -1,4 +1,4 @@
-import { normalizeUrl } from "@pixeloven/core";
+import { normalizeUrl } from "@pixeloven-core/macros";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import {

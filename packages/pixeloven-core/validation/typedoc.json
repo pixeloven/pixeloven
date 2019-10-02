@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/core",
+    "name": "@pixeloven-core/validation",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

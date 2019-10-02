@@ -1,4 +1,4 @@
-import * as core from "@pixeloven/core";
+import * as core from "@pixeloven-core/macros";
 import "jest";
 import sinon from "sinon";
 import server from "./server";

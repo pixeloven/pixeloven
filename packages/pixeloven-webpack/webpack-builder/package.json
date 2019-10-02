@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/core": "^6.0.0-beta.7",
+    "@pixeloven-core/macros": "^6.0.0-beta.7",
     "@pixeloven/node-logger": "^6.0.0-beta.7",
     "react-dev-utils": "9.0.1"
   },
@@ -48,14 +48,9 @@
     "test:watch": "pixeloven-tasks test:watch"
   },
   "lint-staged": {
-    "src/**/*.{scss}": [
-      "yarn pixeloven pretty scss",
-      "yarn pixeloven lint scss",
-      "git add"
-    ],
     "src/**/*.{ts,tsx}": [
-      "yarn pixeloven pretty ts",
-      "yarn pixeloven lint ts",
+      "pixeloven-tasks pretty:ts",
+      "pixeloven-tasks lint:ts",
       "git add"
     ]
   }

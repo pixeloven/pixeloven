@@ -2,7 +2,7 @@
  * @todo Remove as any once https://github.com/infinitered/gluegun/pull/564 is merged
  */
 /* tslint:disable no-any */
-import { Validation } from "@pixeloven/generators";
+import { Validation } from "@pixeloven-core/validation";
 import {
     AddonGeneratorsToolbox,
     AtomicDesignType,

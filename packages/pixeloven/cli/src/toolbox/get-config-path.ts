@@ -1,4 +1,4 @@
-import { FileNotFoundException } from "@pixeloven/exceptions";
+import { FileNotFoundException } from "@pixeloven-core/exceptions";
 import { filesystem, print } from "gluegun";
 
 /**

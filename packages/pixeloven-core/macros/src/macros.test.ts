@@ -1,4 +1,4 @@
-import { FileNotFoundException } from "@pixeloven/exceptions";
+import { FileNotFoundException } from "@pixeloven-core/exceptions";
 import fs, { PathLike } from "fs-extra";
 import "jest";
 import path from "path";
@@ -9,7 +9,7 @@ const existsSyncMock = (somePath: PathLike) => resolvePathExists;
 const mkdirSyncMock = (somePath: PathLike) => undefined;
 const emptyDirSyncMock = (somePath: PathLike) => undefined;
 
-describe("@pixeloven/core", () => {
+describe("@pixeloven-core/macros", () => {
     describe("macros", () => {
         afterAll(() => {
             jest.clearAllMocks();

@@ -1,6 +1,6 @@
+import { FileNotFoundException } from "@pixeloven-core/exceptions";
+import { createOrEmptyDir, resolvePath } from "@pixeloven-core/macros";
 import { RunResponse } from "@pixeloven/cli";
-import { createOrEmptyDir, resolvePath } from "@pixeloven/core";
-import { FileNotFoundException } from "@pixeloven/exceptions";
 import fs from "fs-extra";
 import ghpages from "gh-pages";
 import path from "path";

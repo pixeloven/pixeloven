@@ -87,7 +87,7 @@ yarn test-examples
 To run only one specific package (and speed up development) you can scope them
 
 ```bash
-lerna run test --scope "@pixeloven/generators"
+lerna run test --scope "@pixeloven-core/validation"
 ```
 
 To manually test integration you can use either of the example projects, but first you must symlink the packages from the project root.

@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven/core",
+  "name": "@pixeloven-core/validation",
   "version": "6.0.0-beta.7",
-  "description": "Core Framework",
+  "description": "Helper functions for code generation",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -18,14 +18,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/exceptions": "^6.0.0-beta.7",
-    "cross-spawn": "6.0.5",
-    "fs-extra": "7.0.1"
+    "@pixeloven-core/macros": "^6.0.0-beta.7"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.7",
-    "@types/cross-spawn": "6.0.0",
-    "@types/fs-extra": "5.0.5",
     "lint-staged": "9.2.5"
   },
   "scripts": {
@@ -45,14 +41,9 @@
     "test:watch": "pixeloven-tasks test:watch"
   },
   "lint-staged": {
-    "src/**/*.{scss}": [
-      "yarn pixeloven pretty scss",
-      "yarn pixeloven lint scss",
-      "git add"
-    ],
     "src/**/*.{ts,tsx}": [
-      "yarn pixeloven pretty ts",
-      "yarn pixeloven lint ts",
+      "pixeloven-tasks pretty:ts",
+      "pixeloven-tasks lint:ts",
       "git add"
     ]
   }
