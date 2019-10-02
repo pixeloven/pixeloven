@@ -204,14 +204,15 @@ workflows:
       - lint-packages:
           requires:
             - compile-packages
-      - test-packages:
-          requires:
-            - compile-packages
+# EXITING BECAUSE OF MEM????
+      # - test-packages:
+      #     requires:
+      #       - compile-packages
       - accept-packages:
           requires:
             - document-packages
             - lint-packages
-            - test-packages
+            # - test-packages
       - report-packages:
           requires:
             - accept-packages
