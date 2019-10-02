@@ -53,7 +53,7 @@ commands:
       - persist_to_workspace:
           root: .
           paths: 
-            - << parameters.type >>/**/docs
+            - << parameters.type >>/**/**/docs
   lint:
     description: "Linting"
     parameters:
@@ -75,7 +75,7 @@ commands:
       - persist_to_workspace:
           root: .
           paths: 
-            - << parameters.type >>/**/coverage
+            - << parameters.type >>/**/**/coverage
   list:
     description: "List directory contents"
     parameters:
