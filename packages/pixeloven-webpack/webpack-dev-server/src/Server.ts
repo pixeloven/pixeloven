@@ -1,4 +1,3 @@
-import { normalizeUrl } from "@pixeloven-core/macros";
 import { logger } from "@pixeloven/node-logger";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import {
@@ -112,6 +111,8 @@ class Server {
         logger.info(`---------- Connecting Server ----------`);
         return new Promise<number>((resolve, reject) => {
             try {
+                const normalizeUrl = (item: string) =>
+                    item.replace(/([^:]\/)\/+/g, "$1");
                 const baseUrl = normalizeUrl(
                     `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.path}`,
                 );

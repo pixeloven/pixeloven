@@ -18,7 +18,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/macros": "^6.0.0-beta.7",
     "@pixeloven-core/exceptions": "^6.0.0-beta.7",
     "@pixeloven/node-logger": "^6.0.0-beta.7",
     "@pixeloven/webpack-dev-server-middleware": "^6.0.0-beta.7",

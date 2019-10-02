@@ -1,4 +1,4 @@
-import { resolvePath } from "@pixeloven-core/macros";
+import { resolvePath } from "@pixeloven-core/filesystem";
 import autoprefixer from "autoprefixer";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";

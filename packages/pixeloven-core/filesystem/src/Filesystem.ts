@@ -3,12 +3,8 @@ import fs from "fs-extra";
 import path from "path";
 
 /**
- * Simple wrapper for process exit
- */
-export const exit = process.exit;
-
-/**
  * Simple wrapper for process cwd()
+ * @todo MOVE TO A PROCESS ABSTRACTION LIBRARY
  */
 export const cwd = () => process.cwd();
 
@@ -31,6 +27,21 @@ export const resolvePath = (
 };
 
 /**
+ * Resolves directory
+ * @todo Should move this into core or as a helper in CLI... or both
+ * @param relativePath
+ */
+export function resolveDir(relativePath: string) {
+    const packagePath = resolvePath(relativePath);
+    const stat = fs.statSync(packagePath);
+    if (stat && stat.isDirectory()) {
+        return packagePath;
+    } else {
+        throw new FileNotFoundException();
+    }
+};
+
+/**
  * Create or empty existing directory
  * @param fullPath
  */
@@ -41,10 +52,3 @@ export const createOrEmptyDir = (fullPath: string) => {
         fs.mkdirSync(fullPath);
     }
 };
-
-/**
- * Normalize a url
- * @param item
- */
-export const normalizeUrl = (item: string) =>
-    item.replace(/([^:]\/)\/+/g, "$1");

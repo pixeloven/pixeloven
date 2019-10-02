@@ -1,5 +1,4 @@
-import { FileNotFoundException } from "@pixeloven-core/exceptions";
-import { createOrEmptyDir, resolvePath } from "@pixeloven-core/macros";
+import { createOrEmptyDir, resolveDir, resolvePath } from "@pixeloven-core/filesystem";
 import { RunResponse } from "@pixeloven/cli";
 import fs from "fs-extra";
 import ghpages from "gh-pages";
@@ -7,26 +6,11 @@ import path from "path";
 import { AddonGhPagesRunContext, GhPagesExtension } from "../types";
 
 /**
- * Resolves directory
- * @todo Should move this into core or as a helper in CLI... or both
- * @param relativePath
- */
-const resolveDir = (relativePath: string) => {
-    const packagePath = resolvePath(relativePath);
-    const stat = fs.statSync(packagePath);
-    if (stat && stat.isDirectory()) {
-        return packagePath;
-    } else {
-        throw new FileNotFoundException();
-    }
-};
-
-/**
  * Copies docs to destination
  * @param containerName
  * @param relativePath
  */
-const copyDocs = (containerName: string, packageName: string) => {
+export function copyDocs(containerName: string, packageName: string) {
     const relativeDocsPath = path.join(containerName, packageName, "docs");
     const absoluteSourcePath = resolveDir(relativeDocsPath);
     const relativeDestPath = path.join("docs", relativeDocsPath);

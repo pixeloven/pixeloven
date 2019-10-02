@@ -6,8 +6,8 @@
         "outDir": "./dist/lib",
         "skipLibCheck": true,
         "paths": {
-            "@*": ["src/*"],
-        },
+            "@*": ["src/*"]
+        }
     },
     "exclude": [
         "./**/*.stories.ts",

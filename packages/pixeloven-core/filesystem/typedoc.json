@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven-core/macros",
+    "name": "@pixeloven-core/filesystem",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

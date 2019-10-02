@@ -1,4 +1,4 @@
-import * as core from "@pixeloven-core/macros";
+import * as filesystem from "@pixeloven-core/filesystem";
 import "jest";
 import sinon from "sinon";
 import server from "./server";
@@ -17,7 +17,7 @@ describe("@pixeloven/webpack", () => {
                 });
                 beforeAll(() => {
                     sandbox
-                        .stub(core, "resolvePath")
+                        .stub(filesystem, "resolvePath")
                         .call(
                             (relativePath: string, strict?: boolean) =>
                                 `/test/path/${relativePath}`,
