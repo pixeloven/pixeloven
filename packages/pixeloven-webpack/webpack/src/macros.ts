@@ -1,5 +1,5 @@
-import { Build, Config as BuildConfig } from "@pixeloven/webpack-builder";
-import { Compiler } from "@pixeloven/webpack-compiler";
+import { Build, Config as BuildConfig } from "@pixeloven-webpack/build";
+import { Compiler } from "@pixeloven-webpack/compiler";
 import {
     Config as CompilerConfig,
     webpackClientConfig,

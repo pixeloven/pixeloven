@@ -1,5 +1,5 @@
 import { logger } from "@pixeloven-core/logger";
-import { Compiler } from "@pixeloven/webpack-compiler";
+import { Compiler } from "@pixeloven-webpack/compiler";
 import {
     createWebpackDevMiddleware,
     createWebpackHotClientMiddleware,

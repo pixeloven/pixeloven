@@ -1,5 +1,5 @@
+import { Config as BuildConfig } from "@pixeloven-webpack/build";
 import { PixelOvenToolbox } from "@pixeloven/cli";
-import { Config as BuildConfig } from "@pixeloven/webpack-builder";
 import { Config as CompilerConfig } from "@pixeloven/webpack-config";
 import { Config as ServerConfig } from "@pixeloven/webpack-dev-server";
 

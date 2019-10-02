@@ -1,4 +1,4 @@
-# @pixeloven/webpack-compiler
+# @pixeloven-webpack/compiler
 
 > Pixel Oven webpack-compiler.
 
@@ -9,13 +9,13 @@ See our website [pixeloven-webpack-compiler](https://github.com/pixeloven/pixelo
 Using npm:
 
 ```sh
-npm install --save @pixeloven/webpack-compiler
+npm install --save @pixeloven-webpack/compiler
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/webpack-compiler
+yarn add @pixeloven-webpack/compiler
 ```
 
 ## Usage
@@ -45,7 +45,7 @@ export default [
 
 We can take this configuration and compile it like shown below.
 ```javascript
-import { Compiler } from "@pixeloven/webpack-compiler";
+import { Compiler } from "@pixeloven-webpack/compiler";
 import configs from "./webpack.config.js"
 
 Compiler.create(configs);

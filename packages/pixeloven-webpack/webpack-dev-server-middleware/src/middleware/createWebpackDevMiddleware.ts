@@ -1,5 +1,5 @@
 import { logger } from "@pixeloven-core/logger";
-import { Compiler } from "@pixeloven/webpack-compiler";
+import { Compiler } from "@pixeloven-webpack/compiler";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import { WatchOptions } from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
