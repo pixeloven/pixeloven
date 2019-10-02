@@ -9,13 +9,13 @@ See our website [pixeloven-express-dynamic-middleware](https://github.com/pixelo
 Using npm:
 
 ```sh
-npm install --save @pixeloven/express-dynamic-middleware
+npm install --save @pixeloven-express/dynamic-middleware
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/express-dynamic-middleware
+yarn add @pixeloven-express/dynamic-middleware
 ```
 
 ## Usage

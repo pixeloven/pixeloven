@@ -1,4 +1,4 @@
-import { DynamicMiddleware } from "@pixeloven/express-dynamic-middleware";
+import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import express, { Express, NextFunction, Request, Response } from "express";
 import MemoryFileSystem from "memory-fs";

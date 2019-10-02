@@ -1,6 +1,6 @@
 /* tslint:disable no-any */
 import { logger } from "@pixeloven-core/logger";
-import { DynamicMiddleware } from "@pixeloven/express-dynamic-middleware";
+import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven/webpack-compiler";
 import { NextFunction, Request, Response } from "express";
 import { normalize } from "path";

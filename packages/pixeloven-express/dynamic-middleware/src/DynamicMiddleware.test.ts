@@ -6,7 +6,7 @@ import DynamicMiddleware from "./DynamicMiddleware";
 const exampleMiddleware = (req: Request, res: Response, next: NextFunction) =>
     next();
 
-describe("@pixeloven/express-dynamic-middleware", () => {
+describe("@pixeloven-express/dynamic-middleware", () => {
     describe("DynamicMiddleware", () => {
         it("should instantiate without layers", () => {
             const dynamicMiddleware = new DynamicMiddleware();

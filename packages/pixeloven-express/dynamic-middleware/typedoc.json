@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/express-dynamic-middleware",
+    "name": "@pixeloven-express/dynamic-middleware",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",
