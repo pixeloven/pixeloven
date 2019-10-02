@@ -1,4 +1,6 @@
-import { getBuilder, getCompiler, getServer } from "@pixeloven/webpack";
+import getBundler from "@pixeloven-webpack/bundler";
+import getCompiler from "@pixeloven-webpack/compiler";
+import getServer from "@pixeloven-webpack/server";
 import {
     AddonWebpackToolbox,
     WebpackExtensionOptions,
@@ -22,10 +24,10 @@ export default (toolbox: AddonWebpackToolbox) => {
             switch (options.type) {
                 case WebpackExtensionType.build: {
                     const compiler = getCompiler(options.compilerOptions);
-                    const builder = getBuilder(compiler, options.buildOptions);
+                    const bundler = getBundler(compiler, options.buildOptions);
                     let statusCode = 0;
-                    statusCode += await builder.client();
-                    statusCode += await builder.server();
+                    statusCode += await bundler.client();
+                    statusCode += await bundler.server();
                     return statusCode;
                 }
                 case WebpackExtensionType.start: {
