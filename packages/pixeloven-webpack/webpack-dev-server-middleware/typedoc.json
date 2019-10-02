@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/webpack-dev-server-middleware",
+    "name": "@pixeloven-webpack/server-middleware",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

@@ -1,4 +1,4 @@
-# @pixeloven/webpack-dev-server
+# @pixeloven-webpack/server
 
 > Pixel Oven Webpack Development Server.
 
@@ -9,13 +9,13 @@ See our website [pixeloven-webpack-dev-server](https://github.com/pixeloven/pixe
 Using npm:
 
 ```sh
-npm install --save @pixeloven/webpack-dev-server
+npm install --save @pixeloven-webpack/server
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/webpack-dev-server
+yarn add @pixeloven-webpack/server
 ```
 
 ## Usage

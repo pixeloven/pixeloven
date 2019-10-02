@@ -1,4 +1,4 @@
-# @pixeloven/webpack-dev-server-middleware
+# @pixeloven-webpack/server-middleware
 
 > Pixel Oven Webpack Development Server middleware.
 
@@ -9,13 +9,13 @@ See our website [pixeloven-webpack-dev-server-middleware](https://github.com/pix
 Using npm:
 
 ```sh
-npm install --save @pixeloven/webpack-dev-server-middleware
+npm install --save @pixeloven-webpack/server-middleware
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/webpack-dev-server-middleware
+yarn add @pixeloven-webpack/server-middleware
 ```
 
 ## Usage

@@ -2,7 +2,7 @@ import "jest";
 import httpMocks from "node-mocks-http";
 import errorHandler from "./errorHandler";
 
-describe("@pixeloven/webpack-dev-server", () => {
+describe("@pixeloven-webpack/server", () => {
     describe("middleware", () => {
         describe("errorHandler", () => {
             it(`should respond with 500"`, () => {

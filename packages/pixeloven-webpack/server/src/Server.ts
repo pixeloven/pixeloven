@@ -6,7 +6,7 @@ import {
     createWebpackHotServerMiddleware,
     createWebpackReactAssetMiddleware,
     errorHandler,
-} from "@pixeloven/webpack-dev-server-middleware";
+} from "@pixeloven-webpack/server-middleware";
 import express from "express";
 import fs from "fs";
 import path from "path";

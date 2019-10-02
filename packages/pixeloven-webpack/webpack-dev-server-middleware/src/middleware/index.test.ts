@@ -7,7 +7,7 @@ import {
     errorHandler,
 } from "./index";
 
-describe("@pixeloven/webpack-dev-server-middleware", () => {
+describe("@pixeloven-webpack/server-middleware", () => {
     describe("index", () => {
         it("should export middleware", () => {
             expect(typeof createWebpackDevMiddleware).toEqual("function");

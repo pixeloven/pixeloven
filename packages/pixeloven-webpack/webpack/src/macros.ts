@@ -1,16 +1,16 @@
-import { Build, Config as BuildConfig } from "@pixeloven-webpack/bundler";
-import { Compiler } from "@pixeloven-webpack/compiler";
 import {
     Config as CompilerConfig,
     webpackClientConfig,
     webpackServerConfig,
 } from "@pixeloven/webpack-config";
+
+import { Build, Config as BuildConfig } from "@pixeloven-webpack/bundler";
+import { Compiler } from "@pixeloven-webpack/compiler";
 import {
     Config as ServerConfig,
     Protocol,
     Server,
-} from "@pixeloven/webpack-dev-server";
-
+} from "@pixeloven-webpack/server";
 /**
  * @todo Unify params for build and dev server
  * @todo Should we set ENV here? Or should this be up to the application?
