@@ -20,7 +20,7 @@ commands:
           key: node-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
-            - "examples/**/node_modules"
+            - "examples/**/**/node_modules"
             - "packages/**/**/node_modules"
   compile:
     description: "Compiling"
