@@ -37,8 +37,6 @@
     "@pixeloven/cli-addon-generators": "^6.0.0-beta.7",
     "@pixeloven/cli-addon-storybook": "^6.0.0-beta.7",
     "@pixeloven/cli-addon-webpack": "^6.0.0-beta.7",
-    "@pixeloven-core/validation": "^6.0.0-beta.7",
-    "@pixeloven/storybook": "^6.0.0-beta.7",
     "@pixeloven/webpack": "^6.0.0-beta.7",
     "@types/classnames": "2.2.9",
     "@types/enzyme": "3.10.3",

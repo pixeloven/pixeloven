@@ -1,7 +1,7 @@
 import "jest";
 import { resolveSourceRoot, resolveTsConfig } from "./macros";
 
-describe("@pixeloven/storybook", () => {
+describe("@pixeloven-storybook/config", () => {
     describe("configs", () => {
         describe("macros", () => {
             it("resolveSourceRoot should resolve src root", () => {

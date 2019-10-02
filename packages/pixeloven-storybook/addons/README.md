@@ -1,4 +1,4 @@
-# @pixeloven/storybook
+# @pixeloven-storybook/config
 
 > Pixel Oven docs.
 
@@ -9,11 +9,11 @@ See our website [pixeloven-docs](https://github.com/pixeloven/pixeloven) for mor
 Using npm:
 
 ```sh
-npm install --save @pixeloven/storybook
+npm install --save @pixeloven-storybook/config
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/storybook
+yarn add @pixeloven-storybook/config
 ```

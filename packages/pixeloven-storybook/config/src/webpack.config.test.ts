@@ -6,7 +6,7 @@ import storybook, { newModule } from "./webpack.config";
  * @todo should create a generator to do this but for now let's disable this rule here
  */
 /* tslint:disable no-object-literal-type-assertion */
-describe("@pixeloven/storybook", () => {
+describe("@pixeloven-storybook/config", () => {
     describe("configs", () => {
         describe("webpack.config", () => {
             it("webpack config returns config untouched", () => {

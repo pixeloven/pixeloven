@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/storybook",
+    "name": "@pixeloven-storybook/addons",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

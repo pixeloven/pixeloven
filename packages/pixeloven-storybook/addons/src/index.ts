@@ -4,8 +4,6 @@ import * as Knobs from "@storybook/addon-knobs";
 import * as Viewport from "@storybook/addon-viewport";
 
 /**
- * @todo Need to update this as well
- *
  * @todo Create some helpers and use this to help build stories more efficiently
  * @todo Also can we change the default order of the pages?
  * @todo Does storybook have an official readme package that might be better?

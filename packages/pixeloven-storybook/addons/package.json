@@ -1,9 +1,9 @@
 {
-  "name": "@pixeloven/cli-addon-storybook",
+  "name": "@pixeloven-storybook/addons",
   "version": "6.0.0-beta.7",
-  "description": "PixelOven CLI addon for storybook based development",
-  "main": "dist/lib/index.js",
-  "types": "dist/types/types.d.ts",
+  "description": "Storybook addon library",
+  "main": "dist/lib/story.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist/"
   ],
@@ -18,13 +18,25 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven/cli": "^6.0.0-beta.7",
-    "@pixeloven-core/exceptions": "^6.0.0-beta.7",
-    "@pixeloven-storybook/config": "^6.0.0-beta.7"
+    "@storybook/addon-a11y": "5.1.10",
+    "@storybook/addon-actions": "5.1.10",
+    "@storybook/addon-backgrounds": "5.1.10",
+    "@storybook/addon-knobs": "5.1.10",
+    "@storybook/addon-notes": "5.1.10",
+    "@storybook/addon-options": "5.1.10",
+    "@storybook/addon-viewport": "5.1.10",
+    "@storybook/addons": "5.1.10"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.7",
+    "@types/storybook__addon-knobs": "5.0.3",
+    "@types/storybook__addon-options": "4.0.2",
+    "@types/storybook__addon-viewport": "4.1.1",
     "lint-staged": "9.2.5"
+  },
+  "peerDependencies": {
+    "react": ">=16.3",
+    "react-dom": ">=16.3"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

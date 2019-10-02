@@ -16,10 +16,10 @@ export default (context: AddonStorybookRunContext) => {
         args: string[] = [],
     ) => {
         const { filesystem, pixelOven } = context;
-        const pluginPath = pixelOven.resolvePlugin("@pixeloven", "storybook");
+        const pluginPath = pixelOven.resolvePlugin("@pixeloven-storybook", "config");
         if (!pluginPath) {
             throw new Error(
-                "Could not find peer dependency @pixeloven/storybook",
+                "Could not find peer dependency @pixeloven-storybook/config",
             );
         }
         const configPath = filesystem.path(pluginPath, "./config");
