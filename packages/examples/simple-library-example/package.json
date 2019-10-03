@@ -1,0 +1,49 @@
+{
+  "name": "@examples/simple-library-example",
+  "version": "6.0.0-beta.7",
+  "description": "Simple example for creating a TypeScript based library",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@pixeloven/cli": "^6.0.0-beta.7",
+    "lint-staged": "9.2.5"
+  },
+  "scripts": {
+    "compile": "pixeloven compile ts",
+    "document": "pixeloven document ts ./src",
+    "lint": "yarn run lint:ts",
+    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
+    "precompile": "pixeloven delete dist",
+    "precommit": "lint-staged",
+    "predocument": "pixeloven delete docs",
+    "pretest": "pixeloven delete coverage",
+    "pretty": "yarn run pretty:ts",
+    "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
+    "test": "pixeloven test --color --coverage",
+    "test:ci": "pixeloven test --ci --coverage",
+    "test:watch": "pixeloven test watch"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
+  }
+}
