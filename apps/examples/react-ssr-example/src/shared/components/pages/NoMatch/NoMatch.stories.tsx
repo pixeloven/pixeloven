@@ -15,9 +15,12 @@ const match = {
     url: "testing",
 };
 
-storiesOf("Components/Pages/NoMatch", module)
-    .add("default", () => {
+storiesOf("Components/Pages/NoMatch", module).add(
+    "default",
+    () => {
         return <NoMatch history={history} location={location} match={match} />;
-    }, {
+    },
+    {
         notes: { markdown: Readme },
-    });
+    },
+);

@@ -19,7 +19,11 @@
     "ts"
   ],
   "coveragePathIgnorePatterns": [
-    "/node_modules/"
+    "/coverage/",
+    "/dist/",
+    "/docs/",
+    "/node_modules/",
+    "/stats/"
   ],
   "coverageThreshold": {
     "global": {
@@ -30,7 +34,9 @@
     }
   },
    "collectCoverageFrom": [
-    "<rootDir>/src/**/*.{js,ts}",
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",
+    "!<rootDir>/src/**/*.test.{js,jsx,ts,tsx}",
     "!**/node_modules/**"
   ]
 }

@@ -94,99 +94,99 @@ jobs:
           root: .
           paths: 
             .
-  compile-packages:
+  compile-pixeloven:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - compile:
-          type: "packages"
+          type: "pixeloven"
       - persist_to_workspace:
           root: .
           paths: 
             .
-  lint-packages:
+  lint-pixeloven:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - lint:
-          type: "packages"
-  test-packages:
+          type: "pixeloven"
+  test-pixeloven:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - test:
-          type: "packages"
-  document-packages:
+          type: "pixeloven"
+  document-pixeloven:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - document:
-          type: "packages"
-  accept-packages:
+          type: "pixeloven"
+  accept-pixeloven:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: packages/**/**
-  report-packages:
+          path: ./{apps,packages}/pixeloven/**
+  report-pixeloven:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: packages/**/**/coverage/lcov.info
+          path: ./{apps,packages}/pixeloven/**/coverage/lcov.info
       - report-coverage:
-          type: "packages"
-  lint-apps:
+          type: "pixeloven"
+  lint-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - lint:
-          type: "apps"
-  test-apps:
+          type: "examples"
+  test-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - test:
-          type: "apps"
-  document-apps:
+          type: "examples"
+  document-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - document:
-          type: "apps"
-  build-apps:
+          type: "examples"
+  build-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - run:
           name: Build source
-          command: yarn apps:build
-  accept-apps:
+          command: yarn examples:build
+  accept-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: apps/**/**
-  report-apps:
+          path: ./{apps,packages}/examples/**
+  report-examples:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: apps/**/**/coverage/lcov.info
+          path: ./{apps,packages}/examples/**/coverage/lcov.info
       - report-coverage:
-          type: "apps"
+          type: "examples"
 workflows:
   version: 2.1
   runner:
@@ -195,47 +195,46 @@ workflows:
           filters:
             branches:
               ignore: gh-pages
-      - compile-packages:
+      - compile-pixeloven:
           requires:
             - setup
-      - document-packages:
+      - document-pixeloven:
           requires:
-            - compile-packages
-      - lint-packages:
+            - compile-pixeloven
+      - lint-pixeloven:
           requires:
-            - compile-packages
-# EXITING BECAUSE OF MEM????
-      # - test-packages:
-      #     requires:
-      #       - compile-packages
-      - accept-packages:
+            - compile-pixeloven
+      - test-pixeloven:
           requires:
-            - document-packages
-            - lint-packages
-            # - test-packages
-      - report-packages:
+            - compile-pixeloven
+      - accept-pixeloven:
           requires:
-            - accept-packages
+            - document-pixeloven
+            - lint-pixeloven
+            - test-pixeloven
+      - report-pixeloven:
+          requires:
+            - accept-pixeloven
           filters:
             branches:
               only: master
-      - document-apps:
+      - document-examples:
           requires:
-            - accept-packages
-      - lint-apps:
+            - accept-pixeloven
+      - lint-examples:
           requires:
-            - accept-packages
-      - test-apps:
+            - accept-pixeloven
+      - test-examples:
           requires:
-            - accept-packages
-      - build-apps:
+            - accept-pixeloven
+      - build-examples:
           requires:
-            - document-apps
-            - lint-apps
-            - test-apps
-      - report-apps:
+            - document-examples
+            - lint-examples
+            - test-examples
+      - report-examples:
           requires:
-            - build-apps
+            - build-examples
           filters:
             branches:
               only: master

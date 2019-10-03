@@ -17,11 +17,14 @@ const match = {
     url: "testing",
 };
 
-storiesOf("Components/Templates/Default", module)
-    .add("default", () => (
+storiesOf("Components/Templates/Default", module).add(
+    "default",
+    () => (
         <MemoryRouter>
             <Default history={history} location={location} match={match} />
         </MemoryRouter>
-    ), {
+    ),
+    {
         notes: { markdown: Readme },
-    });
+    },
+);

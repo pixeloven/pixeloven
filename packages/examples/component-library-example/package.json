@@ -1,7 +1,7 @@
 {
-  "name": "@examples/simple-library-example",
+  "name": "@examples/component-library-example",
   "version": "6.0.0-beta.7",
-  "description": "Simple example for creating a TypeScript based library",
+  "description": "Component example for creating a React + TypeScript based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -15,8 +15,13 @@
   "author": "Brian Gebel",
   "license": "MIT",
   "private": true,
+  "dependencies": {
+    "react": "16.8.6"
+  },
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-beta.7",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.14.0",
     "lint-staged": "9.2.5"
   },
   "scripts": {
