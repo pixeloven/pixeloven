@@ -31,9 +31,9 @@
     "emitDecoratorMetadata": true
   },
   "exclude": [
-    "./**/*.stories.ts",
-    "./**/*.spec.ts",
-    "./**/*.test.ts",
+    "./src/__mocks__",
+    "./src/**/*.stories.ts",
+    "./src/**/*.test.ts",
     "./coverage",
     "./dist",
     "./docs",
