@@ -13,7 +13,7 @@
     "yarn": ">=1.0.0"
   },
   "workspaces": [
-    "examples/**/*",
+    "apps/**/*",
     "packages/**/*"
   ],
   "devDependencies": {
