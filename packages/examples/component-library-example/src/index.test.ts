@@ -1,10 +1,9 @@
 import "jest";
-import { Logo } from "./index";
 
-describe("@pixeloven/component-library-example", () => {
-    describe("index", () => {
-        it("should export default as Logo", () => {
-            expect(typeof Logo).toEqual("function");
-        });
+import * as components from "./index";
+
+describe("index", () => {
+    it("exports an object", () => {
+        expect(typeof components).toBe("object");
     });
 });

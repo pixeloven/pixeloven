@@ -28,7 +28,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": [
     "./**/*.stories.ts",
@@ -38,5 +38,5 @@
     "./dist",
     "./docs",
     "./node_modules"
-  ],
+  ]
 }
