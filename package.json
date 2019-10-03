@@ -29,7 +29,7 @@
     "all:build": "yarn examples:build",
     "all:clean": "lerna clean --yes && rm -rf node_modules",
     "all:commit": "git-cz",
-    "all:compile": "yarn packages:compile && yarn examples:compile",
+    "all:compile": "yarn pixeloven:compile && yarn examples:compile",
     "all:linker": "lerna link",
     "all:lint": "lerna run lint",
     "all:lint:ts": "lerna run lint:ts",
