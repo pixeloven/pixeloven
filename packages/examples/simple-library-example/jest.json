@@ -3,20 +3,22 @@
   "verbose": true,
   "preset": "ts-jest",
   "transform": {
-    "^.+\\.(ts)$": "ts-jest"
+    "^.+\\.(ts|tsx)$": "ts-jest"
   },
   "transformIgnorePatterns": [
-    "[/\\\\]node_modules[/\\\\].+\\.(js|mjs|ts)$"
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
   ],
   "testMatch": [
-    "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+    "<rootDir>/src/**/*.test.(j|t)s?(x)"
   ],
   "testEnvironment": "node",
   "testURL": "http://localhost",
   "moduleFileExtensions": [
     "js",
     "json",
-    "ts"
+    "jsx",
+    "ts",
+    "tsx"
   ],
   "coveragePathIgnorePatterns": [
     "/coverage/",
