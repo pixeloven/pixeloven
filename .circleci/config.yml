@@ -142,6 +142,17 @@ jobs:
           path: ./packages/pixeloven/**/coverage/lcov.info
       - report-coverage:
           type: "pixeloven"
+  compile-examples:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: ~/pixeloven
+      - compile:
+          type: "examples"
+      - persist_to_workspace:
+          root: .
+          paths: 
+            .
   lint-examples:
     executor: node-executor
     steps:
@@ -218,12 +229,15 @@ workflows:
           filters:
             branches:
               only: master
+      - compile-examples:
+          requires:
+            - accept-pixeloven
       - document-examples:
           requires:
-            - accept-pixeloven
+            - compile-examples
       - lint-examples:
           requires:
-            - accept-pixeloven
+            - compile-examples
       # - test-examples:
       #     requires:
       #       - accept-pixeloven
