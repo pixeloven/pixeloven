@@ -14,9 +14,9 @@ interface BodyProps {
 }
 
 function Body(props: BodyProps) {
-    const bodyAttrs = props.helmet
-        ? props.helmet.bodyAttributes.toComponent()
-        : {};
+    // const bodyAttrs = props.helmet
+    //     ? props.helmet.bodyAttributes.toComponent()
+    //     : false;
     const serializedState = JSON.stringify(props.initialState);
     const jsTags =
         props.files && props.files.js ? <Script src={props.files.js} /> : false;
@@ -27,7 +27,7 @@ function Body(props: BodyProps) {
         __html: `window.initialState = ${serializedState};`,
     };
     return (
-        <body {...bodyAttrs}>
+        <body>
             <noscript>You need to enable JavaScript to run this app.</noscript>
             {/** @todo CA-441 make that dynamic and not hardcoded */}
             <div id="portal" />
