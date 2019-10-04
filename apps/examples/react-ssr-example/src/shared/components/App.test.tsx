@@ -1,9 +1,13 @@
+import { configure, shallow } from "enzyme";
+import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 
 import React from "react";
-import * as ReactDOM from "react-dom";
-import { MemoryRouter } from "react-router-dom";
 import App from "./App";
+
+configure({
+    adapter: new ReactSixteenAdapter(),
+});
 
 const TestComponent = () => {
     return <div>testing</div>;
@@ -16,15 +20,12 @@ const routes = [
     },
 ];
 
+/**
+ * @todo Find a way to mount instead of shallow
+ */
 describe("App", () => {
-    it("renders without crashing", () => {
-        const div = document.createElement("div");
-        ReactDOM.render(
-            <MemoryRouter>
-                <App routes={routes} />
-            </MemoryRouter>,
-            div,
-        );
-        ReactDOM.unmountComponentAtNode(div);
+    it("render with routes", () => {
+        const wrapper = shallow(<App routes={routes} />);
+        expect(wrapper.find("Routes").length).toEqual(1);
     });
 });

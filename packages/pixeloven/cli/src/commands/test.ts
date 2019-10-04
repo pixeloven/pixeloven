@@ -21,7 +21,7 @@ export default {
             }
             default: {
                 const argList = pixelOven.getArgList("test", parameters, {
-                    offset: 0,
+                    offset: 1,
                     type: "withOptions",
                 });
                 const results = await jest(argList);

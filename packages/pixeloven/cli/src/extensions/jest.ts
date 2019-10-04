@@ -12,11 +12,11 @@ export default (context: PixelOvenToolbox) => {
         if (configPath) {
             return pixelOven.run(
                 cmd
-                    .concat(["--config", configPath, "--env=jsdom"])
+                    .concat(["--config", configPath])
                     .concat(args),
             );
         }
-        return pixelOven.run(cmd.concat(["--env=jsdom"]).concat(args));
+        return pixelOven.run(cmd.concat(args));
     };
     context.jest = jest;
 };

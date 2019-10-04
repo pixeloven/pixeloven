@@ -5,8 +5,9 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import Icon from "./Icon";
 
-storiesOf("Components/Atoms/Icon", module)
-    .add("Default", () => {
+storiesOf("Components/Atoms/Icon", module).add(
+    "Default",
+    () => {
         const fontSize = text("container font-size", "");
         const fontColor = text("container color", "");
         const className = text("className", "");
@@ -29,6 +30,8 @@ storiesOf("Components/Atoms/Icon", module)
                 {`${isBeforeText ? "Trailing text" : ""}`}
             </div>
         );
-    }, {
+    },
+    {
         notes: { markdown: Readme },
-    });
+    },
+);
