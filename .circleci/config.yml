@@ -132,14 +132,14 @@ jobs:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: ./{apps,packages}/pixeloven/**
+          path: ./packages/pixeloven/**
   report-pixeloven:
     executor: node-executor
     steps:
       - attach_workspace:
           at: ~/pixeloven
       - list:
-          path: ./{apps,packages}/pixeloven/**/coverage/lcov.info
+          path: ./packages/pixeloven/**/coverage/lcov.info
       - report-coverage:
           type: "pixeloven"
   lint-examples:
