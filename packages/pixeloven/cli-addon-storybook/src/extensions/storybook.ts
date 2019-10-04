@@ -17,7 +17,6 @@ export default (context: AddonStorybookRunContext) => {
         const { filesystem, print } = context;
         const configEntryPoint = require.resolve("@pixeloven-storybook/config");
         const configDir = filesystem.path(configEntryPoint, "..");
-        console.log(configDir);
         /**
          * @todo Upgrade to latest version and also see if there are types for this somewhere?
          */
@@ -25,13 +24,13 @@ export default (context: AddonStorybookRunContext) => {
             switch (type) {
                 case (StorybookExecutionType.build): {
                     const outputDir = "./dist/public/docs";
-                    const result = await storybook({
+                    await storybook({
                         configDir,
                         mode: "static", // "static"
                         outputDir,
                         quiet: true
                     });
-                    console.log(result);
+
                     return 0;
                     // return pixelOven.run(
                     //     [
@@ -44,14 +43,13 @@ export default (context: AddonStorybookRunContext) => {
                     // );
                 }
                 case (StorybookExecutionType.start): {
-                    const result = await storybook({
+                    await storybook({
                         ci: true,
                         configDir,
                         mode: "dev", // "static"
                         port: 9001, // TODO need to be able to run multiple at the same time??? Also what about scanning the entire learn dir by glob?
                         quiet: true
                     });
-                    console.log(result);
                     // return pixelOven.run(
                     //     [
                     //         "start-storybook",
