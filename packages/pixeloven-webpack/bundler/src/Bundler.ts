@@ -23,7 +23,7 @@ export interface Config {
     outputPath: string;
 }
 
-class Build {
+class Bundler {
     /**
      * Compiler
      */
@@ -166,4 +166,4 @@ class Build {
     }
 }
 
-export default Build;
+export default Bundler;

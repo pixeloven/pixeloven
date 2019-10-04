@@ -4,12 +4,12 @@ import { Compiler } from "@pixeloven-webpack/compiler";
 /**
  * @todo Rename build to bundler
  */
-import Build, { Config } from "./Build";
+import Bundler, { Config } from "./Bundler";
 
 /**
  * Default compiler options
  */
-const defaultBuildOptions: Config = {
+const defaultBundlerOptions: Config = {
     outputPath: "./dist",
 };
 
@@ -22,12 +22,12 @@ function getBundler(
     compiler: Compiler,
     options: Partial<Config> = {},
 ) {
-    const config = mergeOptions(defaultBuildOptions, options);
-    return new Build(compiler, config);
+    const config = mergeOptions(defaultBundlerOptions, options);
+    return new Bundler(compiler, config);
 }
 
 export default getBundler;
 export {
-    Build,
+    Bundler,
     Config
 }

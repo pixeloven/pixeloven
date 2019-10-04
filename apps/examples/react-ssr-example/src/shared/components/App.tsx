@@ -1,15 +1,11 @@
-import { RouteProps, Routes } from "@pixeloven-react/routing";
+import { RouteComponentProps, Routes } from "@pixeloven-react/routing";
 import React from "react";
 
-interface Props {
-    routes: RouteProps[];
-}
-
-function App(props: Props) {
+function App(props: RouteComponentProps) {
     const { routes } = props;
     return (
         <React.Fragment>
-            <Routes as="switch" config={routes} />
+            {routes && <Routes as="switch" config={routes} />}
         </React.Fragment>
     );
 }

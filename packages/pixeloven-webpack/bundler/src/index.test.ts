@@ -1,10 +1,10 @@
 import "jest";
-import getBundler, {Build} from "./index";
+import getBundler, {Bundler} from "./index";
 
-describe("@pixeloven-webpack/builder", () => {
+describe("@pixeloven-webpack/bundler", () => {
     describe("index", () => {
         it("should export Build", () => {
-            expect(typeof Build).toEqual("object");
+            expect(typeof Bundler).toEqual("function");
         });
         it("should export getBundler", () => {
             expect(typeof getBundler).toEqual("function");
