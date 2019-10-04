@@ -14,6 +14,7 @@ export function fsExists(path: fs.PathLike) {
 
 /**
  * Resolves plugin path
+ * @todo DELETE THIS AND MOVE ALL TOOLBOX ITEMS TO Core
  * @param paths
  */
 function resolvePlugin(...paths: string[]) {

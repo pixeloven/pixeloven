@@ -2,7 +2,7 @@
   "name": "@pixeloven-storybook/config",
   "version": "6.0.0-beta.7",
   "description": "Storybook configuration",
-  "main": "dist/lib/story.js",
+  "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "dist/"

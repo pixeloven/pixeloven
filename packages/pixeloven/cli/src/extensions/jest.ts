@@ -1,7 +1,7 @@
 import { JestExtension, PixelOvenToolbox } from "../types";
 
 /**
- * @todo Need to restructure these to make them more testable
+ * @todo Can we import and use jest as a library instead of running it's CLI?
  */
 export default (context: PixelOvenToolbox) => {
     const jest: JestExtension = async (args: string[] = []) => {

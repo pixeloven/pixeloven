@@ -1,4 +1,4 @@
-import { NodeInvalidArgumentException } from "@pixeloven-core/exceptions";
+import storybook from "@storybook/react/standalone";
 import {
     AddonStorybookRunContext,
     StorybookExecutionType,
@@ -6,55 +6,72 @@ import {
 } from "../types";
 
 /**
- * @todo Add support for custom config path
- * @todo Need to clean this up - the cmd and this have similar logic that could be condensed
- * @todo This should really be two different extensions
+ * @todo Use storybook standalone - https://storybook.js.org/docs/configurations/standalone-options/ instead of the CLI
+ * @todo Break this into two extensions since they diverge?
  */
 export default (context: AddonStorybookRunContext) => {
-    const storybook: StorybookExtension = async (
+    const extension: StorybookExtension = async (
         type: StorybookExecutionType,
         args: string[] = [],
     ) => {
-        const { filesystem, pixelOven } = context;
-        const pluginPath = pixelOven.resolvePlugin("@pixeloven-storybook", "config");
-        if (!pluginPath) {
-            throw new Error(
-                "Could not find peer dependency @pixeloven-storybook/config",
-            );
+        const { filesystem, print } = context;
+        const configEntryPoint = require.resolve("@pixeloven-storybook/config");
+        const configDir = filesystem.path(configEntryPoint, "..");
+        console.log(configDir);
+        /**
+         * @todo Upgrade to latest version and also see if there are types for this somewhere?
+         */
+        try {
+            switch (type) {
+                case (StorybookExecutionType.build): {
+                    const outputDir = "./dist/public/docs";
+                    const result = await storybook({
+                        configDir,
+                        mode: "static", // "static"
+                        outputDir,
+                        quiet: true
+                    });
+                    console.log(result);
+                    return 0;
+                    // return pixelOven.run(
+                    //     [
+                    //         "build-storybook",
+                    //         "-c",
+                    //         configDir,
+                    //         "-o",
+                    //         "./dist/public/docs",
+                    //     ].concat(args),
+                    // );
+                }
+                case (StorybookExecutionType.start): {
+                    const result = await storybook({
+                        ci: true,
+                        configDir,
+                        mode: "dev", // "static"
+                        port: 9001, // TODO need to be able to run multiple at the same time??? Also what about scanning the entire learn dir by glob?
+                        quiet: true
+                    });
+                    console.log(result);
+                    // return pixelOven.run(
+                    //     [
+                    //         "start-storybook",
+                    //         "--quiet",
+                    //         "--ci",
+                    //         "-p",
+                    //         "9001",
+                    //         "-c",
+                    //         configDir,
+                    //     ].concat(args),
+                    // );
+                    return 0;
+                }
+            }
+        } catch (err) {
+            if (err && err.message) {
+                print.error(err.message);
+            }
         }
-        const configPath = filesystem.path(pluginPath, "./config");
-
-        switch (type) {
-            case "build": {
-                return pixelOven.run(
-                    [
-                        "build-storybook",
-                        "-c",
-                        configPath,
-                        "-o",
-                        "./dist/public/docs",
-                    ].concat(args),
-                );
-            }
-            case "start": {
-                return pixelOven.run(
-                    [
-                        "start-storybook",
-                        "--quiet",
-                        "--ci",
-                        "-s",
-                        "./public",
-                        "-p",
-                        "9001",
-                        "-c",
-                        configPath,
-                    ].concat(args),
-                );
-            }
-            default: {
-                throw new NodeInvalidArgumentException();
-            }
-        }
+        return 1;
     };
-    context.storybook = storybook;
+    context.storybook = extension;
 };
