@@ -1,0 +1,54 @@
+{
+  "name": "@pixeloven/cli",
+  "version": "6.0.0-beta.7",
+  "description": "Command line interface for PixelOven framework",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/types.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "bin": {
+    "pixeloven": "./dist/lib/index.js"
+  },
+  "homepage": "https://github.com/pixeloven/pixeloven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@pixeloven-core/exceptions": "^6.0.0-beta.7",
+    "@pixeloven/tasks": "^6.0.0-beta.7",
+    "gluegun": "3.3.2"
+  },
+  "devDependencies": {
+    "lint-staged": "9.2.5"
+  },
+  "scripts": {
+    "clean": "pixeloven-tasks clean",
+    "compile": "pixeloven-tasks compile:ts",
+    "document": "pixeloven-tasks document:ts src",
+    "lint": "yarn lint:ts",
+    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "precompile": "pixeloven-tasks compile:clean",
+    "precommit": "lint-staged",
+    "predocument": "pixeloven-tasks document:clean",
+    "pretest": "pixeloven-tasks test:clean",
+    "test": "pixeloven-tasks test --color --coverage",
+    "test:ci": "pixeloven-tasks test --ci --coverage",
+    "test:watch": "pixeloven-tasks test:watch"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "pixeloven-tasks pretty:ts",
+      "pixeloven-tasks lint:ts",
+      "git add"
+    ]
+  }
+}
