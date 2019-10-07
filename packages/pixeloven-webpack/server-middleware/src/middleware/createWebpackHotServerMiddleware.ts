@@ -1,3 +1,4 @@
+import { logger } from "@pixeloven-core/logger";
 import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import express, { Express, NextFunction, Request, Response } from "express";
@@ -53,9 +54,8 @@ const getFileName = (stats: any, chunkName: string) => {
  * @param buffer
  */
 const getServer = (filename: string, buffer: Buffer) => {
-    const server = interopRequireDefault(
-        requireFromString(buffer.toString(), filename),
-    );
+    const serverString = requireFromString(buffer.toString(), filename);
+    const server = interopRequireDefault(serverString);
     if (Object.getPrototypeOf(server) === express) {
         throw new Error("Module is not of type Express");
     }
@@ -87,9 +87,12 @@ const webpackHotServerMiddleware = (
     const onDoneHandler = (stats: Stats) => {
         const statsObject = stats.toJson("verbose");
         const fileName = getFileName(statsObject, "main");
+        logger.info("---------- Server Discovered ----------");
+        logger.info(fileName);
         const buffer = outputFs.readFileSync(fileName);
         dynamicMiddleware.clean();
-        dynamicMiddleware.mount(getServer(fileName, buffer));
+        const server = getServer(fileName, buffer);
+        dynamicMiddleware.mount(server);
         if (config.done) {
             config.done(stats);
         }

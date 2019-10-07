@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Router } from "express";
 import expressWinston from "express-winston";
 import path from "path";
 import winston from "winston";
@@ -10,7 +10,7 @@ import { assetPath, errorHandler, renderer } from "./middleware";
  * Define server logic here
  * @param app
  */
-const server = (app: Application, config: Config) => {
+async function server(app: Application, config: Config) {
     /**
      * Setup express logger
      */
@@ -38,9 +38,18 @@ const server = (app: Application, config: Config) => {
     }
 
     /**
+     * @description Register endpoints here
+     */
+    const router = Router();
+    router.get("/api/v1/health", health);
+    router.all("/api/*", (req, res, next) => {
+        res.status(404).send();
+    });
+    app.use(config.publicPath, router);
+
+    /**
      * Register endpoints
      */
-    app.use(config.publicPath, health);
     app.use(renderer(config));
 
     /**
@@ -52,6 +61,6 @@ const server = (app: Application, config: Config) => {
         }),
     );
     app.use(errorHandler(config));
-};
+}
 
 export default server;
