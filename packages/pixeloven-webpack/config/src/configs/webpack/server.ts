@@ -97,7 +97,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      */
     const typeScriptRule: RuleSetRule = {
         include: resolvePath("src"),
-        test: /\.(ts|tsx)$/,
+        test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
         use: [
             {
                 loader: require.resolve("babel-loader"),
@@ -269,21 +269,19 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      * To fix this, we prevent you from importing files out of src/ -- if you'd like to,
      * please link the files into your node_modules/ and let module-resolution kick in.
      * Make sure your source files are compiled, as they will not be processed in any way.
+     * 
+     * @todo How to handle lerna???
      */
     const resolve: Resolve = {
         extensions: [
-            ".mjs",
-            ".web.ts",
-            ".ts",
-            ".web.tsx",
-            ".tsx",
-            ".web.js",
             ".js",
             ".json",
-            ".web.jsx",
             ".jsx",
+            ".mjs",
+            ".ts",
+            ".tsx"
         ],
-        modules: [resolvePath("src"), "node_modules"],
+        modules: [resolvePath("src"), "node_modules"], // TODO how about lerna?
         plugins: [
             new ModuleScopePlugin(resolvePath("src"), [
                 resolvePath("package.json"),
