@@ -1,11 +1,14 @@
-import { PixelOvenToolbox, RunResponse } from "@pixeloven/cli";
+import { PixelOvenToolbox } from "@pixeloven/cli";
 
-export type StorybookExecutionType = "build" | "start";
+export enum StorybookExecutionType {
+    build = "build",
+    start = "start",
+}
 
 export type StorybookExtension = (
     type: StorybookExecutionType,
     args?: string[],
-) => Promise<RunResponse>;
+) => Promise<number>;
 
 export interface AddonStorybookRunContext extends PixelOvenToolbox {
     storybook: StorybookExtension;
