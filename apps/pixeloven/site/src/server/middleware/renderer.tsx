@@ -1,7 +1,7 @@
 import { RouteProps, Router } from "@pixeloven-react/routing";
+import { Config } from "@server/config";
 import { Body, Head, Html } from "@server/views";
 import { App } from "@shared/components";
-import { Config } from "@shared/config";
 import routeConfig from "@shared/routes";
 import { NextFunction, Request, Response } from "express";
 import React from "react";

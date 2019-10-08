@@ -1,12 +1,12 @@
+import config from "@client/config";
 import { Router } from "@pixeloven-react/routing";
 import { App } from "@shared/components";
-import config from "@shared/config";
 import routeConfig from "@shared/routes";
 import React from "react";
 import * as ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
-import "@shared/shared/styles";
+import "@shared/styles";
 
 /**
  * Define root mounting point

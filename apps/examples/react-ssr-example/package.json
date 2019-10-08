@@ -62,8 +62,8 @@
     "node": "8.x || 9.x || 10.x"
   },
   "scripts": {
-    "build:development": "pixeloven webpack build --stats --source-map --path /",
-    "build:production": "pixeloven webpack build --path /",
+    "build:development": "NODE_ENV=production pixeloven webpack build --stats --source-map --path /",
+    "build:production": "NODE_ENV=production pixeloven webpack build --path /",
     "build:story": "pixeloven story build",
     "document": "pixeloven document ts ./src",
     "generate": "pixeloven generate",

@@ -12,7 +12,6 @@
   "private": true,
   "dependencies": {
     "@pixeloven-react/routing": "^6.0.0-beta.7",
-    "axios": "0.19.0",
     "classnames": "2.2.6",
     "express": "4.17.1",
     "express-winston": "3.2.1",
@@ -49,8 +48,8 @@
     "node": "8.x || 9.x || 10.x"
   },
   "scripts": {
-    "build:development": "pixeloven webpack build --stats --source-map --path /",
-    "build:production": "pixeloven webpack build --path /",
+    "build:development": "NODE_ENV=production pixeloven webpack build --stats --source-map --path /",
+    "build:production": "NODE_ENV=production pixeloven webpack build --path /",
     "build:story": "pixeloven story build",
     "document": "pixeloven document ts ./src",
     "generate": "pixeloven generate",
@@ -64,8 +63,8 @@
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",
     "pretest": "pixeloven delete coverage",
-    "start:development": "pixeloven webpack start --source-map --host 0.0.0.0 --path / --port 8080 --protocol http --stats",
-    "start:production": "node ./dist/server.js",
+    "start:development": "NODE_ENV=development pixeloven webpack start --source-map --host 0.0.0.0 --path / --port 58080 --protocol http --stats",
+    "start:production": "NODE_ENV=production node ./dist/server.js",
     "start:story": "pixeloven story start",
     "test": "pixeloven test --color --coverage",
     "test:ci": "pixeloven test --ci --findRelatedTests",
