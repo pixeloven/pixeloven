@@ -24,6 +24,7 @@
       "noUnusedParameters": false,
       "removeComments": true,
       "rootDir": ".",
+      "skipLibCheck": true,
       "sourceMap": false,
       "strict": true,
       "strictFunctionTypes": true,
@@ -38,9 +39,6 @@
       "**/*.stories.ts",
       "**/*.test.ts",
       "**/__mocks__",
-      "coverage",
-      "dist",
-      "docs",
-      "node_modules"
+      "**/node_modules"
   ]
 }

@@ -4,13 +4,11 @@
         "rootDir": "./src",
         "declarationDir": "./dist/types",
         "outDir": "./dist/lib",
-        "skipLibCheck": true
+        "paths": {
+            "@*": ["src/*"]
+        }
     },
     "exclude": [
-        "./**/*.hbs",
-        "./**/*.stories.ts",
-        "./**/*.spec.ts",
-        "./**/*.test.ts",
         "./coverage",
         "./dist",
         "./docs",

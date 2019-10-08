@@ -4,9 +4,14 @@
         "rootDir": "./src",
         "declarationDir": "./dist/types",
         "outDir": "./dist/lib",
-        "skipLibCheck": true,
         "paths": {
             "@*": ["src/*"]
         }
-    }
-  }
+    },
+    "exclude": [
+        "./coverage",
+        "./dist",
+        "./docs",
+        "./node_modules"
+    ]
+}

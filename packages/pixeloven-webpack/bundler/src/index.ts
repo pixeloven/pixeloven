@@ -18,16 +18,10 @@ const defaultBundlerOptions: Config = {
  * @param compiler
  * @param options
  */
-function getBundler(
-    compiler: Compiler,
-    options: Partial<Config> = {},
-) {
+function getBundler(compiler: Compiler, options: Partial<Config> = {}) {
     const config = mergeOptions(defaultBundlerOptions, options);
     return new Bundler(compiler, config);
 }
 
 export default getBundler;
-export {
-    Bundler,
-    Config
-}
+export { Bundler, Config };
