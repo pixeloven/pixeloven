@@ -1,27 +1,37 @@
 import storybook from "@storybook/react/standalone";
 import {
-    AddonStorybookRunContext,
+    AddonStorybookToolbox,
     StorybookExecutionType,
     StorybookExtension,
+    StorybookExtensionOptions,
 } from "../types";
 
-export default (context: AddonStorybookRunContext) => {
-    const extension: StorybookExtension = async (
+export default (toolbox: AddonStorybookToolbox) => {
+    const story: StorybookExtension = async (
         type: StorybookExecutionType,
-        args: string[] = [],
+        options: StorybookExtensionOptions,
     ) => {
-        const { filesystem, print } = context;
+        const { filesystem, print } = toolbox;
         const configEntryPoint = require.resolve("@pixeloven-storybook/config");
         const configDir = filesystem.path(configEntryPoint, "..");
+        const {outputDir, port, noQuiet} = options;
+
         try {
             switch (type) {
                 case StorybookExecutionType.build: {
-                    const outputDir = "./dist/public/docs";
+                    /**
+                     * configure output, port, quiet
+                     * include feedback validation on bad values if possible
+                     * look into adding exit code to invalidargument in toolbox
+                     * look at webpack cli for examples of erroring
+                     * put logic in extensions vs commands being dumb
+                     */
+
                     await storybook({
                         configDir,
                         mode: "static",
-                        outputDir,
-                        quiet: true,
+                        outputDir: outputDir || "./dist/public/docs",
+                        quiet: !noQuiet,
                     });
                     return 0;
                 }
@@ -30,7 +40,7 @@ export default (context: AddonStorybookRunContext) => {
                         ci: true,
                         configDir,
                         mode: "dev",
-                        port: 9001,
+                        port: port || 9001,
                         quiet: true,
                     });
                     return 0;
@@ -43,5 +53,5 @@ export default (context: AddonStorybookRunContext) => {
         }
         return 1;
     };
-    context.storybook = extension;
+    toolbox.storybook = story;
 };

@@ -5,11 +5,17 @@ export enum StorybookExecutionType {
     start = "start",
 }
 
+export interface StorybookExtensionOptions {
+    outputDir?: string;
+    port?: number;
+    noQuiet?: boolean;
+}
+
 export type StorybookExtension = (
     type: StorybookExecutionType,
-    args?: string[],
+    options: StorybookExtensionOptions,
 ) => Promise<number>;
 
-export interface AddonStorybookRunContext extends PixelOvenToolbox {
+export interface AddonStorybookToolbox extends PixelOvenToolbox {
     storybook: StorybookExtension;
 }

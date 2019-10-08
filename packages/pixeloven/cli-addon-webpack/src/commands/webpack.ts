@@ -6,11 +6,13 @@ export default {
     run: async (toolbox: AddonWebpackToolbox) => {
         const { parameters, pixelOven, webpack } = toolbox;
         if (!parameters.first) {
-            pixelOven.invalidArgument("Must provide a webpack run type.");
+            pixelOven.invalidArgument("Must provide a task for Webpack to run.");
+            pixelOven.exit("Webpack", 1);
             return;
         }
         if (!WebpackExtensionType.hasOwnProperty(parameters.first)) {
-            pixelOven.invalidArgument("Invalid run type provided.");
+            pixelOven.invalidArgument(`Available Webpack tasks are "build" or "start".`, `"${parameters.first}"`);
+            pixelOven.exit("Webpack", 1);
             return;
         }
         /**

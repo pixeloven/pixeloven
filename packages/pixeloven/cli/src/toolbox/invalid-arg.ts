@@ -5,8 +5,12 @@ import { print } from "gluegun";
  * @description Useful for calling existing CLI
  * @param message
  */
-function invalidArgument(message?: string) {
-    print.error(`Invalid argument provided. ${message}`);
+function invalidArgument(message?: string, argument?: string) {
+    if (argument) {
+        print.error(`${argument} is not a valid argument. ${message}`);
+    } else {
+        print.error(`Invalid argument provided. ${message}`);
+    }
     print.info("Run --help for more details");
 }
 
