@@ -1,4 +1,4 @@
-import { resolvePath } from "@pixeloven-core/filesystem";
+import { resolvePath, resolveSourceRoot, resolveTsConfig } from "@pixeloven-core/filesystem";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import path from "path";
@@ -96,7 +96,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      * @todo Babel probably doesn't need to be run for server config
      */
     const typeScriptRule: RuleSetRule = {
-        include: resolvePath("src"),
+        include: resolveSourceRoot(),
         test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
         use: [
             {
@@ -137,7 +137,7 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             {
                 loader: require.resolve("ts-loader"),
                 options: {
-                    configFile: resolvePath("tsconfig.json"),
+                    configFile: resolveTsConfig(),
                     transpileOnly: true,
                 },
             },
@@ -251,13 +251,13 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
         ifProduction(
             new ForkTsCheckerWebpackPlugin({
                 silent: true,
-                tsconfig: resolvePath("tsconfig.json"),
+                tsconfig: resolveTsConfig(),
             }),
             new ForkTsCheckerWebpackPlugin({
                 async: false,
                 silent: true,
-                tsconfig: resolvePath("tsconfig.json"),
-                watch: resolvePath("src"),
+                tsconfig: resolveTsConfig(),
+                watch: resolveSourceRoot(),
             }),
         ),
     ]);
@@ -273,6 +273,9 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      * @todo How to handle lerna???
      */
     const resolve: Resolve = {
+        alias: {
+            "@src": resolveSourceRoot(),
+        },
         extensions: [
             ".js",
             ".json",
@@ -281,13 +284,13 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             ".ts",
             ".tsx"
         ],
-        modules: [resolvePath("src"), "node_modules"], // TODO how about lerna?
+        modules: [resolveSourceRoot(), "node_modules"],
         plugins: [
-            new ModuleScopePlugin(resolvePath("src"), [
+            new ModuleScopePlugin(resolveSourceRoot(), [
                 resolvePath("package.json"),
             ]),
             new TsconfigPathsPlugin({
-                configFile: resolvePath("tsconfig.json"),
+                configFile: resolveTsConfig(),
             }),
         ],
     };
