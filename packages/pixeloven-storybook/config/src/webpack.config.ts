@@ -3,7 +3,6 @@ import deepmerge from "deepmerge";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import { Configuration, Module, RuleSetRule } from "webpack";
 
-
 interface Options {
     config: Configuration;
 }

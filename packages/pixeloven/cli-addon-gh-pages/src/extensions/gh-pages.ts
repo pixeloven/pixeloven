@@ -1,4 +1,8 @@
-import { createOrEmptyDir, resolveDir, resolvePath } from "@pixeloven-core/filesystem";
+import {
+    createOrEmptyDir,
+    resolveDir,
+    resolvePath,
+} from "@pixeloven-core/filesystem";
 import { RunResponse } from "@pixeloven/cli";
 import fs from "fs-extra";
 import ghpages from "gh-pages";
@@ -20,7 +24,7 @@ export function copyDocs(containerName: string, packageName: string) {
         from: absoluteSourcePath,
         to: absoluteDestPath,
     };
-};
+}
 
 /**
  * Publish dist files

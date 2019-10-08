@@ -1,4 +1,8 @@
-import { resolvePath, resolveSourceRoot, resolveTsConfig } from "@pixeloven-core/filesystem";
+import {
+    resolvePath,
+    resolveSourceRoot,
+    resolveTsConfig,
+} from "@pixeloven-core/filesystem";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import path from "path";
@@ -269,21 +273,14 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
      * To fix this, we prevent you from importing files out of src/ -- if you'd like to,
      * please link the files into your node_modules/ and let module-resolution kick in.
      * Make sure your source files are compiled, as they will not be processed in any way.
-     * 
+     *
      * @todo How to handle lerna???
      */
     const resolve: Resolve = {
         alias: {
             "@src": resolveSourceRoot(),
         },
-        extensions: [
-            ".js",
-            ".json",
-            ".jsx",
-            ".mjs",
-            ".ts",
-            ".tsx"
-        ],
+        extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx"],
         modules: [resolveSourceRoot(), "node_modules"],
         plugins: [
             new ModuleScopePlugin(resolveSourceRoot(), [
