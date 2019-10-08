@@ -8,14 +8,5 @@
         "paths": {
             "@*": ["src/*"]
         }
-    },
-    "exclude": [
-        "./**/*.stories.ts",
-        "./**/*.spec.ts",
-        "./**/*.test.ts",
-        "./coverage",
-        "./dist",
-        "./docs",
-        "./node_modules"
-    ]
-}
+    }
+  }

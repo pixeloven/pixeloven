@@ -1,17 +1,10 @@
-import { Request, Response, Router } from "express";
-
-/**
- * Create router
- */
-const router = Router();
+import { Request, Response } from "express";
 
 /**
  * Health check up
  * @param req
  * @param res
  */
-router.get("/v1/health", (req: Request, res: Response): void => {
+export default (req: Request, res: Response): void => {
     res.status(200).send("OK");
-});
-
-export default router;
+};

@@ -21,6 +21,7 @@
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-beta.7",
     "@pixeloven/cli-addon-storybook": "^6.0.0-beta.7",
+    "copyfiles": "2.1.1",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
     "lint-staged": "9.2.5"
@@ -31,6 +32,7 @@
     "lint": "yarn run lint:ts",
     "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
     "precompile": "pixeloven delete dist",
+    "postcompile": "copyfiles -u 1 \"src/**/*.{scss,svg}\" ./dist/lib",
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",
     "pretest": "pixeloven delete coverage",
