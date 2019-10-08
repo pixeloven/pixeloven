@@ -8,13 +8,9 @@ interface HtmlProps {
 }
 
 function Html(props: HtmlProps) {
-    const { children, helmet, lang } = props;
-    const htmlAttrs = helmet ? helmet.htmlAttributes.toComponent() : {};
-    return (
-        <html lang={lang} {...htmlAttrs}>
-            {children}
-        </html>
-    );
+    const { children, lang } = props;
+    // const htmlAttrs = helmet ? helmet.htmlAttributes.toComponent() : {};
+    return <html lang={lang}>{children}</html>;
 }
 
 export default Html;
