@@ -31,7 +31,10 @@ export type GetConfigPathFunction = (
 
 export type InvalidArgumentFunction = (message?: string) => void;
 
-export type ResolvePluginFunction = (plugin: string, ...paths: string[]) => string | false;
+export type ResolvePluginFunction = (
+    plugin: string,
+    ...paths: string[]
+) => string | false;
 
 export interface RunResponse {
     stdout?: Buffer | string;

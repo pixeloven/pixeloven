@@ -11,9 +11,7 @@ export default (context: PixelOvenToolbox) => {
         const cmd = ["jest"];
         if (configPath) {
             return pixelOven.run(
-                cmd
-                    .concat(["--config", configPath])
-                    .concat(args),
+                cmd.concat(["--config", configPath]).concat(args),
             );
         }
         return pixelOven.run(cmd.concat(args));

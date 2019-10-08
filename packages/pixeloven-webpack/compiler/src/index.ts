@@ -33,7 +33,4 @@ function getCompiler(options: Partial<Config> = {}) {
 }
 
 export default getCompiler;
-export {
-    Compiler,
-    Config
-}
+export { Compiler, Config };

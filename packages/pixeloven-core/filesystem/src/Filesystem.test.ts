@@ -61,7 +61,7 @@ describe("@pixeloven-core/filesystem", () => {
                 const mkdirSyncSpy = jest
                     .spyOn(fs, "mkdirSync")
                     .mockImplementation(mkdirSyncMock);
-                    Filesystem.createOrEmptyDir("tmp");
+                Filesystem.createOrEmptyDir("tmp");
                 expect(existsSyncSpy).toHaveBeenCalledTimes(1);
                 expect(mkdirSyncSpy).toHaveBeenCalledTimes(1);
             });
@@ -73,7 +73,7 @@ describe("@pixeloven-core/filesystem", () => {
                 const emptyDirSyncSpy = jest
                     .spyOn(fs, "emptyDirSync")
                     .mockImplementation(emptyDirSyncMock);
-                    Filesystem.createOrEmptyDir("tmp");
+                Filesystem.createOrEmptyDir("tmp");
                 expect(existsSyncSpy).toHaveBeenCalledTimes(1);
                 expect(emptyDirSyncSpy).toHaveBeenCalledTimes(1);
             });
@@ -85,7 +85,9 @@ describe("@pixeloven-core/filesystem", () => {
         });
         describe("resolveTsConfig", () => {
             it("should resolve ts config", () => {
-                expect(Filesystem.resolveTsConfig()).toContain("/tsconfig.json");
+                expect(Filesystem.resolveTsConfig()).toContain(
+                    "/tsconfig.json",
+                );
             });
         });
     });

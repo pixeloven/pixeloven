@@ -15,23 +15,23 @@ export default (context: AddonStorybookRunContext) => {
         const configDir = filesystem.path(configEntryPoint, "..");
         try {
             switch (type) {
-                case (StorybookExecutionType.build): {
+                case StorybookExecutionType.build: {
                     const outputDir = "./dist/public/docs";
                     await storybook({
                         configDir,
                         mode: "static",
                         outputDir,
-                        quiet: true
+                        quiet: true,
                     });
                     return 0;
                 }
-                case (StorybookExecutionType.start): {
+                case StorybookExecutionType.start: {
                     await storybook({
                         ci: true,
                         configDir,
                         mode: "dev",
                         port: 9001,
-                        quiet: true
+                        quiet: true,
                     });
                     return 0;
                 }

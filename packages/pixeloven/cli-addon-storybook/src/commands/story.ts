@@ -16,11 +16,18 @@ export default {
         switch (parameters.first) {
             case "build":
             case "start": {
-                const argList = pixelOven.getArgList(parameters.first, parameters, {
-                    offset: 1,
-                    type: "withOptions",
-                });
-                const statusCode = await storybook(StorybookExecutionType[parameters.first], argList);
+                const argList = pixelOven.getArgList(
+                    parameters.first,
+                    parameters,
+                    {
+                        offset: 1,
+                        type: "withOptions",
+                    },
+                );
+                const statusCode = await storybook(
+                    StorybookExecutionType[parameters.first],
+                    argList,
+                );
                 pixelOven.exit(
                     "Storybook",
                     statusCode,

@@ -24,4 +24,3 @@ export function minLength(min: number) {
         return `Must be a minimum of ${min} characters.`;
     };
 }
-

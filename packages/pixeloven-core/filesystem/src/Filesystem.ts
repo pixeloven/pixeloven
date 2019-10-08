@@ -39,7 +39,7 @@ export function resolveDir(relativePath: string) {
     } else {
         throw new FileNotFoundException();
     }
-};
+}
 
 /**
  * Create or empty existing directory

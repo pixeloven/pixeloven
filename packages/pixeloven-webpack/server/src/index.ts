@@ -4,7 +4,7 @@
 import { mergeOptions } from "@pixeloven-core/common";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import Server from "./Server";
-import {Config, Protocol} from "./types";
+import { Config, Protocol } from "./types";
 
 /**
  * Default compiler options
@@ -23,17 +23,10 @@ const defaultServerOptions: Config = {
  * @param compiler
  * @param options
  */
-function getServer(
-    compiler: Compiler,
-    options: Partial<Config> = {},
-) {
+function getServer(compiler: Compiler, options: Partial<Config> = {}) {
     const config = mergeOptions(defaultServerOptions, options);
     return new Server(compiler, config);
 }
 
 export default getServer;
-export {
-    Server,
-    Config,
-    Protocol
-}
+export { Server, Config, Protocol };
