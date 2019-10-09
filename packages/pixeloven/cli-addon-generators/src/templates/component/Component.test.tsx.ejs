@@ -17,7 +17,7 @@ describe("shared/components/<%= props.atomicType %>/<%= props.name %>", () => {
 
     it("should extend passed classes", () => {
         const wrapper = shallow(<<%= props.name %> className={"test-class"} />);
-        expect(wrapper.hasClass("example-class")).toBe(true);
-        expect(wrapper.hasClass("test-class")).toBe(true);
+        expect(wrapper.hasClass("<%= props.className %>")).toEqual(true);
+        expect(wrapper.hasClass("test-class")).toEqual(true);
     });
 });

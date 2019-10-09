@@ -23,12 +23,16 @@ export default (toolbox: AddonGeneratorsToolbox) => {
             componentHasStyle,
         } = options;
         const { strings, template } = toolbox;
+        const className = `${strings.lowerCase(componentAtomicType.charAt(0))}-${strings.kebabCase(componentName)}`;
+        const name = `${strings.pascalCase(componentName)}`;
         const props = {
             atomicType: componentAtomicType,
+            camelName: strings.camelCase(name),
+            className,
             description: componentDescription,
             hasState: componentHasState,
             hasStyle: componentHasStyle,
-            name: componentName,
+            name,
         };
         const atomicType = strings.pluralize(
             strings.lowerCase(componentAtomicType),
@@ -36,32 +40,32 @@ export default (toolbox: AddonGeneratorsToolbox) => {
         const paradigmType = strings.lowerCase(componentParadigmType);
         template.generate({
             props,
-            target: `src/shared/components/${atomicType}/${componentName}/${componentName}.tsx`,
+            target: `src/shared/components/${atomicType}/${name}/${name}.tsx`,
             template: `component/${paradigmType}.Component.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/shared/components/${atomicType}/${componentName}/${componentName}.scss`,
+            target: `src/shared/components/${atomicType}/${name}/${name}.scss`,
             template: `component/Component.scss.ejs`,
         });
         template.generate({
             props,
-            target: `src/shared/components/${atomicType}/${componentName}/${componentName}.stories.tsx`,
+            target: `src/shared/components/${atomicType}/${name}/${name}.stories.tsx`,
             template: `component/Component.stories.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/shared/components/${atomicType}/${componentName}/${componentName}.test.tsx`,
+            target: `src/shared/components/${atomicType}/${name}/${name}.test.tsx`,
             template: `component/Component.test.tsx.ejs`,
         });
         template.generate({
             props,
-            target: `src/shared/components/${atomicType}/${componentName}/index.ts`,
+            target: `src/shared/components/${atomicType}/${name}/index.ts`,
             template: `component/index.ts.ejs`,
         });
         template.generate({
             props,
-            target: `src/shared/components/${atomicType}/${componentName}/README.md`,
+            target: `src/shared/components/${atomicType}/${name}/README.md`,
             template: `component/README.md.ejs`,
         });
     };
