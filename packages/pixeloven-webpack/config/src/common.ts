@@ -1,6 +1,6 @@
 import {
     resolvePath,
-    resolveSourceRoot,
+    resolveSourceRoot
 } from "@pixeloven-core/filesystem";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -10,14 +10,14 @@ import TerserPlugin from "terser-webpack-plugin";
 import TimeFixPlugin from "time-fix-plugin";
 import webpack, {
     Configuration,
-    DevtoolModuleFilenameTemplateInfo,
+    DevtoolModuleFilenameTemplateInfo
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 import {
-    Config,
+    Mode,
     Name,
-    Target
+    Target,
 } from "./types"
 
 import {
@@ -32,32 +32,53 @@ import {
 } from "./helpers/shared";
 
 import {
-    getEntry,
-    getModuleSCSSLoader,
-    getNode
+    getEntry as getClientEntry,
+    getModuleSCSSLoader as getClientModuleSCSSLoader,
+    getNode as getClientNode
 } from "./helpers/client";
 
+import {
+    getEntry,
+    getExternals,
+    getModuleSCSSLoader,
+    getNode
+} from "./helpers/server";
 
-function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
+interface Options {
+    mode: Mode;
+    name: Name;
+    outputPath: string;
+    profiling: boolean;
+    publicPath: string;
+    sourceMap: boolean;
+    stats: {
+        enabled: boolean;
+        host: string;
+        outputDir: string;
+        port: number;
+    },
+    target: Target;
+}
+
+/**
+ * @todo Create util generator similar to the webpack ones for splitting by name, target etc
+ * @todo Merge these into one
+ */
+
+export function clientConfig(options: Options): Configuration {
+    /**
+     * Utility functions to help segment configuration based on environment
+     */
+    const { ifProduction, ifDevelopment } = getIfUtils(options.mode);
     /**
      * Set local options
      */
     const name = Name.client;
     const target = Target.web;
-    const publicPath = options.path;
+    const publicPath = options.publicPath;
     const outputPath = options.outputPath;
     const publicOutputPath = path.normalize(`${outputPath}/public`);
     const recordsPath = path.resolve(`${outputPath}/${name}-stats.json`);
-
-    /**
-     * Set env variables
-     */
-    const environment = env.NODE_ENV || "production";
-
-    /**
-     * Utility functions to help segment configuration based on environment
-     */
-    const { ifProduction, ifDevelopment } = getIfUtils(environment);
 
     /**
      * Describe source pathing in dev tools
@@ -79,14 +100,14 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
      */
     return {
         bail: ifProduction(),
-        devtool: getDevTool(options.withSourceMap),
-        entry: getEntry(environment, publicPath),
-        mode: getMode(environment),
+        devtool: getDevTool(options.sourceMap),
+        entry: getClientEntry(options.mode, options.publicPath),
+        mode: getMode(options.mode),
         module: {
             rules: [{
                 oneOf: [
                     getModuleTypeScriptLoader(), 
-                    getModuleSCSSLoader(environment), 
+                    getClientModuleSCSSLoader(options.mode), 
                     getModuleFileLoader({
                         name: ifProduction(
                             "static/media/[name].[contenthash].[ext]",
@@ -98,7 +119,7 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
             strictExportPresence: true,
         },
         name,
-        node: getNode(),
+        node: getClientNode(),
         optimization: {
             minimize: ifProduction(),
             minimizer: ifProduction(
@@ -110,7 +131,7 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
                      */
                     new TerserPlugin({
                         extractComments: "all",
-                        sourceMap: options.withSourceMap,
+                        sourceMap: options.sourceMap,
                         terserOptions: {
                             safari10: true,
                         },
@@ -177,7 +198,7 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
             path: resolvePath(publicOutputPath, false),
             publicPath,
         }),
-        performance: getPerformance(environment),
+        performance: getPerformance(options.mode),
         plugins: removeEmpty([
             /**
              * Fixes a known issue with cross-platform differences in file watchers,
@@ -223,7 +244,7 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
              * Perform type checking and linting in a separate process to speed up compilation
              * @env all
              */
-            getPluginForkTsCheckerWebpack(environment),
+            getPluginForkTsCheckerWebpack(options.mode),
             /**
              * Extract css to file
              * @env production
@@ -239,12 +260,9 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
                 ),
             }),
             getPluginBundleAnalyzer({
-                enabled: options.withStats,
-                env: environment,
-                host: options.withStatsHost,
-                name,
-                outputDir: options.withStatsDir,
-                port: options.withStatsPort,
+                ...options.stats,
+                env: options.mode,
+                name: options.name
             }),
             /**
              * Generate a manifest file which contains a mapping of all asset filenames
@@ -266,7 +284,7 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
              */
             ifDevelopment(new webpack.HotModuleReplacementPlugin(), undefined),
         ]),
-        profile: options.withProfiling,
+        profile: options.profiling,
         recordsPath,
         resolve: getResolve(),
         stats: "verbose",
@@ -274,4 +292,97 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
     };
 };
 
-export default config;
+export function serverConfig(options: Options): Configuration {
+    /**
+     * Utility functions to help segment configuration based on environment
+     */
+    const { ifProduction, ifDevelopment } = getIfUtils(options.mode);
+
+    /**
+     * Server side configuration
+     */
+    return {
+        bail: ifProduction(),
+        devtool: getDevTool(options.sourceMap),
+        entry: getEntry(),
+        externals: getExternals(),
+        mode: getMode(options.mode),
+        module: {
+            rules: [{
+                oneOf: [
+                    getModuleTypeScriptLoader(), 
+                    getModuleSCSSLoader(options.mode), 
+                    getModuleFileLoader({
+                        emitFile: false,
+                        name: ifProduction(
+                            "static/media/[name].[contenthash].[ext]",
+                            "static/media/[name].[hash].[ext]",
+                        ),
+                    })
+                ]
+            }],
+            strictExportPresence: true,
+        },
+        name: options.name,
+        node: getNode(),
+        optimization: {
+            noEmitOnErrors: true
+        },
+        output: {
+            filename: "server.js",
+            libraryTarget: "commonjs2",
+            path: resolvePath(options.outputPath, false),
+            publicPath: options.publicPath,
+        },
+        performance: getPerformance(options.mode),
+        plugins: removeEmpty([
+            /**
+             * Fixes a known issue with cross-platform differences in file watchers,
+             * so that webpack doesn't lose file changes when watched files change rapidly
+             * https://github.com/webpack/webpack-dev-middleware#known-issues
+             *
+             * @env development
+             */
+            ifDevelopment(new TimeFixPlugin(), undefined),
+            /**
+             * Watcher doesn"t work well if you mistype casing in a path so we use
+             * a plugin that prints an error when you attempt to do this.
+             * See https://github.com/facebookincubator/create-react-app/issues/240
+             *
+             * @env development
+             */
+            ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
+            /**
+             * Moment.js is an extremely popular library that bundles large locale files
+             * by default due to how Webpack interprets its code. This is a practical
+             * solution that requires the user to opt into importing specific locales.
+             * @url https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+             * @env all
+             */
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+            /**
+             * Define environmental variables base on entry point
+             * @description Provides entry point specific env variables
+             *
+             * @env all
+             */
+            new webpack.EnvironmentPlugin({
+                NAME: options.name,
+                PUBLIC_PATH: options.publicPath,
+                TARGET: options.target,
+            }),
+            getPluginBundleAnalyzer({
+                ...options.stats,
+                env: options.mode,
+                name: options.name
+            }),
+            getPluginForkTsCheckerWebpack(options.mode),
+        ]),
+        profile: options.profiling,
+        recordsPath: path.resolve(`${options.outputPath}/${options.name}-profile.json`),
+        resolve: getResolve(),
+        stats: "verbose",
+        target: options.target,
+    };
+};
+

@@ -8,11 +8,11 @@ import webpack, {
     Configuration,
 } from "webpack";
 import { getIfUtils, removeEmpty } from "webpack-config-utils";
-import webpackNodeExternals from "webpack-node-externals";
+
 import {
     Config,
-    Target, 
-    TargetName
+    Name,
+    Target
 } from "./types"
 
 import {
@@ -27,6 +27,8 @@ import {
 } from "./helpers/shared";
 
 import {
+    getEntry,
+    getExternals,
     getModuleSCSSLoader,
     getNode
 } from "./helpers/server";
@@ -35,7 +37,7 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
     /**
      * Set local options
      */
-    const name = TargetName.server;
+    const name = Name.server;
     const target = Target.node;
     const publicPath = options.path;
     const buildPath = options.outputPath;
@@ -57,15 +59,8 @@ function config(env: NodeJS.ProcessEnv, options: Config): Configuration {
     return {
         bail: ifProduction(),
         devtool: getDevTool(options.withSourceMap),
-        entry: [resolvePath("src/server/index.ts")],
-        externals: [
-            // Exclude from local node_modules dir
-            webpackNodeExternals(),
-            // Exclude from file - helpful for lerna packages
-            webpackNodeExternals({
-                modulesFromFile: true,
-            }),
-        ],
+        entry: getEntry(),
+        externals: getExternals(),
         mode: getMode(environment),
         module: {
             rules: [{

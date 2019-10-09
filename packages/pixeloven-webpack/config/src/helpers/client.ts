@@ -1,6 +1,11 @@
+import {
+    resolvePath,
+} from "@pixeloven-core/filesystem";
 import autoprefixer from "autoprefixer";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import path from "path";
 import {
+    Entry,
     Node,
     RuleSetRule
 } from "webpack";
@@ -8,6 +13,26 @@ import {
     getIfUtils, 
     removeEmpty 
 } from "webpack-config-utils";
+
+/**
+ * Returns entry point for client
+ * @param environment 
+ * @param publicPath 
+ */
+export function getEntry(environment: string, publicPath: string): Entry {
+    const { ifDevelopment } = getIfUtils(environment);
+    const hmrPath = path.normalize(`/${publicPath}/__webpack_hmr`);
+    return {
+        main: removeEmpty([
+            require.resolve("@babel/polyfill"),
+            ifDevelopment(
+                `webpack-hot-middleware/client?path=${hmrPath}`,
+                undefined,
+            ),
+            resolvePath("src/client/index.tsx"),
+        ]),
+    }
+}
 
 /**
  * @description Some libraries import Node modules but don"t use them in the browser.
