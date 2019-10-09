@@ -57,7 +57,7 @@ commands:
     steps:
       - run:
           name: Test source
-          command: yarn << parameters.type >>:test:ci
+          command: yarn << parameters.type >>:test
   list:
     description: "List directory contents"
     parameters:
