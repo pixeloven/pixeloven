@@ -12,9 +12,6 @@ interface BodyProps {
 }
 
 function Body(props: BodyProps) {
-    // const bodyAttrs = props.helmet
-    //     ? props.helmet.bodyAttributes.toComponent()
-    //     : false;
     const jsTags =
         props.files && props.files.js ? <Script src={props.files.js} /> : false;
     const innerHtml = {
