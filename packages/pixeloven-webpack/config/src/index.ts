@@ -1,3 +1,3 @@
-export { default as webpackClientConfig } from "./configs/webpack/client";
-export { default as webpackServerConfig } from "./configs/webpack/server";
+export { default as webpackClientConfig } from "./client";
+export { default as webpackServerConfig } from "./server";
 export { Config } from "./types";

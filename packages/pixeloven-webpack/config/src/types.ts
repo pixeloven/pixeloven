@@ -1,3 +1,13 @@
+export enum Target{
+    web = "web",
+    node = "node"
+}
+
+export enum TargetName {
+    client = "client",
+    server = "server",
+}
+
 /**
  * @description General settings for BundleAnalyzerPlugin
  */
