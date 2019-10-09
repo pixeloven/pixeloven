@@ -14,6 +14,15 @@ export interface WebpackExtensionOptions {
     compilerOptions?: CompilerConfig;
     serverOptions?: ServerConfig;
 }
+
+/* Note: keep this enum up to date matching the options interface above for runtime argument checking */
+export enum WebpackExecutionOptionTypes {
+    stats = "stats",
+    "source-map" = "source-map",
+    sourceMap = "sourceMap",
+    path = "path"
+}
+
 export type WebpackExtension = (
     options: WebpackExtensionOptions,
 ) => Promise<number>;

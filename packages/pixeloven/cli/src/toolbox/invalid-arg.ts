@@ -7,7 +7,7 @@ import { print } from "gluegun";
  */
 function invalidArgument(message?: string, argument?: string) {
     if (argument) {
-        print.error(`${argument} is not a valid argument. ${message}`);
+        print.error(`"${argument}" is not a valid argument. ${message}`);
     } else {
         print.error(`Invalid argument provided. ${message}`);
     }

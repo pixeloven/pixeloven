@@ -1,15 +1,15 @@
 import storybook from "@storybook/react/standalone";
 import {
     AddonStorybookToolbox,
+    StorybookExecutionOptions,
     StorybookExecutionType,
     StorybookExtension,
-    StorybookExtensionOptions,
 } from "../types";
 
 export default (toolbox: AddonStorybookToolbox) => {
     const story: StorybookExtension = async (
         type: StorybookExecutionType,
-        options: StorybookExtensionOptions,
+        options: StorybookExecutionOptions,
     ) => {
         const { filesystem, print } = toolbox;
         const configEntryPoint = require.resolve("@pixeloven-storybook/config");
@@ -20,11 +20,11 @@ export default (toolbox: AddonStorybookToolbox) => {
             switch (type) {
                 case StorybookExecutionType.build: {
                     /**
-                     * configure output, port, quiet
-                     * include feedback validation on bad values if possible
-                     * look into adding exit code to invalidargument in toolbox
-                     * look at webpack cli for examples of erroring
-                     * put logic in extensions vs commands being dumb
+                     * [x] configure output, port, quiet
+                     * [x] include feedback validation on bad values if possible
+                     * [x] - look into adding exit code to invalidargument in toolbox
+                     * [x] - look at webpack cli for examples of erroring
+                     * [ ] - put logic in extensions vs commands being dumb
                      */
 
                     await storybook({
@@ -41,7 +41,7 @@ export default (toolbox: AddonStorybookToolbox) => {
                         configDir,
                         mode: "dev",
                         port: port || 9001,
-                        quiet: true,
+                        quiet: !noQuiet,
                     });
                     return 0;
                 }
