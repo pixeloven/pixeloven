@@ -14,24 +14,16 @@ export default (toolbox: AddonStorybookToolbox) => {
         const { filesystem, print } = toolbox;
         const configEntryPoint = require.resolve("@pixeloven-storybook/config");
         const configDir = filesystem.path(configEntryPoint, "..");
-        const {outputDir, port, noQuiet} = options;
+        const {outputDir, port, quiet} = options;
 
         try {
             switch (type) {
                 case StorybookExecutionType.build: {
-                    /**
-                     * [x] configure output, port, quiet
-                     * [x] include feedback validation on bad values if possible
-                     * [x] - look into adding exit code to invalidargument in toolbox
-                     * [x] - look at webpack cli for examples of erroring
-                     * [ ] - put logic in extensions vs commands being dumb
-                     */
-
                     await storybook({
                         configDir,
                         mode: "static",
-                        outputDir: outputDir || "./dist/public/docs",
-                        quiet: !noQuiet,
+                        outputDir: outputDir || "./stories",
+                        quiet,
                     });
                     return 0;
                 }
@@ -41,7 +33,7 @@ export default (toolbox: AddonStorybookToolbox) => {
                         configDir,
                         mode: "dev",
                         port: port || 9001,
-                        quiet: !noQuiet,
+                        quiet,
                     });
                     return 0;
                 }

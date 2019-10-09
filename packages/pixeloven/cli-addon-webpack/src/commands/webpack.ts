@@ -7,7 +7,7 @@ export default {
         const { parameters, pixelOven, webpack } = toolbox;
         const task = parameters.first;
         if (!task) {
-            pixelOven.invalidArgument("Must provide a task for Webpack to run.");
+            pixelOven.invalidArgument("Please provide a task for Webpack to run.");
             pixelOven.exit("Webpack", 1);
             return;
         }
@@ -17,13 +17,16 @@ export default {
             return;
         }
 
+        /**
+         *  @todo: add "help" argument that prints available tasks and options
+         */
         switch (task) {
             case "build":
             case "start": {
                 Object.keys(parameters.options).forEach(option => {
                     if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
                         pixelOven.invalidArgument(`Available options for "${task}" are "--path", "--source-map", or "--stats"`, `--${option}`);
-                        pixelOven.exit("Storybook", 1);
+                        pixelOven.exit("Webpack", 1);
                     }
                 });
 

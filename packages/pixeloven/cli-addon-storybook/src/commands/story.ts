@@ -7,7 +7,7 @@ export default {
         const { parameters, pixelOven, storybook } = toolbox;
         const task = parameters.first;
         if (!task) {
-            pixelOven.invalidArgument("Must provide a task for Storybook to run.");
+            pixelOven.invalidArgument("Please provide a task for Storybook to run.");
             pixelOven.exit("Storybook", 1);
             return;
         }
@@ -16,6 +16,7 @@ export default {
             pixelOven.exit("Storybook", 1);
             return;
         }
+
         /**
          *  @todo: add "help" argument that prints available tasks and options
          */
@@ -24,7 +25,7 @@ export default {
             case "start": {
                 Object.keys(parameters.options).forEach(option => {
                     if (!StorybookExecutionOptionTypes.hasOwnProperty(option)) {
-                        pixelOven.invalidArgument(`Available options for "${task}" are "--outputDir", "--port", or "--noQuiet"`, `--${option}`);
+                        pixelOven.invalidArgument(`Available options for "${task}" are "--output-dir", "--port", or "--quiet"`, `--${option}`);
                         pixelOven.exit("Storybook", 1);
                     }
                 });
