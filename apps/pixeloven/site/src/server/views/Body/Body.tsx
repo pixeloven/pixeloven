@@ -1,5 +1,4 @@
 import { Script } from "@server/views";
-import { State } from "@shared/store/types";
 import React from "react";
 import { HelmetData } from "react-helmet";
 
@@ -9,19 +8,14 @@ interface BodyProps {
         css?: string[];
         js?: string[];
     };
-    initialState?: State;
     helmet?: HelmetData;
 }
 
 function Body(props: BodyProps) {
-    const serializedState = JSON.stringify(props.initialState);
     const jsTags =
         props.files && props.files.js ? <Script src={props.files.js} /> : false;
     const innerHtml = {
         __html: props.children,
-    };
-    const initialState = {
-        __html: `window.initialState = ${serializedState};`,
     };
     return (
         <body>
@@ -29,7 +23,6 @@ function Body(props: BodyProps) {
             {/** @todo CA-441 make that dynamic and not hardcoded */}
             <div id="portal" />
             <div id="root" dangerouslySetInnerHTML={innerHtml} />
-            <script dangerouslySetInnerHTML={initialState} />
             {jsTags}
         </body>
     );

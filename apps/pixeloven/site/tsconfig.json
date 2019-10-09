@@ -1,0 +1,23 @@
+{
+  "extends": "../../../tsconfig",
+  "compilerOptions": {
+      "baseUrl": ".",
+      "declaration": false,
+      "rootDirs": [
+        "./src"
+      ],
+      "outDir": "./dist",
+      "paths": {
+        "@client/*": ["src/client/*"],
+        "@server/*": ["src/server/*"],
+        "@shared/*": ["src/shared/*"]
+      }
+  },
+  "exclude": [
+      "./coverage",
+      "./dist",
+      "./docs",
+      "./node_modules",
+      "./stats"
+  ]
+}
