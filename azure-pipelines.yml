@@ -12,33 +12,36 @@ stages:
         node_10_x:
           node_version: 10.x
     steps:
-    - task: NodeTool@0 
+    - task: NodeTool@0
       inputs:
         versionSpec: $(node_version)
+    - script: |
+          yarn global lerna
+        displayName: "Install Lerna"
     # @todo we should find a better way
     - script: yarn install --production=false
 
 - stage: compile_pixeloven
   displayName: Compile PixelOven packages
   jobs:
-  - job: compile 
+  - job: compile
     steps:
     - script: yarn pixeloven:compile
 
 - stage: check_pixeloven
   displayName: Check quality of PixelOven packages
   jobs:
-  - job: lint 
+  - job: lint
     steps:
     - script: yarn pixeloven:lint
-  - job: test 
+  - job: test
     steps:
     - script: yarn pixeloven:test
 
 - stage: build_pixeloven
   displayName: Build PixelOven apps
   jobs:
-  - job: build 
+  - job: build
     steps:
     - script: yarn pixeloven:build
 
