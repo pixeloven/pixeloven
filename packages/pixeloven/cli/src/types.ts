@@ -29,7 +29,7 @@ export type GetConfigPathFunction = (
     strict?: boolean,
 ) => string | false;
 
-export type InvalidArgumentFunction = (message?: string) => void;
+export type InvalidArgumentFunction = (message?: string, argument?: string) => void;
 
 export type ResolvePluginFunction = (
     plugin: string,

@@ -37,11 +37,11 @@ describe("Server", () => {
         afterEach(() => {
             Helmet.canUseDOM = true;
         });
-        it(`responds to "/v1/health" with 200 and render "OK"`, done => {
+        it(`responds to "/api/v1/health" with 200 and render "OK"`, done => {
             const app = express();
             server(app, testConfig);
             request(app)
-                .get("/v1/health")
+                .get("/api/v1/health")
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
@@ -51,19 +51,33 @@ describe("Server", () => {
                     done();
                 });
         });
-        // it(`responds to "/" with 200 and render <App />`, done => {
-        //     const app = express();
-        //     server(app, testConfig);
-        //     request(app)
-        //         .get("/")
-        //         .expect(200)
-        //         .end((err, res) => {
-        //             if (err) {
-        //                 return done(err);
-        //             }
-        //             expect(res.text).toContain("<!DOCTYPE html>");
-        //             done();
-        //         });
-        // });
+        it(`responds to "/api/*" with 404 and render "OK"`, done => {
+            const app = express();
+            server(app, testConfig);
+            request(app)
+                .get("/api/missing")
+                .expect(404)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.text).toEqual("");
+                    done();
+                });
+        });
+        it(`responds to "/" with 200 and render <App />`, done => {
+            const app = express();
+            server(app, testConfig);
+            request(app)
+                .get("/")
+                .expect(200)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.text).toContain("<!DOCTYPE html>");
+                    done();
+                });
+        });
     });
 });

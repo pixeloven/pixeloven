@@ -1,0 +1,43 @@
+pool:
+  vmImage: "ubuntu-16.04"
+
+stages:
+
+# @todo Need our own image to speed this up
+- stage: SetupPixelOven
+  displayName: Setup PixelOven dependencies
+  jobs:
+  - job: Setup
+    strategy:
+      matrix:
+        node_10_x:
+          node_version: 10.x
+        node_12_x:
+          node_version: 12.x
+    steps:
+    - task: NodeTool@0 
+      inputs:
+        versionSpec: $(node_version)
+    - script: npm i -g npm
+      displayName: Update npm
+    - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+      displayName: Update yarn
+    - script: npm i -g lerna
+      displayName: Install lerna
+    - script: lerna bootstrap
+      displayName: Bootstrap dependencies
+    - script: yarn pixeloven:compile
+      displayName: Compile PixelOven packages
+    - script: yarn pixeloven:lint
+      displayName: Lint PixelOven packages
+    - script: yarn pixeloven:test
+      displayName: Test PixelOven packages
+    - script: yarn pixeloven:build:production
+      displayName: Build PixelOven apps
+      # Need to trigger this only on master
+    - script: yarn pixeloven:report:coverage
+      displayName: Report PixelOven code coverage
+
+  # Need to do the same thing but for the examples... 
+  # Then we want to save coverage as an artifact and report coverage 
+  # yarn << parameters.type >>:report:coverage
