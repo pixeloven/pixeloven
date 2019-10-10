@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React<% if (props.hasState) { %>, { useEffect, useState }<% } %> from "react";
-<% if (props.hasStyles) { %>
+<% if (props.hasStyle) { %>
 import "./<%= props.name %>.scss";
 <% } %>
 interface <%= props.name %>Props {
@@ -9,15 +9,16 @@ interface <%= props.name %>Props {
 
 function <%= props.name %>(props: <%= props.name %>Props) {
     const { className } = props;
-    const exampleClasses = classNames(className, "example-class");
+    const <%= props.camelName %>Classes = classNames(className, "<%= props.className %>");
     <% if (props.hasState) { %>
     const [isExample, setExample] = useState(false);
+
     useEffect(() => {
         console.log(`Example state changed! ${isExample}`);
     }, [isExample]);
     <% } %>
     return (
-        <div className={exampleClasses}>
+        <div className={<%= props.camelName %>Classes}>
             Function component<% if (props.hasState) { %> with <a onClick={() => setExample(!isExample)}>example state</a> {isExample ? "on" : "off"}<% } %>
         </div>
     );

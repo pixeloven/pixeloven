@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-<% if (props.hasStyles) { %>
+<% if (props.hasStyle) { %>
 import "./<%= props.name %>.scss";
 <% } %>
 interface <%= props.name %>Props {
@@ -14,12 +14,12 @@ interface <%= props.name %>State {
 class <%= props.name %> extends React.Component<<%= props.name %>Props<% if (props.hasState) { %>,<%= props.name %>State<% } %>> {
     public render() {
         const { className } = this.props;
-        const exampleClasses = classNames(className, "example-class");
+        const <%= props.camelName %>Classes = classNames(className, "<%= props.className %>");
         <% if (props.hasState) { %>
         const { exampleState } = this.state;
         <% } %>
         return (
-            <div className={exampleClasses}>
+            <div className={<%= props.camelName %>Classes}>
                 Function component<% if (props.hasState) { %> with {exampleState} state<% } %>
             </div>
         );
