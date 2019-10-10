@@ -17,14 +17,14 @@ stages:
         versionSpec: $(node_version)
     - script: yarn install
 
-- stage: compile-pixeloven
+- stage: compile_pixeloven
   displayName: Compile PixelOven packages
   jobs:
   - job: compile 
     steps:
     - script: yarn pixeloven:compile
 
-- stage: check-pixeloven
+- stage: check_pixeloven
   displayName: Check quality of PixelOven packages
   jobs:
   - job: lint 
@@ -34,7 +34,7 @@ stages:
     steps:
     - script: yarn pixeloven:test
 
-- stage: build-pixeloven
+- stage: build_pixeloven
   displayName: Build PixelOven apps
   jobs:
   - job: build 
