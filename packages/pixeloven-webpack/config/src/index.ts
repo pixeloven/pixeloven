@@ -2,55 +2,47 @@ import { clientConfig, serverConfig } from "./common";
 import { Config, Mode, Name, Target} from "./types";
 
 /**
- * @todo Simplify these a little bit. Once tested with the unified config ship that as one PR before doing any CLI work.
+ * Shims old CLI options with new configuration
+ * @param env 
+ * @param options 
+ * @param name 
+ * @param target 
  */
+function shimOptions(env: NodeJS.ProcessEnv, options: Config, name: Name, target: Target) {
+    const nodeEnv = env.NODE_ENV || "production";
+    return {
+        mode: Mode.hasOwnProperty(nodeEnv) ? Mode[nodeEnv] : Mode.production,
+        name,
+        outputPath: options.outputPath,
+        profiling: options.withProfiling,
+        publicPath: options.path,
+        sourceMap: options.withSourceMap,
+        stats: {
+            enabled: options.withStats,
+            host: options.withStatsHost,
+            outputDir: options.withStatsDir,
+            port: options.withStatsPort,
+        },
+        target,
+    }
+}
 
 /**
- * @todo Clean up CLI options. This is temporary so that I can test the refactor without redoing the entire CLI addon
+ * Configuration for client webpack bundling. This is here to support the old CLI style so we can transition to a new setup.
  * @param env 
  * @param options 
  */
 function webpackClientConfig(env: NodeJS.ProcessEnv, options: Config) {
-    const nodeEnv = env.NODE_ENV || "production";
-    return clientConfig({
-        mode: Mode.hasOwnProperty(nodeEnv) ? Mode[nodeEnv] : Mode.production,
-        name: Name.client,
-        outputPath: options.outputPath,
-        profiling: options.withProfiling,
-        publicPath: options.path,
-        sourceMap: options.withSourceMap,
-        stats: {
-            enabled: options.withStats,
-            host: options.withStatsHost,
-            outputDir: options.withStatsDir,
-            port: options.withStatsPort,
-        },
-        target: Target.web,
-    });
+    return clientConfig(shimOptions(env, options, Name.client, Target.web));
 }
 
 /**
- * @todo Clean up CLI options. This is temporary so that I can test the refactor without redoing the entire CLI addon
+ * Configuration for client webpack bundling. This is here to support the old CLI style so we can transition to a new setup.
  * @param env 
  * @param options 
  */
 function webpackServerConfig(env: NodeJS.ProcessEnv, options: Config) {
-    const nodeEnv = env.NODE_ENV || "production";
-    return serverConfig({
-        mode: Mode.hasOwnProperty(nodeEnv) ? Mode[nodeEnv] : Mode.production,
-        name: Name.server,
-        outputPath: options.outputPath,
-        profiling: options.withProfiling,
-        publicPath: options.path,
-        sourceMap: options.withSourceMap,
-        stats: {
-            enabled: options.withStats,
-            host: options.withStatsHost,
-            outputDir: options.withStatsDir,
-            port: options.withStatsPort,
-        },
-        target: Target.node,
-    });
+    return serverConfig(shimOptions(env, options, Name.server, Target.node));
 }
 
 export {
