@@ -1,27 +1,29 @@
 import storybook from "@storybook/react/standalone";
 import {
-    AddonStorybookRunContext,
+    AddonStorybookToolbox,
+    StorybookExecutionOptions,
     StorybookExecutionType,
     StorybookExtension,
 } from "../types";
 
-export default (context: AddonStorybookRunContext) => {
-    const extension: StorybookExtension = async (
+export default (toolbox: AddonStorybookToolbox) => {
+    const story: StorybookExtension = async (
         type: StorybookExecutionType,
-        args: string[] = [],
+        options: StorybookExecutionOptions,
     ) => {
-        const { filesystem, print } = context;
+        const { filesystem, print } = toolbox;
         const configEntryPoint = require.resolve("@pixeloven-storybook/config");
         const configDir = filesystem.path(configEntryPoint, "..");
+        const {outputDir, port, quiet} = options;
+
         try {
             switch (type) {
                 case StorybookExecutionType.build: {
-                    const outputDir = "./dist/public/docs";
                     await storybook({
                         configDir,
                         mode: "static",
-                        outputDir,
-                        quiet: true,
+                        outputDir: outputDir || "./stories",
+                        quiet,
                     });
                     return 0;
                 }
@@ -30,8 +32,8 @@ export default (context: AddonStorybookRunContext) => {
                         ci: true,
                         configDir,
                         mode: "dev",
-                        port: 9001,
-                        quiet: true,
+                        port: port || 9001,
+                        quiet,
                     });
                     return 0;
                 }
@@ -43,5 +45,5 @@ export default (context: AddonStorybookRunContext) => {
         }
         return 1;
     };
-    context.storybook = extension;
+    toolbox.storybook = story;
 };
