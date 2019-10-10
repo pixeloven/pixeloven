@@ -23,6 +23,7 @@ describe("Server", () => {
                 );
                 expect(wrapper.find("body").length).toEqual(1);
                 expect(wrapper.find("div").length).toEqual(2);
+                expect(wrapper.find("script").length).toEqual(1);
                 expect(
                     wrapper
                         .find("div")
