@@ -12,6 +12,8 @@ stages:
       matrix:
         node_10_x:
           node_version: 10.x
+        node_12_x:
+          node_version: 12.x
     steps:
     - task: NodeTool@0 
       inputs:
@@ -24,28 +26,32 @@ stages:
       displayName: Install lerna
     - script: lerna bootstrap
       displayName: Bootstrap Dependencies
-
-- stage: CompilePixelOven
-  displayName: Compile PixelOven packages
-  jobs:
-  - job: Compile
-    steps:
     - script: yarn pixeloven:compile
-
-- stage: CheckPixelOven
-  displayName: Check quality of PixelOven packages
-  jobs:
-  - job: Lint 
-    steps:
     - script: yarn pixeloven:lint
-  - job: Test 
-    steps:
     - script: yarn pixeloven:test
-
-- stage: BuildPixelOven
-  displayName: Build PixelOven apps
-  jobs:
-  - job: Build 
-    steps:
     - script: yarn pixeloven:build
+
+# - stage: CompilePixelOven
+#   displayName: Compile PixelOven packages
+#   jobs:
+#   - job: Compile
+#     steps:
+#     - script: yarn pixeloven:compile
+
+# - stage: CheckPixelOven
+#   displayName: Check quality of PixelOven packages
+#   jobs:
+#   - job: Lint 
+#     steps:
+#     - script: yarn pixeloven:lint
+#   - job: Test 
+#     steps:
+#     - script: yarn pixeloven:test
+
+# - stage: BuildPixelOven
+#   displayName: Build PixelOven apps
+#   jobs:
+#   - job: Build 
+#     steps:
+#     - script: yarn pixeloven:build
 
