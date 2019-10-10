@@ -119,6 +119,10 @@ jobs:
           at: ~/pixeloven
       - test:
           type: "pixeloven"
+      - persist_to_workspace:
+          root: .
+          paths: 
+            .
   document-pixeloven:
     executor: node-executor
     steps:
@@ -167,6 +171,10 @@ jobs:
           at: ~/pixeloven
       - test:
           type: "examples"
+      - persist_to_workspace:
+          root: .
+          paths: 
+            .
   document-examples:
     executor: node-executor
     steps:
@@ -215,14 +223,14 @@ workflows:
       - lint-pixeloven:
           requires:
             - compile-pixeloven
-      # - test-pixeloven:
-      #     requires:
-      #       - compile-pixeloven
+      - test-pixeloven:
+          requires:
+            - compile-pixeloven
       - accept-pixeloven:
           requires:
             - document-pixeloven
             - lint-pixeloven
-            # - test-pixeloven
+            - test-pixeloven
       - report-pixeloven:
           requires:
             - accept-pixeloven
@@ -238,14 +246,14 @@ workflows:
       - lint-examples:
           requires:
             - compile-examples
-      # - test-examples:
-      #     requires:
-      #       - accept-pixeloven
+      - test-examples:
+          requires:
+            - accept-pixeloven
       - build-examples:
           requires:
             - document-examples
             - lint-examples
-            # - test-examples
+            - test-examples
       - report-examples:
           requires:
             - build-examples
