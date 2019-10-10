@@ -3,6 +3,7 @@ pool:
 
 stages:
 
+# @todo Need our own image to speed this up
 - stage: setup
   displayName: Setup
   jobs:
@@ -15,8 +16,10 @@ stages:
     - task: NodeTool@0 
       inputs:
         versionSpec: $(node_version)
-    # @todo we should find a better way
-    - script: yarn install --production=false
+    - script: npm i -g npm
+    - script: npm i -g yarn
+    - script: npm i -g lerna
+    - script: lerna bootstrap
 
 - stage: compile_pixeloven
   displayName: Compile PixelOven packages
