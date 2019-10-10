@@ -13,17 +13,19 @@ stages:
     - task: NodeTool@0 
       inputs:
         versionSpec: $(node_version)
-    - script: yarn all:bootstrap
-# - stage: Test
-#   jobs:
-#   - job: TestOnWindows
-#     steps:
-#     - script: echo Testing on Windows!
-#   - job: TestOnLinux
-#     steps:
-#     - script: echo Testing on Linux!
-# - stage: Deploy
-#   jobs:
-#   - job: Deploy
-#     steps:
-#     - script: echo Deploying the code!
+    - script: yarn install
+- stage: compile-pixeloven
+  - displayName: Compile PixelOven packages
+  - job: compile 
+    - script: yarn pixeloven:compile
+- stage: check-pixeloven
+  - displayName: Check quality of PixelOven packages
+  - job: lint 
+    - script: yarn pixeloven:lint
+  - job: test 
+    - script: yarn pixeloven:test
+- stage: build-pixeloven
+  - displayName: Build PixelOven apps
+  - job: build 
+    - script: yarn pixeloven:build
+
