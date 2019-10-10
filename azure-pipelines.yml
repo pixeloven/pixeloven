@@ -15,7 +15,6 @@ stages:
     - task: NodeTool@0
       inputs:
         versionSpec: $(node_version)
-    - script: npm install --global lerna
     # @todo we should find a better way
     - script: yarn install --production=false
 
@@ -24,7 +23,6 @@ stages:
   jobs:
   - job: compile
     steps:
-    - script: npm install --global lerna
     - script: yarn pixeloven:compile
 
 - stage: check_pixeloven
