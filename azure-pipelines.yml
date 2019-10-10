@@ -4,7 +4,7 @@ pool:
 stages:
 
 - stage: setup
-  displayName: Compile PixelOven packages
+  displayName: Setup
   jobs:
   - job: setup
     strategy:
@@ -15,7 +15,8 @@ stages:
     - task: NodeTool@0 
       inputs:
         versionSpec: $(node_version)
-    - script: yarn install
+    - script: npm i -g lerna
+    - script: lerna bootstrap
 
 - stage: compile_pixeloven
   displayName: Compile PixelOven packages
