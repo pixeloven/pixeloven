@@ -25,11 +25,19 @@ stages:
     - script: npm i -g lerna
       displayName: Install lerna
     - script: lerna bootstrap
-      displayName: Bootstrap Dependencies
+      displayName: Bootstrap dependencies
     - script: yarn pixeloven:compile
+      displayName: Compile PixelOven packages
     - script: yarn pixeloven:lint
+      displayName: Lint PixelOven packages
     - script: yarn pixeloven:test
+      displayName: Test PixelOven packages
     - script: yarn pixeloven:build
+      displayName: Build PixelOven apps
+      # Need to trigger this only on master
+    - script: yarn pixeloven:report:coverage
+      displayName: Report PixelOven code coverage
+
 
 # - stage: CompilePixelOven
 #   displayName: Compile PixelOven packages
