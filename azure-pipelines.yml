@@ -32,34 +32,8 @@ stages:
       displayName: Lint PixelOven packages
     - script: yarn pixeloven:test
       displayName: Test PixelOven packages
-    - script: yarn pixeloven:build
+    - script: yarn pixeloven:build:production
       displayName: Build PixelOven apps
       # Need to trigger this only on master
     - script: yarn pixeloven:report:coverage
       displayName: Report PixelOven code coverage
-
-
-# - stage: CompilePixelOven
-#   displayName: Compile PixelOven packages
-#   jobs:
-#   - job: Compile
-#     steps:
-#     - script: yarn pixeloven:compile
-
-# - stage: CheckPixelOven
-#   displayName: Check quality of PixelOven packages
-#   jobs:
-#   - job: Lint 
-#     steps:
-#     - script: yarn pixeloven:lint
-#   - job: Test 
-#     steps:
-#     - script: yarn pixeloven:test
-
-# - stage: BuildPixelOven
-#   displayName: Build PixelOven apps
-#   jobs:
-#   - job: Build 
-#     steps:
-#     - script: yarn pixeloven:build
-
