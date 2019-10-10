@@ -17,10 +17,15 @@ stages:
       inputs:
         versionSpec: $(node_version)
     - script: npm i -g npm
+        displayName: Update npm
     - script: npm i -g yarn
-    - script: npm i -g lerna
+        displayName: Update yarn
+    - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+        displayName: Install lerna
     - script: lerna bootstrap
-
+        displayName: Bootstrap Dependencies
+    - script: yarn pixeloven:compile
+    
 - stage: compile_pixeloven
   displayName: Compile PixelOven packages
   jobs:
