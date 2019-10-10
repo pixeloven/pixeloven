@@ -4,7 +4,7 @@ pool:
 stages:
 
 - stage: setup
-  # displayName: Compile PixelOven packages
+  displayName: Compile PixelOven packages
   jobs:
   - job: setup
     strategy:
@@ -18,22 +18,26 @@ stages:
     - script: yarn install
 
 - stage: compile-pixeloven
-  # displayName: Compile PixelOven packages
+  displayName: Compile PixelOven packages
   jobs:
   - job: compile 
+    steps:
     - script: yarn pixeloven:compile
 
 - stage: check-pixeloven
-  # displayName: Check quality of PixelOven packages
+  displayName: Check quality of PixelOven packages
   jobs:
   - job: lint 
+    steps:
     - script: yarn pixeloven:lint
   - job: test 
+    steps:
     - script: yarn pixeloven:test
 
 - stage: build-pixeloven
-  # displayName: Build PixelOven apps
+  displayName: Build PixelOven apps
   jobs:
   - job: build 
+    steps:
     - script: yarn pixeloven:build
 
