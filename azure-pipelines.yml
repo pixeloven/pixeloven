@@ -4,10 +4,10 @@ pool:
 stages:
 
 # @todo Need our own image to speed this up
-- stage: setup
-  displayName: Setup
+- stage: SetupPixelOven
+  displayName: Setup PixelOven dependencies
   jobs:
-  - job: setup
+  - job: Setup
     strategy:
       matrix:
         node_10_x:
@@ -17,36 +17,36 @@ stages:
       inputs:
         versionSpec: $(node_version)
     - script: npm i -g npm
-        displayName: Update npm
+      displayName: Update npm
     - script: npm i -g yarn
-        displayName: Update yarn
+      displayName: Update yarn
     - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
-        displayName: Install lerna
+      displayName: Install lerna
     - script: lerna bootstrap
-        displayName: Bootstrap Dependencies
+      displayName: Bootstrap Dependencies
     - script: yarn pixeloven:compile
-    
-- stage: compile_pixeloven
+
+- stage: CompilePixelOven
   displayName: Compile PixelOven packages
   jobs:
-  - job: compile 
+  - job: Compile 
     steps:
     - script: yarn pixeloven:compile
 
-- stage: check_pixeloven
+- stage: CheckPixelOven
   displayName: Check quality of PixelOven packages
   jobs:
-  - job: lint 
+  - job: Lint 
     steps:
     - script: yarn pixeloven:lint
-  - job: test 
+  - job: Test 
     steps:
     - script: yarn pixeloven:test
 
-- stage: build_pixeloven
+- stage: BuildPixelOven
   displayName: Build PixelOven apps
   jobs:
-  - job: build 
+  - job: Build 
     steps:
     - script: yarn pixeloven:build
 
