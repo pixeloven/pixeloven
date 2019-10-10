@@ -15,9 +15,7 @@ stages:
     - task: NodeTool@0
       inputs:
         versionSpec: $(node_version)
-    - script: |
-          yarn global lerna
-        displayName: "Install Lerna"
+    - script: yarn global lerna
     # @todo we should find a better way
     - script: yarn install --production=false
 
