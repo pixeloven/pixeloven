@@ -37,11 +37,11 @@ describe("Server", () => {
         afterEach(() => {
             Helmet.canUseDOM = true;
         });
-        it(`responds to "/v1/health" with 200 and render "OK"`, done => {
+        it(`responds to "/api/v1/health" with 200 and render "OK"`, done => {
             const app = express();
             server(app, testConfig);
             request(app)
-                .get("/v1/health")
+                .get("/api//v1/health")
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
