@@ -15,8 +15,8 @@ stages:
     - task: NodeTool@0 
       inputs:
         versionSpec: $(node_version)
-    - script: npm i -g lerna
-    - script: lerna bootstrap
+    # @todo we should find a better way
+    - script: yarn install --production=false
 
 - stage: compile_pixeloven
   displayName: Compile PixelOven packages
