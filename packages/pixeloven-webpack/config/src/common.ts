@@ -4,9 +4,7 @@ import {
 } from "@pixeloven-core/filesystem";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
-import TerserPlugin from "terser-webpack-plugin";
 import TimeFixPlugin from "time-fix-plugin";
 import webpack, {
     Configuration,
@@ -30,7 +28,7 @@ import {
  * @todo Merge these into one
  */
 
-export function clientConfig(options: Options): Configuration {
+export function clientConfig(options: Options) {
     /**
      * Utility functions to help segment configuration based on environment
      */
@@ -48,6 +46,7 @@ export function clientConfig(options: Options): Configuration {
         getModuleSCSSLoader,
         getModuleTypeScriptLoader,
         getNode,
+        getOptimization,
         getPerformance,
         getPluginBundleAnalyzer,
         getPluginForkTsCheckerWebpack,
@@ -82,7 +81,7 @@ export function clientConfig(options: Options): Configuration {
     /**
      * Client side configuration
      */
-    return {
+    return removeEmpty({
         bail: ifProduction(),
         devtool: getDevTool(),
         entry: getEntry(),
@@ -92,83 +91,14 @@ export function clientConfig(options: Options): Configuration {
                 oneOf: [
                     getModuleTypeScriptLoader(), 
                     getModuleSCSSLoader(), 
-                    getModuleFileLoader({
-                        name: ifProduction(
-                            "static/media/[name].[contenthash].[ext]",
-                            "static/media/[name].[hash].[ext]",
-                        ),
-                    })
+                    getModuleFileLoader()
                 ],
             }],
             strictExportPresence: true,
         },
         name,
         node: getNode(),
-        optimization: {
-            minimize: ifProduction(),
-            minimizer: ifProduction(
-                [
-                    /**
-                     * Minify the code JavaScript
-                     *
-                     * @env production
-                     */
-                    new TerserPlugin({
-                        extractComments: "all",
-                        sourceMap: options.sourceMap,
-                        terserOptions: {
-                            safari10: true,
-                        },
-                    }),
-                    new OptimizeCSSAssetsPlugin(),
-                ],
-                [],
-            ),
-            noEmitOnErrors: true,
-            /**
-             * @todo See how we can stop vendors-main (no s)
-             * @todo Make configurable v8 (include ability to provide these rules in json form)
-             */
-            splitChunks: {
-                cacheGroups: {
-                    coreJs: {
-                        name: "vendor~core-js",
-                        test: /[\\/]node_modules[\\/](core-js)[\\/]/,
-                    },
-                    lodash: {
-                        name: "vendor~lodash",
-                        test: /[\\/]node_modules[\\/](lodash)[\\/]/,
-                    },
-                    moment: {
-                        name: "vendor~moment",
-                        test: /[\\/]node_modules[\\/](moment)[\\/]/,
-                    },
-                    react: {
-                        name: "vendor~react",
-                        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-                    },
-                    vendor: {
-                        name: "vendor~main",
-                        /**
-                         * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-                         */
-                        // name(mod) {
-                        //     // get the name. E.g. node_modules/packageName/not/this/part.js
-                        //     // or node_modules/packageName
-                        //     const packageName = mod.context.match(
-                        //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-                        //     )[1];
-                        //     // npm package names are URL-safe, but some servers don't like @ symbols
-                        //     return `vendor~${packageName.replace("@", "")}`;
-                        // },
-                        test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
-                    },
-                },
-                chunks: "all",
-                maxInitialRequests: Infinity,
-                minSize: 0,
-            },
-        },
+        optimization: getOptimization(),
         output: removeEmpty({
             chunkFilename: ifProduction(
                 "static/js/[name].[contenthash].js",
@@ -268,10 +198,10 @@ export function clientConfig(options: Options): Configuration {
         resolve: getResolve(),
         stats: "verbose",
         target,
-    };
+    }) as Configuration;
 };
 
-export function serverConfig(options: Options): Configuration {
+export function serverConfig(options: Options) {
     /**
      * Utility functions to help segment configuration based on environment
      */
@@ -299,7 +229,7 @@ export function serverConfig(options: Options): Configuration {
     /**
      * Server side configuration
      */
-    return {
+    return removeEmpty({
         bail: ifProduction(),
         devtool: getDevTool(),
         entry: getEntry(),
@@ -310,13 +240,7 @@ export function serverConfig(options: Options): Configuration {
                 oneOf: [
                     getModuleTypeScriptLoader(), 
                     getModuleSCSSLoader(), 
-                    getModuleFileLoader({
-                        emitFile: false,
-                        name: ifProduction(
-                            "static/media/[name].[contenthash].[ext]",
-                            "static/media/[name].[hash].[ext]",
-                        ),
-                    })
+                    getModuleFileLoader()
                 ]
             }],
             strictExportPresence: true,
@@ -377,6 +301,6 @@ export function serverConfig(options: Options): Configuration {
         resolve: getResolve(),
         stats: "verbose",
         target: options.target,
-    };
+    }) as Configuration;
 };
 

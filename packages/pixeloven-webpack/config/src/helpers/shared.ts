@@ -4,13 +4,14 @@ import {
     resolveTsConfig,
 } from "@pixeloven-core/filesystem";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
+import TerserPlugin from "terser-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import {
     Options as WebpackOptions,
     Resolve,
-    RuleSetQuery,
     RuleSetRule
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
@@ -156,6 +157,75 @@ export function getSetup(options: Options) {
         ], undefined);
     }
 
+    function getOptimization() {
+        return ifClient({
+            minimize: ifProduction(),
+            minimizer: ifProduction(
+                [
+                    /**
+                     * Minify the code JavaScript
+                     *
+                     * @env production
+                     */
+                    new TerserPlugin({
+                        extractComments: "all",
+                        sourceMap: options.sourceMap,
+                        terserOptions: {
+                            safari10: true,
+                        },
+                    }),
+                    new OptimizeCSSAssetsPlugin(),
+                ],
+            ),
+            noEmitOnErrors: true,
+            /**
+             * @todo See how we can stop vendors-main (no s)
+             * @todo Make configurable v8 (include ability to provide these rules in json form)
+             */
+            splitChunks: {
+                cacheGroups: {
+                    coreJs: {
+                        name: "vendor~core-js",
+                        test: /[\\/]node_modules[\\/](core-js)[\\/]/,
+                    },
+                    lodash: {
+                        name: "vendor~lodash",
+                        test: /[\\/]node_modules[\\/](lodash)[\\/]/,
+                    },
+                    moment: {
+                        name: "vendor~moment",
+                        test: /[\\/]node_modules[\\/](moment)[\\/]/,
+                    },
+                    react: {
+                        name: "vendor~react",
+                        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                    },
+                    vendor: {
+                        name: "vendor~main",
+                        /**
+                         * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+                         */
+                        // name(mod) {
+                        //     // get the name. E.g. node_modules/packageName/not/this/part.js
+                        //     // or node_modules/packageName
+                        //     const packageName = mod.context.match(
+                        //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+                        //     )[1];
+                        //     // npm package names are URL-safe, but some servers don't like @ symbols
+                        //     return `vendor~${packageName.replace("@", "")}`;
+                        // },
+                        test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
+                    },
+                },
+                chunks: "all",
+                maxInitialRequests: Infinity,
+                minSize: 0,
+            },
+        }, {
+            noEmitOnErrors: true
+        });
+    }
+
     function getMode() {
         return ifProduction("production", "development");
     }
@@ -168,11 +238,18 @@ export function getSetup(options: Options) {
      * This loader doesn"t use a "test" so it will catch all modules
      * that fall through the other loaders.
      */
-    function getModuleFileLoader(query: RuleSetQuery): RuleSetRule {
+    function getModuleFileLoader(): RuleSetRule {
         return {
             exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
             loader: require.resolve("file-loader"),
-            options: query,
+            options: ifServer({
+                emitFile: false,
+            }, {
+                name: ifProduction(
+                    "static/media/[name].[contenthash].[ext]",
+                    "static/media/[name].[hash].[ext]",
+                ),
+            }),
         };
     }
 
@@ -325,10 +402,10 @@ export function getSetup(options: Options) {
         getModuleSCSSLoader,
         getModuleTypeScriptLoader,
         getNode,
+        getOptimization,
         getPerformance,
         getPluginBundleAnalyzer,
         getPluginForkTsCheckerWebpack,
         getResolve
     }
-
 }
