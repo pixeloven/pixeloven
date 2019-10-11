@@ -5,49 +5,52 @@ export default {
     name: "lint",
     run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, styleLint, tsLint } = context;
-        switch (parameters.first) {
-            case "scss": {
-                const argList = pixelOven.getArgList("scss", parameters, {
-                    offset: 1,
-                    type: "withOptions",
-                });
-                const results = await styleLint(argList);
-                pixelOven.exit(
-                    "Stylelint",
-                    results.status,
-                    `Success! Your SCSS is beautify just the way it is.\n`,
-                );
-                break;
-            }
-            case "ts": {
-                const argList = pixelOven.getArgList("ts", parameters, {
-                    offset: 1,
-                    type: "withOptions",
-                });
-                const results = await tsLint(argList);
-                pixelOven.exit(
-                    "TSLint",
-                    results.status,
-                    `Success! Your TypeScript is beautify just the way it is.\n`,
-                );
-                break;
-            }
-            case "tsx": {
-                const argList = pixelOven.getArgList("tsx", parameters, {
-                    offset: 1,
-                    type: "withOptions",
-                });
-                const results = await tsLint(argList);
-                pixelOven.exit(
-                    "TSLint",
-                    results.status,
-                    `Success! Your TypeScript is beautify just the way it is.\n`,
-                );
-                break;
-            }
-            default: {
-                pixelOven.invalidArgument();
-                break;
+        const availableTasks = ["scss", "ts", "tsx"];
+        const task = parameters.first;
+
+        if (!task) {
+            pixelOven.invalidArgument("Please provide a task for Lint to run.");
+            pixelOven.exit("Lint", 1);
+        } else if (!availableTasks.includes(task)) {
+            pixelOven.invalidArgument(
+                `Available Pretty tasks are "scss", "ts", or "tsx".`,
+                task,
+            );
+            pixelOven.exit("Pretty", 1);
+        } else {
+            const argList = pixelOven.getArgList(task, parameters, {
+                offset: 1,
+                type: "withOptions",
+            });
+
+            switch (parameters.first) {
+                case "scss": {
+                    const results = await styleLint(argList);
+                    pixelOven.exit(
+                        "Stylelint",
+                        results.status,
+                        `Success! Your SCSS is beautify just the way it is.\n`,
+                    );
+                    break;
+                }
+                case "ts":
+                case "tsx": {
+                    const results = await tsLint(argList);
+                    pixelOven.exit(
+                        "TSLint",
+                        results.status,
+                        `Success! Your TypeScript is beautify just the way it is.\n`,
+                    );
+                    break;
+                }
+                default: {
+                    pixelOven.invalidArgument(
+                        `Available Lint tasks are "scss", "ts", or "tsx".`,
+                        task,
+                    );
+                    pixelOven.exit("Lint", 1);
+                    break;
+                }
             }
         }
     },
