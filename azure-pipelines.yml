@@ -1,8 +1,7 @@
 stages:
 - stage: Development
   jobs:
-  - job: Setup
-    displayName: Setup PixelOven
+  - job: Build
     pool:
       vmImage: "ubuntu-16.04"
     strategy:
@@ -23,18 +22,6 @@ stages:
       displayName: Install lerna
     - script: lerna bootstrap
       displayName: Bootstrap dependencies
-  - job: Create
-    dependsOn: Setup
-    displayName: Create PixelOven
-    # pool:
-    #   vmImage: "ubuntu-16.04"
-    # strategy:
-    #   matrix:
-    #     node_10_x:
-    #       node_version: 10.x
-    #     node_12_x:
-    #       node_version: 12.x
-    steps:
     - script: yarn pixeloven:compile
       displayName: Compile PixelOven packages
     - script: yarn pixeloven:lint
@@ -45,3 +32,14 @@ stages:
       displayName: Build PixelOven apps
     - script: yarn pixeloven:report:coverage
       displayName: Report PixelOven code coverage
+    # Run against examples now -- eventually this should be setup as a true integration step
+    - script: yarn examples:compile
+      displayName: Compile Example packages
+    - script: yarn examples:lint
+      displayName: Lint Example packages
+    - script: yarn examples:test
+      displayName: Test Example packages
+    - script: yarn examples:build:production
+      displayName: Build Example apps
+    - script: yarn examples:report:coverage
+      displayName: Report Example code coverage
