@@ -15,7 +15,7 @@ import {
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { getIfUtils } from "webpack-config-utils";
-import { TargetName } from "../types";
+import { Name } from "../types";
 
 export function getDevTool(withSourceMap: boolean) {
     return withSourceMap ? "eval-source-map" : false
@@ -116,7 +116,7 @@ interface PluginBundleAnalyzerOptions {
     env: string;
     host: string;
     port: number;
-    name: TargetName;
+    name: Name;
     outputDir: string;
 }
 
