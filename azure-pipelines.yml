@@ -34,10 +34,5 @@ stages:
       displayName: Test PixelOven packages
     - script: yarn pixeloven:build:production
       displayName: Build PixelOven apps
-      # Need to trigger this only on master
     - script: yarn pixeloven:report:coverage
       displayName: Report PixelOven code coverage
-
-  # Need to do the same thing but for the examples... 
-  # Then we want to save coverage as an artifact and report coverage 
-  # yarn << parameters.type >>:report:coverage
