@@ -34,12 +34,12 @@ stages:
       displayName: Report PixelOven code coverage
     # Run against examples now -- eventually this should be setup as a true integration step
     - script: yarn examples:compile
-      displayName: Compile Example packages
+      displayName: Compile example packages
     - script: yarn examples:lint
-      displayName: Lint Example packages
+      displayName: Lint example packages
     - script: yarn examples:test
-      displayName: Test Example packages
+      displayName: Test example packages
     - script: yarn examples:build:production
-      displayName: Build Example apps
+      displayName: Build example apps
     - script: yarn examples:report:coverage
-      displayName: Report Example code coverage
+      displayName: Report example code coverage

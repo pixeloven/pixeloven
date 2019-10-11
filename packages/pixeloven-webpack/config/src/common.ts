@@ -12,53 +12,18 @@ import webpack, {
     Configuration,
     DevtoolModuleFilenameTemplateInfo
 } from "webpack";
-import { getIfUtils, removeEmpty } from "webpack-config-utils";
 import ManifestPlugin from "webpack-manifest-plugin";
 import {
-    Mode,
     Name,
+    Options,
     Target,
 } from "./types"
 
 import {
-    getDevTool,
-    getMode,
-    getModuleFileLoader,
-    getModuleTypeScriptLoader,
-    getPerformance,
-    getPluginBundleAnalyzer,
-    getPluginForkTsCheckerWebpack,
-    getResolve
+    getSetup,
+    getUtils,
+    removeEmpty
 } from "./helpers/shared";
-
-import {
-    getEntry as getClientEntry,
-    getModuleSCSSLoader as getClientModuleSCSSLoader,
-    getNode as getClientNode
-} from "./helpers/client";
-
-import {
-    getEntry,
-    getExternals,
-    getModuleSCSSLoader,
-    getNode
-} from "./helpers/server";
-
-interface Options {
-    mode: Mode;
-    name: Name;
-    outputPath: string;
-    profiling: boolean;
-    publicPath: string;
-    sourceMap: boolean;
-    stats: {
-        enabled: boolean;
-        host: string;
-        outputDir: string;
-        port: number;
-    },
-    target: Target;
-}
 
 /**
  * @todo Create util generator similar to the webpack ones for splitting by name, target etc
@@ -69,7 +34,26 @@ export function clientConfig(options: Options): Configuration {
     /**
      * Utility functions to help segment configuration based on environment
      */
-    const { ifProduction, ifDevelopment } = getIfUtils(options.mode);
+    const { ifProduction, ifDevelopment } = getUtils({
+        mode: options.mode,
+        name: options.name,
+        target: options.target
+    });
+
+    const {
+        getDevTool,
+        getEntry,
+        getMode,
+        getModuleFileLoader,
+        getModuleSCSSLoader,
+        getModuleTypeScriptLoader,
+        getNode,
+        getPerformance,
+        getPluginBundleAnalyzer,
+        getPluginForkTsCheckerWebpack,
+        getResolve
+    } = getSetup(options);
+
     /**
      * Set local options
      */
@@ -100,14 +84,14 @@ export function clientConfig(options: Options): Configuration {
      */
     return {
         bail: ifProduction(),
-        devtool: getDevTool(options.sourceMap),
-        entry: getClientEntry(options.mode, options.publicPath),
-        mode: getMode(options.mode),
+        devtool: getDevTool(),
+        entry: getEntry(),
+        mode: getMode(),
         module: {
             rules: [{
                 oneOf: [
                     getModuleTypeScriptLoader(), 
-                    getClientModuleSCSSLoader(options.mode), 
+                    getModuleSCSSLoader(), 
                     getModuleFileLoader({
                         name: ifProduction(
                             "static/media/[name].[contenthash].[ext]",
@@ -119,7 +103,7 @@ export function clientConfig(options: Options): Configuration {
             strictExportPresence: true,
         },
         name,
-        node: getClientNode(),
+        node: getNode(),
         optimization: {
             minimize: ifProduction(),
             minimizer: ifProduction(
@@ -198,7 +182,7 @@ export function clientConfig(options: Options): Configuration {
             path: resolvePath(publicOutputPath, false),
             publicPath,
         }),
-        performance: getPerformance(options.mode),
+        performance: getPerformance(),
         plugins: removeEmpty([
             /**
              * Fixes a known issue with cross-platform differences in file watchers,
@@ -207,7 +191,7 @@ export function clientConfig(options: Options): Configuration {
              *
              * @env development
              */
-            ifDevelopment(new TimeFixPlugin(), undefined),
+            ifDevelopment(new TimeFixPlugin()),
             /**
              * Watcher doesn"t work well if you mistype casing in a path so we use
              * a plugin that prints an error when you attempt to do this.
@@ -215,7 +199,7 @@ export function clientConfig(options: Options): Configuration {
              *
              * @env development
              */
-            ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
+            ifDevelopment(new CaseSensitivePathsPlugin()),
             /**
              * Helps prevent hashes from updating if a bundle hasn't changed.
              * @env all
@@ -244,7 +228,7 @@ export function clientConfig(options: Options): Configuration {
              * Perform type checking and linting in a separate process to speed up compilation
              * @env all
              */
-            getPluginForkTsCheckerWebpack(options.mode),
+            getPluginForkTsCheckerWebpack(),
             /**
              * Extract css to file
              * @env production
@@ -259,11 +243,7 @@ export function clientConfig(options: Options): Configuration {
                     "static/css/main.css",
                 ),
             }),
-            getPluginBundleAnalyzer({
-                ...options.stats,
-                env: options.mode,
-                name: options.name
-            }),
+            getPluginBundleAnalyzer(options.stats),
             /**
              * Generate a manifest file which contains a mapping of all asset filenames
              * to their corresponding output file so that tools can pick it up without
@@ -274,15 +254,14 @@ export function clientConfig(options: Options): Configuration {
             ifProduction(
                 new ManifestPlugin({
                     fileName: "asset-manifest.json",
-                }),
-                undefined,
+                })
             ),
             /**
              * This is necessary to emit hot updates (currently CSS only):
              *
              * @env development
              */
-            ifDevelopment(new webpack.HotModuleReplacementPlugin(), undefined),
+            ifDevelopment(new webpack.HotModuleReplacementPlugin()),
         ]),
         profile: options.profiling,
         recordsPath,
@@ -296,22 +275,41 @@ export function serverConfig(options: Options): Configuration {
     /**
      * Utility functions to help segment configuration based on environment
      */
-    const { ifProduction, ifDevelopment } = getIfUtils(options.mode);
+    const { ifProduction, ifDevelopment } = getUtils({
+        mode: options.mode,
+        name: options.name,
+        target: options.target
+    });
+
+    const {
+        getDevTool,
+        getEntry,
+        getExternals,
+        getMode,
+        getModuleFileLoader,
+        getModuleSCSSLoader,
+        getModuleTypeScriptLoader,
+        getNode,
+        getPerformance,
+        getPluginBundleAnalyzer,
+        getPluginForkTsCheckerWebpack,
+        getResolve
+    } = getSetup(options);
 
     /**
      * Server side configuration
      */
     return {
         bail: ifProduction(),
-        devtool: getDevTool(options.sourceMap),
+        devtool: getDevTool(),
         entry: getEntry(),
         externals: getExternals(),
-        mode: getMode(options.mode),
+        mode: getMode(),
         module: {
             rules: [{
                 oneOf: [
                     getModuleTypeScriptLoader(), 
-                    getModuleSCSSLoader(options.mode), 
+                    getModuleSCSSLoader(), 
                     getModuleFileLoader({
                         emitFile: false,
                         name: ifProduction(
@@ -334,7 +332,7 @@ export function serverConfig(options: Options): Configuration {
             path: resolvePath(options.outputPath, false),
             publicPath: options.publicPath,
         },
-        performance: getPerformance(options.mode),
+        performance: getPerformance(),
         plugins: removeEmpty([
             /**
              * Fixes a known issue with cross-platform differences in file watchers,
@@ -343,7 +341,7 @@ export function serverConfig(options: Options): Configuration {
              *
              * @env development
              */
-            ifDevelopment(new TimeFixPlugin(), undefined),
+            ifDevelopment(new TimeFixPlugin()),
             /**
              * Watcher doesn"t work well if you mistype casing in a path so we use
              * a plugin that prints an error when you attempt to do this.
@@ -351,7 +349,7 @@ export function serverConfig(options: Options): Configuration {
              *
              * @env development
              */
-            ifDevelopment(new CaseSensitivePathsPlugin(), undefined),
+            ifDevelopment(new CaseSensitivePathsPlugin()),
             /**
              * Moment.js is an extremely popular library that bundles large locale files
              * by default due to how Webpack interprets its code. This is a practical
@@ -371,12 +369,8 @@ export function serverConfig(options: Options): Configuration {
                 PUBLIC_PATH: options.publicPath,
                 TARGET: options.target,
             }),
-            getPluginBundleAnalyzer({
-                ...options.stats,
-                env: options.mode,
-                name: options.name
-            }),
-            getPluginForkTsCheckerWebpack(options.mode),
+            getPluginBundleAnalyzer(options.stats),
+            getPluginForkTsCheckerWebpack(),
         ]),
         profile: options.profiling,
         recordsPath: path.resolve(`${options.outputPath}/${options.name}-profile.json`),

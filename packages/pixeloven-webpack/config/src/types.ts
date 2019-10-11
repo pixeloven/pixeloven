@@ -13,6 +13,22 @@ export enum Target{
     node = "node"
 }
 
+export interface Options {
+    mode: Mode;
+    name: Name;
+    outputPath: string;
+    profiling: boolean;
+    publicPath: string;
+    sourceMap: boolean;
+    stats: {
+        enabled: boolean;
+        host: string;
+        outputDir: string;
+        port: number;
+    },
+    target: Target;
+}
+
 /**
  * @description General settings for BundleAnalyzerPlugin
  */
