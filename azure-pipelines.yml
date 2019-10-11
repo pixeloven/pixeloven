@@ -1,13 +1,10 @@
-pool:
-  vmImage: "ubuntu-16.04"
-
 stages:
-
-# @todo Need our own image to speed this up
-- stage: SetupPixelOven
-  displayName: Setup PixelOven dependencies
+- stage: Development
   jobs:
   - job: Setup
+    displayName: Setup PixelOven
+    pool:
+      vmImage: "ubuntu-16.04"
     strategy:
       matrix:
         node_10_x:
@@ -26,6 +23,18 @@ stages:
       displayName: Install lerna
     - script: lerna bootstrap
       displayName: Bootstrap dependencies
+  - job: Create
+    dependsOn: Setup
+    displayName: Create PixelOven
+    # pool:
+    #   vmImage: "ubuntu-16.04"
+    # strategy:
+    #   matrix:
+    #     node_10_x:
+    #       node_version: 10.x
+    #     node_12_x:
+    #       node_version: 12.x
+    steps:
     - script: yarn pixeloven:compile
       displayName: Compile PixelOven packages
     - script: yarn pixeloven:lint
