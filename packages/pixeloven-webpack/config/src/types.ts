@@ -1,17 +1,4 @@
-export enum Mode {
-    development = "development",
-    production = "production",
-}
-
-export enum Name {
-    client = "client",
-    server = "server",
-}
-
-export enum Target{
-    web = "web",
-    node = "node"
-}
+import {Mode, Name, Target} from "@pixeloven-core/env";
 
 export interface Options {
     mode: Mode;

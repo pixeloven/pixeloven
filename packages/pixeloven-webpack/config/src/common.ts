@@ -1,3 +1,5 @@
+import {removeEmpty} from "@pixeloven-core/common";
+import {getUtils} from "@pixeloven-core/env";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
@@ -11,15 +13,8 @@ import {
 } from "./types"
 
 import {
-    getSetup,
-    getUtils,
-    removeEmpty
+    getSetup
 } from "./helpers/shared";
-
-/**
- * @todo Create util generator similar to the webpack ones for splitting by name, target etc
- * @todo Merge these into one
- */
 
 export function config(options: Options) {
     /**

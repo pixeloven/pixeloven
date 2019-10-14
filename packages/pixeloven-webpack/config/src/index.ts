@@ -1,5 +1,6 @@
+import {Mode, Name, Target} from "@pixeloven-core/env";
 import { config } from "./common";
-import { Config, Mode, Name, Target} from "./types";
+import { Config} from "./types";
 
 /**
  * Shims old CLI options with new configuration

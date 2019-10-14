@@ -1,3 +1,4 @@
+import {getUtils} from "@pixeloven-core/env";
 import {
     resolvePath,
     resolveSourceRoot,
@@ -17,7 +18,7 @@ import {
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import webpackNodeExternals from "webpack-node-externals";
-import { Mode, Name, Options, Target } from "../types";
+import { Options} from "../types";
 
 import {
     getEntry as getClientEntry,
@@ -31,105 +32,11 @@ import {
     getNode as getServerNode
 } from "./server";
 
-interface UtilOptions {
-    mode: Mode | string,
-    name: Name | string,
-    target: Target | string,
-}
-
 interface PluginBundleAnalyzerOptions {
     enabled: boolean;
     host: string;
     port: number;
     outputDir: string;
-}
-
-/**
- * @todo Move to core
- */
-type DefinedObjKeys<T> = ({ [P in keyof T]: T[P] extends undefined ? never : P })[keyof T];
-type NonEmptyObject<T, P extends DefinedObjKeys<T> = DefinedObjKeys<T>> = { [PP in P]: T[PP] };
-
-function removeEmpty<T>(input: Array<T | undefined>): T[];
-function removeEmpty<T>(input: { [P in keyof T]: T[P] }): NonEmptyObject<T>;
-function removeEmpty<T>(input: Array<T | undefined> | { [P in keyof T]: T[P] }) {
-    if (Array.isArray(input)) {
-        return input.filter((item) => !!item);
-    }
-    return Object.keys(input)
-        .filter(key => !!input[key])
-        .reduce((res, key) => Object.assign(res, { [key]: input[key] }), {} );
-}
-
-export {
-    removeEmpty
-}
-
-/**
- * @todo Replace the old env... These are widely used in ENV and webpack
- * @param options 
- */
-export function getUtils<T extends UtilOptions>(options: T) {
-    function ifType<Y, N>(isType: boolean, value?: Y, alternate?: N) {
-        if (arguments.length) {
-            if (typeof alternate === "undefined") {
-                return isType ? value : false;
-            }
-            return isType ? value : alternate;
-        }
-        return isType;
-    }
-
-    function ifClient(): boolean;
-    function ifClient<Y>(value: Y): Y | false;
-    function ifClient<Y, N>(value: Y, alternate: N): Y | N;
-    function ifClient<Y, N>(value?: Y, alternate?: N) {
-        const isClient = options.name === Name.client;
-        return ifType(isClient, value, alternate);
-    }
-    function ifServer(): boolean;
-    function ifServer<Y>(value: Y): Y | false;
-    function ifServer<Y, N>(value: Y, alternate: N): Y | N;
-    function ifServer<Y, N>(value?: Y, alternate?: N) {
-        const isServer = options.name === Name.server;
-        return ifType(isServer, value, alternate);
-    }
-    function ifDevelopment(): boolean;
-    function ifDevelopment<Y>(value: Y): Y | false;
-    function ifDevelopment<Y, N>(value: Y, alternate: N): Y | N;
-    function ifDevelopment<Y, N>(value?: Y, alternate?: N) {
-        const isDevelopment = options.mode === Mode.development;
-        return ifType(isDevelopment, value, alternate);
-    }
-    function ifProduction(): boolean;
-    function ifProduction<Y>(value: Y): Y | false;
-    function ifProduction<Y, N>(value: Y, alternate: N): Y | N;
-    function ifProduction<Y, N>(value?: Y, alternate?: N) {
-        const isProduction = options.mode === Mode.production;
-        return ifType(isProduction, value, alternate);
-    }
-    function ifNode(): boolean;
-    function ifNode<Y>(value: Y): Y | false;
-    function ifNode<Y, N>(value: Y, alternate: N): Y | N;
-    function ifNode<Y, N>(value?: Y, alternate?: N) {
-        const isNode = options.target === Target.node;
-        return ifType(isNode, value, alternate);
-    }
-    function ifWeb(): boolean;
-    function ifWeb<Y>(value: Y): Y | false;
-    function ifWeb<Y, N>(value: Y, alternate: N): Y | N;
-    function ifWeb<Y, N>(value?: Y, alternate?: N) {
-        const isWeb = options.target === Target.web;
-        return ifType(isWeb, value, alternate);
-    }
-    return {
-        ifClient,
-        ifDevelopment,
-        ifNode,
-        ifProduction,
-        ifServer,
-        ifWeb,
-    }
 }
 
 export function getSetup(options: Options) {
