@@ -1,4 +1,4 @@
-import { clientConfig, serverConfig } from "./common";
+import { config } from "./common";
 import { Config, Mode, Name, Target} from "./types";
 
 /**
@@ -33,7 +33,7 @@ function shimOptions(env: NodeJS.ProcessEnv, options: Config, name: Name, target
  * @param options 
  */
 function webpackClientConfig(env: NodeJS.ProcessEnv, options: Config) {
-    return clientConfig(shimOptions(env, options, Name.client, Target.web));
+    return config(shimOptions(env, options, Name.client, Target.web));
 }
 
 /**
@@ -42,7 +42,7 @@ function webpackClientConfig(env: NodeJS.ProcessEnv, options: Config) {
  * @param options 
  */
 function webpackServerConfig(env: NodeJS.ProcessEnv, options: Config) {
-    return serverConfig(shimOptions(env, options, Name.server, Target.node));
+    return config(shimOptions(env, options, Name.server, Target.node));
 }
 
 export {

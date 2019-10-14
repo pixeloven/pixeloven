@@ -10,6 +10,7 @@ import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TerserPlugin from "terser-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import {
+    DevtoolModuleFilenameTemplateInfo,
     Options as WebpackOptions,
     Resolve,
     RuleSetRule
@@ -132,6 +133,23 @@ export function getUtils<T extends UtilOptions>(options: T) {
 }
 
 export function getSetup(options: Options) {
+
+    /**
+     * Describe source pathing in dev tools
+     * @param info
+     */
+    const devtoolModuleFilenameTemplate = (
+        info: DevtoolModuleFilenameTemplateInfo,
+    ) => {
+        if (ifProduction()) {
+            return path
+                .relative(resolveSourceRoot(), info.absoluteResourcePath)
+                .replace(/\\/g, "/");
+        }
+        return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
+    };
+
+
     const {ifClient, ifDevelopment, ifProduction, ifServer} = getUtils({
         mode: options.mode,
         name: options.name,
@@ -175,7 +193,7 @@ export function getSetup(options: Options) {
                         },
                     }),
                     new OptimizeCSSAssetsPlugin(),
-                ],
+                ],[]
             ),
             noEmitOnErrors: true,
             /**
@@ -224,6 +242,27 @@ export function getSetup(options: Options) {
         }, {
             noEmitOnErrors: true
         });
+    }
+
+    function getOutput() {
+        return ifClient({
+            chunkFilename: ifProduction(
+                "static/js/[name].[contenthash].js",
+                "static/js/[name].[hash].js",
+            ),
+            devtoolModuleFilenameTemplate,
+            filename: ifProduction(
+                "static/js/[name].[contenthash].js",
+                "static/js/[name].[hash].js",
+            ),
+            path: resolvePath(path.normalize(`${options.outputPath}/public`), false), // @todo THis should not be hardcoded once we split client and server
+            publicPath: options.publicPath,
+        }, {
+            filename: "server.js",
+            libraryTarget: "commonjs2",
+            path: resolvePath(options.outputPath, false),
+            publicPath: options.publicPath,
+        })
     }
 
     function getMode() {
@@ -339,7 +378,7 @@ export function getSetup(options: Options) {
             new BundleAnalyzerPlugin({
                 analyzerHost: analyzer.host,
                 analyzerMode: analyzer.enabled ? "server" : "disabled",
-                analyzerPort: analyzer.port,
+                analyzerPort: ifClient(analyzer.port, analyzer.port + 1),
                 // logLevel: "silent",
                 openAnalyzer: false,
             })
@@ -403,6 +442,7 @@ export function getSetup(options: Options) {
         getModuleTypeScriptLoader,
         getNode,
         getOptimization,
+        getOutput,
         getPerformance,
         getPluginBundleAnalyzer,
         getPluginForkTsCheckerWebpack,

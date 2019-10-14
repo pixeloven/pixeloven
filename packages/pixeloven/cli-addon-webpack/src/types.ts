@@ -17,10 +17,22 @@ export interface WebpackExtensionOptions {
 
 /* Note: keep this enum up to date matching the options interface above for runtime argument checking */
 export enum WebpackExecutionOptionTypes {
-    stats = "stats",
+    "host" = "host",
+    "ignored" = "ignored",
+    "path" = "path",
+    "poll" = "poll",
+    "port" = "port",
+    "protocol" = "protocol",
+    "profile" = "profile",
+    "stats" = "stats",
+    "stats-dir" = "stats-dir",
+    "statsDir" = "statsDir",
+    "stats-host" = "stats-host",
+    "statsHost" = "statsHost",
+    "stats-port" = "stats-port",
+    "statsPort" = "statsPort",
     "source-map" = "source-map",
-    sourceMap = "sourceMap",
-    path = "path"
+    "sourceMap" = "sourceMap",
 }
 
 export type WebpackExtension = (
