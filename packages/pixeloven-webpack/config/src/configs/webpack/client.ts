@@ -138,6 +138,10 @@ const config = (env: NodeJS.ProcessEnv, options: Config): Configuration => {
             },
             {
                 loader: require.resolve("sass-loader"),
+                options: {
+                    // Prefer `dart-sass`
+                    implementation: require('sass'),
+                },
             },
         ]),
     };
