@@ -11,12 +11,12 @@ typedocConfigPath="$(pwd)/typedoc.json"
 CMD=$1
 shift
 
-error() { 
-  echo -e "\e[31m$@"; exit 1; 
+error() {
+  echo -e "\e[31m$@"; exit 1;
 }
 
-exe() { 
-  echo "$@" ; $@ ; 
+exe() {
+  echo "$@" ; $@ ;
 }
 
 case $CMD in
@@ -47,9 +47,21 @@ case $CMD in
             error "File not found $typedocConfigPath"
         fi
     ;;
+    "lint")
+        if [ -f $tslintConfigPath ]; then
+            exe "tslint -t codeFrame --config $tslintConfigPath $@" # src/**/*.{ts,tsx}
+        else
+            error "File not found $tslintConfigPath"
+        fi
+         if [ -f $stylelintConfigPath ]; then
+            exe "stylelint --syntax scss --config $stylelintConfigPath $@" # src/**/*.scss
+        else
+            error "File not found $stylelintConfigPath"
+        fi
+    ;;
     "lint:ts")
         if [ -f $tslintConfigPath ]; then
-            exe "tslint -t codeFrame --config $tslintConfigPath $@"
+            exe "tslint -t codeFrame --config $tslintConfigPath $@" # src/**/*.{ts,tsx}
         else
             error "File not found $tslintConfigPath"
         fi
@@ -67,15 +79,35 @@ case $CMD in
         else
             error "File not found $prettierConfigPath"
         fi
+        if [ -f $tslintConfigPath ]; then
+            exe "tslint -t codeFrame --config $tslintConfigPath $@" # src/**/*.{ts,tsx}
+        else
+            error "File not found $tslintConfigPath"
+        fi
+        if [ -f $stylelintConfigPath ]; then
+            exe "stylelint --syntax scss --config $stylelintConfigPath --fix $@" # src/**/*.scss
+        else
+            error "File not found $stylelintConfigPath"
+        fi
     ;;
     "pretty:ts")
+        if [ -f $prettierConfigPath ]; then
+            exe "prettier --write --config $prettierConfigPath $@" # src/**/*.{ts,tsx}
+        else
+            error "File not found $prettierConfigPath"
+        fi
         if [ -f $tslintConfigPath ]; then
-            exe "tslint -t codeFrame --config $tslintConfigPath --fix $@" # src/**/*.{ts,tsx}
+            exe "tslint -t codeFrame --config $tslintConfigPath $@" # src/**/*.{ts,tsx}
         else
             error "File not found $tslintConfigPath"
         fi
     ;;
     "pretty:scss")
+        if [ -f $prettierConfigPath ]; then
+            exe "prettier --write --config $prettierConfigPath $@" # src/**/*.scss
+        else
+            error "File not found $prettierConfigPath"
+        fi
         if [ -f $stylelintConfigPath ]; then
             exe "stylelint --syntax scss --config $stylelintConfigPath --fix $@" # src/**/*.scss
         else
