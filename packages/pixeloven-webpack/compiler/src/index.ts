@@ -1,8 +1,9 @@
 import { mergeOptions } from "@pixeloven-core/common";
+import {Name, Target} from "@pixeloven-core/env";
 import {
     Config,
-    webpackClientConfig,
-    webpackServerConfig,
+    getConfig,
+    shimOptions
 } from "@pixeloven-webpack/config";
 import Compiler from "./Compiler";
 
@@ -27,8 +28,8 @@ const defaultCompilerOptions: Config = {
 function getCompiler(options: Partial<Config> = {}) {
     const config = mergeOptions(defaultCompilerOptions, options);
     return Compiler.create([
-        webpackClientConfig(process.env, config),
-        webpackServerConfig(process.env, config),
+        getConfig(shimOptions(process.env, config, Name.client, Target.web)),
+        getConfig(shimOptions(process.env, config, Name.server, Target.node))
     ]);
 }
 
