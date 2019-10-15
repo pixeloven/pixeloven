@@ -1,10 +1,13 @@
-import {getUtils} from "@pixeloven-core/env";
+import { removeEmpty } from "@pixeloven-core/common";
+import { getUtils } from "@pixeloven-core/env";
 import {
     resolvePath,
     resolveSourceRoot,
     resolveTsConfig,
 } from "@pixeloven-core/filesystem";
+import autoprefixer from "autoprefixer";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
@@ -14,23 +17,11 @@ import {
     DevtoolModuleFilenameTemplateInfo,
     Options as WebpackOptions,
     Resolve,
-    RuleSetRule
+    RuleSetRule,
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import webpackNodeExternals from "webpack-node-externals";
-import { Options} from "../types";
-
-import {
-    getEntry as getClientEntry,
-    getModuleSCSSLoader as getClientModuleSCSSLoader,
-    getNode as getClientNode
-} from "./client";
-
-import {
-    getEntry as getServerEntry,
-    getModuleSCSSLoader as getServerModuleSCSSLoader,
-    getNode as getServerNode
-} from "./server";
+import { Options } from "../types";
 
 interface PluginBundleAnalyzerOptions {
     enabled: boolean;
@@ -40,7 +31,6 @@ interface PluginBundleAnalyzerOptions {
 }
 
 export function getSetup(options: Options) {
-
     /**
      * Describe source pathing in dev tools
      * @param info
@@ -56,120 +46,156 @@ export function getSetup(options: Options) {
         return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
     };
 
+    const postCssPlugin = () => [
+        require("postcss-flexbugs-fixes"),
+        autoprefixer({
+            flexbox: "no-2009",
+        }),
+    ];
 
-    const {ifClient, ifDevelopment, ifProduction, ifServer} = getUtils({
+    const { ifClient, ifDevelopment, ifProduction, ifServer } = getUtils({
         mode: options.mode,
         name: options.name,
-        target: options.target
+        target: options.target,
     });
 
     function getDevTool() {
-        return options.sourceMap ? "eval-source-map" : false
+        return options.sourceMap ? "eval-source-map" : false;
     }
-    
+
     function getEntry() {
-        return ifClient(getClientEntry(options.mode, options.publicPath), getServerEntry());
+        return ifClient(
+            {
+                main: removeEmpty([
+                    /**
+                     * @todo This is deprecated. Need to link core-js directly
+                     */
+                    require.resolve("@babel/polyfill"),
+                    ifDevelopment(
+                        `webpack-hot-middleware/client?path=${path.normalize(
+                            `/${options.publicPath}/__webpack_hmr`,
+                        )}`,
+                        undefined,
+                    ),
+                    resolvePath("src/client/index.tsx"),
+                ]),
+            },
+            [resolvePath("src/server/index.ts")],
+        );
     }
 
     function getExternals() {
-        return ifServer([
-            // Exclude from local node_modules dir
-            webpackNodeExternals(),
-            // Exclude from file - helpful for lerna packages
-            webpackNodeExternals({
-                modulesFromFile: true,
-            }),
-        ], undefined);
+        return ifServer(
+            [
+                // Exclude from local node_modules dir
+                webpackNodeExternals(),
+                // Exclude from file - helpful for lerna packages
+                webpackNodeExternals({
+                    modulesFromFile: true,
+                }),
+            ],
+            undefined,
+        );
     }
 
     function getOptimization() {
-        return ifClient({
-            minimize: ifProduction(),
-            minimizer: ifProduction(
-                [
-                    /**
-                     * Minify the code JavaScript
-                     *
-                     * @env production
-                     */
-                    new TerserPlugin({
-                        extractComments: "all",
-                        sourceMap: options.sourceMap,
-                        terserOptions: {
-                            safari10: true,
-                        },
-                    }),
-                    new OptimizeCSSAssetsPlugin(),
-                ],[]
-            ),
-            noEmitOnErrors: true,
-            /**
-             * @todo See how we can stop vendors-main (no s)
-             * @todo Make configurable v8 (include ability to provide these rules in json form)
-             */
-            splitChunks: {
-                cacheGroups: {
-                    coreJs: {
-                        name: "vendor~core-js",
-                        test: /[\\/]node_modules[\\/](core-js)[\\/]/,
-                    },
-                    lodash: {
-                        name: "vendor~lodash",
-                        test: /[\\/]node_modules[\\/](lodash)[\\/]/,
-                    },
-                    moment: {
-                        name: "vendor~moment",
-                        test: /[\\/]node_modules[\\/](moment)[\\/]/,
-                    },
-                    react: {
-                        name: "vendor~react",
-                        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-                    },
-                    vendor: {
-                        name: "vendor~main",
+        return ifClient(
+            {
+                minimize: ifProduction(),
+                minimizer: ifProduction(
+                    [
                         /**
-                         * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+                         * Minify the code JavaScript
+                         *
+                         * @env production
                          */
-                        // name(mod) {
-                        //     // get the name. E.g. node_modules/packageName/not/this/part.js
-                        //     // or node_modules/packageName
-                        //     const packageName = mod.context.match(
-                        //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-                        //     )[1];
-                        //     // npm package names are URL-safe, but some servers don't like @ symbols
-                        //     return `vendor~${packageName.replace("@", "")}`;
-                        // },
-                        test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
+                        new TerserPlugin({
+                            extractComments: "all",
+                            sourceMap: options.sourceMap,
+                            terserOptions: {
+                                safari10: true,
+                            },
+                        }),
+                        new OptimizeCSSAssetsPlugin(),
+                    ],
+                    [],
+                ),
+                noEmitOnErrors: true,
+                /**
+                 * @todo See how we can stop vendors-main (no s)
+                 * @todo Make configurable v8 (include ability to provide these rules in json form)
+                 */
+                splitChunks: {
+                    cacheGroups: {
+                        coreJs: {
+                            name: "vendor~core-js",
+                            test: /[\\/]node_modules[\\/](core-js)[\\/]/,
+                        },
+                        lodash: {
+                            name: "vendor~lodash",
+                            test: /[\\/]node_modules[\\/](lodash)[\\/]/,
+                        },
+                        moment: {
+                            name: "vendor~moment",
+                            test: /[\\/]node_modules[\\/](moment)[\\/]/,
+                        },
+                        react: {
+                            name: "vendor~react",
+                            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                        },
+                        vendor: {
+                            name: "vendor~main",
+                            /**
+                             * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+                             */
+                            // name(mod) {
+                            //     // get the name. E.g. node_modules/packageName/not/this/part.js
+                            //     // or node_modules/packageName
+                            //     const packageName = mod.context.match(
+                            //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+                            //     )[1];
+                            //     // npm package names are URL-safe, but some servers don't like @ symbols
+                            //     return `vendor~${packageName.replace("@", "")}`;
+                            // },
+                            test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
+                        },
                     },
+                    chunks: "all",
+                    maxInitialRequests: Infinity,
+                    minSize: 0,
                 },
-                chunks: "all",
-                maxInitialRequests: Infinity,
-                minSize: 0,
             },
-        }, {
-            noEmitOnErrors: true
-        });
+            {
+                noEmitOnErrors: true,
+            },
+        );
     }
 
     function getOutput() {
-        return ifClient({
-            chunkFilename: ifProduction(
-                "static/js/[name].[contenthash].js",
-                "static/js/[name].[hash].js",
-            ),
-            devtoolModuleFilenameTemplate,
-            filename: ifProduction(
-                "static/js/[name].[contenthash].js",
-                "static/js/[name].[hash].js",
-            ),
-            path: resolvePath(path.normalize(`${options.outputPath}/public`), false), // @todo THis should not be hardcoded once we split client and server
-            publicPath: options.publicPath,
-        }, {
-            filename: "server.js",
-            libraryTarget: "commonjs2",
-            path: resolvePath(options.outputPath, false),
-            publicPath: options.publicPath,
-        })
+        return ifClient(
+            {
+                chunkFilename: ifProduction(
+                    "static/js/[name].[contenthash].js",
+                    "static/js/[name].[hash].js",
+                ),
+                devtoolModuleFilenameTemplate,
+                filename: ifProduction(
+                    "static/js/[name].[contenthash].js",
+                    "static/js/[name].[hash].js",
+                ),
+                path: resolvePath(
+                    path.normalize(`${options.outputPath}/public`),
+                    false,
+                ), // @todo THis should not be hardcoded once we split client and server
+                publicPath: options.publicPath,
+            },
+            {
+                filename: "server.js",
+                libraryTarget: "commonjs2",
+                path: resolvePath(options.outputPath, false),
+                publicPath: options.publicPath,
+            },
+        );
     }
 
     function getMode() {
@@ -188,19 +214,60 @@ export function getSetup(options: Options) {
         return {
             exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
             loader: require.resolve("file-loader"),
-            options: ifServer({
-                emitFile: false,
-            }, {
-                name: ifProduction(
-                    "static/media/[name].[contenthash].[ext]",
-                    "static/media/[name].[hash].[ext]",
-                ),
-            }),
+            options: ifServer(
+                {
+                    emitFile: false,
+                },
+                {
+                    name: ifProduction(
+                        "static/media/[name].[contenthash].[ext]",
+                        "static/media/[name].[hash].[ext]",
+                    ),
+                },
+            ),
         };
     }
 
     function getModuleSCSSLoader() {
-        return ifClient(getClientModuleSCSSLoader(options.mode), getServerModuleSCSSLoader(options.mode));
+        return ifClient(
+            {
+                test: /\.(scss|sass|css)$/i,
+                use: removeEmpty([
+                    ifDevelopment({
+                        loader: require.resolve("css-hot-loader"),
+                    }),
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: require.resolve("css-loader"),
+                    },
+                    {
+                        loader: require.resolve("postcss-loader"),
+                        options: {
+                            ident: "postcss",
+                            plugins: postCssPlugin,
+                        },
+                    },
+                    {
+                        loader: require.resolve("sass-loader"),
+                        options: {
+                            // Prefer `dart-sass`
+                            implementation: require("sass"),
+                        },
+                    },
+                ]),
+            },
+            {
+                test: /\.(scss|sass|css)$/i,
+                use: [
+                    {
+                        loader: require.resolve("css-loader"),
+                        options: {
+                            onlyLocals: true,
+                        },
+                    },
+                ],
+            },
+        );
     }
 
     /**
@@ -236,7 +303,9 @@ export function getSetup(options: Options) {
                                     loose: true,
                                 },
                             ],
-                            require.resolve("@babel/plugin-syntax-dynamic-import"),
+                            require.resolve(
+                                "@babel/plugin-syntax-dynamic-import",
+                            ),
                         ],
                         presets: [
                             [
@@ -259,7 +328,7 @@ export function getSetup(options: Options) {
                 },
             ],
         };
-    };
+    }
 
     /**
      * @todo Might not need this anymore
@@ -271,8 +340,12 @@ export function getSetup(options: Options) {
     }
 
     function getPluginBundleAnalyzer(analyzer: PluginBundleAnalyzerOptions) {
-        const statsFilename = path.resolve(`${analyzer.outputDir}/${options.name}-stats.json`);
-        const reportFilename = path.resolve(`${analyzer.outputDir}/${options.name}-report.html`);
+        const statsFilename = path.resolve(
+            `${analyzer.outputDir}/${options.name}-stats.json`,
+        );
+        const reportFilename = path.resolve(
+            `${analyzer.outputDir}/${options.name}-report.html`,
+        );
         return ifProduction(
             new BundleAnalyzerPlugin({
                 analyzerMode: analyzer.enabled ? "static" : "disabled",
@@ -288,8 +361,8 @@ export function getSetup(options: Options) {
                 analyzerPort: ifClient(analyzer.port, analyzer.port + 1),
                 // logLevel: "silent",
                 openAnalyzer: false,
-            })
-        )
+            }),
+        );
     }
 
     function getPluginForkTsCheckerWebpack() {
@@ -307,8 +380,23 @@ export function getSetup(options: Options) {
         );
     }
 
-    function getNode(){
-        return ifClient(getClientNode(), getServerNode());
+    function getNode() {
+        return ifClient(
+            {
+                child_process: "empty",
+                dgram: "empty",
+                dns: "mock",
+                fs: "empty",
+                http2: "empty",
+                module: "empty",
+                net: "empty",
+                tls: "empty",
+            },
+            {
+                __dirname: false,
+                __filename: false,
+            },
+        );
     }
 
     /**
@@ -337,7 +425,7 @@ export function getSetup(options: Options) {
                 }),
             ],
         };
-    };
+    }
 
     return {
         getDevTool,
@@ -353,6 +441,6 @@ export function getSetup(options: Options) {
         getPerformance,
         getPluginBundleAnalyzer,
         getPluginForkTsCheckerWebpack,
-        getResolve
-    }
+        getResolve,
+    };
 }
