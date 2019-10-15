@@ -1,24 +1,18 @@
 import { NodeProcessException } from "@pixeloven-core/exceptions";
 import dotenv from "dotenv";
 
-export type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent";
+type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent";
 
-export type Protocol = "http" | "https";
+type Protocol = "http" | "https";
 
-export type Environment = "development" | "production" | "test";
+type Environment = "development" | "production" | "test";
 
-export type Machine = "ci" | "docker" | "host" | "virtual" | undefined;
-
-export interface Environments {
-    development?: object;
-    production?: object;
-    test?: object;
-}
+type Machine = "ci" | "docker" | "host" | "virtual" | undefined;
 
 /**
  * Define required keys here
  */
-export interface DefaultEnv extends NodeJS.ProcessEnv {
+interface DefaultEnv extends NodeJS.ProcessEnv {
     BABEL_ENV: Environment;
     BUILD_PATH: string;
     DOMAIN: string;
@@ -131,4 +125,3 @@ export class Env {
     }
 }
 
-export default Env;

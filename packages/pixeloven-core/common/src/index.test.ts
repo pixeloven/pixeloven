@@ -6,6 +6,7 @@ describe("@pixeloven-core/common", () => {
         it("should export common", () => {
             expect(typeof Common).toEqual("object");
             expect(typeof Common.mergeOptions).toEqual("function");
+            expect(typeof Common.removeEmpty).toEqual("function");
         });
     });
 });

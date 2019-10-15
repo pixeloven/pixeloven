@@ -5,6 +5,10 @@ import { Helmet } from "react-helmet";
 
 type DefaultProps = RouteComponentProps;
 
+/**
+ * @todo Implement Material-UI. Use this as inspiration?
+ * https://github.com/creativetimofficial/material-kit-react
+ */
 function Default(props: DefaultProps) {
     const { routes } = props;
     return (

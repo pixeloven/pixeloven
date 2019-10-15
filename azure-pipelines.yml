@@ -1,13 +1,9 @@
-pool:
-  vmImage: "ubuntu-16.04"
-
 stages:
-
-# @todo Need our own image to speed this up
-- stage: SetupPixelOven
-  displayName: Setup PixelOven dependencies
+- stage: Development
   jobs:
-  - job: Setup
+  - job: Build
+    pool:
+      vmImage: "ubuntu-16.04"
     strategy:
       matrix:
         node_10_x:
@@ -34,10 +30,16 @@ stages:
       displayName: Test PixelOven packages
     - script: yarn pixeloven:build:production
       displayName: Build PixelOven apps
-      # Need to trigger this only on master
     - script: yarn pixeloven:report:coverage
       displayName: Report PixelOven code coverage
-
-  # Need to do the same thing but for the examples... 
-  # Then we want to save coverage as an artifact and report coverage 
-  # yarn << parameters.type >>:report:coverage
+    # Run against examples now -- eventually this should be setup as a true integration step
+    - script: yarn examples:compile
+      displayName: Compile example packages
+    - script: yarn examples:lint
+      displayName: Lint example packages
+    - script: yarn examples:test
+      displayName: Test example packages
+    - script: yarn examples:build:production
+      displayName: Build example apps
+    - script: yarn examples:report:coverage
+      displayName: Report example code coverage

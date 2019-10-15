@@ -5,6 +5,5 @@
  */
 declare module "react-dev-utils/ModuleScopePlugin";
 declare module "react-dev-utils/FileSizeReporter";
-declare module "offline-plugin";
 declare module "time-fix-plugin";
 declare module "tsconfig-paths-webpack-plugin";

@@ -23,6 +23,9 @@ export default {
         switch (task) {
             case "build":
             case "start": {
+                /**
+                 * @todo Need to list all options in some sorta help style menu
+                 */
                 Object.keys(parameters.options).forEach(option => {
                     if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
                         pixelOven.invalidArgument(`Available options for "${task}" are "--path", "--source-map", or "--stats"`, `--${option}`);
