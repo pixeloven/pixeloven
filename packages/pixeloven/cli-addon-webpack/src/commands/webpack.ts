@@ -59,10 +59,10 @@ export default {
                         publicPath: parameters.options.path,
                         sourceMap: parameters.options.sourceMap,
                         stats: {
-                            enabled: parameters.options.stats,
-                            host: parameters.options.statsHost,
-                            outputDir: parameters.options.statsDir,
-                            port: parameters.options.statsPort,
+                            enabled: parameters.options.stats || false,
+                            host: parameters.options.statsHost || "localhost",
+                            outputDir: parameters.options.statsDir || "./stats",
+                            port: parameters.options.statsPort || 8081,
                         },
                     },
                     serverOptions: {
