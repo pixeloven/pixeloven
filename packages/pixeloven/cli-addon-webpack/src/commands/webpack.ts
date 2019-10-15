@@ -54,6 +54,7 @@ export default {
                         outputPath: "./dist",
                     },
                     compilerOptions: {
+                        mode: parameters.options.mode,
                         outputPath: "./dist",
                         profiling: parameters.options.profile,
                         publicPath: parameters.options.path,

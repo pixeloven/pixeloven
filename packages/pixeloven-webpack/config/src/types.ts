@@ -1,6 +1,7 @@
 import { Mode, Name, Target } from "@pixeloven-core/env";
 
 export interface Config {
+    mode: Mode;
     outputPath: string;
     profiling: boolean;
     publicPath: string;
@@ -14,7 +15,6 @@ export interface Config {
 }
 
 export interface Options extends Config {
-    mode: Mode;
     name: Name;
     target: Target;
 }

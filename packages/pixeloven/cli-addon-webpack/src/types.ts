@@ -19,6 +19,7 @@ export interface WebpackExtensionOptions {
 export enum WebpackExecutionOptionTypes {
     "host" = "host",
     "ignored" = "ignored",
+    "mode" = "mode",
     "path" = "path",
     "poll" = "poll",
     "port" = "port",

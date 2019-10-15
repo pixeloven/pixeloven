@@ -7,6 +7,7 @@ import Compiler from "./Compiler";
  * Default compiler options
  */
 const defaultCompilerOptions: Config = {
+    mode: Mode.production,
     outputPath: "./dist",
     profiling: false,
     publicPath: "/",
@@ -25,21 +26,16 @@ const defaultCompilerOptions: Config = {
  */
 function getCompiler(options: Partial<Config> = {}) {
     const config = mergeOptions(defaultCompilerOptions, options);
-    const nodeEnv = process.env.NODE_ENV || "production";
 
     return Compiler.create([
         getConfig({
-            mode: Mode.hasOwnProperty(nodeEnv)
-                ? Mode[nodeEnv]
-                : Mode.production,
+            mode: config.mode,
             name: Name.client,
             target: Target.web,
             ...config,
         }),
         getConfig({
-            mode: Mode.hasOwnProperty(nodeEnv)
-                ? Mode[nodeEnv]
-                : Mode.production,
+            mode: config.mode,
             name: Name.server,
             target: Target.node,
             ...config,
