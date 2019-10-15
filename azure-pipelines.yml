@@ -8,8 +8,9 @@ stages:
       matrix:
         node_10_x:
           node_version: 10.x
-        node_12_x:
-          node_version: 12.x
+        # Comment out until we can figure out how to not report coverage twice
+        # node_12_x:
+        #   node_version: 12.x
     steps:
     - task: NodeTool@0 
       inputs:
@@ -39,16 +40,5 @@ stages:
       displayName: Test example packages
     - script: yarn examples:build:production
       displayName: Build example apps
-  - job: Report
-    pool:
-      vmImage: "ubuntu-16.04"
-    strategy:
-      matrix:
-        node_12_x:
-          node_version: 12.x
-    steps:
-    - task: NodeTool@0 
-      inputs:
-        versionSpec: $(node_version)
     - script: yarn all:report:coverage
       displayName: Report code coverage
