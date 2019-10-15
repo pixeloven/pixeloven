@@ -40,5 +40,5 @@ stages:
       displayName: Test example packages
     - script: yarn examples:build:production
       displayName: Build example apps
-    - script: yarn all:report:coverage
+    - script: yarn codecov -t $(CODECOV_TOKEN)
       displayName: Report code coverage
