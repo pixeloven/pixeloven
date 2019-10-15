@@ -1,4 +1,9 @@
-import { AddonWebpackToolbox, WebpackExecutionOptionTypes, WebpackExtensionType } from "../types";
+import {
+    AddonWebpackToolbox,
+    WebpackExecutionOptionTypes,
+    WebpackExtensionType,
+} from "../types";
+// import {getUtils, Mode, Name, Target} from "@pixeloven-core/env";
 
 export default {
     alias: ["--webpack", "-w"],
@@ -7,12 +12,17 @@ export default {
         const { parameters, pixelOven, webpack } = toolbox;
         const task = parameters.first;
         if (!task) {
-            pixelOven.invalidArgument("Please provide a task for Webpack to run.");
+            pixelOven.invalidArgument(
+                "Please provide a task for Webpack to run.",
+            );
             pixelOven.exit("Webpack", 1);
             return;
         }
         if (!WebpackExtensionType.hasOwnProperty(task)) {
-            pixelOven.invalidArgument(`Available Webpack tasks are "build" or "start".`, task);
+            pixelOven.invalidArgument(
+                `Available Webpack tasks are "build" or "start".`,
+                task,
+            );
             pixelOven.exit("Webpack", 1);
             return;
         }
@@ -28,7 +38,10 @@ export default {
                  */
                 Object.keys(parameters.options).forEach(option => {
                     if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
-                        pixelOven.invalidArgument(`Available options for "${task}" are "--path", "--source-map", or "--stats"`, `--${option}`);
+                        pixelOven.invalidArgument(
+                            `Available options for "${task}" are "--path", "--source-map", or "--stats"`,
+                            `--${option}`,
+                        );
                         pixelOven.exit("Webpack", 1);
                     }
                 });
@@ -42,13 +55,15 @@ export default {
                     },
                     compilerOptions: {
                         outputPath: "./dist",
-                        path: parameters.options.path,
-                        withProfiling: parameters.options.profile,
-                        withSourceMap: parameters.options.sourceMap,
-                        withStats: parameters.options.stats,
-                        withStatsDir: parameters.options.statsDir,
-                        withStatsHost: parameters.options.statsHost,
-                        withStatsPort: parameters.options.statsPort,
+                        profiling: parameters.options.profile,
+                        publicPath: parameters.options.path,
+                        sourceMap: parameters.options.sourceMap,
+                        stats: {
+                            enabled: parameters.options.stats,
+                            host: parameters.options.statsHost,
+                            outputDir: parameters.options.statsDir,
+                            port: parameters.options.statsPort,
+                        },
                     },
                     serverOptions: {
                         host: parameters.options.host,

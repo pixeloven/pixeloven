@@ -1,8 +1,6 @@
-import {Mode, Name, Target} from "@pixeloven-core/env";
+import { Mode, Name, Target } from "@pixeloven-core/env";
 
-export interface Options {
-    mode: Mode;
-    name: Name;
+export interface Config {
     outputPath: string;
     profiling: boolean;
     publicPath: string;
@@ -12,29 +10,11 @@ export interface Options {
         host: string;
         outputDir: string;
         port: number;
-    },
+    };
+}
+
+export interface Options extends Config {
+    mode: Mode;
+    name: Name;
     target: Target;
-}
-
-/**
- * @description General settings for BundleAnalyzerPlugin
- */
-interface StatsConfig {
-    withStats: boolean;
-    withStatsDir: string;
-}
-
-/**
- * @description Development server settings for BundleAnalyzerPlugin
- */
-interface StatsServerConfig extends StatsConfig {
-    withStatsHost: string;
-    withStatsPort: number;
-}
-
-export interface Config extends StatsServerConfig {
-    outputPath: string;
-    path: string;
-    withProfiling: boolean;
-    withSourceMap: boolean;
 }
