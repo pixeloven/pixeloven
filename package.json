@@ -39,7 +39,7 @@
     "all:pretty:scss": "lerna run pretty:scss",
     "all:test": "lerna run test",
     "all:document": "lerna run document",
-    "all:report:coverage": "yarn codecov -t $CODECOV_TOKEN",
+    "all:report:coverage": "yarn codecov -t \"$CODECOV_TOKEN\"",
     "examples:build:development": "lerna run build:development --scope=@examples/*",
     "examples:build:production": "lerna run build:production --scope=@examples/*",
     "examples:compile": "lerna run compile --scope=@examples/* && yarn all:linker",
