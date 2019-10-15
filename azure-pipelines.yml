@@ -30,8 +30,6 @@ stages:
       displayName: Test PixelOven packages
     - script: yarn pixeloven:build:production
       displayName: Build PixelOven apps
-    - script: yarn pixeloven:report:coverage
-      displayName: Report PixelOven code coverage
     # Run against examples now -- eventually this should be setup as a true integration step
     - script: yarn examples:compile
       displayName: Compile example packages
@@ -41,5 +39,5 @@ stages:
       displayName: Test example packages
     - script: yarn examples:build:production
       displayName: Build example apps
-    - script: yarn examples:report:coverage
-      displayName: Report example code coverage
+    - script: yarn all:report:coverage
+      displayName: Report code coverage

@@ -19,9 +19,9 @@
   "devDependencies": {
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
-    "codecov": "3.5.0",
+    "codecov": "3.6.1",
     "commitizen": "4.0.3",
-    "husky": "3.0.5",
+    "husky": "3.0.9",
     "lerna": "3.16.4"
   },
   "scripts": {
@@ -39,7 +39,7 @@
     "all:pretty:scss": "lerna run pretty:scss",
     "all:test": "lerna run test",
     "all:document": "lerna run document",
-    "all:report:coverage": "cat ./**/**/coverage/lcov.info | codecov",
+    "all:report:coverage": "yarn codecov -t $CODECOV_TOKEN",
     "examples:build:development": "lerna run build:development --scope=@examples/*",
     "examples:build:production": "lerna run build:production --scope=@examples/*",
     "examples:compile": "lerna run compile --scope=@examples/* && yarn all:linker",
@@ -50,7 +50,6 @@
     "examples:pretty": "lerna run pretty --scope=@examples/*",
     "examples:pretty:ts": "lerna run pretty:ts --scope=@examples/*",
     "examples:pretty:scss": "lerna run pretty:scss --scope=@examples/*",
-    "examples:report:coverage": "cat ./{apps,packages}/examples/**/coverage/lcov.info | codecov",
     "examples:test": "lerna run test --scope=@examples/*",
     "examples:test:ci": "lerna run test:ci --scope=@examples/*",
     "pixeloven:build:development": "lerna run build:development --scope=@pixeloven/*",
@@ -63,7 +62,6 @@
     "pixeloven:pretty": "lerna run pretty --scope={@pixeloven,@pixeloven-*}/*",
     "pixeloven:pretty:ts": "lerna run pretty:ts --scope={@pixeloven,@pixeloven-*}/*",
     "pixeloven:pretty:scss": "lerna run pretty:scss --scope={@pixeloven,@pixeloven-*}/*",
-    "pixeloven:report:coverage": "cat ./{apps,packages}/**/coverage/lcov.info | codecov",
     "pixeloven:test": "lerna run test --scope={@pixeloven,@pixeloven-*}/*",
     "pixeloven:test:ci": "lerna run test:ci --scope={@pixeloven,@pixeloven-*}/*",
     "preversion": "yarn all:bootstrap && yarn all:lint && yarn all:compile && yarn all:build && yarn all:test"
