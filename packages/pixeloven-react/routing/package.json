@@ -45,7 +45,7 @@
     "document": "pixeloven-tasks document:ts src",
     "lint": "yarn lint:ts",
     "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
-    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
+    "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "precompile": "pixeloven-tasks compile:clean",
     "precommit": "lint-staged",

@@ -1,23 +1,14 @@
-import {
-    resolvePath,
-} from "@pixeloven-core/filesystem";
+import { resolvePath } from "@pixeloven-core/filesystem";
 import autoprefixer from "autoprefixer";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
-import {
-    Entry,
-    Node,
-    RuleSetRule
-} from "webpack";
-import { 
-    getIfUtils, 
-    removeEmpty 
-} from "webpack-config-utils";
+import { Entry, Node, RuleSetRule } from "webpack";
+import { getIfUtils, removeEmpty } from "webpack-config-utils";
 
 /**
  * Returns entry point for client
- * @param environment 
- * @param publicPath 
+ * @param environment
+ * @param publicPath
  */
 export function getEntry(environment: string, publicPath: string): Entry {
     const { ifDevelopment } = getIfUtils(environment);
@@ -31,7 +22,7 @@ export function getEntry(environment: string, publicPath: string): Entry {
             ),
             resolvePath("src/client/index.tsx"),
         ]),
-    }
+    };
 }
 
 /**
@@ -78,6 +69,10 @@ export function getModuleSCSSLoader(environment: string): RuleSetRule {
             },
             {
                 loader: require.resolve("sass-loader"),
+                options: {
+                    // Prefer `dart-sass`
+                    implementation: require("sass"),
+                },
             },
         ]),
     };
