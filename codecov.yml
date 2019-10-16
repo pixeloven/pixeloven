@@ -4,4 +4,4 @@ codecov:
 coverage:
   precision: 2
   round: down
-  range: "40...90"
+  range: "10...90"
