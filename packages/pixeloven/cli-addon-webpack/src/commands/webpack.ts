@@ -1,9 +1,9 @@
+// import {Mode, Name, Target} from "@pixeloven-core/env";
 import {
     AddonWebpackToolbox,
     WebpackExecutionOptionTypes,
     WebpackExtensionType,
 } from "../types";
-// import {getUtils, Mode, Name, Target} from "@pixeloven-core/env";
 
 export default {
     alias: ["--webpack", "-w"],
@@ -11,6 +11,22 @@ export default {
     run: async (toolbox: AddonWebpackToolbox) => {
         const { parameters, pixelOven, webpack } = toolbox;
         const task = parameters.first;
+        const {
+            entry,
+            host,
+            ignored,
+            path,
+            poll,
+            port,
+            profile,
+            protocol,
+            sourceMap,
+            stats,
+            statsDir,
+            statsHost,
+            statsPort,
+        } = parameters.options;
+
         if (!task) {
             pixelOven.invalidArgument(
                 "Please provide a task for Webpack to run.",
@@ -39,12 +55,18 @@ export default {
                 Object.keys(parameters.options).forEach(option => {
                     if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
                         pixelOven.invalidArgument(
-                            `Available options for "${task}" are "--path", "--source-map", or "--stats"`,
+                            `Available options for "${task}" are "--entry", "--host", "--ignored", "--path", "--port", "--protocol", "--source-map", or "--stats"`,
                             `--${option}`,
                         );
                         pixelOven.exit("Webpack", 1);
                     }
                 });
+
+                const entries = entry
+                    ? Array.isArray(entry)
+                        ? entry
+                        : [entry]
+                    : ["production:client:web"];
 
                 /**
                  * @todo Need to type the all the options for this CLI
@@ -54,25 +76,25 @@ export default {
                         outputPath: "./dist",
                     },
                     compilerOptions: {
-                        mode: parameters.options.mode,
+                        entries,
                         outputPath: "./dist",
-                        profiling: parameters.options.profile,
-                        publicPath: parameters.options.path,
-                        sourceMap: parameters.options.sourceMap,
+                        profiling: profile,
+                        publicPath: path,
+                        sourceMap,
                         stats: {
-                            enabled: parameters.options.stats || false,
-                            host: parameters.options.statsHost || "localhost",
-                            outputDir: parameters.options.statsDir || "./stats",
-                            port: parameters.options.statsPort || 8081,
+                            enabled: stats || false,
+                            host: statsHost || "localhost",
+                            outputDir: statsDir || "./stats",
+                            port: statsPort || 8081,
                         },
                     },
                     serverOptions: {
-                        host: parameters.options.host,
-                        ignored: parameters.options.ignored,
-                        path: parameters.options.path,
-                        poll: parameters.options.poll,
-                        port: parameters.options.port,
-                        protocol: parameters.options.protocol,
+                        host,
+                        ignored,
+                        path,
+                        poll,
+                        port,
+                        protocol,
                     },
                     type: WebpackExtensionType[task],
                 });

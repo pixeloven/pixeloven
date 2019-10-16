@@ -1,13 +1,14 @@
 import { mergeOptions } from "@pixeloven-core/common";
 import { Mode, Name, Target } from "@pixeloven-core/env";
 import { Config, getConfig } from "@pixeloven-webpack/config";
+import { Configuration } from "webpack";
 import Compiler from "./Compiler";
 
 /**
  * Default compiler options
  */
 const defaultCompilerOptions: Config = {
-    mode: Mode.production,
+    entries: ["production:client:web"],
     outputPath: "./dist",
     profiling: false,
     publicPath: "/",
@@ -26,21 +27,24 @@ const defaultCompilerOptions: Config = {
  */
 function getCompiler(options: Partial<Config> = {}) {
     const config = mergeOptions(defaultCompilerOptions, options);
+    const compilers: Configuration[] = [];
 
-    return Compiler.create([
-        getConfig({
-            mode: config.mode,
-            name: Name.client,
-            target: Target.web,
-            ...config,
-        }),
-        getConfig({
-            mode: config.mode,
-            name: Name.server,
-            target: Target.node,
-            ...config,
-        }),
-    ]);
+    config.entries.map((entry: string) => {
+        const entryBlocks = entry.split(":");
+        const mode = entryBlocks[0];
+        const name = entryBlocks[1];
+        const target = entryBlocks[2];
+        compilers.push(
+            getConfig({
+                ...config,
+                mode: Mode[mode],
+                name: Name[name],
+                target: Target[target],
+            }),
+        );
+    });
+
+    return Compiler.create(compilers);
 }
 
 export default getCompiler;

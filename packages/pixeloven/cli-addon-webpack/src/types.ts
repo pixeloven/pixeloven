@@ -17,9 +17,9 @@ export interface WebpackExtensionOptions {
 
 /* Note: keep this enum up to date matching the options interface above for runtime argument checking */
 export enum WebpackExecutionOptionTypes {
+    "entry" = "entry",
     "host" = "host",
     "ignored" = "ignored",
-    "mode" = "mode",
     "path" = "path",
     "poll" = "poll",
     "port" = "port",
