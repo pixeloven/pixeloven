@@ -1,7 +1,21 @@
 codecov:
-  require_ci_to_pass: yes
+  branch: master
+  notify:
+    require_ci_to_pass: no
 
 coverage:
-  precision: 2
-  round: down
-  range: "10...90"
+  status:
+    project:
+      default:
+        # basic
+        target: auto
+        threshold: null
+        base: auto
+        # advanced
+        branches: null
+        if_no_uploads: error
+        if_not_found: success
+        if_ci_failed: error
+        only_pulls: false
+        flags: null
+        paths: null
