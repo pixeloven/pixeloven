@@ -1,13 +1,8 @@
-import {
-    Mode,
-    Name,
-    Target,
-    UtilOptions,
-} from "./types";
+import { Mode, Name, Target, UtilOptions } from "./types";
 
 /**
- * Get utils returns an object of functions abstracting common environment variables for conditional statements. 
- * @param options 
+ * Get utils returns an object of functions abstracting common environment variables for conditional statements.
+ * @param options
  */
 export function getUtils<T extends UtilOptions>(options: T) {
     function ifType<Y, N>(isType: boolean, value?: Y, alternate?: N) {
@@ -69,5 +64,5 @@ export function getUtils<T extends UtilOptions>(options: T) {
         ifProduction,
         ifServer,
         ifWeb,
-    }
+    };
 }

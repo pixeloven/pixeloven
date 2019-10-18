@@ -157,7 +157,6 @@ class Bundler {
                             WARN_AFTER_BUNDLE_GZIP_SIZE,
                             WARN_AFTER_CHUNK_GZIP_SIZE,
                         );
-                        console.log();
                     }
                     return resolve(0);
                 }

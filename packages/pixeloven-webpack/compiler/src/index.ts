@@ -25,15 +25,18 @@ const defaultCompilerOptions: Config = {
  * @param options
  */
 function getCompiler(options: Partial<Config> = {}) {
+    const { compilers } = options;
+    delete options.compilers;
     const config = mergeOptions(defaultCompilerOptions, options);
-    const compilers: Configuration[] = [];
+    const compilerConfigs: Configuration[] = [];
 
-    if (config.compilers && config.compilers.length > 0) {
-        config.compilers.map((compiler: CompilerConfig) => {
-            const { mode, name, target } = compiler;
-            compilers.push(
+    if (compilers && compilers.length > 0) {
+        compilers.map((compiler: CompilerConfig) => {
+            const { entry, mode, name, target } = compiler;
+            compilerConfigs.push(
                 getConfig({
                     ...config,
+                    entry,
                     mode,
                     name,
                     target,
@@ -42,7 +45,7 @@ function getCompiler(options: Partial<Config> = {}) {
         });
     }
 
-    return Compiler.create(compilers);
+    return Compiler.create(compilerConfigs);
 }
 
 export default getCompiler;

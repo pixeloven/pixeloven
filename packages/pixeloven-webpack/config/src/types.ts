@@ -24,8 +24,4 @@ export interface Config extends Shared {
     compilers?: CompilerConfig[];
 }
 
-export interface Options extends Config {
-    mode: Mode;
-    name: Name;
-    target: Target;
-}
+export interface Options extends Config, CompilerConfig {}

@@ -47,8 +47,8 @@
     "node": "8.x || 9.x || 10.x"
   },
   "scripts": {
-    "build:development": "pixeloven webpack build --client --server --stats --source-map --path /",
-    "build:production": "pixeloven webpack build --client --server --path /",
+    "build:development": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --stats --source-map --path /",
+    "build:production": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --path /",
     "build:story": "pixeloven story build",
     "document": "pixeloven document ts ./src",
     "generate": "pixeloven generate",
@@ -62,7 +62,7 @@
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",
     "pretest": "pixeloven delete coverage",
-    "start:development": "pixeloven webpack start --client --server --development --source-map --host 0.0.0.0 --path / --port 58080 --protocol http --stats",
+    "start:development": "pixeloven webpack start --client ./src/client/index.tsx --server ./src/server/index.ts --development --source-map --host 0.0.0.0 --path / --port 58080 --protocol http --stats",
     "start:production": "NODE_ENV=production node ./dist/server.js",
     "start:story": "pixeloven story start",
     "test": "pixeloven test --color --coverage",

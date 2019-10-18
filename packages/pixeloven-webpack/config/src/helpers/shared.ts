@@ -77,10 +77,10 @@ export function getSetup(options: Options) {
                         )}`,
                         undefined,
                     ),
-                    resolvePath("src/client/index.tsx"),
+                    resolvePath(options.entry),
                 ]),
             },
-            [resolvePath("src/server/index.ts")],
+            [resolvePath(options.entry)],
         );
     }
 
