@@ -6,7 +6,7 @@ import path from "path";
 import TimeFixPlugin from "time-fix-plugin";
 import webpack, { Configuration } from "webpack";
 import ManifestPlugin from "webpack-manifest-plugin";
-import { Config, Options } from "./types";
+import { CompilerConfig, Config, Options } from "./types";
 
 import { getSetup } from "./helpers/shared";
 
@@ -195,4 +195,4 @@ function getConfig(options: Options) {
     }) as Configuration;
 }
 
-export { Config, getConfig };
+export { Config, CompilerConfig, getConfig };

@@ -5,16 +5,17 @@ export enum Mode {
 
 export enum Name {
     client = "client",
+    library = "library",
     server = "server",
 }
 
-export enum Target{
+export enum Target {
     web = "web",
-    node = "node"
+    node = "node",
 }
 
 export interface UtilOptions {
-    mode: Mode | string,
-    name: Name | string,
-    target: Target | string,
+    mode: Mode | string;
+    name: Name | string;
+    target: Target | string;
 }

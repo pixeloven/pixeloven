@@ -13,8 +13,15 @@ interface Shared {
     };
 }
 
+export interface CompilerConfig {
+    entry: string;
+    mode: Mode;
+    name: Name;
+    target: Target;
+}
+
 export interface Config extends Shared {
-    entries: string[];
+    compilers?: CompilerConfig[];
 }
 
 export interface Options extends Config {
