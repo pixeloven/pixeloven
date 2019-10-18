@@ -4,6 +4,7 @@ coverage
 dist
 docs
 stats
+stories
 
 # Dependency directories
 node_modules

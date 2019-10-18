@@ -1,10 +1,6 @@
 import { mergeOptions } from "@pixeloven-core/common";
-import {Name, Target} from "@pixeloven-core/env";
-import {
-    Config,
-    getConfig,
-    shimOptions
-} from "@pixeloven-webpack/config";
+import { Mode, Name, Target } from "@pixeloven-core/env";
+import { Config, getConfig } from "@pixeloven-webpack/config";
 import Compiler from "./Compiler";
 
 /**
@@ -12,13 +8,15 @@ import Compiler from "./Compiler";
  */
 const defaultCompilerOptions: Config = {
     outputPath: "./dist",
-    path: "/",
-    withProfiling: false,
-    withSourceMap: false,
-    withStats: false,
-    withStatsDir: "./stats",
-    withStatsHost: "localhost",
-    withStatsPort: 8081,
+    profiling: false,
+    publicPath: "/",
+    sourceMap: false,
+    stats: {
+        enabled: false,
+        host: "localhost",
+        outputDir: "./stats",
+        port: 8081,
+    },
 };
 
 /**
@@ -27,9 +25,25 @@ const defaultCompilerOptions: Config = {
  */
 function getCompiler(options: Partial<Config> = {}) {
     const config = mergeOptions(defaultCompilerOptions, options);
+    const nodeEnv = process.env.NODE_ENV || "production";
+
     return Compiler.create([
-        getConfig(shimOptions(process.env, config, Name.client, Target.web)),
-        getConfig(shimOptions(process.env, config, Name.server, Target.node))
+        getConfig({
+            mode: Mode.hasOwnProperty(nodeEnv)
+                ? Mode[nodeEnv]
+                : Mode.production,
+            name: Name.client,
+            target: Target.web,
+            ...config,
+        }),
+        getConfig({
+            mode: Mode.hasOwnProperty(nodeEnv)
+                ? Mode[nodeEnv]
+                : Mode.production,
+            name: Name.server,
+            target: Target.node,
+            ...config,
+        }),
     ]);
 }
 
