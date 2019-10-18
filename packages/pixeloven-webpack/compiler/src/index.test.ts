@@ -1,3 +1,4 @@
+import { Mode, Name, Target } from "@pixeloven-core/env";
 import "jest";
 import getCompiler, { Compiler } from "./index";
 
@@ -36,6 +37,47 @@ describe("@pixeloven-webpack/compiler", () => {
             it("should throw an error due to hard coded client and server index files", () => {
                 expect(() => {
                     getCompiler();
+                }).toThrow(Error);
+            });
+            it("should throw an error due to hard coded client and server index files", () => {
+                expect(() => {
+                    getCompiler({
+                        compilers: [],
+                        outputPath: "./dist",
+                        profiling: false,
+                        publicPath: "/",
+                        sourceMap: false,
+                        stats: {
+                            enabled: false,
+                            host: "localhost",
+                            outputDir: "./stats",
+                            port: 8081,
+                        },
+                    });
+                }).toThrow(Error);
+            });
+            it("should throw an error due to hard coded client and server index files", () => {
+                expect(() => {
+                    getCompiler({
+                        compilers: [
+                            {
+                                entry: "./src/index.ts",
+                                mode: Mode.production,
+                                name: Name.client,
+                                target: Target.web,
+                            },
+                        ],
+                        outputPath: "./dist",
+                        profiling: false,
+                        publicPath: "/",
+                        sourceMap: false,
+                        stats: {
+                            enabled: false,
+                            host: "localhost",
+                            outputDir: "./stats",
+                            port: 8081,
+                        },
+                    });
                 }).toThrow(Error);
             });
         });
