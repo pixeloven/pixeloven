@@ -9,6 +9,7 @@ import { Options } from "./types";
 
 /**
  * Setup constants for bundle size
+ * @todo should be part of the options
  * @description These sizes are pretty large. We"ll warn for bundles exceeding them.
  */
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
@@ -24,6 +25,9 @@ const {
 
 /**
  * Compiler handler
+ * @todo make treat warnings as errors as an option
+ * @todo eliminate react-utils
+ *
  * @param path
  * @param fileSizes
  * @param webpackCompiler

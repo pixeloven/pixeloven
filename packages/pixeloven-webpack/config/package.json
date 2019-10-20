@@ -51,7 +51,6 @@
     "typescript": "3.5.3",
     "webpack": "4.38.0",
     "webpack-bundle-analyzer": "3.3.2",
-    "webpack-config-utils": "2.3.1",
     "webpack-manifest-plugin": "2.0.4",
     "webpack-node-externals": "1.7.2"
   },
@@ -64,7 +63,6 @@
     "@types/terser-webpack-plugin": "1.2.1",
     "@types/webpack": "4.39.3",
     "@types/webpack-bundle-analyzer": "2.13.2",
-    "@types/webpack-config-utils": "2.3.0",
     "@types/webpack-manifest-plugin": "2.0.0",
     "@types/webpack-node-externals": "1.6.3",
     "lint-staged": "9.2.5"
