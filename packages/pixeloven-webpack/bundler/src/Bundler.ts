@@ -23,60 +23,64 @@ const {
     printFileSizesAfterBuild,
 } = FileSizeReporter;
 
+interface Messages {
+    errors: string[];
+    warnings: string[];
+}
+
+interface Something {
+    fileSizes: string[];
+    outputPath: string;
+    errorOnWarning: boolean;
+}
+
 /**
  * Compiler handler
  * @todo make treat warnings as errors as an option
  * @todo eliminate react-utils
  *
- * @param path
+ * @param outputPath
  * @param fileSizes
  * @param webpackCompiler
  */
-function handler(
-    path: string,
-    fileSizes: string[],
-    webpackCompiler: SingleCompiler,
-) {
+async function runner(webpackCompiler: SingleCompiler, options: Something) {
+    function output(messages: Messages, stats: Stats) {
+        if (messages.errors.length) {
+            logger.error(messages.errors.join("\n\n"));
+            return 1;
+        }
+        if (options.errorOnWarning) {
+            logger.info("treating warnings as errors");
+            if (messages.warnings.length) {
+                logger.error(messages.warnings.join("\n\n"));
+                return 1;
+            }
+        }
+        if (messages.warnings.length) {
+            logger.error(messages.warnings.join("\n\n"));
+        }
+        logger.success("compiled successfully");
+        logger.info("file sizes after gzip\n");
+        printFileSizesAfterBuild(
+            stats,
+            options.fileSizes,
+            options.outputPath,
+            WARN_AFTER_BUNDLE_GZIP_SIZE,
+            WARN_AFTER_CHUNK_GZIP_SIZE,
+        );
+        return 0;
+    }
+
     return new Promise<number>((resolve, reject) => {
         webpackCompiler.run((err: Error, stats: Stats) => {
             if (err) {
                 return reject(err);
             } else {
-                const messages = formatWebpackMessages(stats.toJson("verbose"));
-                if (messages.errors.length) {
-                    return reject(new Error(messages.errors.join("\n\n")));
-                }
-                if (messages.warnings.length) {
-                    logger.warn("Compiled with warnings.");
-                    logger.warn(messages.warnings.join("\n\n"));
-                    logger.warn(
-                        'Search for the "keywords" to learn more about each warning.',
-                    );
-                    if (
-                        process.env.CI &&
-                        process.env.CI.toLowerCase() !== "false" &&
-                        messages.warnings.length
-                    ) {
-                        logger.info(
-                            "Treating warnings as errors because process.env.CI = true.",
-                        );
-                        logger.info("Most CI servers set it automatically.");
-                        return reject(
-                            new Error(messages.warnings.join("\n\n")),
-                        );
-                    }
-                } else {
-                    logger.success("Compiled successfully.");
-                    logger.info("File sizes after gzip:\n");
-                    printFileSizesAfterBuild(
-                        stats,
-                        fileSizes,
-                        path,
-                        WARN_AFTER_BUNDLE_GZIP_SIZE,
-                        WARN_AFTER_CHUNK_GZIP_SIZE,
-                    );
-                }
-                return resolve(0);
+                const messages: Messages = formatWebpackMessages(
+                    stats.toJson("verbose"),
+                );
+                const status = output(messages, stats);
+                return resolve(status);
             }
         });
     });
@@ -89,14 +93,13 @@ function handler(
  * @param options
  */
 async function Bundler(compiler: Compiler, options: Options) {
+    const errorOnWarning = process.env.CI === "true";
+    const outputPath = options.outputPath;
+    const fileSizes: string[] = await measureFileSizesBeforeBuild(outputPath);
     if (options.clean) {
         logger.info("cleaning up previous builds...");
-        createOrEmptyDir(options.outputPath);
+        createOrEmptyDir(outputPath);
     }
-
-    const previousFileSizes: string[] = await measureFileSizesBeforeBuild(
-        options.outputPath,
-    );
 
     /**
      * Simplify the compiler so we can generalize these
@@ -105,11 +108,11 @@ async function Bundler(compiler: Compiler, options: Options) {
         if (compiler.hasClientCodePath) {
             logger.info(`${options.name} code path found...`);
             if (compiler.client) {
-                return handler(
-                    options.outputPath,
-                    previousFileSizes,
-                    compiler.client,
-                );
+                return runner(compiler.client, {
+                    errorOnWarning,
+                    fileSizes,
+                    outputPath,
+                });
             } else {
                 logger.error(`${options.name} compiler not found.`);
             }
@@ -122,11 +125,11 @@ async function Bundler(compiler: Compiler, options: Options) {
         if (compiler.hasServerCodePath) {
             logger.info(`${options.name} code path found...`);
             if (compiler.server) {
-                return handler(
-                    options.outputPath,
-                    previousFileSizes,
-                    compiler.server,
-                );
+                return runner(compiler.server, {
+                    errorOnWarning,
+                    fileSizes,
+                    outputPath,
+                });
             } else {
                 logger.error(`${options.name} compiler not found.`);
             }
