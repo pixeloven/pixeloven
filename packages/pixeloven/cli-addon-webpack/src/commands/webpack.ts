@@ -132,9 +132,6 @@ export default {
                  * @todo Need to type the all the options for this CLI
                  */
                 const statusCode = await webpack({
-                    buildOptions: {
-                        outputPath: "./dist",
-                    },
                     compilerOptions: {
                         compilers: compilers.length ? compilers : undefined,
                         outputPath: "./dist",

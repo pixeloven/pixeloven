@@ -1,9 +1,12 @@
+import { Name } from "@pixeloven-core/env";
 import { createOrEmptyDir } from "@pixeloven-core/filesystem";
 import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import FileSizeReporter from "react-dev-utils/FileSizeReporter";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import { Compiler as SingleCompiler, Stats } from "webpack";
+import { Options } from "./types";
+
 /**
  * Setup constants for bundle size
  * @description These sizes are pretty large. We"ll warn for bundles exceeding them.
@@ -19,150 +22,124 @@ const {
     printFileSizesAfterBuild,
 } = FileSizeReporter;
 
-export interface Config {
-    outputPath: string;
+/**
+ * Compiler handler
+ * @param path
+ * @param fileSizes
+ * @param webpackCompiler
+ */
+function handler(
+    path: string,
+    fileSizes: string[],
+    webpackCompiler: SingleCompiler,
+) {
+    return new Promise<number>((resolve, reject) => {
+        webpackCompiler.run((err: Error, stats: Stats) => {
+            if (err) {
+                return reject(err);
+            } else {
+                const messages = formatWebpackMessages(stats.toJson("verbose"));
+                if (messages.errors.length) {
+                    return reject(new Error(messages.errors.join("\n\n")));
+                }
+                if (messages.warnings.length) {
+                    logger.warn("Compiled with warnings.");
+                    logger.warn(messages.warnings.join("\n\n"));
+                    logger.warn(
+                        'Search for the "keywords" to learn more about each warning.',
+                    );
+                    if (
+                        process.env.CI &&
+                        process.env.CI.toLowerCase() !== "false" &&
+                        messages.warnings.length
+                    ) {
+                        logger.info(
+                            "Treating warnings as errors because process.env.CI = true.",
+                        );
+                        logger.info("Most CI servers set it automatically.");
+                        return reject(
+                            new Error(messages.warnings.join("\n\n")),
+                        );
+                    }
+                } else {
+                    logger.success("Compiled successfully.");
+                    logger.info("File sizes after gzip:\n");
+                    printFileSizesAfterBuild(
+                        stats,
+                        fileSizes,
+                        path,
+                        WARN_AFTER_BUNDLE_GZIP_SIZE,
+                        WARN_AFTER_CHUNK_GZIP_SIZE,
+                    );
+                }
+                return resolve(0);
+            }
+        });
+    });
 }
 
-class Bundler {
-    /**
-     * Compiler
-     */
-    protected compiler: Compiler;
-
-    /**
-     * Config
-     */
-    protected config: Config;
-
-    /**
-     * Client code path
-     */
-    protected clientPath: string;
-
-    /**
-     * Server code path
-     */
-    protected serverPath: string;
-
-    /**
-     * Construct server
-     * @param compiler
-     * @param config
-     */
-    constructor(compiler: Compiler, config: Config) {
-        this.compiler = compiler;
-        this.config = config;
-
-        this.clientPath = `${config.outputPath}/public`;
-        this.serverPath = config.outputPath;
+/**
+ * @todo hasClientCodePath belongs in bundler or another util not in compiler
+ * @todo hasServerCodePath belongs in bundler or another util not in compiler
+ * @param compiler
+ * @param options
+ */
+async function Bundler(compiler: Compiler, options: Options) {
+    if (options.clean) {
+        logger.info("cleaning up previous builds...");
+        createOrEmptyDir(options.outputPath);
     }
 
+    const previousFileSizes: string[] = await measureFileSizesBeforeBuild(
+        options.outputPath,
+    );
+
     /**
-     * Build client code path
+     * Simplify the compiler so we can generalize these
      */
-    public async client() {
-        createOrEmptyDir(this.config.outputPath);
-        logger.info("Creating an optimized production build...");
-        if (this.compiler.hasClientCodePath) {
-            logger.info("Client code path found...");
-            if (this.compiler.client) {
-                logger.info("Compiling client...");
-                const previousFileSizes: string[] = await measureFileSizesBeforeBuild(
-                    this.clientPath,
-                );
-                return this.handler(
-                    this.clientPath,
+    async function client() {
+        if (compiler.hasClientCodePath) {
+            logger.info(`${options.name} code path found...`);
+            if (compiler.client) {
+                return handler(
+                    options.outputPath,
                     previousFileSizes,
-                    this.compiler.client,
+                    compiler.client,
                 );
+            } else {
+                logger.error(`${options.name} compiler not found.`);
             }
-            throw new Error(`Client compiler failed to initialize.`);
+            logger.error(`${options.name} code path not found.`);
         }
-        throw new Error(`Client code path ${this.clientPath} does not exist.`);
+        return 1;
     }
 
-    /**
-     * Build server code path
-     */
-    public async server() {
-        if (this.compiler.hasServerCodePath) {
-            logger.info("Server code path found...");
-            if (this.compiler.server) {
-                logger.info("Compiling server...");
-                const previousFileSizes: string[] = await measureFileSizesBeforeBuild(
-                    this.serverPath,
-                );
-                return this.handler(
-                    this.serverPath,
+    async function server() {
+        if (compiler.hasServerCodePath) {
+            logger.info(`${options.name} code path found...`);
+            if (compiler.server) {
+                return handler(
+                    options.outputPath,
                     previousFileSizes,
-                    this.compiler.server,
+                    compiler.server,
                 );
+            } else {
+                logger.error(`${options.name} compiler not found.`);
             }
-            throw new Error(`Server compiler failed to initialize.`);
+            logger.error(`${options.name} code path not found.`);
         }
-        throw new Error(`Server code path ${this.serverPath} does not exist.`);
+        return 1;
     }
 
-    /**
-     * Return a promise and handle webpack stats.
-     * @todo Move printing up to CLI and return stats + exit code in promise
-     * @param path
-     * @param fileSizes
-     * @param webpackCompiler
-     */
-    private handler(
-        path: string,
-        fileSizes: string[],
-        webpackCompiler: SingleCompiler,
-    ) {
-        return new Promise<number>((resolve, reject) => {
-            webpackCompiler.run((err: Error, stats: Stats) => {
-                if (err) {
-                    return reject(err);
-                } else {
-                    const messages = formatWebpackMessages(
-                        stats.toJson("verbose"),
-                    );
-                    if (messages.errors.length) {
-                        return reject(new Error(messages.errors.join("\n\n")));
-                    }
-                    if (messages.warnings.length) {
-                        logger.warn("Compiled with warnings.");
-                        logger.warn(messages.warnings.join("\n\n"));
-                        logger.warn(
-                            'Search for the "keywords" to learn more about each warning.',
-                        );
-                        if (
-                            process.env.CI &&
-                            process.env.CI.toLowerCase() !== "false" &&
-                            messages.warnings.length
-                        ) {
-                            logger.info(
-                                "Treating warnings as errors because process.env.CI = true.",
-                            );
-                            logger.info(
-                                "Most CI servers set it automatically.",
-                            );
-                            return reject(
-                                new Error(messages.warnings.join("\n\n")),
-                            );
-                        }
-                    } else {
-                        logger.success("Compiled successfully.");
-                        logger.info("File sizes after gzip:\n");
-                        printFileSizesAfterBuild(
-                            stats,
-                            fileSizes,
-                            path,
-                            WARN_AFTER_BUNDLE_GZIP_SIZE,
-                            WARN_AFTER_CHUNK_GZIP_SIZE,
-                        );
-                    }
-                    return resolve(0);
-                }
-            });
-        });
+    switch (options.name) {
+        case Name.client:
+            return client();
+        case Name.server:
+            return server();
+        default:
+            logger.warn("nothing to compile");
     }
+    return 0;
 }
 
 export default Bundler;

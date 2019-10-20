@@ -21,17 +21,21 @@ export default (toolbox: AddonWebpackToolbox) => {
     const webpack = async (options: WebpackExtensionOptions) => {
         const { print } = toolbox;
         try {
+            const compiler = getCompiler(options.compilerOptions);
             switch (options.type) {
                 case WebpackExtensionType.build: {
-                    const compiler = getCompiler(options.compilerOptions);
-                    const bundler = getBundler(compiler, options.buildOptions);
                     let statusCode = 0;
-                    statusCode += await bundler.client();
-                    statusCode += await bundler.server();
+                    statusCode += await getBundler(compiler, {
+                        clean: true,
+                        outputPath: options.compilerOptions.outputPath,
+                    });
+                    statusCode += await getBundler(compiler, {
+                        clean: false,
+                        outputPath: `${options.compilerOptions.outputPath}/public`,
+                    });
                     return statusCode;
                 }
                 case WebpackExtensionType.start: {
-                    const compiler = getCompiler(options.compilerOptions);
                     const server = getServer(compiler, options.serverOptions);
                     return await server.start();
                 }
