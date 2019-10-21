@@ -1,7 +1,16 @@
-import { Config as BuildConfig } from "@pixeloven-webpack/bundler";
 import { Config as CompilerConfig } from "@pixeloven-webpack/config";
 import { Config as ServerConfig } from "@pixeloven-webpack/server";
 import { PixelOvenToolbox } from "@pixeloven/cli";
+
+export enum ErrorCode {
+    MissingTask,
+    MissingTarget,
+    InvalidTask,
+    InvalidArgument,
+    FailedBundling,
+    FailedClientBundling,
+    FailedServerBundling,
+}
 
 export enum WebpackExtensionType {
     build = "build",
@@ -10,8 +19,7 @@ export enum WebpackExtensionType {
 
 export interface WebpackExtensionOptions {
     type: WebpackExtensionType;
-    buildOptions?: BuildConfig;
-    compilerOptions?: CompilerConfig;
+    compilerOptions: CompilerConfig;
     serverOptions?: ServerConfig;
 }
 

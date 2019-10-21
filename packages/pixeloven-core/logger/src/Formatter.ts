@@ -30,7 +30,7 @@ function getColor(level?: string) {
  */
 const console = winston.format.printf(info => {
     const color = getColor(info.level);
-    return `${color(info.level.toUpperCase())}: ${chalk.gray(
+    return `${color(info.level.toLocaleLowerCase())} ${chalk.gray(
         info.meta.timestamp,
     )} ${info.message}`;
 });

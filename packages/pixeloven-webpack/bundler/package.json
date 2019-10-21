@@ -22,7 +22,7 @@
     "@pixeloven-core/filesystem": "^6.0.0-beta.7",
     "@pixeloven-core/logger": "^6.0.0-beta.7",
     "@pixeloven-webpack/compiler": "^6.0.0-beta.7",
-    "react-dev-utils": "9.0.1"
+    "react-dev-utils": "9.1.0"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.7",
