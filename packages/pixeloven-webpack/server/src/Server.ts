@@ -10,6 +10,7 @@ import {
 import express from "express";
 import fs from "fs";
 import path from "path";
+import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import { Config } from "./types";
 
 class Server {
@@ -49,6 +50,29 @@ class Server {
          * Create middleware
          */
         const webpackDevMiddleware = createWebpackDevMiddleware(this.compiler, {
+            done: stats => {
+                /**
+                 * @todo Unify with bundler
+                 */
+                const formatted = formatWebpackMessages(
+                    stats.toJson("verbose"),
+                );
+                if (formatted) {
+                    if (stats.hasErrors()) {
+                        logger.error(formatted.errors);
+                        logger.error("Failed to compile.");
+                    } else if (stats.hasWarnings()) {
+                        logger.warn(formatted.warnings);
+                        logger.warn("Compiled with warnings.");
+                    } else {
+                        logger.success("Compiled successfully.");
+                    }
+                } else {
+                    logger.error(
+                        "Unexpected Error: Failed to retrieve webpack stats.",
+                    );
+                }
+            },
             publicPath: this.config.path,
             watchOptions: {
                 ignored: this.config.ignored,
@@ -66,7 +90,10 @@ class Server {
         const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
             this.compiler,
             {
-                done: stats => {
+                done: (stats, fileName) => {
+                    logger.info("---------- Server Discovered ----------");
+                    // @todo shorten to relative path
+                    logger.info(fileName);
                     if (refreshCount) {
                         logger.info("---------- Restarting ----------");
                     } else {

@@ -15,10 +15,10 @@ interface ClientMiddlewareConfig {
  * @param compiler
  * @param watchOptions
  */
-const createWebpackHotClientMiddleware = (
+function createWebpackHotClientMiddleware(
     compiler: Compiler,
     config: ClientMiddlewareConfig,
-) => {
+) {
     if (compiler.client) {
         return webpackHotMiddleware(compiler.client, {
             heartbeat: 3000,
@@ -30,6 +30,6 @@ const createWebpackHotClientMiddleware = (
     return (req: Request, res: Response, next: NextFunction) => {
         next();
     };
-};
+}
 
 export default createWebpackHotClientMiddleware;

@@ -1,12 +1,12 @@
 import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
-import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
-import { WatchOptions } from "webpack";
+import { Stats, WatchOptions } from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 
 interface DevMiddlewareConfig {
     publicPath: string;
-    watchOptions?: WatchOptions;
+    watchOptions: WatchOptions;
+    done?: (stats: Stats) => void;
 }
 
 /**
@@ -17,44 +17,30 @@ interface DevMiddlewareConfig {
  * @param compiler
  * @param watchOptions
  */
-const createWebpackDevMiddleware = (
+function createWebpackDevMiddleware(
     compiler: Compiler,
     config: DevMiddlewareConfig,
-) => {
+) {
     return webpackDevMiddleware(compiler.combined, {
-        ...config,
         index: false,
         logLevel: "error",
+        publicPath: config.publicPath,
         reporter: (middlewareOptions, reporterOptions) => {
             if (
                 reporterOptions.state &&
                 reporterOptions.stats &&
                 middlewareOptions.logLevel !== "silent"
             ) {
-                const stats = formatWebpackMessages(
-                    reporterOptions.stats.toJson("verbose"),
-                );
-                if (stats) {
-                    if (reporterOptions.stats.hasErrors()) {
-                        logger.error(stats.errors);
-                        logger.error("Failed to compile.");
-                    } else if (reporterOptions.stats.hasWarnings()) {
-                        logger.warn(stats.warnings);
-                        logger.warn("Compiled with warnings.");
-                    } else {
-                        logger.success("Compiled successfully.");
-                    }
-                } else {
-                    logger.error(
-                        "Unexpected Error: Failed to retrieve webpack stats.",
-                    );
+                if (config.done) {
+                    config.done(reporterOptions.stats);
                 }
             } else {
                 logger.info("Waiting...");
             }
         },
         serverSideRender: true,
+        watchOptions: config.watchOptions,
     });
-};
+}
 
 export default createWebpackDevMiddleware;

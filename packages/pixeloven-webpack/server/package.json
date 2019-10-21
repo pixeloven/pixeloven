@@ -23,7 +23,8 @@
     "@pixeloven-core/logger": "^6.0.0-beta.7",
     "@pixeloven-webpack/compiler": "^6.0.0-beta.7",
     "@pixeloven-webpack/server-middleware": "^6.0.0-beta.7",
-    "express": "4.16.4"
+    "express": "4.16.4",
+    "react-dev-utils": "9.1.0"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.7",
