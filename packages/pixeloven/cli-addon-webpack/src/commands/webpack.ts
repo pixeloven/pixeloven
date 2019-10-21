@@ -1,6 +1,7 @@
 import { Mode, Name, Target } from "@pixeloven-core/env";
 import {
     AddonWebpackToolbox,
+    ErrorCode,
     WebpackExecutionOptionTypes,
     WebpackExtensionType,
 } from "../types";
@@ -27,16 +28,6 @@ function breakOption(option: string | boolean) {
     return {
         target: Target[options[0]],
     };
-}
-
-enum ErrorCode {
-    MissingTask,
-    MissingTarget,
-    InvalidTask,
-    InvalidArgument,
-    FailedBundling,
-    FailedClientBundling,
-    FailedServerBundling,
 }
 
 export default {
