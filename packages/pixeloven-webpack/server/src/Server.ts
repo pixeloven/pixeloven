@@ -87,7 +87,11 @@ class Server {
         const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
             this.compiler,
             {
-                done: stats => {
+                done: (stats, scripts, stylesheets) => {
+                    logger.info("---------- Assets Discovered ----------");
+                    logger.info(stylesheets);
+                    logger.info(scripts);
+
                     const json = stats.toJson("normal");
                     logger.success(
                         `Webpack built client ${json.hash} in ${json.time}ms`,
