@@ -1,3 +1,4 @@
+import { Name } from "@pixeloven-core/env";
 import fs from "fs";
 import path from "path";
 import webpack, {
@@ -19,12 +20,12 @@ class Compiler {
      * @param config
      */
     public static create(configs: Configuration[]) {
-        if (!configs.find(config => config.name === "client")) {
+        if (!configs.find(config => config.name === Name.client)) {
             throw Error(
                 `Cannot find configuration property "name" with value "client"`,
             );
         }
-        if (!configs.find(config => config.name === "server")) {
+        if (!configs.find(config => config.name === Name.server)) {
             throw Error(
                 `Cannot find configuration property "name" with value "server"`,
             );

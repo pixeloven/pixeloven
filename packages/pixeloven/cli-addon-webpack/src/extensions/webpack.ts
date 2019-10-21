@@ -14,16 +14,10 @@ export default (toolbox: AddonWebpackToolbox) => {
             const compiler = getCompiler(options.compilerOptions);
             switch (options.type) {
                 case WebpackExtensionType.build: {
-                    let statusCode = 0;
-                    statusCode += await getBundler(compiler, {
+                    return await getBundler(compiler, {
                         clean: true,
                         outputPath: options.compilerOptions.outputPath,
                     });
-                    statusCode += await getBundler(compiler, {
-                        clean: false,
-                        outputPath: `${options.compilerOptions.outputPath}/public`,
-                    });
-                    return statusCode;
                 }
                 case WebpackExtensionType.start: {
                     const server = getServer(compiler, options.serverOptions);
