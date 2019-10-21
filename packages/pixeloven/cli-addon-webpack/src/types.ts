@@ -2,6 +2,16 @@ import { Config as CompilerConfig } from "@pixeloven-webpack/config";
 import { Config as ServerConfig } from "@pixeloven-webpack/server";
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
+export enum ErrorCode {
+    MissingTask,
+    MissingTarget,
+    InvalidTask,
+    InvalidArgument,
+    FailedBundling,
+    FailedClientBundling,
+    FailedServerBundling,
+}
+
 export enum WebpackExtensionType {
     build = "build",
     start = "start",

@@ -1,15 +1,40 @@
 import { Mode, Name, Target } from "@pixeloven-core/env";
 import {
     AddonWebpackToolbox,
+    ErrorCode,
     WebpackExecutionOptionTypes,
     WebpackExtensionType,
 } from "../types";
+
+/**
+ * Handles breaking options
+ * @param option
+ */
+function breakOption(option: string | boolean) {
+    if (typeof option === "boolean") {
+        return {};
+    }
+    const options = option.includes(":") ? option.split(":") : [option];
+    if (options.length > 1) {
+        return {
+            entry: options[1],
+            target: Target[options[0]],
+        };
+    } else if (options[0].includes(".")) {
+        return {
+            entry: options[0],
+        };
+    }
+    return {
+        target: Target[options[0]],
+    };
+}
 
 export default {
     alias: ["--webpack", "-w"],
     name: "webpack",
     run: async (toolbox: AddonWebpackToolbox) => {
-        const { parameters, pixelOven, webpack } = toolbox;
+        const { parameters, pixelOven, print, webpack } = toolbox;
         const task = parameters.first;
         const {
             client,
@@ -34,7 +59,7 @@ export default {
             pixelOven.invalidArgument(
                 "Please provide a task for Webpack to run.",
             );
-            pixelOven.exit("Webpack", 1);
+            pixelOven.exit("Webpack", ErrorCode.MissingTask);
             return;
         }
         if (!WebpackExtensionType.hasOwnProperty(task)) {
@@ -42,7 +67,7 @@ export default {
                 `Available Webpack tasks are "build" or "start".`,
                 task,
             );
-            pixelOven.exit("Webpack", 1);
+            pixelOven.exit("Webpack", ErrorCode.InvalidTask);
             return;
         }
 
@@ -56,7 +81,7 @@ export default {
                     pixelOven.invalidArgument(
                         `Please provide an entry for Webpack to target. Available options are "--client", "--library", or "--server".`,
                     );
-                    pixelOven.exit("Webpack", 1);
+                    pixelOven.exit("Webpack", ErrorCode.MissingTarget);
                     return;
                 }
 
@@ -69,33 +94,10 @@ export default {
                             `Available options for "${task}" are "--client", "--development", "--entry", "--host", "--ignored", "--library", "--path", "--port", "--protocol", "--server", "--source-map", or "--stats"`,
                             `--${option}`,
                         );
-                        pixelOven.exit("Webpack", 1);
+                        pixelOven.exit("Webpack", ErrorCode.InvalidArgument);
                     }
                 });
 
-                const breakOption = (option: string | boolean) => {
-                    if (typeof option === "boolean") {
-                        return {};
-                    } else {
-                        const options = option.includes(":")
-                            ? option.split(":")
-                            : [option];
-                        if (options.length > 1) {
-                            return {
-                                entry: options[1],
-                                target: Target[options[0]],
-                            };
-                        } else if (options[0].includes(".")) {
-                            return {
-                                entry: options[0],
-                            };
-                        } else {
-                            return {
-                                target: Target[options[0]],
-                            };
-                        }
-                    }
-                };
                 const compilers = [];
                 const mode = development ? Mode.development : Mode.production;
                 const defaultEntry = "./src/index.ts";
@@ -155,15 +157,36 @@ export default {
                     },
                     type: WebpackExtensionType[task],
                 });
-                pixelOven.exit(
-                    "Webpack",
-                    statusCode,
-                    `Success! Pack your bags we're going home. \n`,
-                );
+
+                if (statusCode) {
+                    if (statusCode === 1) {
+                        print.error("client bundling failed to complete");
+                        pixelOven.exit(
+                            "Webpack",
+                            ErrorCode.FailedClientBundling,
+                        );
+                    } else if (statusCode === 2) {
+                        print.error("server bundling failed to complete");
+                        pixelOven.exit(
+                            "Webpack",
+                            ErrorCode.FailedServerBundling,
+                        );
+                    } else {
+                        print.error("bundling failed to complete");
+                        pixelOven.exit("Webpack", ErrorCode.FailedBundling);
+                    }
+                } else {
+                    pixelOven.exit(
+                        "Webpack",
+                        0,
+                        `Success! Pack your bags we're going home. \n`,
+                    );
+                }
                 break;
             }
             default: {
                 pixelOven.invalidArgument();
+                pixelOven.exit("Webpack", 1);
                 break;
             }
         }
