@@ -176,10 +176,11 @@ export default {
                         pixelOven.exit("Webpack", ErrorCode.FailedBundling);
                     }
                 } else {
-                    print.success(
+                    pixelOven.exit(
+                        "Webpack",
+                        0,
                         `Success! Pack your bags we're going home. \n`,
                     );
-                    pixelOven.exit("Webpack", 0);
                 }
                 break;
             }
