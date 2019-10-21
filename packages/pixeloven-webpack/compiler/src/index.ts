@@ -1,12 +1,13 @@
 import { mergeOptions } from "@pixeloven-core/common";
-import { Mode, Name, Target } from "@pixeloven-core/env";
-import { Config, getConfig } from "@pixeloven-webpack/config";
+import { CompilerConfig, Config, getConfig } from "@pixeloven-webpack/config";
+import { Configuration } from "webpack";
 import Compiler from "./Compiler";
 
 /**
  * Default compiler options
  */
 const defaultCompilerOptions: Config = {
+    compilers: undefined,
     outputPath: "./dist",
     profiling: false,
     publicPath: "/",
@@ -24,27 +25,27 @@ const defaultCompilerOptions: Config = {
  * @param options
  */
 function getCompiler(options: Partial<Config> = {}) {
+    const { compilers } = options;
+    delete options.compilers;
     const config = mergeOptions(defaultCompilerOptions, options);
-    const nodeEnv = process.env.NODE_ENV || "production";
+    const compilerConfigs: Configuration[] = [];
 
-    return Compiler.create([
-        getConfig({
-            mode: Mode.hasOwnProperty(nodeEnv)
-                ? Mode[nodeEnv]
-                : Mode.production,
-            name: Name.client,
-            target: Target.web,
-            ...config,
-        }),
-        getConfig({
-            mode: Mode.hasOwnProperty(nodeEnv)
-                ? Mode[nodeEnv]
-                : Mode.production,
-            name: Name.server,
-            target: Target.node,
-            ...config,
-        }),
-    ]);
+    if (compilers && compilers.length > 0) {
+        compilers.map((compiler: CompilerConfig) => {
+            const { entry, mode, name, target } = compiler;
+            compilerConfigs.push(
+                getConfig({
+                    ...config,
+                    entry,
+                    mode,
+                    name,
+                    target,
+                }),
+            );
+        });
+    }
+
+    return Compiler.create(compilerConfigs);
 }
 
 export default getCompiler;

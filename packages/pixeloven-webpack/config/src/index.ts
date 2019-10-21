@@ -2,11 +2,10 @@ import { removeEmpty } from "@pixeloven-core/common";
 import { getUtils } from "@pixeloven-core/env";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import path from "path";
 import TimeFixPlugin from "time-fix-plugin";
 import webpack, { Configuration } from "webpack";
 import ManifestPlugin from "webpack-manifest-plugin";
-import { Config, Options } from "./types";
+import { CompilerConfig, Config, Options } from "./types";
 
 import { getSetup } from "./helpers/shared";
 
@@ -186,13 +185,10 @@ function getConfig(options: Options) {
         performance: getPerformance(),
         plugins,
         profile: options.profiling,
-        recordsPath: path.resolve(
-            `${options.outputPath}/${options.name}-stats.json`,
-        ),
         resolve: getResolve(),
         stats: "verbose",
         target: options.target,
     }) as Configuration;
 }
 
-export { Config, getConfig };
+export { Config, CompilerConfig, getConfig };

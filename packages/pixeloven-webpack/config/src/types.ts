@@ -1,6 +1,6 @@
 import { Mode, Name, Target } from "@pixeloven-core/env";
 
-export interface Config {
+interface Shared {
     outputPath: string;
     profiling: boolean;
     publicPath: string;
@@ -13,8 +13,15 @@ export interface Config {
     };
 }
 
-export interface Options extends Config {
+export interface CompilerConfig {
+    entry: string;
     mode: Mode;
     name: Name;
     target: Target;
 }
+
+export interface Config extends Shared {
+    compilers?: CompilerConfig[];
+}
+
+export interface Options extends Config, CompilerConfig {}
