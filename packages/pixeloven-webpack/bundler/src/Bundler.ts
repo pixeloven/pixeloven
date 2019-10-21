@@ -22,7 +22,13 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
  */
 async function Bundler(compiler: Compiler, options: Options) {
     const errorOnWarning = process.env.CI === "true";
-
+    /**
+     * @todo these should be broken into two steps so FileReporter can compare before and after (which seems broken anyway)
+     */
+    if (options.clean) {
+        logger.info("cleaning up previous builds...");
+        createOrEmptyDir(options.outputPath);
+    }
     /**
      * Simple wrapper fro running a single compiler
      * @param webpackCompiler
@@ -34,10 +40,6 @@ async function Bundler(compiler: Compiler, options: Options) {
             warnAfterBundleGzipSize: WARN_AFTER_BUNDLE_GZIP_SIZE,
             warnAfterChunkGzipSize: WARN_AFTER_CHUNK_GZIP_SIZE,
         });
-        if (options.clean) {
-            logger.info("cleaning up previous builds...");
-            createOrEmptyDir(outputPath);
-        }
         return new Promise<number>((resolve, reject) => {
             webpackCompiler.run((err: Error, stats: Stats) =>
                 err ? reject(err) : resolve(fileReporter.fromStats(stats)),
