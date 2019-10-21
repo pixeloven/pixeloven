@@ -64,7 +64,7 @@ async function Bundler(compiler: Compiler, options: Options) {
                 return runner(compiler.server, options.outputPath);
             }
             logger.error(`compiler is set but code path could not be found`);
-            return 1;
+            return 2;
         }
         return 0;
     }
