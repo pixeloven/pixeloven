@@ -1,4 +1,3 @@
-import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { Stats, WatchOptions } from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
@@ -6,13 +5,12 @@ import webpackDevMiddleware from "webpack-dev-middleware";
 interface DevMiddlewareConfig {
     publicPath: string;
     watchOptions: WatchOptions;
-    done?: (stats: Stats) => void;
 }
 
 /**
  * Creates webpackDevMiddleware with custom configuration
- * @todo Create our own formatter
- *  - https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/typescriptFormatter.js
+ * @todo Long term we should own this to help facilitate error handling and reporting.
+ *
  * @param config
  * @param compiler
  * @param watchOptions
@@ -20,22 +18,17 @@ interface DevMiddlewareConfig {
 function createWebpackDevMiddleware(
     compiler: Compiler,
     config: DevMiddlewareConfig,
+    done?: (stats: Stats) => void,
 ) {
     return webpackDevMiddleware(compiler.combined, {
         index: false,
         logLevel: "error",
         publicPath: config.publicPath,
         reporter: (middlewareOptions, reporterOptions) => {
-            if (
-                reporterOptions.state &&
-                reporterOptions.stats &&
-                middlewareOptions.logLevel !== "silent"
-            ) {
-                if (config.done) {
-                    config.done(reporterOptions.stats);
+            if (reporterOptions.state && reporterOptions.stats) {
+                if (done) {
+                    done(reporterOptions.stats);
                 }
-            } else {
-                logger.info("Waiting...");
             }
         },
         serverSideRender: true,

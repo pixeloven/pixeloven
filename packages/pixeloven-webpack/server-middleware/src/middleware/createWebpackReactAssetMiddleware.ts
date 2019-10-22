@@ -8,14 +8,15 @@ import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
 
 interface ReactAssetMiddlewareConfig {
-    done?: (stats: Stats, scripts: string[], stylesheets: string[]) => void;
+    done?: (stats: Stats) => void;
     error?: (stats: Error) => void;
     publicPath: string;
 }
 
 /**
  * Applies react assets to server requests
- * @todo Add better logging for what assets were discovered
+ * @todo Add better logging for what assets were discovered.
+ *      Technically this isn't react specific. We should own flushChunks as it helps with webpack handling.
  * @param compiler
  */
 function webpackReactAssetMiddleware(
@@ -45,7 +46,7 @@ function webpackReactAssetMiddleware(
                 },
             );
             if (config.done) {
-                config.done(stats, scripts, stylesheets);
+                config.done(stats);
             }
         }
     }

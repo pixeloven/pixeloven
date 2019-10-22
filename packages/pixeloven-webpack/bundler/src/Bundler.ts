@@ -1,3 +1,4 @@
+import { mergeOptions } from "@pixeloven-core/common";
 import { createOrEmptyDir } from "@pixeloven-core/filesystem";
 import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
@@ -5,6 +6,24 @@ import { Compiler } from "@pixeloven-webpack/compiler";
 import { Compiler as SingleCompiler, Stats } from "webpack";
 import FileReporter from "./FileReporter";
 import { Options } from "./types";
+
+/**
+ * Default bundler options
+ */
+const defaultBundlerOptions: Options = {
+    clean: true,
+    outputPath: "./dist",
+};
+
+/**
+ * Create build from compiler and options
+ * @param compiler
+ * @param options
+ */
+function getBundler(compiler: Compiler, options: Partial<Options> = {}) {
+    const mergedOptions = mergeOptions(defaultBundlerOptions, options);
+    return Bundler(compiler, mergedOptions);
+}
 
 /**
  * Setup constants for bundle size
@@ -76,4 +95,4 @@ async function Bundler(compiler: Compiler, options: Options) {
     return statusCode;
 }
 
-export default Bundler;
+export { getBundler, Bundler };

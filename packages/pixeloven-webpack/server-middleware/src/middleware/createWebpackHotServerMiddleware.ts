@@ -8,7 +8,7 @@ import { Stats } from "webpack";
 import { Module } from "./types";
 
 interface HotServerMiddlewareConfig {
-    done?: (stats: Stats, fileName: string) => void;
+    done?: (stats: Stats) => void;
     error?: (stats: Error) => void;
 }
 
@@ -92,7 +92,7 @@ function webpackHotServerMiddleware(
         const server = getServer(fileName, buffer);
         dynamicMiddleware.mount(server);
         if (config.done) {
-            config.done(stats, fileName);
+            config.done(stats);
         }
     }
 
