@@ -11,8 +11,7 @@ import {
 import express from "express";
 import fs from "fs";
 import path from "path";
-import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
-import { Stats } from "webpack";
+import FileReporter from "./FileReporter";
 import { Config, Protocol } from "./types";
 
 /**
@@ -37,43 +36,12 @@ function getServer(compiler: Compiler, options: Partial<Config> = {}) {
     return Server(compiler, config);
 }
 
-interface FileReporterOptions {
-    name: string;
-}
-
-/**
- * @todo Unify with bundler file reporter eventually
- */
-function FileReporter(options: FileReporterOptions) {
-    function fromStats(stats: Stats) {
-        const statsJSON = stats.toJson("verbose");
-        const formatted = formatWebpackMessages(statsJSON);
-        logger.info(
-            `webpack ${options.name} built ${statsJSON.hash} in ${statsJSON.time}ms`,
-        );
-        if (formatted) {
-            if (stats.hasErrors()) {
-                logger.error(formatted.errors);
-                logger.error("compiled with errors");
-            } else if (stats.hasWarnings()) {
-                logger.warn(formatted.warnings);
-                logger.warn("compiled with warnings");
-            } else {
-                // @todo print file and gzip sizes
-                logger.success("compiled successfully");
-            }
-        } else {
-            logger.error("failed to retrieve webpack stats");
-        }
-    }
-
-    return {
-        fromStats,
-    };
-}
-
 async function Server(compiler: Compiler, config: Config) {
     const app = express();
+    const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
+    const baseUrl = normalizeUrl(
+        `${config.protocol}://${config.host}:${config.port}/${config.path}`,
+    );
     const staticAssetPath = path.resolve(process.cwd(), "public");
     if (fs.existsSync(staticAssetPath)) {
         logger.info([
@@ -100,21 +68,14 @@ async function Server(compiler: Compiler, config: Config) {
         },
     );
 
-    let serverRefreshCount = 0;
     const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
         compiler,
         {
             done: stats => {
                 const fileReporter = FileReporter({
-                    name: "client",
+                    name: "server",
                 });
-                if (serverRefreshCount) {
-                    logger.info("---------- Rebuilding ----------");
-                } else {
-                    logger.info("---------- Creating ----------");
-                }
                 fileReporter.fromStats(stats);
-                serverRefreshCount++;
             },
             error: error => {
                 logger.error(error.message);
@@ -122,22 +83,14 @@ async function Server(compiler: Compiler, config: Config) {
         },
     );
 
-    let clientRefreshCount = 0;
     const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
         compiler,
         {
             done: stats => {
                 const fileReporter = FileReporter({
-                    name: "server",
+                    name: "client",
                 });
-
-                if (clientRefreshCount) {
-                    logger.info("---------- Rebuilding ----------");
-                } else {
-                    logger.info("---------- Creating ----------");
-                }
                 fileReporter.fromStats(stats);
-                clientRefreshCount++;
             },
             error: error => {
                 logger.error(error.message);
@@ -153,20 +106,38 @@ async function Server(compiler: Compiler, config: Config) {
     app.use(webpackReactAssetMiddleware);
     app.use(webpackHotServerMiddleware);
     app.use(errorHandler);
-    logger.info(`---------- Connecting Server ----------`);
+    logger.info(`---------- connecting server ----------`);
     return new Promise<number>((resolve, reject) => {
         try {
-            const normalizeUrl = (item: string) =>
-                item.replace(/([^:]\/)\/+/g, "$1");
-            const baseUrl = normalizeUrl(
-                `${config.protocol}://${config.host}:${config.port}/${config.path}`,
-            );
             app.listen(config.port, config.host, () => {
-                logger.success(`Started on ${baseUrl}`);
-                return resolve(0);
+                logger.success(`development server is listening at ${baseUrl}`);
+            });
+            app.on("mount", () => {
+                logger.success(
+                    `development server has mounted the application server`,
+                );
+            });
+            /**
+             * @description Captured CTRL-C or exited for another reason
+             * @todo figure out why we can't do app.on for this
+             */
+            process.on("exit", () => {
+                logger.info(`development server is exiting`);
+                resolve(0);
+                process.exit();
+            });
+            process.on("SIGINT", () => {
+                logger.info(`development server is shutting down`);
+                resolve(0);
+                process.exit();
+            });
+            process.on("uncaughtException", err => {
+                logger.error(err.message);
+                reject(err);
+                process.exit();
             });
         } catch (err) {
-            return reject(err);
+            reject(err);
         }
     });
 }
