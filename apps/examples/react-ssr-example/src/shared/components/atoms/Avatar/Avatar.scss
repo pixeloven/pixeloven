@@ -1,4 +1,4 @@
-@import "../../../styles/core/core";
+@use "../../../styles/core/core" as *;
 
 .a-avatar {
     border: 1px solid $color-white;
