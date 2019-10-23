@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven-webpack/server-middleware",
+  "name": "@pixeloven-webpack/file-reporter",
   "version": "6.0.0-beta.7",
-  "description": "Webpack Development Server middleware",
+  "description": "Webpack file reporter",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -18,25 +18,19 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-express/dynamic-middleware": "^6.0.0-beta.7",
-    "ansi-html": "0.0.7",
-    "html-entities": "1.2.1",
-    "react-universal-component": "4.0.0",
-    "require-from-string": "2.0.2",
-    "webpack-dev-middleware": "3.7.2",
-    "webpack-flush-chunks": "2.0.3",
-    "webpack-hot-middleware": "2.25.0"
+    "@pixeloven-core/logger": "^6.0.0-beta.7",
+    "chalk": "2.4.2",
+    "filesize" : "5.0.3",
+    "gzip-size" : "5.1.1",
+    "recursive-readdir": "2.2.2",
+    "react-dev-utils": "9.1.0",
+    "strip-ansi": "5.2.0"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.7",
-    "@pixeloven-webpack/compiler": "^6.0.0-beta.7",
-    "@types/express": "4.17.0",
-    "@types/html-entities": "1.2.16",
-    "@types/memory-fs": "0.3.2",
-    "@types/require-from-string": "1.2.0",
+    "@types/filesize": "4.2.0",
+    "@types/recursive-readdir": "2.2.0",
     "@types/webpack": "4.39.5",
-    "@types/webpack-dev-middleware": "2.0.3",
-    "@types/webpack-hot-middleware": "2.16.5",
     "lint-staged": "9.2.5"
   },
   "scripts": {

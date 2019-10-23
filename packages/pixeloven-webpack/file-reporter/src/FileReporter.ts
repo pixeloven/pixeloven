@@ -1,32 +1,22 @@
 import { logger } from "@pixeloven-core/logger";
-import FileSizeReporter from "react-dev-utils/FileSizeReporter";
 import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import { Stats } from "webpack";
-
-/**
- * Get FileSizeReporter functions
- */
-const {
+import {
     measureFileSizesBeforeBuild,
     printFileSizesAfterBuild,
-} = FileSizeReporter;
-
-interface Messages {
-    errors: string[];
-    warnings: string[];
-}
-
-interface FileReporterOptions {
-    outputPath: string;
-    errorOnWarning: boolean;
-    warnAfterBundleGzipSize: number;
-    warnAfterChunkGzipSize: number;
-}
+} from "./helper";
+import { FileReporterOptions, FileSizeMap, Messages } from "./types";
 
 async function FileReporter(options: FileReporterOptions) {
-    const previousFileSizes: string[] = await measureFileSizesBeforeBuild(
-        options.outputPath,
-    );
+    let previousFileSizes: FileSizeMap | undefined;
+    try {
+        previousFileSizes = await measureFileSizesBeforeBuild(
+            options.outputPath,
+        );
+    } catch (error) {
+        logger.warn("could not locate previous build");
+        logger.info("skipping build comparison stats");
+    }
 
     function fromStats(stats: Stats) {
         const messages: Messages = formatWebpackMessages(
@@ -47,14 +37,19 @@ async function FileReporter(options: FileReporterOptions) {
             logger.error(messages.warnings.join("\n\n"));
         }
         logger.success("compiled successfully");
-        logger.info("file sizes after gzip\n");
-        printFileSizesAfterBuild(
-            stats,
-            previousFileSizes,
-            options.outputPath,
-            options.warnAfterBundleGzipSize,
-            options.warnAfterChunkGzipSize,
-        );
+        logger.info("---------- file sizes after gzip ----------");
+        /**
+         * @todo This is temporary until I can get better abstraction around stats
+         */
+        if (previousFileSizes) {
+            printFileSizesAfterBuild(
+                stats,
+                previousFileSizes,
+                options.outputPath,
+                options.warnAfterBundleGzipSize,
+                options.warnAfterChunkGzipSize,
+            );
+        }
         return 0;
     }
 
@@ -63,4 +58,4 @@ async function FileReporter(options: FileReporterOptions) {
     };
 }
 
-export default FileReporter;
+export { FileReporter };

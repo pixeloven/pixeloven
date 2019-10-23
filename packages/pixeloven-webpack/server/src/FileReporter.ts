@@ -14,6 +14,9 @@ function FileReporter(options: FileReporterOptions) {
 
     function fromStats(stats: Stats) {
         const statsJSON = stats.toJson("verbose");
+        /**
+         * https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/formatWebpackMessages.js
+         */
         const formatted = formatWebpackMessages(statsJSON);
         if (buildCounter) {
             logger.info(`---------- rebuilding ${options.name} ----------`);

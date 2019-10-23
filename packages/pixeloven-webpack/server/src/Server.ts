@@ -37,23 +37,11 @@ function getServer(compiler: Compiler, options: Partial<Config> = {}) {
 }
 
 async function Server(compiler: Compiler, config: Config) {
-    const app = express();
     const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
     const baseUrl = normalizeUrl(
         `${config.protocol}://${config.host}:${config.port}/${config.path}`,
     );
     const staticAssetPath = path.resolve(process.cwd(), "public");
-    if (fs.existsSync(staticAssetPath)) {
-        logger.info([
-            `found "public" directory...`,
-            `setting up static file serving`,
-        ]);
-        app.use(config.path, express.static(staticAssetPath));
-    }
-
-    /**
-     * Create middleware
-     */
     const webpackDevMiddleware = createWebpackDevMiddleware(compiler, {
         publicPath: config.path,
         watchOptions: {
@@ -67,7 +55,6 @@ async function Server(compiler: Compiler, config: Config) {
             publicPath: config.path,
         },
     );
-
     const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
         compiler,
         {
@@ -82,7 +69,6 @@ async function Server(compiler: Compiler, config: Config) {
             },
         },
     );
-
     const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
         compiler,
         {
@@ -98,20 +84,31 @@ async function Server(compiler: Compiler, config: Config) {
             publicPath: config.path,
         },
     );
-    /**
-     * Apply middleware to server application
-     */
-    app.use(webpackDevMiddleware);
-    app.use(webpackHotClientMiddleware);
-    app.use(webpackReactAssetMiddleware);
-    app.use(webpackHotServerMiddleware);
-    app.use(errorHandler);
-    logger.info(`---------- connecting server ----------`);
     return new Promise<number>((resolve, reject) => {
         try {
+            const app = express();
+            logger.info(`---------- configuring development server ----------`);
+            if (fs.existsSync(staticAssetPath)) {
+                logger.info([
+                    `found "public" directory...`,
+                    `setting up static file serving`,
+                ]);
+                app.use(config.path, express.static(staticAssetPath));
+            }
+            logger.info(`mounting webpack development middleware`);
+            app.use(webpackDevMiddleware);
+            app.use(webpackHotClientMiddleware);
+            app.use(webpackReactAssetMiddleware);
+            app.use(webpackHotServerMiddleware);
+            logger.info(`mounting error handling`);
+            app.use(errorHandler);
+            logger.info(`---------- connecting development server ----------`);
             app.listen(config.port, config.host, () => {
                 logger.success(`development server is listening at ${baseUrl}`);
             });
+            /**
+             * @todo determine why this isn't being called.
+             */
             app.on("mount", () => {
                 logger.success(
                     `development server has mounted the application server`,
@@ -127,7 +124,7 @@ async function Server(compiler: Compiler, config: Config) {
                 process.exit();
             });
             process.on("SIGINT", () => {
-                logger.info(`development server is shutting down`);
+                logger.info(`captured signal interrupt likely CTRL-C`);
                 resolve(0);
                 process.exit();
             });

@@ -2,9 +2,8 @@ import { mergeOptions } from "@pixeloven-core/common";
 import { createOrEmptyDir } from "@pixeloven-core/filesystem";
 import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
-
+import { FileReporter } from "@pixeloven-webpack/file-reporter";
 import { Compiler as SingleCompiler, Stats } from "webpack";
-import FileReporter from "./FileReporter";
 import { Options } from "./types";
 
 /**

@@ -1,0 +1,17 @@
+{
+    "extends": "../../../tsconfig",
+    "compilerOptions": {
+        "rootDir": "./src",
+        "declarationDir": "./dist/types",
+        "outDir": "./dist/lib",
+        "paths": {
+            "@*": ["src/*"]
+        }
+    },
+    "exclude": [
+        "./coverage",
+        "./dist",
+        "./docs",
+        "./node_modules"
+    ]
+}
