@@ -1,13 +1,8 @@
-export interface FileSizeMap {
-    root: string;
-    sizes: number[];
-}
+export type FileSizeMap = Map<string, number>;
 
-export interface FileSizeStats {
-    folder: string;
-    name: string;
-    size: number;
-    sizeLabel: string;
+export interface FileSizes {
+    root: string;
+    sizes: FileSizeMap;
 }
 
 export interface FileReporterOptions {
