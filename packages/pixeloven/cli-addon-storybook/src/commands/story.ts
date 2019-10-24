@@ -1,4 +1,8 @@
-import { AddonStorybookToolbox, StorybookExecutionOptionTypes, StorybookExecutionType } from "../types";
+import {
+    AddonStorybookToolbox,
+    StorybookExecutionOptionTypes,
+    StorybookExecutionType,
+} from "../types";
 
 export default {
     alias: ["--story", "-s"],
@@ -7,12 +11,17 @@ export default {
         const { parameters, pixelOven, storybook } = toolbox;
         const task = parameters.first;
         if (!task) {
-            pixelOven.invalidArgument("Please provide a task for Storybook to run.");
+            pixelOven.invalidArgument(
+                "Please provide a task for Storybook to run.",
+            );
             pixelOven.exit("Storybook", 1);
             return;
         }
         if (!StorybookExecutionType.hasOwnProperty(task)) {
-            pixelOven.invalidArgument(`Available Storybook tasks are "build" or "start".`, task);
+            pixelOven.invalidArgument(
+                `Available Storybook tasks are "build" or "start".`,
+                task,
+            );
             pixelOven.exit("Storybook", 1);
             return;
         }
@@ -25,13 +34,16 @@ export default {
             case "start": {
                 Object.keys(parameters.options).forEach(option => {
                     if (!StorybookExecutionOptionTypes.hasOwnProperty(option)) {
-                        pixelOven.invalidArgument(`Available options for "${task}" are "--output-dir", "--port", or "--quiet"`, `--${option}`);
+                        pixelOven.invalidArgument(
+                            `Available options for "${task}" are "--output-dir", "--port", or "--quiet"`,
+                            `--${option}`,
+                        );
                         pixelOven.exit("Storybook", 1);
                     }
                 });
                 const statusCode = await storybook(
                     StorybookExecutionType[task],
-                    parameters.options
+                    parameters.options,
                 );
                 pixelOven.exit(
                     "Storybook",
