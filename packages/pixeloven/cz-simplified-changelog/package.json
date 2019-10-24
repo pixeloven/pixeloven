@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cz-simplified-changelog",
-  "version": "6.0.0-beta.8",
+  "version": "6.0.0-beta.9",
   "description": "Commit citizen simplified changelog prompt",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -26,7 +26,7 @@
     "word-wrap": "1.2.3"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.8",
+    "@pixeloven/tasks": "^6.0.0-beta.9",
     "@types/lodash.map": "4.6.13",
     "commitizen": "4.0.3",
     "lint-staged": "9.2.5"
