@@ -102,8 +102,9 @@ async function FileReporter(options: FileReporterOptions) {
     ) {
         if (latest && previous) {
             for (const [key, value] of latest.sizes) {
-                if (previous[key]) {
-                    const difference = getDifferenceLabel(value, previous[key]);
+                const previousSize = previous.sizes.get(key);
+                if (previousSize) {
+                    const difference = getDifferenceLabel(value, previousSize);
                     const readableSize = filesize(value);
                     if (difference) {
                         logger.info(`${key} (${readableSize}) ${difference}`);
