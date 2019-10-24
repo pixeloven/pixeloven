@@ -23,7 +23,9 @@ export default (toolbox: AddonGeneratorsToolbox) => {
             componentHasStyle,
         } = options;
         const { strings, template } = toolbox;
-        const className = `${strings.lowerCase(componentAtomicType.charAt(0))}-${strings.kebabCase(componentName)}`;
+        const className = `${strings.lowerCase(
+            componentAtomicType.charAt(0),
+        )}-${strings.kebabCase(componentName)}`;
         const name = `${strings.pascalCase(componentName)}`;
         const props = {
             atomicType: componentAtomicType,

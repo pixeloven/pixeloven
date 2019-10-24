@@ -26,7 +26,8 @@
   },
   "scripts": {
     "all:bootstrap": "yarn install && yarn all:compile",
-    "all:build": "yarn examples:build",
+    "all:build:production": "yarn pixeloven:build:production && yarn examples:build:production",
+    "all:build:development": "yarn pixeloven:build:production && yarn examples:build:production",
     "all:clean": "lerna clean --yes && rm -rf node_modules",
     "all:commit": "git-cz",
     "all:compile": "yarn pixeloven:compile && yarn examples:compile",
@@ -64,7 +65,7 @@
     "pixeloven:pretty:scss": "lerna run pretty:scss --scope={@pixeloven,@pixeloven-*}/*",
     "pixeloven:test": "lerna run test --scope={@pixeloven,@pixeloven-*}/*",
     "pixeloven:test:ci": "lerna run test:ci --scope={@pixeloven,@pixeloven-*}/*",
-    "preversion": "yarn all:bootstrap && yarn all:lint && yarn all:compile && yarn all:build && yarn all:test"
+    "preversion": "yarn all:bootstrap && yarn all:lint && yarn all:compile && yarn all:build:production && yarn all:test"
   },
   "husky": {
     "hooks": {

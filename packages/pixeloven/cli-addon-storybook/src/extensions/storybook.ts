@@ -14,7 +14,7 @@ export default (toolbox: AddonStorybookToolbox) => {
         const { filesystem, print } = toolbox;
         const configEntryPoint = require.resolve("@pixeloven-storybook/config");
         const configDir = filesystem.path(configEntryPoint, "..");
-        const {outputDir, port, quiet} = options;
+        const { outputDir, port, quiet } = options;
 
         try {
             switch (type) {

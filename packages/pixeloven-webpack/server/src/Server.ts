@@ -100,7 +100,7 @@ async function Server(compiler: Compiler, config: Config) {
             app.use(webpackHotClientMiddleware);
             app.use(webpackReactAssetMiddleware);
             app.use(webpackHotServerMiddleware);
-            logger.info(`mounting error handling`);
+            logger.info(`mounting error handler`);
             app.use(errorHandler);
             logger.info(`---------- connecting development server ----------`);
             app.listen(config.port, config.host, () => {

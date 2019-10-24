@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-storybook/addons",
-  "version": "6.0.0-beta.7",
+  "version": "6.0.0-beta.9",
   "description": "Storybook addon library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -31,7 +31,7 @@
     "@types/storybook__addon-viewport": "4.1.1"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.7",
+    "@pixeloven/tasks": "^6.0.0-beta.9",
     "lint-staged": "9.2.5"
   },
   "peerDependencies": {

@@ -4,13 +4,8 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { addDecorator, addParameters, configure } from "@storybook/react";
 
 /**
- * Import remote assets dynamically
- * @todo Find a way to do this through a Decorator or something
  * @todo Make readme the default if it exists?  Can we hide actions? what does it even do?
  */
-import("" + "@src/shared/styles").catch((error: Error) => {
-    console.error("Failed to load scss files", error.message);
-});
 
 addDecorator(withA11y);
 addDecorator(withBackgrounds);
@@ -54,7 +49,7 @@ addParameters({
 /**
  * Stories loader
  */
-const req = require.context("@src/shared", true, /.stories.[jt]sx?$/);
+const req = require.context("@src", true, /.stories.[jt]sx?$/);
 function loadStories() {
     req.keys().forEach(req);
 }

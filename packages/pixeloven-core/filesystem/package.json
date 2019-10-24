@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-core/filesystem",
-  "version": "6.0.0-beta.7",
+  "version": "6.0.0-beta.9",
   "description": "Filesystem abstractions",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,10 +18,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/exceptions": "^6.0.0-beta.7"
+    "@pixeloven-core/exceptions": "^6.0.0-beta.9"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.7",
+    "@pixeloven/tasks": "^6.0.0-beta.9",
     "lint-staged": "9.2.5"
   },
   "scripts": {
