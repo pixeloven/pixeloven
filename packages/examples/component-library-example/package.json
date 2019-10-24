@@ -1,6 +1,6 @@
 {
   "name": "@examples/component-library-example",
-  "version": "6.0.0-beta.7",
+  "version": "6.0.0-beta.8",
   "description": "Component example for creating a React + TypeScript based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -16,8 +16,8 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@pixeloven/cli": "^6.0.0-beta.7",
-    "@pixeloven/cli-addon-storybook": "^6.0.0-beta.7",
+    "@pixeloven/cli": "^6.0.0-beta.8",
+    "@pixeloven/cli-addon-storybook": "^6.0.0-beta.8",
     "copyfiles": "2.1.1",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",

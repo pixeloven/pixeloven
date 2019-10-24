@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/bundler",
-  "version": "6.0.0-beta.7",
+  "version": "6.0.0-beta.8",
   "description": "Webpack build handler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,14 +18,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/common": "^6.0.0-beta.7",
-    "@pixeloven-core/filesystem": "^6.0.0-beta.7",
-    "@pixeloven-core/logger": "^6.0.0-beta.7",
-    "@pixeloven-webpack/compiler": "^6.0.0-beta.7",
+    "@pixeloven-core/common": "^6.0.0-beta.8",
+    "@pixeloven-core/filesystem": "^6.0.0-beta.8",
+    "@pixeloven-core/logger": "^6.0.0-beta.8",
+    "@pixeloven-webpack/compiler": "^6.0.0-beta.8",
     "react-dev-utils": "9.1.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.7",
+    "@pixeloven/tasks": "^6.0.0-beta.8",
     "@types/webpack": "4.39.3",
     "lint-staged": "9.2.5"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@examples/simple-library-example",
-  "version": "6.0.0-beta.7",
+  "version": "6.0.0-beta.8",
   "description": "Simple example for creating a TypeScript based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@pixeloven/cli": "^6.0.0-beta.7",
+    "@pixeloven/cli": "^6.0.0-beta.8",
     "lint-staged": "9.2.5"
   },
   "scripts": {
