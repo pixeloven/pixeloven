@@ -2,7 +2,10 @@ import { mergeOptions } from "@pixeloven-core/common";
 import { createOrEmptyDir } from "@pixeloven-core/filesystem";
 import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
-import { FileReporter } from "@pixeloven-webpack/file-reporter";
+import {
+    defaultFileReporterOptions as reportingOptions,
+    getFileReporter,
+} from "@pixeloven-webpack/file-reporter";
 import chalk from "chalk";
 import { Compiler as SingleCompiler, Stats } from "webpack";
 import { Options } from "./types";
@@ -13,6 +16,7 @@ import { Options } from "./types";
 const defaultBundlerOptions: Options = {
     clean: true,
     outputPath: "./dist",
+    reportingOptions,
 };
 
 /**
@@ -26,27 +30,12 @@ function getBundler(compiler: Compiler, options: Partial<Options> = {}) {
 }
 
 /**
- * Setup constants for bundle size
- * @todo should be part of the options
- * @description These sizes are pretty large. We"ll warn for bundles exceeding them.
- */
-const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
-const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
-
-/**
- * @todo Generalize this further so don't need to create abstractions for server, client etc. Requires compiler wrapper to be redone.
- *
+ * Wrapper for bundling application code
  * @param compiler
  * @param options
  */
 async function Bundler(compiler: Compiler, options: Options) {
-    const errorOnWarning = process.env.CI === "true";
-    const fileReporter = FileReporter({
-        errorOnWarning,
-        warnAfterBundleGzipSize: WARN_AFTER_BUNDLE_GZIP_SIZE,
-        warnAfterChunkGzipSize: WARN_AFTER_CHUNK_GZIP_SIZE,
-    });
-
+    const fileReporter = getFileReporter(options.reportingOptions);
     async function runner(webpackCompiler: SingleCompiler) {
         return new Promise<number>((resolve, reject) => {
             webpackCompiler.run((err: Error, stats: Stats) => {

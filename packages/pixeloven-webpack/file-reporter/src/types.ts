@@ -11,6 +11,8 @@ export interface FileReporterOptions {
     warnAfterChunkGzipSize: number;
 }
 
+export type PartialFileReporterOptions = Partial<FileReporterOptions>;
+
 export interface SimplifiedStats {
     errors: string[];
     hash?: string;

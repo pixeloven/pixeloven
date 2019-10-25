@@ -1,3 +1,4 @@
+import { mergeOptions } from "@pixeloven-core/common";
 import { logger } from "@pixeloven-core/logger";
 import chalk from "chalk";
 import filesize from "filesize";
@@ -8,9 +9,41 @@ import {
     getDifferenceLabel,
     measureFileSizes,
 } from "./helper";
-import { FileReporterOptions, FileSizes, SimplifiedStats } from "./types";
+import {
+    FileReporterOptions,
+    FileSizes,
+    PartialFileReporterOptions,
+    SimplifiedStats,
+} from "./types";
 
-function FileReporter(options: FileReporterOptions) {
+/**
+ * Setup constants for bundle size
+ * @todo should be part of the options
+ * @description These sizes are pretty large. We"ll warn for bundles exceeding them.
+ */
+const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
+const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
+
+/**
+ * Default FileReporter options
+ */
+export const defaultFileReporterOptions: FileReporterOptions = {
+    errorOnWarning: false,
+    warnAfterBundleGzipSize: WARN_AFTER_BUNDLE_GZIP_SIZE,
+    warnAfterChunkGzipSize: WARN_AFTER_CHUNK_GZIP_SIZE,
+};
+
+/**
+ * Create file reporter with default values
+ * @todo we could probably pass file reporter in to server and bundler instead of having it a hard dependency
+ * @param options
+ */
+export function getFileReporter(options: PartialFileReporterOptions = {}) {
+    const mergedOptions = mergeOptions(defaultFileReporterOptions, options);
+    return FileReporter(mergedOptions);
+}
+
+export function FileReporter(options: FileReporterOptions) {
     /**
      * @todo need to add better understand of errors for both of the below scenarios...
      *      status codes would be good for CLI error handling
@@ -60,10 +93,10 @@ function FileReporter(options: FileReporterOptions) {
                     logger.warn(stats.warnings);
                     logger.warn("compiled with warnings");
                 }
+            } else {
+                logger.success("compiled successfully");
             }
-            logger.success("compiled successfully");
         }
-        logger.info(`waiting...`);
     }
 
     function printFileStats(name: string, fileStats?: FileSizes | false) {
@@ -80,7 +113,9 @@ function FileReporter(options: FileReporterOptions) {
                 const maxRecommendedSize = isMainBundle
                     ? options.warnAfterBundleGzipSize
                     : options.warnAfterChunkGzipSize;
-                const isLarge = value > maxRecommendedSize;
+                const isLarge = maxRecommendedSize
+                    ? value > maxRecommendedSize
+                    : false;
                 const label = chalk.dim(`(${readableSize})`);
                 if (isLarge && isJsFile) {
                     if (options.errorOnWarning) {
@@ -142,5 +177,3 @@ function FileReporter(options: FileReporterOptions) {
         printStats,
     };
 }
-
-export { FileReporter };

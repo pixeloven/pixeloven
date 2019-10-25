@@ -1,7 +1,10 @@
 import { mergeOptions } from "@pixeloven-core/common";
 import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
-import { FileReporter } from "@pixeloven-webpack/file-reporter";
+import {
+    defaultFileReporterOptions as reportingOptions,
+    getFileReporter,
+} from "@pixeloven-webpack/file-reporter";
 import {
     createWebpackDevMiddleware,
     createWebpackHotClientMiddleware,
@@ -12,19 +15,19 @@ import {
 import express from "express";
 import fs from "fs";
 import path from "path";
-// import FileReporter from "./FileReporter";
-import { Config, Protocol } from "./types";
+import { Options, Protocol } from "./types";
 
 /**
  * Default compiler options
  */
-const defaultServerOptions: Config = {
+const defaultServerOptions: Options = {
     host: "localhost",
     ignored: /node_modules/,
     path: "/",
     poll: 500,
     port: 8080,
     protocol: Protocol.http,
+    reportingOptions,
 };
 
 /**
@@ -32,45 +35,39 @@ const defaultServerOptions: Config = {
  * @param compiler
  * @param options
  */
-function getServer(compiler: Compiler, options: Partial<Config> = {}) {
+function getServer(compiler: Compiler, options: Partial<Options> = {}) {
     const config = mergeOptions(defaultServerOptions, options);
     return Server(compiler, config);
 }
 
 /**
- * Setup constants for bundle size
- * @todo should be part of the options
- * @description These sizes are pretty large. We"ll warn for bundles exceeding them.
+ * Sanitize url
+ * @param item
  */
-const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
-const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
+const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
 
-async function Server(compiler: Compiler, config: Config) {
-    const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
-    /**
-     * @todo make configurable
-     */
-    const errorOnWarning = false;
-    const fileReporter = FileReporter({
-        errorOnWarning,
-        warnAfterBundleGzipSize: WARN_AFTER_BUNDLE_GZIP_SIZE,
-        warnAfterChunkGzipSize: WARN_AFTER_CHUNK_GZIP_SIZE,
-    });
+/**
+ * Wrapper for express dev server
+ * @param compiler
+ * @param options
+ */
+async function Server(compiler: Compiler, options: Options) {
+    const fileReporter = getFileReporter(options.reportingOptions);
     const baseUrl = normalizeUrl(
-        `${config.protocol}://${config.host}:${config.port}/${config.path}`,
+        `${options.protocol}://${options.host}:${options.port}/${options.path}`,
     );
     const staticAssetPath = path.resolve(process.cwd(), "public");
     const webpackDevMiddleware = createWebpackDevMiddleware(compiler, {
-        publicPath: config.path,
+        publicPath: options.path,
         watchOptions: {
-            ignored: config.ignored,
-            poll: config.poll,
+            ignored: options.ignored,
+            poll: options.poll,
         },
     });
     const webpackHotClientMiddleware = createWebpackHotClientMiddleware(
         compiler,
         {
-            publicPath: config.path,
+            publicPath: options.path,
         },
     );
     const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
@@ -95,7 +92,7 @@ async function Server(compiler: Compiler, config: Config) {
             error: error => {
                 logger.error(error.message);
             },
-            publicPath: config.path,
+            publicPath: options.path,
         },
     );
     return new Promise<number>((resolve, reject) => {
@@ -107,7 +104,7 @@ async function Server(compiler: Compiler, config: Config) {
                     `found "public" directory...`,
                     `setting up static file serving`,
                 ]);
-                app.use(config.path, express.static(staticAssetPath));
+                app.use(options.path, express.static(staticAssetPath));
             }
             logger.info(`mounting webpack development middleware`);
             app.use(webpackDevMiddleware);
@@ -117,7 +114,7 @@ async function Server(compiler: Compiler, config: Config) {
             logger.info(`mounting error handler`);
             app.use(errorHandler);
             logger.info(`---------- connecting development server ----------`);
-            app.listen(config.port, config.host, () => {
+            app.listen(options.port, options.host, () => {
                 logger.success(`development server is listening at ${baseUrl}`);
             });
             /**
@@ -130,7 +127,6 @@ async function Server(compiler: Compiler, config: Config) {
             });
             /**
              * @description Captured CTRL-C or exited for another reason
-             * @todo figure out why we can't do app.on for this
              */
             process.on("exit", () => {
                 logger.info(`development server is exiting`);
