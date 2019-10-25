@@ -69,14 +69,15 @@ async function FileReporter(options: FileReporterOptions) {
                     ? options.warnAfterBundleGzipSize
                     : options.warnAfterChunkGzipSize;
                 const isLarge = value > maxRecommendedSize;
+                const label = chalk.dim(`(${readableSize})`);
                 if (isLarge && isJsFile) {
                     if (options.errorOnWarning) {
-                        logger.error(`${key} (${readableSize})`);
+                        logger.error(`${key} ${label}`);
                     } else {
-                        logger.warn(`${key} (${readableSize})`);
+                        logger.warn(`${key} ${label}`);
                     }
                 } else {
-                    logger.info(`${key} (${readableSize})`);
+                    logger.info(`${key} ${label}`);
                 }
             }
         } else {
@@ -105,12 +106,7 @@ async function FileReporter(options: FileReporterOptions) {
                 const previousSize = previous.sizes.get(key);
                 if (previousSize) {
                     const difference = getDifferenceLabel(value, previousSize);
-                    const readableSize = filesize(value);
-                    if (difference) {
-                        logger.info(`${key} (${readableSize}) ${difference}`);
-                    } else {
-                        logger.info(`${key} (${readableSize}) (no change)`);
-                    }
+                    logger.info(`${key} ${difference}`);
                 }
             }
         } else {

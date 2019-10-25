@@ -6,8 +6,6 @@ import recursive from "recursive-readdir";
 
 import { FileSizeMap, FileSizes } from "./types";
 
-const FIFTY_KILOBYTES = 1024 * 50;
-
 function canReadAsset(asset: string) {
     return /\.(js|css)$/.test(asset);
 }
@@ -22,20 +20,17 @@ function removeFileNameHash(buildFolder: string, fileName: string) {
         );
 }
 
-// Input: 1024, 2048
-// Output: "(+1 KB)"
 export function getDifferenceLabel(currentSize: number, previousSize: number) {
     const difference = currentSize - previousSize;
     const fileSize = !Number.isNaN(difference) ? filesize(difference) : 0;
-    if (difference >= FIFTY_KILOBYTES) {
-        return chalk.red("+" + fileSize);
-    } else if (difference < FIFTY_KILOBYTES && difference > 0) {
-        return chalk.yellow("+" + fileSize);
+    if (difference > 0) {
+        return (
+            chalk.dim("(") + chalk.redBright(`+${fileSize}`) + chalk.dim(")")
+        );
     } else if (difference < 0) {
-        return chalk.green("" + fileSize);
-    } else {
-        return "";
+        return chalk.dim("(") + chalk.green(`${fileSize}`) + chalk.dim(")");
     }
+    return chalk.dim(`(no change)`);
 }
 
 export function measureFileSizes(root: string) {
