@@ -1,6 +1,6 @@
-import getBundler from "@pixeloven-webpack/bundler";
+import { getBundler } from "@pixeloven-webpack/bundler";
 import getCompiler from "@pixeloven-webpack/compiler";
-import getServer from "@pixeloven-webpack/server";
+import { getServer } from "@pixeloven-webpack/server";
 import {
     AddonWebpackToolbox,
     WebpackExtensionOptions,
@@ -20,8 +20,7 @@ export default (toolbox: AddonWebpackToolbox) => {
                     });
                 }
                 case WebpackExtensionType.start: {
-                    const server = getServer(compiler, options.serverOptions);
-                    return await server.start();
+                    return await getServer(compiler, options.serverOptions);
                 }
             }
         } catch (err) {

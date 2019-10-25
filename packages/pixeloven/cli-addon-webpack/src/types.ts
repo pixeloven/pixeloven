@@ -1,5 +1,5 @@
-import { Config as CompilerConfig } from "@pixeloven-webpack/config";
-import { Config as ServerConfig } from "@pixeloven-webpack/server";
+import { Config as CompilerOptions } from "@pixeloven-webpack/config";
+import { Options as ServerOptions } from "@pixeloven-webpack/server";
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
 export enum ErrorCode {
@@ -19,8 +19,8 @@ export enum WebpackExtensionType {
 
 export interface WebpackExtensionOptions {
     type: WebpackExtensionType;
-    compilerOptions: CompilerConfig;
-    serverOptions?: ServerConfig;
+    compilerOptions: CompilerOptions;
+    serverOptions?: ServerOptions;
 }
 
 /* Note: keep this enum up to date matching the options interface above for runtime argument checking */

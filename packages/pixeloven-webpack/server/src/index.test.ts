@@ -1,5 +1,5 @@
 import "jest";
-import getServer, { Server } from "./index";
+import { getServer, Server } from "./index";
 
 describe("@pixeloven-webpack/server", () => {
     describe("index", () => {

@@ -1,5 +1,5 @@
 import "jest";
-import getBundler, { Bundler } from "./index";
+import { Bundler, getBundler } from "./index";
 
 describe("@pixeloven-webpack/bundler", () => {
     describe("index", () => {
