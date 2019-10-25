@@ -6,13 +6,14 @@ export interface FileSizes {
 }
 
 export interface FileReporterOptions {
-    outputPath: string;
     errorOnWarning: boolean;
     warnAfterBundleGzipSize: number;
     warnAfterChunkGzipSize: number;
 }
 
-export interface Messages {
+export interface SimplifiedStats {
     errors: string[];
+    hash?: string;
+    time?: number;
     warnings: string[];
 }

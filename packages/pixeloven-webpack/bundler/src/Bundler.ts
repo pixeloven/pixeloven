@@ -41,10 +41,8 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
  */
 async function Bundler(compiler: Compiler, options: Options) {
     const errorOnWarning = process.env.CI === "true";
-    const outputPath = options.outputPath;
-    const fileReporter = await FileReporter({
+    const fileReporter = FileReporter({
         errorOnWarning,
-        outputPath,
         warnAfterBundleGzipSize: WARN_AFTER_BUNDLE_GZIP_SIZE,
         warnAfterChunkGzipSize: WARN_AFTER_CHUNK_GZIP_SIZE,
     });
@@ -56,7 +54,8 @@ async function Bundler(compiler: Compiler, options: Options) {
                     reject(err);
                 }
                 const messages = fileReporter.fromStats(stats);
-                resolve(fileReporter.printMessages(messages));
+                fileReporter.printStats(messages);
+                resolve(0);
             });
         });
     }
@@ -93,7 +92,9 @@ async function Bundler(compiler: Compiler, options: Options) {
 
     try {
         // Run stats on old build if it exists
-        const previousFileSizes = await fileReporter.fromFileSystem();
+        const previousFileSizes = await fileReporter.fromFileSystem(
+            options.outputPath,
+        );
         fileReporter.printFileStats("previous", previousFileSizes);
 
         // Clean up old build
@@ -108,7 +109,9 @@ async function Bundler(compiler: Compiler, options: Options) {
         statusCode += await server();
 
         // Run stats on new build if it exists
-        const latestFileSizes = await fileReporter.fromFileSystem();
+        const latestFileSizes = await fileReporter.fromFileSystem(
+            options.outputPath,
+        );
         fileReporter.printFileStats("latest", latestFileSizes);
 
         // Compare the two builds if they exist

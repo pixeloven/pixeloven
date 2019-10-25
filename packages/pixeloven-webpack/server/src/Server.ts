@@ -1,6 +1,7 @@
 import { mergeOptions } from "@pixeloven-core/common";
 import { logger } from "@pixeloven-core/logger";
 import { Compiler } from "@pixeloven-webpack/compiler";
+import { FileReporter } from "@pixeloven-webpack/file-reporter";
 import {
     createWebpackDevMiddleware,
     createWebpackHotClientMiddleware,
@@ -11,7 +12,7 @@ import {
 import express from "express";
 import fs from "fs";
 import path from "path";
-import FileReporter from "./FileReporter";
+// import FileReporter from "./FileReporter";
 import { Config, Protocol } from "./types";
 
 /**
@@ -36,8 +37,25 @@ function getServer(compiler: Compiler, options: Partial<Config> = {}) {
     return Server(compiler, config);
 }
 
+/**
+ * Setup constants for bundle size
+ * @todo should be part of the options
+ * @description These sizes are pretty large. We"ll warn for bundles exceeding them.
+ */
+const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
+const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
+
 async function Server(compiler: Compiler, config: Config) {
     const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
+    /**
+     * @todo make configurable
+     */
+    const errorOnWarning = false;
+    const fileReporter = FileReporter({
+        errorOnWarning,
+        warnAfterBundleGzipSize: WARN_AFTER_BUNDLE_GZIP_SIZE,
+        warnAfterChunkGzipSize: WARN_AFTER_CHUNK_GZIP_SIZE,
+    });
     const baseUrl = normalizeUrl(
         `${config.protocol}://${config.host}:${config.port}/${config.path}`,
     );
@@ -59,10 +77,8 @@ async function Server(compiler: Compiler, config: Config) {
         compiler,
         {
             done: stats => {
-                const fileReporter = FileReporter({
-                    name: "server",
-                });
-                fileReporter.fromStats(stats);
+                const messages = fileReporter.fromStats(stats);
+                fileReporter.printStats(messages);
             },
             error: error => {
                 logger.error(error.message);
@@ -73,10 +89,8 @@ async function Server(compiler: Compiler, config: Config) {
         compiler,
         {
             done: stats => {
-                const fileReporter = FileReporter({
-                    name: "client",
-                });
-                fileReporter.fromStats(stats);
+                const messages = fileReporter.fromStats(stats);
+                fileReporter.printStats(messages);
             },
             error: error => {
                 logger.error(error.message);

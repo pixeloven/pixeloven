@@ -2,56 +2,68 @@ import { logger } from "@pixeloven-core/logger";
 import chalk from "chalk";
 import filesize from "filesize";
 import path from "path";
-import formatWebpackMessages from "react-dev-utils/formatWebpackMessages";
 import { Stats } from "webpack";
-import { getDifferenceLabel, measureFileSizes } from "./helper";
-import { FileReporterOptions, FileSizes, Messages } from "./types";
+import {
+    formatWebpackMessages,
+    getDifferenceLabel,
+    measureFileSizes,
+} from "./helper";
+import { FileReporterOptions, FileSizes, SimplifiedStats } from "./types";
 
-async function FileReporter(options: FileReporterOptions) {
-    // @todo reporter should be able to report raw data from either source and then have printing functionality
-
-    if (options.errorOnWarning) {
-        logger.info("treating warnings as errors");
-    }
-
-    async function fromFileSystem() {
+function FileReporter(options: FileReporterOptions) {
+    /**
+     * @todo need to add better understand of errors for both of the below scenarios...
+     *      status codes would be good for CLI error handling
+     */
+    async function fromFileSystem(outputPath: string) {
         try {
-            return await measureFileSizes(options.outputPath);
+            return await measureFileSizes(outputPath);
         } catch (err) {
             return false;
         }
     }
 
     /**
-     * @todo we need to own format webpack so we can control output and reduce deps
-     * @todo Would like this and the filesystem one to be closely inline
-     * @todo the from functions should return or throw errors. Bundler returns status based on these
-     *
-     * @param stats
+     * @todo need to add better understand of errors for both of the below scenarios...
+     *      status codes would be good for CLI error handling
      */
     function fromStats(stats: Stats) {
-        const messages: Messages = formatWebpackMessages(
-            stats.toJson("verbose"),
-        );
-        return messages;
+        try {
+            return formatWebpackMessages(stats.toJson("verbose"));
+        } catch (err) {
+            return false;
+        }
     }
 
-    function printMessages(messages: Messages) {
-        if (messages.errors.length) {
-            logger.error(messages.errors.join("\n\n"));
-            return 1;
-        }
-        if (options.errorOnWarning) {
-            if (messages.warnings.length) {
-                logger.error(messages.warnings.join("\n\n"));
-                return 1;
+    function printStats(stats?: SimplifiedStats | false) {
+        if (stats) {
+            if (options.errorOnWarning) {
+                logger.info("treating warnings as errors");
             }
+            if (stats.hash && stats.time) {
+                logger.info(
+                    `webpack completed build ${stats.hash} in ${stats.time}ms`,
+                );
+            } else if (stats.time) {
+                logger.info(`webpack completed build in ${stats.time}ms`);
+            } else {
+                logger.info(`webpack completed build`);
+            }
+            if (stats.errors.length) {
+                logger.error(stats.errors);
+                logger.error("compiled with errors");
+            } else if (stats.warnings.length) {
+                if (options.errorOnWarning) {
+                    logger.error(stats.warnings);
+                    logger.error("compiled with errors");
+                } else {
+                    logger.warn(stats.warnings);
+                    logger.warn("compiled with warnings");
+                }
+            }
+            logger.success("compiled successfully");
         }
-        if (messages.warnings.length) {
-            logger.error(messages.warnings.join("\n\n"));
-        }
-        logger.success("compiled successfully");
-        return 0;
+        logger.info(`waiting...`);
     }
 
     function printFileStats(name: string, fileStats?: FileSizes | false) {
@@ -127,7 +139,7 @@ async function FileReporter(options: FileReporterOptions) {
         fromStats,
         printFileStats,
         printFileStatsComparison,
-        printMessages,
+        printStats,
     };
 }
 
