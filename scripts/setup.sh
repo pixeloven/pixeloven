@@ -2,7 +2,7 @@
 
 #################################################
 # SETUP: Attempts to setup the enviroment with 
-#           all the requirements needed for SSR.
+#           all the requirements needed for PO.
 #################################################
 
 . $(pwd)/scripts/shared/logger.sh
