@@ -25,7 +25,7 @@ This project was born from a small collective effort within ***GoFundMe*** with 
 For this project to see continued success we need your help. **Join us and start coding!** :heart:
 
 ## Getting Started
-Please review the documents below and if you have questions seek us out  on Slack [#pixeloven](https://gofundme.slack.com/messages/C4H59S97D).
+Please review the documents below and if you have questions seek us out  on Slack [#pixeloven](https://pixelovenworkspace.slack.com/messages/CJ3B566Q2).
 
 ## Contribution
 
