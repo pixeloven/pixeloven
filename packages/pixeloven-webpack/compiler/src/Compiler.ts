@@ -20,14 +20,12 @@ class Compiler {
      * @param config
      */
     public static create(configs: Configuration[]) {
-        if (!configs.find(config => config.name === Name.client)) {
+        if (
+            !configs.find(config => config.name === Name.client) &&
+            !configs.find(config => config.name === Name.server)
+        ) {
             throw Error(
-                `Cannot find configuration property "name" with value "client"`,
-            );
-        }
-        if (!configs.find(config => config.name === Name.server)) {
-            throw Error(
-                `Cannot find configuration property "name" with value "server"`,
+                `Cannot find configuration property "name" with value  of "client" or "server". Please provide an entry for Webpack to target`,
             );
         }
         return new Compiler(configs);
