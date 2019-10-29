@@ -20,16 +20,18 @@ class Compiler {
      * @param config
      */
     public static create(configs: Configuration[]) {
-        if (!configs.find(config => config.name === Name.client)) {
+        if (!configs.length) {
             throw Error(
-                `Cannot find configuration property "name" with value "client"`,
+                `No webpack configuration provided. Please provide an entry for Webpack to target`,
             );
         }
-        if (!configs.find(config => config.name === Name.server)) {
-            throw Error(
-                `Cannot find configuration property "name" with value "server"`,
-            );
-        }
+        configs.forEach(config => {
+            if (!config.name || !Name.hasOwnProperty(config.name)) {
+                throw Error(
+                    `Cannot find configuration property "name" with value  of "client" or "server". Please provide an entry for Webpack to target`,
+                );
+            }
+        });
         return new Compiler(configs);
     }
 

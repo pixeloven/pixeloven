@@ -12,12 +12,5 @@
         "@server/*": ["src/server/*"],
         "@shared/*": ["src/shared/*"]
       }
-  },
-  "exclude": [
-      "./coverage",
-      "./dist",
-      "./docs",
-      "./node_modules",
-      "./stats"
-  ]
+  }
 }

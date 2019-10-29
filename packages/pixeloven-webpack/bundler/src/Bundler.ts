@@ -50,8 +50,8 @@ async function Bundler(compiler: Compiler, options: Options) {
     }
 
     async function client() {
-        logger.info(`starting ${chalk.bold("client")} build`);
         if (compiler.client) {
+            logger.info(`starting ${chalk.bold("client")} build`);
             if (compiler.hasServerCodePath) {
                 logger.info(
                     `${chalk.bold("client")} code path has been discovered`,
@@ -65,8 +65,8 @@ async function Bundler(compiler: Compiler, options: Options) {
     }
 
     async function server() {
-        logger.info(`starting ${chalk.bold("server")} build`);
         if (compiler.server) {
+            logger.info(`starting ${chalk.bold("server")} build`);
             if (compiler.hasServerCodePath) {
                 logger.info(
                     `${chalk.bold("server")} code path has been discovered`,
