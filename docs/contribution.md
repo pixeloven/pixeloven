@@ -7,6 +7,7 @@ This document is meant to highlight best practices for contributing to the gener
 - [Recommended Development Approach](#recommended-development-approach)
 - [Package Development](#package-development)
 - [Committing](#committing)
+- [Pull Requests](#pull-requests)
 
 ## Requirements
 
@@ -81,7 +82,7 @@ lerna link
 For code quality checks and formatting the following *scripts* can be run.
 ```
 lerna run lint --scope "{NAME}"
-erna run pretty --scope "{NAME}"
+lerna run pretty --scope "{NAME}"
 lerna run test --scope "{NAME}"
 ```
 Once again other variations of these *scripts* may exist. Please review the `package.json` in the root of this project for shortcuts. 
@@ -92,7 +93,7 @@ It is highly encourage to read this [documentation](https://github.com/lerna/ler
 > Note commit formatting is helpful for us for generating a [CHANGELOG](CHANGELOG.md) so we know what goes into each tagged release. The actual version doesn't matter as much as tracking our changes in a highly discoverable way.
 
 ### Commit Linting
-When executing a standard commit `git commit` the a pre-commit hook will check the format of the message `-m`.
+When executing a standard commit `git commit` the pre-commit hook will check the format of the message `-m`.
 
 Invalid commit might look like:
 ```bash
@@ -126,3 +127,11 @@ chore:    Other changes that don't modify src or test files
 revert:   Reverts a previous commit 
 ```
 A few more options will be presented to help guide your commit.
+
+## Pull Requests
+
+Keep in mind that this project is a mono-repo design. If you encounter any issue when running scripts it is recommended to run `yarn clean` at the root of this project and re run the setup above.
+
+Make both your branches and commits descriptive. Ensure "lerna" commands such as `lerna run build` and `lerna run test` work properly before submitting a pull request.
+
+Finally send a [GitHub Pull Request](https://github.com/pixeloven/pixeloven/compare?expand=1) with a clear list of what you've done (read more [about pull requests](https://help.github.com/articles/about-pull-requests/)). Make sure all of your commits are atomic (one feature per commit).
