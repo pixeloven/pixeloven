@@ -8,4 +8,5 @@ Below is documentation on some general integration best practices. This section 
 ## Table of Contents
 
 - [Developing components](./components.md)
+- [File system and structure](./file-system-and-structure.md)
 - [Working with libraries](./working-with-libraries.md)
