@@ -8,45 +8,43 @@ This project is a `mono-repo` designed to contain several packages that in combi
 
 ## Table of Contents
 
-- [Requirements](#requirements)
-- [Integration](#integration)
+- [Statement](#statement)
+- [Getting Started](#getting-started)
 - [Contribution](#contribution)
+- [Integration](#integration)
 - [Features](#features)
 - [Improvements](#improvements)
 - [Our Commitment](#our-commitment)
 
-## Requirements
-This project has the following requirements for development. Keep in mind that the versions provided are a recommendation while other versions may be compatible they are untested.
-- Node >= `8.0.0` 
-- Yarn >= `1.0.0`
+## Statement
 
-## Integration
+This project was born from a small collective effort within ***GoFundMe*** with the purpose to abstract common configuration and infrastructure used in the creation of *isomorphic* React applications.
 
-> ***TBD*** Link to each package here.
+***PixelOven*** is a development CLI that gets inspiration form amazing work done by the [create-react-app project](https://github.com/facebook/create-react-app) and other similar projects. Our goal is to build a highly extensible CLI that focuses on testability, type safety and a plugin/addon first approach.
 
-For existing projects please review our [integration guide](./integration.md) for more details.
+For this project to see continued success we need your help. **Join us and start coding!** :heart:
+
+## Getting Started
+Please review the documents below and if you have questions seek us out  on Slack [#pixeloven](https://pixelovenworkspace.slack.com/messages/CJ3B566Q2).
 
 ## Contribution
 
 > ***TBD*** Link to template directory with instructions for creating new template.
 
-This project was born from a small collective effort within ***GoFundMe*** with the purpose to abstract common configuration and infrastructure used in the creation of *isomorphic* React applications. However, for this project to be even more successful we need your help. **Join us and start coding!** :heart:
+Please consider reviewing our [contribution guide](./docs/contribution.md) for details about what **PixelOven** is and how to contribute to it's development.
 
-Please consider reviewing our [contribution guide](./contribution.md) for more details.
+## Integration
+
+> ***TBD*** Link to each package here.
+
+We also have a [series of guides](./docs/guides/index.md) to help you get started with using PixelOven in your projects.
 
 ## Features
 
 > ***TBD*** Add feature summary plus below might be inaccurate
 
-### Git Hooks
-
-There is already set a `precommit` hook for formatting your code with Prettier :nail_care:
-
-By default, there are two disabled git hooks. They're set up when you run the `npm run semantic-release-prepare` script. They make sure:
- - You follow a [conventional commit message](https://github.com/conventional-changelog/conventional-changelog)
- - Your build is not going to fail in [Travis](https://travis-ci.org) (or your CI server), since it's run locally before `git push`
-
-This makes more sense in combination with [automatic releases](#automatic-releases).
+## Our Commitment
+We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./docs/code-of-conduct.md) to help us with our commitment. Thank you!
 
 ## Improvements
 Below are just some of the up coming ideas for improvements.
@@ -63,9 +61,6 @@ Below are just some of the up coming ideas for improvements.
 * Load env for storybook too.
 * handle precommit for each package https://github.com/sudo-suhas/lint-staged-multi-pkg
 * https://github.com/atlassian/lerna-semantic-release
-
-## Our Commitment
-We are committed to providing a safe place for everyone. Please review our [code of conduct guidelines](./code-of-conduct.md) to help us with our commitment. Thank you!
 
 ## Planned v6 Release
 * Restructure with scoped namespaces. Also create a deprecated section so we can redirect people.
