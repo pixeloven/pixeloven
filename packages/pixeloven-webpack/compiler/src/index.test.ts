@@ -1,4 +1,3 @@
-import { Mode, Name, Target } from "@pixeloven-core/env";
 import "jest";
 import getCompiler, { Compiler } from "./index";
 
@@ -12,6 +11,11 @@ describe("@pixeloven-webpack/compiler", () => {
         });
 
         describe("Compiler", () => {
+            it("should throw error if no configurations are provided.", () => {
+                expect(() => {
+                    Compiler.create([]);
+                }).toThrow(Error);
+            });
             it("should throw an error when passed an invalid name", () => {
                 expect(() => {
                     Compiler.create([{ name: "foo" }]);
@@ -34,50 +38,9 @@ describe("@pixeloven-webpack/compiler", () => {
         });
 
         describe("getCompiler", () => {
-            it("should throw an error due to hard coded client and server index files", () => {
+            it("should throw error if no configurations are provided.", () => {
                 expect(() => {
                     getCompiler();
-                }).toThrow(Error);
-            });
-            it("should throw an error due to hard coded client and server index files", () => {
-                expect(() => {
-                    getCompiler({
-                        compilers: [],
-                        outputPath: "./dist",
-                        profiling: false,
-                        publicPath: "/",
-                        sourceMap: false,
-                        stats: {
-                            enabled: false,
-                            host: "localhost",
-                            outputDir: "./stats",
-                            port: 8081,
-                        },
-                    });
-                }).toThrow(Error);
-            });
-            it("should throw an error due to hard coded client and server index files", () => {
-                expect(() => {
-                    getCompiler({
-                        compilers: [
-                            {
-                                entry: "./src/index.ts",
-                                mode: Mode.production,
-                                name: Name.client,
-                                target: Target.web,
-                            },
-                        ],
-                        outputPath: "./dist",
-                        profiling: false,
-                        publicPath: "/",
-                        sourceMap: false,
-                        stats: {
-                            enabled: false,
-                            host: "localhost",
-                            outputDir: "./stats",
-                            port: 8081,
-                        },
-                    });
                 }).toThrow(Error);
             });
         });

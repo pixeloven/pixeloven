@@ -35,6 +35,11 @@
       "target": "es5"
   },
   "exclude": [
+      "./coverage",
+      "./dist",
+      "./docs",
+      "./node_modules",
+      "./stats",
       "**/*.stories.tsx",
       "**/*.test.tsx",
       "**/*.stories.ts",

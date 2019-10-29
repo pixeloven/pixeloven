@@ -20,6 +20,11 @@ class Compiler {
      * @param config
      */
     public static create(configs: Configuration[]) {
+        if (!configs.length) {
+            throw Error(
+                `No webpack configuration provided. Please provide an entry for Webpack to target`,
+            );
+        }
         configs.forEach(config => {
             if (!config.name || !Name.hasOwnProperty(config.name)) {
                 throw Error(

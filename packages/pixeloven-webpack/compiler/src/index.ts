@@ -7,7 +7,6 @@ import Compiler from "./Compiler";
  * Default compiler options
  */
 const defaultCompilerOptions: Config = {
-    compilers: undefined,
     outputPath: "./dist",
     profiling: false,
     publicPath: "/",
@@ -26,7 +25,6 @@ const defaultCompilerOptions: Config = {
  */
 function getCompiler(options: Partial<Config> = {}) {
     const { compilers } = options;
-    delete options.compilers;
     const config = mergeOptions(defaultCompilerOptions, options);
     const compilerConfigs: Configuration[] = [];
 
