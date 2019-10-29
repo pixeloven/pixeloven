@@ -41,7 +41,7 @@ Run the following in the root directory to get a list of available cmds.
 ```
 yarn run
 ```
-These shortcuts are defined to make development easier. You do the same cmd inside of the individual application and package directories to see their specific cmds. Beyond that it is recommended review (lerna documentation)[https://github.com/lerna/lerna].
+These shortcuts are defined to make development easier. Run the same command inside of the individual application and package directories to see their specific cmds. Beyond that it is recommended review (lerna documentation)[https://github.com/lerna/lerna].
 
 ## Docker setup
 > Note the following steps assume all cmds are run within `pixeloven`. This is also WIP and will be updated as needed.
