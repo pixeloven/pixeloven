@@ -4,8 +4,7 @@ This document is general advice for creating new components and utilities.
 ## Table of Contents
 
 - [Community definitions](#community-definitions)
-- [Declaring definitions](#ceclaring-definitions)
-- [Declaring definitions](#referencing-source-files)
+- [Declaration files](#declaration-files)
 - [Un-typed Libraries](#referencing-source-files)
 - [Turning off type-checking](#turning-off-type-checking)
 
@@ -14,7 +13,7 @@ Generally the TypeScript community has or will define definitions for lots of sc
 
 If that fails you can also search NPM repository for `@types/*` where `*` is the package name. As a last resort before moving to the below options is to search google. :)
 
-## Declaration Files
+## Declaration files
 Declaring definitions can be necessary for when a module is un-typed or when using an external API.
 
 > Note this is the right way to import an un-typed module or file. However, it is a tedious process and so it is recommended to first search for types from the community (shown above) or if too cumbersome do what is show below in the next sub sections.
