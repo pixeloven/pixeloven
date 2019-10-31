@@ -31,6 +31,12 @@ interface PluginBundleAnalyzerOptions {
 }
 
 export function getSetup(options: Options) {
+    const { ifClient, ifDevelopment, ifProduction, ifServer } = getUtils({
+        mode: options.mode,
+        name: options.name,
+        target: options.target,
+    });
+
     /**
      * Describe source pathing in dev tools
      * @param info
@@ -52,16 +58,6 @@ export function getSetup(options: Options) {
             flexbox: "no-2009",
         }),
     ];
-
-    const { ifClient, ifDevelopment, ifProduction, ifServer } = getUtils({
-        mode: options.mode,
-        name: options.name,
-        target: options.target,
-    });
-
-    function getDevTool() {
-        return options.sourceMap ? "eval-source-map" : false;
-    }
 
     function getEntry() {
         return ifClient(
@@ -172,6 +168,9 @@ export function getSetup(options: Options) {
     }
 
     function getOutput() {
+        /**
+         * @todo start here but otherwise the build should be similar to server except with assets
+         */
         return ifClient(
             {
                 chunkFilename: ifProduction(
@@ -424,7 +423,6 @@ export function getSetup(options: Options) {
     }
 
     return {
-        getDevTool,
         getEntry,
         getExternals,
         getMode,

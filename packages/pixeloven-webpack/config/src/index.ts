@@ -20,7 +20,6 @@ function getConfig(options: Options) {
     });
 
     const {
-        getDevTool,
         getEntry,
         getExternals,
         getMode,
@@ -162,7 +161,7 @@ function getConfig(options: Options) {
      */
     return removeEmpty({
         bail: ifProduction(),
-        devtool: getDevTool(),
+        devtool: options.sourceMap ? "eval-source-map" : false,
         entry: getEntry(),
         externals: getExternals(),
         mode: getMode(),
