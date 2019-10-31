@@ -13,14 +13,8 @@ import path from "path";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TerserPlugin from "terser-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
-import {
-    DevtoolModuleFilenameTemplateInfo,
-    Options as WebpackOptions,
-    Resolve,
-    RuleSetRule,
-} from "webpack";
+import { Resolve, RuleSetRule } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import webpackNodeExternals from "webpack-node-externals";
 import { Options } from "../types";
 
 interface PluginBundleAnalyzerOptions {
@@ -31,26 +25,11 @@ interface PluginBundleAnalyzerOptions {
 }
 
 export function getSetup(options: Options) {
-    const { ifClient, ifDevelopment, ifProduction, ifServer } = getUtils({
+    const { ifClient, ifDevelopment, ifProduction } = getUtils({
         mode: options.mode,
         name: options.name,
         target: options.target,
     });
-
-    /**
-     * Describe source pathing in dev tools
-     * @param info
-     */
-    const devtoolModuleFilenameTemplate = (
-        info: DevtoolModuleFilenameTemplateInfo,
-    ) => {
-        if (ifProduction()) {
-            return path
-                .relative(resolveSourceRoot(), info.absoluteResourcePath)
-                .replace(/\\/g, "/");
-        }
-        return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
-    };
 
     const postCssPlugin = () => [
         require("postcss-flexbugs-fixes"),
@@ -60,6 +39,9 @@ export function getSetup(options: Options) {
     ];
 
     function getEntry() {
+        /**
+         * @todo library -- here -- make a bit more configurable
+         */
         return ifClient(
             {
                 main: removeEmpty([
@@ -77,20 +59,6 @@ export function getSetup(options: Options) {
                 ]),
             },
             [resolvePath(options.entry)],
-        );
-    }
-
-    function getExternals() {
-        return ifServer(
-            [
-                // Exclude from local node_modules dir
-                webpackNodeExternals(),
-                // Exclude from file - helpful for lerna packages
-                webpackNodeExternals({
-                    modulesFromFile: true,
-                }),
-            ],
-            undefined,
         );
     }
 
@@ -167,40 +135,6 @@ export function getSetup(options: Options) {
         );
     }
 
-    function getOutput() {
-        /**
-         * @todo start here but otherwise the build should be similar to server except with assets
-         */
-        return ifClient(
-            {
-                chunkFilename: ifProduction(
-                    "static/js/[name].[contenthash].js",
-                    "static/js/[name].[hash].js",
-                ),
-                devtoolModuleFilenameTemplate,
-                filename: ifProduction(
-                    "static/js/[name].[contenthash].js",
-                    "static/js/[name].[hash].js",
-                ),
-                path: resolvePath(
-                    path.normalize(`${options.outputPath}/public`),
-                    false,
-                ), // @todo THis should not be hardcoded once we split client and server
-                publicPath: options.publicPath,
-            },
-            {
-                filename: "server.js",
-                libraryTarget: "commonjs2",
-                path: resolvePath(options.outputPath, false),
-                publicPath: options.publicPath,
-            },
-        );
-    }
-
-    function getMode() {
-        return ifProduction("production", "development");
-    }
-
     /**
      * All other files that aren't caught by the other loaders will go through this one.
      * @description "file" loader makes sure those assets get served by WebpackDevServer.
@@ -224,6 +158,9 @@ export function getSetup(options: Options) {
     }
 
     function getModuleSCSSLoader() {
+        /**
+         * @todo library -- here
+         */
         return ifClient(
             {
                 test: /\.(scss|sass|css)$/i,
@@ -325,15 +262,6 @@ export function getSetup(options: Options) {
         };
     }
 
-    /**
-     * @todo Might not need this anymore
-     */
-    function getPerformance(): WebpackOptions.Performance {
-        return {
-            hints: ifDevelopment("warning", false),
-        };
-    }
-
     function getPluginBundleAnalyzer(analyzer: PluginBundleAnalyzerOptions) {
         const statsFilename = path.resolve(
             `${analyzer.outputDir}/${options.name}-stats.json`,
@@ -375,25 +303,6 @@ export function getSetup(options: Options) {
         );
     }
 
-    function getNode() {
-        return ifClient(
-            {
-                child_process: "empty",
-                dgram: "empty",
-                dns: "mock",
-                fs: "empty",
-                http2: "empty",
-                module: "empty",
-                net: "empty",
-                tls: "empty",
-            },
-            {
-                __dirname: false,
-                __filename: false,
-            },
-        );
-    }
-
     /**
      * @description Tell webpack how to resolve files and modules
      * Prevents users from importing files from outside of src/ (or node_modules/).
@@ -424,15 +333,10 @@ export function getSetup(options: Options) {
 
     return {
         getEntry,
-        getExternals,
-        getMode,
         getModuleFileLoader,
         getModuleSCSSLoader,
         getModuleTypeScriptLoader,
-        getNode,
         getOptimization,
-        getOutput,
-        getPerformance,
         getPluginBundleAnalyzer,
         getPluginForkTsCheckerWebpack,
         getResolve,

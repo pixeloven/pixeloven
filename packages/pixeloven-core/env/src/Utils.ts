@@ -13,13 +13,19 @@ export function getUtils<T extends UtilOptions>(options: T) {
         }
         return isType;
     }
-
     function ifClient(): boolean;
     function ifClient<Y>(value: Y): Y | false;
     function ifClient<Y, N>(value: Y, alternate: N): Y | N;
     function ifClient<Y, N>(value?: Y, alternate?: N) {
         const isClient = options.name === Name.client;
         return ifType(isClient, value, alternate);
+    }
+    function ifNotClient(): boolean;
+    function ifNotClient<Y>(value: Y): Y | false;
+    function ifNotClient<Y, N>(value: Y, alternate: N): Y | N;
+    function ifNotClient<Y, N>(value?: Y, alternate?: N) {
+        const isNotClient = options.name !== Name.client;
+        return ifType(isNotClient, value, alternate);
     }
     function ifLibrary(): boolean;
     function ifLibrary<Y>(value: Y): Y | false;
@@ -68,6 +74,7 @@ export function getUtils<T extends UtilOptions>(options: T) {
         ifDevelopment,
         ifLibrary,
         ifNode,
+        ifNotClient,
         ifProduction,
         ifServer,
         ifWeb,

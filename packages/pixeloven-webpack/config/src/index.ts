@@ -1,10 +1,16 @@
 import { removeEmpty } from "@pixeloven-core/common";
 import { getUtils } from "@pixeloven-core/env";
+import { resolvePath, resolveSourceRoot } from "@pixeloven-core/filesystem";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import path from "path";
 import TimeFixPlugin from "time-fix-plugin";
-import webpack, { Configuration } from "webpack";
+import webpack, {
+    Configuration,
+    DevtoolModuleFilenameTemplateInfo,
+} from "webpack";
 import ManifestPlugin from "webpack-manifest-plugin";
+import webpackNodeExternals from "webpack-node-externals";
 import { CompilerConfig, Config, Options } from "./types";
 
 import { getSetup } from "./helpers/shared";
@@ -13,23 +19,41 @@ function getConfig(options: Options) {
     /**
      * Utility functions to help segment configuration based on environment
      */
-    const { ifProduction, ifDevelopment, ifClient } = getUtils({
+    const {
+        ifProduction,
+        ifDevelopment,
+        ifClient,
+        ifNotClient,
+        ifNode,
+        ifWeb,
+        ifServer,
+    } = getUtils({
         mode: options.mode,
         name: options.name,
         target: options.target,
     });
 
+    /**
+     * Describe source pathing in dev tools
+     * @param info
+     */
+    const devtoolModuleFilenameTemplate = (
+        info: DevtoolModuleFilenameTemplateInfo,
+    ) => {
+        if (ifProduction()) {
+            return path
+                .relative(resolveSourceRoot(), info.absoluteResourcePath)
+                .replace(/\\/g, "/");
+        }
+        return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
+    };
+
     const {
         getEntry,
-        getExternals,
-        getMode,
         getModuleFileLoader,
         getModuleSCSSLoader,
         getModuleTypeScriptLoader,
-        getNode,
         getOptimization,
-        getOutput,
-        getPerformance,
         getPluginBundleAnalyzer,
         getPluginForkTsCheckerWebpack,
         getResolve,
@@ -163,8 +187,18 @@ function getConfig(options: Options) {
         bail: ifProduction(),
         devtool: options.sourceMap ? "eval-source-map" : false,
         entry: getEntry(),
-        externals: getExternals(),
-        mode: getMode(),
+        externals: ifNotClient(
+            [
+                // Exclude from local node_modules dir
+                webpackNodeExternals(),
+                // Exclude from file - helpful for lerna packages
+                webpackNodeExternals({
+                    modulesFromFile: true,
+                }),
+            ],
+            undefined,
+        ),
+        mode: ifProduction("production", "development"),
         module: {
             rules: [
                 {
@@ -178,10 +212,51 @@ function getConfig(options: Options) {
             strictExportPresence: true,
         },
         name: options.name,
-        node: getNode(),
+        node: ifWeb(
+            {
+                child_process: "empty",
+                dgram: "empty",
+                dns: "mock",
+                fs: "empty",
+                http2: "empty",
+                module: "empty",
+                net: "empty",
+                tls: "empty",
+            },
+            {
+                __dirname: false,
+                __filename: false,
+            },
+        ),
         optimization: getOptimization(),
-        output: getOutput(),
-        performance: getPerformance(),
+        output: ifClient(
+            {
+                chunkFilename: ifProduction(
+                    "static/js/[name].[contenthash].js",
+                    "static/js/[name].[hash].js",
+                ),
+                devtoolModuleFilenameTemplate,
+                filename: ifProduction(
+                    "static/js/[name].[contenthash].js",
+                    "static/js/[name].[hash].js",
+                ),
+                // @todo This should just be the provided path and not hard-coded... the issue is we only accept a single --path
+                path: resolvePath(
+                    path.normalize(`${options.outputPath}/public`),
+                    false,
+                ),
+                publicPath: options.publicPath,
+            },
+            {
+                filename: ifServer("server.js", "index.js"),
+                libraryTarget: ifNode("commonjs2", "umd"),
+                path: resolvePath(options.outputPath, false),
+                publicPath: options.publicPath,
+            },
+        ),
+        performance: {
+            hints: ifDevelopment("warning", false),
+        },
         plugins,
         profile: options.profiling,
         resolve: getResolve(),
