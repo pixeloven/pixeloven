@@ -229,6 +229,7 @@ function getConfig(options: Options) {
             },
         ),
         optimization: getOptimization(),
+        // https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
         output: ifClient(
             {
                 chunkFilename: ifProduction(
@@ -248,7 +249,7 @@ function getConfig(options: Options) {
                 publicPath: options.publicPath,
             },
             {
-                filename: ifServer("server.js", "index.js"),
+                filename: ifServer("server.js", "lib/index.js"),
                 libraryTarget: ifNode("commonjs2", "umd"),
                 path: resolvePath(options.outputPath, false),
                 publicPath: options.publicPath,

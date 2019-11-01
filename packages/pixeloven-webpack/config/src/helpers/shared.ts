@@ -25,7 +25,7 @@ interface PluginBundleAnalyzerOptions {
 }
 
 export function getSetup(options: Options) {
-    const { ifClient, ifDevelopment, ifProduction } = getUtils({
+    const { ifClient, ifDevelopment, ifLibrary, ifProduction } = getUtils({
         mode: options.mode,
         name: options.name,
         target: options.target,
@@ -211,6 +211,9 @@ export function getSetup(options: Options) {
      * @todo Babel probably doesn't need to be run for server config
      */
     function getModuleTypeScriptLoader(): RuleSetRule {
+        /**
+         * @todo transpileOnly prevents declaration files from being output... but can the forked process handle this?
+         */
         return {
             include: resolveSourceRoot(),
             test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
@@ -253,10 +256,15 @@ export function getSetup(options: Options) {
                 },
                 {
                     loader: require.resolve("ts-loader"),
-                    options: {
-                        configFile: resolveTsConfig(),
-                        transpileOnly: true,
-                    },
+                    options: ifLibrary(
+                        {
+                            configFile: resolveTsConfig(),
+                        },
+                        {
+                            configFile: resolveTsConfig(),
+                            transpileOnly: true,
+                        },
+                    ),
                 },
             ],
         };
@@ -289,6 +297,9 @@ export function getSetup(options: Options) {
     }
 
     function getPluginForkTsCheckerWebpack() {
+        /**
+         * @todo library -- how can we handle this if ifLibrary
+         */
         return ifProduction(
             new ForkTsCheckerWebpackPlugin({
                 silent: true,
