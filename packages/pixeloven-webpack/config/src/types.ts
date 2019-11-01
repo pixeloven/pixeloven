@@ -1,27 +1,20 @@
 import { Mode, Name, Target } from "@pixeloven-core/env";
 
-interface Shared {
+interface Stats {
+    enabled: boolean;
+    host: string;
+    outputDir: string;
+    port: number;
+}
+
+export interface Options {
+    entry: string;
+    mode: Mode;
+    name: Name;
     outputPath: string;
     profiling: boolean;
     publicPath: string;
     sourceMap: boolean;
-    stats: {
-        enabled: boolean;
-        host: string;
-        outputDir: string;
-        port: number;
-    };
-}
-
-export interface CompilerConfig {
-    entry: string;
-    mode: Mode;
-    name: Name;
+    stats: Stats;
     target: Target;
 }
-
-export interface Config extends Shared {
-    compilers?: CompilerConfig[];
-}
-
-export interface Options extends Config, CompilerConfig {}
