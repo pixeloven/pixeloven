@@ -1,5 +1,4 @@
 /* tslint:disable no-any */
-import { Name } from "@pixeloven-core/env";
 import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { NextFunction, Request, Response } from "express";
@@ -54,11 +53,7 @@ function webpackReactAssetMiddleware(
 
     if (compiler.client) {
         try {
-            compiler.onDone(
-                Name.client,
-                onDoneHandler,
-                "hot react client middleware",
-            );
+            compiler.onDone("client", onDoneHandler);
             return dynamicMiddleware.handle();
         } catch (err) {
             if (config.error) {
