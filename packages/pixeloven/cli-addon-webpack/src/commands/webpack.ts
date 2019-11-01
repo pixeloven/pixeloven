@@ -11,6 +11,18 @@ import {
  * @param option
  */
 function breakOption(option: string | boolean) {
+    /**
+     * @todo validate pathing here
+     */
+    // if (compiler.hasClientCodePath) {
+    //     logger.info(
+    //         `${chalk.bold("client")} code path has been discovered`,
+    //     );
+    //     return runner(compiler.client);
+    // }
+    // logger.error(`compiler is set but code path could not be found`);
+
+    // path.resolve(process.cwd(), "./src/client")
     if (typeof option === "boolean") {
         return {};
     }

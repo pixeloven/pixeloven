@@ -1,6 +1,4 @@
 import { Name } from "@pixeloven-core/env";
-import fs from "fs";
-import path from "path";
 import webpack, {
     Compiler as SingleCompiler,
     Configuration,
@@ -8,7 +6,6 @@ import webpack, {
     Stats,
 } from "webpack";
 
-export type Type = "client" | "server";
 export type Handler = (stats: Stats) => void;
 
 class Compiler {
@@ -46,39 +43,12 @@ class Compiler {
     protected configs: Configuration[];
 
     /**
-     * Client code path
-     */
-    protected clientPath: string;
-
-    /**
-     * Server code path
-     */
-    protected serverPath: string;
-
-    /**
      * Construct compilers
      * @param configs
      */
     constructor(configs: Configuration[]) {
         this.configs = configs;
         this.combined = webpack(configs);
-
-        this.clientPath = path.resolve(process.cwd(), "./src/client");
-        this.serverPath = path.resolve(process.cwd(), "./src/server");
-    }
-
-    /**
-     * Checks if client code path exists
-     */
-    public get hasClientCodePath() {
-        return fs.existsSync(this.clientPath);
-    }
-
-    /**
-     * Checks if server code path exists
-     */
-    public get hasServerCodePath() {
-        return fs.existsSync(this.serverPath);
     }
 
     /**
@@ -87,6 +57,15 @@ class Compiler {
     public get client() {
         return this.combined.compilers.find(
             compiler => compiler.name === "client",
+        );
+    }
+
+    /**
+     * Attempts to find client compiler
+     */
+    public get library() {
+        return this.combined.compilers.find(
+            compiler => compiler.name === "library",
         );
     }
 
@@ -104,7 +83,7 @@ class Compiler {
      * @param type
      * @param callback
      */
-    public onDone(type: Type, handler: Handler) {
+    public onDone(name: Name, handler: Handler) {
         const time = Date.now();
 
         /**
@@ -115,11 +94,13 @@ class Compiler {
             if (!compiler) {
                 throw Error("Could not find compiler type.");
             }
-            compiler.hooks.done.tap(`${Compiler.id}-${type}-${time}`, hand);
+            compiler.hooks.done.tap(`${Compiler.id}-${name}-${time}`, hand);
         };
-        switch (type) {
+        switch (name) {
             case "client":
                 process(handler, this.client);
+            case "library":
+                process(handler, this.library);
             case "server":
                 process(handler, this.server);
         }

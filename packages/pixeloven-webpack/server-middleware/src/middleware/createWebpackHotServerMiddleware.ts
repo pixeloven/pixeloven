@@ -1,3 +1,4 @@
+import { Name } from "@pixeloven-core/env";
 import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import express, { Express, NextFunction, Request, Response } from "express";
@@ -97,7 +98,7 @@ function webpackHotServerMiddleware(
     }
 
     try {
-        compiler.onDone("server", onDoneHandler);
+        compiler.onDone(Name.server, onDoneHandler);
         return dynamicMiddleware.handle();
     } catch (err) {
         if (config.error) {

@@ -52,14 +52,15 @@ async function Bundler(compiler: Compiler, options: Options) {
     async function client() {
         if (compiler.client) {
             logger.info(`starting ${chalk.bold("client")} build`);
-            if (compiler.hasServerCodePath) {
-                logger.info(
-                    `${chalk.bold("client")} code path has been discovered`,
-                );
-                return runner(compiler.client);
-            }
-            logger.error(`compiler is set but code path could not be found`);
-            return 1;
+            return runner(compiler.client);
+        }
+        return 0;
+    }
+
+    async function library() {
+        if (compiler.library) {
+            logger.info(`starting ${chalk.bold("library")} build`);
+            return runner(compiler.library);
         }
         return 0;
     }
@@ -67,14 +68,7 @@ async function Bundler(compiler: Compiler, options: Options) {
     async function server() {
         if (compiler.server) {
             logger.info(`starting ${chalk.bold("server")} build`);
-            if (compiler.hasServerCodePath) {
-                logger.info(
-                    `${chalk.bold("server")} code path has been discovered`,
-                );
-                return runner(compiler.server);
-            }
-            logger.error(`compiler is set but code path could not be found`);
-            return 2;
+            return runner(compiler.server);
         }
         return 0;
     }
@@ -95,6 +89,7 @@ async function Bundler(compiler: Compiler, options: Options) {
         // Attempt build
         let statusCode = 0;
         statusCode += await client();
+        statusCode += await library();
         statusCode += await server();
 
         // Run stats on new build if it exists

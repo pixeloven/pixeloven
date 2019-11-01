@@ -1,4 +1,5 @@
 /* tslint:disable no-any */
+import { Name } from "@pixeloven-core/env";
 import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { NextFunction, Request, Response } from "express";
@@ -53,7 +54,7 @@ function webpackReactAssetMiddleware(
 
     if (compiler.client) {
         try {
-            compiler.onDone("client", onDoneHandler);
+            compiler.onDone(Name.client, onDoneHandler);
             return dynamicMiddleware.handle();
         } catch (err) {
             if (config.error) {
