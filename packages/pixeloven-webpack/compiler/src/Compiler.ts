@@ -83,7 +83,7 @@ class Compiler {
      * @param type
      * @param callback
      */
-    public onDone(name: Name, handler: Handler, description: string) {
+    public onDone(name: Name | string, handler: Handler) {
         const time = Date.now();
 
         /**
@@ -92,9 +92,7 @@ class Compiler {
          */
         const process = (hand: Handler, compiler?: SingleCompiler) => {
             if (!compiler) {
-                throw Error(
-                    `could not find compiler type ${name} for ${description}`,
-                );
+                throw Error(`could not find compiler type ${name}`);
             }
             compiler.hooks.done.tap(`${Compiler.id}-${name}-${time}`, hand);
         };

@@ -5,7 +5,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TimeFixPlugin from "time-fix-plugin";
 import webpack, { Configuration } from "webpack";
 import ManifestPlugin from "webpack-manifest-plugin";
-import { CompilerConfig, Config, Options } from "./types";
+import { Options } from "./types";
 
 import { getSetup } from "./helpers/shared";
 
@@ -191,4 +191,4 @@ function getConfig(options: Options) {
     }) as Configuration;
 }
 
-export { Config, CompilerConfig, getConfig };
+export { getConfig, Options };
