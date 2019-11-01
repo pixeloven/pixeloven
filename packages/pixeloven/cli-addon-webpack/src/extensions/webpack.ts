@@ -14,10 +14,7 @@ export default (toolbox: AddonWebpackToolbox) => {
             const compiler = getCompiler(options.compilerOptions);
             switch (options.type) {
                 case WebpackExtensionType.build: {
-                    return await getBundler(compiler, {
-                        clean: true,
-                        outputPath: options.compilerOptions.outputPath,
-                    });
+                    return await getBundler(compiler, options.bundlerOptions);
                 }
                 case WebpackExtensionType.start: {
                     return await getServer(compiler, options.serverOptions);

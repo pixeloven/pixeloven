@@ -67,6 +67,37 @@ export default {
             statsPort,
         } = parameters.options;
 
+        const globalDefaultEntry = "./src/index.ts";
+        const globalDefaultOutputPath = "./dist";
+
+        function getCompilerOptions(
+            type: string | boolean,
+            name: Name,
+            defaultEntry: string,
+            defaultTarget: Target,
+        ) {
+            const dynamicOptions = breakOption(type);
+            const mode = development ? Mode.development : Mode.production;
+            const entry = dynamicOptions.entry || defaultEntry;
+            const target = dynamicOptions.target || defaultTarget;
+            return {
+                entry,
+                mode,
+                name,
+                outputPath: globalDefaultOutputPath,
+                profiling: profile,
+                publicPath: path,
+                sourceMap,
+                stats: {
+                    enabled: stats || false,
+                    host: statsHost || "localhost",
+                    outputDir: statsDir || "./stats",
+                    port: statsPort || 8081,
+                },
+                target,
+            };
+        }
+
         if (!task) {
             pixelOven.invalidArgument(
                 "Please provide a task for Webpack to run.",
@@ -110,55 +141,43 @@ export default {
                     }
                 });
 
-                const compilers = [];
-                const mode = development ? Mode.development : Mode.production;
-                const defaultEntry = "./src/index.ts";
-
+                const compilerOptions = [];
                 if (!!client) {
-                    const clientOptions = breakOption(client);
-                    compilers.push({
-                        entry: clientOptions.entry || defaultEntry,
-                        mode,
-                        name: Name.client,
-                        target: clientOptions.target || Target.web,
-                    });
+                    const clientOptions = getCompilerOptions(
+                        client,
+                        Name.client,
+                        globalDefaultEntry,
+                        Target.web,
+                    );
+                    compilerOptions.push(clientOptions);
                 }
                 if (!!library) {
-                    const libraryOptions = breakOption(library);
-                    compilers.push({
-                        entry: libraryOptions.entry || defaultEntry,
-                        mode,
-                        name: Name.library,
-                        target: libraryOptions.target || Target.node,
-                    });
+                    const libraryOptions = getCompilerOptions(
+                        library,
+                        Name.library,
+                        globalDefaultEntry,
+                        Target.node,
+                    );
+                    compilerOptions.push(libraryOptions);
                 }
                 if (!!server) {
-                    const serverOptions = breakOption(server);
-                    compilers.push({
-                        entry: serverOptions.entry || defaultEntry,
-                        mode,
-                        name: Name.server,
-                        target: serverOptions.target || Target.node,
-                    });
+                    const serverOptions = getCompilerOptions(
+                        server,
+                        Name.server,
+                        globalDefaultEntry,
+                        Target.node,
+                    );
+                    compilerOptions.push(serverOptions);
                 }
-
                 /**
                  * @todo Need to type the all the options for this CLI
                  */
                 const statusCode = await webpack({
-                    compilerOptions: {
-                        compilers: compilers.length ? compilers : undefined,
-                        outputPath: "./dist",
-                        profiling: profile,
-                        publicPath: path,
-                        sourceMap,
-                        stats: {
-                            enabled: stats || false,
-                            host: statsHost || "localhost",
-                            outputDir: statsDir || "./stats",
-                            port: statsPort || 8081,
-                        },
+                    bundlerOptions: {
+                        clean: true,
+                        outputPath: globalDefaultOutputPath,
                     },
+                    compilerOptions,
                     serverOptions: {
                         host,
                         ignored,

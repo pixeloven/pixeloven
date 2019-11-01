@@ -1,4 +1,5 @@
-import { Config as CompilerOptions } from "@pixeloven-webpack/config";
+import { Options as BundlerOptions } from "@pixeloven-webpack/bundler";
+import { Options as CompilerOptions } from "@pixeloven-webpack/config";
 import { Options as ServerOptions } from "@pixeloven-webpack/server";
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
@@ -19,7 +20,8 @@ export enum WebpackExtensionType {
 
 export interface WebpackExtensionOptions {
     type: WebpackExtensionType;
-    compilerOptions: CompilerOptions;
+    bundlerOptions?: BundlerOptions;
+    compilerOptions: CompilerOptions[];
     serverOptions?: ServerOptions;
 }
 

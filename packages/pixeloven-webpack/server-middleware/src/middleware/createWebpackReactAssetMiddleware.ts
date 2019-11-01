@@ -54,7 +54,11 @@ function webpackReactAssetMiddleware(
 
     if (compiler.client) {
         try {
-            compiler.onDone(Name.client, onDoneHandler);
+            compiler.onDone(
+                Name.client,
+                onDoneHandler,
+                "hot react client middleware",
+            );
             return dynamicMiddleware.handle();
         } catch (err) {
             if (config.error) {

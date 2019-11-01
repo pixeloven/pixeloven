@@ -98,7 +98,7 @@ function webpackHotServerMiddleware(
     }
 
     try {
-        compiler.onDone(Name.server, onDoneHandler);
+        compiler.onDone(Name.server, onDoneHandler, "hot server middleware");
         return dynamicMiddleware.handle();
     } catch (err) {
         if (config.error) {

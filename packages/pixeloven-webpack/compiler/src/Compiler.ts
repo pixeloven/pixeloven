@@ -56,7 +56,7 @@ class Compiler {
      */
     public get client() {
         return this.combined.compilers.find(
-            compiler => compiler.name === "client",
+            compiler => compiler.name === Name.client,
         );
     }
 
@@ -65,7 +65,7 @@ class Compiler {
      */
     public get library() {
         return this.combined.compilers.find(
-            compiler => compiler.name === "library",
+            compiler => compiler.name === Name.library,
         );
     }
 
@@ -74,7 +74,7 @@ class Compiler {
      */
     public get server() {
         return this.combined.compilers.find(
-            compiler => compiler.name === "server",
+            compiler => compiler.name === Name.server,
         );
     }
 
@@ -83,7 +83,7 @@ class Compiler {
      * @param type
      * @param callback
      */
-    public onDone(name: Name, handler: Handler) {
+    public onDone(name: Name, handler: Handler, description: string) {
         const time = Date.now();
 
         /**
@@ -92,16 +92,18 @@ class Compiler {
          */
         const process = (hand: Handler, compiler?: SingleCompiler) => {
             if (!compiler) {
-                throw Error("Could not find compiler type.");
+                throw Error(
+                    `could not find compiler type ${name} for ${description}`,
+                );
             }
             compiler.hooks.done.tap(`${Compiler.id}-${name}-${time}`, hand);
         };
         switch (name) {
-            case "client":
+            case Name.client:
                 process(handler, this.client);
-            case "library":
+            case Name.library:
                 process(handler, this.library);
-            case "server":
+            case Name.server:
                 process(handler, this.server);
         }
     }
