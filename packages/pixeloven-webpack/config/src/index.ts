@@ -55,7 +55,10 @@ function getConfig(options: Options) {
              * @env development
              */
             ifDevelopment(new CaseSensitivePathsPlugin()),
-            new CircularDependencyPlugin(),
+            new CircularDependencyPlugin({
+                // exclude detection of files based on a RegExp
+                exclude: /node_modules/,
+            }),
             /**
              * Helps prevent hashes from updating if a bundle hasn't changed.
              * @env all
@@ -135,7 +138,10 @@ function getConfig(options: Options) {
              * @env development
              */
             ifDevelopment(new CaseSensitivePathsPlugin()),
-            new CircularDependencyPlugin(),
+            new CircularDependencyPlugin({
+                // exclude detection of files based on a RegExp
+                exclude: /node_modules/,
+            }),
             /**
              * Moment.js is an extremely popular library that bundles large locale files
              * by default due to how Webpack interprets its code. This is a practical
