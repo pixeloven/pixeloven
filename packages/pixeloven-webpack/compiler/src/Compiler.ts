@@ -75,6 +75,7 @@ class Compiler {
 
     /**
      * Allows for hooks to be defined for on compile done
+     * @todo there seems to be a race condition sometimes where a compiler onDone is called but the compiler falls through. Or we are calling this twice in the dev server.
      * @param type
      * @param callback
      */
