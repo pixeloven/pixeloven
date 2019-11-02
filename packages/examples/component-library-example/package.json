@@ -18,7 +18,7 @@
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-beta.10",
     "@pixeloven/cli-addon-storybook": "^6.0.0-beta.10",
-    "@pixeloven/cli-addon-webpack": "^6.0.0-beta.10",
+    "@pixeloven/cli-addon-webpack": "^6.0.0-beta.11",
     "copyfiles": "2.1.1",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
