@@ -1,10 +1,5 @@
 import { Name } from "@pixeloven-core/env";
-import webpack, {
-    Compiler as SingleCompiler,
-    Configuration,
-    MultiCompiler,
-    Stats,
-} from "webpack";
+import webpack, { Configuration, MultiCompiler, Stats } from "webpack";
 
 export type Handler = (stats: Stats) => void;
 
@@ -85,24 +80,28 @@ class Compiler {
      */
     public onDone(name: Name | string, handler: Handler) {
         const time = Date.now();
-
-        /**
-         * Process compiler with callback
-         * @param compiler
-         */
-        const process = (hand: Handler, compiler?: SingleCompiler) => {
-            if (!compiler) {
-                throw Error(`could not find compiler type ${name}`);
-            }
-            compiler.hooks.done.tap(`${Compiler.id}-${name}-${time}`, hand);
-        };
         switch (name) {
             case Name.client:
-                process(handler, this.client);
+                if (this.client) {
+                    this.client.hooks.done.tap(
+                        `${Compiler.id}-${name}-${time}`,
+                        handler,
+                    );
+                }
             case Name.library:
-                process(handler, this.library);
+                if (this.library) {
+                    this.library.hooks.done.tap(
+                        `${Compiler.id}-${name}-${time}`,
+                        handler,
+                    );
+                }
             case Name.server:
-                process(handler, this.server);
+                if (this.server) {
+                    this.server.hooks.done.tap(
+                        `${Compiler.id}-${name}-${time}`,
+                        handler,
+                    );
+                }
         }
     }
 }
