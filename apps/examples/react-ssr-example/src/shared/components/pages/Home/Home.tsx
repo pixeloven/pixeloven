@@ -1,6 +1,6 @@
 // import { Logo } from "@examples/component-library-example";
 import { RouteComponentProps } from "@pixeloven-react/routing";
-import { Icon } from "@shared/components/atoms";
+import { Icon } from "@shared/components/atoms/Icon";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Container, Grid, Header, Segment } from "semantic-ui-react";

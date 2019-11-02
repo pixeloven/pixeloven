@@ -10,7 +10,8 @@ import {
     END,
     SagaMiddleware,
 } from "redux-saga";
-import { rootReducer, rootSaga } from "./";
+import { rootReducer } from "./reducers";
+import { rootSaga } from "./sagas";
 
 type Target = "client" | "server";
 

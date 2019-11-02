@@ -1,4 +1,4 @@
-import { Link } from "@shared/components";
+import { Link } from "@shared/components/atoms/Link";
 import React from "react";
 import favicon from "./favicon.ico";
 

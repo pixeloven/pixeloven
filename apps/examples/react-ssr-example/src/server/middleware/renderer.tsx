@@ -1,81 +1,63 @@
 import { RouteProps, Router } from "@pixeloven-react/routing";
 import { Config } from "@server/config";
-import { Body, Head, Html } from "@server/views";
-import { App } from "@shared/components";
+import App from "@shared/components/App";
+import { Body } from "@shared/components/atoms/Body";
+import { Head } from "@shared/components/atoms/Head";
+import { Html } from "@shared/components/atoms/Html";
+import { Link } from "@shared/components/atoms/Link";
+import { Script } from "@shared/components/atoms/Script";
+import { Favicon } from "@shared/components/molecules/Favicon";
+
 import routeConfig, { unknownErrorRoutes } from "@shared/routes";
 import { configureStore, rootSaga } from "@shared/store";
 import { NextFunction, Request, Response } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { Helmet, HelmetData } from "react-helmet";
+import { Helmet } from "react-helmet";
 import { Provider } from "react-redux";
 import { StaticContext, StaticRouter } from "react-router";
 import { Store } from "redux";
 
-interface RenderProps {
+interface TemplateProps {
     req: Request;
-    store: Store;
-}
-
-interface TemplateRenderProps extends RenderProps {
-    children: string;
-    helmetData: HelmetData;
-}
-
-interface ContentRenderProps extends RenderProps {
     routes: RouteProps[];
+    store: Store;
     staticContext: StaticContext;
 }
 
-const Template = (props: TemplateRenderProps) => (
-    <Html helmet={props.helmetData} lang={props.req.language}>
-        <Head files={props.req.files} helmet={props.helmetData} />
-        <Body files={props.req.files} initialState={props.store.getState()}>
-            {props.children}
-        </Body>
-    </Html>
-);
-
-/**
- * Encapsulate application content
- * @param props
- */
-const Content = (props: ContentRenderProps) => (
-    <Provider store={props.store}>
-        <StaticRouter location={props.req.url} context={props.staticContext}>
-            <App routes={props.routes} />
-        </StaticRouter>
-    </Provider>
-);
-
-/**
- * Render application from templates
- * @param req
- * @param routes
- * @param staticContext
- * @param store
- */
-function render(
-    req: Request,
-    routes: RouteProps[],
-    staticContext: StaticContext,
-    store: Store,
-) {
-    const contentString = renderToString(
-        <Content
-            req={req}
-            routes={routes}
-            staticContext={staticContext}
-            store={store}
-        />,
+function Template(props: TemplateProps) {
+    const content = renderToString(
+        <Provider store={props.store}>
+            <StaticRouter
+                location={props.req.url}
+                context={props.staticContext}
+            >
+                <App routes={props.routes} />
+            </StaticRouter>
+        </Provider>,
     );
     const helmetData = Helmet.renderStatic();
-    const output = renderToString(
-        <Template helmetData={helmetData} req={req} store={store}>
-            {contentString}
-        </Template>,
+    const template = renderToString(
+        <Html helmet={helmetData} lang={props.req.language}>
+            <Head helmet={helmetData}>
+                <Favicon />
+                {props.req.files && (
+                    <Link
+                        href={props.req.files.css}
+                        rel="stylesheet"
+                        type="text/css"
+                    />
+                )}
+            </Head>
+            <Body
+                scripts={props.req.files && <Script src={props.req.files.js} />}
+                state={props.store.getState()}
+            >
+                {content}
+            </Body>
+        </Html>,
     );
-    return `<!DOCTYPE html>${output}`;
+    return `<!DOCTYPE html>${template}`;
 }
 
 export function errorHandler(config: Config) {
@@ -93,7 +75,12 @@ export function errorHandler(config: Config) {
                 .runSaga(rootSaga)
                 .toPromise()
                 .then(() => {
-                    const output = render(req, routes, staticContext, store);
+                    const output = Template({
+                        req,
+                        routes,
+                        staticContext,
+                        store,
+                    });
                     const statusCode = staticContext.statusCode || 500;
                     res.write(output);
                     res.status(statusCode);
@@ -133,7 +120,12 @@ export function renderer(config: Config) {
                 .runSaga(rootSaga)
                 .toPromise()
                 .then(() => {
-                    const output = render(req, routes, staticContext, store);
+                    const output = Template({
+                        req,
+                        routes,
+                        staticContext,
+                        store,
+                    });
                     const statusCode = staticContext.statusCode || 200;
                     res.write(output);
                     res.status(statusCode);

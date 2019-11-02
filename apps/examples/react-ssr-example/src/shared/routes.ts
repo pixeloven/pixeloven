@@ -1,5 +1,6 @@
-import { Home, NoMatch } from "@shared/components/pages";
-import { Default } from "@shared/components/templates";
+import { Home } from "@shared/components/pages/Home";
+import { NoMatch } from "@shared/components/pages/NoMatch";
+import { Default } from "@shared/components/templates/Default";
 
 /**
  * @todo Need to create a better unknown error page
