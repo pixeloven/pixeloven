@@ -1,6 +1,5 @@
 import { mergeOptions } from "@pixeloven-core/common";
-import { logger } from "@pixeloven-core/logger";
-import chalk from "chalk";
+import { chalk, logger } from "@pixeloven-core/logger";
 import filesize from "filesize";
 import path from "path";
 import { Stats } from "webpack";

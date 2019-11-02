@@ -1,4 +1,7 @@
 import { Mode, Name, Target } from "@pixeloven-core/env";
+import { chalk, logger } from "@pixeloven-core/logger";
+import { filesystem } from "gluegun";
+import p from "path";
 import {
     AddonWebpackToolbox,
     ErrorCode,
@@ -6,23 +9,26 @@ import {
     WebpackExtensionType,
 } from "../types";
 
+function getEntryPoint(entry: string) {
+    const absolutePath = p.resolve(process.cwd(), entry);
+    if (filesystem.isFile(absolutePath)) {
+        return absolutePath;
+    }
+    return false;
+}
+
+function getTarget(target: Target | string): Target | false {
+    if (Target.hasOwnProperty(target)) {
+        return Target[target];
+    }
+    return false;
+}
+
 /**
  * Handles breaking options
  * @param option
  */
-function breakOption(option: string | boolean) {
-    /**
-     * @todo validate pathing here
-     */
-    // if (compiler.hasClientCodePath) {
-    //     logger.info(
-    //         `${chalk.bold("client")} code path has been discovered`,
-    //     );
-    //     return runner(compiler.client);
-    // }
-    // logger.error(`compiler is set but code path could not be found`);
-
-    // path.resolve(process.cwd(), "./src/client")
+function getOptions(option: string | boolean) {
     if (typeof option === "boolean") {
         return {};
     }
@@ -69,6 +75,7 @@ export default {
 
         const globalDefaultEntry = "./src/index.ts";
         const globalDefaultOutputPath = "./dist";
+        const mode = development ? Mode.development : Mode.production;
 
         function getCompilerOptions(
             type: string | boolean,
@@ -76,10 +83,23 @@ export default {
             defaultEntry: string,
             defaultTarget: Target,
         ) {
-            const dynamicOptions = breakOption(type);
-            const mode = development ? Mode.development : Mode.production;
-            const entry = dynamicOptions.entry || defaultEntry;
-            const target = dynamicOptions.target || defaultTarget;
+            const dynamicOptions = getOptions(type);
+            const entry = getEntryPoint(dynamicOptions.entry || defaultEntry);
+            if (!entry) {
+                logger.error(`code path entry point could not be found`);
+                return;
+            }
+            logger.info(`${chalk.bold(name)} code path has been discovered`);
+
+            /**
+             * @todo we don't always want defaults
+             */
+            const target = getTarget(dynamicOptions.target || defaultTarget);
+            if (!target) {
+                logger.error(`invalid target provided`);
+                return;
+            }
+            logger.info(`${chalk.bold(name)} targeting ${target}`);
             return {
                 entry,
                 mode,
@@ -100,19 +120,38 @@ export default {
 
         if (!task) {
             pixelOven.invalidArgument(
-                "Please provide a task for Webpack to run.",
+                "alease provide a task for Webpack to run.",
             );
             pixelOven.exit("Webpack", ErrorCode.MissingTask);
             return;
         }
         if (!WebpackExtensionType.hasOwnProperty(task)) {
             pixelOven.invalidArgument(
-                `Available Webpack tasks are "build" or "start".`,
+                `available Webpack tasks are "build" or "start".`,
                 task,
             );
             pixelOven.exit("Webpack", ErrorCode.InvalidTask);
             return;
         }
+        if (!client && !library && !server) {
+            pixelOven.invalidArgument(
+                `Please provide an entry for Webpack to target. Available options are "--client", "--library", or "--server".`,
+            );
+            pixelOven.exit("Webpack", ErrorCode.MissingTarget);
+            return;
+        }
+        /**
+         * @todo Need to list all options in some sorta help style menu
+         */
+        Object.keys(parameters.options).forEach(option => {
+            if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
+                pixelOven.invalidArgument(
+                    `Available options for "${task}" are "--client", "--development", "--entry", "--host", "--ignored", "--library", "--path", "--port", "--protocol", "--server", "--source-map", or "--stats"`,
+                    `--${option}`,
+                );
+                pixelOven.exit("Webpack", ErrorCode.InvalidArgument);
+            }
+        });
 
         /**
          *  @todo: add "help" argument that prints available tasks and options
@@ -120,27 +159,6 @@ export default {
         switch (task) {
             case "build":
             case "start": {
-                if (!client && !library && !server) {
-                    pixelOven.invalidArgument(
-                        `Please provide an entry for Webpack to target. Available options are "--client", "--library", or "--server".`,
-                    );
-                    pixelOven.exit("Webpack", ErrorCode.MissingTarget);
-                    return;
-                }
-
-                /**
-                 * @todo Need to list all options in some sorta help style menu
-                 */
-                Object.keys(parameters.options).forEach(option => {
-                    if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
-                        pixelOven.invalidArgument(
-                            `Available options for "${task}" are "--client", "--development", "--entry", "--host", "--ignored", "--library", "--path", "--port", "--protocol", "--server", "--source-map", or "--stats"`,
-                            `--${option}`,
-                        );
-                        pixelOven.exit("Webpack", ErrorCode.InvalidArgument);
-                    }
-                });
-
                 const compilerOptions = [];
                 if (!!client) {
                     const clientOptions = getCompilerOptions(
@@ -149,7 +167,9 @@ export default {
                         globalDefaultEntry,
                         Target.web,
                     );
-                    compilerOptions.push(clientOptions);
+                    if (clientOptions) {
+                        compilerOptions.push(clientOptions);
+                    }
                 }
                 if (!!library) {
                     const libraryOptions = getCompilerOptions(
@@ -158,7 +178,9 @@ export default {
                         globalDefaultEntry,
                         Target.node,
                     );
-                    compilerOptions.push(libraryOptions);
+                    if (libraryOptions) {
+                        compilerOptions.push(libraryOptions);
+                    }
                 }
                 if (!!server) {
                     const serverOptions = getCompilerOptions(
@@ -167,7 +189,9 @@ export default {
                         globalDefaultEntry,
                         Target.node,
                     );
-                    compilerOptions.push(serverOptions);
+                    if (serverOptions) {
+                        compilerOptions.push(serverOptions);
+                    }
                 }
                 /**
                  * @todo Need to type the all the options for this CLI
