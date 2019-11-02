@@ -1,6 +1,6 @@
 import "jest";
-import ExampleActionTypes from "./Example.actions";
-import reducer, { initialState } from "./Example.reducers";
+import reducer, { initialState } from "./reducers";
+import { ExampleActionTypes } from "./types";
 
 describe("Shared/Store/Example", () => {
     describe("Example.reducers", () => {

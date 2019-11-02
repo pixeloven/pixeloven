@@ -1,8 +1,16 @@
-import ExampleActionTypes, {
-    GetExampleInProgress,
-} from "@shared/store/Example/Example.actions";
-import { getExample } from "@shared/store/Example/Example.service";
 import { all, call, put, takeEvery } from "redux-saga/effects";
+import { ExampleActionTypes, GetExampleInProgress } from "./types";
+
+/**
+ * Example async call
+ * @param str
+ */
+async function getExample(str: string) {
+    return {
+        description: str,
+        title: str,
+    };
+}
 
 // Workers
 function* workExample(action: GetExampleInProgress) {
@@ -16,7 +24,7 @@ function* workExample(action: GetExampleInProgress) {
         });
     } catch (error) {
         yield put({
-            payload: error.response,
+            payload: error,
             type: ExampleActionTypes.GET_EXAMPLE_FAILURE,
         });
     }

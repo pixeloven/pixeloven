@@ -9,7 +9,8 @@ import { Script } from "@shared/components/atoms/Script";
 import { Favicon } from "@shared/components/molecules/Favicon";
 
 import routeConfig, { unknownErrorRoutes } from "@shared/routes";
-import { configureStore, rootSaga } from "@shared/store";
+import { rootSaga } from "@shared/store/sagas";
+import { configureStore } from "@shared/store/store";
 import { NextFunction, Request, Response } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
@@ -114,7 +115,7 @@ export function renderer(config: Config) {
 
             /**
              * Setup store to render application after sagas have complete
-             * @todo react-helmet-async instead
+             * @todo fetch data doesn't seem to be called
              */
             store
                 .runSaga(rootSaga)

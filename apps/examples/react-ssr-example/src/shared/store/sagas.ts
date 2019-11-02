@@ -1,4 +1,4 @@
-import exampleSaga from "@shared/store/Example/Example.sagas";
+import exampleSaga from "@shared/store/Example/sagas";
 import { all } from "redux-saga/effects";
 
 /**

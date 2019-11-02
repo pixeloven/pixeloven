@@ -1,4 +1,4 @@
-import example from "@shared/store/Example/Example.reducers";
+import example from "@shared/store/Example/reducers";
 import { combineReducers } from "redux";
 
 /**

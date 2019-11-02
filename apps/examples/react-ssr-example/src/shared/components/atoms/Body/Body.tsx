@@ -1,11 +1,10 @@
-import { State } from "@shared/store/types";
 import React from "react";
 import { HelmetData } from "react-helmet";
 
 interface BodyProps {
     children: string;
     scripts?: React.ReactNode;
-    state?: State;
+    state?: object; // Todo make generic
     helmet?: HelmetData;
 }
 
