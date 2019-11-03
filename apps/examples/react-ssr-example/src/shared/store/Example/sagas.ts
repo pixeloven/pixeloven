@@ -41,4 +41,4 @@ function* saga() {
 }
 
 export default saga;
-export { workExample };
+export { getExample, workExample };

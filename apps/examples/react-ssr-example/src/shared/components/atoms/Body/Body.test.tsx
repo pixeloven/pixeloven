@@ -18,19 +18,13 @@ describe("Server", () => {
                     <Body scripts={<React.Fragment />}>{contentString}</Body>,
                 );
                 expect(wrapper.find("body").length).toEqual(1);
-                expect(wrapper.find("div").length).toEqual(2);
+                expect(wrapper.find("div").length).toEqual(1);
                 expect(
                     wrapper
                         .find("div")
                         .last()
                         .props().id,
                 ).toEqual("root");
-                expect(
-                    wrapper
-                        .find("div")
-                        .first()
-                        .props().id,
-                ).toEqual("portal");
             });
         });
     });

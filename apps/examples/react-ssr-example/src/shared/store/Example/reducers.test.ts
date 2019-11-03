@@ -19,12 +19,7 @@ describe("Shared/Store/Example", () => {
             it("should respond to FAILURE action", () => {
                 expect(
                     typeof reducer(initialState, {
-                        payload: {
-                            error: {
-                                code: 1,
-                                message: "bad",
-                            },
-                        },
+                        payload: "error",
                         type: ExampleActionTypes.GET_EXAMPLE_FAILURE,
                     }),
                 ).toEqual("object");
@@ -33,10 +28,8 @@ describe("Shared/Store/Example", () => {
                 expect(
                     typeof reducer(initialState, {
                         payload: {
-                            example: {
-                                description: "woot",
-                                title: "woot",
-                            },
+                            description: "woot",
+                            title: "woot",
                         },
                         type: ExampleActionTypes.GET_EXAMPLE_SUCCESS,
                     }),

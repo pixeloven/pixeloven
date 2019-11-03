@@ -12,19 +12,14 @@ describe("Server", () => {
     describe("Views", () => {
         describe("Head", () => {
             it("should render basic head", () => {
-                const wrapper = shallow(<Head />);
+                const wrapper = shallow(
+                    <Head>
+                        <meta />
+                    </Head>,
+                );
                 expect(wrapper.find("head").length).toEqual(1);
                 expect(wrapper.find("Link").length).toEqual(0);
-                expect(wrapper.find("Favicon").length).toEqual(1);
-            });
-            it("should render head with css files", () => {
-                const files = {
-                    css: ["main.css"],
-                };
-                const wrapper = shallow(<Head files={files} />);
-                expect(wrapper.find("head").length).toEqual(1);
-                expect(wrapper.find("Link").length).toEqual(1);
-                expect(wrapper.find("Favicon").length).toEqual(1);
+                expect(wrapper.find("meta").length).toEqual(1);
             });
         });
     });
