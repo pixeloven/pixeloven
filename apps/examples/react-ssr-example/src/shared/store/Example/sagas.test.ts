@@ -1,9 +1,8 @@
 import "jest";
 import { expectSaga } from "redux-saga-test-plan";
 import { call } from "redux-saga/effects";
-import ExampleActionTypes from "./Example.actions";
-import rootSaga, { workExample } from "./Example.sagas";
-import { getExample } from "./Example.service";
+import rootSaga, { getExample, workExample } from "./sagas";
+import { ExampleActionTypes } from "./types";
 
 const mockHttpResponse = {
     data: {
