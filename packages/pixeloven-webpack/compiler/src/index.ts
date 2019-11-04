@@ -1,12 +1,15 @@
 import { mergeOptions } from "@pixeloven-core/common";
-import { CompilerConfig, Config, getConfig } from "@pixeloven-webpack/config";
-import { Configuration } from "webpack";
+import { Mode, Name, Target } from "@pixeloven-core/env";
+import { getConfig, Options } from "@pixeloven-webpack/config";
 import Compiler from "./Compiler";
 
 /**
  * Default compiler options
  */
-const defaultCompilerOptions: Config = {
+const defaultCompilerOptions: Options = {
+    entry: "./src/index.ts",
+    mode: Mode.development,
+    name: Name.library,
     outputPath: "./dist",
     profiling: false,
     publicPath: "/",
@@ -17,34 +20,20 @@ const defaultCompilerOptions: Config = {
         outputDir: "./stats",
         port: 8081,
     },
+    target: Target.node,
 };
 
 /**
  * Returns a compiler with our custom configuration
+ * @todo Move get config into CLI instead of here.
  * @param options
  */
-function getCompiler(options: Partial<Config> = {}) {
-    const { compilers } = options;
-    const config = mergeOptions(defaultCompilerOptions, options);
-    const compilerConfigs: Configuration[] = [];
-
-    if (compilers && compilers.length > 0) {
-        compilers.map((compiler: CompilerConfig) => {
-            const { entry, mode, name, target } = compiler;
-            compilerConfigs.push(
-                getConfig({
-                    ...config,
-                    entry,
-                    mode,
-                    name,
-                    target,
-                }),
-            );
-        });
-    }
-
-    return Compiler.create(compilerConfigs);
+function getCompiler(options: Array<Partial<Options>> = []) {
+    const combined = options.map(single => {
+        return getConfig(mergeOptions(defaultCompilerOptions, single));
+    });
+    return Compiler.create(combined);
 }
 
 export default getCompiler;
-export { Compiler, Config };
+export { Compiler, Options };

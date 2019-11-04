@@ -1,14 +1,6 @@
 import { Name } from "@pixeloven-core/env";
-import fs from "fs";
-import path from "path";
-import webpack, {
-    Compiler as SingleCompiler,
-    Configuration,
-    MultiCompiler,
-    Stats,
-} from "webpack";
+import webpack, { Configuration, MultiCompiler, Stats } from "webpack";
 
-export type Type = "client" | "server";
 export type Handler = (stats: Stats) => void;
 
 class Compiler {
@@ -46,39 +38,12 @@ class Compiler {
     protected configs: Configuration[];
 
     /**
-     * Client code path
-     */
-    protected clientPath: string;
-
-    /**
-     * Server code path
-     */
-    protected serverPath: string;
-
-    /**
      * Construct compilers
      * @param configs
      */
     constructor(configs: Configuration[]) {
         this.configs = configs;
         this.combined = webpack(configs);
-
-        this.clientPath = path.resolve(process.cwd(), "./src/client");
-        this.serverPath = path.resolve(process.cwd(), "./src/server");
-    }
-
-    /**
-     * Checks if client code path exists
-     */
-    public get hasClientCodePath() {
-        return fs.existsSync(this.clientPath);
-    }
-
-    /**
-     * Checks if server code path exists
-     */
-    public get hasServerCodePath() {
-        return fs.existsSync(this.serverPath);
     }
 
     /**
@@ -86,7 +51,16 @@ class Compiler {
      */
     public get client() {
         return this.combined.compilers.find(
-            compiler => compiler.name === "client",
+            compiler => compiler.name === Name.client,
+        );
+    }
+
+    /**
+     * Attempts to find client compiler
+     */
+    public get library() {
+        return this.combined.compilers.find(
+            compiler => compiler.name === Name.library,
         );
     }
 
@@ -95,33 +69,40 @@ class Compiler {
      */
     public get server() {
         return this.combined.compilers.find(
-            compiler => compiler.name === "server",
+            compiler => compiler.name === Name.server,
         );
     }
 
     /**
      * Allows for hooks to be defined for on compile done
+     * @todo there seems to be a race condition sometimes where a compiler onDone is called but the compiler falls through. Or we are calling this twice in the dev server.
      * @param type
      * @param callback
      */
-    public onDone(type: Type, handler: Handler) {
+    public onDone(name: Name | string, handler: Handler) {
         const time = Date.now();
-
-        /**
-         * Process compiler with callback
-         * @param compiler
-         */
-        const process = (hand: Handler, compiler?: SingleCompiler) => {
-            if (!compiler) {
-                throw Error("Could not find compiler type.");
-            }
-            compiler.hooks.done.tap(`${Compiler.id}-${type}-${time}`, hand);
-        };
-        switch (type) {
-            case "client":
-                process(handler, this.client);
-            case "server":
-                process(handler, this.server);
+        switch (name) {
+            case Name.client:
+                if (this.client) {
+                    this.client.hooks.done.tap(
+                        `${Compiler.id}-${name}-${time}`,
+                        handler,
+                    );
+                }
+            case Name.library:
+                if (this.library) {
+                    this.library.hooks.done.tap(
+                        `${Compiler.id}-${name}-${time}`,
+                        handler,
+                    );
+                }
+            case Name.server:
+                if (this.server) {
+                    this.server.hooks.done.tap(
+                        `${Compiler.id}-${name}-${time}`,
+                        handler,
+                    );
+                }
         }
     }
 }

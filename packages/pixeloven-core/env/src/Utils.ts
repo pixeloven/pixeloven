@@ -6,21 +6,33 @@ import { Mode, Name, Target, UtilOptions } from "./types";
  */
 export function getUtils<T extends UtilOptions>(options: T) {
     function ifType<Y, N>(isType: boolean, value?: Y, alternate?: N) {
-        if (arguments.length) {
-            if (typeof alternate === "undefined") {
-                return isType ? value : false;
-            }
-            return isType ? value : alternate;
+        const tValue = value || false;
+        const tAlternate = alternate || false;
+        if (tValue) {
+            return isType ? tValue : tAlternate;
         }
         return isType;
     }
-
     function ifClient(): boolean;
     function ifClient<Y>(value: Y): Y | false;
     function ifClient<Y, N>(value: Y, alternate: N): Y | N;
     function ifClient<Y, N>(value?: Y, alternate?: N) {
         const isClient = options.name === Name.client;
         return ifType(isClient, value, alternate);
+    }
+    function ifNotClient(): boolean;
+    function ifNotClient<Y>(value: Y): Y | false;
+    function ifNotClient<Y, N>(value: Y, alternate: N): Y | N;
+    function ifNotClient<Y, N>(value?: Y, alternate?: N) {
+        const isNotClient = options.name !== Name.client;
+        return ifType(isNotClient, value, alternate);
+    }
+    function ifLibrary(): boolean;
+    function ifLibrary<Y>(value: Y): Y | false;
+    function ifLibrary<Y, N>(value: Y, alternate: N): Y | N;
+    function ifLibrary<Y, N>(value?: Y, alternate?: N) {
+        const isLibrary = options.name === Name.library;
+        return ifType(isLibrary, value, alternate);
     }
     function ifServer(): boolean;
     function ifServer<Y>(value: Y): Y | false;
@@ -60,7 +72,9 @@ export function getUtils<T extends UtilOptions>(options: T) {
     return {
         ifClient,
         ifDevelopment,
+        ifLibrary,
         ifNode,
+        ifNotClient,
         ifProduction,
         ifServer,
         ifWeb,

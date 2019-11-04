@@ -1,6 +1,5 @@
 import { mergeOptions } from "@pixeloven-core/common";
-import { logger } from "@pixeloven-core/logger";
-import chalk from "chalk";
+import { chalk, logger } from "@pixeloven-core/logger";
 import filesize from "filesize";
 import path from "path";
 import { Stats } from "webpack";
@@ -136,9 +135,9 @@ export function FileReporter(options: FileReporterOptions) {
                 );
             } else {
                 logger.warn(
-                    `skip reporting for ${chalk.bold(
+                    `skipping ${chalk.bold(
                         name,
-                    )} since build does not exist`,
+                    )} build reporting since it does not exist`,
                 );
             }
         }
@@ -163,7 +162,7 @@ export function FileReporter(options: FileReporterOptions) {
                 );
             } else {
                 logger.warn(
-                    `skipping comparison not enough build information was collected`,
+                    `skipping comparison due to not enough information being collected`,
                 );
             }
         }
