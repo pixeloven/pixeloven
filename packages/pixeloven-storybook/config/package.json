@@ -40,7 +40,7 @@
     "@types/storybook__addon-options": "4.0.2",
     "@types/storybook__addon-viewport": "4.1.1",
     "@types/storybook__react": "4.0.2",
-    "lint-staged": "9.2.5"
+    "lint-staged": "9.4.2"
   },
   "peerDependencies": {
     "react": ">=16.3",

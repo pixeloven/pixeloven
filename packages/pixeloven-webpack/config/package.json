@@ -67,7 +67,7 @@
     "@types/webpack-bundle-analyzer": "2.13.2",
     "@types/webpack-manifest-plugin": "2.0.0",
     "@types/webpack-node-externals": "1.6.3",
-    "lint-staged": "9.2.5"
+    "lint-staged": "9.4.2"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

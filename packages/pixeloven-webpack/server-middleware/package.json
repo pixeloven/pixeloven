@@ -37,7 +37,7 @@
     "@types/webpack": "4.39.5",
     "@types/webpack-dev-middleware": "2.0.3",
     "@types/webpack-hot-middleware": "2.16.5",
-    "lint-staged": "9.2.5"
+    "lint-staged": "9.4.2"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

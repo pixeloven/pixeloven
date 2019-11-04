@@ -28,7 +28,7 @@
     "@types/filesize": "4.2.0",
     "@types/recursive-readdir": "2.2.0",
     "@types/webpack": "4.39.5",
-    "lint-staged": "9.2.5"
+    "lint-staged": "9.4.2"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
