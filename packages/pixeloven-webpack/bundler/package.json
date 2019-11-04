@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.9",
-    "@types/webpack": "4.39.5",
+    "@types/webpack": "4.39.8",
     "lint-staged": "9.4.2"
   },
   "scripts": {
