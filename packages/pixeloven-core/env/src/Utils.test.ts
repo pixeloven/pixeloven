@@ -3,14 +3,6 @@ import { Mode, Name, Target } from "./types";
 import { getUtils } from "./Utils";
 
 describe("@pixeloven/env", () => {
-    beforeEach(() => {
-        // Jest sets NODE_ENV so we need to pretend
-    });
-
-    afterEach(() => {
-        // Jest sets NODE_ENV so we need to set it back
-    });
-
     describe("Utils", () => {
         describe("getUtils", () => {
             it("should return an object full of functions", () => {
@@ -39,11 +31,11 @@ describe("@pixeloven/env", () => {
                     });
                     it("should return first argument with one argument", () => {
                         const { ifClient } = utils;
-                        expect(ifClient("client")).toEqual("client");
+                        expect(ifClient("first")).toEqual("first");
                     });
                     it("should return first argument with two arguments", () => {
                         const { ifClient } = utils;
-                        expect(ifClient("client", "server")).toEqual("client");
+                        expect(ifClient("first", "server")).toEqual("first");
                     });
                 });
                 describe("when name is not client", () => {
@@ -58,11 +50,53 @@ describe("@pixeloven/env", () => {
                     });
                     it("should return false with one argument", () => {
                         const { ifClient } = utils;
-                        expect(ifClient("client")).toEqual(false);
+                        expect(ifClient("first")).toEqual(false);
                     });
                     it("should return second argument with two arguments", () => {
                         const { ifClient } = utils;
-                        expect(ifClient("client", "server")).toEqual("server");
+                        expect(ifClient("first", "second")).toEqual("second");
+                    });
+                });
+            });
+            describe("ifNotClient", () => {
+                describe("when name is client", () => {
+                    const utils = getUtils({
+                        mode: Mode.development,
+                        name: Name.client,
+                        target: Target.web,
+                    });
+                    it("should return false with zero arguments", () => {
+                        const { ifNotClient } = utils;
+                        expect(ifNotClient()).toEqual(false);
+                    });
+                    it("should return false with one argument", () => {
+                        const { ifNotClient } = utils;
+                        expect(ifNotClient("first")).toEqual(false);
+                    });
+                    it("should return second argument with two arguments", () => {
+                        const { ifNotClient } = utils;
+                        expect(ifNotClient("first", "second")).toEqual(
+                            "second",
+                        );
+                    });
+                });
+                describe("when name is not client", () => {
+                    const utils = getUtils({
+                        mode: Mode.development,
+                        name: Name.server,
+                        target: Target.web,
+                    });
+                    it("should return true with zero arguments", () => {
+                        const { ifNotClient } = utils;
+                        expect(ifNotClient()).toEqual(true);
+                    });
+                    it("should return first argument with one argument", () => {
+                        const { ifNotClient } = utils;
+                        expect(ifNotClient("first")).toEqual("first");
+                    });
+                    it("should return first argument with two arguments", () => {
+                        const { ifNotClient } = utils;
+                        expect(ifNotClient("first", "second")).toEqual("first");
                     });
                 });
             });
