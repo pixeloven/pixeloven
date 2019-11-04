@@ -1,8 +1,8 @@
 import { Router } from "@pixeloven-react/routing";
-import { App } from "@shared/components";
+import App from "@shared/components/App";
 import { config } from "@shared/config";
 import routeConfig from "@shared/routes";
-import { configureStore } from "@shared/store";
+import { configureStore } from "@shared/store/store";
 import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -21,14 +21,15 @@ const routes = Router.getConfig(routeConfig, config.publicPath);
 /**
  * Wrap application with container, router and store
  */
-const AppWrapper = () => (
-    <Provider store={configureStore("client")}>
-        <BrowserRouter>
-            <App routes={routes} />
-        </BrowserRouter>
-    </Provider>
-);
-
+function AppWrapper() {
+    return (
+        <Provider store={configureStore("client")}>
+            <BrowserRouter>
+                <App routes={routes} />
+            </BrowserRouter>
+        </Provider>
+    );
+}
 /**
  * When using hot module replacement we need to use the render method
  * otherwise errors may occur in development.

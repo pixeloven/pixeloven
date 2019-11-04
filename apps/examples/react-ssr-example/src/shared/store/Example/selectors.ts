@@ -1,5 +1,5 @@
-import { ExampleState } from "@shared/store/Example/Example.types";
 import { createSelector } from "reselect";
+import { ExampleState } from "./types";
 
 const getExampleState = (state: ExampleState) => state.example;
 

@@ -1,9 +1,6 @@
-import { initialState } from "@shared/store/Example/Example.reducers";
-import {
-    makeGetExampleDescription,
-    makeGetExampleTitle,
-} from "@shared/store/Example/Example.selectors";
 import "jest";
+import { initialState } from "./reducers";
+import { makeGetExampleDescription, makeGetExampleTitle } from "./selectors";
 
 const exampleState = initialState;
 exampleState.example.description = "testing";

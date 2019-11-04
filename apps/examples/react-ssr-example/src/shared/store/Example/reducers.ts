@@ -1,8 +1,5 @@
-import ExampleActionTypes, {
-    ExampleAction,
-} from "@shared/store/Example/Example.actions";
-import { ExampleState } from "@shared/store/Example/Example.types";
 import produce from "immer";
+import { ExampleAction, ExampleActionTypes, ExampleState } from "./types";
 
 export const initialState: ExampleState = {
     example: {
@@ -35,7 +32,7 @@ const exampleReducer = (draft: ExampleState, action: ExampleAction) => {
                 ...action.payload,
             };
         case ExampleActionTypes.GET_EXAMPLE_FAILURE:
-            draft.meta.error = action.payload.error;
+            draft.meta.error = true;
             draft.meta.loading = false;
             return draft;
     }

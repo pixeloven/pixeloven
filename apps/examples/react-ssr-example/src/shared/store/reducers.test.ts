@@ -1,5 +1,5 @@
 import "jest";
-import { initialState } from "./Example/Example.reducers";
+import { initialState } from "./Example/reducers";
 import { rootReducer } from "./reducers";
 
 describe("Shared/Store", () => {
