@@ -4,10 +4,6 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { addDecorator, addParameters, configure } from "@storybook/react";
 import { themes } from "@storybook/theming";
 
-/**
- * @todo Make readme the default if it exists?  Can we hide actions? what does it even do?
- */
-
 addDecorator(withA11y);
 addDecorator(withBackgrounds);
 addDecorator(withKnobs);
