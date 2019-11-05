@@ -53,7 +53,7 @@ export function getSetup(options: Options) {
         }),
     ];
 
-    const { ifClient, ifDevelopment, ifProduction, ifServer } = getUtils({
+    const { ifClient, ifDevelopment, ifProduction } = getUtils({
         mode: options.mode,
         name: options.name,
         target: options.target,
@@ -85,21 +85,16 @@ export function getSetup(options: Options) {
     }
 
     function getExternals() {
-        /**
-         * @todo This holds the secret.
-         *      Can we just make this configurable... would be nice to make server.js a bundle
-         */
-        return ifServer(
-            [
-                // Exclude from local node_modules dir
-                webpackNodeExternals(),
-                // Exclude from file - helpful for lerna packages
-                webpackNodeExternals({
-                    modulesFromFile: true,
-                }),
-            ],
-            undefined,
-        );
+        return !options.allowExternals
+            ? [
+                  // Exclude from local node_modules dir
+                  webpackNodeExternals(),
+                  // Exclude from file - helpful for lerna packages
+                  webpackNodeExternals({
+                      modulesFromFile: true,
+                  }),
+              ]
+            : undefined;
     }
 
     function getOptimization() {

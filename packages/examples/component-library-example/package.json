@@ -32,6 +32,7 @@
     "document": "pixeloven document ts ./src",
     "lint": "yarn run lint:ts",
     "lint:ts": "pixeloven lint ts 'src/**/*.{ts,tsx}'",
+    "postcompile": "pixeloven copy assets",
     "precompile": "pixeloven delete dist",
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",

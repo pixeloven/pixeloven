@@ -27,6 +27,8 @@ export interface WebpackExtensionOptions {
 
 /* Note: keep this enum up to date matching the options interface above for runtime argument checking */
 export enum WebpackExecutionOptionTypes {
+    "allow-externals" = "allow-externals",
+    "allowExternals" = "allowExternals",
     "client" = "client",
     "development" = "development",
     "entry" = "entry",
