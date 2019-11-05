@@ -45,16 +45,32 @@ export function getSetup(options: Options) {
      * that fall through the other loaders.
      */
     function getModuleFileLoader(): RuleSetRule {
+        /**
+         * @todo make this work for isNotServer also should we just copy SCSS if it is a library and not touch it below?
+         * @todo also something we are doing makes it not work for either web or node.
+         * @todo need a better way to chain these functions....
+         */
         return {
             exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
             loader: require.resolve("file-loader"),
-            options: {
-                emitFile: ifServer(false, true),
-                name: ifProduction(
-                    "static/media/[name].[contenthash].[ext]",
-                    "static/media/[name].[hash].[ext]",
+            options: ifServer(
+                {
+                    emitFile: false,
+                },
+                ifNotLibrary(
+                    {
+                        emitFile: true,
+                        name: ifProduction(
+                            "static/media/[name].[contenthash].[ext]",
+                            "static/media/[name].[hash].[ext]",
+                        ),
+                    },
+                    {
+                        emitFile: true,
+                        name: "lib/[name].[ext]",
+                    },
                 ),
-            },
+            ),
         };
     }
 

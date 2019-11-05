@@ -24,6 +24,12 @@ import { Options } from "./types";
 
 import { getSetup } from "./helpers/shared";
 
+/**
+ * @todo Source maps for libraries
+ * @todo figure out how to do the chaining for the manifest and the hot reload
+ *
+ * @param options
+ */
 function getConfig(options: Options) {
     /**
      * Utility functions to help segment configuration based on environment
@@ -33,6 +39,7 @@ function getConfig(options: Options) {
         ifDevelopment,
         ifClient,
         ifNode,
+        ifNotClient,
         ifServer,
     } = getUtils({
         mode: options.mode,
@@ -84,17 +91,14 @@ function getConfig(options: Options) {
             },
             [resolvePath(options.entry)],
         ),
-        externals: ifNode(
-            [
-                // Exclude from local node_modules dir
-                webpackNodeExternals(),
-                // Exclude from file - helpful for lerna packages
-                webpackNodeExternals({
-                    modulesFromFile: true,
-                }),
-            ],
-            undefined,
-        ),
+        externals: ifNotClient([
+            // Exclude from local node_modules dir
+            webpackNodeExternals(),
+            // Exclude from file - helpful for lerna packages
+            webpackNodeExternals({
+                modulesFromFile: true,
+            }),
+        ]),
         mode: ifProduction("production", "development"),
         module: {
             rules: [
@@ -125,76 +129,87 @@ function getConfig(options: Options) {
                 tls: "empty",
             },
         ),
-        optimization: ifClient(
-            {
-                minimize: ifProduction(),
-                minimizer: ifProduction(
-                    [
-                        /**
-                         * Minify the code JavaScript
-                         *
-                         * @env production
-                         */
-                        new TerserPlugin({
-                            extractComments: "all",
-                            sourceMap: options.sourceMap,
-                            terserOptions: {
-                                safari10: true,
+        // {
+        //     /**
+        //      * @todo NEED to make this better for server and library cases
+        //      */
+        //     minimize: false,
+        //     noEmitOnErrors: true,
+        // },
+        optimization: {
+            minimize: ifProduction(),
+            minimizer: ifProduction(
+                removeEmpty([
+                    /**
+                     * Minify the code JavaScript
+                     */
+                    new TerserPlugin(
+                        ifClient(
+                            {
+                                extractComments: "all",
+                                sourceMap: options.sourceMap,
+                                terserOptions: {
+                                    safari10: true,
+                                },
                             },
-                        }),
-                        new OptimizeCSSAssetsPlugin(),
-                    ],
-                    [],
-                ),
-                noEmitOnErrors: true,
-                /**
-                 * @todo See how we can stop vendors-main (no s)
-                 * @todo Make configurable v8 (include ability to provide these rules in json form)
-                 */
-                splitChunks: {
-                    cacheGroups: {
-                        coreJs: {
-                            name: "vendor~core-js",
-                            test: /[\\/]node_modules[\\/](core-js)[\\/]/,
-                        },
-                        lodash: {
-                            name: "vendor~lodash",
-                            test: /[\\/]node_modules[\\/](lodash)[\\/]/,
-                        },
-                        moment: {
-                            name: "vendor~moment",
-                            test: /[\\/]node_modules[\\/](moment)[\\/]/,
-                        },
-                        react: {
-                            name: "vendor~react",
-                            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-                        },
-                        vendor: {
-                            name: "vendor~main",
-                            /**
-                             * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-                             */
-                            // name(mod) {
-                            //     // get the name. E.g. node_modules/packageName/not/this/part.js
-                            //     // or node_modules/packageName
-                            //     const packageName = mod.context.match(
-                            //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-                            //     )[1];
-                            //     // npm package names are URL-safe, but some servers don't like @ symbols
-                            //     return `vendor~${packageName.replace("@", "")}`;
-                            // },
-                            test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
-                        },
+                            {
+                                extractComments: "all",
+                                sourceMap: options.sourceMap,
+                            },
+                        ),
+                    ),
+                    /**
+                     * Optimize CSS similar to hoe we might with JS
+                     */
+                    ifClient(new OptimizeCSSAssetsPlugin()),
+                ]),
+                [],
+            ),
+            noEmitOnErrors: true,
+            /**
+             * @todo See how we can stop vendors-main (no s)
+             * @todo Make configurable v8 (include ability to provide these rules in json form)
+             */
+            splitChunks: ifClient({
+                cacheGroups: {
+                    coreJs: {
+                        name: "vendor~core-js",
+                        test: /[\\/]node_modules[\\/](core-js)[\\/]/,
                     },
-                    chunks: "all",
-                    maxInitialRequests: Infinity,
-                    minSize: 0,
+                    lodash: {
+                        name: "vendor~lodash",
+                        test: /[\\/]node_modules[\\/](lodash)[\\/]/,
+                    },
+                    moment: {
+                        name: "vendor~moment",
+                        test: /[\\/]node_modules[\\/](moment)[\\/]/,
+                    },
+                    react: {
+                        name: "vendor~react",
+                        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                    },
+                    vendor: {
+                        name: "vendor~main",
+                        /**
+                         * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+                         */
+                        // name(mod) {
+                        //     // get the name. E.g. node_modules/packageName/not/this/part.js
+                        //     // or node_modules/packageName
+                        //     const packageName = mod.context.match(
+                        //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+                        //     )[1];
+                        //     // npm package names are URL-safe, but some servers don't like @ symbols
+                        //     return `vendor~${packageName.replace("@", "")}`;
+                        // },
+                        test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
+                    },
                 },
-            },
-            {
-                noEmitOnErrors: true,
-            },
-        ),
+                chunks: "all",
+                maxInitialRequests: Infinity,
+                minSize: 0,
+            }),
+        },
         output: ifClient(
             {
                 chunkFilename: ifProduction(
@@ -212,12 +227,20 @@ function getConfig(options: Options) {
                 ), // @todo THis should not be hardcoded once we split client and server
                 publicPath: options.publicPath,
             },
-            {
-                filename: ifServer("server.js", "lib/index.js"),
-                libraryTarget: ifServer("commonjs2", "umd"),
-                path: resolvePath(options.outputPath, false),
-                publicPath: options.publicPath,
-            },
+            ifServer(
+                {
+                    filename: "server.js",
+                    libraryTarget: "commonjs2",
+                    path: resolvePath(options.outputPath, false),
+                    publicPath: options.publicPath,
+                },
+                {
+                    filename: "lib/index.js",
+                    library: "CHANGE_ME",
+                    libraryTarget: "umd",
+                    path: resolvePath(options.outputPath, false),
+                },
+            ),
         ),
         /**
          * @todo might not need this anymore since we have file reporting

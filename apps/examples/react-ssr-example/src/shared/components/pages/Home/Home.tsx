@@ -1,4 +1,7 @@
-// import { Logo } from "@examples/component-library-example";
+import { Logo } from "@examples/component-library-example";
+// import "@examples/component-library-example/Logo.scss";
+// import logo from "@examples/component-library-example/logo.svg";
+
 import { RouteComponentProps } from "@pixeloven-react/routing";
 import { Icon } from "@shared/components/atoms/Icon";
 import React from "react";
@@ -23,7 +26,7 @@ class Home extends React.Component<RouteComponentProps> {
                                     textAlign="center"
                                 >
                                     <Container>
-                                        {/* <Logo speed="10s" /> */}
+                                        <Logo speed="10s" />
                                         <Header as="h1" inverted={true}>
                                             Welcome to TypeScript + React
                                         </Header>
