@@ -5,9 +5,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Container, Grid, Header, Segment } from "semantic-ui-react";
 
-// import "@examples/component-library-example/logo.scss";
-// import logo from "@examples/component-library-example/logo.svg";
-
 class Home extends React.Component<RouteComponentProps> {
     public render(): React.ReactNode {
         return (
