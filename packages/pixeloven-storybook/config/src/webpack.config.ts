@@ -7,15 +7,32 @@ interface Options {
     config: Configuration;
 }
 
+/**
+ * @todo Join this with the one in our webpack share config
+ */
 export const newScssRule: RuleSetRule = {
-    loaders: [
-        require.resolve("style-loader"),
-        require.resolve("css-loader"),
-        require.resolve("sass-loader"),
-    ],
+    include: resolveSourceRoot(),
     test: /\.(scss|sass|css)$/i,
+    use: [
+        {
+            loader: require.resolve("style-loader"),
+        },
+        {
+            loader: require.resolve("css-loader"),
+        },
+        {
+            loader: require.resolve("sass-loader"),
+            options: {
+                // Prefer `dart-sass`
+                implementation: require("sass"),
+            },
+        },
+    ],
 };
 
+/**
+ * @todo Join this with the one in our webpack share config
+ */
 export const newTsRule: RuleSetRule = {
     include: resolveSourceRoot(),
     test: /\.(ts|tsx)$/,
