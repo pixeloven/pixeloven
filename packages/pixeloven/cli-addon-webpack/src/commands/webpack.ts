@@ -176,7 +176,7 @@ export default {
                         library,
                         Name.library,
                         globalDefaultEntry,
-                        Target.node,
+                        Target.web,
                     );
                     if (libraryOptions) {
                         compilerOptions.push(libraryOptions);

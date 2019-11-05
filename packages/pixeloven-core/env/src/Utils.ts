@@ -34,6 +34,13 @@ export function getUtils<T extends UtilOptions>(options: T) {
         const isLibrary = options.name === Name.library;
         return ifType(isLibrary, value, alternate);
     }
+    function ifNotLibrary(): boolean;
+    function ifNotLibrary<Y>(value: Y): Y | false;
+    function ifNotLibrary<Y, N>(value: Y, alternate: N): Y | N;
+    function ifNotLibrary<Y, N>(value?: Y, alternate?: N) {
+        const isNotLibrary = options.name !== Name.library;
+        return ifType(isNotLibrary, value, alternate);
+    }
     function ifServer(): boolean;
     function ifServer<Y>(value: Y): Y | false;
     function ifServer<Y, N>(value: Y, alternate: N): Y | N;
@@ -75,6 +82,7 @@ export function getUtils<T extends UtilOptions>(options: T) {
         ifLibrary,
         ifNode,
         ifNotClient,
+        ifNotLibrary,
         ifProduction,
         ifServer,
         ifWeb,

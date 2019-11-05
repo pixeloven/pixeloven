@@ -33,7 +33,6 @@ function getConfig(options: Options) {
         ifDevelopment,
         ifClient,
         ifNode,
-        ifNotClient,
         ifServer,
     } = getUtils({
         mode: options.mode,
@@ -64,138 +63,6 @@ function getConfig(options: Options) {
         return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
     }
 
-    const plugins = ifClient(
-        removeEmpty([
-            /**
-             * Fixes a known issue with cross-platform differences in file watchers,
-             * so that webpack doesn't lose file changes when watched files change rapidly
-             * https://github.com/webpack/webpack-dev-middleware#known-issues
-             *
-             * @env development
-             */
-            ifDevelopment(new TimeFixPlugin()),
-            /**
-             * Watcher doesn"t work well if you mistype casing in a path so we use
-             * a plugin that prints an error when you attempt to do this.
-             * See https://github.com/facebookincubator/create-react-app/issues/240
-             *
-             * @env development
-             */
-            ifDevelopment(new CaseSensitivePathsPlugin()),
-            new CircularDependencyPlugin({
-                // exclude detection of files based on a RegExp
-                exclude: /node_modules/,
-            }),
-            /**
-             * Helps prevent hashes from updating if a bundle hasn't changed.
-             * @env all
-             */
-            new webpack.HashedModuleIdsPlugin(),
-            /**
-             * Moment.js is an extremely popular library that bundles large locale files
-             * by default due to how Webpack interprets its code. This is a practical
-             * solution that requires the user to opt into importing specific locales.
-             * @url https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-             * @env all
-             */
-            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-            /**
-             * Does a string replacement for specific env variables
-             * @description Provides entry point specific env variables
-             * @env all
-             */
-            new webpack.EnvironmentPlugin({
-                NAME: options.name,
-                PUBLIC_PATH: options.publicPath,
-                TARGET: options.target,
-            }),
-            /**
-             * Perform type checking and linting in a separate process to speed up compilation
-             * @env all
-             */
-            getPluginForkTsCheckerWebpack(),
-            /**
-             * Extract css to file
-             * @env production
-             */
-            new MiniCssExtractPlugin({
-                chunkFilename: ifProduction(
-                    "static/css/[name].[contenthash].css",
-                    "static/css/main.css",
-                ),
-                filename: ifProduction(
-                    "static/css/[name].[contenthash].css",
-                    "static/css/main.css",
-                ),
-            }),
-            getPluginBundleAnalyzer(options.stats),
-            /**
-             * Generate a manifest file which contains a mapping of all asset filenames
-             * to their corresponding output file so that tools can pick it up without
-             * having to parse `index.html`.
-             *
-             * @env production
-             */
-            ifProduction(
-                new ManifestPlugin({
-                    fileName: "asset-manifest.json",
-                }),
-            ),
-            /**
-             * This is necessary to emit hot updates (currently CSS only):
-             *
-             * @env development
-             */
-            ifDevelopment(new webpack.HotModuleReplacementPlugin()),
-        ]),
-        removeEmpty([
-            /**
-             * Fixes a known issue with cross-platform differences in file watchers,
-             * so that webpack doesn't lose file changes when watched files change rapidly
-             * https://github.com/webpack/webpack-dev-middleware#known-issues
-             *
-             * @env development
-             */
-            ifDevelopment(new TimeFixPlugin()),
-            /**
-             * Watcher doesn"t work well if you mistype casing in a path so we use
-             * a plugin that prints an error when you attempt to do this.
-             * See https://github.com/facebookincubator/create-react-app/issues/240
-             *
-             * @env development
-             */
-            ifDevelopment(new CaseSensitivePathsPlugin()),
-            new CircularDependencyPlugin({
-                // exclude detection of files based on a RegExp
-                exclude: /node_modules/,
-            }),
-            /**
-             * Moment.js is an extremely popular library that bundles large locale files
-             * by default due to how Webpack interprets its code. This is a practical
-             * solution that requires the user to opt into importing specific locales.
-             * @url https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-             * @env all
-             */
-            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-            /**
-             * Define environmental variables base on entry point
-             * @description Provides entry point specific env variables
-             *
-             * @env all
-             */
-            new webpack.EnvironmentPlugin({
-                NAME: options.name,
-                PUBLIC_PATH: options.publicPath,
-                TARGET: options.target,
-            }),
-            getPluginBundleAnalyzer(options.stats),
-            getPluginForkTsCheckerWebpack(),
-        ]),
-    );
-
-    /**
-     * Client side configuration
-     */
     return removeEmpty({
         bail: ifProduction(),
         devtool: options.sourceMap ? "eval-source-map" : false,
@@ -217,7 +84,7 @@ function getConfig(options: Options) {
             },
             [resolvePath(options.entry)],
         ),
-        externals: ifNotClient(
+        externals: ifNode(
             [
                 // Exclude from local node_modules dir
                 webpackNodeExternals(),
@@ -346,11 +213,8 @@ function getConfig(options: Options) {
                 publicPath: options.publicPath,
             },
             {
-                /**
-                 * @todo can we not minmize these???
-                 */
                 filename: ifServer("server.js", "lib/index.js"),
-                libraryTarget: "commonjs2",
+                libraryTarget: ifServer("commonjs2", "umd"),
                 path: resolvePath(options.outputPath, false),
                 publicPath: options.publicPath,
             },
@@ -361,7 +225,90 @@ function getConfig(options: Options) {
         performance: {
             hints: ifDevelopment("warning", false),
         },
-        plugins,
+        plugins: removeEmpty([
+            /**
+             * Fixes a known issue with cross-platform differences in file watchers,
+             * so that webpack doesn't lose file changes when watched files change rapidly
+             * https://github.com/webpack/webpack-dev-middleware#known-issues
+             *
+             * @env development
+             */
+            ifDevelopment(new TimeFixPlugin()),
+            /**
+             * Watcher doesn't work well if you mistype casing in a path so we use
+             * a plugin that prints an error when you attempt to do this.
+             * See https://github.com/facebookincubator/create-react-app/issues/240
+             */
+            ifDevelopment(new CaseSensitivePathsPlugin()),
+            /**
+             * Helps prevent hashes from updating if a bundle hasn't changed.
+             */
+            new webpack.HashedModuleIdsPlugin(),
+            /**
+             * Checks for circular dependencies
+             */
+            new CircularDependencyPlugin({
+                // exclude detection of files based on a RegExp
+                exclude: /node_modules/,
+            }),
+            /**
+             * Moment.js is an extremely popular library that bundles large locale files
+             * by default due to how Webpack interprets its code. This is a practical
+             * solution that requires the user to opt into importing specific locales.
+             * @url https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+             */
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+            /**
+             * Define environmental variables base on entry point
+             * @description Provides entry point specific env variables
+             */
+            new webpack.EnvironmentPlugin({
+                NAME: options.name,
+                PUBLIC_PATH: options.publicPath,
+                TARGET: options.target,
+            }),
+            /**
+             * Forks ts type checker into another process
+             */
+            getPluginForkTsCheckerWebpack(),
+            /**
+             * Extract css to file
+             */
+            ifClient(
+                new MiniCssExtractPlugin({
+                    chunkFilename: ifProduction(
+                        "static/css/[name].[contenthash].css",
+                        "static/css/main.css",
+                    ),
+                    filename: ifProduction(
+                        "static/css/[name].[contenthash].css",
+                        "static/css/main.css",
+                    ),
+                }),
+            ),
+            /**
+             * Bundle analyzer for js
+             */
+            getPluginBundleAnalyzer(options.stats),
+            /**
+             * Generate a manifest file which contains a mapping of all asset filenames
+             * to their corresponding output file so that tools can pick it up without
+             * having to parse `index.html`.
+             *
+             * @todo should only run for client
+             */
+            ifProduction(
+                new ManifestPlugin({
+                    fileName: "asset-manifest.json",
+                }),
+            ),
+            /**
+             * This is necessary to emit hot updates (currently CSS only):
+             *
+             * @todo should only run for client
+             */
+            ifDevelopment(new webpack.HotModuleReplacementPlugin()),
+        ]),
         profile: options.profiling,
         /**
          * @description Tell webpack how to resolve files and modules

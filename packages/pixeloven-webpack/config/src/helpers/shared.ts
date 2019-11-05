@@ -24,7 +24,13 @@ export function getSetup(options: Options) {
         }),
     ];
 
-    const { ifClient, ifDevelopment, ifProduction, ifServer } = getUtils({
+    const {
+        ifClient,
+        ifDevelopment,
+        ifProduction,
+        ifNotLibrary,
+        ifServer,
+    } = getUtils({
         mode: options.mode,
         name: options.name,
         target: options.target,
@@ -148,10 +154,15 @@ export function getSetup(options: Options) {
                 },
                 {
                     loader: require.resolve("ts-loader"),
-                    options: {
-                        configFile: resolveTsConfig(),
-                        transpileOnly: true,
-                    },
+                    options: ifNotLibrary(
+                        {
+                            configFile: resolveTsConfig(),
+                            transpileOnly: true,
+                        },
+                        {
+                            configFile: resolveTsConfig(),
+                        },
+                    ),
                 },
             ],
         };
@@ -184,17 +195,19 @@ export function getSetup(options: Options) {
     }
 
     function getPluginForkTsCheckerWebpack() {
-        return ifProduction(
-            new ForkTsCheckerWebpackPlugin({
-                silent: true,
-                tsconfig: resolveTsConfig(),
-            }),
-            new ForkTsCheckerWebpackPlugin({
-                async: false,
-                silent: true,
-                tsconfig: resolveTsConfig(),
-                watch: resolveSourceRoot(),
-            }),
+        return ifNotLibrary(
+            ifProduction(
+                new ForkTsCheckerWebpackPlugin({
+                    silent: true,
+                    tsconfig: resolveTsConfig(),
+                }),
+                new ForkTsCheckerWebpackPlugin({
+                    async: false,
+                    silent: true,
+                    tsconfig: resolveTsConfig(),
+                    watch: resolveSourceRoot(),
+                }),
+            ),
         );
     }
 
