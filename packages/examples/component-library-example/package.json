@@ -29,7 +29,7 @@
     "react": ">=16"
   },
   "scripts": {
-    "compile": "pixeloven compile ts",
+    "compile": "pixeloven webpack build --library ./src/index.ts --stats --source-map",
     "document": "pixeloven document ts ./src",
     "lint": "yarn run lint:ts",
     "lint:ts": "pixeloven lint ts 'src/**/*.{ts,tsx}'",

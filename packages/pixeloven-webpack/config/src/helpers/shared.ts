@@ -1,26 +1,12 @@
 import { removeEmpty } from "@pixeloven-core/common";
 import { getUtils } from "@pixeloven-core/env";
-import {
-    resolvePath,
-    resolveSourceRoot,
-    resolveTsConfig,
-} from "@pixeloven-core/filesystem";
+import { resolveSourceRoot, resolveTsConfig } from "@pixeloven-core/filesystem";
 import autoprefixer from "autoprefixer";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
-import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
-import TerserPlugin from "terser-webpack-plugin";
-import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
-import {
-    DevtoolModuleFilenameTemplateInfo,
-    Options as WebpackOptions,
-    Resolve,
-    RuleSetRule,
-} from "webpack";
+import { RuleSetRule } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import webpackNodeExternals from "webpack-node-externals";
 import { Options } from "../types";
 
 interface PluginBundleAnalyzerOptions {
@@ -31,21 +17,6 @@ interface PluginBundleAnalyzerOptions {
 }
 
 export function getSetup(options: Options) {
-    /**
-     * Describe source pathing in dev tools
-     * @param info
-     */
-    const devtoolModuleFilenameTemplate = (
-        info: DevtoolModuleFilenameTemplateInfo,
-    ) => {
-        if (ifProduction()) {
-            return path
-                .relative(resolveSourceRoot(), info.absoluteResourcePath)
-                .replace(/\\/g, "/");
-        }
-        return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
-    };
-
     const postCssPlugin = () => [
         require("postcss-flexbugs-fixes"),
         autoprefixer({
@@ -58,149 +29,6 @@ export function getSetup(options: Options) {
         name: options.name,
         target: options.target,
     });
-
-    function getDevTool() {
-        return options.sourceMap ? "eval-source-map" : false;
-    }
-
-    function getEntry() {
-        return ifClient(
-            {
-                main: removeEmpty([
-                    /**
-                     * @todo This is deprecated. Need to link core-js directly
-                     */
-                    require.resolve("@babel/polyfill"),
-                    ifDevelopment(
-                        `webpack-hot-middleware/client?path=${path.normalize(
-                            `/${options.publicPath}/__webpack_hmr`,
-                        )}`,
-                        undefined,
-                    ),
-                    resolvePath(options.entry),
-                ]),
-            },
-            [resolvePath(options.entry)],
-        );
-    }
-
-    function getExternals() {
-        return ifServer(
-            [
-                // Exclude from local node_modules dir
-                webpackNodeExternals(),
-                // Exclude from file - helpful for lerna packages
-                webpackNodeExternals({
-                    modulesFromFile: true,
-                }),
-            ],
-            undefined,
-        );
-    }
-
-    function getOptimization() {
-        return ifClient(
-            {
-                minimize: ifProduction(),
-                minimizer: ifProduction(
-                    [
-                        /**
-                         * Minify the code JavaScript
-                         *
-                         * @env production
-                         */
-                        new TerserPlugin({
-                            extractComments: "all",
-                            sourceMap: options.sourceMap,
-                            terserOptions: {
-                                safari10: true,
-                            },
-                        }),
-                        new OptimizeCSSAssetsPlugin(),
-                    ],
-                    [],
-                ),
-                noEmitOnErrors: true,
-                /**
-                 * @todo See how we can stop vendors-main (no s)
-                 * @todo Make configurable v8 (include ability to provide these rules in json form)
-                 */
-                splitChunks: {
-                    cacheGroups: {
-                        coreJs: {
-                            name: "vendor~core-js",
-                            test: /[\\/]node_modules[\\/](core-js)[\\/]/,
-                        },
-                        lodash: {
-                            name: "vendor~lodash",
-                            test: /[\\/]node_modules[\\/](lodash)[\\/]/,
-                        },
-                        moment: {
-                            name: "vendor~moment",
-                            test: /[\\/]node_modules[\\/](moment)[\\/]/,
-                        },
-                        react: {
-                            name: "vendor~react",
-                            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-                        },
-                        vendor: {
-                            name: "vendor~main",
-                            /**
-                             * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-                             */
-                            // name(mod) {
-                            //     // get the name. E.g. node_modules/packageName/not/this/part.js
-                            //     // or node_modules/packageName
-                            //     const packageName = mod.context.match(
-                            //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-                            //     )[1];
-                            //     // npm package names are URL-safe, but some servers don't like @ symbols
-                            //     return `vendor~${packageName.replace("@", "")}`;
-                            // },
-                            test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
-                        },
-                    },
-                    chunks: "all",
-                    maxInitialRequests: Infinity,
-                    minSize: 0,
-                },
-            },
-            {
-                noEmitOnErrors: true,
-            },
-        );
-    }
-
-    function getOutput() {
-        return ifClient(
-            {
-                chunkFilename: ifProduction(
-                    "static/js/[name].[contenthash].js",
-                    "static/js/[name].[hash].js",
-                ),
-                devtoolModuleFilenameTemplate,
-                filename: ifProduction(
-                    "static/js/[name].[contenthash].js",
-                    "static/js/[name].[hash].js",
-                ),
-                path: resolvePath(
-                    path.normalize(`${options.outputPath}/public`),
-                    false,
-                ), // @todo THis should not be hardcoded once we split client and server
-                publicPath: options.publicPath,
-            },
-            {
-                filename: "server.js",
-                libraryTarget: "commonjs2",
-                path: resolvePath(options.outputPath, false),
-                publicPath: options.publicPath,
-            },
-        );
-    }
-
-    function getMode() {
-        return ifProduction("production", "development");
-    }
 
     /**
      * All other files that aren't caught by the other loaders will go through this one.
@@ -215,7 +43,7 @@ export function getSetup(options: Options) {
             exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
             loader: require.resolve("file-loader"),
             options: {
-                emitFile: ifClient(true, false),
+                emitFile: ifServer(false, true),
                 name: ifProduction(
                     "static/media/[name].[contenthash].[ext]",
                     "static/media/[name].[hash].[ext]",
@@ -225,6 +53,9 @@ export function getSetup(options: Options) {
     }
 
     function getModuleSCSSLoader() {
+        /**
+         * @todo what to do here?????
+         */
         return ifClient(
             {
                 test: /\.(scss|sass|css)$/i,
@@ -326,15 +157,6 @@ export function getSetup(options: Options) {
         };
     }
 
-    /**
-     * @todo Might not need this anymore
-     */
-    function getPerformance(): WebpackOptions.Performance {
-        return {
-            hints: ifDevelopment("warning", false),
-        };
-    }
-
     function getPluginBundleAnalyzer(analyzer: PluginBundleAnalyzerOptions) {
         const statsFilename = path.resolve(
             `${analyzer.outputDir}/${options.name}-stats.json`,
@@ -376,67 +198,11 @@ export function getSetup(options: Options) {
         );
     }
 
-    function getNode() {
-        return ifClient(
-            {
-                child_process: "empty",
-                dgram: "empty",
-                dns: "mock",
-                fs: "empty",
-                http2: "empty",
-                module: "empty",
-                net: "empty",
-                tls: "empty",
-            },
-            {
-                __dirname: false,
-                __filename: false,
-            },
-        );
-    }
-
-    /**
-     * @description Tell webpack how to resolve files and modules
-     * Prevents users from importing files from outside of src/ (or node_modules/).
-     * This often causes confusion because we only process files within src/ with babel.
-     * To fix this, we prevent you from importing files out of src/ -- if you'd like to,
-     * please link the files into your node_modules/ and let module-resolution kick in.
-     * Make sure your source files are compiled, as they will not be processed in any way.
-     *
-     * @todo How to handle lerna???
-     */
-    function getResolve(): Resolve {
-        return {
-            alias: {
-                "@src": resolveSourceRoot(),
-            },
-            extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx"],
-            modules: [resolveSourceRoot(), "node_modules"],
-            plugins: [
-                new ModuleScopePlugin(resolveSourceRoot(), [
-                    resolvePath("package.json"),
-                ]),
-                new TsconfigPathsPlugin({
-                    configFile: resolveTsConfig(),
-                }),
-            ],
-        };
-    }
-
     return {
-        getDevTool,
-        getEntry,
-        getExternals,
-        getMode,
         getModuleFileLoader,
         getModuleSCSSLoader,
         getModuleTypeScriptLoader,
-        getNode,
-        getOptimization,
-        getOutput,
-        getPerformance,
         getPluginBundleAnalyzer,
         getPluginForkTsCheckerWebpack,
-        getResolve,
     };
 }
