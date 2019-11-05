@@ -62,7 +62,7 @@
   },
   "scripts": {
     "build:development": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --stats --source-map --path /",
-    "build:production": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --path /",
+    "build:production": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --allow-externals --path /",
     "build:story": "pixeloven story build",
     "document": "pixeloven document ts ./src",
     "generate": "pixeloven generate",

@@ -7,6 +7,7 @@ import Compiler from "./Compiler";
  * Default compiler options
  */
 const defaultCompilerOptions: Options = {
+    allowExternals: false,
     entry: "./src/index.ts",
     mode: Mode.development,
     name: Name.library,

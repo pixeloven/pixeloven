@@ -8,6 +8,7 @@ interface Stats {
 }
 
 export interface Options {
+    allowExternals: boolean;
     entry: string;
     mode: Mode;
     name: Name;

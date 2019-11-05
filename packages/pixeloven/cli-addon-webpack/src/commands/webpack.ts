@@ -55,6 +55,7 @@ export default {
         const { parameters, pixelOven, print, webpack } = toolbox;
         const task = parameters.first;
         const {
+            allowExternals,
             client,
             development,
             host,
@@ -101,6 +102,7 @@ export default {
             }
             logger.info(`${chalk.bold(name)} targeting ${target}`);
             return {
+                allowExternals,
                 entry,
                 mode,
                 name,
