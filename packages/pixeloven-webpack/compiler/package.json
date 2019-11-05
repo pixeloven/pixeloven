@@ -21,12 +21,12 @@
     "@pixeloven-core/common": "^6.0.0-beta.10",
     "@pixeloven-core/env": "^6.0.0-beta.10",
     "@pixeloven-webpack/config": "^6.0.0-beta.11",
-    "webpack": "4.38.0"
+    "webpack": "4.41.2"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.9",
-    "@types/webpack": "4.39.5",
-    "lint-staged": "9.2.5"
+    "@types/webpack": "4.39.8",
+    "lint-staged": "9.4.2"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

@@ -2,10 +2,7 @@ import { withA11y } from "@storybook/addon-a11y";
 import { withBackgrounds } from "@storybook/addon-backgrounds";
 import { withKnobs } from "@storybook/addon-knobs";
 import { addDecorator, addParameters, configure } from "@storybook/react";
-
-/**
- * @todo Make readme the default if it exists?  Can we hide actions? what does it even do?
- */
+import { themes } from "@storybook/theming";
 
 addDecorator(withA11y);
 addDecorator(withBackgrounds);
@@ -40,9 +37,7 @@ addParameters({
         isFullScreen: false,
         panelPosition: "right",
         showSearchBox: false,
-        theme: {
-            brandTitle: "Storybook React",
-        },
+        theme: themes.light,
     },
 });
 
