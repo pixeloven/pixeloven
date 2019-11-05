@@ -85,6 +85,10 @@ export function getSetup(options: Options) {
     }
 
     function getExternals() {
+        /**
+         * @todo This holds the secret.
+         *      Can we just make this configurable... would be nice to make server.js a bundle
+         */
         return ifServer(
             [
                 // Exclude from local node_modules dir
@@ -215,7 +219,7 @@ export function getSetup(options: Options) {
             exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.html$/, /\.json$/],
             loader: require.resolve("file-loader"),
             options: {
-                emitFile: ifClient(true, false),
+                emitFile: ifClient(),
                 name: ifProduction(
                     "static/media/[name].[contenthash].[ext]",
                     "static/media/[name].[hash].[ext]",

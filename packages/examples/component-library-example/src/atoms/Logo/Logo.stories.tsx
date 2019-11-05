@@ -7,7 +7,7 @@ import Logo from "./Logo";
 storiesOf("Logo", module).add(
     "Default",
     () => {
-        return <Logo />;
+        return <Logo speed={"30s"} />;
     },
     {
         notes: { markdown: Readme },

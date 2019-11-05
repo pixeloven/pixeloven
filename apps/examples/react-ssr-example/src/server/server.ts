@@ -1,4 +1,4 @@
-import { Application, Router } from "express";
+import express, { Application, Router } from "express";
 import expressWinston from "express-winston";
 import path from "path";
 import winston from "winston";
@@ -30,6 +30,10 @@ async function server(app: Application, config: Config) {
                 config.publicPath,
                 path.resolve(__dirname, "public/asset-manifest.json"),
             ),
+        );
+        app.use(
+            config.publicPath,
+            express.static(path.resolve(__dirname, "public")),
         );
     }
 
