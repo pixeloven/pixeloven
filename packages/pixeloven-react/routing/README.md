@@ -2,7 +2,7 @@
 
 > Pixel Oven React router config.
 
-See our website [pixeloven-react-router-config](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [pixeloven](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
 
 ## Install
 

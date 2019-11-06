@@ -1,6 +1,6 @@
-# @pixeloven-react/common
+# @pixeloven-react/testing
 
-> Pixel Oven react common
+> Pixel Oven react testing
 
 See our website [pixeloven](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
 
@@ -9,11 +9,11 @@ See our website [pixeloven](https://github.com/pixeloven/pixeloven) for more inf
 Using npm:
 
 ```sh
-npm install --save @pixeloven-react/common
+npm install --save @pixeloven-react/testing
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven-react/common
+yarn add @pixeloven-react/testing
 ```
