@@ -43,7 +43,6 @@
     "@types/react-helmet": "5.0.8",
     "@types/react-redux": "7.1.1",
     "@types/supertest": "2.0.7",
-    "babel-loader": "8.0.5",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
     "lint-staged": "9.4.2",
@@ -54,7 +53,7 @@
     "node": "8.x || 9.x || 10.x"
   },
   "scripts": {
-    "build:development": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --stats --source-map --path /",
+    "build:development": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --allow-externals --stats --source-map --path /",
     "build:production": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --allow-externals --path /",
     "build:story": "pixeloven story build",
     "document": "pixeloven document ts ./src",
