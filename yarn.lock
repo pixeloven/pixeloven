@@ -3276,6 +3276,15 @@
     "@types/react" "*"
     "@types/react-router" "*"
 
+"@types/react-router-dom@5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.2.tgz#853f229f1f297513c0be84f7c914a08b778cfdf5"
+  integrity sha512-kRx8hoBflE4Dp7uus+j/0uMHR5uGTAvQtc4A3vOTWKS+epe0leCuxEx7HNT7XGUd1lH53/moWM51MV2YUyhzAg==
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
 "@types/react-router@*", "@types/react-router@5.1.2":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.2.tgz#41e5e6aa333a7b9a2bfdac753c04e1ca4b3e0d21"
