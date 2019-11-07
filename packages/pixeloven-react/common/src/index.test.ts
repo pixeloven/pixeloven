@@ -1,6 +1,6 @@
 import "jest";
 
-describe("@pixeloven-react/testing", () => {
+describe("@pixeloven-react/common", () => {
     describe("index", () => {
         //
     });
