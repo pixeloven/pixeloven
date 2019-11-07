@@ -6,10 +6,13 @@ import { Mode, Name, Target, UtilOptions } from "./types";
  */
 export function getUtils<T extends UtilOptions>(options: T) {
     function ifType<Y, N>(isType: boolean, value?: Y, alternate?: N) {
-        const tValue = value || false;
-        const tAlternate = alternate || false;
-        if (tValue) {
-            return isType ? tValue : tAlternate;
+        if (typeof value !== "undefined" && typeof alternate !== "undefined") {
+            return isType ? value : alternate;
+        } else if (
+            typeof value !== "undefined" &&
+            typeof alternate === "undefined"
+        ) {
+            return isType ? value : false;
         }
         return isType;
     }
