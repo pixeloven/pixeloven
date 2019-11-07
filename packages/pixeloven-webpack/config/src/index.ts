@@ -1,7 +1,7 @@
 import { removeEmpty } from "@pixeloven-core/common";
 import { getUtils } from "@pixeloven-core/env";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
-import CircularDependencyPlugin from "circular-dependency-plugin";
+// import CircularDependencyPlugin from "circular-dependency-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TimeFixPlugin from "time-fix-plugin";
 import webpack, { Configuration } from "webpack";
@@ -55,10 +55,10 @@ function getConfig(options: Options) {
              * @env development
              */
             ifDevelopment(new CaseSensitivePathsPlugin()),
-            new CircularDependencyPlugin({
-                // exclude detection of files based on a RegExp
-                exclude: /node_modules/,
-            }),
+            // new CircularDependencyPlugin({
+            //     // exclude detection of files based on a RegExp
+            //     exclude: /node_modules/,
+            // }),
             /**
              * Helps prevent hashes from updating if a bundle hasn't changed.
              * @env all
@@ -138,10 +138,10 @@ function getConfig(options: Options) {
              * @env development
              */
             ifDevelopment(new CaseSensitivePathsPlugin()),
-            new CircularDependencyPlugin({
-                // exclude detection of files based on a RegExp
-                exclude: /node_modules/,
-            }),
+            // new CircularDependencyPlugin({
+            //     // exclude detection of files based on a RegExp
+            //     exclude: /node_modules/,
+            // }),
             /**
              * Moment.js is an extremely popular library that bundles large locale files
              * by default due to how Webpack interprets its code. This is a practical
