@@ -1,5 +1,5 @@
 import { matchPath } from "react-router";
-import { MatchedRoutes, MatchOptions, RouteProps } from "../../types";
+import { MatchedRoutes, MatchOptions, UniversalRouteProps } from "../../types";
 
 /**
  * Copied form Router.computeRootMatch(pathname) version 4.4.0-beta
@@ -30,7 +30,7 @@ function computeRootMatch(path: string) {
  * @todo If a server knows a statusCode ahead of time (like failed api response) we should be able to do matching on both status and path
  */
 function getMatches(
-    routes: RouteProps[],
+    routes: UniversalRouteProps[],
     options: MatchOptions = {
         as: "default",
         path: "/",
