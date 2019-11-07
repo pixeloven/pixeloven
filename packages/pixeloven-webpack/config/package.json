@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/config",
-  "version": "6.0.0-beta.12",
+  "version": "6.0.0-beta.13",
   "description": "Webpack configuration for client and server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -27,7 +27,7 @@
     "@babel/preset-react": "7.7.0",
     "@babel/preset-typescript": "7.7.2",
     "@pixeloven-core/common": "^6.0.0-beta.12",
-    "@pixeloven-core/env": "^6.0.0-beta.12",
+    "@pixeloven-core/env": "^6.0.0-beta.13",
     "@pixeloven-core/filesystem": "^6.0.0-beta.12",
     "autoprefixer": "9.7.1",
     "babel-loader": "8.0.6",
