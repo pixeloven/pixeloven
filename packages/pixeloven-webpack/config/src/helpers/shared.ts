@@ -53,7 +53,7 @@ export function getSetup(options: Options) {
         }),
     ];
 
-    const { ifClient, ifDevelopment, ifProduction } = getUtils({
+    const { ifClient, ifDevelopment, ifProduction, ifNode } = getUtils({
         mode: options.mode,
         name: options.name,
         target: options.target,
@@ -85,16 +85,17 @@ export function getSetup(options: Options) {
     }
 
     function getExternals() {
-        return !options.allowExternals
-            ? [
-                  // Exclude from local node_modules dir
-                  webpackNodeExternals(),
-                  // Exclude from file - helpful for lerna packages
-                  webpackNodeExternals({
-                      modulesFromFile: true,
-                  }),
-              ]
-            : undefined;
+        if (!options.allowExternals) {
+            return ifNode([
+                // Exclude from local node_modules dir
+                webpackNodeExternals(),
+                // Exclude from file - helpful for lerna packages
+                webpackNodeExternals({
+                    modulesFromFile: true,
+                }),
+            ]);
+        }
+        return false;
     }
 
     function getOptimization() {
@@ -376,7 +377,11 @@ export function getSetup(options: Options) {
     }
 
     function getNode() {
-        return ifClient(
+        return ifNode(
+            {
+                __dirname: false,
+                __filename: false,
+            },
             {
                 child_process: "empty",
                 dgram: "empty",
@@ -386,10 +391,6 @@ export function getSetup(options: Options) {
                 module: "empty",
                 net: "empty",
                 tls: "empty",
-            },
-            {
-                __dirname: false,
-                __filename: false,
             },
         );
     }
