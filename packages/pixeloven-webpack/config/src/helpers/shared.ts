@@ -278,6 +278,7 @@ export function getSetup(options: Options) {
         return {
             include: resolveSourceRoot(),
             test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
+            type: "javascript/auto",
             use: [
                 {
                     loader: require.resolve("babel-loader"),
