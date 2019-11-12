@@ -179,6 +179,15 @@ function getConfig(options: Options) {
             rules: [
                 {
                     oneOf: [
+                        {
+                            test: /.mjs$/,
+                            type: "javascript/auto",
+                            use: [
+                                {
+                                    loader: require.resolve("babel-loader"),
+                                },
+                            ],
+                        },
                         getModuleTypeScriptLoader(),
                         getModuleSCSSLoader(),
                         getModuleFileLoader(),
