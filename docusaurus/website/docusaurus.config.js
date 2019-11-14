@@ -37,7 +37,7 @@ const siteConfig = {
       },
       links: [
         { 
-          to: 'docs/getting-started', 
+          to: 'docs/getting-started/intro', 
           label: 'Docs', 
           position: 'right'
         },
@@ -56,7 +56,7 @@ const siteConfig = {
           items: [
             {
               label: 'Get Started',
-              to: 'docs/getting-started',
+              to: 'docs/getting-started/intro',
             },
             {
               label: 'Learn React',

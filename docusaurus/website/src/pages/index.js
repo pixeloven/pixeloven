@@ -51,7 +51,7 @@ function Home() {
           <div className={styles.getStarted}>
             <Link
               className="button button--outline button--primary button--lg"
-              to={useBaseUrl('docs/getting-started')}
+              to={useBaseUrl('docs/getting-started/intro')}
             >
               Get Started
             </Link>
@@ -91,7 +91,7 @@ function Home() {
                 npx pixeloven init my-app
               </CodeBlock>
               <br />
-              <p>For new and existing projects please review our documentation for tips on <Link to={useBaseUrl('docs/getting-started')}>getting started</Link>.</p>
+              <p>For new and existing projects please review our documentation for tips on <Link to={useBaseUrl('docs/getting-started/intro')}>getting started</Link>.</p>
             </div>
             <div className="col col--5 col--offset-1">
               @todo - animation of terminal here, create generate above & finish --help
