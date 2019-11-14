@@ -3,7 +3,7 @@
  */
 const siteConfig = {
   title: 'PixelOven',
-  tagline: 'A modern CLI for production ready JavaScript applications',
+  tagline: 'A modern CLI for production ready JavaScript applications.',
   url: 'https://pixeloven.com',
   baseUrl: '/',
   projectName: 'pixeloven',
@@ -28,7 +28,7 @@ const siteConfig = {
     ],
   ],
   themeConfig: {
-    image: 'img/logo-og.png',
+    // image: 'img/logo-og.png', // What is this for ?
     navbar: {
       title: 'PixelOven',
       logo: {
@@ -65,16 +65,17 @@ const siteConfig = {
           ],
         },
         {
+          // Add links for typescript, jest, webpack etc
           title: 'Community',
           items: [
             {
               label: 'Stack Overflow',
               href:
-                'https://stackoverflow.com/questions/tagged/create-react-app',
+                'https://stackoverflow.com/questions/tagged/pixeloven',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/reactjs',
+              href: 'https://twitter.com/pixeloven',
             },
             {
               label: 'Contributor Covenant',
@@ -93,11 +94,6 @@ const siteConfig = {
           ],
         },
       ],
-      logo: {
-        alt: 'Facebook Open Source Logo',
-        src: 'img/oss_logo.png',
-      },
-      copyright: `Copyright © ${new Date().getFullYear()} PixelOven`,
     },
   },
 };

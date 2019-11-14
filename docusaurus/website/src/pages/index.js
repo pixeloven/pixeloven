@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import React from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -17,21 +10,24 @@ import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
+/**
+ * Move these into the JSX and just abstract into components. I want to add some links in the text
+ */
 const features = [
   {
-    title: 'Less to Learn',
+    title: 'Modular Design',
     content:
-      "You don't need to learn and configure many build tools. Instant reloads help you focus on development. When it's time to deploy, your bundles are optimized automatically.",
+      "PixelOven is split into a single core CLI with numerous addons for more specific needs. These addons include storybook, webpack and other important development tools.",
   },
   {
-    title: 'Only One Dependency',
+    title: 'Production Ready',
     content:
-      'Your app only needs one build dependency. We test Create React App to make sure that all of its underlying pieces work together seamlessly – no complicated version mismatches.',
+      'Our primary focus is to provide tooling to drive scalable & production ready applications. We support SSR, TypeScript for type safety and other features to ensure build quality.',
   },
   {
-    title: 'No Lock-In',
+    title: 'Community Driven',
     content:
-      'Under the hood, we use Webpack, Babel, ESLint, and other amazing projects to power your app. If you ever want an advanced configuration, you can ”eject” from Create React App and edit their config files directly.',
+      'Our tooling is built on top the best the community has to offer including Babel, TypeScript, Jest, Prettier, Webpack, and many other amazing projects to power your application.',
   },
 ];
 
@@ -42,7 +38,7 @@ function Home() {
   return (
     <Layout
       permalink={'/'}
-      description={'Set up a modern web app by running one command.'}
+      description={'A modern CLI for production ready JavaScript applications.'}
     >
       <div className={classnames('hero hero--dark', styles.heroBanner)}>
         <div className="container">
@@ -85,25 +81,20 @@ function Home() {
             <div className="col col--4 col--offset-1">
               <h2>Get started in seconds</h2>
               <p>
-                Whether you’re using React or another library, Create React App
-                lets you <strong>focus on code, not build tools</strong>.
+                PixelOven makes it easy to focus on what matters. Keep your <strong>application moving forward</strong> and let us handle the tooling.
+                We provide everything your team needs to build a <strong>production</strong> ready <strong>scalable</strong> application.
                 <br />
                 <br />
                 To create a project called <i>my-app</i>, run this command:
               </p>
               <CodeBlock className="language-sh">
-                npx create-react-app my-app
+                npx pixeloven init my-app
               </CodeBlock>
               <br />
+              <p>For new and existing projects please review our documentation for tips on <Link to={useBaseUrl('docs/getting-started')}>getting started</Link>.</p>
             </div>
             <div className="col col--5 col--offset-1">
-              <img
-                className={styles.featureImage}
-                alt={'Easy to get started in seconds'}
-                src={
-                  'https://camo.githubusercontent.com/29765c4a32f03bd01d44edef1cd674225e3c906b/68747470733a2f2f63646e2e7261776769742e636f6d2f66616365626f6f6b2f6372656174652d72656163742d6170702f323762343261632f73637265656e636173742e737667'
-                }
-              />
+              @todo - animation of terminal here, create generate above & finish --help
             </div>
           </div>
         </div>
@@ -112,22 +103,69 @@ function Home() {
         <div className="container padding-vert--xl text--left">
           <div className="row">
             <div className="col col--4 col--offset-1">
-              <img
-                className={styles.featureImage}
-                alt={'Easy to update'}
-                src={useBaseUrl('img/update.png')}
-              />
+              @todo - Fun image here
             </div>
             <div className="col col--5 col--offset-1">
               <h2>Easy to Maintain</h2>
               <p>
-                Updating your build tooling is typically a daunting and
-                time-consuming task. When new versions of Create React App are
-                released, you can upgrade using a single command:
+                PixelOven's strength is in it's modular design. The CLI is broken up into to single main package and a number of addons for more specific requirements. 
+                <br />
+                <br />
+                Updating the core package is as easy as:
               </p>
               <CodeBlock className="language-sh">
-                npm install react-scripts@latest
+                npm install @pixeloven/cli@latest
               </CodeBlock>
+              <br />
+              <p>Addons can be upgrade in the same way and we strive to version our addons, packages and dependencies in a manner that is clear and secure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={styles.gettingStartedSection}>
+        <div className="container padding-vert--xl text--left">
+          <div className="row">
+            <div className="col col--4 col--offset-1">
+              <h2>PixelOven loves modularity</h2>
+              <p>
+                PixelOven loves <strong>modularity</strong>. Our core CLI can has been extend with numerous <strong>addons</strong> to support advanced tooling needs while keeping maintainability. PixelOven offers optional boilerplate packages to help support advanced React development.
+                <br />
+                <br />
+                Ooo did we mention that most of the core dependencies can be used in a standalone fashion!
+              </p>
+            </div>
+            <div className="col col--5 col--offset-1">
+              @todo - Fun image here
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="container padding-vert--xl text--left">
+          <div className="row">
+            <div className="col col--4 col--offset-1">
+              @todo - Fun image here
+            </div>
+            <div className="col col--5 col--offset-1">
+              <h2>Community Extensible</h2>
+              <p>
+                Modularity is amazing however, we didn't stop there!
+                <br />
+                <br />
+                We made it possible for the community to write their own addons to further extend PixelOven. We absolutely encourage contributing back to this project but we also understand that this is not always possible.
+                <br />
+              </p>
+              <CodeBlock className="language-json">
+                {JSON.stringify({
+                    "@pixeloven/cli": "6.0.0",
+                    "@pixeloven/cli-addon-generators": "6.0.0",
+                    "@pixeloven/cli-addon-storybook": "6.0.0",
+                    "@pixeloven/cli-addon-webpack": "6.0.0",
+                    "@my-project/cli-pixeloven-addon-fancy": "1.0.0",
+                }, null, 4)}
+              </CodeBlock>
+              <br />
+              <p>Whether your addons are for other amazing <strong>open source</strong> projects or private enterprise we leave that to you... but really it should be open ;).</p>
             </div>
           </div>
         </div>
