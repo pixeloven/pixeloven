@@ -1,5 +1,12 @@
 {
   "docs": {
-    "Welcome": ["intro"]
+    "Welcome": ["intro"],
+    "Getting Started": [
+      "getting-started"
+    ],
+    "Contributing": [
+      "contribution",
+      "code-of-conduct"
+    ]
   }
 }

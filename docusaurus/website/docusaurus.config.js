@@ -1,17 +1,13 @@
 /**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * @todo Setup prettier and what not... would be nice to use some of our own CLI to manage this
  */
-
 const siteConfig = {
-  title: 'Create React App',
-  tagline: 'Set up a modern web app by running one command.',
-  url: 'https://create-react-app.dev',
+  title: 'PixelOven',
+  tagline: 'A modern CLI for production ready JavaScript applications',
+  url: 'https://pixeloven.com',
   baseUrl: '/',
-  projectName: 'create-react-app',
-  organizationName: 'facebook',
+  projectName: 'pixeloven',
+  organizationName: 'pixeloven',
   favicon: 'img/favicon/favicon.ico',
   presets: [
     [
@@ -21,7 +17,7 @@ const siteConfig = {
           path: '../docs',
           sidebarPath: require.resolve('./sidebars.json'),
           editUrl:
-            'https://github.com/facebook/create-react-app/edit/master/docusaurus/docs/',
+            'https://github.com/pixeloven/pixeloven/tree/master/docusaurus/docs',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
@@ -33,25 +29,20 @@ const siteConfig = {
   ],
   themeConfig: {
     image: 'img/logo-og.png',
-    algolia: {
-      apiKey: '3be60f4f8ffc24c75da84857d6323791',
-      indexName: 'create-react-app',
-    },
     navbar: {
-      title: 'Create React App',
+      title: 'PixelOven',
       logo: {
-        alt: 'Create React App Logo',
+        alt: 'PixelOven Logo',
         src: 'img/logo.svg',
       },
       links: [
-        { to: 'docs/getting-started', label: 'Docs', position: 'right' },
-        {
-          href: 'https://reactjs.org/community/support.html',
-          label: 'Help',
-          position: 'right',
+        { 
+          to: 'docs/getting-started', 
+          label: 'Docs', 
+          position: 'right'
         },
         {
-          href: 'https://www.github.com/facebook/create-react-app',
+          href: 'https://github.com/pixeloven/pixeloven',
           label: 'GitHub',
           position: 'right',
         },
@@ -82,10 +73,6 @@ const siteConfig = {
                 'https://stackoverflow.com/questions/tagged/create-react-app',
             },
             {
-              label: 'Spectrum',
-              href: 'https://spectrum.chat/create-react-app',
-            },
-            {
               label: 'Twitter',
               href: 'https://twitter.com/reactjs',
             },
@@ -101,7 +88,7 @@ const siteConfig = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://www.github.com/facebook/create-react-app',
+              href: 'https://github.com/pixeloven/pixeloven',
             },
           ],
         },
@@ -110,7 +97,7 @@ const siteConfig = {
         alt: 'Facebook Open Source Logo',
         src: 'img/oss_logo.png',
       },
-      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+      copyright: `Copyright © ${new Date().getFullYear()} PixelOven`,
     },
   },
 };

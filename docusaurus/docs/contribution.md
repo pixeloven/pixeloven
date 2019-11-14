@@ -1,3 +1,8 @@
+---
+id: contribution
+title: Contribution
+---
+
 # Contribution
 This document is meant to highlight best practices for contributing to the general PixelOven project. If you are looking for specifics on how to setup this project for development of `apps` or `packages` please review the [quick start guide](./quick-start-guide.md). Otherwise for ideas on how to go about working within our best practices please review our [integration docs](./integrating/index.md).
 
