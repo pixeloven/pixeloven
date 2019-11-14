@@ -4,9 +4,16 @@
     "Getting Started": [
       "getting-started"
     ],
+    "Integration": [
+      "integration/intro",  
+      "integration/file-system-and-structure",  
+      "integration/working-with-libraries",  
+      "integration/react-components"
+    ],
     "Contributing": [
-      "contribution",
-      "code-of-conduct"
+      "contribution/intro",
+      "contribution/quick-start-guide",
+      "contribution/code-of-conduct"
     ]
   }
 }

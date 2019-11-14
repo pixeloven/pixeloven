@@ -1,4 +1,8 @@
-# Working with libraries
+---
+id: working-with-libraries
+title: Working with libraries
+---
+
 This document is general advice for creating new components and utilities.
 
 ## Table of Contents

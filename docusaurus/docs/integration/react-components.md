@@ -1,4 +1,8 @@
-# Components
+---
+id: react-components
+title: React Components
+---
+
 This document is general advice for creating and working with new components.
 
 ## Table of Contents

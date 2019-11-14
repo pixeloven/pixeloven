@@ -1,4 +1,8 @@
-# File System and Structure
+---
+id: file-system-and-structure
+title: File System and Structure
+---
+
 General overview of PixelOven's file structure and recommended application structure for projects using our CLI.
 
 ## Table of Contents
