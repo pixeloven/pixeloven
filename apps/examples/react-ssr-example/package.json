@@ -1,6 +1,6 @@
 {
   "name": "@examples/react-ssr-example",
-  "version": "6.0.0-beta.13",
+  "version": "6.0.0-beta.15",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@examples/component-library-example": "^6.0.0-beta.13",
+    "@examples/component-library-example": "^6.0.0-beta.15",
     "@pixeloven-react/routing": "^6.0.0-beta.12",
     "axios": "0.19.0",
     "classnames": "2.2.6",
@@ -35,9 +35,9 @@
   },
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-beta.12",
-    "@pixeloven/cli-addon-generators": "^6.0.0-beta.12",
+    "@pixeloven/cli-addon-generators": "^6.0.0-beta.14",
     "@pixeloven/cli-addon-storybook": "^6.0.0-beta.13",
-    "@pixeloven/cli-addon-webpack": "^6.0.0-beta.13",
+    "@pixeloven/cli-addon-webpack": "^6.0.0-beta.15",
     "@types/classnames": "2.2.9",
     "@types/enzyme": "3.10.3",
     "@types/enzyme-adapter-react-16": "1.0.5",
@@ -61,7 +61,7 @@
     "node": "8.x || 9.x || 10.x"
   },
   "scripts": {
-    "build:development": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --stats --source-map --path /",
+    "build:development": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --allow-externals --stats --source-map --path /",
     "build:production": "pixeloven webpack build --client ./src/client/index.tsx --server ./src/server/index.ts --allow-externals --path /",
     "build:story": "pixeloven story build",
     "document": "pixeloven document ts ./src",
@@ -76,7 +76,7 @@
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",
     "pretest": "pixeloven delete coverage",
-    "start:development": "pixeloven webpack start --client ./src/client/index.tsx --server ./src/server/index.ts --development --source-map --host localhost --path / --port 8080 --protocol http",
+    "start:development": "pixeloven webpack start --client ./src/client/index.tsx --server ./src/server/index.ts --allow-externals --development --source-map --host localhost --path / --port 8080 --protocol http",
     "start:production": "NODE_ENV=production node ./dist/server.js",
     "start:story": "pixeloven story start",
     "test": "pixeloven test --color --coverage",
