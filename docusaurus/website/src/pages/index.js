@@ -8,8 +8,6 @@ import CodeBlock from '@theme/CodeBlock';
 
 import classnames from 'classnames';
 
-import styles from './styles.module.css';
-
 /**
  * Move these into the JSX and just abstract into components. I want to add some links in the text
  */
@@ -40,15 +38,15 @@ function Home() {
       permalink={'/'}
       description={'A modern CLI for production ready JavaScript applications.'}
     >
-      <div className={classnames('hero hero--dark', styles.heroBanner)}>
+      <div className={classnames("hero", "hero--dark")}>
         <div className="container">
-          <img
-            className={classnames(styles.heroBannerLogo, 'margin-vert--md')}
-            src={useBaseUrl('img/logo.svg')}
-          />
+          {/* <img
+            className={classnames("logo", "margin-vert--md")}
+            src={useBaseUrl("img/logo.svg")}
+          /> */}
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className={styles.getStarted}>
+          <div className={classnames("get-started")}>
             <Link
               className="button button--outline button--primary button--lg"
               to={useBaseUrl('docs/getting-started/intro')}
@@ -59,13 +57,13 @@ function Home() {
         </div>
       </div>
       {features && features.length && (
-        <div className={styles.features}>
+        <div className={"features"}>
           <div className="container">
             <div className="row">
               {features.map(({ title, content }, idx) => (
                 <div
                   key={idx}
-                  className={classnames('col col--4', styles.feature)}
+                  className={classnames('col col--4', "features")}
                 >
                   <h2>{title}</h2>
                   <p>{content}</p>
@@ -75,7 +73,7 @@ function Home() {
           </div>
         </div>
       )}
-      <div className={styles.gettingStartedSection}>
+      <div className={"section--alt"}>
         <div className="container padding-vert--xl text--left">
           <div className="row">
             <div className="col col--4 col--offset-1">
@@ -94,16 +92,16 @@ function Home() {
               <p>For new and existing projects please review our documentation for tips on <Link to={useBaseUrl('docs/getting-started/intro')}>getting started</Link>.</p>
             </div>
             <div className="col col--5 col--offset-1">
-              @todo - animation of terminal here, create generate above & finish --help
+              <img width="75%" className={"grayscale"} src={"img/rocket.svg"} />
             </div>
           </div>
         </div>
       </div>
-      <div>
+      <div className={"section"}>
         <div className="container padding-vert--xl text--left">
           <div className="row">
             <div className="col col--4 col--offset-1">
-              @todo - Fun image here
+              <img width="100%" className={"grayscale"} src={"img/toolbox.svg"} />
             </div>
             <div className="col col--5 col--offset-1">
               <h2>Easy to Maintain</h2>
@@ -122,39 +120,22 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className={styles.gettingStartedSection}>
+      <div className={"section--alt"}>
         <div className="container padding-vert--xl text--left">
           <div className="row">
             <div className="col col--4 col--offset-1">
               <h2>PixelOven loves modularity</h2>
               <p>
-                PixelOven loves <strong>modularity</strong>. Our core CLI can has been extend with numerous <strong>addons</strong> to support advanced tooling needs while keeping maintainability. PixelOven offers optional boilerplate packages to help support advanced React development.
+                PixelOven loves <strong>modularity</strong>. Our core CLI is extended by some specialized <strong>addons</strong> to support advanced tooling needs while keeping maintainability.
                 <br />
                 <br />
-                Ooo did we mention that most of the core dependencies can be used in a standalone fashion!
+                However, we didn't stop there. PixelOven is design to allow the community to write their own addons to further extend PixelOven. Our hope is that people will want to contribute back to this project but we also understand that this is not always possible.
+                <br />
+                <br />
+                Whether your addons are for other amazing <strong>open source</strong> projects or private enterprise we leave that to you... but really it should be open ;).
               </p>
             </div>
             <div className="col col--5 col--offset-1">
-              @todo - Fun image here
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div className="container padding-vert--xl text--left">
-          <div className="row">
-            <div className="col col--4 col--offset-1">
-              @todo - Fun image here
-            </div>
-            <div className="col col--5 col--offset-1">
-              <h2>Community Extensible</h2>
-              <p>
-                Modularity is amazing however, we didn't stop there!
-                <br />
-                <br />
-                We made it possible for the community to write their own addons to further extend PixelOven. We absolutely encourage contributing back to this project but we also understand that this is not always possible.
-                <br />
-              </p>
               <CodeBlock className="language-json">
                 {JSON.stringify({
                     "@pixeloven/cli": "6.0.0",
@@ -165,7 +146,36 @@ function Home() {
                 }, null, 4)}
               </CodeBlock>
               <br />
-              <p>Whether your addons are for other amazing <strong>open source</strong> projects or private enterprise we leave that to you... but really it should be open ;).</p>
+              <p>Besides our CLI options PixelOven offers a number of simple abstractions to help user's start working with these great tools faster.</p>
+              <CodeBlock className="language-json">
+                {JSON.stringify({
+                    "@pixeloven-react/common": "6.0.0",
+                    "@pixeloven-react/routing": "6.0.0",
+                }, null, 4)}
+              </CodeBlock>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={"section"}>
+        <div className="container padding-vert--xl text--left">
+          <div className="row">
+            <div className="col col--4 col--offset-1">
+              <div className="community-stack">
+                <img width="45%" className={"community-item--one grayscale"} src={"img/storybook.svg"} />
+                <img width="55%" className={"community-item--two grayscale"} src={"img/jest.svg"} />
+                <img width="90%" className={"community-item--three grayscale"} src={"img/react.svg"} />
+              </div>
+            </div>
+            <div className="col col--5 col--offset-1">
+              <h2>Community Driven</h2>
+              <p>
+                Our goal is to not replace these amazing community tools but instead fill in the gaps to make it a fun and seamless experience. 
+                <br />
+                <br />
+                Besides our CLI options PixelOven offers a number of simple abstractions to help user's start working with these great tools faster.
+              </p>
+              <p>If you are feeling really adventurous much of our CLI functionality can be used in a more standalone fashion. Everything from the development webpack server to simple core functions is all up for grabs.</p>
             </div>
           </div>
         </div>

@@ -1,14 +1,79 @@
 :root {
-  --ifm-color-primary: #09d3ac;
-  --ifm-color-primary-dark: rgb(8, 190, 155);
-  --ifm-color-primary-darker: rgb(8, 179, 146);
-  --ifm-color-primary-darkest: rgb(6, 148, 120);
-  --ifm-color-primary-light: rgb(46, 218, 184);
-  --ifm-color-primary-lighter: rgb(83, 224, 197);
-  --ifm-color-primary-lightest: rgb(132, 233, 214);
-  --ifm-hero-background-color: #1B1C1D;
+  --ifm-color-primary: #00b964;
+}
+.center {
+  display: block;
+  margin: 0 auto;
+}
+
+.community-stack {
+  position: relative;
+}
+
+.community-item--one {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.community-item--two {
+  position: absolute;
+  top: 80px;
+  left: 20%;
+}
+.community-item--three {
+  position: absolute;
+  top: 160px;
+  left: 30%;
+}
+.community-item--four {
+  position: absolute;
+  top: 0px;
+  right: 0%;
+}
+.grayscale {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+.features {
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.hero {
+  padding: 2.5rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero.hero--dark {
   --ifm-hero-background-color: #1B1C1D;
+}
+
+.section {
+  background-color: var(--ifm-background-color);
+}
+
+.section--alt {
+  background-color: #f7f7f7;
+}
+
+html[data-theme="dark"] .section {
+  background-color: var(--ifm-background-color);
+}
+
+html[data-theme="dark"] .section--alt {
+  background-color: #1B1C1D;
+}
+
+.get-started {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer.footer--dark {
+  --ifm-footer-background-color: #1B1C1D;
 }

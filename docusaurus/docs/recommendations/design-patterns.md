@@ -1,6 +1,6 @@
 ---
 id: design-patterns
-title: Recommended Design Patterns
+title: Design Patterns
 ---
 
 ## Application files structure

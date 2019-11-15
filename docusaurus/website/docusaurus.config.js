@@ -31,10 +31,10 @@ const siteConfig = {
     // image: 'img/logo-og.png', // What is this for ?
     navbar: {
       title: 'PixelOven',
-      logo: {
-        alt: 'PixelOven Logo',
-        src: 'img/logo.svg',
-      },
+      // logo: {
+      //   alt: 'PixelOven Logo',
+      //   src: 'img/logo.svg',
+      // },
       links: [
         { 
           to: 'docs/getting-started/intro', 
