@@ -1,4 +1,4 @@
-import { Routing } from "@pixeloven-react/routing";
+import { BrowserRouter, Routing } from "@pixeloven-react/routing";
 import App from "@shared/components/App";
 import { config } from "@shared/config";
 import routeConfig from "@shared/routes";
@@ -6,7 +6,6 @@ import { configureStore } from "@shared/store/store";
 import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import "../shared/styles/core/core.scss";
 
 /**

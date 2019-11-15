@@ -1,9 +1,9 @@
-import { Routes, UniversalUniversalRouteProps } from "@pixeloven-react/routing";
+import { Routes, UniversalRouteProps } from "@pixeloven-react/routing";
 import React from "react";
 import { Helmet } from "react-helmet";
 
 interface Props {
-    routes: UniversalUniversalRouteProps[];
+    routes: UniversalRouteProps[];
 }
 
 function App(props: Props) {

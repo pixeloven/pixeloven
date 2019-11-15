@@ -1,6 +1,6 @@
 import { ConnectedComponentClass } from "react-redux";
 import { match } from "react-router";
-import { RouteComponentProps, UniversalRouteProps } from "react-router-dom";
+import { RouteComponentProps, RouteProps } from "react-router-dom";
 import { Dispatch } from "redux";
 
 /**
@@ -24,7 +24,7 @@ export interface MatchOptions {
 
 export interface MatchedRoutes {
     matched: match;
-    route: UniversalUniversalRouteProps;
+    route: UniversalRouteProps;
 }
 
 /**
@@ -32,17 +32,17 @@ export interface MatchedRoutes {
  */
 export type ResolvePathFunction = (parentPath: string) => string;
 
-export interface UniversalUniversalRouteProps extends UniversalRouteProps {
+export interface UniversalRouteProps extends RouteProps {
     key?: number;
     component: UniversalRouteComponent<Params>;
     fetchData?: FetchDataFunction;
-    routes?: UniversalUniversalRouteProps[];
+    routes?: UniversalRouteProps[];
     statusCode?: number;
 }
 
 export interface UniversalRouteComponentProps<T = {}>
     extends RouteComponentProps<T> {
-    routes?: UniversalUniversalRouteProps[];
+    routes?: UniversalRouteProps[];
 }
 
 export type UniversalRouteComponent<T = {}> =
