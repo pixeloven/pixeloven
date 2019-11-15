@@ -1,0 +1,478 @@
+{
+  "entrypoints": [
+    "main"
+  ],
+  "origins": {
+    "0": [
+      1,
+      2,
+      4,
+      34,
+      0
+    ],
+    "1": [
+      0,
+      2,
+      4,
+      1
+    ],
+    "@site/src/pages/index.js": [
+      0,
+      1,
+      2
+    ],
+    "@theme/DocItem": [
+      3
+    ],
+    "@theme/DocPage": [
+      0,
+      1,
+      4
+    ],
+    "@site/../docs/about-us.md": [
+      5
+    ],
+    "@site/../docs/contribution/code-of-conduct.md": [
+      6
+    ],
+    "@site/../docs/contribution/file-system-and-structure.md": [
+      7
+    ],
+    "@site/../docs/contribution/intro.md": [
+      8
+    ],
+    "@site/../docs/contribution/quick-start-guide.md": [
+      9
+    ],
+    "@site/../docs/getting-started/file-system-and-structure.md": [
+      10
+    ],
+    "@site/../docs/getting-started/intro.md": [
+      11
+    ],
+    "@site/../docs/integration/cli.md": [
+      12
+    ],
+    "@site/../docs/integration/cli-addon-webpack.md": [
+      13
+    ],
+    "@site/../docs/recommendations/design-patterns.md": [
+      14
+    ],
+    "@site/../docs/recommendations/intro.md": [
+      15
+    ],
+    "@site/../docs/recommendations/react-components.md": [
+      16
+    ],
+    "@site/../docs/recommendations/working-with-libraries.md": [
+      17
+    ],
+    "@docusaurus-plugin-content-docs/docs-b5f.json": [
+      18
+    ],
+    "main": [
+      33,
+      19
+    ],
+    "@docusaurus-plugin-content-docs/docs-about-us-a7d.json": [
+      20
+    ],
+    "@docusaurus-plugin-content-docs/docs-contribution-code-of-conduct-360.json": [
+      21
+    ],
+    "@docusaurus-plugin-content-docs/docs-contribution-file-system-and-structure-aba.json": [
+      22
+    ],
+    "@docusaurus-plugin-content-docs/docs-contribution-intro-16b.json": [
+      23
+    ],
+    "@docusaurus-plugin-content-docs/docs-contribution-quick-start-guide-8bb.json": [
+      24
+    ],
+    "@docusaurus-plugin-content-docs/docs-getting-started-file-system-and-structure-722.json": [
+      25
+    ],
+    "@docusaurus-plugin-content-docs/docs-getting-started-intro-60f.json": [
+      26
+    ],
+    "@docusaurus-plugin-content-docs/docs-integration-cli-773.json": [
+      27
+    ],
+    "@docusaurus-plugin-content-docs/docs-integration-cli-addon-webpack-f23.json": [
+      28
+    ],
+    "@docusaurus-plugin-content-docs/docs-recommendations-design-patterns-08a.json": [
+      29
+    ],
+    "@docusaurus-plugin-content-docs/docs-recommendations-intro-a8c.json": [
+      30
+    ],
+    "@docusaurus-plugin-content-docs/docs-recommendations-react-components-1f4.json": [
+      31
+    ],
+    "@docusaurus-plugin-content-docs/docs-recommendations-working-with-libraries-302.json": [
+      32
+    ],
+    "runtime~main": [
+      19,
+      33
+    ],
+    "@theme/NotFound": [
+      0,
+      34
+    ]
+  },
+  "assets": {
+    "0": {
+      "css": [
+        {
+          "file": "0.4b6b47aa5e3c93eeb1e7.css",
+          "hash": "3abe83a851a28cc9d8b1",
+          "publicPath": "/0.4b6b47aa5e3c93eeb1e7.css"
+        }
+      ],
+      "js": [
+        {
+          "file": "0.62e2c8bc6ea4f5019d3a.js",
+          "hash": "3abe83a851a28cc9d8b1",
+          "publicPath": "/0.62e2c8bc6ea4f5019d3a.js"
+        }
+      ]
+    },
+    "1": {
+      "css": [
+        {
+          "file": "1.5f663a2a8ae4f3f3384b.css",
+          "hash": "993da752ec993cb73ba2",
+          "publicPath": "/1.5f663a2a8ae4f3f3384b.css"
+        }
+      ],
+      "js": [
+        {
+          "file": "1.d1847be2adafc7f04b43.js",
+          "hash": "993da752ec993cb73ba2",
+          "publicPath": "/1.d1847be2adafc7f04b43.js"
+        }
+      ]
+    },
+    "2": {
+      "js": [
+        {
+          "file": "component---site-src-pages-index-jsc-4-f-f99.44997087cdb272df4b87.js",
+          "hash": "9205c51c2d8adbd04029",
+          "publicPath": "/component---site-src-pages-index-jsc-4-f-f99.44997087cdb272df4b87.js"
+        }
+      ]
+    },
+    "3": {
+      "css": [
+        {
+          "file": "component---theme-doc-item-178-a40.de2648345892298aff25.css",
+          "hash": "9f3cb79c506a144502ed",
+          "publicPath": "/component---theme-doc-item-178-a40.de2648345892298aff25.css"
+        }
+      ],
+      "js": [
+        {
+          "file": "component---theme-doc-item-178-a40.4ad01857f19f94134f4f.js",
+          "hash": "9f3cb79c506a144502ed",
+          "publicPath": "/component---theme-doc-item-178-a40.4ad01857f19f94134f4f.js"
+        }
+      ]
+    },
+    "4": {
+      "css": [
+        {
+          "file": "component---theme-doc-page-1-be-9be.ac9351e3fa30b156a630.css",
+          "hash": "cb4d1d3be905b29a2950",
+          "publicPath": "/component---theme-doc-page-1-be-9be.ac9351e3fa30b156a630.css"
+        }
+      ],
+      "js": [
+        {
+          "file": "component---theme-doc-page-1-be-9be.b7c6bd31d09c79ebbced.js",
+          "hash": "cb4d1d3be905b29a2950",
+          "publicPath": "/component---theme-doc-page-1-be-9be.b7c6bd31d09c79ebbced.js"
+        }
+      ]
+    },
+    "5": {
+      "js": [
+        {
+          "file": "content---docs-about-us-531-2c2.2b6b335ab24f4c0dcb07.js",
+          "hash": "7bf216d5d1b32540a71a",
+          "publicPath": "/content---docs-about-us-531-2c2.2b6b335ab24f4c0dcb07.js"
+        }
+      ]
+    },
+    "6": {
+      "js": [
+        {
+          "file": "content---docs-contribution-code-of-conduct-722-eff.cbf2a2df790744ee7953.js",
+          "hash": "82aed7f198a72271c91b",
+          "publicPath": "/content---docs-contribution-code-of-conduct-722-eff.cbf2a2df790744ee7953.js"
+        }
+      ]
+    },
+    "7": {
+      "js": [
+        {
+          "file": "content---docs-contribution-file-system-and-structureb-2-e-3b4.1ae41814e438606da7d1.js",
+          "hash": "766a9ea6fca0b95c3a7e",
+          "publicPath": "/content---docs-contribution-file-system-and-structureb-2-e-3b4.1ae41814e438606da7d1.js"
+        }
+      ]
+    },
+    "8": {
+      "js": [
+        {
+          "file": "content---docs-contribution-introb-54-31e.737b4e01197ab13cf2ff.js",
+          "hash": "053daa2e16239c53bdb3",
+          "publicPath": "/content---docs-contribution-introb-54-31e.737b4e01197ab13cf2ff.js"
+        }
+      ]
+    },
+    "9": {
+      "js": [
+        {
+          "file": "content---docs-contribution-quick-start-guide-9-f-8-c79.854662a30972b95ac95b.js",
+          "hash": "157da85efe92edf81bd5",
+          "publicPath": "/content---docs-contribution-quick-start-guide-9-f-8-c79.854662a30972b95ac95b.js"
+        }
+      ]
+    },
+    "10": {
+      "js": [
+        {
+          "file": "content---docs-getting-started-file-system-and-structure-42-e-0fa.3a6112500cf510615307.js",
+          "hash": "41a186c6b7437c1bb064",
+          "publicPath": "/content---docs-getting-started-file-system-and-structure-42-e-0fa.3a6112500cf510615307.js"
+        }
+      ]
+    },
+    "11": {
+      "js": [
+        {
+          "file": "content---docs-getting-started-introf-5-c-9cc.1ec22f9b9e158fc518cf.js",
+          "hash": "1a34164a3b5963bc5227",
+          "publicPath": "/content---docs-getting-started-introf-5-c-9cc.1ec22f9b9e158fc518cf.js"
+        }
+      ]
+    },
+    "12": {
+      "js": [
+        {
+          "file": "content---docs-integration-cli-26-e-194.028e9084292bed9c8251.js",
+          "hash": "984154134dc210df0f32",
+          "publicPath": "/content---docs-integration-cli-26-e-194.028e9084292bed9c8251.js"
+        }
+      ]
+    },
+    "13": {
+      "js": [
+        {
+          "file": "content---docs-integration-cli-addon-webpack-76-e-546.de11a01eebb18d7c158d.js",
+          "hash": "9d21b2b61d4b1143ebca",
+          "publicPath": "/content---docs-integration-cli-addon-webpack-76-e-546.de11a01eebb18d7c158d.js"
+        }
+      ]
+    },
+    "14": {
+      "js": [
+        {
+          "file": "content---docs-recommendations-design-patternsd-9-e-eab.9c4e72e92ce7ab44084a.js",
+          "hash": "a81276f4d6386702e815",
+          "publicPath": "/content---docs-recommendations-design-patternsd-9-e-eab.9c4e72e92ce7ab44084a.js"
+        }
+      ]
+    },
+    "15": {
+      "js": [
+        {
+          "file": "content---docs-recommendations-intro-32-b-c5c.79ea728d40fc8569ba04.js",
+          "hash": "a903654e0a7706fb58bc",
+          "publicPath": "/content---docs-recommendations-intro-32-b-c5c.79ea728d40fc8569ba04.js"
+        }
+      ]
+    },
+    "16": {
+      "js": [
+        {
+          "file": "content---docs-recommendations-react-components-771-2ad.2106376ee7fff00c2b8a.js",
+          "hash": "b117a4e52c938f9fdfaf",
+          "publicPath": "/content---docs-recommendations-react-components-771-2ad.2106376ee7fff00c2b8a.js"
+        }
+      ]
+    },
+    "17": {
+      "js": [
+        {
+          "file": "content---docs-recommendations-working-with-librariesafa-8a3.c847f347850a2386afe1.js",
+          "hash": "f7b8a802313b6241c88f",
+          "publicPath": "/content---docs-recommendations-working-with-librariesafa-8a3.c847f347850a2386afe1.js"
+        }
+      ]
+    },
+    "18": {
+      "js": [
+        {
+          "file": "docsMetadata---docs-1-da-721.f28a473339e7e5dd901b.js",
+          "hash": "839c06a28a1adc7c5635",
+          "publicPath": "/docsMetadata---docs-1-da-721.f28a473339e7e5dd901b.js"
+        }
+      ]
+    },
+    "19": {
+      "css": [
+        {
+          "file": "main.a35e7ae2678bae3642fb.css",
+          "hash": "9021e150b2d9c818e363",
+          "publicPath": "/main.a35e7ae2678bae3642fb.css"
+        }
+      ],
+      "js": [
+        {
+          "file": "main.8a4f9a534e00cf5c8b38.js",
+          "hash": "9021e150b2d9c818e363",
+          "publicPath": "/main.8a4f9a534e00cf5c8b38.js"
+        }
+      ]
+    },
+    "20": {
+      "js": [
+        {
+          "file": "metadata---docs-about-usa-19-7aa.8b42fc13635fd46c8d9c.js",
+          "hash": "d1bd8339b559c3d9e1c8",
+          "publicPath": "/metadata---docs-about-usa-19-7aa.8b42fc13635fd46c8d9c.js"
+        }
+      ]
+    },
+    "21": {
+      "js": [
+        {
+          "file": "metadata---docs-contribution-code-of-conductd-26-f35.e977bb457cb867239811.js",
+          "hash": "7cb305f48de7a4767f64",
+          "publicPath": "/metadata---docs-contribution-code-of-conductd-26-f35.e977bb457cb867239811.js"
+        }
+      ]
+    },
+    "22": {
+      "js": [
+        {
+          "file": "metadata---docs-contribution-file-system-and-structure-40-b-915.b6c39d3d42e2267e82c9.js",
+          "hash": "8849c9b57de43955093c",
+          "publicPath": "/metadata---docs-contribution-file-system-and-structure-40-b-915.b6c39d3d42e2267e82c9.js"
+        }
+      ]
+    },
+    "23": {
+      "js": [
+        {
+          "file": "metadata---docs-contribution-introd-78-137.21beea3976edebd50c5a.js",
+          "hash": "4ddad0e4c904b0f8cfc6",
+          "publicPath": "/metadata---docs-contribution-introd-78-137.21beea3976edebd50c5a.js"
+        }
+      ]
+    },
+    "24": {
+      "js": [
+        {
+          "file": "metadata---docs-contribution-quick-start-guide-1-a-6-5ed.42b1f6c5f8c07e90631d.js",
+          "hash": "b0368024085126a82058",
+          "publicPath": "/metadata---docs-contribution-quick-start-guide-1-a-6-5ed.42b1f6c5f8c07e90631d.js"
+        }
+      ]
+    },
+    "25": {
+      "js": [
+        {
+          "file": "metadata---docs-getting-started-file-system-and-structure-30-e-b98.63a80b37b8a7891962cb.js",
+          "hash": "1ff9c55cd50acfd7c113",
+          "publicPath": "/metadata---docs-getting-started-file-system-and-structure-30-e-b98.63a80b37b8a7891962cb.js"
+        }
+      ]
+    },
+    "26": {
+      "js": [
+        {
+          "file": "metadata---docs-getting-started-intro-06-b-7c8.7e20ec89fe7c4946e453.js",
+          "hash": "d382dc0e798dd9eb949f",
+          "publicPath": "/metadata---docs-getting-started-intro-06-b-7c8.7e20ec89fe7c4946e453.js"
+        }
+      ]
+    },
+    "27": {
+      "js": [
+        {
+          "file": "metadata---docs-integration-cli-1-d-0-779.8c3ad39cbef3f246928d.js",
+          "hash": "e488a9911540c7f4c709",
+          "publicPath": "/metadata---docs-integration-cli-1-d-0-779.8c3ad39cbef3f246928d.js"
+        }
+      ]
+    },
+    "28": {
+      "js": [
+        {
+          "file": "metadata---docs-integration-cli-addon-webpack-21-d-dc2.e53a4af6cbddb7d7e3ca.js",
+          "hash": "ce55c6d44908b49cd8f6",
+          "publicPath": "/metadata---docs-integration-cli-addon-webpack-21-d-dc2.e53a4af6cbddb7d7e3ca.js"
+        }
+      ]
+    },
+    "29": {
+      "js": [
+        {
+          "file": "metadata---docs-recommendations-design-patternse-9-f-d52.fe4e5d598e887f1197cf.js",
+          "hash": "5815a948d74278370f59",
+          "publicPath": "/metadata---docs-recommendations-design-patternse-9-f-d52.fe4e5d598e887f1197cf.js"
+        }
+      ]
+    },
+    "30": {
+      "js": [
+        {
+          "file": "metadata---docs-recommendations-introb-94-3ed.cf3a3289e822d064a094.js",
+          "hash": "08fd05e627cf3128cdfd",
+          "publicPath": "/metadata---docs-recommendations-introb-94-3ed.cf3a3289e822d064a094.js"
+        }
+      ]
+    },
+    "31": {
+      "js": [
+        {
+          "file": "metadata---docs-recommendations-react-components-69-f-0ca.612ddff1b2e7254bfd1d.js",
+          "hash": "32dd2e72aaf84e959e39",
+          "publicPath": "/metadata---docs-recommendations-react-components-69-f-0ca.612ddff1b2e7254bfd1d.js"
+        }
+      ]
+    },
+    "32": {
+      "js": [
+        {
+          "file": "metadata---docs-recommendations-working-with-librariesff-9-a36.4a975ed26aca7a594e97.js",
+          "hash": "04ae41bff5e21e8fe896",
+          "publicPath": "/metadata---docs-recommendations-working-with-librariesff-9-a36.4a975ed26aca7a594e97.js"
+        }
+      ]
+    },
+    "33": {
+      "js": [
+        {
+          "file": "runtime~main.acb070cc05fb9c6a15e3.js",
+          "hash": "d710dcb9dd3daf004738",
+          "publicPath": "/runtime~main.acb070cc05fb9c6a15e3.js"
+        }
+      ]
+    },
+    "34": {
+      "js": [
+        {
+          "file": "34.241a52c817d92e483fdb.js",
+          "hash": "52f57edf1d24b5bbb7aa",
+          "publicPath": "/34.241a52c817d92e483fdb.js"
+        }
+      ]
+    }
+  }
+}
