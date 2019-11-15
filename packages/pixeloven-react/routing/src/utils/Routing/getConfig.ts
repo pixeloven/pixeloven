@@ -1,4 +1,7 @@
-import { UniversalRouteConfig, UniversalRouteProps } from "../../types";
+import {
+    UniversalRouteConfig,
+    UniversalUniversalRouteProps,
+} from "../../types";
 
 /**
  * Normalize Url
@@ -7,14 +10,14 @@ import { UniversalRouteConfig, UniversalRouteProps } from "../../types";
 const normalizeUrl = (item: string) => item.replace(/([^:]\/)\/+/g, "$1");
 
 /**
- * Map custom route config to react router v4 UniversalRouteProps
+ * Map custom route config to react router v4 UniversalUniversalRouteProps
  * @param routeConfig
  * @param parentRoute
  */
 function getConfig(
     routeConfig: UniversalRouteConfig[],
     parentRoute: string = "",
-): UniversalRouteProps[] {
+): UniversalUniversalRouteProps[] {
     return routeConfig.map(route => {
         let path = parentRoute;
         if (route.path) {

@@ -61,6 +61,7 @@ Below are just some of the up coming ideas for improvements.
 * Load env for storybook too.
 * handle precommit for each package https://github.com/sudo-suhas/lint-staged-multi-pkg
 * https://github.com/atlassian/lerna-semantic-release
+* https://code.visualstudio.com/docs/remote/containers
 
 ## Planned v6 Release
 * Restructure with scoped namespaces. Also create a deprecated section so we can redirect people.

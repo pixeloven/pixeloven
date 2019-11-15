@@ -2,7 +2,7 @@ import {
     Routing,
     StaticContext,
     StaticRouter,
-    UniversalRouteProps,
+    UniversalUniversalRouteProps,
 } from "@pixeloven-react/routing";
 import { Config } from "@server/config";
 import { Body, Head, Html } from "@server/views";
@@ -23,7 +23,7 @@ interface TemplateRenderProps extends RenderProps {
 }
 
 interface ContentRenderProps extends RenderProps {
-    routes: UniversalRouteProps[];
+    routes: UniversalUniversalRouteProps[];
     staticContext: StaticContext;
 }
 
@@ -53,7 +53,7 @@ const Content = (props: ContentRenderProps) => (
  */
 function render(
     req: Request,
-    routes: UniversalRouteProps[],
+    routes: UniversalUniversalRouteProps[],
     staticContext: StaticContext,
 ) {
     const contentString = renderToString(

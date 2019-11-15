@@ -65,11 +65,11 @@ export default routes;
 ### Implementation 
 Next let's implement our shared Routes component. In the example above we created a simple nested structure with **Default** as out `template` and **Home** as our `page`. First up we need to add out `Routes` component to our Application.
 ```javascript
-import { Routes, RouteProps } from "@pixeloven-react/routing";
+import { Routes, UniversalRouteProps } from "@pixeloven-react/routing";
 import routes from "@shared/routes";
 
 interface Props {
-    routes: RouteProps[];
+    routes: UniversalRouteProps[];
 }
 
 class App extends React.Component<Props> {
