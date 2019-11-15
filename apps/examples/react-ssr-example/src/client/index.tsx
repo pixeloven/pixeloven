@@ -1,4 +1,4 @@
-import { Router } from "@pixeloven-react/routing";
+import { BrowserRouter, Routing } from "@pixeloven-react/routing";
 import App from "@shared/components/App";
 import { config } from "@shared/config";
 import routeConfig from "@shared/routes";
@@ -6,7 +6,6 @@ import { configureStore } from "@shared/store/store";
 import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import "../shared/styles/core/core.scss";
 
 /**
@@ -17,7 +16,7 @@ const root = document.getElementById("root");
 /**
  * Get route config
  */
-const routes = Router.getConfig(routeConfig, config.publicPath);
+const routes = Routing.getConfig(routeConfig, config.publicPath);
 /**
  * Wrap application with container, router and store
  */

@@ -2,7 +2,7 @@
 
 > Pixel Oven React router config.
 
-See our website [pixeloven-react-router-config](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [pixeloven](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
 
 ## Install
 
@@ -65,11 +65,11 @@ export default routes;
 ### Implementation 
 Next let's implement our shared Routes component. In the example above we created a simple nested structure with **Default** as out `template` and **Home** as our `page`. First up we need to add out `Routes` component to our Application.
 ```javascript
-import { Routes, RouteProps } from "@pixeloven-react/routing";
+import { Routes, UniversalRouteProps } from "@pixeloven-react/routing";
 import routes from "@shared/routes";
 
 interface Props {
-    routes: RouteProps[];
+    routes: UniversalRouteProps[];
 }
 
 class App extends React.Component<Props> {

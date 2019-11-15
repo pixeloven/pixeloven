@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { MatchType, RouteProps } from "../../types";
+import { MatchType, UniversalRouteProps } from "../../types";
 import { Status } from "../Status";
 
-export interface RoutesProps {
+interface RoutesProps {
     as?: MatchType;
-    config: RouteProps[];
+    config: UniversalRouteProps[];
 }
 
 /**

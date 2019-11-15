@@ -1,12 +1,10 @@
-import Readme from "./README.md";
-
+import { MemoryRouter } from "@pixeloven-react/routing";
 import { storiesOf } from "@storybook/react";
-
 import { createLocation, createMemoryHistory } from "history";
 import React from "react";
-import { MemoryRouter } from "react-router-dom";
 
 import Default from "./Default";
+import Readme from "./README.md";
 
 const history = createMemoryHistory();
 const location = createLocation("/testing");

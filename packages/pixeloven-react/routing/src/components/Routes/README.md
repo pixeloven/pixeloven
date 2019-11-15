@@ -1,6 +1,6 @@
 # Routes Molecule component
 
-Routes takes a config array of "RouteProps" and renders a react router `<Switch />` that contains `<Routes />` referencing the components in the configuration.
+Routes takes a config array of "UniversalRouteProps" and renders a react router `<Switch />` that contains `<Routes />` referencing the components in the configuration.
 
 ## Source
 ```js
