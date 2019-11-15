@@ -1,11 +1,11 @@
 import "jest";
-import { Router } from "./index";
+import { Routing } from "./index";
 
 describe("@pixeloven-react/routing", () => {
     describe("utils/index", () => {
         it("should export Router", () => {
-            expect(typeof Router.getConfig).toEqual("function");
-            expect(typeof Router.getMatches).toEqual("function");
+            expect(typeof Routing.getConfig).toEqual("function");
+            expect(typeof Routing.getMatches).toEqual("function");
         });
     });
 });
