@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven-react/routing",
+    "name": "@pixeloven-react/common",
     "target": "es5",
     "out": "docs",
     "exclude": "*.{test}.{ts}",

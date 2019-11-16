@@ -1,21 +1,21 @@
-/* tslint:disable no-any */
 import { ConnectedComponentClass } from "react-redux";
 import { match } from "react-router";
-import {
-    RouteComponentProps as DefaultRouteComponentProps,
-    RouteProps as DefaultRouteProps,
-} from "react-router-dom";
+import { RouteComponentProps, RouteProps } from "react-router-dom";
 import { Dispatch } from "redux";
 
 /**
- * @todo Need a better way to do this than to pass any
+ * @todo Should remove the reliance on redux make types more generic
+ * @todo need to expose react router through this package
  */
+/* tslint:disable no-any */
 type Params = any;
+
+export type FetchDataFunction = (dispatch: Dispatch, ownProps: Params) => void;
 
 export type MatchType = "switch" | "default";
 
 /**
- * @todo we should make this PathLike??
+ * @todo path should support Buffer | Url | string
  */
 export interface MatchOptions {
     as?: MatchType;
@@ -24,41 +24,37 @@ export interface MatchOptions {
 
 export interface MatchedRoutes {
     matched: match;
-    route: RouteProps;
+    route: UniversalRouteProps;
 }
 
 /**
- * @todo Need make this less dependent on redux
+ * @todo parentPath should support Buffer | Url | string
  */
-export type RouteFetchDataFunction = (
-    dispatch: Dispatch,
-    ownProps: Params,
-) => void;
+export type ResolvePathFunction = (parentPath: string) => string;
 
-export type RouteComponent<T = {}> =
-    | React.ComponentType<DefaultRouteComponentProps<T>>
-    | ConnectedComponentClass<any, DefaultRouteComponentProps<T>>;
-
-export interface RouteComponentProps<T = {}>
-    extends DefaultRouteComponentProps<T> {
-    routes?: RouteProps[];
-}
-
-export interface RouteProps extends DefaultRouteProps {
+export interface UniversalRouteProps extends RouteProps {
     key?: number;
-    component: RouteComponent<Params>;
-    fetchData?: RouteFetchDataFunction;
-    routes?: RouteProps[];
+    component: UniversalRouteComponent<Params>;
+    fetchData?: FetchDataFunction;
+    routes?: UniversalRouteProps[];
     statusCode?: number;
 }
 
-export type RouteResolvePath = (parentPath: string) => string;
+export interface UniversalRouteComponentProps<T = {}>
+    extends RouteComponentProps<T> {
+    routes?: UniversalRouteProps[];
+}
 
-export interface RouteConfig {
-    component: RouteComponent<Params>;
+export type UniversalRouteComponent<T = {}> =
+    | React.ComponentType<T>
+    | React.ComponentType<UniversalRouteComponentProps<T>>
+    | ConnectedComponentClass<any, UniversalRouteComponentProps<T>>;
+
+export interface UniversalRouteConfig {
+    component: UniversalRouteComponent<Params>;
     exact?: boolean;
-    path?: RouteResolvePath | string;
-    fetchData?: RouteFetchDataFunction;
-    routes?: RouteConfig[];
+    path?: ResolvePathFunction | string;
+    fetchData?: FetchDataFunction;
+    routes?: UniversalRouteConfig[];
     statusCode?: number;
 }

@@ -134,7 +134,7 @@ async function Server(compiler: Compiler, options: Options) {
                 process.exit();
             });
             process.on("SIGINT", () => {
-                logger.info(`captured signal interrupt likely CTRL-C`);
+                logger.info(`\ncaptured signal interrupt likely CTRL-C`);
                 resolve(0);
                 process.exit();
             });

@@ -15,17 +15,15 @@
   "author": "Brian Gebel",
   "license": "MIT",
   "private": true,
+  "dependencies": {
+    "@pixeloven-react/common": "^6.0.0-beta.13"
+  },
   "devDependencies": {
     "@pixeloven/cli": "^6.0.0-beta.12",
     "@pixeloven/cli-addon-storybook": "^6.0.0-beta.13",
     "@pixeloven/cli-addon-webpack": "^6.0.0-beta.15",
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.14.0",
-    "lint-staged": "9.4.2",
-    "react": "16.11.0"
-  },
-  "peerDependencies": {
-    "react": ">=16"
+    "@pixeloven-react/testing": "^6.0.0-beta.13",
+    "lint-staged": "9.4.2"
   },
   "scripts": {
     "compile": "pixeloven compile ts",

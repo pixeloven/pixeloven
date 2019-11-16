@@ -1,4 +1,9 @@
-import { RouteProps, Router } from "@pixeloven-react/routing";
+import {
+    Routing,
+    StaticContext,
+    StaticRouter,
+    UniversalRouteProps,
+} from "@pixeloven-react/routing";
 import { Config } from "@server/config";
 import { Body, Head, Html } from "@server/views";
 import { App } from "@shared/components";
@@ -7,7 +12,6 @@ import { NextFunction, Request, Response } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { Helmet, HelmetData } from "react-helmet";
-import { StaticContext, StaticRouter } from "react-router";
 
 interface RenderProps {
     req: Request;
@@ -19,7 +23,7 @@ interface TemplateRenderProps extends RenderProps {
 }
 
 interface ContentRenderProps extends RenderProps {
-    routes: RouteProps[];
+    routes: UniversalRouteProps[];
     staticContext: StaticContext;
 }
 
@@ -49,7 +53,7 @@ const Content = (props: ContentRenderProps) => (
  */
 function render(
     req: Request,
-    routes: RouteProps[],
+    routes: UniversalRouteProps[],
     staticContext: StaticContext,
 ) {
     const contentString = renderToString(
@@ -85,7 +89,7 @@ export function renderer(config: Config) {
             statusCode: 200,
         };
         try {
-            const routes = Router.getConfig(routeConfig, config.publicPath);
+            const routes = Routing.getConfig(routeConfig, config.publicPath);
             const output = render(req, routes, staticContext);
             const statusCode = staticContext.statusCode || 200;
             res.write(output);

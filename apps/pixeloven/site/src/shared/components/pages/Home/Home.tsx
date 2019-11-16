@@ -1,15 +1,9 @@
-import { RouteComponentProps, Routes } from "@pixeloven-react/routing";
+import { Routes, UniversalRouteComponentProps } from "@pixeloven-react/routing";
 import { Favicon } from "@shared/components/molecules";
 import React from "react";
 import { Helmet } from "react-helmet";
 
-type DefaultProps = RouteComponentProps;
-
-/**
- * @todo Implement Material-UI. Use this as inspiration?
- * https://github.com/creativetimofficial/material-kit-react
- */
-function Default(props: DefaultProps) {
+function Default(props: UniversalRouteComponentProps) {
     const { routes } = props;
     return (
         <React.Fragment>

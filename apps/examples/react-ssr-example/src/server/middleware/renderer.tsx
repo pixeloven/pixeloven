@@ -1,4 +1,4 @@
-import { RouteProps, Router } from "@pixeloven-react/routing";
+import { Routing, UniversalRouteProps } from "@pixeloven-react/routing";
 import { Config } from "@server/config";
 import App from "@shared/components/App";
 import { Body } from "@shared/components/atoms/Body";
@@ -21,7 +21,7 @@ import { Store } from "redux";
 
 interface TemplateProps {
     req: Request;
-    routes: RouteProps[];
+    routes: UniversalRouteProps[];
     store: Store;
     staticContext: StaticContext;
 }
@@ -68,7 +68,7 @@ export function errorHandler(config: Config) {
         };
         try {
             const store = configureStore("server");
-            const routes = Router.getConfig(
+            const routes = Routing.getConfig(
                 unknownErrorRoutes,
                 config.publicPath,
             );
@@ -107,8 +107,8 @@ export function renderer(config: Config) {
         };
         try {
             const store = configureStore("server");
-            const routes = Router.getConfig(routeConfig, config.publicPath);
-            const matchedRoutes = Router.getMatches(routes, {
+            const routes = Routing.getConfig(routeConfig, config.publicPath);
+            const matchedRoutes = Routing.getMatches(routes, {
                 as: "switch",
                 path: req.path,
             });

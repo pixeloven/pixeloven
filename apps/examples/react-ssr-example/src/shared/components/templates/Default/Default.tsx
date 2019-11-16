@@ -1,10 +1,10 @@
-import { RouteComponentProps, Routes } from "@pixeloven-react/routing";
+import { Routes, UniversalRouteComponentProps } from "@pixeloven-react/routing";
 import { MainMenu } from "@shared/components/molecules";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Icon, Responsive, Segment } from "semantic-ui-react";
 
-function Default(props: RouteComponentProps) {
+function Default(props: UniversalRouteComponentProps) {
     const { routes } = props;
     return (
         <Responsive>
