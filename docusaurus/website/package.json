@@ -13,8 +13,7 @@
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.34",
     "@docusaurus/preset-classic": "^2.0.0-alpha.34",
-    "classnames": "2.2.6",
-    "react": "16.11.0",
-    "react-dom": "16.11.0"
+    "@pixeloven-react/common" : "^6.0.0-beta.13",
+    "classnames": "2.2.6"
   }
 }
