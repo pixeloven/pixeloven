@@ -1,0 +1,24 @@
+{
+  "docs": {
+    "Welcome": ["about-us"],
+    "Getting Started": [
+      "getting-started/intro"
+    ],
+    "Contributing": [
+      "contribution/intro",
+      "contribution/quick-start-guide",
+      "contribution/file-system-and-structure",  
+      "contribution/code-of-conduct"
+    ],
+    "Integration": [
+      "integration/cli",
+      "integration/cli-addon-webpack"
+    ],
+    "Recommendations": [
+      "recommendations/intro",  
+      "recommendations/design-patterns",  
+      "recommendations/working-with-libraries",  
+      "recommendations/react-components"
+    ]
+  }
+}

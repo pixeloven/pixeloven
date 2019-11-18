@@ -1,4 +1,8 @@
-# Quick Start Guide
+---
+id: quick-start-guide
+title: Quick Start Guide
+---
+
 Below are instructions for getting started on development with PixelOven and our local environment. Included are some docker abstractions to help reduce env based issues.
 
 ## Table of Contents

@@ -73,6 +73,7 @@ Below are just some of the up coming ideas for improvements.
 * Break middleware up into smaller packages
 * Remove semantic UI deps in main example and replace with a more accesible option
 * Document everything and host storybook, docs, etc
+* create generator for init and make compatible with npx finish --help
 
 ## After v6 Release
 * Unify all logging and make json logging a thing
@@ -88,3 +89,4 @@ Below are just some of the up coming ideas for improvements.
 * Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
 * Create our own all in one dashboard like Jarvis + BundleAnalyzerPlugin + console (read only)
 * PixelOven site with coverage, storybook, etc all hosted with a unified theme.
+

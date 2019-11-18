@@ -1,71 +1,7 @@
-# File System and Structure
-General overview of PixelOven's file structure and recommended application structure for projects using our CLI.
-
-## Table of Contents
-
-- [File extensions](#file-extensions)
-- [File designations](#file-designations)
-- [File structure](#file-structure)
-- [Application file structure](#application-file-structure)
-- [Atomic design structure](#atomic-design-structure)
-- [Component structure](#component-structure)
-
-## File structure
-The structure of this application should be considered living. As new requirements are needed this structure should be able to adapt to change. With that said there was a fair attempt to plan for the future. Below is a quick break down of this structure.
-```
-./
-├── .github/
-├── apps/
-│   ├── examples/
-│   └── pixeloven/
-├── docker/
-├── docs/
-├── node_modules/
-├── packages/
-│   ├── examples/
-│   ├── pixeloven/
-│   ├── pixeloven-core/
-│   ├── pixeloven-express/
-│   ├── pixeloven-react/
-│   ├── pixeloven-storybook/
-│   └── pixeloven-webpack/
-└── scripts/
-...
-```
-
-### PixelOven Root structure
-|Directory|Description|
-|---|---|
-|`.github`|GitHub configuration|
-|`apps`|Workspace for all applications including examples.|
-|`docker`|Docker setup files for custom images|
-|`docs`|General documentation for PixelOven and recommended best practices for using our CLI|
-|`node_modules`|I would hope this is understood ;) but this is also a transient directory used to store our general dependencies.|
-|`packages`|Workspace for all packages including examples.|
-|`scripts`|Scripts used to help onboarding as well as our build process.|
-
-### PixelOven App structure
-|Directory|Description|
-|---|---|
-|`examples`|Workspace for example applications to help with onboarding and testing.|
-|`pixeloven`|Workspace for PixelOven sites and apps.|
-
-### PixelOven Package structure
-|Directory|Description|
-|---|---|
-|`examples`|Workspace for example packages to help with onboarding, testing and abstracting common example logic.|
-|`pixeloven`|Workspace for core CLI implementation.|
-|`pixeloven-core`|Workspace for core logic common to any project|
-|`pixeloven-express`|Workspace express abstractions to help support server based applications including our own dev server.|
-|`pixeloven-react`|Workspace react abstractions for common react development|
-|`pixeloven-storybook`|Workspace for storybook CLI logic|
-|`pixeloven-webpack`|Workspace for webpack CLI logic|
-
-### File extensions
-It should be noted that we use both `.ts` and `.tsx`. The general rule is any file that has ***JSX*** should use the `.tsx` extension. Everything else should be `.ts`. The `.js` and `.jsx` extensions are not supported as this is a pure TypeScript environment.
-
-### File designations
-Beyond just the above extensions we have a few other designations. First we have `.stories.tsx` which allow us to render out components in isolation. Second we have `.test.tsx` which are part of our unit testing environment. Both of these designations are matched by pattern and should be present for **all** components.
+---
+id: design-patterns
+title: Design Patterns
+---
 
 ## Application files structure
 This section is both documentation for our own application structure and recommended structure for derivative apps.

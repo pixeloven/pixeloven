@@ -1,4 +1,8 @@
-# Contribution
+---
+id: intro
+title: Intro
+---
+
 This document is meant to highlight best practices for contributing to the general PixelOven project. If you are looking for specifics on how to setup this project for development of `apps` or `packages` please review the [quick start guide](./quick-start-guide.md). Otherwise for ideas on how to go about working within our best practices please review our [integration docs](./integrating/index.md).
 
 ## Table of Contents
@@ -23,17 +27,17 @@ These steps will guide you through contributing to this project:
 Check "engine" requirements:
 ```bash
 node -v
-v10.16.3
+# v10.16.3
 ```
 Please follow these official instructions to install [yarn](https://yarnpkg.com/docs/install/) for your specific system. 
 ```bash
 yarn -v
-1.17.3
+# 1.17.3
 ```
 Please follow these official instructions to install [lerna](https://github.com/lerna/lerna) globally.
 ```bash
 lerna -v
-3.16.4
+# 3.16.4
 ```
 
 ## Recommended Development Approach
