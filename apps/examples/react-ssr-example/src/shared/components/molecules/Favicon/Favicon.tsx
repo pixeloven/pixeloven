@@ -1,4 +1,4 @@
-import { Link } from "@shared/components/atoms/Link";
+import { Link } from "@pixeloven-react/common";
 import React from "react";
 import favicon from "./favicon.ico";
 

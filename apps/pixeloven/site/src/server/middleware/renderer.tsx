@@ -1,3 +1,4 @@
+import { Body, Head, Html, Link, Script } from "@pixeloven-react/common";
 import {
     Routing,
     StaticContext,
@@ -5,67 +6,45 @@ import {
     UniversalRouteProps,
 } from "@pixeloven-react/routing";
 import { Config } from "@server/config";
-import { Body, Head, Html } from "@server/views";
 import { App } from "@shared/components";
 import routeConfig from "@shared/routes";
 import { NextFunction, Request, Response } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { Helmet, HelmetData } from "react-helmet";
+import { Helmet } from "react-helmet";
 
-interface RenderProps {
+interface TemplateProps {
     req: Request;
-}
-
-interface TemplateRenderProps extends RenderProps {
-    children: string;
-    helmetData: HelmetData;
-}
-
-interface ContentRenderProps extends RenderProps {
     routes: UniversalRouteProps[];
     staticContext: StaticContext;
 }
 
-const Template = (props: TemplateRenderProps) => (
-    <Html helmet={props.helmetData} lang={props.req.language}>
-        <Head files={props.req.files} helmet={props.helmetData} />
-        <Body files={props.req.files}>{props.children}</Body>
-    </Html>
-);
-
-/**
- * Encapsulate application content
- * @param props
- */
-const Content = (props: ContentRenderProps) => (
-    <StaticRouter location={props.req.url} context={props.staticContext}>
-        <App routes={props.routes} />
-    </StaticRouter>
-);
-
-/**
- * Render application from templates
- * @param req
- * @param routes
- * @param staticContext
- * @param store
- */
-function render(
-    req: Request,
-    routes: UniversalRouteProps[],
-    staticContext: StaticContext,
-) {
-    const contentString = renderToString(
-        <Content req={req} routes={routes} staticContext={staticContext} />,
+function Template(props: TemplateProps) {
+    const content = renderToString(
+        <StaticRouter location={props.req.url} context={props.staticContext}>
+            <App routes={props.routes} />
+        </StaticRouter>,
     );
     const helmetData = Helmet.renderStatic();
-    const output = renderToString(
-        <Template helmetData={helmetData} req={req}>
-            {contentString}
-        </Template>,
+    const template = renderToString(
+        <Html helmet={helmetData} lang={props.req.language}>
+            <Head helmet={helmetData}>
+                {props.req.files && (
+                    <Link
+                        href={props.req.files.css}
+                        rel="stylesheet"
+                        type="text/css"
+                    />
+                )}
+            </Head>
+            <Body
+                scripts={props.req.files && <Script src={props.req.files.js} />}
+            >
+                {content}
+            </Body>
+        </Html>,
     );
-    return `<!DOCTYPE html>${output}`;
+    return `<!DOCTYPE html>${template}`;
 }
 
 export function errorHandler(config: Config) {
@@ -90,8 +69,12 @@ export function renderer(config: Config) {
         };
         try {
             const routes = Routing.getConfig(routeConfig, config.publicPath);
-            const output = render(req, routes, staticContext);
-            const statusCode = staticContext.statusCode || 200;
+            const output = Template({
+                req,
+                routes,
+                staticContext,
+            });
+            const statusCode = staticContext.statusCode || 500;
             res.write(output);
             res.status(statusCode);
             res.end();

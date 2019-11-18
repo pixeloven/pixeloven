@@ -1,11 +1,7 @@
+import { Body, Head, Html, Link, Script } from "@pixeloven-react/common";
 import { Routing, UniversalRouteProps } from "@pixeloven-react/routing";
 import { Config } from "@server/config";
 import App from "@shared/components/App";
-import { Body } from "@shared/components/atoms/Body";
-import { Head } from "@shared/components/atoms/Head";
-import { Html } from "@shared/components/atoms/Html";
-import { Link } from "@shared/components/atoms/Link";
-import { Script } from "@shared/components/atoms/Script";
 import { Favicon } from "@shared/components/molecules/Favicon";
 
 import routeConfig, { unknownErrorRoutes } from "@shared/routes";

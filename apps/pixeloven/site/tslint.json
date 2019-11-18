@@ -2,11 +2,10 @@
   "defaultSeverity": "error",
   "linterOptions": {
     "exclude": [
-      ".circleci",
       "dist",
       "coverage",
       "node_modules",
-      "public"
+      "stats"
     ]
   },
   "extends": [
@@ -18,8 +17,8 @@
   "rules": {
     "arrow-parens": false,
     "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
     "jsx-wrap-multiline" : false,
-    "jsx-no-lambda" : false,
     "interface-name" : false,
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
