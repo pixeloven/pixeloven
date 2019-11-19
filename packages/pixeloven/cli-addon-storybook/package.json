@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli-addon-storybook",
-  "version": "6.0.0-beta.13",
+  "version": "6.0.0-beta.16",
   "description": "PixelOven CLI addon for storybook based development",
   "main": "dist/lib/index.js",
   "types": "dist/types/types.d.ts",
@@ -18,12 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/exceptions": "^6.0.0-beta.12",
-    "@pixeloven-storybook/config": "^6.0.0-beta.13",
-    "@pixeloven/cli": "^6.0.0-beta.12"
+    "@pixeloven-core/exceptions": "^6.0.0-beta.16",
+    "@pixeloven-storybook/config": "^6.0.0-beta.16",
+    "@pixeloven/cli": "^6.0.0-beta.16"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.12",
+    "@pixeloven/tasks": "^6.0.0-beta.16",
     "lint-staged": "9.4.2"
   },
   "scripts": {
