@@ -2,11 +2,10 @@
   "defaultSeverity": "error",
   "linterOptions": {
     "exclude": [
-      ".circleci",
       "dist",
       "coverage",
       "node_modules",
-      "public"
+      "stats"
     ]
   },
   "extends": [

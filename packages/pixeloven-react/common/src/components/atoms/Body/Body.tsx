@@ -9,7 +9,8 @@ interface BodyProps {
 }
 
 function Body(props: BodyProps) {
-    const { children, scripts, state } = props;
+    const { children, helmet, scripts, state } = props;
+    const bodyAttrs = helmet ? helmet.bodyAttributes.toComponent() : {};
     const serializedState = JSON.stringify(state || {});
     const innerHTML = {
         __html: children,
@@ -18,7 +19,7 @@ function Body(props: BodyProps) {
         __html: `window.initialState = ${serializedState};`,
     };
     return (
-        <body>
+        <body {...bodyAttrs}>
             <noscript>You need to enable JavaScript to run this app.</noscript>
             <div id="root" dangerouslySetInnerHTML={innerHTML} />
             <script dangerouslySetInnerHTML={initialState} />

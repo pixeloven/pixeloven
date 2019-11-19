@@ -20,8 +20,10 @@
   "dependencies": {
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.4",
+    "@types/react-helmet": "5.0.14",
     "react": "16.11.0",
-    "react-dom": "16.11.0"
+    "react-dom": "16.11.0",
+    "react-helmet": "6.0.0-beta"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.12",
