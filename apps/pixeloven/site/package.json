@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/site",
-  "version": "6.0.0-beta.16",
+  "version": "6.0.0-beta.17",
   "description": "Example project using the framework",
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -22,8 +22,8 @@
     "@pixeloven-react/testing": "^6.0.0-beta.16",
     "@pixeloven/cli": "^6.0.0-beta.16",
     "@pixeloven/cli-addon-generators": "^6.0.0-beta.16",
-    "@pixeloven/cli-addon-storybook": "^6.0.0-beta.16",
-    "@pixeloven/cli-addon-webpack": "^6.0.0-beta.16",
+    "@pixeloven/cli-addon-storybook": "^6.0.0-beta.17",
+    "@pixeloven/cli-addon-webpack": "^6.0.0-beta.17",
     "@types/classnames": "2.2.9",
     "@types/express": "4.17.0",
     "@types/express-winston": "3.0.0",
