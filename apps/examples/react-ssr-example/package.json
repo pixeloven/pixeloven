@@ -31,7 +31,6 @@
     "winston": "3.2.1"
   },
   "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-beta.13",
     "@pixeloven/cli": "^6.0.0-beta.16",
     "@pixeloven/cli-addon-generators": "^6.0.0-beta.16",
     "@pixeloven/cli-addon-storybook": "^6.0.0-beta.16",

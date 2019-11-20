@@ -1,6 +1,8 @@
 import { removeEmpty } from "@pixeloven-core/common";
 import { getUtils } from "@pixeloven-core/env";
+import { resolveSourceRoot } from "@pixeloven-core/filesystem";
 import { logger } from "@pixeloven-core/logger";
+import tsLoader from "@pixeloven-webpack/ts-loader";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import CircularDependencyPlugin from "circular-dependency-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -28,7 +30,6 @@ function getConfig(options: Options) {
         getMode,
         getModuleFileLoader,
         getModuleSCSSLoader,
-        getModuleTypeScriptLoader,
         getNode,
         getOptimization,
         getOutput,
@@ -270,7 +271,11 @@ function getConfig(options: Options) {
                                 },
                             ],
                         },
-                        getModuleTypeScriptLoader(),
+                        {
+                            include: resolveSourceRoot(),
+                            test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
+                            use: tsLoader,
+                        },
                         getModuleSCSSLoader(),
                         getModuleFileLoader(),
                     ],
