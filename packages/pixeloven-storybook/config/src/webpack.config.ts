@@ -1,65 +1,58 @@
 import { resolveSourceRoot, resolveTsConfig } from "@pixeloven-core/filesystem";
+import tsLoader from "@pixeloven-webpack/ts-loader";
 import deepmerge from "deepmerge";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
-import { Configuration, Module, RuleSetRule } from "webpack";
+import { Configuration } from "webpack";
 
 interface Options {
     config: Configuration;
+    mode: string;
 }
-
-/**
- * @todo Join this with the one in our webpack share config
- */
-export const newScssRule: RuleSetRule = {
-    include: resolveSourceRoot(),
-    test: /\.(scss|sass|css)$/i,
-    use: [
-        {
-            loader: require.resolve("style-loader"),
-        },
-        {
-            loader: require.resolve("css-loader"),
-        },
-        {
-            loader: require.resolve("sass-loader"),
-            options: {
-                // Prefer `dart-sass`
-                implementation: require("sass"),
-            },
-        },
-    ],
-};
-
-/**
- * @todo Join this with the one in our webpack share config
- */
-export const newTsRule: RuleSetRule = {
-    include: resolveSourceRoot(),
-    test: /\.(ts|tsx)$/,
-    use: [
-        {
-            loader: require.resolve("babel-loader"),
-        },
-        {
-            loader: require.resolve("ts-loader"),
-            options: {
-                configFile: resolveTsConfig(),
-            },
-        },
-    ],
-};
-
-export const newModule: Module = {
-    rules: [newScssRule, newTsRule],
-};
 
 /**
  * Extend webpack config for storybook
  */
-export default (options: Options) => {
+async function getConfig(options: Options) {
     const { config } = options;
-    if (config.module) {
-        config.module = deepmerge(config.module, newModule);
+    const modules = {
+        rules: [
+            {
+                test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
+                use: tsLoader,
+            },
+            {
+                test: /\.(scss|sass|css)$/i,
+                use: [
+                    {
+                        loader: require.resolve("style-loader"),
+                    },
+                    {
+                        loader: require.resolve("css-loader"),
+                    },
+                    {
+                        loader: require.resolve("sass-loader"),
+                        options: {
+                            // Prefer `dart-sass`
+                            implementation: require("sass"),
+                        },
+                    },
+                ],
+            },
+        ],
+    };
+    config.module = config.module ? deepmerge(config.module, modules) : modules;
+
+    // Plugins
+    // @todo we should use the same setup as webpack and also this should have two modes
+    const forkTsPlugin = new ForkTsCheckerWebpackPlugin({
+        silent: true,
+        tsconfig: resolveTsConfig(),
+    });
+    if (config.plugins) {
+        config.plugins.push(forkTsPlugin);
+    } else {
+        config.plugins = [forkTsPlugin];
     }
     if (config.resolve) {
         // Aliases
@@ -83,7 +76,7 @@ export default (options: Options) => {
         } else {
             config.resolve.modules = [resolveSourceRoot(), "node_modules"];
         }
-        // Plugins
+        // Resolve
         const tsPathPlugin = new TsconfigPathsPlugin({
             configFile: resolveTsConfig(),
         });
@@ -94,4 +87,6 @@ export default (options: Options) => {
         }
     }
     return config;
-};
+}
+
+export default getConfig;

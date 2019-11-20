@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven-storybook/addons",
+  "name": "@pixeloven-webpack/ts-loader",
   "version": "6.0.0-beta.16",
-  "description": "Storybook addon library",
+  "description": "Collection of loaders to handle TypeScript and other advanced JS features",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -18,18 +18,22 @@
     "access": "public"
   },
   "dependencies": {
-    "@storybook/addon-a11y": "5.2.6",
-    "@storybook/addon-actions": "5.2.6",
-    "@storybook/addon-backgrounds": "5.2.6",
-    "@storybook/addon-knobs": "5.2.6",
-    "@storybook/addon-notes": "5.2.6",
-    "@storybook/addon-options": "5.2.6",
-    "@storybook/addon-viewport": "5.2.6",
-    "@storybook/addons": "5.2.6",
-    "@storybook/react": "5.2.6"
+    "@babel/core": "7.7.2",
+    "@babel/plugin-proposal-class-properties": "7.7.0",
+    "@babel/plugin-proposal-decorators": "7.7.0",
+    "@babel/plugin-syntax-dynamic-import": "7.2.0",
+    "@babel/polyfill": "7.7.0",
+    "@babel/preset-env": "7.7.1",
+    "@babel/preset-react": "7.7.0",
+    "@babel/preset-typescript": "7.7.2",
+    "@pixeloven-core/filesystem": "^6.0.0-beta.16",
+    "babel-loader": "8.0.6",
+    "ts-loader": "6.2.1",
+    "typescript": "3.7.2"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.16",
+    "@types/webpack": "4.39.8",
     "lint-staged": "9.4.2"
   },
   "scripts": {

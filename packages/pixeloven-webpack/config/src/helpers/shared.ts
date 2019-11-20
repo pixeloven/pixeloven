@@ -267,66 +267,6 @@ export function getSetup(options: Options) {
     }
 
     /**
-     * Define rule for transpiling TypeScript
-     * @description Uncomment transpileOnly to Disable type checker - will use it in ForkTsCheckerWebpackPlugin at the cost of overlay.
-     * Babel loader is present to support react-hot-loader.
-     *
-     * @todo Make configurable for CI and performance. Babel can also provide caching and polyfill
-     * @todo Babel probably doesn't need to be run for server config
-     */
-    function getModuleTypeScriptLoader(): RuleSetRule {
-        return {
-            include: resolveSourceRoot(),
-            test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
-            use: [
-                {
-                    loader: require.resolve("babel-loader"),
-                    options: {
-                        plugins: [
-                            [
-                                require.resolve(
-                                    "@babel/plugin-proposal-decorators",
-                                ),
-                                {
-                                    legacy: true,
-                                },
-                            ],
-                            [
-                                require.resolve(
-                                    "@babel/plugin-proposal-class-properties",
-                                ),
-                                {
-                                    loose: true,
-                                },
-                            ],
-                            require.resolve(
-                                "@babel/plugin-syntax-dynamic-import",
-                            ),
-                        ],
-                        presets: [
-                            [
-                                require.resolve("@babel/preset-env"),
-                                {
-                                    useBuiltIns: false,
-                                },
-                            ],
-                            require.resolve("@babel/preset-react"),
-                            require.resolve("@babel/preset-typescript"),
-                        ],
-                    },
-                },
-                {
-                    loader: require.resolve("ts-loader"),
-                    options: {
-                        configFile: resolveTsConfig(),
-                        transpileOnly: true,
-                    },
-                },
-            ],
-        };
-    }
-
-    /**
      * @todo Might not need this anymore
      */
     function getPerformance(): WebpackOptions.Performance {
@@ -430,7 +370,6 @@ export function getSetup(options: Options) {
         getMode,
         getModuleFileLoader,
         getModuleSCSSLoader,
-        getModuleTypeScriptLoader,
         getNode,
         getOptimization,
         getOutput,
