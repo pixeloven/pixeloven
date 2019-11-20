@@ -21,14 +21,6 @@ describe("@pixeloven-storybook/config", () => {
                 } as Configuration;
                 expect(typeof storybook({ config, mode })).toEqual("object");
             });
-            it("should add push into existing properties", () => {
-                const config = {
-                    module: {},
-                    plugins: [],
-                    resolve: {},
-                } as Configuration;
-                expect(typeof storybook({ config, mode })).toEqual("object");
-            });
         });
     });
 });
