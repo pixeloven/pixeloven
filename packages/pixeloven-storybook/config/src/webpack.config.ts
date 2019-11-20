@@ -15,33 +15,44 @@ interface Options {
  */
 async function getConfig(options: Options) {
     const { config } = options;
-    if (config.module) {
-        config.module = deepmerge(config.module, {
-            rules: [
-                {
-                    test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
-                    use: tsLoader,
-                },
-                {
-                    test: /\.(scss|sass|css)$/i,
-                    use: [
-                        {
-                            loader: require.resolve("style-loader"),
+    const modules = {
+        rules: [
+            {
+                test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
+                use: tsLoader,
+            },
+            {
+                test: /\.(scss|sass|css)$/i,
+                use: [
+                    {
+                        loader: require.resolve("style-loader"),
+                    },
+                    {
+                        loader: require.resolve("css-loader"),
+                    },
+                    {
+                        loader: require.resolve("sass-loader"),
+                        options: {
+                            // Prefer `dart-sass`
+                            implementation: require("sass"),
                         },
-                        {
-                            loader: require.resolve("css-loader"),
-                        },
-                        {
-                            loader: require.resolve("sass-loader"),
-                            options: {
-                                // Prefer `dart-sass`
-                                implementation: require("sass"),
-                            },
-                        },
-                    ],
-                },
-            ],
-        });
+                    },
+                ],
+            },
+        ],
+    };
+    config.module = config.module ? deepmerge(config.module, modules) : modules;
+
+    // Plugins
+    // @todo we should use the same setup as webpack and also this should have two modes
+    const forkTsPlugin = new ForkTsCheckerWebpackPlugin({
+        silent: true,
+        tsconfig: resolveTsConfig(),
+    });
+    if (config.plugins) {
+        config.plugins.push(forkTsPlugin);
+    } else {
+        config.plugins = [forkTsPlugin];
     }
     if (config.resolve) {
         // Aliases
@@ -64,17 +75,6 @@ async function getConfig(options: Options) {
             config.resolve.modules.push("node_modules");
         } else {
             config.resolve.modules = [resolveSourceRoot(), "node_modules"];
-        }
-        // Plugins
-        // @todo we should use the same setup as webpack and also this should have two modes
-        const forkTsPlugin = new ForkTsCheckerWebpackPlugin({
-            silent: true,
-            tsconfig: resolveTsConfig(),
-        });
-        if (config.plugins) {
-            config.plugins.push(forkTsPlugin);
-        } else {
-            config.plugins = [forkTsPlugin];
         }
         // Resolve
         const tsPathPlugin = new TsconfigPathsPlugin({
