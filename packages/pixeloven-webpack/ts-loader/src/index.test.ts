@@ -1,5 +1,5 @@
 import "jest";
-import { loader } from "./index";
+import loader from "./index";
 
 describe("@pixeloven-webpack/ts-loader", () => {
     describe("index", () => {
