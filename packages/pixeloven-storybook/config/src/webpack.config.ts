@@ -18,7 +18,7 @@ async function getConfig(options: Options) {
     const modules = {
         rules: [
             {
-                test: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/],
+                test: [/\.(ts|tsx)$/],
                 use: tsLoader,
             },
             {
