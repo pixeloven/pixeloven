@@ -1,21 +1,23 @@
-import { AddonGhPagesRunContext } from "../types";
+import { AddonGhPagesToolbox } from "../types";
 
 export default {
     name: "gh-pages",
-    run: async (context: AddonGhPagesRunContext) => {
-        const { parameters, pixelOven, ghPages } = context;
-        const argList =
-            parameters.array && parameters.array.length
-                ? parameters.array.slice(1)
-                : [];
+    run: async (context: AddonGhPagesToolbox) => {
+        const { parameters, print, pixelOven, ghPages } = context;
+        const { path } = parameters.options;
         switch (parameters.first) {
             case "build": {
-                const results = await ghPages(argList);
-                pixelOven.exit(
-                    "Github Pages",
-                    results.status,
-                    `Success! Opening doc-ing bay. :)\n`,
-                );
+                const statusCode = await ghPages(path);
+                if (statusCode) {
+                    print.error("failed to deploy");
+                    pixelOven.exit("Github Pages", statusCode);
+                } else {
+                    pixelOven.exit(
+                        "Github Pages",
+                        0,
+                        `Success! Opening doc-ing bay. :)\n`,
+                    );
+                }
                 break;
             }
             default: {
