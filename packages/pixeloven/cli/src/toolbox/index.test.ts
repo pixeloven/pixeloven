@@ -7,7 +7,6 @@ describe("@pixeloven/cli", () => {
             it("should export all helpers", () => {
                 expect(helpers).toHaveProperty("getArgList");
                 expect(helpers).toHaveProperty("getConfigPath");
-                expect(helpers).toHaveProperty("resolvePlugin");
                 expect(helpers).toHaveProperty("run");
             });
         });
