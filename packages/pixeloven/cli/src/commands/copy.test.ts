@@ -35,6 +35,12 @@ describe("@pixeloven/cli", () => {
                 expect(mockPrintInfo.callCount).toEqual(1);
                 expect(context.commandName).toEqual("copy");
             });
+            it("should copy ico", async () => {
+                const context = await cli.run("copy ico");
+                expect(mockFileCopy.callCount).toEqual(1);
+                expect(mockPrintSuccess.callCount).toEqual(1);
+                expect(context.commandName).toEqual("copy");
+            });
             it("should copy scss", async () => {
                 const context = await cli.run("copy scss");
                 expect(mockFileCopy.callCount).toEqual(1);
