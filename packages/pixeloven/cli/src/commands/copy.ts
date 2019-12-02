@@ -7,6 +7,13 @@ export default {
         const { filesystem, parameters, pixelOven, print } = toolbox;
 
         switch (parameters.first) {
+            case "ico":
+                filesystem.copy("src", "dist/lib", {
+                    matching: "**/*.ico",
+                    overwrite: true,
+                });
+                print.success(`Successfully copied ico files to dist`);
+                break;
             case "scss":
                 filesystem.copy("src", "dist/lib", {
                     matching: "**/*.scss",
@@ -23,7 +30,7 @@ export default {
                 break;
             case "assets":
                 filesystem.copy("src", "dist/lib", {
-                    matching: "**/*.{scss,svg}",
+                    matching: "**/*.{ico,scss,svg}",
                     overwrite: true,
                 });
                 print.success(`Successfully copied assets to dist`);
