@@ -34,11 +34,6 @@ export type InvalidArgumentFunction = (
     argument?: string,
 ) => void;
 
-export type ResolvePluginFunction = (
-    plugin: string,
-    ...paths: string[]
-) => string | false;
-
 export interface RunResponse {
     stdout?: Buffer | string;
     status: number;
@@ -52,7 +47,6 @@ export interface PixelOvenExtensions {
     getArgList: GetArgListFunction;
     getConfigPath: GetConfigPathFunction;
     invalidArgument: InvalidArgumentFunction;
-    resolvePlugin: ResolvePluginFunction;
     run: RunFunction;
 }
 export interface PixelOvenOptions {

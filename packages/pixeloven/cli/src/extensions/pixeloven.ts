@@ -3,7 +3,6 @@ import {
     getArgList,
     getConfigPath,
     invalidArgument,
-    resolvePlugin,
     run,
 } from "../toolbox";
 import { PixelOvenToolbox } from "../types";
@@ -14,7 +13,6 @@ export default (toolbox: PixelOvenToolbox) => {
         getArgList,
         getConfigPath,
         invalidArgument,
-        resolvePlugin,
         run,
     };
 };

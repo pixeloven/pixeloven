@@ -64,29 +64,37 @@ Below are just some of the up coming ideas for improvements.
 * https://code.visualstudio.com/docs/remote/containers
 
 ## Planned v6 Release
-* Restructure with scoped namespaces. Also create a deprecated section so we can redirect people.
-* Restructure examples. Name apps and create one example and one for pixeloven.com
 * Cleanup deps and move functions into core & add tests
-* Abstract some shared app deps and what not to other packages (they can remain private for now)
-* Restructure and fix example into smaller parts
-* Custom commit CLI addon with linting and features to help aid mono repos
-* Break middleware up into smaller packages
-* Remove semantic UI deps in main example and replace with a more accesible option
-* Document everything and host storybook, docs, etc
-* create generator for init and make compatible with npx finish --help
+* Finish Custom commit CLI addon with linting and features to help aid mono repos
+* Finish github deploy CLI addon
+* Finish documentation
+* Create generator for init and make compatible with npx finish --help
+* Add help to CLI and documentation
 
 ## After v6 Release
 * Unify all logging and make json logging a thing
 * Remove react-dev-utils
-* Add help to CLI and documentation
 * Reach 90-100% test coverage
 * node-mocks-http replace with supertest
-* Make client/server compilation configurable
-* Audit deps/build and make sure it passes without critical
+* Break middleware up into smaller packages
+* Finish webpack for libraries setup and continue to break config in parts
+* Audi deps and remove warnings.
+* No longer need pixeloven app site. 
+* Restructure and fix example(s) into smaller parts. Create shared packages and narrow each example to a specific focus
+
+## Planned v7 Release
 * Add static site generation support
 * Add support for PWA
+* Deprecate babel polyfill 
+* Abstract out build in js scripts.
+* Automate release publishing and come up with better process for release
+* Fork Jarvis modify for our needs.
+    + Create more robust console section
+    + BundleAnalyzerPlugin display tab with custom styles
+    + Reduce connection section to be more condensed 
+
+
+## After v7 Release
+* PixelOven site with coverage, storybook, etc all hosted with a unified theme.
 * Create a unified configuration (perhaps an addon?) for the CLI
 * Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
-* Create our own all in one dashboard like Jarvis + BundleAnalyzerPlugin + console (read only)
-* PixelOven site with coverage, storybook, etc all hosted with a unified theme.
-

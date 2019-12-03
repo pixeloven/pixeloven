@@ -1,7 +1,13 @@
-import { PixelOvenToolbox, RunResponse } from "@pixeloven/cli";
+import { PixelOvenToolbox } from "@pixeloven/cli";
 
-export type GhPagesExtension = (args?: string[]) => Promise<RunResponse>;
+export interface GhPagesExtensionOptions {
+    path: string;
+}
 
-export interface AddonGhPagesRunContext extends PixelOvenToolbox {
+export type GhPagesExtension = (
+    options: GhPagesExtensionOptions,
+) => Promise<number>;
+
+export interface AddonGhPagesToolbox extends PixelOvenToolbox {
     ghPages: GhPagesExtension;
 }

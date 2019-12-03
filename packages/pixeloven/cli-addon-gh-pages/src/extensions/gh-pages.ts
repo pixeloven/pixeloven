@@ -1,80 +1,36 @@
-import {
-    createOrEmptyDir,
-    resolveDir,
-    resolvePath,
-} from "@pixeloven-core/filesystem";
-import { RunResponse } from "@pixeloven/cli";
-import fs from "fs-extra";
-import ghpages from "gh-pages";
-import path from "path";
-import { AddonGhPagesRunContext, GhPagesExtension } from "../types";
+import ghPages from "gh-pages";
+import { AddonGhPagesToolbox } from "../types";
 
 /**
- * Copies docs to destination
- * @param containerName
- * @param relativePath
+ * Publish path
+ * @param path
  */
-export function copyDocs(containerName: string, packageName: string) {
-    const relativeDocsPath = path.join(containerName, packageName, "docs");
-    const absoluteSourcePath = resolveDir(relativeDocsPath);
-    const relativeDestPath = path.join("docs", relativeDocsPath);
-    const absoluteDestPath = resolvePath(relativeDestPath, false);
-    fs.copySync(absoluteSourcePath, absoluteDestPath);
-    return {
-        from: absoluteSourcePath,
-        to: absoluteDestPath,
-    };
+function publish(path: string) {
+    return new Promise<number>((resolve, reject) => {
+        ghPages.publish(path, (err?: Error) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(0);
+        });
+    });
 }
 
 /**
  * Publish dist files
- * @todo Make docs directory configurable through argv
- * @todo if argv is empty we should print usage here
- * @todo need to support the creation of an index page
- * @todo gh-pages might not support index files with underscores
- * @todo Type docs should not include readme.md file
- *      docs
- *          -> types
- *          -> coverage
- *          -> index.html (simple static site created from README.md)
- *
- * @todo Need to return a promise here
+ * @todo Validate path
+ * @todo base back specific error codes -- to do that we should write this scrip ourselves
  */
-export default (context: AddonGhPagesRunContext) => {
-    const ghPages: GhPagesExtension = async (args: string[] = []) => {
-        const { print } = context;
-        /**
-         * Handles error or success
-         * @param err
-         */
-        let results: RunResponse = {
-            status: 0,
-        };
-        const handler = async (err?: Error) => {
-            if (err) {
-                print.error(err.message);
-                results = {
-                    error: err,
-                    status: 1,
-                };
-            }
-        };
+export default (toolbox: AddonGhPagesToolbox) => {
+    toolbox.ghPages = async options => {
+        const { print } = toolbox;
         try {
-            print.info("Creating global docs directory");
-            createOrEmptyDir("docs");
-            args.forEach(containerName => {
-                print.info(`Resolving ${containerName}`);
-                const examples = fs.readdirSync(containerName);
-                examples.forEach(packageName => {
-                    const copied = copyDocs(containerName, packageName);
-                    print.info(`${copied.from} => ${copied.to}`);
-                });
-            });
-            ghpages.publish("docs", await handler);
+            return await publish(options.path);
         } catch (err) {
-            await handler(err);
+            if (err && err.message) {
+                print.error(err.message);
+            }
         }
-        return results;
+        return 1;
     };
-    context.ghPages = ghPages;
 };

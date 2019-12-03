@@ -21,13 +21,11 @@
     "@pixeloven-core/exceptions": "^6.0.0-beta.16",
     "@pixeloven-core/filesystem": "^6.0.0-beta.16",
     "@pixeloven/cli": "^6.0.0-beta.16",
-    "fs-extra": "7.0.1",
-    "gh-pages": "2.0.1"
+    "gh-pages": "2.1.1"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.16",
-    "@types/fs-extra": "5.0.4",
-    "@types/gh-pages": "2.0.0",
+    "@types/gh-pages": "2.0.1",
     "lint-staged": "9.4.2"
   },
   "scripts": {
