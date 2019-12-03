@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli-addon-generators",
-  "version": "6.0.0-beta.16",
+  "version": "6.0.0-beta.19",
   "description": "PixelOven CLI Common code generators",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/validation": "^6.0.0-beta.16",
-    "@pixeloven/cli": "^6.0.0-beta.16"
+    "@pixeloven-core/validation": "^6.0.0-beta.19",
+    "@pixeloven/cli": "^6.0.0-beta.19"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.16",
+    "@pixeloven/tasks": "^6.0.0-beta.19",
     "copyfiles": "2.1.1",
     "lint-staged": "9.2.5"
   },
