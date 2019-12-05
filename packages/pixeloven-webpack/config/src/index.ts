@@ -46,6 +46,9 @@ function getConfig(options: Options) {
     let numCyclesDetected = 0;
     let numCyclesDisplayed = 0;
 
+    /**
+     * @todo Look into https://github.com/mzgoddard/hard-source-webpack-plugin
+     */
     const plugins = ifClient(
         removeEmpty([
             /**
