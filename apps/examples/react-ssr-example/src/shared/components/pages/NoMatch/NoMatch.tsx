@@ -1,8 +1,8 @@
-import { RouteComponentProps } from "@pixeloven-react/routing";
+import { UniversalRouteComponentProps } from "@pixeloven-react/routing";
 import React from "react";
 import { Container, Grid } from "semantic-ui-react";
 
-class NoMatch extends React.Component<RouteComponentProps> {
+class NoMatch extends React.Component<UniversalRouteComponentProps> {
     public render(): React.ReactNode {
         return (
             <Grid.Row>

@@ -80,9 +80,9 @@ class App extends React.Component<Props> {
 ```
 Of course this next step is option but here to highlight that nested routes are supported. For this example we have defined a simple **Default** template that might have shared components common across our application.
 ```javascript
-import { Routes, RouteComponentProps } from "@pixeloven-react/routing";
+import { Routes, UniversalRouteComponentProps } from "@pixeloven-react/routing";
 
-class Default extends React.Component<RouteComponentProps> {
+class Default extends React.Component<UniversalRouteComponentProps> {
     public render() {
         return <Routes as="switch" config={routes} />
     }
@@ -90,9 +90,9 @@ class Default extends React.Component<RouteComponentProps> {
 ```
 Finally we arrive home with our simple little page.
 ```javascript
-import { RouteComponentProps } from "@pixeloven-react/routing";
+import { UniversalRouteComponentProps } from "@pixeloven-react/routing";
 
-class Home extends React.Component<RouteComponentProps> {
+class Home extends React.Component<UniversalRouteComponentProps> {
     public render() {
         return <div>I'm Home!</div>;
     }

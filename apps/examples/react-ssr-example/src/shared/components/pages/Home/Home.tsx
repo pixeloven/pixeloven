@@ -1,11 +1,11 @@
 import { Logo } from "@examples/component-library-example";
-import { RouteComponentProps } from "@pixeloven-react/routing";
+import { UniversalRouteComponentProps } from "@pixeloven-react/routing";
 import { Icon } from "@shared/components/atoms/Icon";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Container, Grid, Header, Segment } from "semantic-ui-react";
 
-class Home extends React.Component<RouteComponentProps> {
+class Home extends React.Component<UniversalRouteComponentProps> {
     public render(): React.ReactNode {
         return (
             <React.Fragment>
