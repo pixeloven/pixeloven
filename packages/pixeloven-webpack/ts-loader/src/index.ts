@@ -10,6 +10,7 @@ const loader: RuleSetUse = [
     {
         loader: require.resolve("babel-loader"),
         options: {
+            cacheDirectory: true,
             plugins: [
                 [
                     require.resolve("@babel/plugin-proposal-decorators"),

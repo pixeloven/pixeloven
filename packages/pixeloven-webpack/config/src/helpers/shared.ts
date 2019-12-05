@@ -67,10 +67,6 @@ export function getSetup(options: Options) {
         return ifClient(
             {
                 main: removeEmpty([
-                    /**
-                     * @todo This is deprecated. Need to link core-js directly
-                     */
-                    require.resolve("@babel/polyfill"),
                     ifDevelopment(
                         `webpack-hot-middleware/client?path=${path.normalize(
                             `/${options.publicPath}/__webpack_hmr`,
@@ -120,11 +116,12 @@ export function getSetup(options: Options) {
                     ],
                     [],
                 ),
+                moduleIds: "hashed", // @todo DO we need that one plugin if we have this???
                 noEmitOnErrors: true,
                 /**
-                 * @todo See how we can stop vendors-main (no s)
                  * @todo Make configurable v8 (include ability to provide these rules in json form)
                  */
+                runtimeChunk: "single",
                 splitChunks: {
                     cacheGroups: {
                         coreJs: {
