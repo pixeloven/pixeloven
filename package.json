@@ -66,7 +66,7 @@
     "pixeloven:pretty:scss": "lerna run pretty:scss --stream --scope={@pixeloven,@pixeloven-*}/*",
     "pixeloven:test": "lerna run test --stream --scope={@pixeloven,@pixeloven-*}/*",
     "pixeloven:test:ci": "lerna run test:ci --stream --scope={@pixeloven,@pixeloven-*}/*",
-    "preversion": "yarn all:bootstrap && yarn all:lint && yarn all:compile && yarn all:build:production && yarn all:test"
+    "preversion": "yarn all:bootstrap"
   },
   "husky": {
     "hooks": {
