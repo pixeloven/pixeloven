@@ -24,7 +24,6 @@
     "document": "pixeloven document ts ./src",
     "lint": "yarn run lint:ts",
     "lint:ts": "pixeloven lint ts 'src/**/*.{ts,tsx}'",
-    "precompile": "pixeloven delete dist",
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",
     "pretest": "pixeloven delete coverage",
