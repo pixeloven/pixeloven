@@ -226,10 +226,13 @@ export function getSetup(options: Options) {
             {
                 test: /\.(scss|sass|css)$/i,
                 use: removeEmpty([
-                    ifDevelopment({
-                        loader: require.resolve("css-hot-loader"),
-                    }),
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: ifDevelopment(),
+                        },
+                    },
+
                     {
                         loader: require.resolve("css-loader"),
                     },

@@ -7432,15 +7432,6 @@ css-has-pseudo@^0.10.0:
     postcss "^7.0.6"
     postcss-selector-parser "^5.0.0-rc.4"
 
-css-hot-loader@1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/css-hot-loader/-/css-hot-loader-1.4.4.tgz#ae784932cd8b7d092f7f15702af08b3ec9436052"
-  integrity sha512-J/qXHz+r7FOT92qMIJfxUk0LC9fecQNZVr0MswQ4FOpKLyOCBjofVMfc6R268bh/5ktkTShrweMr0wWqerC92g==
-  dependencies:
-    loader-utils "^1.1.0"
-    lodash "^4.17.5"
-    normalize-url "^1.9.1"
-
 css-loader@3.2.0, css-loader@^3.0.0, css-loader@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-3.2.0.tgz#bb570d89c194f763627fcf1f80059c6832d009b2"
@@ -13284,7 +13275,7 @@ normalize-selector@^0.2.0:
   resolved "https://registry.yarnpkg.com/normalize-selector/-/normalize-selector-0.2.0.tgz#d0b145eb691189c63a78d201dc4fdb1293ef0c03"
   integrity sha1-0LFF62kRicY6eNIB3E/bEpPvDAM=
 
-normalize-url@1.9.1, normalize-url@^1.0.0, normalize-url@^1.9.1:
+normalize-url@1.9.1, normalize-url@^1.0.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-1.9.1.tgz#2cc0d66b31ea23036458436e3620d85954c66c3c"
   integrity sha1-LMDWazHqIwNkWENuNiDYWVTGbDw=
