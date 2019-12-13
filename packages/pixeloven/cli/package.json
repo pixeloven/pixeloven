@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli",
-  "version": "6.0.0-beta.19",
+  "version": "6.0.0-beta.21",
   "description": "Command line interface for PixelOven framework",
   "main": "dist/lib/index.js",
   "types": "dist/types/types.d.ts",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/exceptions": "^6.0.0-beta.19",
+    "@pixeloven-core/exceptions": "^6.0.0-beta.21",
     "@pixeloven/tasks": "^6.0.0-beta.19",
     "gluegun": "4.1.0"
   },
