@@ -23,10 +23,10 @@
   "dependencies": {
     "@pixeloven-core/exceptions": "^6.0.0-beta.21",
     "@pixeloven/tasks": "^6.0.0-beta.19",
-    "gluegun": "4.1.0"
+    "gluegun": "4.1.2"
   },
   "devDependencies": {
-    "lint-staged": "9.4.2"
+    "lint-staged": "9.5.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
