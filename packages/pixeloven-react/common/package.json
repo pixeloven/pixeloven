@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/react": "16.9.11",
+    "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
     "@types/react-helmet": "5.0.14",
     "classnames": "2.2.6",
