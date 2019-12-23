@@ -14,6 +14,11 @@
     "@docusaurus/core": "2.0.0-alpha.39",
     "@docusaurus/preset-classic": "2.0.0-alpha.39",
     "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "react-dom": "16.12.0",
+    "prop-types": "15.7.2"
+  },
+  "resolutions": {
+    "**/react": "16.12.0",
+    "**/react-dom": "16.12.0"
   }
 }
