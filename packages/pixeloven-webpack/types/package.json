@@ -18,7 +18,7 @@
       "access": "public"
     },
     "dependencies": {
-        "@types/webpack": "4.41.0",
+        "@types/webpack": "4.39.8",
         "@types/webpack-env": "1.14.1"
     }
   }
