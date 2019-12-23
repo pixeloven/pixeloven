@@ -2,7 +2,7 @@
   "name": "@pixeloven/docusaurus-website",
   "author": "Brian Gebel <brian@pixeloven.com>",
   "description": "Static site for pixeloven.com",
-  "version": "6.0.0-beta.19",
+  "version": "6.0.0-beta.21",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
@@ -11,9 +11,14 @@
     "deploy": "GIT_USER=pixeloven-bot USE_SSH=true docusaurus deploy"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.37",
-    "@docusaurus/preset-classic": "2.0.0-alpha.37",
-    "@pixeloven-react/common": "^6.0.0-beta.19",
-    "classnames": "2.2.6"
+    "@docusaurus/core": "2.0.0-alpha.39",
+    "@docusaurus/preset-classic": "2.0.0-alpha.39",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "prop-types": "15.7.2"
+  },
+  "resolutions": {
+    "**/react": "16.12.0",
+    "**/react-dom": "16.12.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/server",
-  "version": "6.0.0-beta.19",
+  "version": "6.0.0-beta.21",
   "description": "Webpack Development Server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,19 +18,19 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/common": "^6.0.0-beta.19",
-    "@pixeloven-core/exceptions": "^6.0.0-beta.19",
-    "@pixeloven-core/logger": "^6.0.0-beta.19",
-    "@pixeloven-webpack/compiler": "^6.0.0-beta.19",
-    "@pixeloven-webpack/file-reporter": "^6.0.0-beta.19",
-    "@pixeloven-webpack/server-middleware": "^6.0.0-beta.19",
+    "@pixeloven-core/common": "^6.0.0-beta.21",
+    "@pixeloven-core/exceptions": "^6.0.0-beta.21",
+    "@pixeloven-core/logger": "^6.0.0-beta.21",
+    "@pixeloven-webpack/compiler": "^6.0.0-beta.21",
+    "@pixeloven-webpack/file-reporter": "^6.0.0-beta.21",
+    "@pixeloven-webpack/server-middleware": "^6.0.0-beta.21",
     "express": "4.16.4"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.19",
     "@types/express": "4.17.0",
-    "@types/webpack": "4.39.8",
-    "lint-staged": "9.4.2"
+    "@types/webpack": "4.41.0",
+    "lint-staged": "9.5.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
@@ -40,7 +40,6 @@
     "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
-    "precompile": "pixeloven-tasks compile:clean",
     "precommit": "lint-staged",
     "predocument": "pixeloven-tasks document:clean",
     "pretest": "pixeloven-tasks test:clean",

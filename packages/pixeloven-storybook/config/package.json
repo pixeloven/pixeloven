@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-storybook/config",
-  "version": "6.0.0-beta.19",
+  "version": "6.0.0-beta.21",
   "description": "Storybook configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,25 +18,29 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/filesystem": "^6.0.0-beta.19",
-    "@pixeloven-storybook/addons": "^6.0.0-beta.19",
-    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.19",
-    "@storybook/core": "5.2.6",
-    "@storybook/react": "5.2.6",
-    "@storybook/theming": "5.2.6",
-    "css-loader": "3.2.0",
+    "@babel/core": "7.7.7",
+    "@pixeloven-core/filesystem": "^6.0.0-beta.21",
+    "@pixeloven-storybook/addons": "^6.0.0-beta.21",
+    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.21",
+    "@storybook/core": "5.2.8",
+    "@storybook/react": "5.2.8",
+    "@storybook/theming": "5.2.8",
+    "babel-loader": "8.0.6",
+    "css-loader": "3.4.0",
     "deepmerge": "4.2.2",
-    "fork-ts-checker-webpack-plugin": "3.1.0",
-    "sass": "1.23.3",
+    "fork-ts-checker-webpack-plugin": "3.1.1",
+    "sass": "1.23.7",
     "sass-loader": "8.0.0",
     "style-loader": "1.0.0",
     "tsconfig-paths-webpack-plugin": "3.2.0",
-    "webpack": "4.41.2"
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "webpack": "4.41.4"
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.19",
     "@types/mini-css-extract-plugin": "0.8.0",
-    "lint-staged": "9.4.2"
+    "lint-staged": "9.5.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
@@ -46,7 +50,6 @@
     "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
-    "precompile": "pixeloven-tasks compile:clean",
     "precommit": "lint-staged",
     "predocument": "pixeloven-tasks document:clean",
     "pretest": "pixeloven-tasks test:clean",

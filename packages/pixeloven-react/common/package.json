@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-react/common",
-  "version": "6.0.0-beta.19",
+  "version": "6.0.0-beta.21",
   "description": "Encapsulates react dependencies and provides a simple abstraction for common project functionality.",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,17 +18,18 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/react": "16.9.11",
+    "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
     "@types/react-helmet": "5.0.14",
-    "react": "16.11.0",
-    "react-dom": "16.11.0",
+    "classnames": "2.2.6",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-helmet": "6.0.0-beta"
   },
   "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-beta.19",
+    "@pixeloven-react/testing": "^6.0.0-beta.21",
     "@pixeloven/tasks": "^6.0.0-beta.19",
-    "lint-staged": "9.4.2"
+    "lint-staged": "9.5.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
@@ -38,7 +39,6 @@
     "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
-    "precompile": "pixeloven-tasks compile:clean",
     "precommit": "lint-staged",
     "predocument": "pixeloven-tasks document:clean",
     "pretest": "pixeloven-tasks test:clean",

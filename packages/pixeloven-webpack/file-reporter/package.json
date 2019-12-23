@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/file-reporter",
-  "version": "6.0.0-beta.19",
+  "version": "6.0.0-beta.21",
   "description": "Webpack file reporter",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/logger": "^6.0.0-beta.19",
+    "@pixeloven-core/logger": "^6.0.0-beta.21",
     "filesize": "5.0.3",
     "gzip-size": "5.1.1",
     "recursive-readdir": "2.2.2"
@@ -27,8 +27,8 @@
     "@pixeloven/tasks": "^6.0.0-beta.19",
     "@types/filesize": "4.2.0",
     "@types/recursive-readdir": "2.2.0",
-    "@types/webpack": "4.39.8",
-    "lint-staged": "9.4.2"
+    "@types/webpack": "4.41.0",
+    "lint-staged": "9.5.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
@@ -38,7 +38,6 @@
     "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
-    "precompile": "pixeloven-tasks compile:clean",
     "precommit": "lint-staged",
     "predocument": "pixeloven-tasks document:clean",
     "pretest": "pixeloven-tasks test:clean",
