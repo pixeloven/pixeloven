@@ -21,6 +21,7 @@
     "@pixeloven-webpack/bundler": "^6.0.0-beta.21",
     "@pixeloven-webpack/compiler": "^6.0.0-beta.21",
     "@pixeloven-webpack/server": "^6.0.0-beta.21",
+    "@pixeloven-webpack/types": "^6.0.0-beta.21",
     "@pixeloven/cli": "^6.0.0-beta.21"
   },
   "devDependencies": {

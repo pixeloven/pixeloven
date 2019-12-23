@@ -44,10 +44,12 @@ addParameters({
 /**
  * Stories loader
  */
-const req = require.context("@src", true, /.stories.[jt]sx?$/);
+/* tslint:disable no-string-literal */
+const req = require["context"]("@src", true, /.stories.[jt]sx?$/);
 function loadStories() {
     req.keys().forEach(req);
 }
+/* tslint:enable no-string-literal */
 
 // Initialize react-storybook
 configure(loadStories, module);
