@@ -65,13 +65,14 @@ Below are just some of the up coming ideas for improvements.
 
 ## Planned v6 Release
 * Cleanup deps and move functions into core & add tests
-* Finish Custom commit CLI addon with linting and features to help aid mono repos
-* Finish github deploy CLI addon
 * Finish documentation
 * Create generator for init and make compatible with npx finish --help
 * Add help to CLI and documentation
 
 ## After v6 Release
+* Finish Custom commit CLI addon with linting and features to help aid mono repos
+* Finish github deploy CLI addon
+* Move away from React helmet and use https://www.npmjs.com/package/react-helmet-async - Also break out deps a bit better
 * Unify all logging and make json logging a thing
 * Remove react-dev-utils
 * Reach 90-100% test coverage
@@ -81,6 +82,10 @@ Below are just some of the up coming ideas for improvements.
 * Audi deps and remove warnings.
 * No longer need pixeloven app site. 
 * Restructure and fix example(s) into smaller parts. Create shared packages and narrow each example to a specific focus
+* Updatee testing libraries to include Cypress abstractions
+* Should we switch over to eslint now that tslint will eventually be deprecated
+* create custom tslint / eslint extension
+* consolidate lerna's conventional-changelog-angular with the one here????
 
 ## Planned v7 Release
 * Add static site generation support

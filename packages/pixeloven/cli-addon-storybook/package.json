@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.19",
-    "lint-staged": "9.4.2"
+    "lint-staged": "9.5.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",

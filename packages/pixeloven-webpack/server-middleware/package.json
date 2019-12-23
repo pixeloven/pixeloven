@@ -21,23 +21,27 @@
     "@pixeloven-express/dynamic-middleware": "^6.0.0-beta.21",
     "ansi-html": "0.0.7",
     "html-entities": "1.2.1",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-universal-component": "4.0.0",
     "require-from-string": "2.0.2",
     "webpack-dev-middleware": "3.7.2",
     "webpack-flush-chunks": "2.0.3",
-    "webpack-hot-middleware": "2.25.0"
+    "webpack-hot-middleware": "2.25.0",
+    "webpack": "4.41.4"
   },
   "devDependencies": {
     "@pixeloven-webpack/compiler": "^6.0.0-beta.21",
     "@pixeloven/tasks": "^6.0.0-beta.19",
     "@types/express": "4.17.0",
+    "@types/react": "16.9.17",
     "@types/html-entities": "1.2.16",
     "@types/memory-fs": "0.3.2",
     "@types/require-from-string": "1.2.0",
-    "@types/webpack": "4.39.8",
+    "@types/webpack": "4.41.0",
     "@types/webpack-dev-middleware": "2.0.3",
     "@types/webpack-hot-middleware": "2.16.5",
-    "lint-staged": "9.4.2"
+    "lint-staged": "9.5.0"
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
