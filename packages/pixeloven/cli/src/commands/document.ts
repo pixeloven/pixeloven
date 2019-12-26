@@ -1,17 +1,20 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
-    alias: ["--document"],
     name: "document",
     run: async (toolbox: PixelOvenToolbox) => {
         const { parameters, pixelOven, typeDoc } = toolbox;
-        const argList =
-            parameters.array && parameters.array.length
-                ? parameters.array.slice(1)
-                : [];
         switch (parameters.first) {
             case "ts":
             case "tsx": {
+                const argList = pixelOven.getArgList(
+                    parameters.first,
+                    parameters,
+                    {
+                        offset: 1,
+                        type: "withOptions",
+                    },
+                );
                 const results = await typeDoc(argList);
                 pixelOven.exit(
                     "TypeDoc",

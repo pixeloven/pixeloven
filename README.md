@@ -64,11 +64,17 @@ Below are just some of the up coming ideas for improvements.
 * https://code.visualstudio.com/docs/remote/containers
 
 ## Planned v6 Release
-* Finish documentation
-* Create generator for init and make compatible with npx finish --help
-* Add help to CLI and documentation
+* Finish documentation for working with and contributing to PO
+* Add help to CLI
+* Create generator for init and make compatible with npx (npx pixeloven init my-app) like create react app does.
+* FInish App and package generators
+* Document some of our hardcoded opnions like .dist and .src
+* Lint and prettier used with lint-staged
+* Move setup file docs into it's own sections
 
 ## After v6 Release
+* Break out the document feature into it's own standalone package
+* Break out the test feature into it's own standalone package
 * Cleanup deps and move functions into core & add tests
 * Finish Custom commit CLI addon with linting and features to help aid mono repos
 * Finish github deploy CLI addon

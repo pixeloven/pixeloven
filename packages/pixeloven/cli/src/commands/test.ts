@@ -1,7 +1,6 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
-    alias: ["--test", "-t"],
     name: "test",
     run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, jest } = context;

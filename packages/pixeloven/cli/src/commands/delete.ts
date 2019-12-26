@@ -1,7 +1,6 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
-    alias: ["--delete"],
     name: "delete",
     run: async (toolbox: PixelOvenToolbox) => {
         const { filesystem, pixelOven, parameters, print } = toolbox;
@@ -16,6 +15,14 @@ export default {
                 break;
             case "docs":
                 filesystem.remove("./docs");
+                print.success(`Successfully deleted directory`);
+                break;
+            case "stats":
+                filesystem.remove("./stats");
+                print.success(`Successfully deleted directory`);
+                break;
+            case "stories":
+                filesystem.remove("./stories");
                 print.success(`Successfully deleted directory`);
                 break;
             default:

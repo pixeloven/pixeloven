@@ -5,7 +5,6 @@ import {
 } from "../types";
 
 export default {
-    alias: ["--story", "-s"],
     name: "story",
     run: async (toolbox: AddonStorybookToolbox) => {
         const { parameters, pixelOven, storybook } = toolbox;

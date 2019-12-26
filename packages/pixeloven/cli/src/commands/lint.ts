@@ -1,11 +1,10 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
-    alias: ["--lint", "-l"],
     name: "lint",
     run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, styleLint, tsLint } = context;
-        const availableTasks = ["scss", "ts", "tsx"];
+        const availableTasks = ["css", "scss", "ts", "tsx"];
         const task = parameters.first;
 
         if (!task) {
@@ -13,7 +12,7 @@ export default {
             pixelOven.exit("Lint", 1);
         } else if (!availableTasks.includes(task)) {
             pixelOven.invalidArgument(
-                `Available Pretty tasks are "scss", "ts", or "tsx".`,
+                `Available Pretty tasks are "css", "scss", "ts", or "tsx".`,
                 task,
             );
             pixelOven.exit("Pretty", 1);
@@ -24,12 +23,13 @@ export default {
             });
 
             switch (parameters.first) {
+                case "css":
                 case "scss": {
                     const results = await styleLint(argList);
                     pixelOven.exit(
                         "Stylelint",
                         results.status,
-                        `Success! Your SCSS is beautify just the way it is.\n`,
+                        `Success! Your ${parameters.first} is beautify just the way it is.\n`,
                     );
                     break;
                 }
@@ -39,13 +39,13 @@ export default {
                     pixelOven.exit(
                         "TSLint",
                         results.status,
-                        `Success! Your TypeScript is beautify just the way it is.\n`,
+                        `Success! Your ${parameters.first} is beautify just the way it is.\n`,
                     );
                     break;
                 }
                 default: {
                     pixelOven.invalidArgument(
-                        `Available Lint tasks are "scss", "ts", or "tsx".`,
+                        `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
                         task,
                     );
                     pixelOven.exit("Lint", 1);

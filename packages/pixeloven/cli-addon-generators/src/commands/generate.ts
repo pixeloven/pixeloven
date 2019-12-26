@@ -17,7 +17,6 @@ import {
  * @url https://github.com/SBoudrias/Inquirer.js/
  */
 export default {
-    alias: ["--generate", "-g"],
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
         const { createComponent, print, pixelOven, prompt } = toolbox;
