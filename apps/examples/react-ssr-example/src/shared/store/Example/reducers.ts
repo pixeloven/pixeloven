@@ -38,7 +38,4 @@ const exampleReducer = (draft: ExampleState, action: ExampleAction) => {
     }
 };
 
-export default produce<ExampleState, ExampleAction>(
-    exampleReducer,
-    initialState,
-);
+export default produce(exampleReducer, initialState);

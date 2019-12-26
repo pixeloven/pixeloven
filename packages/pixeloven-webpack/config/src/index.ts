@@ -102,6 +102,8 @@ function getConfig(options: Options) {
             /**
              * Helps prevent hashes from updating if a bundle hasn't changed.
              * @env all
+             *
+             * @todo should we use webpack.ids.DeterministicModuleIdsPlugin instead?
              */
             new webpack.HashedModuleIdsPlugin(),
             /**
@@ -133,12 +135,12 @@ function getConfig(options: Options) {
              */
             new MiniCssExtractPlugin({
                 chunkFilename: ifProduction(
-                    "static/css/[id].[contenthash].css",
-                    "static/css/[id].css",
+                    "static/css/[name].[id].[contenthash].css",
+                    "static/css/[name].[id].[hash].css",
                 ),
                 filename: ifProduction(
                     "static/css/[name].[contenthash].css",
-                    "static/css/[name].css",
+                    "static/css/[name].[hash].css",
                 ),
             }),
             getPluginBundleAnalyzer(options.stats),
