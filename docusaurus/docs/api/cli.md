@@ -5,7 +5,29 @@ title: CLI Core
 
 PixelOven's core CLI provides some basic out of the box commands for creating managing your project. The usages below assuming execution with yarn but npm and other package managers should work just as well.
 
-## Compile
+## Installation
+To install the core CLI simply run the following with NPM
+```sh
+npm install --save-dev @pixeloven/cli
+```
+or yarn
+```sh
+yarn add --dev @pixeloven/cli
+```
+
+## API Reference
+|API|Description|
+|---|---|
+|[`compile`](#cli-pixelovencompile)| CLI entry point for compiling with TypeScript. |
+|[`copy`](#cli-pixelovencopy)| CLI utility for copy specific static assets. |
+|[`delete`](#cli-pixelovendelete)| CLI utility for deleting specific directory paths. |
+|[`document`](#cli-pixelovendocument)| CLI entry point for generating type docs using TypeDoc. |
+|[`lint`](#cli-pixelovenlint)| CLI entry point for interfacing with TSLint & StyleLint. |
+|[`pretty`](#cli-pixelovenpretty)| CLI entry point for interfacing with Prettier. |
+|[`test`](#cli-pixeloventest)| CLI entry point for interfacing with Jest. |
+
+
+## CLI: PixelOven.Compile
 Compile is a simple wrapper for standard JavaScript/TypeScript compilation. It currently acts as proxy for the TypeScript compiler.
 
 ### TypeScript
@@ -40,7 +62,7 @@ yarn run pixeloven compile ts
 ```
 TypeScript options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **tsconfig.json** file.
 
-## Copy
+## CLI: PixelOven.Copy
 Copy is a utility API that helps copy static assets from src directories into a distribution directory. This can be useful for when developing component libraries that depend on static components throughout the development life cycle.
 
 ### Assets
@@ -68,7 +90,7 @@ A common pattern where this might be used is as a post command hook after a comp
 }
 ```
 
-## Delete
+## CLI: PixelOven.Delete
 
 Delete is another utility API that is meant to aid in deleting common paths during the development cycle.  
 
@@ -96,7 +118,7 @@ A common pattern where this might be used is as a post command hook after a comp
 }
 ```
 
-## Document
+## CLI: PixelOven.Document
 > NOTICE: This feature will be removed from the core cli and become an addon in a future update.
 
 Document is a wrapper for type doc and is therefore dependent on TypeScript. As such it follows a similar pattern as our own [Compile](#compile) cmd.
@@ -143,7 +165,7 @@ Once configured we can create our documentation from our source using a cmd simi
 yarn run pixeloven document ts ./src
 ```
 
-## Lint
+## CLI: PixelOven.Lint
 The Lint API provides a proxy for TsLint as well as StyleLint for handling linting for SCSS, CSS, JavaScript and TypeScript.
 
 ### Styles
@@ -214,7 +236,7 @@ yarn run pixeloven lint ts ./src/index.ts
 ```
 TSLint options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **tslint.json** file.
 
-## Pretty
+## CLI: PixelOven.Pretty
 > NOTICE: Future versions will no longer wrap over a linters --fix functionality but instead focus on extending prettier alone. Leaving the auto fix functions of linters to the Lint API.
 
 The Pretty API provides a proxy for TsLint, StyleLint and Prettier. Utilizing each linters own auto-fixing features along side prettier to help maintain code compliance. 
@@ -287,7 +309,7 @@ yarn run pixeloven pretty ts ./src/index.ts
 ```
 TSLint options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **tslint.json** file.
 
-## Test
+## CLI: PixelOven.Test
 > NOTICE: This feature will be removed from the core cli and become an addon in a future update.
 
 Test is a simple wrapper for testing JavaScript applications. It currently acts as proxy for the Jest compiler and comes with a dependecies to make it more compatible with TypeScript.
