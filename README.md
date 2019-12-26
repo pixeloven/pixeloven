@@ -64,12 +64,12 @@ Below are just some of the up coming ideas for improvements.
 * https://code.visualstudio.com/docs/remote/containers
 
 ## Planned v6 Release
-* Cleanup deps and move functions into core & add tests
 * Finish documentation
 * Create generator for init and make compatible with npx finish --help
 * Add help to CLI and documentation
 
 ## After v6 Release
+* Cleanup deps and move functions into core & add tests
 * Finish Custom commit CLI addon with linting and features to help aid mono repos
 * Finish github deploy CLI addon
 * Move away from React helmet and use https://www.npmjs.com/package/react-helmet-async - Also break out deps a bit better
