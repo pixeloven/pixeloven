@@ -149,7 +149,6 @@ export function getSetup(options: Options) {
                             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
                         },
                         vendors: {
-                            // maxSize: 1000000,
                             name: "vendor~main",
                             priority: 10,
                             test: /[\\/]node_modules[\\/]((?!(core-js|lodash|moment|react|react-dom)).*)[\\/]/,
