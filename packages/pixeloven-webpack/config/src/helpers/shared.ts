@@ -106,7 +106,9 @@ export function getSetup(options: Options) {
                          * @env production
                          */
                         new TerserPlugin({
+                            cache: true,
                             extractComments: "all",
+                            parallel: true,
                             sourceMap: options.sourceMap,
                             terserOptions: {
                                 safari10: true,
@@ -116,49 +118,45 @@ export function getSetup(options: Options) {
                     ],
                     [],
                 ),
-                moduleIds: "hashed", // @todo DO we need that one plugin if we have this???
+                moduleIds: "hashed",
                 noEmitOnErrors: true,
-                /**
-                 * @todo Make configurable v8 (include ability to provide these rules in json form)
-                 */
-                runtimeChunk: "single",
+                runtimeChunk: {
+                    /* tslint:disable no-any */
+                    name: (entryPoint: any) => `${entryPoint.name}~runtime`,
+                    /* tslint:enable no-any */
+                },
                 splitChunks: {
                     cacheGroups: {
                         coreJs: {
                             name: "vendor~core-js",
+                            priority: 20,
                             test: /[\\/]node_modules[\\/](core-js)[\\/]/,
                         },
+                        default: false,
                         lodash: {
                             name: "vendor~lodash",
+                            priority: 20,
                             test: /[\\/]node_modules[\\/](lodash)[\\/]/,
                         },
                         moment: {
                             name: "vendor~moment",
+                            priority: 20,
                             test: /[\\/]node_modules[\\/](moment)[\\/]/,
                         },
                         react: {
                             name: "vendor~react",
+                            priority: 20,
                             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
                         },
-                        vendor: {
+                        vendors: {
                             name: "vendor~main",
-                            /**
-                             * @todo https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-                             */
-                            // name(mod) {
-                            //     // get the name. E.g. node_modules/packageName/not/this/part.js
-                            //     // or node_modules/packageName
-                            //     const packageName = mod.context.match(
-                            //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-                            //     )[1];
-                            //     // npm package names are URL-safe, but some servers don't like @ symbols
-                            //     return `vendor~${packageName.replace("@", "")}`;
-                            // },
-                            test: /[\\/]node_modules[\\/](!core-js)(!lodash)(!moment)(!react)(!react-dom)[\\/]/,
+                            priority: 10,
+                            test: /[\\/]node_modules[\\/]((?!(core-js|lodash|moment|react|react-dom)).*)[\\/]/,
                         },
                     },
                     chunks: "all",
                     maxInitialRequests: Infinity,
+                    maxSize: 1000000,
                     minSize: 0,
                 },
             },
@@ -172,8 +170,8 @@ export function getSetup(options: Options) {
         return ifClient(
             {
                 chunkFilename: ifProduction(
-                    "static/js/[name].[contenthash].js",
-                    "static/js/[name].[hash].js",
+                    "static/js/[name].[id].[contenthash].js",
+                    "static/js/[name].[id].[hash].js",
                 ),
                 devtoolModuleFilenameTemplate,
                 filename: ifProduction(
@@ -342,8 +340,6 @@ export function getSetup(options: Options) {
      * To fix this, we prevent you from importing files out of src/ -- if you'd like to,
      * please link the files into your node_modules/ and let module-resolution kick in.
      * Make sure your source files are compiled, as they will not be processed in any way.
-     *
-     * @todo How to handle lerna???
      */
     function getResolve(): Resolve {
         return {

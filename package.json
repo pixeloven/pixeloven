@@ -22,8 +22,8 @@
     "@commitlint/config-conventional": "8.2.0",
     "codecov": "3.6.1",
     "commitizen": "4.0.3",
-    "husky": "3.0.9",
-    "lerna": "3.16.4"
+    "husky": "3.1.0",
+    "lerna": "3.19.0"
   },
   "scripts": {
     "all:bootstrap": "yarn install && yarn all:compile",
@@ -31,7 +31,7 @@
     "all:build:development": "yarn pixeloven:build:production && yarn examples:build:production",
     "all:clean": "lerna clean --yes && rm -rf node_modules",
     "all:commit": "git-cz",
-    "all:compile": "lerna run --stream compile",
+    "all:compile": "yarn pixeloven:compile && yarn examples:compile",
     "all:linker": "lerna link",
     "all:lint": "lerna run --stream lint",
     "all:lint:ts": "lerna run --stream lint:ts",

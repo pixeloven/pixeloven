@@ -33,12 +33,14 @@ function AppWrapper() {
  * When using hot module replacement we need to use the render method
  * otherwise errors may occur in development.
  */
-const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
+/* tslint:disable no-string-literal */
+const renderMethod = module["hot"] ? ReactDOM.render : ReactDOM.hydrate;
 renderMethod(<AppWrapper />, root);
 
 /**
  * Register service workers
  */
-if (module.hot) {
-    module.hot.accept();
+if (module["hot"]) {
+    module["hot"].accept();
 }
+/* tslint:enable no-string-literal */

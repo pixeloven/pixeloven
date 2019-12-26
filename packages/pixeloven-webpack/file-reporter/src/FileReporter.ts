@@ -99,6 +99,9 @@ export function FileReporter(options: FileReporterOptions) {
     }
 
     function printFileStats(name: string, fileStats?: FileSizes | false) {
+        /**
+         * @todo add up sizes and better header
+         */
         if (fileStats) {
             logger.info(
                 `collecting ${chalk.bold(name)} build stats from ${
