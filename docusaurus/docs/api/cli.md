@@ -9,6 +9,8 @@ PixelOven's core CLI provides some basic out of the box commands for creating ma
 Compile is a simple wrapper for standard JavaScript/TypeScript compilation. It currently acts as proxy for the TypeScript compiler.
 
 ### TypeScript
+> It is important to note that currently this feature expects a **tsconfig.json** file to be present at the root of the package to configure the compiler.
+
 |Argument|Description|
 |---|---|
 |`ts`| A proxy for the TypeScript compiler with a few opinionated defaults for easier setup. |
@@ -17,10 +19,8 @@ Compile is a simple wrapper for standard JavaScript/TypeScript compilation. It c
 #### Options
 For reference on all the available options please review the [official documentation](https://www.typescriptlang.org/docs/home.html) for TypeScript. 
 
-> It is important to note that currently this feature expects a **tsconfig.json** file to be present at the root of the package to configure the compiler.
-
-#### Usage
-First be sure to create a **tsconfig.json** file at the root of the project or in other words adjacent to the **package.json**.
+#### Setup
+Be sure to create a **tsconfig.json** file at the root of the project or in other words adjacent to the **package.json**. 
 ```json
 {
     "compilerOptions": {
@@ -30,15 +30,18 @@ First be sure to create a **tsconfig.json** file at the root of the project or i
     }
 }
 ```
+The above configuration file is not an exhaustive example but instead represents our recommendation for getting started. Please review the official documentation for more advanced configurations.
 
-Once this has been confirmed all we have to do is run the following.
+#### Usage
+Once configured we can compile our source using a cmd similar what you see below.
+
 ```bash
 yarn run pixeloven compile ts
 ```
 TypeScript options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **tsconfig.json** file.
 
 ## Copy
-Copy is a utility that helps copy static assets from src directories into a distribution directory. This can be useful for when developing component libraries that depend on static components throughout the development life cycle.
+Copy is a utility API that helps copy static assets from src directories into a distribution directory. This can be useful for when developing component libraries that depend on static components throughout the development life cycle.
 
 ### Assets
 |Argument|Description|
@@ -51,13 +54,13 @@ Copy is a utility that helps copy static assets from src directories into a dist
 Each of these cmds follows the current path down copy files into `./dist/lib` while maintaining the src pathing. This is done to ensure compatibility with compiled TypeScript into JavaScript. That way references are maintained relative to the compiled source.
 
 #### Usage
->Note the current form of this cmd is limited on purpose. Tooling already exists for glob based copying and so this utility is meant more as a convenience.
+>Note extensive tooling already exists for copying files. This utility is meant more as a convenience and therefore has a very limited scope.
 
 Using this cmd is as simple as:
 ```bash
 yarn run pixeloven copy assets
 ```
-A common pattern where this might be used is as a post command hook after a compailation step.
+A common pattern where this might be used is as a post command hook after a compilation step has completed.
 ```json
 "scripts": {
     "compile": "pixeloven compile ts",
@@ -99,6 +102,8 @@ A common pattern where this might be used is as a post command hook after a comp
 Document is a wrapper for type doc and is therefore dependent on TypeScript. As such it follows a similar pattern as our own [Compile](#compile) cmd.
 
 ### TypeScript
+> It is important to note that currently this feature expects both a **tsconfig.json** and **typedoc.json** file to be present at the root of the package for TypeDoc to run.
+
 |Argument|Description|
 |---|---|
 |`ts`| A proxy for the TypeDoc API with a few opinionated defaults for easier setup. |
@@ -107,9 +112,7 @@ Document is a wrapper for type doc and is therefore dependent on TypeScript. As 
 #### Options
 For reference on all the available options please review the [official documentation](https://typedoc.org/) for TypeDoc. 
 
-> It is important to note that currently this feature expects both a **tsconfig.json** and **typedoc.json** file to be present at the root of the package for TypeDoc to run.
-
-#### Usage
+#### Setup
 First be sure to create a **tsconfig.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -120,7 +123,7 @@ First be sure to create a **tsconfig.json** file at the root of the project or i
     }
 }
 ```
-Second make sure to have a configuration file for typedoc like seen below.
+Second make sure to have a configuration file for TypeDoc like seen below.
 ```json
 {
     "name": "@project/name",
@@ -132,7 +135,10 @@ Second make sure to have a configuration file for typedoc like seen below.
     "includeDeclarations": true
 }
 ```
-Finally we can run the cmd like so:
+The above configuration files are not exhaustive examples but instead represents our recommendation for getting started. Please review the official documentation for more advanced configurations.
+
+#### Usage
+Once configured we can create our documentation from our source using a cmd similar what you see below.
 ```bash
 yarn run pixeloven document ts ./src
 ```
@@ -151,7 +157,7 @@ For reference on all the available options please review the [official documenta
 
 > It is important to note that currently this feature expects a **stylelint.json** file to be present at the root of the package to configure the compiler.
 
-#### Usage
+#### Setup
 First be sure to create a **stylelint.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -161,6 +167,7 @@ First be sure to create a **stylelint.json** file at the root of the project or 
 ```
 PixelOven by default provides [stylelint-config-recommended-scss](https://github.com/kristerkari/stylelint-config-recommended-scss) as a dependency and highly recommends using this as a starting point for all SCSS based projects.
 
+#### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
 yarn run pixeloven lint scss
@@ -172,6 +179,8 @@ yarn run pixeloven lint scss ./src/index.scss
 StyleLint options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **stylelint.json** file.
 
 ### TypeScript
+> It is important to note that currently this feature expects a **tslint.json** file to be present at the root of the package to configure the compiler.
+
 |Argument|Description|
 |---|---|
 |`ts`| A proxy for the TSLint linter with a few opinionated defaults for easier setup. |
@@ -180,9 +189,7 @@ StyleLint options can be passed through the CLI but it is highly recommended tha
 #### Options
 For reference on all the available options please review the [official documentation](https://palantir.github.io/tslint/) for TSLint. 
 
-> It is important to note that currently this feature expects a **tslint.json** file to be present at the root of the package to configure the compiler.
-
-#### Usage
+#### Setup
 First be sure to create a **tslint.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -196,6 +203,7 @@ First be sure to create a **tslint.json** file at the root of the project or in 
 ```
 PixelOven by default provides [tslint-config-prettier](https://github.com/prettier/tslint-config-prettier) for compatibility between TSLint and Prettier as well as [tslint-eslint-rules](https://github.com/buzinas/tslint-eslint-rules) to match rules against ESLint.
 
+#### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
 yarn run pixeloven lint ts
@@ -211,20 +219,18 @@ TSLint options can be passed through the CLI but it is highly recommended that t
 
 The Pretty API provides a proxy for TsLint, StyleLint and Prettier. Utilizing each linters own auto-fixing features along side prettier to help maintain code compliance. 
 
-For reference on all the available options please review the [official documentation](https://prettier.io/) for Prettier. 
-
 ### Styles
+> It is important to note that currently this feature expects a **stylelint.json** file to be present at the root of the package to configure the compiler.
+
 |Argument|Description|
 |---|---|
 |`css`| An alias for `scss`. Implemented to help differentiate CSS from SCSS.|
 |`scss`| A proxy for the StyleLint linter with a few opinionated defaults for easier setup. |
 
 #### Options
-For reference on all the available options please review the [official documentation](https://stylelint.io/) for StyleLint. 
+For reference on all the available options please review the [official documentation](https://prettier.io/) for Prettier. 
 
-> It is important to note that currently this feature expects a **stylelint.json** file to be present at the root of the package to configure the compiler.
-
-#### Usage
+#### Setup
 First be sure to create a **stylelint.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -234,6 +240,7 @@ First be sure to create a **stylelint.json** file at the root of the project or 
 ```
 PixelOven by default provides [stylelint-config-recommended-scss](https://github.com/kristerkari/stylelint-config-recommended-scss) as a dependency and highly recommends using this as a starting point for all SCSS based projects.
 
+#### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
 yarn run pixeloven pretty scss
@@ -245,17 +252,17 @@ yarn run pixeloven pretty ts ./src/index.scss
 StyleLint options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **stylelint.json** file.
 
 ### TypeScript
+> It is important to note that currently this feature expects a **tslint.json** file to be present at the root of the package to configure the compiler.
+
 |Argument|Description|
 |---|---|
 |`ts`| A proxy for the TSLint linter with a few opinionated defaults for easier setup. |
 |`tsx`| An alias for `ts`. Implemented to help differentiate JSX based projects.|
 
 #### Options
-For reference on all the available options please review the [official documentation](https://palantir.github.io/tslint/) for TSLint. 
+For reference on all the available options please review the [official documentation](https://prettier.io/) for Prettier. 
 
-> It is important to note that currently this feature expects a **tslint.json** file to be present at the root of the package to configure the compiler.
-
-#### Usage
+#### Setup
 First be sure to create a **tslint.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -269,6 +276,7 @@ First be sure to create a **tslint.json** file at the root of the project or in 
 ```
 PixelOven by default provides [tslint-config-prettier](https://github.com/prettier/tslint-config-prettier) for compatibility between TSLint and Prettier as well as [tslint-eslint-rules](https://github.com/buzinas/tslint-eslint-rules) to match rules against ESLint.
 
+#### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
 yarn run pixeloven pretty ts
@@ -279,19 +287,17 @@ yarn run pixeloven pretty ts ./src/index.ts
 ```
 TSLint options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **tslint.json** file.
 
-
 ## Test
 > NOTICE: This feature will be removed from the core cli and become an addon in a future update.
 
 Test is a simple wrapper for testing JavaScript applications. It currently acts as proxy for the Jest compiler and comes with a dependecies to make it more compatible with TypeScript.
 
 ### Jest
+> It is important to note that currently this feature expects a **jest.json** file to be present at the root of the package to configure the compiler.
 
 For reference on all the available configurations please review the [official documentation](https://jestjs.io/) for Jest. 
 
-> It is important to note that currently this feature expects a **jest.json** file to be present at the root of the package to configure the compiler.
-
-#### Usage
+#### Setup
 First be sure to create a **jest.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -333,9 +339,10 @@ First be sure to create a **jest.json** file at the root of the project or in ot
   }
 ```
 
+#### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
-yarn run pixeloven test watch
+yarn run pixeloven test --watch
 ```
 or perhaps as part of a CI workflow:
 ```bash

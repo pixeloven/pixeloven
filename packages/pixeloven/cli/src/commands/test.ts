@@ -5,6 +5,9 @@ export default {
     run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, jest } = context;
         switch (parameters.first) {
+            /**
+             * @deprecated We should simply treat this as a proxy for jest in future versions.
+             */
             case "watch": {
                 const argList = pixelOven.getArgList("watch", parameters, {
                     offset: 1,
