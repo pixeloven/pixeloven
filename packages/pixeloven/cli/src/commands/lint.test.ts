@@ -18,7 +18,6 @@ describe("@pixeloven/cli", () => {
                 mockPrintInfo.reset();
             });
             it("should contains required props", () => {
-                expect(lintModule.alias).toEqual(["--lint", "-l"]);
                 expect(lintModule.name).toEqual("lint");
                 expect(typeof lintModule.run).toEqual("function");
             });

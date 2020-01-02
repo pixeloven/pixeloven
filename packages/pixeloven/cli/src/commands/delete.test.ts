@@ -24,7 +24,6 @@ describe("@pixeloven/cli", () => {
                 mockPrintSuccess.reset();
             });
             it("should contains required props", () => {
-                expect(deleteModule.alias).toEqual(["--delete"]);
                 expect(deleteModule.name).toEqual("delete");
                 expect(typeof deleteModule.run).toEqual("function");
             });

@@ -11,7 +11,6 @@ describe("@pixeloven/cli-addon-webpack", () => {
                 Sandbox.restore();
             });
             it("should contains required props", () => {
-                expect(webpackModule.alias).toEqual(["--webpack", "-w"]);
                 expect(webpackModule.name).toEqual("webpack");
                 expect(typeof webpackModule.run).toEqual("function");
             });

@@ -18,7 +18,6 @@ describe("@pixeloven/cli", () => {
                 mockPrintInfo.reset();
             });
             it("should contains required props", () => {
-                expect(prettyModule.alias).toEqual(["--pretty", "-p"]);
                 expect(prettyModule.name).toEqual("pretty");
                 expect(typeof prettyModule.run).toEqual("function");
             });

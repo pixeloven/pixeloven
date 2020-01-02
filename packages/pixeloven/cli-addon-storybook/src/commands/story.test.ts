@@ -14,7 +14,6 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 sandbox.restore();
             });
             it("should contains required props", () => {
-                expect(storyModule.alias).toEqual(["--story", "-s"]);
                 expect(storyModule.name).toEqual("story");
                 expect(typeof storyModule.run).toEqual("function");
             });
