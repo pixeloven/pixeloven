@@ -1,0 +1,29 @@
+<% if (props.nameSpace && props.nameSpace.length > 0) { -%>
+# <%= props.nameSpace %>/packages-<%= props.name %>
+<% } else { -%>
+# <%= props.name %>
+<% } -%>
+
+<%= props.description %>
+
+## Insall
+
+Using npm:
+
+```sh
+<% if (props.nameSpace && props.nameSpace.length > 0) { -%>
+npm install --save <%= props.nameSpace %>/packages-<%= props.name %>
+<% } else { -%>
+npm install --save <%= props.name %>
+<% } -%>
+```
+
+or using yarn:
+
+```sh
+<% if (props.nameSpace && props.nameSpace.length > 0) { -%>
+yarn add <%= props.nameSpace %>/packages-<%= props.name %>
+<% } else { -%>
+yarn add <%= props.name %>
+<% } -%>
+```

@@ -8,6 +8,7 @@ import {
     AtomicDesignType,
     CreateComponentOptions,
     CreateOptions,
+    CreatePackageOptions,
     GeneratorType,
     ProgrammingParadigm,
 } from "../types";
@@ -19,7 +20,13 @@ import {
 export default {
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
-        const { createComponent, print, pixelOven, prompt } = toolbox;
+        const {
+            createComponent,
+            createPackage,
+            print,
+            pixelOven,
+            prompt,
+        } = toolbox;
         // todo create generator for library
         // todo crete generator for addon
         // todo crete generator for state
@@ -101,6 +108,57 @@ export default {
                 validate: Validation.minLength(1),
             },
         ];
+        const askCreatePackageQuestions = [
+            {
+                message: "What is the name of the new package?",
+                name: "packageName",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message:
+                    "Provide a package namespace if necessary (leave blank if not required):",
+                name: "packageNameSpace",
+                type: "input",
+            },
+            {
+                message: "Provide a brief description of the package:",
+                name: "packageDescription",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message: "Provide a license type for the package:",
+                name: "packageLicense",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message: "Provide the author name:",
+                name: "packageAuthorName",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message: "Provide the author email:",
+                name: "packageAuthorEmail",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message:
+                    "Provide a private registery if necessary(leave blank if not required):",
+                name: "packageRegistry",
+                type: "input",
+            },
+            {
+                message:
+                    "Provide an initial version to publish the package with:",
+                name: "packageVersion",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+        ];
         const { generatorType } = (await prompt.ask<CreateOptions>(
             askCreateQuestions,
         )) as any;
@@ -117,7 +175,10 @@ export default {
                 break;
             }
             case "Package": {
-                print.info("Coming Soon");
+                const options = (await prompt.ask<CreatePackageOptions>(
+                    askCreatePackageQuestions,
+                )) as any;
+                createPackage(options);
                 break;
             }
             default: {

@@ -1,0 +1,53 @@
+{
+  <%_ if (props.nameSpace && props.nameSpace.length > 0) { -%>
+  "name": "<%= props.nameSpace %>/packages-<%= props.name %>",
+  <%_ } else { -%>
+  "name": "<%= props.name %>",
+  <%_ } -%>
+  "version": "<%= props.version %>",
+  "description": "<%= props.description %>",
+  "author": "<%= props.authorName %> <<%= props.authorEmail %>>",
+  "license": "<%= props.license %>",
+  <%_ if (props.registry) { -%>
+  "publishConfig": {
+    "access": "private",
+    "registry": "<%= props.registry %>"
+  },
+  <%_ } -%>
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "compile": "pixeloven compile ts",
+    "document": "pixeloven document ts ./src",
+    "generate": "pixeloven generate",
+    "lint": "yarn lint:ts && yarn lint:scss",
+    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
+    "lint:scss": "pixeloven lint scss ./src/**/*.scss",
+    "pretty": "yarn pretty:ts && yarn pretty:scss",
+    "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
+    "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
+    "test": "pixeloven test --color --coverage",
+    "test:ci": "pixeloven test --ci",
+    "test:watch": "pixeloven test watch",
+    "start:story": "pixeloven story start",
+    "precommit": "lint-staged",
+    "predocument": "pixeloven delete docs",
+    "pretest": "pixeloven delete coverage",
+    "postcompile": "pixeloven copy assets"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty ts",
+      "yarn pixeloven lint ts",
+      "git add"
+    ]
+  }
+}
