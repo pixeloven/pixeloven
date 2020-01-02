@@ -49,7 +49,6 @@ function getOptions(option: string | boolean) {
 }
 
 export default {
-    alias: ["--webpack", "-w"],
     name: "webpack",
     run: async (toolbox: AddonWebpackToolbox) => {
         const { parameters, pixelOven, print, webpack } = toolbox;

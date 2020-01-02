@@ -21,7 +21,6 @@ describe("@pixeloven/cli", () => {
                 mockPrintSuccess.reset();
             });
             it("should contains required props", () => {
-                expect(compileModule.alias).toEqual(["--compile", "-c"]);
                 expect(compileModule.name).toEqual("compile");
                 expect(typeof compileModule.run).toEqual("function");
             });

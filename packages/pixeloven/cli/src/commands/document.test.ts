@@ -18,7 +18,6 @@ describe("@pixeloven/cli", () => {
                 mockPrintInfo.reset();
             });
             it("should contains required props", () => {
-                expect(documentModule.alias).toEqual(["--document"]);
                 expect(documentModule.name).toEqual("document");
                 expect(typeof documentModule.run).toEqual("function");
             });

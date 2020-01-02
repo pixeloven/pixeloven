@@ -24,7 +24,6 @@ describe("@pixeloven/cli", () => {
                 mockPrintSuccess.reset();
             });
             it("should contains required props", () => {
-                expect(copyModule.alias).toEqual(["--copy"]);
                 expect(copyModule.name).toEqual("copy");
                 expect(typeof copyModule.run).toEqual("function");
             });

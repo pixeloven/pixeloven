@@ -1,11 +1,10 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
-    alias: ["--pretty", "-p"],
     name: "pretty",
     run: async (context: PixelOvenToolbox) => {
         const { parameters, pixelOven, prettier, styleLint, tsLint } = context;
-        const availableTasks = ["scss", "ts", "tsx"];
+        const availableTasks = ["css", "scss", "ts", "tsx"];
         const task = parameters.first;
 
         /**
@@ -19,7 +18,7 @@ export default {
             pixelOven.exit("Pretty", 1);
         } else if (!availableTasks.includes(task)) {
             pixelOven.invalidArgument(
-                `Available Pretty tasks are "scss", "ts", or "tsx".`,
+                `Available Pretty tasks are "css", "scss", "ts", or "tsx".`,
                 task,
             );
             pixelOven.exit("Pretty", 1);
@@ -36,6 +35,7 @@ export default {
             );
 
             switch (task) {
+                case "css":
                 case "scss": {
                     const styleLintResults = await styleLint(
                         ["--fix"].concat(argList),
@@ -61,7 +61,7 @@ export default {
                 }
                 default: {
                     pixelOven.invalidArgument(
-                        `Available Pretty tasks are "scss", "ts", or "tsx".`,
+                        `Available Pretty tasks are "css", "scss", "ts", or "tsx".`,
                         task,
                     );
                     pixelOven.exit("Pretty", 1);

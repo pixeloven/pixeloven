@@ -11,7 +11,6 @@ describe("@pixeloven/cli-addon-generators", () => {
                 Sandbox.restore();
             });
             it("should contains required props", () => {
-                expect(generateModule.alias).toEqual(["--generate", "-g"]);
                 expect(generateModule.name).toEqual("generate");
                 expect(typeof generateModule.run).toEqual("function");
             });

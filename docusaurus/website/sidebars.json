@@ -4,15 +4,18 @@
     "Getting Started": [
       "getting-started/intro"
     ],
+    "API": [
+      "api/cli",
+      "api/cli-addon-generators",
+      "api/cli-addon-gh-pages",
+      "api/cli-addon-storybook",
+      "api/cli-addon-webpack"
+    ],
     "Contributing": [
       "contribution/intro",
       "contribution/quick-start-guide",
       "contribution/file-system-and-structure",  
       "contribution/code-of-conduct"
-    ],
-    "Integration": [
-      "integration/cli",
-      "integration/cli-addon-webpack"
     ],
     "Recommendations": [
       "recommendations/intro",  

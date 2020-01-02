@@ -1,7 +1,6 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
-    alias: ["--copy"],
     name: "copy",
     run: async (toolbox: PixelOvenToolbox) => {
         const { filesystem, parameters, pixelOven, print } = toolbox;
