@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/server-middleware",
-  "version": "6.0.0-beta.22",
+  "version": "6.0.0-beta.23",
   "description": "Webpack Development Server middleware",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -31,7 +31,7 @@
     "webpack-hot-middleware": "2.25.0"
   },
   "devDependencies": {
-    "@pixeloven-webpack/compiler": "^6.0.0-beta.22",
+    "@pixeloven-webpack/compiler": "^6.0.0-beta.23",
     "@pixeloven-webpack/types": "^6.0.0-beta.22",
     "@pixeloven/tasks": "^6.0.0-beta.22",
     "@types/express": "4.17.0",

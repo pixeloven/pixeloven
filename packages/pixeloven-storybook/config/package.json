@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-storybook/config",
-  "version": "6.0.0-beta.22",
+  "version": "6.0.0-beta.23",
   "description": "Storybook configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -20,8 +20,8 @@
   "dependencies": {
     "@babel/core": "7.7.7",
     "@pixeloven-core/filesystem": "^6.0.0-beta.22",
-    "@pixeloven-storybook/addons": "^6.0.0-beta.22",
-    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.22",
+    "@pixeloven-storybook/addons": "^6.0.0-beta.23",
+    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.23",
     "@pixeloven-webpack/types": "^6.0.0-beta.22",
     "@storybook/core": "5.2.8",
     "@storybook/react": "5.2.8",
