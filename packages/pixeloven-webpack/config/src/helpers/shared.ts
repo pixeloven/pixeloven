@@ -155,7 +155,7 @@ export function getSetup(options: Options) {
                     },
                     chunks: "all",
                     maxInitialRequests: Infinity,
-                    maxSize: 1000000,
+                    maxSize: ifProduction(1000000, 0),
                     minSize: 0,
                 },
             },
