@@ -21,7 +21,7 @@
     "@pixeloven-core/common": "^6.0.0-beta.22",
     "@pixeloven-core/env": "^6.0.0-beta.22",
     "@pixeloven-webpack/config": "^6.0.0-beta.22",
-    "webpack": "4.41.4"
+    "webpack": "4.41.5"
   },
   "devDependencies": {
     "@pixeloven-webpack/types": "^6.0.0-beta.22",
