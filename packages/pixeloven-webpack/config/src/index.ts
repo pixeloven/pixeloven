@@ -135,8 +135,8 @@ function getConfig(options: Options) {
              */
             new MiniCssExtractPlugin({
                 chunkFilename: ifProduction(
-                    "static/css/[name].[id].[contenthash].css",
-                    "static/css/[name].[id].[hash].css",
+                    "static/css/[name].[contenthash].css",
+                    "static/css/[name].[hash].css",
                 ),
                 filename: ifProduction(
                     "static/css/[name].[contenthash].css",

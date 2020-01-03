@@ -118,7 +118,6 @@ export function getSetup(options: Options) {
                     ],
                     [],
                 ),
-                moduleIds: "hashed",
                 noEmitOnErrors: true,
                 runtimeChunk: {
                     /* tslint:disable no-any */
@@ -170,8 +169,8 @@ export function getSetup(options: Options) {
         return ifClient(
             {
                 chunkFilename: ifProduction(
-                    "static/js/[name].[id].[contenthash].js",
-                    "static/js/[name].[id].[hash].js",
+                    "static/js/[name].[contenthash].js",
+                    "static/js/[name].[hash].js",
                 ),
                 devtoolModuleFilenameTemplate,
                 filename: ifProduction(
