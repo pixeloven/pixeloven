@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-react/routing",
-  "version": "6.0.0-beta.21",
+  "version": "6.0.0-beta.22",
   "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-react/common": "^6.0.0-beta.21",
+    "@pixeloven-react/common": "^6.0.0-beta.22",
     "@types/react-redux": "7.1.1",
     "@types/react-router": "5.1.2",
     "@types/react-router-dom": "5.1.2",
@@ -26,8 +26,8 @@
     "react-router-dom": "5.1.2"
   },
   "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-beta.21",
-    "@pixeloven/tasks": "^6.0.0-beta.19",
+    "@pixeloven-react/testing": "^6.0.0-beta.22",
+    "@pixeloven/tasks": "^6.0.0-beta.22",
     "lint-staged": "9.5.0"
   },
   "scripts": {

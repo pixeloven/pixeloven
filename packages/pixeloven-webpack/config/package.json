@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/config",
-  "version": "6.0.0-beta.21",
+  "version": "6.0.0-beta.22",
   "description": "Webpack configuration for client and server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/common": "^6.0.0-beta.21",
-    "@pixeloven-core/env": "^6.0.0-beta.21",
-    "@pixeloven-core/filesystem": "^6.0.0-beta.21",
-    "@pixeloven-core/logger": "^6.0.0-beta.21",
-    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.21",
+    "@pixeloven-core/common": "^6.0.0-beta.22",
+    "@pixeloven-core/env": "^6.0.0-beta.22",
+    "@pixeloven-core/filesystem": "^6.0.0-beta.22",
+    "@pixeloven-core/logger": "^6.0.0-beta.22",
+    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.22",
     "autoprefixer": "9.7.3",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "circular-dependency-plugin": "5.2.0",
@@ -47,8 +47,8 @@
     "webpack-node-externals": "1.7.2"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.19",
-    "@pixeloven-webpack/types": "^6.0.0-beta.21",
+    "@pixeloven-webpack/types": "^6.0.0-beta.22",
+    "@pixeloven/tasks": "^6.0.0-beta.22",
     "@types/autoprefixer": "9.6.1",
     "@types/case-sensitive-paths-webpack-plugin": "2.1.4",
     "@types/circular-dependency-plugin": "5.0.0",
