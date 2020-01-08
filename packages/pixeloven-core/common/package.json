@@ -17,6 +17,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "dependencies": {
+    "@types/node": "10.17.12"
+  },
   "devDependencies": {
     "@pixeloven/tasks": "^6.0.0-beta.22",
     "lint-staged": "9.5.0"
