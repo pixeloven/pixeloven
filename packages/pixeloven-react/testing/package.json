@@ -26,7 +26,10 @@
     "react-dom": "16.12.0"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.22",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.22",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.22",
+    "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
+    "@pixeloven-tooling/test": "^6.0.0-beta.22",
     "lint-staged": "9.5.0"
   },
   "scripts": {

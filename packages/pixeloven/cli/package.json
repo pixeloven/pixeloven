@@ -26,7 +26,6 @@
     "@pixeloven-tooling/linter": "^6.0.0-beta.22",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
     "@pixeloven-tooling/test": "^6.0.0-beta.22",
-    "@pixeloven/tasks": "^6.0.0-beta.22",
     "gluegun": "4.1.2"
   },
   "devDependencies": {
