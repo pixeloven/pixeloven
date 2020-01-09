@@ -23,6 +23,7 @@
   "dependencies": {
     "@pixeloven-core/exceptions": "^6.0.0-beta.22",
     "@pixeloven-tooling/linter": "^6.0.0-beta.22",
+    "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
     "@pixeloven/tasks": "^6.0.0-beta.22",
     "gluegun": "4.1.2"
   },
@@ -36,7 +37,7 @@
     "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
-    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
     "precommit": "lint-staged",
     "predocument": "pixeloven-tasks document:clean",
     "pretest": "pixeloven-tasks test:clean",
@@ -46,8 +47,9 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "pixeloven-tasks pretty:ts",
-      "pixeloven-tasks lint:ts",
+      "pixeloven-pretty ts",
+      "pixeloven-linter ts --fix",
+      "pixeloven-linter ts",
       "git add"
     ]
   }
