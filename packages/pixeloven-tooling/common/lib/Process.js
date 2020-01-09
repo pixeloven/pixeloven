@@ -24,7 +24,7 @@ function getParameters(argv) {
             args.push(arg)
         }
     });
-    return {args, options};
+    return {args, options, raw: argv};
 }
 
 async function run(cmd, args = []) {

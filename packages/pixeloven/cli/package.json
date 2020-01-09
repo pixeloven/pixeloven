@@ -25,6 +25,7 @@
     "@pixeloven-tooling/compiler": "^6.0.0-beta.22",
     "@pixeloven-tooling/linter": "^6.0.0-beta.22",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
+    "@pixeloven-tooling/test": "^6.0.0-beta.22",
     "@pixeloven/tasks": "^6.0.0-beta.22",
     "gluegun": "4.1.2"
   },
@@ -32,19 +33,16 @@
     "lint-staged": "9.5.0"
   },
   "scripts": {
-    "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-compiler ts",
-    "document": "pixeloven-tasks document:ts src",
     "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
     "precommit": "lint-staged",
-    "predocument": "pixeloven-tasks document:clean",
     "pretest": "pixeloven-tasks test:clean",
-    "test": "pixeloven-tasks test --color --coverage",
-    "test:ci": "pixeloven-tasks test --ci --coverage",
-    "test:watch": "pixeloven-tasks test:watch"
+    "test": "pixeloven-test --color --coverage",
+    "test:ci": "pixeloven-test --ci --coverage",
+    "test:watch": "pixeloven-test --watch"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
