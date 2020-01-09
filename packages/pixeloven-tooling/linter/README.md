@@ -1,43 +1,49 @@
-# @pixeloven/tasks
+# @pixeloven-tooling/linter
 
-> Pixel Oven tasks
+> Pixel Oven tooling linter
 
-See our website [pixeloven-tasks](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [pixeloven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save-dev @pixeloven/tasks
+npm install --save-dev @pixeloven-tooling/linter
 ```
 
 or using yarn:
 
 ```sh
-yarn add --dev @pixeloven/tasks
+yarn add --dev @pixeloven-tooling/linter
 ```
 
 ## Usage
-> Note this package was originally created to encapsulate common dependencies and scripts used during the development of PixelOven. For a full public CLI experience please see [@pixeloven/cli](https://www.npmjs.com/package/@pixeloven/cli).
+> Note this package was originally created to encapsulate common dependencies and scripts used during the development of PixelOven. For a full public CLI experience please see our website [pixeloven](https://www.pixeloven.com/).
 
-When making a libraries similar to the ones seen in [PixelOven](https://github.com/pixeloven/pixeloven) we can use this simple wrapper for common tasks like linting, compiling and testing. 
+This simple package wraps tslint and stylelint and a few other dependencies used throughout our workflow. We are often use this package side by side with lint-staged to help improve our code quality.
 
 Example of usage in `package.json`
 ```json
+{
+  "devDependencies": {
+    "@pixeloven-tooling/linter": "6.0.0",
+    "lint-staged": "9.5.0"
+  },
   "scripts": {
-    "clean": "pixeloven-tasks clean",
-    "compile": "pixeloven-tasks compile:ts",
-    "precompile": "pixeloven-tasks compile:clean",
-    "document": "pixeloven-tasks document:ts src",
-    "predocument": "pixeloven-tasks document:clean",
-    "lint": "yarn lint:ts",
-    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
-    "pretest": "pixeloven-tasks test:clean",
-    "pretty": "pixeloven-tasks pretty src/**/*.{ts,tsx}",
-    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
-    "test": "pixeloven-tasks test --color --coverage",
-    "test:ci": "pixeloven-tasks test --ci --coverage",
-    "test:watch": "pixeloven-tasks test:watch"
+    "lint": "yarn lint:ts && yarn lint:scss",
+    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
+    "lint:scss": "pixeloven-linter scss src/**/*.{scss}"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "pixeloven-linter scss",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "pixeloven-linter ts",
+      "git add"
+    ]
   }
+}
 ```

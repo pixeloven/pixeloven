@@ -28,8 +28,9 @@
   "scripts": {
     "compile": "pixeloven compile ts",
     "document": "pixeloven document ts ./src",
-    "lint": "yarn run lint:ts",
+    "lint": "yarn lint:ts && yarn lint:scss",
     "lint:ts": "pixeloven lint ts 'src/**/*.{ts,tsx}'",
+    "lint:scss": "pixeloven lint ts 'src/**/*.{scss}'",
     "postcompile": "pixeloven copy assets",
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",
@@ -42,6 +43,11 @@
     "test:watch": "pixeloven test watch"
   },
   "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty scss",
+      "yarn pixeloven lint scss",
+      "git add"
+    ],
     "src/**/*.{ts,tsx}": [
       "yarn pixeloven pretty ts",
       "yarn pixeloven lint ts",
