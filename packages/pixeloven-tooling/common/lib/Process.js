@@ -6,7 +6,8 @@ const { spawnSync } = require("child_process");
 function getParameters(argv) {
     const args = [];
     const options = {};
-    argv.slice(2, argv.length).forEach(arg => {
+    const raw = argv.slice(2, argv.length);
+    raw.forEach(arg => {
         // Long form options
         if (arg.slice(0,2) === '--') {
             const longArg = arg.split('=');
@@ -24,7 +25,7 @@ function getParameters(argv) {
             args.push(arg)
         }
     });
-    return {args, options, raw: argv};
+    return {args, options, raw};
 }
 
 async function run(cmd, args = []) {

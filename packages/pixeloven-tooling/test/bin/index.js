@@ -14,31 +14,29 @@ const jestJson = "jest.json";
 async function main(proc) {
     let statusCode = 0;
     const params = Process.getParameters(proc.argv);
-    console.log(params);
-    proc.exit();
     const firstArg = params.args.shift();
     
     function config(fileName) {
         const cwd = proc.cwd();
         const configPath = FileSystem.getPath(`${cwd}/${fileName}`);
         if (configPath) {
-            Logger.info(`test ${firstArg}`, `found configuration ${configPath}`);
+            Logger.info(`test`, `found configuration ${configPath}`);
         } else {
-            Logger.warn(`test ${firstArg}`, `could not find configuration file ${fileName} in current working directory`);
+            Logger.warn(`test`, `could not find configuration file ${fileName} in current working directory`);
         }
         return configPath;
     }
 
     const configPath = config(jestJson);
     if (params.options.watch) {
-        statusCode = await Process.run("jest", ["--watch", "--config", configPath, ...params.args]);
+        statusCode = await Process.run("jest", ["--watch", "--config", configPath, ...params.raw]);
     } else {
-        statusCode = await Process.run("jest", ["--config", configPath, ...params.args]);
+        statusCode = await Process.run("jest", ["--config", configPath, ...params.raw]);
     }
     if (statusCode === 0) {
-        Logger.success(`test ${firstArg}`, "completed");
+        Logger.success(`test`, "completed");
     } else {
-        Logger.error(`test ${firstArg}`, `exited with status code ${statusCode}`);
+        Logger.error(`test`, `exited with status code ${statusCode}`);
     }
     proc.exit(statusCode);
 }

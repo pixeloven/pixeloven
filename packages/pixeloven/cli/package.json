@@ -39,7 +39,6 @@
     "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
     "precommit": "lint-staged",
-    "pretest": "pixeloven-tasks test:clean",
     "test": "pixeloven-test --color --coverage",
     "test:ci": "pixeloven-test --ci --coverage",
     "test:watch": "pixeloven-test --watch"
