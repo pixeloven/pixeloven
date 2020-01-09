@@ -5,7 +5,7 @@
   "bin": {
     "pixeloven-linter": "./bin/index.js"
   },
-  "homepage": "https://github.com/pixeloven/pixeloven",
+  "homepage": "https://www.pixeloven.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pixeloven/pixeloven.git"
