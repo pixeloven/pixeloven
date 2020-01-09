@@ -1,9 +1,0 @@
-{
-    "name": "@pixeloven-webpack/server",
-    "target": "es5",
-    "out": "docs",
-    "exclude": "*.{test}.{ts}",
-    "externalPattern": "**/node_modules/**",
-    "excludeExternals": true,
-    "includeDeclarations": true
-}
