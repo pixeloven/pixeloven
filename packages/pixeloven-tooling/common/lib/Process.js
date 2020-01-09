@@ -27,12 +27,6 @@ function getParameters(argv) {
     return {args, options};
 }
 
-function onStatus(status) {
-    if (status && status > 0) {
-        process.exit(status);
-    }
-}
-
 async function run(cmd, args = []) {
     const result = spawnSync(cmd, args, {
         detached: true,
@@ -43,6 +37,5 @@ async function run(cmd, args = []) {
 
 module.exports = {
     getParameters,
-    onStatus,
     run
 }

@@ -1,8 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 
-function getAbsolutePath(...paths) {
-    return path.resolve(process.cwd(), ...paths);
+/**
+ * Returns path if it exists
+ * @param  {...any} paths 
+ */
+function getPath(...paths) {
+    const resolvedPath = path.resolve(...paths);
+    if (fs.existsSync(resolvedPath)) {
+        return resolvedPath;
+    }
+    return false;
 }
 
 function getPackage(absPath) {
@@ -10,9 +18,9 @@ function getPackage(absPath) {
     return JSON.parse(packageJSON);
 }
 
-function isDirectory(absPath) {
+function isDirectory(path) {
     try {
-        var stat = fs.lstatSync(absPath);
+        var stat = fs.lstatSync(path);
         return stat.isDirectory();
     } catch (e) {
         // lstatSync throws an error if path doesn't exist
@@ -21,7 +29,7 @@ function isDirectory(absPath) {
 }
 
 module.exports = {
-    getAbsolutePath,
+    getPath,
     getPackage,
     isDirectory
 }

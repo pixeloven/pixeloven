@@ -1,9 +1,9 @@
 {
-  "name": "@pixeloven-core/linter",
+  "name": "@pixeloven-tooling/linter",
   "version": "6.0.0-beta.22",
-  "description": "Common tasks used during development of PixelOven",
+  "description": "Linter abstraction for PixelOven's workflow",
   "bin": {
-    "pixeloven-tasks": "./bin/task.bash"
+    "pixeloven-linter": "./bin/index.js"
   },
   "homepage": "https://github.com/pixeloven/pixeloven",
   "repository": {
@@ -17,6 +17,9 @@
   },
   "dependencies": {
     "@pixeloven-tooling/common": "6.0.0-beta.22",
+    "stylelint": "12.0.0",
+    "stylelint-config-recommended-scss": "4.1.0",
+    "stylelint-scss": "3.13.0",
     "tslint": "5.20.1",
     "tslint-config-prettier": "1.18.0",
     "tslint-eslint-rules": "5.4.0",

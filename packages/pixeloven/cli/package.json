@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@pixeloven-core/exceptions": "^6.0.0-beta.22",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.22",
     "@pixeloven/tasks": "^6.0.0-beta.22",
     "gluegun": "4.1.2"
   },
@@ -32,8 +33,8 @@
     "clean": "pixeloven-tasks clean",
     "compile": "pixeloven-tasks compile:ts",
     "document": "pixeloven-tasks document:ts src",
-    "lint": "yarn lint:ts",
-    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
     "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
     "precommit": "lint-staged",
