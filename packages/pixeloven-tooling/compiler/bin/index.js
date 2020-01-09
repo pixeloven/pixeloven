@@ -5,10 +5,11 @@ const {
     Process
 } = require("@pixeloven-tooling/common");
 
-const prettierJson = "prettier.json";
+const tsConfigJson = "tsconfig.json";
 
 /**
  * Compiler for PixelOven workflow
+ * @todo Can we support watch mode?
  * @param {*} argv 
  */
 async function main(proc) {
@@ -20,31 +21,30 @@ async function main(proc) {
         const cwd = proc.cwd();
         const configPath = FileSystem.getPath(`${cwd}/${fileName}`);
         if (configPath) {
-            Logger.info(`pretty ${firstArg}`, `found configuration ${configPath}`);
+            Logger.info(`compiler ${firstArg}`, `found configuration ${configPath}`);
         } else {
-            Logger.warn(`pretty ${firstArg}`, `could not find configuration file ${fileName} in current working directory`);
+            Logger.warn(`compiler ${firstArg}`, `could not find configuration file ${fileName} in current working directory`);
         }
         return configPath;
     }
 
     switch(firstArg) {
-        case "scss":
         case "tsx":
         case "ts": {
-            const configPath = config(prettierJson);
-            statusCode = await Process.run("prettier", ["--write", "--config", configPath, ...params.args]);
+            const configPath = config(tsConfigJson);
+            statusCode = await Process.run("tsc", ["--pretty", "--project", configPath, ...params.args]);
             break;
         }
         default: {
             statusCode = 1;
-            Logger.error(`pretty ${firstArg}`, `cmd does not exist`);
+            Logger.error(`compiler ${firstArg}`, `cmd does not exist`);
             break;
         }
     }
     if (statusCode === 0) {
-        Logger.success(`pretty ${firstArg}`, "completed");
+        Logger.success(`compiler ${firstArg}`, "completed");
     } else {
-        Logger.error(`pretty ${firstArg}`, `exited with status code ${statusCode}`);
+        Logger.error(`compiler ${firstArg}`, `exited with status code ${statusCode}`);
     }
     proc.exit(statusCode);
 }

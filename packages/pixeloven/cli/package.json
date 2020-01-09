@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@pixeloven-core/exceptions": "^6.0.0-beta.22",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.22",
     "@pixeloven-tooling/linter": "^6.0.0-beta.22",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
     "@pixeloven/tasks": "^6.0.0-beta.22",
@@ -32,7 +33,7 @@
   },
   "scripts": {
     "clean": "pixeloven-tasks clean",
-    "compile": "pixeloven-tasks compile:ts",
+    "compile": "pixeloven-compiler ts",
     "document": "pixeloven-tasks document:ts src",
     "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",

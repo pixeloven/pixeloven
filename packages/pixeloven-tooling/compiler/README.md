@@ -1,11 +1,4 @@
-# @pixeloven-tooling/pretty
-
-
-MAKE SURE TO UPDATE ALL PACKAGES WITH THESE NEW PARTS
-ALSO CREATE A SETUP SCRIPT AND OTHER BUILD TOOLS FOR THE PIPELINE
-ALSO UPDATE ALL THE README AND PACKAGE FILES WITH THE CORRECT HOME PAGE
-TRY TO PIN ALL DEPS INSTEAD OF DOING ^ --- do they still update on publish?
-REMOVE TYPEDOC FOR THIS PROJECT AND MOVE IT TO BE A CLI ADDON -- REMOVE FROM SSR AS WELL
+# @pixeloven-tooling/linter
 
 > Pixel Oven tooling linter
 
@@ -44,12 +37,10 @@ Example of usage in `package.json`
   },
   "lint-staged": {
     "src/**/*.{scss}": [
-      "pixeloven-linter scss --fix",
       "pixeloven-linter scss",
       "git add"
     ],
     "src/**/*.{ts,tsx}": [
-      "pixeloven-linter ts --fix",
       "pixeloven-linter ts",
       "git add"
     ]
