@@ -1,3 +1,0 @@
-/**
- * Register Organisms here
- */

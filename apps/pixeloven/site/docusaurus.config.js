@@ -14,7 +14,7 @@ const siteConfig = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          path: '../docs',
+          path: './docs',
           sidebarPath: require.resolve('./sidebars.json'),
           editUrl:
             'https://github.com/pixeloven/pixeloven/tree/master/docusaurus/docs',
