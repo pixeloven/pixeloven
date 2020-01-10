@@ -2,7 +2,7 @@
 
 > Pixel Oven cli addon for webpack
 
-See our website [pixeloven-cli-addon-webpack](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
 ## Features
 This addon is meant to allow the CLI to use webpack as a bundler on top of a a TypeScript compiler. It includes many of the plugins and features expected from a fully production ready JavaScript application. Also included is a completely custom development server built to handle both client and server side  JavaScript development.

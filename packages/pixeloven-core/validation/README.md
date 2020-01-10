@@ -1,6 +1,6 @@
-# @pixeloven-core/cli-addon-generators
+# @pixeloven-core/validation
 
-> Pixel Oven cli addon generators
+> Pixel Oven core validation
 
 See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
@@ -9,15 +9,11 @@ See our website [PixelOven](https://www.pixeloven.com/) for more information or 
 Using npm:
 
 ```sh
-npm install --save-dev @pixeloven/cli-addon-generators
+npm install --save @pixeloven-core/validation
 ```
 
 or using yarn:
 
 ```sh
-yarn add --dev @pixeloven/cli-addon-generators
+yarn add @pixeloven-core/validation
 ```
-
-## Generating components
-
-Refer to [the component instructions](./component.md)

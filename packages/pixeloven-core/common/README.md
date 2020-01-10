@@ -1,6 +1,6 @@
-# @pixeloven-core/cli-addon-storybook
+# @pixeloven-core/common
 
-> Pixel Oven cli addon storybook
+> Pixel Oven core common
 
 See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
@@ -9,11 +9,11 @@ See our website [PixelOven](https://www.pixeloven.com/) for more information or 
 Using npm:
 
 ```sh
-npm install --save-dev @pixeloven/cli-addon-storybook
+npm install --save @pixeloven-core/common
 ```
 
 or using yarn:
 
 ```sh
-yarn add --dev @pixeloven/cli-addon-storybook
+yarn add @pixeloven-core/common
 ```

@@ -1,21 +1,22 @@
-# @pixeloven/env
+# @pixeloven-core/env
 
 > Pixel Oven env.
 
-See our website [pixeloven-env](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
+
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @pixeloven/env
+npm install --save @pixeloven-core/env
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/env
+yarn add @pixeloven-core/env
 ```
 
 ## Usage
