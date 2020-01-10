@@ -1,6 +1,6 @@
-# @pixeloven-storybook/addons
+# @pixeloven-webpack/types
 
-> Pixel Oven storybook addons
+> Pixel Oven webpack types
 
 See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
@@ -9,11 +9,11 @@ See our website [PixelOven](https://www.pixeloven.com/) for more information or 
 Using npm:
 
 ```sh
-npm install --save @pixeloven-storybook/config
+npm install --save @pixeloven-webpack/types
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven-storybook/config
+yarn add @pixeloven-webpack/types
 ```

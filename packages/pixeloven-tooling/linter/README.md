@@ -2,7 +2,7 @@
 
 > Pixel Oven tooling linter
 
-See our website [pixeloven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
+See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
 ## Install
 
@@ -21,7 +21,7 @@ yarn add --dev @pixeloven-tooling/linter
 ## Usage
 > Note this package was originally created to encapsulate common dependencies and scripts used during the development of PixelOven. For a full public CLI experience please see our website [pixeloven](https://www.pixeloven.com/).
 
-This simple package wraps tslint and stylelint and a few other dependencies used throughout our workflow. We are often use this package side by side with lint-staged to help improve our code quality.
+This simple package wraps tslint and stylelint and a few other dependencies used throughout our workflow. We often use this package side by side with lint-staged to help improve our code quality.
 
 Example of usage in `package.json`
 ```json
