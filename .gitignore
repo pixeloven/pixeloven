@@ -37,3 +37,7 @@ __snapshots__
 /*/*/*/node_modules
 /*/*/*/stats
 /*/*/*/stories
+
+# generated files
+.docusaurus
+.cache-loader
