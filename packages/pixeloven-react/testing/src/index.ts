@@ -1,4 +1,9 @@
+import Enzyme from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+
 /**
- * @todo Would like to move core components like the server side templates
+ * @todo Need to implement this everywhere?
  */
-export {};
+Enzyme.configure({
+    adapter: new Adapter(),
+});

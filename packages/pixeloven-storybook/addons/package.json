@@ -7,7 +7,7 @@
   "files": [
     "dist/"
   ],
-  "homepage": "https://github.com/pixeloven/pixeloven",
+  "homepage": "https://www.pixeloven.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pixeloven/pixeloven.git"
@@ -35,28 +35,28 @@
     "webpack": "4.41.5"
   },
   "devDependencies": {
-    "@pixeloven/tasks": "^6.0.0-beta.22",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.22",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.22",
+    "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
+    "@pixeloven-tooling/test": "^6.0.0-beta.22",
     "lint-staged": "9.5.0"
   },
   "scripts": {
-    "clean": "pixeloven-tasks clean",
-    "compile": "pixeloven-tasks compile:ts",
-    "document": "pixeloven-tasks document:ts src",
-    "lint": "yarn lint:ts",
-    "lint:ts": "pixeloven-tasks lint:ts src/**/*.{ts,tsx}",
+    "compile": "pixeloven-compiler ts",
+    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
-    "pretty:ts": "pixeloven-tasks pretty:ts src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
     "precommit": "lint-staged",
-    "predocument": "pixeloven-tasks document:clean",
-    "pretest": "pixeloven-tasks test:clean",
-    "test": "pixeloven-tasks test --color --coverage",
-    "test:ci": "pixeloven-tasks test --ci --coverage",
-    "test:watch": "pixeloven-tasks test:watch"
+    "test": "pixeloven-test --color --coverage",
+    "test:ci": "pixeloven-test --ci --coverage",
+    "test:watch": "pixeloven-test --watch"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "pixeloven-tasks pretty:ts",
-      "pixeloven-tasks lint:ts",
+      "pixeloven-pretty ts",
+      "pixeloven-linter ts --fix",
+      "pixeloven-linter ts",
       "git add"
     ]
   }

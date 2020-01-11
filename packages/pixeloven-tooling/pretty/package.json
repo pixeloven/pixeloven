@@ -1,0 +1,21 @@
+{
+  "name": "@pixeloven-tooling/pretty",
+  "version": "6.0.0-beta.22",
+  "description": "Prettier abstraction for PixelOven's workflow",
+  "bin": {
+    "pixeloven-pretty": "./bin/index.js"
+  },
+  "homepage": "https://www.pixeloven.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "prettier": "1.19.1"
+  }
+}

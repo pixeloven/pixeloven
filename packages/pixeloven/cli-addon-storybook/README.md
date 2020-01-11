@@ -1,8 +1,8 @@
-# @pixeloven/cli-addon-storybook
+# @pixeloven-core/cli-addon-storybook
 
-> Pixel Oven cli addon for storybook
+> Pixel Oven cli addon storybook
 
-See our website [pixeloven-cli-addon-storybook](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
 ## Install
 
@@ -17,5 +17,3 @@ or using yarn:
 ```sh
 yarn add --dev @pixeloven/cli-addon-storybook
 ```
-
-## Usage

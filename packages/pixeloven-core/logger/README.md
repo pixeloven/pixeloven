@@ -1,8 +1,8 @@
-# @pixeloven/node-logger
+# @pixeloven-core/logger
 
-> Pixel Oven node-logger.
+> Pixel Oven core logger
 
-See our website [pixeloven-node-logger](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
 ## Install
 

@@ -1,0 +1,19 @@
+{
+  "name": "@pixeloven-tooling/common",
+  "version": "6.0.0-beta.22",
+  "description": "Common libraries used to build out tooling for PixelOven's workflow",
+  "main": "lib/index.js",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://www.pixeloven.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -32,7 +32,11 @@ __snapshots__
 # Package files
 /*/*/*/coverage
 /*/*/*/dist
-/*/*/*/docs
+/*/*/*/build
 /*/*/*/node_modules
 /*/*/*/stats
 /*/*/*/stories
+
+# generated files
+.docusaurus
+.cache-loader

@@ -1,19 +1,19 @@
-# @pixeloven/webpack-builder
+# @pixeloven/webpack-bundler
 
-> Pixel Oven webpack bui
+> Pixel Oven webpack bundler
 
-See our website [pixeloven-webpack-builder](https://github.com/pixeloven/pixeloven) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this package.
+See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @pixeloven/webpack-builder
+npm install --save @pixeloven/webpack-bundler
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven/webpack-builder
+yarn add @pixeloven/webpack-bundler
 ```

@@ -2,7 +2,7 @@
 
 > Pixel Oven webpack TypeScript Loader
 
-See our website [www.pixeloven.com](www.pixeloven.com) for more information or the [issues](https://github.com/pixeloven/pixeloven) associated with this project.
+See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
 ## Install
 
