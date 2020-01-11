@@ -1,0 +1,141 @@
+---
+id: intro
+title: Intro
+---
+
+This document is meant to highlight best practices for contributing to the general PixelOven project. If you are looking for specifics on how to setup this project for development of `apps` or `packages` please review the [quick start guide](./quick-start-guide.md). Otherwise for ideas on how to go about working within our best practices please review our [integration docs](./integrating/index.md).
+
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Recommended Development Approach](#recommended-development-approach)
+- [Package Development](#package-development)
+- [Committing](#committing)
+- [Pull Requests](#pull-requests)
+
+## Requirements
+
+These steps will guide you through contributing to this project:
+
+- Ensure Node >= `10.0.0` and yarn >= `1.0.0`
+- Ensure [yarn](https://yarnpkg.com/docs/install/) is installed
+- Clone repository and install dependencies
+
+> Note please ensure system has these minimum requirements or greater.
+
+### Manually checking requirements
+Check "engine" requirements:
+```bash
+node -v
+# v10.16.3
+```
+Please follow these official instructions to install [yarn](https://yarnpkg.com/docs/install/) for your specific system. 
+```bash
+yarn -v
+# 1.17.3
+```
+Please follow these official instructions to install [lerna](https://github.com/lerna/lerna) globally.
+```bash
+lerna -v
+# 3.16.4
+```
+
+## Recommended Development Approach
+> Note it is recommended to periodically re-install deps to ensure latest version during development.
+
+When developing component(s) the recommended development workflow is as follows.
+- Build component in isolation using StoryBook
+- Write/Modify co-located unit tests for component(s).
+- Integrate component into application
+- Write/Modify integration tests that might utilize component(s).
+- Finally spin up **docker** to verify application with back-end services.
+
+### Using shortcuts
+
+The main project contains a few shortcuts for working with all packages. These *scripts* are helpful when making sweeping changes or testing the entire project but generally are not meant for an iterative workflow.
+
+In the root project directory run the following to compile packages.
+```
+yarn packages:compile
+```
+Once compiled sym-links will need to be updated.
+```
+yarn packages:link
+```
+For code quality checks and formatting the following *scripts* can be run.
+```
+yarn packages:lint
+yarn packages:pretty
+yarn packages:test
+```
+Other variations of these *scripts* exist. Generally speaking all packages will follow a very similar pattern but it is possible that specialty packages may have other requirements. 
+
+### Using Lerna
+> For the examples below `{NAME}` refers to the value found in each packages `package.json` under the key `name`.
+
+When working with a specific package we can use [Lerna](https://github.com/lerna/lerna/blob/master/README.md) to help us manage our workflow and reduce the need from change directories often.
+
+From anywhere within the project you can compile a specific package with the following cmd.
+```
+lerna run compile --scope "{NAME}"
+```
+Once compiled sym-links will need to be updated.
+```
+lerna link
+```
+For code quality checks and formatting the following *scripts* can be run.
+```
+lerna run lint --scope "{NAME}"
+lerna run pretty --scope "{NAME}"
+lerna run test --scope "{NAME}"
+```
+Once again other variations of these *scripts* may exist. Please review the `package.json` in the root of this project for shortcuts. 
+
+It is highly encourage to read this [documentation](https://github.com/lerna/lerna/blob/master/README.md) for an in-depth look at how to work with lerna.
+
+## Committing
+> Note commit formatting is helpful for us for generating a [CHANGELOG](CHANGELOG.md) so we know what goes into each tagged release. The actual version doesn't matter as much as tracking our changes in a highly discoverable way.
+
+### Commit Linting
+When executing a standard commit `git commit` the pre-commit hook will check the format of the message `-m`.
+
+Invalid commit might look like:
+```bash
+git commit -m "I did some work"
+```
+versus a valid commit:
+```bash
+git commit -m "chore: i did some work"
+git commit -m "fix(XX-1000): i did some work"
+```
+Currently the linter will accept either of the above formats however knowing what starting tag to use may be more difficult. To facilitate this we can run an interactive console.
+
+### Commit Console
+> Note this console is meant to guide your commits but is not necessary to commit code.  
+```bash
+yarn commit
+```
+
+To start you will be presented with a menu of commit tag types.
+```
+feat:     A new feature 
+fix:      A bug fix 
+docs:     Documentation only changes 
+style:    Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) 
+refactor: A code change that neither fixes a bug nor adds a feature 
+perf:     A code change that improves performance 
+test:     Adding missing tests or correcting existing tests
+build:    Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm) 
+ci:       Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) 
+chore:    Other changes that don't modify src or test files 
+revert:   Reverts a previous commit 
+```
+A few more options will be presented to help guide your commit.
+
+## Pull Requests
+
+Keep in mind that this project is a mono-repo design. If you encounter any issue when running scripts it is recommended to run `yarn clean` at the root of this project and re run the setup above.
+
+Make both your branches and commits descriptive. Ensure "lerna" commands such as `lerna run build` and `lerna run test` work properly before submitting a pull request.
+
+Finally send a [GitHub Pull Request](https://github.com/pixeloven/pixeloven/compare?expand=1) with a clear list of what you've done (read more [about pull requests](https://help.github.com/articles/about-pull-requests/)). Make sure all of your commits are atomic (one feature per commit).
