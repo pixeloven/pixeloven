@@ -13,4 +13,5 @@ ADD ./lerna.json .
 ADD ./package.json .
 ADD ./yarn.lock .
 
-RUN yarn all:bootstrap
+RUN lerna bootstrap && \
+    lerna run compile

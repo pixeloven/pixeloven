@@ -1,6 +1,11 @@
 version: '3'
 services:  
+  node:
+    build: 
+      context: .
+      dockerfile: ./docker/node/Dockerfile
   pixeloven:
+    hostname: pixeloven
     build: 
       context: .
       dockerfile: ./docker/cli/Dockerfile

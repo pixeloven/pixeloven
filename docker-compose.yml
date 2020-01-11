@@ -1,5 +1,5 @@
 version: '3'
-services:  
+services:
   pixeloven:
     container_name: pixeloven
     image: pixeloven/cli:latest
