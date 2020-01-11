@@ -1,8 +1,15 @@
 version: '3'
 services:  
-  react-ssr-example:
-    container_name: react-ssr-example
-    image: pixeloven/react-ssr-example:latest
-    ports:
-      - "8080:8080"
-      - "9001:9001"
+  pixeloven:
+    container_name: pixeloven
+    image: pixeloven/cli:latest
+    hostname: pixeloven
+    volumes:
+      # - ./apps:/usr/src/app/pixeloven/apps
+      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+    # ports:
+    #   - "80:80"
+    #   - "443:443"
