@@ -1,0 +1,15 @@
+version: '3'
+services:  
+  pixeloven:
+    build: 
+      context: .
+      dockerfile: ./docker/cli/Dockerfile
+    # volumes:
+    #   # - ./apps:/usr/src/app/pixeloven/apps
+    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
+    # ports:
+    #   - "80:80"
+    #   - "443:443"

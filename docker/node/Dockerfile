@@ -1,7 +1,3 @@
-#
-# This is our base node image. It contains all the tooling required to build and run our applications.
-# This can also serve as a guide for dockerizing services made with PixelOven
-#
 FROM node:12.14
 LABEL description="Node 10 image for PixelOven"
 LABEL maintainer="Brian Gebel <brian@pixeloven.com>"

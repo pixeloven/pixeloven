@@ -3,11 +3,12 @@ IMAGE_NAME=cli
 IMAGE_TAG=latest
 
 IMAGE=$(NAMESPACE)/$(IMAGE_NAME):$(IMAGE_TAG)
+DOCKERFILE_PATH=./Dockerfile
+CONTEXT_PATH=../../
 
 build: 
 	@echo "[+] Starting Docker build for ${IMAGE}"
-	docker build --rm \
-	-t ${IMAGE} .
+	docker build --rm -t ${IMAGE} -f ${DOCKERFILE_PATH} ${CONTEXT_PATH}
 
 test:
 	@echo "[+] Running tests"

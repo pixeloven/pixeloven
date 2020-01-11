@@ -4,12 +4,3 @@ services:
     container_name: pixeloven
     image: pixeloven/cli:latest
     hostname: pixeloven
-    volumes:
-      # - ./apps:/usr/src/app/pixeloven/apps
-      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-      - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-    # ports:
-    #   - "80:80"
-    #   - "443:443"
