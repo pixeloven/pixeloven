@@ -5,13 +5,8 @@ LABEL maintainer="Brian Gebel <brian@pixeloven.com>"
 
 WORKDIR /usr/src/app/
 
-ADD ./apps . 
-ADD ./packages .
-ADD ./codecov.yml .
-ADD ./commitlint.config.js .
-ADD ./lerna.json .
-ADD ./package.json .
-ADD ./yarn.lock .
+ADD . .
 
 RUN lerna bootstrap && \
-    lerna run compile
+    lerna run compile && \
+    lerna link

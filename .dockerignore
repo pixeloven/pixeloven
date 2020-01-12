@@ -1,0 +1,21 @@
+# Project files
+.git
+.github
+
+docker
+
+# Build files
+**/coverage
+**/dist
+**/build
+**/node_modules
+**/stats
+**/stories
+
+#
+# @todo Move examples back into a project like setup apps/packages of it's own
+# @todo don't have app mounted in here -- have it's own container
+#
+# Exclude -- won't work once we want an app/example Image
+apps
+packages/examples

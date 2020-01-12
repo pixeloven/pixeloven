@@ -6,15 +6,41 @@ services:
       dockerfile: ./docker/node/Dockerfile
   pixeloven:
     hostname: pixeloven
+    # @todo how can we test against this while it is running???
+    command: lerna run --parallel compile:watch
     build: 
       context: .
       dockerfile: ./docker/cli/Dockerfile
-    # volumes:
-    #   # - ./apps:/usr/src/app/pixeloven/apps
-    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-    #   - ./packages/pixeloven/cli/src:/usr/src/app/pixeloven/packages/pixeloven/cli/src
-    # ports:
-    #   - "80:80"
-    #   - "443:443"
+    environment:
+      BABEL_ENV: development
+      NODE_ENV: development
+      TSC_WATCHFILE: UseFsEventsWithFallbackDynamicPolling
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./packages/pixeloven/cli-addon-generators/src:/usr/src/app/packages/pixeloven/cli-addon-generators/src:cached
+      - ./packages/pixeloven/cli-addon-gh-pages/src:/usr/src/app/packages/pixeloven/cli-addon-gh-pages/src:cached
+      - ./packages/pixeloven/cli-addon-storybook/src:/usr/src/app/packages/pixeloven/cli-addon-storybook/src:cached
+      - ./packages/pixeloven/cli-addon-webpack/src:/usr/src/app/packages/pixeloven/cli-addon-webpack/src:cached
+      - ./packages/pixeloven/cli/src:/usr/src/app/packages/pixeloven/cli/src:cached
+      - ./packages/pixeloven/commit-config/src:/usr/src/app/packages/pixeloven/commit-config/src:cached
+      - ./packages/pixeloven/cz-simplified-changelog/src:/usr/src/app/packages/pixeloven/cz-simplified-changelog/src:cached
+      - ./packages/pixeloven-core/common/src:/usr/src/app/packages/pixeloven-core/common/src:cached
+      - ./packages/pixeloven-core/env/src:/usr/src/app/packages/pixeloven-core/env/src:cached
+      - ./packages/pixeloven-core/exceptions/src:/usr/src/app/packages/pixeloven-core/exceptions/src:cached
+      - ./packages/pixeloven-core/filesystem/src:/usr/src/app/packages/pixeloven-core/filesystem/src:cached
+      - ./packages/pixeloven-core/logger/src:/usr/src/app/packages/pixeloven-core/logger/src:cached
+      - ./packages/pixeloven-core/validation/src:/usr/src/app/packages/pixeloven-core/validation/src:cached
+      - ./packages/pixeloven-express/dynamic-middleware/src:/usr/src/app/packages/pixeloven-express/dynamic-middleware/src:cached
+      - ./packages/pixeloven-react/common/src:/usr/src/app/packages/pixeloven-react/common/src:cached
+      - ./packages/pixeloven-react/routing/src:/usr/src/app/packages/pixeloven-react/routing/src:cached
+      - ./packages/pixeloven-react/testing/src:/usr/src/app/packages/pixeloven-react/testing/src:cached
+      - ./packages/pixeloven-storybook/addons/src:/usr/src/app/packages/pixeloven-storybook/addons/src:cached
+      - ./packages/pixeloven-storybook/config/src:/usr/src/app/packages/pixeloven-storybook/config/src:cached
+      - ./packages/pixeloven-webpack/bundler/src:/usr/src/app/packages/pixeloven-webpack/bundler/src:cached
+      - ./packages/pixeloven-webpack/compiler/src:/usr/src/app/packages/pixeloven-webpack/compiler/src:cached
+      - ./packages/pixeloven-webpack/config/src:/usr/src/app/packages/pixeloven-webpack/config/src:cached
+      - ./packages/pixeloven-webpack/file-reporter/src:/usr/src/app/packages/pixeloven-webpack/file-reporter/src:cached
+      - ./packages/pixeloven-webpack/server-middleware/src:/usr/src/app/packages/pixeloven-webpack/server-middleware/src:cached
+      - ./packages/pixeloven-webpack/server/src:/usr/src/app/packages/pixeloven-webpack/server/src:cached
+      - ./packages/pixeloven-webpack/ts-loader/src:/usr/src/app/packages/pixeloven-webpack/ts-loader/src:cached
