@@ -5,7 +5,8 @@
 # which it's contents can then be copied to the top of
 # docker-compose.override.yml
 #
-# @todo Make this able to push to the top of the override automatically
+# @todo DOCKER Make this able to update the override file automatically
+# @todo DOCKER Make this is node script
 #
 twoSpaces="  ";
 fourSpaces="$twoSpaces$twoSpaces";
