@@ -6,9 +6,9 @@ services:
       dockerfile: ./docker/node/Dockerfile
   pixeloven:
     hostname: pixeloven
-    # @todo how can we test against this while it is running???
-    # @todo how do we auto link stuff and when do we need to???
-    # @tdod do we need to build something like this??? https://github.com/ductiletoaster/node-lerna-monorepo/blob/master/tools/monorepo/src/monorepo.js
+    # @todo DOCKER how can we test against this while it is running???
+    # @todo DOCKER how do we auto link stuff and when do we need to???
+    # @todo DOCKER do we need to build something like this??? https://github.com/ductiletoaster/node-lerna-monorepo/blob/master/tools/monorepo/src/monorepo.js
     command: lerna run --parallel compile:watch
     build: 
       context: .
