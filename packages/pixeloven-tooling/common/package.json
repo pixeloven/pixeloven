@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-tooling/common",
-  "version": "6.0.0-beta.24",
+  "version": "6.0.0-beta.25",
   "description": "Common libraries used to build out tooling for PixelOven's workflow",
   "main": "lib/index.js",
   "files": [

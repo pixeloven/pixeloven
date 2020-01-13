@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/cli-addon-webpack",
-  "version": "6.0.0-beta.24",
+  "version": "6.0.0-beta.25",
   "description": "PixelOven CLI addon for webpack based development",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/bundler",
-  "version": "6.0.0-beta.24",
+  "version": "6.0.0-beta.25",
   "description": "Webpack build handler",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
