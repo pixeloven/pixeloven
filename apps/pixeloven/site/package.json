@@ -2,7 +2,7 @@
   "name": "@pixeloven/site",
   "author": "Brian Gebel <brian@pixeloven.com>",
   "description": "Static site for pixeloven.com",
-  "version": "6.0.0-beta.22",
+  "version": "6.0.0-beta.24",
   "private": true,
   "scripts": {
     "start": "docusaurus start",

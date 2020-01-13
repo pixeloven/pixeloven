@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-react/common",
-  "version": "6.0.0-beta.22",
+  "version": "6.0.0-beta.24",
   "description": "Encapsulates react dependencies and provides a simple abstraction for common project functionality.",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -27,11 +27,11 @@
     "react-helmet": "6.0.0-beta"
   },
   "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-beta.22",
-    "@pixeloven-tooling/compiler": "^6.0.0-beta.22",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.22",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
-    "@pixeloven-tooling/test": "^6.0.0-beta.22",
+    "@pixeloven-react/testing": "^6.0.0-beta.24",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.24",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.24",
+    "@pixeloven-tooling/pretty": "^6.0.0-beta.24",
+    "@pixeloven-tooling/test": "^6.0.0-beta.24",
     "lint-staged": "9.5.0"
   },
   "scripts": {

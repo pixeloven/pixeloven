@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-storybook/config",
-  "version": "6.0.0-beta.23",
+  "version": "6.0.0-beta.24",
   "description": "Storybook configuration",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "@babel/core": "7.7.7",
-    "@pixeloven-core/filesystem": "^6.0.0-beta.22",
-    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.23",
-    "@pixeloven-webpack/types": "^6.0.0-beta.22",
+    "@pixeloven-core/filesystem": "^6.0.0-beta.24",
+    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.24",
+    "@pixeloven-webpack/types": "^6.0.0-beta.24",
     "@storybook/addon-a11y": "5.2.8",
     "@storybook/addon-actions": "5.2.8",
     "@storybook/addon-backgrounds": "5.2.8",
@@ -47,10 +47,10 @@
     "webpack": "4.41.5"
   },
   "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-beta.22",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.22",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
-    "@pixeloven-tooling/test": "^6.0.0-beta.22",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.24",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.24",
+    "@pixeloven-tooling/pretty": "^6.0.0-beta.24",
+    "@pixeloven-tooling/test": "^6.0.0-beta.24",
     "@types/mini-css-extract-plugin": "0.8.0",
     "lint-staged": "9.5.0"
   },
