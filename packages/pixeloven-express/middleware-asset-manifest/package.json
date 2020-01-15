@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven-express/asset-manifest-middleware",
+  "name": "@pixeloven-express/middleware-asset-manifest",
   "version": "6.0.0-beta.22",
-  "description": "Express asset manifest middleware",
+  "description": "Express middleware for reading an asset manifest",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
