@@ -63,7 +63,10 @@ Simply a list of ideas I throw down when I can't sleep
     + Create more robust console section
     + BundleAnalyzerPlugin display tab with custom styles
     + Reduce connection section to be more condensed 
-* Automate release publishing and come up with better process for release
+* Workflow
+    * Automate test, build and release
+    * Integrate with github packages (docker, npm, etc)
+    * Keep NPM for legacy
 
 ## After v7 Release
 * Add support for PWA
