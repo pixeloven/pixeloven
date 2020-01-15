@@ -1,0 +1,48 @@
+{
+  "name": "@pixeloven-express/asset-manifest-middleware",
+  "version": "6.0.0-beta.22",
+  "description": "Express asset manifest middleware",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://www.pixeloven.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.22",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.22",
+    "@pixeloven-tooling/pretty": "^6.0.0-beta.22",
+    "@pixeloven-tooling/test": "^6.0.0-beta.22",
+    "@types/express": "4.17.0",
+    "lint-staged": "9.5.0"
+  },
+  "scripts": {
+    "compile": "pixeloven-compiler ts",
+    "compile:watch": "pixeloven-compiler ts --watch",
+    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
+    "pretty": "yarn pretty:ts",
+    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
+    "precommit": "lint-staged",
+    "test": "pixeloven-test --color --coverage",
+    "test:ci": "pixeloven-test --ci --coverage",
+    "test:watch": "pixeloven-test --watch"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "pixeloven-pretty ts",
+      "pixeloven-linter ts --fix",
+      "pixeloven-linter ts",
+      "git add"
+    ]
+  }
+}

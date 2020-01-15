@@ -1,4 +1,4 @@
-import express, {Request} from "express";
+import express, { Request } from "express";
 import fs from "fs";
 import "jest";
 import sinon from "sinon";

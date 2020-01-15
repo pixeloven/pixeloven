@@ -1,5 +1,5 @@
 import "jest";
-import {assetPath} from "./index";
+import { assetPath } from "./index";
 
 describe("util-asset-manifest", () => {
     describe("index", () => {

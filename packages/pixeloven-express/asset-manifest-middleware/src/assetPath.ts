@@ -1,5 +1,5 @@
-import {NextFunction, Request, Response} from "express";
-import {AssetManifest} from "./AssetManifest";
+import { NextFunction, Request, Response } from "express";
+import { AssetManifest } from "./AssetManifest";
 
 /**
  * Define assets for template

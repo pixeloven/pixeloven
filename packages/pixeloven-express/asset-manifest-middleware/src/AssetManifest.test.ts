@@ -1,7 +1,7 @@
 import fs from "fs";
 import "jest";
 import sinon from "sinon";
-import {AssetManifest} from "./AssetManifest";
+import { AssetManifest } from "./AssetManifest";
 
 const sandbox = sinon.createSandbox();
 const json = JSON.stringify({

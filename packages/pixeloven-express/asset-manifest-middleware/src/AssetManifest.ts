@@ -1,5 +1,5 @@
 import fs from "fs";
-import {normalize, resolve} from "path";
+import { normalize, resolve } from "path";
 
 interface Manifest {
     css: string[];
@@ -51,8 +51,12 @@ export class AssetManifest {
         const basePath = `/${this.config.publicPath}/`;
         const manifestJson = this.parseManifestFile();
         return {
-            css: this.filter(manifestJson, "css").map(file => normalize(`${basePath}/${file}`)),
-            js: this.filter(manifestJson, "js").map(file => normalize(`${basePath}/${file}`)),
+            css: this.filter(manifestJson, "css").map(file =>
+                normalize(`${basePath}/${file}`),
+            ),
+            js: this.filter(manifestJson, "js").map(file =>
+                normalize(`${basePath}/${file}`),
+            ),
         };
     }
 
