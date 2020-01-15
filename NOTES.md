@@ -3,7 +3,7 @@ Simply a list of ideas I throw down when I can't sleep
 
 ## Planned v6 Release
 * Onboarding
-    * Finish documentation for working with and contributing to PO
+    * Finish getting started and API documentation
     * Robust --help sections
     * Create generator for init and make compatible with npx (npx pixeloven init my-app) like create react app does.
     * Finish App and package generators
@@ -29,8 +29,11 @@ Simply a list of ideas I throw down when I can't sleep
     * Reach 90-100% unit test coverage
     * Create custom tslint / eslint extension to match our specifications (new repo might be best for this one)
     * Consolidate lerna's conventional-changelog-angular with the one here????
-* Document 
+* Document
+    * Finish advanced guides and contribution docs
     * hardcoded opinions like .dist and .src
+    * version the site so we can start on v7
+    * create a basic library so I can reuse components between them
 * General Improvements
     * Generalize the router to not need redux
     * Generalize or move react core components
