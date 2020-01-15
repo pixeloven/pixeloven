@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig",
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "./dist/types",
+        "outDir": "./dist/lib",
+        "rootDir": "./src",
+        "skipLibCheck": true
+    }
+  }
