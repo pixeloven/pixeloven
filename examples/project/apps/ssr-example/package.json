@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@examples/component-library-example": "^1.0.0",
+    "@pixeloven-express/middleware-asset-manifest": "6.0.0-beta.25",
     "@pixeloven-react/common": "6.0.0-beta.25",
     "@pixeloven-react/routing": "6.0.0-beta.25",
     "@pixeloven-react/template": "6.0.0-beta.25",
