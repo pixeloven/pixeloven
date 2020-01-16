@@ -1,0 +1,37 @@
+{
+  "bail": true,
+  "collectCoverageFrom": [
+      "!<rootDir>/**/*.stories.{js,jsx,ts,tsx}",
+      "!<rootDir>/**/*.test.{js,jsx,ts,tsx}",
+      "<rootDir>/**/*.{js,jsx,ts,tsx}"
+  ],
+  "coverageDirectory": "<rootDir>/../coverage",
+  "coverageThreshold": {
+      "global": {
+          "branches": 40,
+          "functions": 100,
+          "lines": 95,
+          "statements": 95
+      }
+  },
+  "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "ts",
+      "tsx"
+  ],
+  "preset": "ts-jest",
+  "rootDir": "./src",
+  "testEnvironment": "jsdom",
+  "testMatch": [
+      "<rootDir>/**/*.test.(j|t)s?(x)"
+  ],
+  "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+  "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+  ],
+  "verbose": true
+}

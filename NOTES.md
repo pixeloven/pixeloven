@@ -25,9 +25,15 @@ Simply a list of ideas I throw down when I can't sleep
         * Root of mono repo
         * Nested in each package of a mono repo
         * Standard repo
+        * Mount each package in isolation to test for issues
         * Plus all the options one can have
     * Reach 90-100% unit test coverage
     * Create custom tslint / eslint extension to match our specifications (new repo might be best for this one)
+        * "tslint:latest",
+        * "tslint-config-prettier",
+        * "tslint-eslint-rules",
+        * "tslint-react",
+        * "tslint-react-hooks"
     * Consolidate lerna's conventional-changelog-angular with the one here????
 * Document
     * Finish advanced guides and contribution docs

@@ -1,4 +1,4 @@
-import { Link } from "@pixeloven-react/common";
+import { Link } from "@pixeloven-react/template";
 import React from "react";
 import favicon from "./favicon.ico";
 
