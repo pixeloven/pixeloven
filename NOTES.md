@@ -90,3 +90,21 @@ Simply a list of ideas I throw down when I can't sleep
 * https://code.visualstudio.com/docs/remote/containers
 * https://github.com/Microsoft/vscode-remote-try-node
 * Review this [starter](https://github.com/bitjson/typescript-starter) and [this one](https://github.com/alexjoverm/typescript-library-starter) for trending ideas.
+
+
+## PR Lerna
+Make this configurable https://github.com/ductiletoaster/lerna/blob/master/commands/publish/index.js#L249
+    - ignore completely
+    - or reject changes if publish fails... something
+Update this retry logic
+    - https://github.com/ductiletoaster/lerna/blob/master/commands/publish/index.js#L683
+    - https://github.com/ductiletoaster/lerna/tree/master/utils/npm-publish
+    - First make retry more configurable 
+        - retryAttempts: number
+        - retryTimeout: number
+        - If publishing ten packages don't exit on the first failure. Attempt retry, track failures and log via output but continue. The final attempt can exit with a status code but we should still always attempt to publish all packages.
+            - I deal scenario here is that that we work off a queue. FIFO where retries are thrown at the end of the queue and not attempted until other packages have had there turn.
+    - https://github.com/ductiletoaster/lerna/blob/master/utils/npm-publish/npm-publish.js#L70
+
+    - Might need to go as far as here
+        - https://github.com/evocateur/libnpmpublish
