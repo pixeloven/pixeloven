@@ -9,6 +9,8 @@
   },
   "extends": [
     "tslint:latest",
+    "tslint-react",
+    "tslint-react-hooks",
     "tslint-config-prettier",
     "tslint-eslint-rules"
   ],

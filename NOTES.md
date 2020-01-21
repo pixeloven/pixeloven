@@ -16,7 +16,8 @@ Simply a list of ideas I throw down when I can't sleep
     * create a common package for core deps and basic server setup
     * clean up webpack middleware and see what can be merged, forked and moved into this section
     * improve dev server so it can go under this section instead of the other way around
-
+* Remove commitcitizen from PO (maybe from pixeloven/srr as well)
+    * Then just name space our commitlint better
 
 ## After v6 Release
 * Workflow
@@ -50,7 +51,7 @@ Simply a list of ideas I throw down when I can't sleep
 * New CLI Addons
     * Break out typedoc feature
     * Break out the test feature (specifically jest)
-    * Create new commit CLI to support commit linting along side husky and lint-stage
+    * Create new commit CLI to support commit linting along side husky and lint-stage (Or just namespace our config better and integrate btter with @commitlint - can even propose integrations/prs)
     * Finish github deploy CLI addon
 * Testing libraries
     * create common packages for some of our most common deps
@@ -97,8 +98,7 @@ Make this configurable https://github.com/ductiletoaster/lerna/blob/master/comma
     - ignore completely
     - or reject changes if publish fails... something
 Update this retry logic
-    - https://github.com/ductiletoaster/lerna/blob/master/commands/publish/index.js#L683
-    - https://github.com/ductiletoaster/lerna/tree/master/utils/npm-publish
+    - It appears https://github.com/ductiletoaster/lerna/blob/master/commands/publish/index.js#L708 uses publish and fails if it rejects the promise. Goal is to rewirte this functionality and include bulk publish support like this portion of code.
     - First make retry more configurable 
         - retryAttempts: number
         - retryTimeout: number
@@ -108,3 +108,4 @@ Update this retry logic
 
     - Might need to go as far as here
         - https://github.com/evocateur/libnpmpublish
+        - 
