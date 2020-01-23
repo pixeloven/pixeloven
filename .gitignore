@@ -10,7 +10,6 @@
 .cache
 .npm
 .tmp
-node_modules
 
 # Output of 'npm pack'
 *.tgz
@@ -29,13 +28,13 @@ yarn-error.log*
 # storybook
 __snapshots__
 
-# Package files
-/*/*/*/coverage
-/*/*/*/dist
-/*/*/*/build
-/*/*/*/node_modules
-/*/*/*/stats
-/*/*/*/stories
+# Build files
+**/coverage
+**/dist
+**/build
+**/node_modules
+**/stats
+**/stories
 
 # generated files
 .docusaurus

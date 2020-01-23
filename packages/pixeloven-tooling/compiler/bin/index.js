@@ -31,8 +31,9 @@ async function main(proc) {
     switch(firstArg) {
         case "tsx":
         case "ts": {
+            params.raw.shift()
             const configPath = config(tsConfigJson);
-            statusCode = await Process.run("tsc", ["--pretty", "--project", configPath, ...params.args]);
+            statusCode = await Process.run("tsc", ["--pretty", "--project", configPath, ...params.raw]);
             break;
         }
         default: {

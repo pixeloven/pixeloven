@@ -109,3 +109,9 @@ Below are just some of the up coming ideas for improvements.
 * PixelOven site with coverage, storybook, etc all hosted with a unified theme.
 * Create a unified configuration (perhaps an addon?) for the CLI
 * Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
+* https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
+* https://github.com/microsoft/vscode-docker
+* https://code.visualstudio.com/docs/remote/containers
+* https://github.com/Microsoft/vscode-remote-try-node
+
+https://code.visualstudio.com/docs/remote/containers-advanced#_developing-inside-a-container-on-a-remote-docker-host
