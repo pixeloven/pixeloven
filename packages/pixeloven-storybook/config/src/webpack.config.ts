@@ -57,9 +57,12 @@ async function getConfig(options: Options) {
     if (config.resolve) {
         // Aliases
         if (config.resolve.alias) {
+            // change to @cwd so that stories locally run from the working directory and on jenkins from root
+            config.resolve.alias["@cwd"] = process.cwd();
             config.resolve.alias["@src"] = resolveSourceRoot();
         } else {
             config.resolve.alias = {
+                "@cwd": process.cwd(),
                 "@src": resolveSourceRoot(),
             };
         }

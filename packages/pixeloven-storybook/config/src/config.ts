@@ -45,7 +45,7 @@ addParameters({
  * Stories loader
  */
 /* tslint:disable no-string-literal */
-const req = require["context"]("@src", true, /.stories.[jt]sx?$/);
+const req = require["context"]("@cwd", true, /.stories.[jt]sx?$/);
 function loadStories() {
     req.keys().forEach(req);
 }
