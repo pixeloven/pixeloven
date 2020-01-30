@@ -25,6 +25,7 @@
       "noImplicitThis": true,
       "noUnusedLocals": true,
       "noUnusedParameters": false,
+      "preserveWatchOutput": true,
       "removeComments": true,
       "rootDir": ".",
       "skipLibCheck": true,
