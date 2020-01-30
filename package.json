@@ -29,7 +29,7 @@
     "all:build": "lerna run --stream build",
     "all:clean": "lerna clean --yes && rm -rf node_modules",
     "all:commit": "git-cz",
-    "all:compile": "lerna run compile --stream compile && yarn all:linker",
+    "all:compile": "lerna run --stream compile && yarn all:linker",
     "all:linker": "lerna link",
     "all:lint": "lerna run --stream lint",
     "all:lint:ts": "lerna run --stream lint:ts",

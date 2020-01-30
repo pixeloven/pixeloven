@@ -1,7 +1,7 @@
 stages:
 - stage: Development
   jobs:
-  - job: Build
+  - job: CLIBuild
     pool:
       vmImage: "ubuntu-16.04"
     strategy:
@@ -38,5 +38,8 @@ stages:
     # Reporting
     - script: yarn codecov -t $(CODECOV_TOKEN)
       displayName: Report code coverage
+      trigger:
+        branches:
+          - master
     # @todo Run against examples now
     # @todo Create an integration test suite
