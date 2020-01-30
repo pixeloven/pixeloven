@@ -45,7 +45,7 @@
     "@types/supertest": "2.0.7",
     "lint-staged": "9.5.0",
     "redux-saga-test-plan": "4.0.0-beta.3",
-    "supertest": "3.3.0"
+    "supertest": "4.0.2"
   },
   "devEngines": {
     "node": "8.x || 9.x || 10.x"
