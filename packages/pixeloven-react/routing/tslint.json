@@ -18,6 +18,7 @@
     "arrow-parens": false,
     "prefer-object-spread": false,
     "interface-name": false,
+    "jsx-no-lambda": false,
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
     "no-console": false,
