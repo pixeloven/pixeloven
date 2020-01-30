@@ -1,7 +1,7 @@
 stages:
 - stage: Development
   jobs:
-  - job: CLIBuild
+  - job: PixelOven
     pool:
       vmImage: "ubuntu-16.04"
     strategy:
@@ -34,12 +34,8 @@ stages:
     # Site Pipeline
     - script: yarn all:build
       displayName: Build PixelOven Site
-    # @todo on master we need to 
     # Reporting
     - script: yarn codecov -t $(CODECOV_TOKEN)
       displayName: Report code coverage
-      trigger:
-        branches:
-          - master
     # @todo Run against examples now
     # @todo Create an integration test suite
