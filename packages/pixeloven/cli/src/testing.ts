@@ -18,3 +18,9 @@ export const Mock = {
     filesystem: Sandbox.mock(filesystem),
     print: Sandbox.mock(print),
 };
+
+export const Stub = {
+    process: {
+        exit: Sandbox.stub(process, "exit"),
+    },
+};

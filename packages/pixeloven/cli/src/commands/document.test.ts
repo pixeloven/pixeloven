@@ -24,7 +24,6 @@ describe("@pixeloven/cli", () => {
             it("should print error", async () => {
                 const context = await cli.run("document");
                 expect(mockPrintError.callCount).toEqual(1);
-                expect(mockPrintInfo.callCount).toEqual(1);
                 expect(context.commandName).toEqual("document");
             });
         });
