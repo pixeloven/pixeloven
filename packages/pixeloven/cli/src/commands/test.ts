@@ -3,7 +3,8 @@ import { PixelOvenToolbox } from "../types";
 export default {
     name: "test",
     run: async (context: PixelOvenToolbox) => {
-        const { parameters, pixelOven, jest } = context;
+        let statusCode = 0;
+        const { parameters, pixelOven, print, jest } = context;
         switch (parameters.first) {
             /**
              * @deprecated We should simply treat this as a proxy for jest in future versions.
@@ -14,11 +15,7 @@ export default {
                     type: "withOptions",
                 });
                 const results = await jest(["--watch"].concat(argList));
-                pixelOven.exit(
-                    "Jest",
-                    results.status,
-                    `Success! Untouchable.\n`,
-                );
+                statusCode = results.status;
                 break;
             }
             default: {
@@ -27,13 +24,14 @@ export default {
                     type: "withOptions",
                 });
                 const results = await jest(argList);
-                pixelOven.exit(
-                    "Jest",
-                    results.status,
-                    `Success! Untouchable.\n`,
-                );
+                statusCode = results.status;
                 break;
             }
+        }
+        if (statusCode) {
+            print.error("Failed to complete testing");
+        } else {
+            print.success(`Success! Untouchable.\n`);
         }
     },
 };

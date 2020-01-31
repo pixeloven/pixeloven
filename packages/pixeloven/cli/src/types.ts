@@ -1,5 +1,15 @@
 import { GluegunCommand, GluegunParameters, GluegunToolbox } from "gluegun";
 
+/**
+ * @todo Extend these in WebPack and use them throughout the CLI
+ */
+export enum ErrorCode {
+    InvalidArgument = 1,
+    InvalidTask,
+    MissingTask,
+    MissingTarget,
+}
+
 interface GetArgListOptions {
     offset: number;
     type: "default" | "withOptions";
@@ -12,27 +22,11 @@ export type TsLintExtension = (args?: string[]) => Promise<RunResponse>;
 export type TscExtension = (args?: string[]) => Promise<RunResponse>;
 export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
 
-export type ExitFunction = (
-    cmd: string,
-    status: number,
-    success?: string,
-) => void;
-
 export type GetArgListFunction = (
     cmd: string,
     parameters: GluegunParameters,
     options: GetArgListOptions,
 ) => string[];
-
-export type GetConfigPathFunction = (
-    fileName: string,
-    strict?: boolean,
-) => string | false;
-
-export type InvalidArgumentFunction = (
-    message?: string,
-    argument?: string,
-) => void;
 
 export interface RunResponse {
     stdout?: Buffer | string;
@@ -43,10 +37,7 @@ export interface RunResponse {
 export type RunFunction = (args: string[]) => Promise<RunResponse>;
 
 export interface PixelOvenExtensions {
-    exit: ExitFunction;
     getArgList: GetArgListFunction;
-    getConfigPath: GetConfigPathFunction;
-    invalidArgument: InvalidArgumentFunction;
     run: RunFunction;
 }
 export interface PixelOvenOptions {
