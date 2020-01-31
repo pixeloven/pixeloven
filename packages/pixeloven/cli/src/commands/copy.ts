@@ -3,7 +3,8 @@ import { PixelOvenToolbox } from "../types";
 export default {
     name: "copy",
     run: async (toolbox: PixelOvenToolbox) => {
-        const { filesystem, parameters, pixelOven, print } = toolbox;
+        let statusCode = 0;
+        const { filesystem, parameters, print } = toolbox;
 
         switch (parameters.first) {
             case "ico":
@@ -34,9 +35,12 @@ export default {
                 });
                 print.success(`Successfully copied assets to dist`);
                 break;
-            default:
-                pixelOven.invalidArgument();
+            default: {
+                print.error(`Invalid argument provided`);
+                statusCode = 1;
                 break;
+            }
         }
+        process.exit(statusCode);
     },
 };

@@ -3,7 +3,8 @@ import { PixelOvenToolbox } from "../types";
 export default {
     name: "document",
     run: async (toolbox: PixelOvenToolbox) => {
-        const { parameters, pixelOven, typeDoc } = toolbox;
+        let statusCode = 0;
+        const { parameters, print, pixelOven, typeDoc } = toolbox;
         switch (parameters.first) {
             case "ts":
             case "tsx": {
@@ -16,17 +17,20 @@ export default {
                     },
                 );
                 const results = await typeDoc(argList);
-                pixelOven.exit(
-                    "TypeDoc",
-                    results.status,
-                    `Success! What's up doc(s)?\n`,
-                );
+                statusCode = results.status;
+                if (statusCode) {
+                    print.error("Failed to build type docs");
+                } else {
+                    print.success(`Success! What's up doc(s)?\n`);
+                }
                 break;
             }
             default: {
-                pixelOven.invalidArgument();
+                print.error(`Invalid argument provided`);
+                statusCode = 1;
                 break;
             }
         }
+        process.exit(statusCode);
     },
 };

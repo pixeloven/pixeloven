@@ -20,13 +20,8 @@ import {
 export default {
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
-        const {
-            createComponent,
-            createPackage,
-            print,
-            pixelOven,
-            prompt,
-        } = toolbox;
+        let statusCode = 0;
+        const { createComponent, createPackage, print, prompt } = toolbox;
         // todo create generator for library
         // todo crete generator for addon
         // todo crete generator for state
@@ -182,9 +177,11 @@ export default {
                 break;
             }
             default: {
-                pixelOven.invalidArgument();
+                print.error(`Invalid argument provided`);
+                statusCode = 1;
                 break;
             }
         }
+        process.exit(statusCode);
     },
 };
