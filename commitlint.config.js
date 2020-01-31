@@ -1,6 +1,4 @@
 /**
- * @todo Need to tailor this to be more JIRA/Bitbucket and GFM specific
- *          - We can create our own standard off of this: https://github.com/klauskpm/cz-simple-changelog
  * 
  * @description: We are currently following a strict standard defined by the open source community based on Angular development.
  *               Rules can be adjusted for our needs based on the following docs: 
