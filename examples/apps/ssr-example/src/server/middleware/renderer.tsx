@@ -1,5 +1,5 @@
 import { Routing, UniversalRouteProps } from "@pixeloven-react/routing";
-import { Body, Head, Html, Link, Script } from "@pixeloven-react/template";
+import { Body, Head, Html, Link, Script } from "@pixeloven-react/templating";
 import { Config } from "@server/config";
 import App from "@shared/components/App";
 import { Favicon } from "@shared/components/molecules/Favicon";

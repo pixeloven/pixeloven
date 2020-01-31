@@ -1,4 +1,4 @@
-import storybook from "@storybook/react/standalone";
+import storybook from "@pixeloven-storybook/common";
 import {
     AddonStorybookToolbox,
     StorybookExecutionOptions,

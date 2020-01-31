@@ -18,21 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/core": "7.7.7",
-    "@storybook/addon-a11y": "5.2.8",
-    "@storybook/addon-actions": "5.2.8",
-    "@storybook/addon-backgrounds": "5.2.8",
-    "@storybook/addon-knobs": "5.2.8",
-    "@storybook/addon-notes": "5.2.8",
-    "@storybook/addon-options": "5.2.8",
-    "@storybook/addon-viewport": "5.2.8",
-    "@storybook/addons": "5.2.8",
-    "@storybook/react": "5.2.8",
-    "babel-loader": "8.0.6",
-    "prop-types": "15.7.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "webpack": "4.41.5"
+    "@pixeloven-storybook/common": "^6.0.0-beta.26"
   },
   "devDependencies": {
     "@pixeloven-tooling/compiler": "^6.0.0-beta.26",
