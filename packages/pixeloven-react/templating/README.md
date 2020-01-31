@@ -1,6 +1,6 @@
-# @pixeloven-react/template
+# @pixeloven-react/templating
 
-> Pixel Oven react template
+> Pixel Oven react templating
 
 See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
@@ -9,11 +9,11 @@ See our website [PixelOven](https://www.pixeloven.com/) for more information or 
 Using npm:
 
 ```sh
-npm install --save @pixeloven-react/template
+npm install --save @pixeloven-react/templating
 ```
 
 or using yarn:
 
 ```sh
-yarn add @pixeloven-react/template
+yarn add @pixeloven-react/templating
 ```

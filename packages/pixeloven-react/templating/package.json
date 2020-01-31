@@ -1,5 +1,5 @@
 {
-  "name": "@pixeloven-react/template",
+  "name": "@pixeloven-react/templating",
   "version": "6.0.0-beta.22",
   "description": "Defines simple react components and functionality to support server side rendering.",
   "main": "dist/lib/index.js",
