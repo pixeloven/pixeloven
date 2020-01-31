@@ -4,13 +4,13 @@ import { Options as ServerOptions } from "@pixeloven-webpack/server";
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
 export enum ErrorCode {
-    MissingTask,
-    MissingTarget,
+    InvalidArgument = 1,
     InvalidTask,
-    InvalidArgument,
     FailedBundling,
     FailedClientBundling,
     FailedServerBundling,
+    MissingTask,
+    MissingTarget,
 }
 
 export enum WebpackExtensionType {

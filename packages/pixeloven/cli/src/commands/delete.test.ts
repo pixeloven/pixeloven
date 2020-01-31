@@ -31,7 +31,6 @@ describe("@pixeloven/cli", () => {
                 const context = await cli.run("delete");
                 expect(mockFileRemove.callCount).toEqual(0);
                 expect(mockPrintError.callCount).toEqual(1);
-                expect(mockPrintInfo.callCount).toEqual(1);
                 expect(context.commandName).toEqual("delete");
             });
             it("should delete coverage", async () => {

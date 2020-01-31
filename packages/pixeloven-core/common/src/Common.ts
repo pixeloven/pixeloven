@@ -16,9 +16,9 @@ function mergeOptions<T>(defaults: T, options: Partial<T>): T {
     };
 }
 
-type DefinedObjKeys<T> = ({
+type DefinedObjKeys<T> = {
     [P in keyof T]: T[P] extends undefined ? never : P;
-})[keyof T];
+}[keyof T];
 type NonEmptyObject<T, P extends DefinedObjKeys<T> = DefinedObjKeys<T>> = {
     [PP in P]: T[PP];
 };

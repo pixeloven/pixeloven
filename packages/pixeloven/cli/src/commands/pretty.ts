@@ -3,71 +3,65 @@ import { PixelOvenToolbox } from "../types";
 export default {
     name: "pretty",
     run: async (context: PixelOvenToolbox) => {
-        const { parameters, pixelOven, prettier, styleLint, tsLint } = context;
+        let statusCode = 0;
+        const {
+            parameters,
+            pixelOven,
+            print,
+            prettier,
+            styleLint,
+            tsLint,
+        } = context;
         const availableTasks = ["css", "scss", "ts", "tsx"];
         const task = parameters.first;
 
-        /**
-         * @todo might need to break these apart since the linters can't accept the same params as prettier
-         *      - Might just rely on the underlying cli more directly instead of having these aliases
-         */
         if (!task) {
-            pixelOven.invalidArgument(
-                "Please provide a task for Pretty to run.",
+            print.error(`Missing task`);
+            print.error(`Available  tasks are "css", "scss", "ts", or "tsx".`);
+            process.exit(1);
+        }
+        if (!availableTasks.includes(task)) {
+            print.error(`Invalid argument ${task}`);
+            print.error(
+                `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
             );
-            pixelOven.exit("Pretty", 1);
-        } else if (!availableTasks.includes(task)) {
-            pixelOven.invalidArgument(
-                `Available Pretty tasks are "css", "scss", "ts", or "tsx".`,
-                task,
-            );
-            pixelOven.exit("Pretty", 1);
-        } else {
-            const argList = pixelOven.getArgList(task, parameters, {
-                offset: 1,
-                type: "withOptions",
-            });
-            const prettierResults = await prettier(argList);
-            pixelOven.exit(
-                "Prettier",
-                prettierResults.status,
-                `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
-            );
+            process.exit(1);
+        }
+        const argList = pixelOven.getArgList(task, parameters, {
+            offset: 1,
+            type: "withOptions",
+        });
 
-            switch (task) {
-                case "css":
-                case "scss": {
-                    const styleLintResults = await styleLint(
-                        ["--fix"].concat(argList),
-                    );
-                    pixelOven.exit(
-                        "Stylelint",
-                        styleLintResults.status,
-                        `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
-                    );
-                    break;
-                }
-                case "ts":
-                case "tsx": {
-                    const tsLintResults = await tsLint(
-                        ["--fix"].concat(argList),
-                    );
-                    pixelOven.exit(
-                        "TSLint",
-                        tsLintResults.status,
-                        `\nSuccess! Looks a lot nicer now doesn't it?!\n`,
-                    );
-                    break;
-                }
-                default: {
-                    pixelOven.invalidArgument(
-                        `Available Pretty tasks are "css", "scss", "ts", or "tsx".`,
-                        task,
-                    );
-                    pixelOven.exit("Pretty", 1);
-                    break;
-                }
+        const prettierResults = await prettier(argList);
+        statusCode = prettierResults.status;
+        if (statusCode) {
+            process.exit(statusCode);
+        }
+        switch (parameters.first) {
+            case "css":
+            case "scss": {
+                const results = await styleLint(["--fix"].concat(argList));
+                statusCode = results.status;
+                break;
+            }
+            case "ts":
+            case "tsx": {
+                const results = await tsLint(["--fix"].concat(argList));
+                statusCode = results.status;
+                break;
+            }
+            default: {
+                print.error(`Invalid argument ${task}`);
+                print.error(
+                    `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
+                );
+                statusCode = 1;
+                break;
             }
         }
+        if (!statusCode) {
+            print.success(`\nSuccess! Looks a lot nicer now doesn't it?!\n`);
+        }
+        process.exit(statusCode);
     },
 };

@@ -51,7 +51,8 @@ function getOptions(option: string | boolean) {
 export default {
     name: "webpack",
     run: async (toolbox: AddonWebpackToolbox) => {
-        const { parameters, pixelOven, print, webpack } = toolbox;
+        let statusCode = 0;
+        const { parameters, print, webpack } = toolbox;
         const task = parameters.first;
         const {
             allowExternals,
@@ -120,37 +121,32 @@ export default {
         }
 
         if (!task) {
-            pixelOven.invalidArgument(
-                "alease provide a task for Webpack to run.",
-            );
-            pixelOven.exit("Webpack", ErrorCode.MissingTask);
-            return;
+            print.error("Missing task");
+            print.error(`Available Webpack tasks are "build" or "start".`);
+            process.exit(ErrorCode.MissingTask);
         }
         if (!WebpackExtensionType.hasOwnProperty(task)) {
-            pixelOven.invalidArgument(
-                `available Webpack tasks are "build" or "start".`,
-                task,
-            );
-            pixelOven.exit("Webpack", ErrorCode.InvalidTask);
-            return;
+            print.error(`Invalid argument ${task}`);
+            print.error(`Available Webpack tasks are "build" or "start".`);
+            process.exit(ErrorCode.InvalidArgument);
         }
         if (!client && !library && !server) {
-            pixelOven.invalidArgument(
-                `Please provide an entry for Webpack to target. Available options are "--client", "--library", or "--server".`,
+            print.error(`Missing entry target ${task}`);
+            print.error(
+                `Available options are "--client", "--library", or "--server".`,
             );
-            pixelOven.exit("Webpack", ErrorCode.MissingTarget);
-            return;
+            process.exit(ErrorCode.MissingTarget);
         }
         /**
          * @todo Need to list all options in some sorta help style menu
          */
         Object.keys(parameters.options).forEach(option => {
             if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
-                pixelOven.invalidArgument(
+                print.error(`Invalid argument --${option}`);
+                print.error(
                     `Available options for "${task}" are "--client", "--development", "--entry", "--host", "--ignored", "--library", "--path", "--port", "--protocol", "--server", "--source-map", or "--stats"`,
-                    `--${option}`,
                 );
-                pixelOven.exit("Webpack", ErrorCode.InvalidArgument);
+                process.exit(ErrorCode.InvalidArgument);
             }
         });
 
@@ -197,7 +193,7 @@ export default {
                 /**
                  * @todo Need to type the all the options for this CLI
                  */
-                const statusCode = await webpack({
+                statusCode = await webpack({
                     bundlerOptions: {
                         clean: true,
                         outputPath: globalDefaultOutputPath,
@@ -217,34 +213,27 @@ export default {
                 if (statusCode) {
                     if (statusCode === 1) {
                         print.error("client bundling failed to complete");
-                        pixelOven.exit(
-                            "Webpack",
-                            ErrorCode.FailedClientBundling,
-                        );
+                        statusCode = ErrorCode.FailedClientBundling;
                     } else if (statusCode === 2) {
                         print.error("server bundling failed to complete");
-                        pixelOven.exit(
-                            "Webpack",
-                            ErrorCode.FailedServerBundling,
-                        );
+                        statusCode = ErrorCode.FailedServerBundling;
                     } else {
                         print.error("bundling failed to complete");
-                        pixelOven.exit("Webpack", ErrorCode.FailedBundling);
+                        statusCode = ErrorCode.FailedBundling;
                     }
                 } else {
-                    pixelOven.exit(
-                        "Webpack",
-                        0,
+                    print.success(
                         `Success! Pack your bags we're going home. \n`,
                     );
                 }
                 break;
             }
             default: {
-                pixelOven.invalidArgument();
-                pixelOven.exit("Webpack", 1);
+                print.error(`Invalid argument provided`);
+                statusCode = ErrorCode.InvalidArgument;
                 break;
             }
         }
+        process.exit(statusCode);
     },
 };
