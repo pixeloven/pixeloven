@@ -1,7 +1,7 @@
 {
-  "name": "@pixeloven-storybook/config",
+  "name": "@pixeloven-storybook/common",
   "version": "6.0.0-beta.26",
-  "description": "Storybook configuration",
+  "description": "Storybook Common",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -19,17 +19,21 @@
   },
   "dependencies": {
     "@babel/core": "7.8.4",
-    "@pixeloven-core/filesystem": "^6.0.0-beta.26",
-    "@pixeloven-storybook/common": "^6.0.0-beta.26",
-    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.26",
-    "@pixeloven-webpack/types": "^6.0.0-beta.26",
-    "css-loader": "3.4.1",
-    "deepmerge": "4.2.2",
-    "fork-ts-checker-webpack-plugin": "3.1.1",
-    "sass": "1.24.1",
-    "sass-loader": "8.0.0",
-    "style-loader": "1.1.2",
-    "tsconfig-paths-webpack-plugin": "3.2.0",
+    "@storybook/core": "5.3.9",
+    "@storybook/addon-a11y": "5.3.9",
+    "@storybook/addon-actions": "5.3.9",
+    "@storybook/addon-backgrounds": "5.3.9",
+    "@storybook/addon-knobs": "5.3.9",
+    "@storybook/addon-notes": "5.3.9",
+    "@storybook/addon-options": "5.3.9",
+    "@storybook/addon-viewport": "5.3.9",
+    "@storybook/addons": "5.3.9",
+    "@storybook/react": "5.3.9",
+    "@storybook/theming": "5.3.9",
+    "babel-loader": "8.0.6",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "regenerator-runtime": "0.13.3",
     "webpack": "4.41.5"
   },
   "devDependencies": {
@@ -37,7 +41,6 @@
     "@pixeloven-tooling/linter": "^6.0.0-beta.26",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
     "@pixeloven-tooling/test": "^6.0.0-beta.26",
-    "@types/mini-css-extract-plugin": "0.8.0",
     "lint-staged": "9.5.0"
   },
   "scripts": {
