@@ -28,6 +28,11 @@ function getParameters(argv) {
     return {args, options, raw};
 }
 
+/**
+ * @todo We could probably just use spawn (async)
+ * @param {*} cmd 
+ * @param {*} args 
+ */
 async function run(cmd, args = []) {
     const result = spawnSync(cmd, args, {
         detached: true,
