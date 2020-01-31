@@ -1,4 +1,4 @@
-import {assetPath} from "@pixeloven-express/middleware-asset-manifest"
+import { assetPath } from "@pixeloven-express/middleware-asset-manifest";
 import express, { Application, Router } from "express";
 import expressWinston from "express-winston";
 import path from "path";
@@ -6,7 +6,6 @@ import winston from "winston";
 import { Config } from "./config";
 import { health } from "./controllers";
 import { errorHandler, renderer } from "./middleware";
-
 
 /**
  * Define server logic here

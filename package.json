@@ -40,6 +40,7 @@
     "all:test": "lerna run --stream test",
     "all:document": "lerna run --stream document",
     "all:report:coverage": "yarn codecov -t \"$CODECOV_TOKEN\"",
+    "examples:bootstrap": "yarn --cwd examples lerna bootstrap",
     "preversion": "yarn all:bootstrap"
   },
   "husky": {

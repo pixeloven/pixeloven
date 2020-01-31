@@ -21,6 +21,8 @@
     },
     "scripts": {
       "all:bootstrap": "yarn install && yarn all:compile && yarn all:linker",
+      "all:build:development": "lerna run build:development",
+      "all:build:production": "lerna run build:production",
       "all:clean": "lerna clean --yes && rm -rf node_modules",
       "all:compile": "lerna run --stream compile",
       "all:linker": "lerna link",
