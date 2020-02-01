@@ -169,13 +169,13 @@ export function getSetup(options: Options) {
         return ifClient(
             {
                 chunkFilename: ifProduction(
-                    "static/js/[name].[contenthash].js",
-                    "static/js/[name].[hash].js",
+                    `${options.staticAssetPath}/js/[name].[contenthash].js`,
+                    `${options.staticAssetPath}/js/[name].[hash].js`,
                 ),
                 devtoolModuleFilenameTemplate,
                 filename: ifProduction(
-                    "static/js/[name].[contenthash].js",
-                    "static/js/[name].[hash].js",
+                    `${options.staticAssetPath}/js/[name].[contenthash].js`,
+                    `${options.staticAssetPath}/js/[name].[hash].js`,
                 ),
                 path: resolvePath(
                     path.normalize(`${options.outputPath}/public`),
@@ -211,8 +211,8 @@ export function getSetup(options: Options) {
             options: {
                 emitFile: ifClient(),
                 name: ifProduction(
-                    "static/media/[name].[contenthash].[ext]",
-                    "static/media/[name].[hash].[ext]",
+                    `${options.staticAssetPath}/media/[name].[contenthash].[ext]`,
+                    `${options.staticAssetPath}/media/[name].[hash].[ext]`,
                 ),
             },
         };

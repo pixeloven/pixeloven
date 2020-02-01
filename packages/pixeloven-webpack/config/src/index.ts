@@ -135,12 +135,12 @@ function getConfig(options: Options) {
              */
             new MiniCssExtractPlugin({
                 chunkFilename: ifProduction(
-                    "static/css/[name].[contenthash].css",
-                    "static/css/[name].[hash].css",
+                    `${options.staticAssetPath}/css/[name].[contenthash].css`,
+                    `${options.staticAssetPath}/css/[name].[hash].css`,
                 ),
                 filename: ifProduction(
-                    "static/css/[name].[contenthash].css",
-                    "static/css/[name].[hash].css",
+                    `${options.staticAssetPath}/css/[name].[contenthash].css`,
+                    `${options.staticAssetPath}/css/[name].[hash].css`,
                 ),
             }),
             getPluginBundleAnalyzer(options.stats),
