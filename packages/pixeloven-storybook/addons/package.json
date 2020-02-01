@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-storybook/addons",
-  "version": "6.0.0-beta.27",
+  "version": "6.0.0-beta.28",
   "description": "Storybook addon library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,13 +18,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-storybook/common": "^6.0.0-beta.27"
+    "@pixeloven-storybook/common": "^6.0.0-beta.28"
   },
   "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-beta.26",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.26",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.28",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.28",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-beta.26",
+    "@pixeloven-tooling/test": "^6.0.0-beta.28",
     "lint-staged": "9.5.0"
   },
   "scripts": {
