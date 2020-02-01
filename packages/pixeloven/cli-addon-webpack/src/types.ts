@@ -41,6 +41,8 @@ export enum WebpackExecutionOptionTypes {
     "protocol" = "protocol",
     "profile" = "profile",
     "server" = "server",
+    "static-asset-path" = "static-asset-path",
+    "staticAssetPath" = "staticAssetPath",
     "stats" = "stats",
     "stats-dir" = "stats-dir",
     "statsDir" = "statsDir",
