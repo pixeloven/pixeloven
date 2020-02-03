@@ -1,21 +1,87 @@
 import "jest";
 import sinon from "sinon";
+
 import storyModule from "./story";
 
-const sandbox = sinon.createSandbox();
+import { build, print } from "gluegun";
+import { resolve } from "path";
+
+const Sandbox = sinon.createSandbox();
+const cli = build()
+    .brand("pixeloven")
+    .src(resolve(__dirname, ".."))
+    .create();
+
+const Stub = {
+    print: Sandbox.stub(print),
+    process: {
+        exit: Sandbox.stub(process, "exit"),
+    },
+};
 
 describe("@pixeloven/cli-addon-storybook", () => {
     describe("commands", () => {
         describe("story", () => {
-            afterEach(() => {
-                sandbox.reset();
-            });
             afterAll(() => {
-                sandbox.restore();
+                Sandbox.restore();
+            });
+            afterEach(() => {
+                Sandbox.reset();
             });
             it("should contains required props", () => {
                 expect(storyModule.name).toEqual("story");
                 expect(typeof storyModule.run).toEqual("function");
+            });
+            it("should exit with an error when no task is provided", async () => {
+                const context = await cli.run("story");
+                expect(context.commandName).toEqual("story");
+                expect(Stub.print.error.called).toEqual(true);
+                expect(
+                    Stub.print.error.calledWithExactly(
+                        "Invalid argument no task provided.",
+                    ),
+                ).toEqual(true);
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+            });
+            it("should exit with an error when an invalid task is provided", async () => {
+                const task = "wrong";
+                const context = await cli.run(`story ${task}`);
+                expect(context.commandName).toEqual("story");
+                expect(Stub.print.error.called).toEqual(true);
+                expect(
+                    Stub.print.error.calledWithExactly(
+                        `Invalid argument ${task}`,
+                    ),
+                ).toEqual(true);
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+            });
+            it("should exit with an error when a single invalid option is provided", async () => {
+                const task = "build";
+                const context = await cli.run(`story ${task} --wrong`);
+                expect(context.commandName).toEqual("story");
+                expect(Stub.print.error.called).toEqual(true);
+                expect(
+                    Stub.print.error.calledWithExactly(
+                        `Invalid ${task} option --wrong`,
+                    ),
+                ).toEqual(true);
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+            });
+            it("should exit with an error when multiple invalid options are provided", async () => {
+                const task = "build";
+                const context = await cli.run(`story ${task} --wrong --bad`);
+                expect(context.commandName).toEqual("story");
+                expect(Stub.print.error.called).toEqual(true);
+                expect(
+                    Stub.print.error.calledWithExactly(
+                        `Invalid ${task} options --wrong --bad`,
+                    ),
+                ).toEqual(true);
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
         });
     });

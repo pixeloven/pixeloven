@@ -4,48 +4,41 @@ import {
     StorybookExecutionType,
 } from "../types";
 
+/**
+ *  @todo: add "help" argument that prints available tasks and options
+ */
 export default {
     name: "story",
     run: async (toolbox: AddonStorybookToolbox) => {
         let statusCode = 0;
         const { parameters, print, storybook } = toolbox;
         const task = parameters.first;
+        const invalidOptions = Object.keys(parameters.options).filter(
+            option => !StorybookExecutionOptionTypes.hasOwnProperty(option),
+        );
         if (!task) {
             print.error("Invalid argument no task provided.");
             print.info(`Available Storybook tasks are "build" or "start"`);
-            process.exit(1);
-        }
-        if (!StorybookExecutionType.hasOwnProperty(task)) {
+            statusCode = 1;
+        } else if (!StorybookExecutionType.hasOwnProperty(task)) {
             print.error(`Invalid argument ${task}`);
             print.info(`Available Storybook tasks are "build" or "start"`);
-            process.exit(1);
-        }
-        Object.keys(parameters.options).forEach(option => {
-            if (!StorybookExecutionOptionTypes.hasOwnProperty(option)) {
-                print.error(`Invalid argument --${option}`);
-                print.info(
-                    `Available options for "${task}" are "--output-dir", "--port", or "--quiet"`,
-                );
-                process.exit(1);
-            }
-        });
-        /**
-         *  @todo: add "help" argument that prints available tasks and options
-         */
-        switch (task) {
-            case "build":
-            case "start": {
-                statusCode = await storybook(
-                    StorybookExecutionType[task],
-                    parameters.options,
-                );
-                break;
-            }
-        }
-        if (statusCode > 0) {
-            print.error(`Failed to ${task} storybook`);
+            statusCode = 1;
+        } else if (invalidOptions.length) {
+            const error =
+                invalidOptions.length === 1
+                    ? `Invalid ${task} option --${invalidOptions[0]}`
+                    : `Invalid ${task} options --${invalidOptions.join(" --")}`;
+            print.error(error);
+            print.info(
+                `Available options for "${task}" are "--output-dir", "--port", or "--quiet"`,
+            );
+            statusCode = 1;
         } else {
-            print.success(`Success! Read me a story please.\n`);
+            statusCode = await storybook(
+                StorybookExecutionType[task],
+                parameters.options,
+            );
         }
         process.exit(statusCode);
     },
