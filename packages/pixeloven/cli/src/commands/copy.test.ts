@@ -3,6 +3,7 @@ import copyModule from "./copy";
 
 const mockFileCopy = Mock.filesystem.expects("copy");
 const mockPrintError = Mock.print.expects("error");
+const mockFileExists = Mock.filesystem.expects("exists");
 const mockPrintInfo = Mock.print.expects("info");
 const mockPrintSuccess = Mock.print.expects("success");
 const stubProcessExit = Stub.process.exit;
@@ -16,6 +17,7 @@ describe("@pixeloven/cli", () => {
                 mockPrintError.restore();
                 mockPrintInfo.restore();
                 mockPrintSuccess.restore();
+                mockFileExists.restore();
                 stubProcessExit.restore();
             });
             afterEach(() => {
@@ -24,6 +26,7 @@ describe("@pixeloven/cli", () => {
                 mockPrintError.reset();
                 mockPrintInfo.reset();
                 mockPrintSuccess.reset();
+                mockFileExists.reset();
                 stubProcessExit.reset();
             });
             it("should contains required props", () => {
@@ -34,6 +37,7 @@ describe("@pixeloven/cli", () => {
             it("should print error", async () => {
                 const context = await cli.run("copy");
                 expect(mockFileCopy.callCount).toEqual(0);
+                expect(mockFileExists.callCount).toEqual(0);
                 expect(mockPrintError.callCount).toEqual(1);
                 expect(context.commandName).toEqual("copy");
                 expect(Stub.process.exit.called).toEqual(true);
@@ -65,6 +69,40 @@ describe("@pixeloven/cli", () => {
             });
             it("should copy assets", async () => {
                 const context = await cli.run("copy assets");
+                expect(mockFileCopy.callCount).toEqual(1);
+                expect(mockPrintSuccess.callCount).toEqual(1);
+                expect(context.commandName).toEqual("copy");
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            });
+            it("should copy directory if found", async () => {
+                mockFileExists.returns(true);
+                const context = await cli.run("copy /path/to/some/dir");
+                expect(mockFileExists.callCount).toEqual(1);
+                expect(mockFileCopy.callCount).toEqual(1);
+                expect(mockPrintSuccess.callCount).toEqual(1);
+                expect(context.commandName).toEqual("copy");
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            });
+            it("should copy directory if found with source and dest", async () => {
+                mockFileExists.returns(true);
+                const context = await cli.run(
+                    "copy /path/to/some/dir /des/path",
+                );
+                expect(mockFileExists.callCount).toEqual(1);
+                expect(mockFileCopy.callCount).toEqual(1);
+                expect(mockPrintSuccess.callCount).toEqual(1);
+                expect(context.commandName).toEqual("copy");
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            });
+            it("should copy directory if found with source and dest and matching", async () => {
+                mockFileExists.returns(true);
+                const context = await cli.run(
+                    "copy /path/to/some/dir /des/path **.globpattern",
+                );
+                expect(mockFileExists.callCount).toEqual(1);
                 expect(mockFileCopy.callCount).toEqual(1);
                 expect(mockPrintSuccess.callCount).toEqual(1);
                 expect(context.commandName).toEqual("copy");

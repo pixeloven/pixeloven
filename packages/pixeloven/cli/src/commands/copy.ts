@@ -5,7 +5,6 @@ export default {
     run: async (toolbox: PixelOvenToolbox) => {
         let statusCode = 0;
         const { filesystem, parameters, print } = toolbox;
-
         switch (parameters.first) {
             case "ico":
                 filesystem.copy("src", "dist/lib", {
@@ -36,8 +35,25 @@ export default {
                 print.success(`Successfully copied assets to dist`);
                 break;
             default: {
-                print.error(`Invalid argument provided`);
-                statusCode = 1;
+                if (parameters.first && filesystem.exists(parameters.first)) {
+                    const destPath = parameters.second || "dist/lib";
+                    filesystem.copy(parameters.first, destPath, {
+                        matching: parameters.third || "*",
+                        overwrite: true,
+                    });
+                    if (parameters.third) {
+                        print.success(
+                            `Successfully copied contents of ${parameters.first} to ${destPath} matching ${parameters.third}`,
+                        );
+                    } else {
+                        print.success(
+                            `Successfully copied contents of ${parameters.first} to ${destPath}`,
+                        );
+                    }
+                } else {
+                    print.error(`Invalid argument provided`);
+                    statusCode = 1;
+                }
                 break;
             }
         }
