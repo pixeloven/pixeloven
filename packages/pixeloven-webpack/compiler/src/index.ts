@@ -15,6 +15,7 @@ const defaultCompilerOptions: Options = {
     profiling: false,
     publicPath: "/",
     sourceMap: false,
+    staticAssetPath: "static",
     stats: {
         enabled: false,
         host: "localhost",

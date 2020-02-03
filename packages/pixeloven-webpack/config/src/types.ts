@@ -12,6 +12,7 @@ export interface Options {
     entry: string;
     mode: Mode;
     name: Name;
+    staticAssetPath: string;
     outputPath: string;
     profiling: boolean;
     publicPath: string;

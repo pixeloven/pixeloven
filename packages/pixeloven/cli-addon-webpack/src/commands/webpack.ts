@@ -68,6 +68,7 @@ export default {
             protocol,
             server,
             sourceMap,
+            staticAssetPath,
             stats,
             statsDir,
             statsHost,
@@ -110,6 +111,7 @@ export default {
                 profiling: profile,
                 publicPath: path,
                 sourceMap,
+                staticAssetPath,
                 stats: {
                     enabled: stats || false,
                     host: statsHost || "localhost",
