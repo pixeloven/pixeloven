@@ -27,7 +27,6 @@ describe("@pixeloven/cli", () => {
             it("should throw an error", async () => {
                 const context = await cli.run("compile");
                 expect(mockPrintError.callCount).toEqual(1);
-                expect(mockPrintInfo.callCount).toEqual(1);
                 expect(context.commandName).toEqual("compile");
             });
             it("should compile ts,tsx files", async () => {

@@ -3,27 +3,26 @@ import { AddonGhPagesToolbox } from "../types";
 export default {
     name: "gh-pages",
     run: async (context: AddonGhPagesToolbox) => {
-        const { parameters, print, pixelOven, ghPages } = context;
+        let statusCode = 0;
+        const { parameters, print, ghPages } = context;
         const { path } = parameters.options;
         switch (parameters.first) {
             case "build": {
-                const statusCode = await ghPages(path);
+                statusCode = await ghPages(path);
                 if (statusCode) {
-                    print.error("failed to deploy");
-                    pixelOven.exit("Github Pages", statusCode);
+                    print.error("Failed to deploy");
+                    statusCode = 1;
                 } else {
-                    pixelOven.exit(
-                        "Github Pages",
-                        0,
-                        `Success! Opening doc-ing bay. :)\n`,
-                    );
+                    print.success(`Success! Opening doc-ing bay. :)\n`);
                 }
                 break;
             }
             default: {
-                pixelOven.invalidArgument();
+                print.error(`Invalid argument provided`);
+                statusCode = 1;
                 break;
             }
         }
+        process.exit(statusCode);
     },
 };

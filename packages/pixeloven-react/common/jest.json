@@ -8,10 +8,10 @@
   "coverageDirectory": "<rootDir>/../coverage",
   "coverageThreshold": {
       "global": {
-          "branches": 40,
-          "functions": 100,
-          "lines": 95,
-          "statements": 95
+          "branches": 0,
+          "functions": 0,
+          "lines": 0,
+          "statements": 0
       }
   },
   "moduleFileExtensions": [

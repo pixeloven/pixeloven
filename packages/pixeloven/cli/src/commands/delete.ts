@@ -3,7 +3,8 @@ import { PixelOvenToolbox } from "../types";
 export default {
     name: "delete",
     run: async (toolbox: PixelOvenToolbox) => {
-        const { filesystem, pixelOven, parameters, print } = toolbox;
+        let statusCode = 0;
+        const { filesystem, parameters, print } = toolbox;
         switch (parameters.first) {
             case "coverage":
                 filesystem.remove("./coverage");
@@ -25,9 +26,12 @@ export default {
                 filesystem.remove("./stories");
                 print.success(`Successfully deleted directory`);
                 break;
-            default:
-                pixelOven.invalidArgument();
+            default: {
+                print.error(`Invalid argument provided`);
+                statusCode = 1;
                 break;
+            }
         }
+        process.exit(statusCode);
     },
 };

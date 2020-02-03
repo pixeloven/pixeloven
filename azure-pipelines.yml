@@ -1,7 +1,7 @@
 stages:
 - stage: Development
   jobs:
-  - job: Build
+  - job: PixelOven
     pool:
       vmImage: "ubuntu-16.04"
     strategy:
@@ -15,6 +15,7 @@ stages:
     - task: NodeTool@0 
       inputs:
         versionSpec: $(node_version)
+    # Setup
     - script: npm i -g npm
       displayName: Update npm
     - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
@@ -23,22 +24,18 @@ stages:
       displayName: Install lerna
     - script: lerna bootstrap
       displayName: Bootstrap dependencies
-    - script: yarn pixeloven:compile
+    # CLI Pipeline
+    - script: yarn all:compile
       displayName: Compile PixelOven packages
-    - script: yarn pixeloven:lint
+    - script: yarn all:lint
       displayName: Lint PixelOven packages
-    - script: yarn pixeloven:test
+    - script: yarn all:test
       displayName: Test PixelOven packages
-    - script: yarn pixeloven:build:production
-      displayName: Build PixelOven apps
-    # Run against examples now -- eventually this should be setup as a true integration step
-    - script: yarn examples:compile
-      displayName: Compile example packages
-    - script: yarn examples:lint
-      displayName: Lint example packages
-    - script: yarn examples:test
-      displayName: Test example packages
-    - script: yarn examples:build:production
-      displayName: Build example apps
+    # Site Pipeline
+    - script: yarn all:build
+      displayName: Build PixelOven Site
+    # Reporting
     - script: yarn codecov -t $(CODECOV_TOKEN)
       displayName: Report code coverage
+    # @todo Run against examples now
+    # @todo Create an integration test suite

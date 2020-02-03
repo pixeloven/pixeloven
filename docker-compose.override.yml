@@ -17,8 +17,6 @@ services:
       BABEL_ENV: development
       NODE_ENV: development
       TSC_WATCHFILE: UseFsEventsWithFallbackDynamicPolling
-    stdin_open: true
-    tty: true
     volumes:
       - ./packages/pixeloven/cli-addon-generators/src:/usr/src/app/packages/pixeloven/cli-addon-generators/src:cached
       - ./packages/pixeloven/cli-addon-gh-pages/src:/usr/src/app/packages/pixeloven/cli-addon-gh-pages/src:cached

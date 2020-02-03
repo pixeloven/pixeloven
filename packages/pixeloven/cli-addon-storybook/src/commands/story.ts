@@ -7,54 +7,46 @@ import {
 export default {
     name: "story",
     run: async (toolbox: AddonStorybookToolbox) => {
-        const { parameters, pixelOven, storybook } = toolbox;
+        let statusCode = 0;
+        const { parameters, print, storybook } = toolbox;
         const task = parameters.first;
         if (!task) {
-            pixelOven.invalidArgument(
-                "Please provide a task for Storybook to run.",
-            );
-            pixelOven.exit("Storybook", 1);
-            return;
+            print.error("Invalid argument no task provided.");
+            print.info(`Available Storybook tasks are "build" or "start"`);
+            process.exit(1);
         }
         if (!StorybookExecutionType.hasOwnProperty(task)) {
-            pixelOven.invalidArgument(
-                `Available Storybook tasks are "build" or "start".`,
-                task,
-            );
-            pixelOven.exit("Storybook", 1);
-            return;
+            print.error(`Invalid argument ${task}`);
+            print.info(`Available Storybook tasks are "build" or "start"`);
+            process.exit(1);
         }
-
+        Object.keys(parameters.options).forEach(option => {
+            if (!StorybookExecutionOptionTypes.hasOwnProperty(option)) {
+                print.error(`Invalid argument --${option}`);
+                print.info(
+                    `Available options for "${task}" are "--output-dir", "--port", or "--quiet"`,
+                );
+                process.exit(1);
+            }
+        });
         /**
          *  @todo: add "help" argument that prints available tasks and options
          */
         switch (task) {
             case "build":
             case "start": {
-                Object.keys(parameters.options).forEach(option => {
-                    if (!StorybookExecutionOptionTypes.hasOwnProperty(option)) {
-                        pixelOven.invalidArgument(
-                            `Available options for "${task}" are "--output-dir", "--port", or "--quiet"`,
-                            `--${option}`,
-                        );
-                        pixelOven.exit("Storybook", 1);
-                    }
-                });
-                const statusCode = await storybook(
+                statusCode = await storybook(
                     StorybookExecutionType[task],
                     parameters.options,
                 );
-                pixelOven.exit(
-                    "Storybook",
-                    statusCode,
-                    `Success! Read me a story please.\n`,
-                );
-                break;
-            }
-            default: {
-                pixelOven.invalidArgument();
                 break;
             }
         }
+        if (statusCode > 0) {
+            print.error(`Failed to ${task} storybook`);
+        } else {
+            print.success(`Success! Read me a story please.\n`);
+        }
+        process.exit(statusCode);
     },
 };

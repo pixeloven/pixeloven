@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-react/routing",
-  "version": "6.0.0-beta.25",
+  "version": "6.0.0-beta.28",
   "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,20 +18,26 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-react/common": "^6.0.0-beta.24",
     "@types/react-redux": "7.1.1",
     "@types/react-router": "5.1.2",
     "@types/react-router-dom": "5.1.2",
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2"
   },
+  "peerDependencies": {
+    "@pixeloven-react/common": ">=6.0.0-beta.25"
+  },
   "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-beta.24",
-    "@pixeloven-tooling/compiler": "^6.0.0-beta.24",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.24",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.24",
-    "@pixeloven-tooling/test": "^6.0.0-beta.24",
-    "lint-staged": "9.5.0"
+    "@pixeloven-react/testing": "^6.0.0-beta.28",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.28",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.28",
+    "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
+    "@pixeloven-tooling/test": "^6.0.0-beta.28",
+    "@types/react": "16.9.17",
+    "@types/react-dom": "16.9.4",
+    "lint-staged": "9.5.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "scripts": {
     "compile": "pixeloven-compiler ts",

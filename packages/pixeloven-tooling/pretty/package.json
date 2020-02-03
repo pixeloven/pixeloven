@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-tooling/pretty",
-  "version": "6.0.0-beta.25",
+  "version": "6.0.0-beta.26",
   "description": "Prettier abstraction for PixelOven's workflow",
   "bin": {
     "pixeloven-pretty": "./bin/index.js"
