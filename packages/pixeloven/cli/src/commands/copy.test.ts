@@ -82,6 +82,8 @@ describe("@pixeloven/cli", () => {
                 expect(mockFileCopy.callCount).toEqual(1);
                 expect(mockPrintSuccess.callCount).toEqual(1);
                 expect(context.commandName).toEqual("copy");
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should copy directory if found with source and dest", async () => {
                 mockFileExists.returns(true);
@@ -92,6 +94,8 @@ describe("@pixeloven/cli", () => {
                 expect(mockFileCopy.callCount).toEqual(1);
                 expect(mockPrintSuccess.callCount).toEqual(1);
                 expect(context.commandName).toEqual("copy");
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should copy directory if found with source and dest and matching", async () => {
                 mockFileExists.returns(true);
@@ -102,6 +106,8 @@ describe("@pixeloven/cli", () => {
                 expect(mockFileCopy.callCount).toEqual(1);
                 expect(mockPrintSuccess.callCount).toEqual(1);
                 expect(context.commandName).toEqual("copy");
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
         });
     });
