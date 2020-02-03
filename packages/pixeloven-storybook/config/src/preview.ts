@@ -1,8 +1,7 @@
 import { withA11y } from "@storybook/addon-a11y";
 import { withBackgrounds } from "@storybook/addon-backgrounds";
 import { withKnobs } from "@storybook/addon-knobs";
-import { addDecorator, addParameters, configure } from "@storybook/react";
-import { themes } from "@storybook/theming";
+import { addDecorator, addParameters } from "@storybook/react";
 
 addDecorator(withA11y);
 addDecorator(withBackgrounds);
@@ -33,23 +32,4 @@ addParameters({
         { name: "twitter", value: "#00aced", default: false },
         { name: "facebook", value: "#3b5998", default: false },
     ],
-    options: {
-        isFullScreen: false,
-        panelPosition: "right",
-        showSearchBox: false,
-        theme: themes.light,
-    },
 });
-
-/**
- * Stories loader
- */
-/* tslint:disable no-string-literal */
-const req = require["context"]("@src", true, /.stories.[jt]sx?$/);
-function loadStories() {
-    req.keys().forEach(req);
-}
-/* tslint:enable no-string-literal */
-
-// Initialize react-storybook
-configure(loadStories, module);
