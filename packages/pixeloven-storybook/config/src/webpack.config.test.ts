@@ -9,7 +9,7 @@ import getConfig from "./webpack.config";
 describe("@pixeloven-storybook/config", () => {
     describe("webpack.config", () => {
         it("should export function as default", () => {
-            expect(getConfig).toEqual("function");
+            expect(typeof getConfig).toEqual("function");
         });
         it("should return a config option upon execution", () => {
             const config = {
