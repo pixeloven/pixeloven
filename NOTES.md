@@ -12,6 +12,8 @@ Simply a list of ideas I throw down when I can't sleep
     * finish dockerizing them
 * Remove commit-citizen from PO (maybe from pixeloven/ssr as well)
     * Then just name space our commitlint better
+* Storybook
+    * storybook-addon-options is deprecated and will stop working soon
 
 ## After v6 Release
 * Workflow
