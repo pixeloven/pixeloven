@@ -4,4 +4,5 @@ import * as Knobs from "@storybook/addon-knobs";
 import * as Viewport from "@storybook/addon-viewport";
 import storybook from "@storybook/react/standalone";
 
-export { storybook, Actions, Backgrounds, Knobs, Viewport };
+export default storybook;
+export { Actions, Backgrounds, Knobs, Viewport };

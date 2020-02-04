@@ -6,7 +6,7 @@ import storyModule from "./story";
 import { build, print } from "gluegun";
 import { resolve } from "path";
 
-import { storybook } from "@pixeloven-storybook/common";
+import storybook from "@pixeloven-storybook/common";
 
 const Sandbox = sinon.createSandbox();
 const Stub = {

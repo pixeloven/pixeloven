@@ -1,10 +1,10 @@
 import "jest";
-import standalone, { Actions, Backgrounds, Knobs, Viewport } from "./index";
+import storybook, { Actions, Backgrounds, Knobs, Viewport } from "./index";
 
 describe("@pixeloven-storybook/common", () => {
     describe("index", () => {
-        it("should export standalone react", () => {
-            expect(typeof standalone).toEqual("object");
+        it("should export storybook react", () => {
+            expect(typeof storybook).toEqual("object");
         });
         it("should addon libraries", () => {
             expect(typeof Actions).toEqual("object");
