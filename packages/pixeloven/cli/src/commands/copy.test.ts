@@ -1,3 +1,5 @@
+import "jest";
+
 import { build, filesystem, print } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
