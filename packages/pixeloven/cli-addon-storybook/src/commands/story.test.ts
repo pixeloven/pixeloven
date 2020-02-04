@@ -16,8 +16,6 @@ const Stub = {
     },
 };
 
-// import storyModule from "./story";
-
 const cli = build()
     .brand("pixeloven")
     .src(resolve(__dirname, ".."))
@@ -32,56 +30,60 @@ describe("@pixeloven/cli-addon-storybook", () => {
             afterEach(() => {
                 Sandbox.reset();
             });
-            it("should exit with an error when no task is provided", async () => {
+            it("should exit with an error when no task is provided", async done => {
                 const context = await cli.run("story");
                 expect(context.commandName).toEqual("story");
-                expect(Stub.print.error.called).toEqual(true);
+                expect(Stub.print.error.calledOnce).toEqual(true);
                 expect(
                     Stub.print.error.calledWithExactly(
                         "Invalid argument no task provided.",
                     ),
                 ).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+                done();
             });
-            it("should exit with an error when an invalid task is provided", async () => {
+            it("should exit with an error when an invalid task is provided", async done => {
                 const task = "wrong";
                 const context = await cli.run(`story ${task}`);
                 expect(context.commandName).toEqual("story");
-                expect(Stub.print.error.called).toEqual(true);
+                expect(Stub.print.error.calledOnce).toEqual(true);
                 expect(
                     Stub.print.error.calledWithExactly(
                         `Invalid argument ${task}`,
                     ),
                 ).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+                done();
             });
-            it("should exit with an error when a single invalid option is provided", async () => {
+            it("should exit with an error when a single invalid option is provided", async done => {
                 const task = "build";
                 const context = await cli.run(`story ${task} --wrong`);
                 expect(context.commandName).toEqual("story");
-                expect(Stub.print.error.called).toEqual(true);
+                expect(Stub.print.error.calledOnce).toEqual(true);
                 expect(
                     Stub.print.error.calledWithExactly(
                         `Invalid ${task} option --wrong`,
                     ),
                 ).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+                done();
             });
-            it("should exit with an error when multiple invalid options are provided", async () => {
+            it("should exit with an error when multiple invalid options are provided", async done => {
                 const task = "build";
                 const context = await cli.run(`story ${task} --wrong --bad`);
                 expect(context.commandName).toEqual("story");
-                expect(Stub.print.error.called).toEqual(true);
+                expect(Stub.print.error.calledOnce).toEqual(true);
                 expect(
                     Stub.print.error.calledWithExactly(
                         `Invalid ${task} options --wrong --bad`,
                     ),
                 ).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+                done();
             });
             it("should complete build", async done => {
                 Stub.common.storybook.resolves();
@@ -89,8 +91,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 const task = "build";
                 const context = await cli.run(`story ${task}`);
                 expect(context.commandName).toEqual("story");
-                expect(Stub.common.storybook.called).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(false);
+                expect(Stub.common.storybook.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(false);
                 done();
             });
             it("should complete start", async done => {
@@ -99,8 +101,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 const task = "start";
                 const context = await cli.run(`story ${task}`);
                 expect(context.commandName).toEqual("story");
-                expect(Stub.common.storybook.called).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(false);
+                expect(Stub.common.storybook.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(false);
                 done();
             });
             it("should exit when storybook fails", async done => {
@@ -109,8 +111,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 const task = "build";
                 const context = await cli.run(`story ${task}`);
                 expect(context.commandName).toEqual("story");
-                expect(Stub.common.storybook.called).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.common.storybook.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
                 done();
             });

@@ -18,7 +18,11 @@ export default {
                 );
                 const results = await tsc(argList);
                 statusCode = results.status;
-                print.success(`Success! Beam me up.\n`);
+                if (statusCode) {
+                    print.error("Failed to compile source");
+                } else {
+                    print.success(`Success! Beam me up\n`);
+                }
                 break;
             }
             default: {

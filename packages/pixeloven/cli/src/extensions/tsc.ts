@@ -1,24 +1,26 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
-import { PixelOvenToolbox, TscExtension } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 const fileName = "tsconfig.json";
 
 /**
- * @todo Import ts instead of calling bin?
+ * @todo Does tsc have a standalone I can import vs running as a child process?
  */
 export default (toolbox: PixelOvenToolbox) => {
-    const tsc: TscExtension = async (args: string[] = []) => {
+    async function tsc(args: string[] = []) {
         const { print, pixelOven } = toolbox;
         const configPath = resolvePath(fileName, false);
+        const tscArgs = ["tsc", "--pretty"];
         if (configPath) {
-            return pixelOven.run(
-                ["tsc", "--pretty", "--project", configPath].concat(args),
+            tscArgs.concat(["--project", configPath, ...args]);
+        } else {
+            print.warning(
+                `Unable to find "${fileName}" reverting to default configuration`,
             );
+            tscArgs.concat(args);
         }
-        print.warning(
-            `Unable to find "${fileName}" reverting to default configuration`,
-        );
-        return pixelOven.run(["tsc", "--pretty"].concat(args));
-    };
+        const result = await pixelOven.run(tscArgs);
+        return result;
+    }
     toolbox.tsc = tsc;
 };
