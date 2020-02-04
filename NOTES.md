@@ -9,14 +9,8 @@ Simply a list of ideas I throw down when I can't sleep
     * Finish App and package generators
 * Clean up examples
     * abstract what I need from ssr example and gut the rest
-    * fix dep issues and warnings
     * finish dockerizing them
-* Express server
-    * make dynamic middleware more attractive outside of our context
-    * create a common package for core deps and basic server setup
-    * clean up webpack middleware and see what can be merged, forked and moved into this section
-    * improve dev server so it can go under this section instead of the other way around
-* Remove commitcitizen from PO (maybe from pixeloven/srr as well)
+* Remove commit-citizen from PO (maybe from pixeloven/ssr as well)
     * Then just name space our commitlint better
 
 ## After v6 Release
@@ -56,6 +50,11 @@ Simply a list of ideas I throw down when I can't sleep
 * Testing libraries
     * create common packages for some of our most common deps
     * create section for cypress and consider something for CLI Addon
+* Express server
+    * make dynamic middleware more attractive outside of our context
+    * create a common package for core deps and basic server setup
+    * clean up webpack middleware and see what can be merged, forked and moved into this section
+    * improve dev server so it can go under this section instead of the other way around
 * Webpack
     * Finish webpack for libraries 
     * Continue to break config in parts for reusability

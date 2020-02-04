@@ -40,6 +40,9 @@ export default {
                 parameters.options,
             );
         }
-        process.exit(statusCode);
+        // We only want to exit if statusCode is 1 or greater
+        if (statusCode) {
+            process.exit(statusCode);
+        }
     },
 };
