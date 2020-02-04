@@ -32,7 +32,8 @@
       "all:pretty": "lerna run --stream pretty",
       "all:pretty:ts": "lerna run --stream pretty:ts",
       "all:pretty:scss": "lerna run --stream pretty:scss",
-      "all:test": "lerna run --stream test"
+      "all:test": "lerna run --stream test",
+      "precommit": "lerna run --concurrency 1 --stream precommit"
     }
   }
   
