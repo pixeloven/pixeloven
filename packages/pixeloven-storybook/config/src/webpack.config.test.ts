@@ -1,26 +1,21 @@
 import "jest";
 import { Configuration } from "webpack";
-import storybook from "./webpack.config";
-
-const mode = "production";
+import getConfig from "./webpack.config";
 
 /**
  * @todo need to make this more testable
  */
 /* tslint:disable no-object-literal-type-assertion */
 describe("@pixeloven-storybook/config", () => {
-    describe("configs", () => {
-        describe("webpack.config", () => {
-            it("should return config untouched", () => {
-                const config = {} as Configuration;
-                expect(typeof storybook({ config, mode })).toEqual("object");
-            });
-            it("should add new properties into the config", () => {
-                const config = {
-                    resolve: {},
-                } as Configuration;
-                expect(typeof storybook({ config, mode })).toEqual("object");
-            });
+    describe("webpack.config", () => {
+        it("should export function as default", () => {
+            expect(typeof getConfig).toEqual("function");
+        });
+        it("should return a config option upon execution", () => {
+            const config = {
+                resolve: {},
+            } as Configuration;
+            expect(typeof getConfig(config)).toEqual("object");
         });
     });
 });

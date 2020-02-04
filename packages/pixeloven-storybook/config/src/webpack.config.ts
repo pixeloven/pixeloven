@@ -5,16 +5,10 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import { Configuration } from "webpack";
 
-interface Options {
-    config: Configuration;
-    mode: string;
-}
-
 /**
  * Extend webpack config for storybook
  */
-async function getConfig(options: Options) {
-    const { config } = options;
+async function getConfig(config: Configuration) {
     const modules = {
         rules: [
             {
@@ -55,14 +49,6 @@ async function getConfig(options: Options) {
         config.plugins = [forkTsPlugin];
     }
     if (config.resolve) {
-        // Aliases
-        if (config.resolve.alias) {
-            config.resolve.alias["@src"] = resolveSourceRoot();
-        } else {
-            config.resolve.alias = {
-                "@src": resolveSourceRoot(),
-            };
-        }
         // Extensions
         if (config.resolve.extensions) {
             config.resolve.extensions.push(".ts", ".tsx");

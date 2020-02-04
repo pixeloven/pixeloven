@@ -27,7 +27,7 @@
   "scripts": {
     "all:bootstrap": "yarn all:clean && yarn install && yarn all:compile",
     "all:build": "lerna run --stream build",
-    "all:clean": "lerna clean --yes && rm -rf node_modules",
+    "all:clean": "lerna clean --yes && rm -rf node_modules && rm -rf **/dist",
     "all:commit": "git-cz",
     "all:compile": "lerna run --stream compile && yarn all:linker",
     "all:linker": "lerna link",

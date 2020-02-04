@@ -2225,31 +2225,31 @@
     ts-jest "24.3.0"
     typescript "3.7.4"
 
-"@pixeloven-webpack/bundler@^6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/bundler/-/bundler-6.0.0-beta.28.tgz#60a922f0134fcd750dbddf30c5a9f0e1797fc6ca"
-  integrity sha512-L2aH1BQe5uIr1C4R1cRE2fbjxSvyvPT/e8ti33RTrVGVNUPRW+rv2rX3FVkGvSxEdU3bf4URmxAgw1Vc7xncDw==
+"@pixeloven-webpack/bundler@^6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/bundler/-/bundler-6.0.0-beta.29.tgz#11f6c65e9f1530749852473d9e32e411e7e779df"
+  integrity sha512-5SYsIANpmkyzkS3j02cQiHtPEZWrDDCLtrUPbSUiKbn1CT7yNr4QkNa4/ZHKCzWAVG/zMzZPwEUoEBgN/jiQPQ==
   dependencies:
     "@pixeloven-core/common" "^6.0.0-beta.28"
     "@pixeloven-core/filesystem" "^6.0.0-beta.28"
     "@pixeloven-core/logger" "^6.0.0-beta.28"
-    "@pixeloven-webpack/compiler" "^6.0.0-beta.28"
+    "@pixeloven-webpack/compiler" "^6.0.0-beta.29"
     "@pixeloven-webpack/file-reporter" "^6.0.0-beta.28"
 
-"@pixeloven-webpack/compiler@^6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/compiler/-/compiler-6.0.0-beta.28.tgz#789143fd91233a11ac9bf6f0a80b748a03defa0a"
-  integrity sha512-Zt64/e5FegV/+wAs7P+I719MlnQiCfRIvaT9hiy/7ydVKVO4xa51gGBDXqmiAapXaNPax1ImCjjSE4z/fk+CkA==
+"@pixeloven-webpack/compiler@^6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/compiler/-/compiler-6.0.0-beta.29.tgz#c576380f913409a79be6bdb7ff76f6d334555c70"
+  integrity sha512-KTwvlH5cdg152buQR/aFDBgNIkN+gB1YiwLDHpuRk9/8l6XRDpEWR1bkdxdRK4gyUKHT+ab9XBbcSL6HiN5rLA==
   dependencies:
     "@pixeloven-core/common" "^6.0.0-beta.28"
     "@pixeloven-core/env" "^6.0.0-beta.28"
-    "@pixeloven-webpack/config" "^6.0.0-beta.28"
+    "@pixeloven-webpack/config" "^6.0.0-beta.29"
     webpack "4.41.5"
 
-"@pixeloven-webpack/config@^6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/config/-/config-6.0.0-beta.28.tgz#23de5a5810a2218387919fd0e2ae153d9f0aba15"
-  integrity sha512-vGdEyf4fpyuWQS0lRdsUxGRi+yDsyoadYU3zc9KbbR55GiOcn5QFl3Km9vj7WBH6bivpiCNTDoK0A9nyq+mi3A==
+"@pixeloven-webpack/config@^6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/config/-/config-6.0.0-beta.29.tgz#069cf12d050c2f9d025ef94b929e301cfa0ec8c6"
+  integrity sha512-QpZT1jpo5+R5O8hOnUyVgh1o5mPnn/S+bOedExk5dNM+DPLUVFHKzSzpltvvfBgQ+PBEcj+YevTrLNM0i0YQ8A==
   dependencies:
     "@pixeloven-core/common" "^6.0.0-beta.28"
     "@pixeloven-core/env" "^6.0.0-beta.28"
@@ -2289,10 +2289,10 @@
     gzip-size "5.1.1"
     recursive-readdir "2.2.2"
 
-"@pixeloven-webpack/server-middleware@^6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/server-middleware/-/server-middleware-6.0.0-beta.28.tgz#99f838b7221630300aadb0588ca81e15ab6f91cf"
-  integrity sha512-h2R6bzJNsJjTrzd87T2Rlsb4g2Y8InlI4PREnBrW6ZdiGNU8LDyOCUp0CQ0EJRYEz0DCbN431/3s7kD/dPCkcQ==
+"@pixeloven-webpack/server-middleware@^6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/server-middleware/-/server-middleware-6.0.0-beta.29.tgz#500dde15fadded4197caff79bf4a1b7ed474efa4"
+  integrity sha512-wtB0/JeeP2ZH6hWapKXNM80nuHSR/ijarJaQvg4CHPu2y3aNv5aE6MO9QjiXRMtUNj4NV99K/UDZZhXg0SvJtA==
   dependencies:
     "@pixeloven-express/dynamic-middleware" "^6.0.0-beta.28"
     "@types/react" "16.9.17"
@@ -2307,17 +2307,17 @@
     webpack-flush-chunks "2.0.3"
     webpack-hot-middleware "2.25.0"
 
-"@pixeloven-webpack/server@^6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/server/-/server-6.0.0-beta.28.tgz#7edbe52653a73cdc43aae9bbb41aa79eb7ad3db5"
-  integrity sha512-CrsWR1uepGsDx7rWhnvxnyC6eCG4PDkUNn1JAUjQkw/jofuCidAlorINTgJql+VjuBYaSUi9cEeZB/IiRdJxpA==
+"@pixeloven-webpack/server@^6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven-webpack/server/-/server-6.0.0-beta.29.tgz#c2e396b52c00da52bd1b5d91e1de965451fe4097"
+  integrity sha512-dUyfnAhGxUsIrZma3llUmApR/XG3sXzg/hOl6S7qsokby/e30HiQU8n8fibGrR3jQkv6+NdguvNjMYqVMs1ySQ==
   dependencies:
     "@pixeloven-core/common" "^6.0.0-beta.28"
     "@pixeloven-core/exceptions" "^6.0.0-beta.28"
     "@pixeloven-core/logger" "^6.0.0-beta.28"
-    "@pixeloven-webpack/compiler" "^6.0.0-beta.28"
+    "@pixeloven-webpack/compiler" "^6.0.0-beta.29"
     "@pixeloven-webpack/file-reporter" "^6.0.0-beta.28"
-    "@pixeloven-webpack/server-middleware" "^6.0.0-beta.28"
+    "@pixeloven-webpack/server-middleware" "^6.0.0-beta.29"
     express "4.17.1"
 
 "@pixeloven-webpack/ts-loader@^6.0.0-beta.28":
@@ -2345,39 +2345,52 @@
     "@types/webpack" "4.39.8"
     "@types/webpack-env" "1.14.1"
 
-"@pixeloven/cli-addon-generators@6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven/cli-addon-generators/-/cli-addon-generators-6.0.0-beta.28.tgz#ab75f9b413acc07e07cabe8204453cfe1c109747"
-  integrity sha512-V6B5QR86MeiY0dpYgV0Zer8rZRoRc9qnCzNupvwFu1tNF9mUuBxwEJpamjSv1mqK7qMuXb5E5y+OLJhqrsCPpQ==
+"@pixeloven/cli-addon-generators@6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven/cli-addon-generators/-/cli-addon-generators-6.0.0-beta.29.tgz#888fc9d9f71076e95fc01e2e120d7bae73d7cd6e"
+  integrity sha512-AcnDZACreD1eHt0AZcQXbWhguWhf29wxzTueIFzPNXOUZWzYJvAiy1IIHEMdoSBmQE6E/sMryWPR6pPorORJfg==
   dependencies:
     "@pixeloven-core/validation" "^6.0.0-beta.28"
-    "@pixeloven/cli" "^6.0.0-beta.28"
+    "@pixeloven/cli" "^6.0.0-beta.29"
 
-"@pixeloven/cli-addon-storybook@6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven/cli-addon-storybook/-/cli-addon-storybook-6.0.0-beta.28.tgz#5b4564090ef9cc4460f5e979c66fb4789c36f12b"
-  integrity sha512-HUChLPe+Mg72EBdYYxOe5sxxKClG4P81x7pcwXQxwYNOKzK5v8fKgSCijZsExbBGCGBxs0IoC4rXr1QSV1UxGw==
+"@pixeloven/cli-addon-storybook@6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven/cli-addon-storybook/-/cli-addon-storybook-6.0.0-beta.29.tgz#0c8ac34ed3b42f9917076a02a6518ca27b176bc6"
+  integrity sha512-Du3Rp0tGuv4T0SFpLamv325AvOpnuW8joy48e+E8krcRDN39Fy5muG7ctaVaWkyUeY8Vf6ZpacZH4B051ykd9w==
   dependencies:
     "@pixeloven-core/exceptions" "^6.0.0-beta.28"
     "@pixeloven-storybook/common" "^6.0.0-beta.28"
     "@pixeloven-storybook/config" "^6.0.0-beta.28"
-    "@pixeloven/cli" "^6.0.0-beta.28"
+    "@pixeloven/cli" "^6.0.0-beta.29"
 
-"@pixeloven/cli-addon-webpack@6.0.0-beta.28":
-  version "6.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/@pixeloven/cli-addon-webpack/-/cli-addon-webpack-6.0.0-beta.28.tgz#114fb3eec25d271995d640eaed16ca76c9ee1e35"
-  integrity sha512-P8VGo/9ECFAxE0BlTr8GtUnaK4Bqlq8ykDs806vKBJhQDiPyly8n/6/tQw4Z5eARIm/carSDAEsQnwKxZR6tBg==
+"@pixeloven/cli-addon-webpack@6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven/cli-addon-webpack/-/cli-addon-webpack-6.0.0-beta.29.tgz#ee8f8780c295fc97c7c6cb7d079d14d928099ce8"
+  integrity sha512-ItXlVzomPLk/33pXZN+DX7JGaoQBACAMVUD9O0pA1Cw2urr56WYd/j1KGB5MxcCXgSLOKkifp+zDg7jEUzAMug==
   dependencies:
-    "@pixeloven-webpack/bundler" "^6.0.0-beta.28"
-    "@pixeloven-webpack/compiler" "^6.0.0-beta.28"
-    "@pixeloven-webpack/server" "^6.0.0-beta.28"
+    "@pixeloven-webpack/bundler" "^6.0.0-beta.29"
+    "@pixeloven-webpack/compiler" "^6.0.0-beta.29"
+    "@pixeloven-webpack/server" "^6.0.0-beta.29"
     "@pixeloven-webpack/types" "^6.0.0-beta.26"
-    "@pixeloven/cli" "^6.0.0-beta.28"
+    "@pixeloven/cli" "^6.0.0-beta.29"
 
-"@pixeloven/cli@6.0.0-beta.28", "@pixeloven/cli@^6.0.0-beta.28":
+"@pixeloven/cli@6.0.0-beta.28":
   version "6.0.0-beta.28"
   resolved "https://registry.yarnpkg.com/@pixeloven/cli/-/cli-6.0.0-beta.28.tgz#a99c50a64c469cc9bf19f235ab7a17ee8e21dccb"
   integrity sha512-MCsckMsR+b531+D+ulCKB1zlJfgT/Tuuz+dzPwpTRzVG4E5Z5vNxjzwmQqwXVqJhPb6jCB0YM1BHw64YNEZ/eg==
+  dependencies:
+    "@pixeloven-core/filesystem" "^6.0.0-beta.28"
+    "@pixeloven-tooling/compiler" "^6.0.0-beta.28"
+    "@pixeloven-tooling/linter" "^6.0.0-beta.28"
+    "@pixeloven-tooling/pretty" "^6.0.0-beta.26"
+    "@pixeloven-tooling/test" "^6.0.0-beta.28"
+    gluegun "4.1.2"
+    typedoc "0.15.7"
+
+"@pixeloven/cli@6.0.0-beta.29", "@pixeloven/cli@^6.0.0-beta.29":
+  version "6.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@pixeloven/cli/-/cli-6.0.0-beta.29.tgz#4c6971a6b5885979016b77c9d7608b61f11cd2f7"
+  integrity sha512-Tm16zFvavLHIlIlPvcUKDRjQOm64at842lMsV3bbDkXN953ipNP3Zy1F3fqvk7YNv/LT+yQzWAqIaWyqdaNbuQ==
   dependencies:
     "@pixeloven-core/filesystem" "^6.0.0-beta.28"
     "@pixeloven-tooling/compiler" "^6.0.0-beta.28"
