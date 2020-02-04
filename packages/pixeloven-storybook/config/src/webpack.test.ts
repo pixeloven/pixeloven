@@ -1,6 +1,6 @@
 import "jest";
 import { Configuration } from "webpack";
-import getConfig from "./webpack.config";
+import getConfig from "./webpack";
 
 /**
  * @todo need to make this more testable

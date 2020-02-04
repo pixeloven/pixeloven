@@ -1,4 +1,4 @@
-import getConfig from "./webpack.config";
+import getConfig from "./webpack";
 
 module.exports = {
     addons: [
