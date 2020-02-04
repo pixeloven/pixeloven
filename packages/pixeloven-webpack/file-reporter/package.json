@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/file-reporter",
-  "version": "6.0.0-beta.28",
+  "version": "6.0.0-beta.32",
   "description": "Webpack file reporter",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,16 +18,16 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/logger": "^6.0.0-beta.28",
+    "@pixeloven-core/logger": "^6.0.0-beta.32",
     "filesize": "5.0.3",
     "gzip-size": "5.1.1",
     "recursive-readdir": "2.2.2"
   },
   "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-beta.28",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.28",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.32",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.32",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-beta.28",
+    "@pixeloven-tooling/test": "^6.0.0-beta.32",
     "@pixeloven-webpack/types": "^6.0.0-beta.26",
     "@types/filesize": "4.2.0",
     "@types/recursive-readdir": "2.2.0",

@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-core/env",
-  "version": "6.0.0-beta.28",
+  "version": "6.0.0-beta.32",
   "description": "Environment loader",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,14 +18,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/exceptions": "^6.0.0-beta.28",
+    "@pixeloven-core/exceptions": "^6.0.0-beta.32",
     "dotenv": "8.0.0"
   },
   "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-beta.28",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.28",
+    "@pixeloven-tooling/compiler": "^6.0.0-beta.32",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.32",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-beta.28",
+    "@pixeloven-tooling/test": "^6.0.0-beta.32",
     "@types/dotenv": "6.1.1",
     "lint-staged": "9.5.0"
   },
