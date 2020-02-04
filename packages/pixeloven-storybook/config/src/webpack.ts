@@ -37,8 +37,10 @@ async function getConfig(config: Configuration) {
     };
     config.module = config.module ? deepmerge(config.module, modules) : modules;
 
+    /**
+     * @todo we should use the same setup as webpack and also this should have two modes
+     */
     // Plugins
-    // @todo we should use the same setup as webpack and also this should have two modes
     const forkTsPlugin = new ForkTsCheckerWebpackPlugin({
         silent: true,
         tsconfig: resolveTsConfig(),

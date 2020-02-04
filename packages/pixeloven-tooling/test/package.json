@@ -25,6 +25,6 @@
     "jest-resolve": "24.9.0",
     "sinon": "8.0.1",
     "ts-jest": "24.3.0",
-    "typescript": "3.7.4"
+    "typescript": "3.7.5"
   }
 }
