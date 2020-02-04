@@ -32,6 +32,7 @@ export default (toolbox: AddonStorybookToolbox) => {
                         mode: "dev",
                         port: port || 9001,
                         quiet,
+                        smokeTest: false,
                     });
                     return 0;
                 }
