@@ -2,7 +2,7 @@ import "jest";
 import * as main from "./main";
 
 describe("@pixeloven-storybook/config", () => {
-    describe("maib", () => {
+    describe("main", () => {
         it("should export storybook configuration", () => {
             expect(typeof main).toEqual("object");
             expect(typeof main.hasOwnProperty("addons")).toEqual(true);

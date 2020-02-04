@@ -4,7 +4,7 @@ import storybook, { Actions, Backgrounds, Knobs, Viewport } from "./index";
 describe("@pixeloven-storybook/common", () => {
     describe("index", () => {
         it("should export storybook react", () => {
-            expect(typeof storybook).toEqual("object");
+            expect(typeof storybook).toEqual("function");
         });
         it("should addon libraries", () => {
             expect(typeof Actions).toEqual("object");
