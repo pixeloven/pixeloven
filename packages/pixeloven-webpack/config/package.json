@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-webpack/config",
-  "version": "6.0.0-beta.32",
+  "version": "6.0.0-beta.33",
   "description": "Webpack configuration for client and server",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-core/common": "^6.0.0-beta.32",
-    "@pixeloven-core/env": "^6.0.0-beta.32",
-    "@pixeloven-core/filesystem": "^6.0.0-beta.32",
-    "@pixeloven-core/logger": "^6.0.0-beta.32",
-    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.32",
+    "@pixeloven-core/common": "^6.0.0-beta.33",
+    "@pixeloven-core/env": "^6.0.0-beta.33",
+    "@pixeloven-core/filesystem": "^6.0.0-beta.33",
+    "@pixeloven-core/logger": "^6.0.0-beta.33",
+    "@pixeloven-webpack/ts-loader": "^6.0.0-beta.33",
     "autoprefixer": "9.7.3",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "circular-dependency-plugin": "5.2.0",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@pixeloven-tooling/compiler": "^6.0.0-beta.32",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.32",
+    "@pixeloven-tooling/linter": "^6.0.0-beta.33",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
     "@pixeloven-tooling/test": "^6.0.0-beta.32",
     "@pixeloven-webpack/types": "^6.0.0-beta.26",
