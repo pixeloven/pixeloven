@@ -1,21 +1,19 @@
-import storybook from "@pixeloven-storybook/common";
+import { storybook } from "@pixeloven-storybook/common";
 import {
     AddonStorybookToolbox,
     StorybookExecutionOptions,
     StorybookExecutionType,
-    StorybookExtension,
 } from "../types";
 
 export default (toolbox: AddonStorybookToolbox) => {
-    const story: StorybookExtension = async (
+    async function story(
         type: StorybookExecutionType,
         options: StorybookExecutionOptions,
-    ) => {
-        const { filesystem, print } = toolbox;
+    ) {
+        const { filesystem } = toolbox;
         const configEntryPoint = require.resolve("@pixeloven-storybook/config");
         const configDir = filesystem.path(configEntryPoint, "..");
         const { outputDir, port, quiet } = options;
-
         try {
             switch (type) {
                 case StorybookExecutionType.build: {
@@ -38,12 +36,9 @@ export default (toolbox: AddonStorybookToolbox) => {
                     return 0;
                 }
             }
-        } catch (err) {
-            if (err && err.message) {
-                print.error(err.message);
-            }
+        } catch (e) {
+            return 1;
         }
-        return 1;
-    };
+    }
     toolbox.storybook = story;
 };

@@ -6,18 +6,23 @@ import storyModule from "./story";
 import { build, print } from "gluegun";
 import { resolve } from "path";
 
-const Sandbox = sinon.createSandbox();
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, ".."))
-    .create();
+import { storybook } from "@pixeloven-storybook/common";
 
+const Sandbox = sinon.createSandbox();
 const Stub = {
+    common: {
+        storybook: Sandbox.stub(storybook),
+    },
     print: Sandbox.stub(print),
     process: {
         exit: Sandbox.stub(process, "exit"),
     },
 };
+
+const cli = build()
+    .brand("pixeloven")
+    .src(resolve(__dirname, ".."))
+    .create();
 
 describe("@pixeloven/cli-addon-storybook", () => {
     describe("commands", () => {
@@ -83,6 +88,22 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
+            // it("should complete build", async () => {
+            //     const task = "build";
+            //     const context = await cli.run(`story ${task}`);
+            //     expect(context.commandName).toEqual("story");
+            //     expect(Stub.common.storybook.called).toEqual(true);
+            //     expect(Stub.process.exit.called).toEqual(true);
+            //     expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            // });
+            // it("should complete start", async () => {
+            //     const task = "start";
+            //     const context = await cli.run(`story ${task}`);
+            //     expect(context.commandName).toEqual("story");
+            //     expect(Stub.common.storybook.called).toEqual(true);
+            //     expect(Stub.process.exit.called).toEqual(true);
+            //     expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            // });
         });
     });
 });
