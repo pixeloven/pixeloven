@@ -1,22 +1,22 @@
 import "jest";
 
-import storybook from "@pixeloven-storybook/common";
+import * as common from "@pixeloven-storybook/common";
 import { build, print } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
 
-import storyModule from "./story";
-
 const Sandbox = sinon.createSandbox();
 const Stub = {
     common: {
-        storybook: Sandbox.stub(storybook), // @todo why no work
+        storybook: Sandbox.stub(common, "storybook"),
     },
     print: Sandbox.stub(print),
     process: {
         exit: Sandbox.stub(process, "exit"),
     },
 };
+
+// import storyModule from "./story";
 
 const cli = build()
     .brand("pixeloven")
@@ -31,10 +31,6 @@ describe("@pixeloven/cli-addon-storybook", () => {
             });
             afterEach(() => {
                 Sandbox.reset();
-            });
-            it("should contains required props", () => {
-                expect(storyModule.name).toEqual("story");
-                expect(typeof storyModule.run).toEqual("function");
             });
             it("should exit with an error when no task is provided", async () => {
                 const context = await cli.run("story");
@@ -88,21 +84,34 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
             it("should complete build", async done => {
+                Stub.common.storybook.resolves();
+
+                const task = "build";
+                const context = await cli.run(`story ${task}`);
+                expect(context.commandName).toEqual("story");
+                expect(Stub.common.storybook.called).toEqual(true);
+                expect(Stub.process.exit.called).toEqual(false);
+                done();
+            });
+            it("should complete start", async done => {
+                Stub.common.storybook.resolves();
+
+                const task = "start";
+                const context = await cli.run(`story ${task}`);
+                expect(context.commandName).toEqual("story");
+                expect(Stub.common.storybook.called).toEqual(true);
+                expect(Stub.process.exit.called).toEqual(false);
+                done();
+            });
+            it("should exit when storybook fails", async done => {
+                Stub.common.storybook.throwsException("testing");
+
                 const task = "build";
                 const context = await cli.run(`story ${task}`);
                 expect(context.commandName).toEqual("story");
                 expect(Stub.common.storybook.called).toEqual(true);
                 expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
-                done();
-            });
-            it("should complete start", async done => {
-                const task = "start";
-                const context = await cli.run(`story ${task}`);
-                expect(context.commandName).toEqual("story");
-                expect(Stub.common.storybook.called).toEqual(true);
-                expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
                 done();
             });
         });
