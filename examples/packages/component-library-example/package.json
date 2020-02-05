@@ -33,7 +33,7 @@
     "pretest": "pixeloven delete coverage",
     "pretty": "yarn run pretty:ts && yarn run pretty:scss",
     "pretty:ts": "pixeloven pretty ./src/**/*.{ts,tsx}",
-    "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
+    "pretty:scss": "pixeloven pretty ./src/**/*.scss",
     "test": "pixeloven test --color --coverage",
     "test:ci": "pixeloven test --ci --coverage",
     "test:watch": "pixeloven test --watch"

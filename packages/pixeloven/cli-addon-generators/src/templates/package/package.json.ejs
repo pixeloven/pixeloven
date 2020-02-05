@@ -47,8 +47,8 @@
     "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
     "lint:scss": "pixeloven lint scss ./src/**/*.scss",
     "pretty": "yarn pretty:ts && yarn pretty:scss",
-    "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
-    "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
+    "pretty:ts": "pixeloven pretty ./src/**/*.{ts,tsx}",
+    "pretty:scss": "pixeloven pretty ./src/**/*.scss",
     "test": "pixeloven test --color --coverage",
     "test:ci": "pixeloven test --ci",
     "test:watch": "pixeloven test watch",
@@ -60,13 +60,13 @@
   },
   "lint-staged": {
     "src/**/*.{scss}": [
-      "yarn pixeloven pretty scss",
-      "yarn pixeloven lint scss",
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint scss --fix",
       "git add"
     ],
     "src/**/*.{ts,tsx}": [
-      "yarn pixeloven pretty ts",
-      "yarn pixeloven lint ts",
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint ts --fix",
       "git add"
     ]
   }
