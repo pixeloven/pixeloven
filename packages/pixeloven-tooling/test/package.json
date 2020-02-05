@@ -23,7 +23,7 @@
     "jest-config": "24.9.0",
     "jest-haste-map": "24.9.0",
     "jest-resolve": "24.9.0",
-    "sinon": "8.0.1",
+    "sinon": "8.1.1",
     "ts-jest": "24.3.0",
     "typescript": "3.7.5"
   }
