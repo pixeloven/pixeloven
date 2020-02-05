@@ -1,27 +1,25 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
-import { PixelOvenToolbox, StyleLintExtension } from "../types";
+import { PixelOvenToolbox } from "../types";
 
 const fileName = "stylelint.json";
 
+/**
+ * @todo Add support for CSS
+ */
 export default (context: PixelOvenToolbox) => {
-    const styleLint: StyleLintExtension = async (args: string[]) => {
+    async function styleLint(args: string[]) {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);
+        const stylelintArgs = ["stylelint", "--syntax", "scss"];
         if (configPath) {
-            return pixelOven.run(
-                [
-                    "stylelint",
-                    "--syntax",
-                    "scss",
-                    "--config",
-                    configPath,
-                ].concat(args),
+            stylelintArgs.concat(["--config", configPath, ...args]);
+        } else {
+            print.warning(
+                `Unable to find "${fileName}" reverting to default configuration`,
             );
+            stylelintArgs.concat(args);
         }
-        print.warning(
-            `Unable to find "${fileName}" reverting to default configuration`,
-        );
-        return pixelOven.run(["stylelint", "--syntax", "scss"].concat(args));
-    };
+        return pixelOven.run(stylelintArgs);
+    }
     context.styleLint = styleLint;
 };
