@@ -1,4 +1,4 @@
-import storybook from "@pixeloven-storybook/common";
+import { storybook } from "@pixeloven-storybook/common";
 import {
     AddonStorybookToolbox,
     StorybookExecutionOptions,

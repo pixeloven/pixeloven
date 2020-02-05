@@ -1,5 +1,5 @@
 import "jest";
-import storybook, { Actions, Backgrounds, Knobs, Viewport } from "./index";
+import { Actions, Backgrounds, Knobs, storybook, Viewport } from "./index";
 
 describe("@pixeloven-storybook/common", () => {
     describe("index", () => {

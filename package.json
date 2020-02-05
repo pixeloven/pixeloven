@@ -21,7 +21,7 @@
     "@commitlint/config-conventional": "8.2.0",
     "codecov": "3.6.1",
     "commitizen": "4.0.3",
-    "husky": "3.1.0",
+    "husky": "4.2.1",
     "lerna": "3.20.2"
   },
   "scripts": {
@@ -41,12 +41,13 @@
     "all:document": "lerna run --stream document",
     "all:report:coverage": "yarn codecov -t \"$CODECOV_TOKEN\"",
     "examples:bootstrap": "yarn --cwd examples lerna bootstrap",
+    "precommit": "lerna run --concurrency 1 --stream precommit --since HEAD",
     "preversion": "yarn all:bootstrap"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lerna run --concurrency 1 --stream precommit --since HEAD"
+      "pre-commit": "yarn precommit && yarn --cwd examples precommit"
     }
   },
   "config": {
