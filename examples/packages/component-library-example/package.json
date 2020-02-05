@@ -27,7 +27,7 @@
     "compile": "pixeloven compile ts",
     "lint": "yarn lint:ts && yarn lint:scss",
     "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
-    "lint:scss": "pixeloven lint ts ./src/**/*.{scss}",
+    "lint:scss": "pixeloven lint scss ./src/**/*.{scss}",
     "postcompile": "pixeloven copy assets",
     "precommit": "lint-staged",
     "pretest": "pixeloven delete coverage",
