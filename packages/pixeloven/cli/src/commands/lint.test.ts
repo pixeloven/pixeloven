@@ -72,7 +72,7 @@ describe("@pixeloven/cli", () => {
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
-                const context = await cli.run("lint ts");
+                const context = await cli.run("lint tsx");
                 expect(context.commandName).toEqual("lint");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.calledOnce).toEqual(true);
@@ -92,12 +92,12 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
-            it("should succeed linting ts/tsx with stylelint.json", async () => {
+            it("should succeed linting css/scss with stylelint.json", async () => {
                 Mock.core.expects("resolvePath").returns(true);
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
-                const context = await cli.run("lint scss");
+                const context = await cli.run("lint css");
                 expect(context.commandName).toEqual("lint");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.calledOnce).toEqual(true);

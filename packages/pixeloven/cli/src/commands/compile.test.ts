@@ -50,7 +50,7 @@ describe("@pixeloven/cli", () => {
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
-                const context = await cli.run("compile ts ./some/file.ts");
+                const context = await cli.run("compile tsx ./some/file.ts");
                 expect(context.commandName).toEqual("compile");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.calledOnce).toEqual(true);
@@ -72,7 +72,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
-            it("should fail to compile ts,tsx files with tsconfig.json", async () => {
+            it("should fail to compile ts,tsx files", async () => {
                 Mock.core
                     .expects("resolvePath")
                     .returns("/some/abs/path/tsconfig.json");
