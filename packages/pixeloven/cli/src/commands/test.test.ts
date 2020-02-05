@@ -67,8 +67,8 @@ describe("@pixeloven/cli", () => {
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
-                const context = await cli.run("lint ts");
-                expect(context.commandName).toEqual("lint");
+                const context = await cli.run("test");
+                expect(context.commandName).toEqual("test");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.calledOnce).toEqual(true);
                 expect(Stub.print.warning.calledOnce).toEqual(true);
