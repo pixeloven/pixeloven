@@ -44,7 +44,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.print.error.callCount).toEqual(1);
                 expect(Stub.print.info.callCount).toEqual(1);
                 expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(3)).toEqual(true);
             });
             it("should print error for invalid task", async () => {
                 const context = await cli.run("lint wrong");
