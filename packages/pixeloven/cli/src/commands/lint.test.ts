@@ -52,7 +52,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.print.error.callCount).toEqual(1);
                 expect(Stub.print.info.callCount).toEqual(1);
                 expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(2)).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
             // it("should warn if tslint.json is missing and succeed", async () => {
             //     Mock.core

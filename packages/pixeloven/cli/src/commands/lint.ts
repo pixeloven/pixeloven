@@ -17,7 +17,7 @@ export default {
             print.info(
                 `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
             );
-            statusCode = 2;
+            statusCode = 1;
         } else {
             const argList = pixelOven.getArgList(task, parameters, {
                 offset: 1,
@@ -38,7 +38,7 @@ export default {
                 }
                 default: {
                     print.error(`Invalid argument ${task}`);
-                    print.error(
+                    print.info(
                         `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
                     );
                     statusCode = 1;
