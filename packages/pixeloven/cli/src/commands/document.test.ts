@@ -45,7 +45,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
-            it("should warn if typedoc.json is missing", async () => {
+            it("should warn if typedoc.json is missing and succeed", async () => {
                 Mock.core
                     .expects("resolvePath")
                     .withArgs("typedoc.json")
@@ -65,7 +65,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
-            it("should warn if tsconfig.json is missing", async () => {
+            it("should warn if tsconfig.json is missing and succeed", async () => {
                 Mock.core
                     .expects("resolvePath")
                     .withArgs("typedoc.json")
