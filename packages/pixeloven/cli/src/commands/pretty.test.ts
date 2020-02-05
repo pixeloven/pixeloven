@@ -54,6 +54,22 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
+            // it("should warn if tslint.json is missing and succeed", async () => {
+            //     Mock.core
+            //         .expects("resolvePath")
+            //         .withArgs("tslint.json")
+            //         .returns(false);
+            //     Stub.system.spawn.resolves({
+            //         status: 0,
+            //     });
+            //     const context = await cli.run("lint ts");
+            //     expect(context.commandName).toEqual("lint");
+            //     expect(Stub.system.spawn.calledOnce).toEqual(true);
+            //     expect(Stub.print.success.calledOnce).toEqual(true);
+            //     expect(Stub.print.warning.calledOnce).toEqual(true);
+            //     expect(Stub.process.exit.calledOnce).toEqual(true);
+            //     expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            // });
         });
     });
 });
