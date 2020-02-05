@@ -1,28 +1,38 @@
-import { cli, Mock, Sandbox } from "../testing";
-import helpModule from "./help";
+import "jest";
 
-const mockPrintInfo = Mock.print.expects("info");
+import { build, print } from "gluegun";
+import { resolve } from "path";
+import sinon from "sinon";
+
+const cli = build()
+    .brand("pixeloven")
+    .src(resolve(__dirname, ".."))
+    .create();
+
+const Sandbox = sinon.createSandbox();
+
+const Stub = {
+    print: Sandbox.stub(print),
+    process: {
+        exit: Sandbox.stub(process, "exit"),
+    },
+};
 
 describe("@pixeloven/cli", () => {
     describe("commands", () => {
         describe("help", () => {
             afterAll(() => {
                 Sandbox.restore();
-                mockPrintInfo.restore();
             });
             afterEach(() => {
                 Sandbox.reset();
-                mockPrintInfo.reset();
             });
-            it("should contains required props", () => {
-                expect(helpModule.alias).toEqual(["--help", "-h"]);
-                expect(helpModule.name).toEqual("help");
-                expect(typeof helpModule.run).toEqual("function");
-            });
-            it("should print help documentation", async () => {
+            it("should print error", async () => {
                 const context = await cli.run("help");
-                expect(mockPrintInfo.callCount).toEqual(1);
                 expect(context.commandName).toEqual("help");
+                expect(Stub.print.error.callCount).toEqual(1);
+                expect(Stub.process.exit.called).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
         });
     });

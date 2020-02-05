@@ -26,27 +26,27 @@
   "scripts": {
     "compile": "pixeloven compile ts",
     "lint": "yarn lint:ts && yarn lint:scss",
-    "lint:ts": "pixeloven lint ts 'src/**/*.{ts,tsx}'",
-    "lint:scss": "pixeloven lint ts 'src/**/*.{scss}'",
+    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
+    "lint:scss": "pixeloven lint ts ./src/**/*.{scss}",
     "postcompile": "pixeloven copy assets",
     "precommit": "lint-staged",
     "pretest": "pixeloven delete coverage",
     "pretty": "yarn run pretty:ts && yarn run pretty:scss",
-    "pretty:ts": "pixeloven pretty ts 'src/**/*.{ts,tsx}'",
-    "pretty:scss": "pixeloven pretty scss 'src/**/*.scss'",
+    "pretty:ts": "pixeloven pretty ./src/**/*.{ts,tsx}",
+    "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
     "test": "pixeloven test --color --coverage",
     "test:ci": "pixeloven test --ci --coverage",
-    "test:watch": "pixeloven test watch"
+    "test:watch": "pixeloven test --watch"
   },
   "lint-staged": {
     "src/**/*.{scss}": [
-      "yarn pixeloven pretty scss",
-      "yarn pixeloven lint scss",
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint scss --fix",
       "git add"
     ],
     "src/**/*.{ts,tsx}": [
-      "yarn pixeloven pretty ts",
-      "yarn pixeloven lint ts",
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint ts --fix",
       "git add"
     ]
   }

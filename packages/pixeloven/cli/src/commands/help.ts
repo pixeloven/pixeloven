@@ -5,6 +5,7 @@ export default {
     name: "help",
     run: async (toolbox: PixelOvenToolbox) => {
         const { print } = toolbox;
-        print.info("Coming soon");
+        print.error(`Invalid argument`);
+        process.exit(1);
     },
 };

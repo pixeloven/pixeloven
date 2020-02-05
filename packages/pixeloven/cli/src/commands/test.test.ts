@@ -48,7 +48,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
-            it("should succeed running tests with jest.json", async () => {
+            it("should succeed running with jest.json", async () => {
                 Mock.core
                     .expects("resolvePath")
                     .returns("/some/abs/path/jest.json");
@@ -58,10 +58,11 @@ describe("@pixeloven/cli", () => {
                 const context = await cli.run("test");
                 expect(context.commandName).toEqual("test");
                 expect(Stub.print.success.callCount).toEqual(1);
+                expect(Stub.print.warning.calledOnce).toEqual(false);
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
-            it("should succeed running tests without jest.json by warn", async () => {
+            it("should succeed running without jest.json by warn", async () => {
                 Mock.core.expects("resolvePath").returns(false);
                 Stub.system.spawn.resolves({
                     status: 0,

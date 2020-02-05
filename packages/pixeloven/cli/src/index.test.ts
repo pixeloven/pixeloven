@@ -1,9 +1,7 @@
-import { Sandbox } from "./testing";
-
+import sinon from "sinon";
 import * as main from "./main";
 
-const mockMain = Sandbox.mock(main).expects("default");
-
+const Sandbox = sinon.createSandbox();
 const caller = () => {
     require("./index");
 };
@@ -17,6 +15,7 @@ describe("@pixeloven/cli", () => {
             Sandbox.reset();
         });
         it("should execute main", () => {
+            const mockMain = Sandbox.mock(main).expects("default");
             caller();
             expect(mockMain.callCount).toEqual(1);
         });

@@ -56,11 +56,11 @@
     "document": "pixeloven document ts ./src",
     "generate": "pixeloven generate",
     "lint": "yarn lint:ts && yarn lint:scss",
-    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
-    "lint:scss": "pixeloven lint scss ./src/**/*.scss",
+    "lint:ts": "pixeloven lint ts --fix ./src/**/*.{ts,tsx}",
+    "lint:scss": "pixeloven lint scss --fix ./src/**/*.scss",
     "pretty": "yarn pretty:ts && yarn pretty:scss",
-    "pretty:ts": "pixeloven pretty ts ./src/**/*.{ts,tsx}",
-    "pretty:scss": "pixeloven pretty scss ./src/**/*.scss",
+    "pretty:ts": "pixeloven pretty ./src/**/*.{ts,tsx}",
+    "pretty:scss": "pixeloven pretty ./src/**/*.scss",
     "prebuild": "pixeloven delete dist",
     "precommit": "lint-staged",
     "predocument": "pixeloven delete docs",
@@ -70,17 +70,17 @@
     "start:story": "pixeloven story start",
     "test": "pixeloven test --color --coverage",
     "test:ci": "pixeloven test --ci --findRelatedTests",
-    "test:watch": "pixeloven test watch"
+    "test:watch": "pixeloven test --watch"
   },
   "lint-staged": {
     "src/**/*.{scss}": [
-      "yarn pixeloven pretty scss",
-      "yarn pixeloven lint scss",
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint scss --fix",
       "git add"
     ],
     "src/**/*.{ts,tsx}": [
-      "yarn pixeloven pretty ts",
-      "yarn pixeloven lint ts",
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint ts --fix",
       "git add"
     ]
   }

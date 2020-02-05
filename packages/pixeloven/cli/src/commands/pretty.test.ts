@@ -1,6 +1,6 @@
 import "jest";
 
-// import * as core from "@pixeloven-core/filesystem";
+import * as core from "@pixeloven-core/filesystem";
 import { build, print, system } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
@@ -12,9 +12,9 @@ const cli = build()
 
 const Sandbox = sinon.createSandbox();
 
-// const Mock = {
-//     core: Sandbox.mock(core),
-// };
+const Mock = {
+    core: Sandbox.mock(core),
+};
 
 const Stub = {
     print: Sandbox.stub(print),
@@ -38,38 +38,39 @@ describe("@pixeloven/cli", () => {
             afterEach(() => {
                 Sandbox.reset();
             });
-            it("should print error for missing task", async () => {
+            it("should print error when no arguments are provided", async () => {
                 const context = await cli.run("pretty");
                 expect(context.commandName).toEqual("pretty");
-                expect(Stub.print.error.callCount).toEqual(1);
-                expect(Stub.print.info.callCount).toEqual(1);
+                expect(Stub.print.error.calledOnce).toEqual(true);
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
-            it("should print error for invalid task", async () => {
-                const context = await cli.run("pretty wrong");
-                expect(context.commandName).toEqual("pretty");
-                expect(Stub.print.error.callCount).toEqual(1);
-                expect(Stub.print.info.callCount).toEqual(1);
-                expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+            it("should succeed running with prettier.json", async () => {
+                Mock.core.expects("resolvePath").returns(true);
+                Stub.system.spawn.resolves({
+                    status: 0,
+                });
+                const context = await cli.run("lint ts");
+                expect(context.commandName).toEqual("lint");
+                expect(Stub.system.spawn.calledOnce).toEqual(true);
+                expect(Stub.print.success.calledOnce).toEqual(true);
+                expect(Stub.print.warning.calledOnce).toEqual(false);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
-            // it("should warn if tslint.json is missing and succeed", async () => {
-            //     Mock.core
-            //         .expects("resolvePath")
-            //         .withArgs("tslint.json")
-            //         .returns(false);
-            //     Stub.system.spawn.resolves({
-            //         status: 0,
-            //     });
-            //     const context = await cli.run("lint ts");
-            //     expect(context.commandName).toEqual("lint");
-            //     expect(Stub.system.spawn.calledOnce).toEqual(true);
-            //     expect(Stub.print.success.calledOnce).toEqual(true);
-            //     expect(Stub.print.warning.calledOnce).toEqual(true);
-            //     expect(Stub.process.exit.calledOnce).toEqual(true);
-            //     expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
-            // });
+            it("should succeed running without prettier.json by warn", async () => {
+                Mock.core.expects("resolvePath").returns(false);
+                Stub.system.spawn.resolves({
+                    status: 0,
+                });
+                const context = await cli.run("lint ts");
+                expect(context.commandName).toEqual("lint");
+                expect(Stub.system.spawn.calledOnce).toEqual(true);
+                expect(Stub.print.success.calledOnce).toEqual(true);
+                expect(Stub.print.warning.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            });
         });
     });
 });

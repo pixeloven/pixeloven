@@ -42,6 +42,7 @@ describe("@pixeloven/cli", () => {
                 const context = await cli.run("document");
                 expect(context.commandName).toEqual("document");
                 expect(Stub.print.error.callCount).toEqual(1);
+                expect(Stub.print.warning.calledOnce).toEqual(false);
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });

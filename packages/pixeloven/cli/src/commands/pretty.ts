@@ -4,60 +4,17 @@ export default {
     name: "pretty",
     run: async (context: PixelOvenToolbox) => {
         let statusCode = 0;
-        const {
-            parameters,
-            pixelOven,
-            print,
-            prettier,
-            styleLint,
-            tsLint,
-        } = context;
-        const availableTasks = ["css", "scss", "ts", "tsx"];
-        const task = parameters.first;
-
-        if (!task) {
-            print.error(`Missing task`);
-            print.info(`Available  tasks are "css", "scss", "ts", or "tsx".`);
-            statusCode = 1;
-        } else if (!availableTasks.includes(task)) {
-            print.error(`Invalid argument ${task}`);
-            print.info(
-                `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
-            );
+        const { parameters, pixelOven, print, prettier } = context;
+        if (!parameters.first) {
+            print.error(`No arguments provided`);
             statusCode = 1;
         } else {
-            const argList = pixelOven.getArgList(task, parameters, {
+            const argList = pixelOven.getArgList(parameters.first, parameters, {
                 offset: 1,
                 type: "withOptions",
             });
-
-            const prettierResults = await prettier(argList);
-            statusCode = prettierResults.status;
-            if (statusCode) {
-                process.exit(statusCode);
-            }
-            switch (parameters.first) {
-                case "css":
-                case "scss": {
-                    const results = await styleLint(["--fix"].concat(argList));
-                    statusCode = results.status;
-                    break;
-                }
-                case "ts":
-                case "tsx": {
-                    const results = await tsLint(["--fix"].concat(argList));
-                    statusCode = results.status;
-                    break;
-                }
-                default: {
-                    print.error(`Invalid argument ${task}`);
-                    print.error(
-                        `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
-                    );
-                    statusCode = 1;
-                    break;
-                }
-            }
+            const results = await prettier(argList);
+            statusCode = results.status;
         }
         if (!statusCode) {
             print.success(`\nSuccess! Looks a lot nicer now doesn't it?!\n`);
