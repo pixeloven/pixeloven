@@ -4,7 +4,7 @@ import { PixelOvenToolbox, StyleLintExtension } from "../types";
 const fileName = "stylelint.json";
 
 export default (context: PixelOvenToolbox) => {
-    const styleLint: StyleLintExtension = async (args: string[] = []) => {
+    const styleLint: StyleLintExtension = async (args: string[]) => {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);
         if (configPath) {

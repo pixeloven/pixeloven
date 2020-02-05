@@ -7,7 +7,7 @@ const fileName = "tsconfig.json";
  * @todo Does tsc have a standalone I can import vs running as a child process?
  */
 export default (toolbox: PixelOvenToolbox) => {
-    async function tsc(args: string[] = []) {
+    async function tsc(args: string[]) {
         const { print, pixelOven } = toolbox;
         const configPath = resolvePath(fileName, false);
         const tscArgs = ["tsc", "--pretty"];

@@ -16,6 +16,7 @@ async function main(proc: NodeJS.Process) {
     /**
      * Add plugins
      * @param plugins
+     * @todo Try and replace with https://infinitered.github.io/gluegun/#/runtime?id=plugins
      */
     function addPlugins(plugins: string[]) {
         plugins.forEach(plugin => {

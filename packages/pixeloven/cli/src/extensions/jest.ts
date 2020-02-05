@@ -7,7 +7,7 @@ const fileName = "jest.json";
  * @todo Can we import and use jest as a library instead of running it's CLI?
  */
 export default (context: PixelOvenToolbox) => {
-    async function jest(args: string[] = []) {
+    async function jest(args: string[]) {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);
         const cmd = ["jest"];

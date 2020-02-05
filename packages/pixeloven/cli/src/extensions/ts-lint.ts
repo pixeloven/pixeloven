@@ -4,7 +4,7 @@ import { PixelOvenToolbox, TsLintExtension } from "../types";
 const fileName = "tslint.json";
 
 export default (context: PixelOvenToolbox) => {
-    const tsLint: TsLintExtension = async (args: string[] = []) => {
+    const tsLint: TsLintExtension = async (args: string[]) => {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);
         if (configPath) {

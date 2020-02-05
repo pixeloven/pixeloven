@@ -15,12 +15,12 @@ interface GetArgListOptions {
     type: "default" | "withOptions";
 }
 
-export type JestExtension = (args?: string[]) => Promise<RunResponse>;
-export type PrettierExtension = (args?: string[]) => Promise<RunResponse>;
-export type StyleLintExtension = (args?: string[]) => Promise<RunResponse>;
-export type TsLintExtension = (args?: string[]) => Promise<RunResponse>;
-export type TscExtension = (args?: string[]) => Promise<RunResponse>;
-export type TypeDocExtension = (args?: string[]) => Promise<RunResponse>;
+export type JestExtension = (args: string[]) => Promise<RunResponse>;
+export type PrettierExtension = (args: string[]) => Promise<RunResponse>;
+export type StyleLintExtension = (args: string[]) => Promise<RunResponse>;
+export type TsLintExtension = (args: string[]) => Promise<RunResponse>;
+export type TscExtension = (args: string[]) => Promise<RunResponse>;
+export type TypeDocExtension = (args: string[]) => Promise<RunResponse>;
 
 export type GetArgListFunction = (
     cmd: string,
