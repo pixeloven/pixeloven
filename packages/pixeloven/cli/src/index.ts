@@ -4,4 +4,4 @@ import main from "./main";
 /**
  * Start cli
  */
-main(process.argv);
+main(process);

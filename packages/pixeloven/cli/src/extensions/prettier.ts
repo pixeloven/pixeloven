@@ -4,7 +4,7 @@ import { PixelOvenToolbox } from "../types";
 const fileName = "prettier.json";
 
 export default (context: PixelOvenToolbox) => {
-    async function prettier(args: string[] = []) {
+    async function prettier(args: string[]) {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);
         const prettierArgs = ["prettier", "--write"];

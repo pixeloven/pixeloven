@@ -86,6 +86,25 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
+            it("should fail to document ts,tsx files", async () => {
+                Mock.core
+                    .expects("resolvePath")
+                    .withArgs("typedoc.json")
+                    .returns("/some/abs/path/typedoc.json");
+                Mock.core
+                    .expects("resolvePath")
+                    .withArgs("tsconfig.json")
+                    .returns("/some/abs/path/tsconfig.json");
+                Stub.system.spawn.resolves({
+                    status: 1,
+                });
+                const context = await cli.run("document tsx");
+                expect(context.commandName).toEqual("document");
+                expect(Stub.system.spawn.calledOnce).toEqual(true);
+                expect(Stub.print.error.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
+            });
         });
     });
 });

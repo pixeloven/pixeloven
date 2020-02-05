@@ -5,7 +5,7 @@ import { build, filesystem } from "gluegun";
  * Run CLI
  * @param argv
  */
-async function main(argv: string[]) {
+async function main(proc: NodeJS.Process) {
     /**
      * Create CLI builder
      */
@@ -16,6 +16,7 @@ async function main(argv: string[]) {
     /**
      * Add plugins
      * @param plugins
+     * @todo Try and replace with https://infinitered.github.io/gluegun/#/runtime?id=plugins
      */
     function addPlugins(plugins: string[]) {
         plugins.forEach(plugin => {
@@ -30,16 +31,13 @@ async function main(argv: string[]) {
     /**
      * Get plugins in the callers path
      */
-    const callingPath = filesystem.path(
-        process.cwd(),
-        "./node_modules",
-        "@pixeloven",
-    );
-    const callingPathPlugins = filesystem.subdirectories(callingPath);
-    addPlugins(callingPathPlugins);
+    const cwdPath = filesystem.path(proc.cwd(), "./node_modules", "@pixeloven");
+    const cwdPathPlugins = filesystem.subdirectories(cwdPath);
+    addPlugins(cwdPathPlugins);
 
     /**
      * Get plugins in the script path
+     * @todo what if this and the above are the same? Need a better way to handle lerna cases.
      */
     const scriptPath = filesystem.path(
         __dirname,
@@ -51,8 +49,11 @@ async function main(argv: string[]) {
     /**
      * Create CLI and return context
      */
-    const cli = builder.version().create();
-    const context = await cli.run(argv);
+    const cli = builder
+        .version()
+        .help()
+        .create();
+    const context = await cli.run(proc.argv);
     return context;
 }
 
