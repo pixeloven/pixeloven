@@ -54,7 +54,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
-            it("should warn if tslint.json is missing and succeed linting ts/tsx", async () => {
+            it("should warn if tslint.json is missing and succeed linting ts", async () => {
                 Mock.core.expects("resolvePath").returns(false);
                 Stub.system.spawn.resolves({
                     status: 0,
@@ -67,12 +67,48 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
-            it("should succeed linting ts/tsx with tslint.json", async () => {
+            it("should succeed linting ts with tslint.json", async () => {
                 Mock.core.expects("resolvePath").returns(true);
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
                 const context = await cli.run("lint ts");
+                expect(context.commandName).toEqual("lint");
+                expect(Stub.system.spawn.calledOnce).toEqual(true);
+                expect(Stub.print.success.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            });
+            it("should succeed linting tsx with tslint.json", async () => {
+                Mock.core.expects("resolvePath").returns(true);
+                Stub.system.spawn.resolves({
+                    status: 0,
+                });
+                const context = await cli.run("lint tsx");
+                expect(context.commandName).toEqual("lint");
+                expect(Stub.system.spawn.calledOnce).toEqual(true);
+                expect(Stub.print.success.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            });
+            it("should succeed linting js with tslint.json", async () => {
+                Mock.core.expects("resolvePath").returns(true);
+                Stub.system.spawn.resolves({
+                    status: 0,
+                });
+                const context = await cli.run("lint js");
+                expect(context.commandName).toEqual("lint");
+                expect(Stub.system.spawn.calledOnce).toEqual(true);
+                expect(Stub.print.success.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+            });
+            it("should succeed linting jsx with tslint.json", async () => {
+                Mock.core.expects("resolvePath").returns(true);
+                Stub.system.spawn.resolves({
+                    status: 0,
+                });
+                const context = await cli.run("lint jsx");
                 expect(context.commandName).toEqual("lint");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.calledOnce).toEqual(true);

@@ -1,5 +1,7 @@
 import { ErrorCode, PixelOvenToolbox } from "../types";
 
+const availableTasksString = `Available tasks are "css", "scss", "js", "jsx", "ts", or "tsx".`;
+
 export default {
     name: "lint",
     run: async (context: PixelOvenToolbox) => {
@@ -9,7 +11,7 @@ export default {
 
         if (!task) {
             print.error(`Missing task`);
-            print.info(`Available  tasks are "css", "scss", "ts", or "tsx".`);
+            print.info(availableTasksString);
             statusCode = ErrorCode.MissingTask;
         } else {
             const argList = pixelOven.getArgList(task, parameters, {
@@ -23,6 +25,8 @@ export default {
                     statusCode = results.status;
                     break;
                 }
+                case "js":
+                case "jsx":
                 case "ts":
                 case "tsx": {
                     const results = await tsLint(argList);
@@ -30,10 +34,8 @@ export default {
                     break;
                 }
                 default: {
-                    print.error(`Invalid argument ${task}`);
-                    print.info(
-                        `Available Lint tasks are "css", "scss", "ts", or "tsx".`,
-                    );
+                    print.error(`Invalid task: ${task}`);
+                    print.info(availableTasksString);
                     statusCode = ErrorCode.InvalidArgument;
                     break;
                 }
