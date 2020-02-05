@@ -30,7 +30,7 @@ describe("@pixeloven/cli-addon-storybook", () => {
             afterEach(() => {
                 Sandbox.reset();
             });
-            it("should exit with an error when no task is provided", async done => {
+            it("should exit with an error when no task is provided", async () => {
                 const context = await cli.run("story");
                 expect(context.commandName).toEqual("story");
                 expect(Stub.print.error.calledOnce).toEqual(true);
@@ -41,9 +41,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 ).toEqual(true);
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
-                done();
             });
-            it("should exit with an error when an invalid task is provided", async done => {
+            it("should exit with an error when an invalid task is provided", async () => {
                 const task = "wrong";
                 const context = await cli.run(`story ${task}`);
                 expect(context.commandName).toEqual("story");
@@ -55,9 +54,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 ).toEqual(true);
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
-                done();
             });
-            it("should exit with an error when a single invalid option is provided", async done => {
+            it("should exit with an error when a single invalid option is provided", async () => {
                 const task = "build";
                 const context = await cli.run(`story ${task} --wrong`);
                 expect(context.commandName).toEqual("story");
@@ -69,9 +67,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 ).toEqual(true);
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
-                done();
             });
-            it("should exit with an error when multiple invalid options are provided", async done => {
+            it("should exit with an error when multiple invalid options are provided", async () => {
                 const task = "build";
                 const context = await cli.run(`story ${task} --wrong --bad`);
                 expect(context.commandName).toEqual("story");
@@ -83,9 +80,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 ).toEqual(true);
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
-                done();
             });
-            it("should complete build", async done => {
+            it("should complete build", async () => {
                 Stub.common.storybook.resolves();
 
                 const task = "build";
@@ -93,9 +89,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 expect(context.commandName).toEqual("story");
                 expect(Stub.common.storybook.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledOnce).toEqual(false);
-                done();
             });
-            it("should complete start", async done => {
+            it("should complete start", async () => {
                 Stub.common.storybook.resolves();
 
                 const task = "start";
@@ -103,9 +98,8 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 expect(context.commandName).toEqual("story");
                 expect(Stub.common.storybook.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledOnce).toEqual(false);
-                done();
             });
-            it("should exit when storybook fails", async done => {
+            it("should exit when storybook fails", async () => {
                 Stub.common.storybook.throwsException("testing");
 
                 const task = "build";
@@ -114,7 +108,6 @@ describe("@pixeloven/cli-addon-storybook", () => {
                 expect(Stub.common.storybook.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledOnce).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
-                done();
             });
         });
     });
