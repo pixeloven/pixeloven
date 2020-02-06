@@ -10,16 +10,21 @@ export default (context: PixelOvenToolbox) => {
     async function styleLint(args: string[]) {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);
-        const stylelintArgs = ["stylelint", "--syntax", "scss"];
+        let stylelintArgs = ["stylelint", "--syntax", "scss"];
         if (configPath) {
-            stylelintArgs.concat(["--config", configPath, ...args]);
+            stylelintArgs = stylelintArgs.concat([
+                "--config",
+                configPath,
+                ...args,
+            ]);
         } else {
+            stylelintArgs = stylelintArgs.concat(args);
             print.warning(
                 `Unable to find "${fileName}" reverting to default configuration`,
             );
-            stylelintArgs.concat(args);
         }
-        return pixelOven.run(stylelintArgs);
+        const results = pixelOven.run(stylelintArgs);
+        return results;
     }
     context.styleLint = styleLint;
 };

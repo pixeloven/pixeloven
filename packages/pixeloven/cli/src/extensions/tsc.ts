@@ -14,10 +14,10 @@ export default (toolbox: PixelOvenToolbox) => {
         if (configPath) {
             tscArgs.concat(["--project", configPath, ...args]);
         } else {
+            tscArgs.concat(args);
             print.warning(
                 `Unable to find "${fileName}" reverting to default configuration`,
             );
-            tscArgs.concat(args);
         }
         const result = await pixelOven.run(tscArgs);
         return result;

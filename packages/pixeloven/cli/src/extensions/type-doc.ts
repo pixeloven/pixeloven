@@ -21,13 +21,13 @@ export default (context: PixelOvenToolbox) => {
         }
         const tsconfigConfigPath = resolvePath(tsconfigFileName, false);
         if (tsconfigConfigPath) {
-            typeDocArgs.concat(["--tsconfig", tsconfigConfigPath]);
+            typeDocArgs.concat(["--tsconfig", tsconfigConfigPath, ...args]);
         } else {
+            typeDocArgs.concat(args);
             print.warning(
                 `Unable to find "${tsconfigFileName}" reverting to default configuration`,
             );
         }
-        typeDocArgs.concat(args);
         const results = await pixelOven.run(typeDocArgs);
         return results;
     }

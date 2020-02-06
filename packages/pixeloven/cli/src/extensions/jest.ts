@@ -20,7 +20,8 @@ export default (context: PixelOvenToolbox) => {
                 `Unable to find "${fileName}" reverting to default configuration`,
             );
         }
-        return pixelOven.run(cmd.concat(args));
+        const results = pixelOven.run(cmd.concat(args));
+        return results;
     }
     context.jest = jest;
 };

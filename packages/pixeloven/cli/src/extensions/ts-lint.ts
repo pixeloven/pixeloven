@@ -9,10 +9,10 @@ export default (context: PixelOvenToolbox) => {
         const { print, pixelOven } = context;
         const tsLintPath = resolvePath(tsLintFileName, false);
         const tsConfigPath = resolvePath(tsConfigFileName, false);
-        const tslintArgs = ["tslint", "-t", "codeFrame"];
+        let tslintArgs = ["tslint", "-t", "codeFrame"];
         if (tsLintPath) {
             if (tsConfigPath) {
-                tslintArgs.concat([
+                tslintArgs = tslintArgs.concat([
                     "--config",
                     tsLintPath,
                     "--project",
@@ -20,15 +20,20 @@ export default (context: PixelOvenToolbox) => {
                     ...args,
                 ]);
             } else {
-                tslintArgs.concat(["--config", tsLintPath, ...args]);
+                tslintArgs = tslintArgs.concat([
+                    "--config",
+                    tsLintPath,
+                    ...args,
+                ]);
             }
         } else {
+            tslintArgs = tslintArgs.concat(args);
             print.warning(
                 `Unable to find "${tsLintPath}" reverting to default configuration`,
             );
-            tslintArgs.concat(args);
         }
-        return pixelOven.run(tslintArgs);
+        const results = await pixelOven.run(tslintArgs);
+        return results;
     }
     context.tsLint = tsLint;
 };
