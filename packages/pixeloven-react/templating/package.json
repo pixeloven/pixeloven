@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-react/templating",
-  "version": "6.0.0-beta.33",
+  "version": "6.0.0-rc.0",
   "description": "Defines simple react components and functionality to support server side rendering.",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -27,11 +27,11 @@
     "react-helmet": "6.0.0-beta"
   },
   "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-beta.33",
+    "@pixeloven-react/testing": "^6.0.0-rc.0",
     "@pixeloven-tooling/compiler": "^6.0.0-beta.32",
     "@pixeloven-tooling/linter": "^6.0.0-beta.33",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-beta.32",
+    "@pixeloven-tooling/test": "^6.0.0-rc.0",
     "lint-staged": "9.5.0"
   },
   "scripts": {
