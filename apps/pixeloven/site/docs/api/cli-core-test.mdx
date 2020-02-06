@@ -1,0 +1,92 @@
+---
+id: cli-core-test
+title: CLI Core Test
+---
+
+PixelOven's core CLI provides some basic out of the box commands for creating managing your project. The usages below assuming execution with yarn but npm and other package managers should work just as well.
+
+> Note: PixelOven's core CLI represents our own opinions on development and release processes. However, we also strive to provide more general alternatives for those looking for highly customized workflows. If something is missing please consider [contributing](/docs/contribution/intro) or dropping us a [recommendation or file a bug](https://github.com/pixeloven/pixeloven/issues).
+
+## Installation
+To install the core CLI simply run the following with NPM
+```sh
+npm install --save-dev @pixeloven/cli
+```
+or yarn
+```sh
+yarn add --dev @pixeloven/cli
+```
+
+## API Reference
+|API|Description|
+|---|---|
+|[`compile`](#cli-pixelovencompile)| CLI entry point for compiling with TypeScript. |
+|[`copy`](#cli-pixelovencopy)| CLI utility for copy specific static assets. |
+|[`delete`](#cli-pixelovendelete)| CLI utility for deleting specific directory paths. |
+|[`document`](#cli-pixelovendocument)| CLI entry point for generating type docs using TypeDoc. |
+|[`lint`](#cli-pixelovenlint)| CLI entry point for interfacing with TSLint & StyleLint. |
+|[`pretty`](#cli-pixelovenpretty)| CLI entry point for interfacing with Prettier. |
+|[`test`](#cli-pixeloventest)| CLI entry point for interfacing with Jest. |
+
+## CLI: PixelOven.Test
+> NOTICE: This feature will be removed from the core cli and become an addon in a future update.
+
+Test is a simple wrapper for testing JavaScript applications. It currently acts as proxy for the Jest compiler and comes with a dependecies to make it more compatible with TypeScript.
+
+### Jest
+> It is important to note that currently this feature expects a **jest.json** file to be present at the root of the package to configure the compiler.
+
+For reference on all the available configurations please review the [official documentation](https://jestjs.io/) for Jest. 
+
+#### Setup
+First be sure to create a **jest.json** file at the root of the project or in other words adjacent to the **package.json**.
+```json
+{
+    "bail": true,
+    "collectCoverageFrom": [
+        "!<rootDir>/**/*.stories.{js,jsx,ts,tsx}",
+        "!<rootDir>/**/*.test.{js,jsx,ts,tsx}",
+        "<rootDir>/**/*.{js,jsx,ts,tsx}"
+    ],
+    "coverageDirectory": "<rootDir>/../coverage",
+    "coverageThreshold": {
+        "global": {
+            "branches": 0,
+            "functions": 0,
+            "lines": 0,
+            "statements": 0
+        }
+    },
+    "moduleFileExtensions": [
+        "js",
+        "json",
+        "jsx",
+        "ts",
+        "tsx"
+    ],
+    "preset": "ts-jest",
+    "rootDir": "./src",
+    "testEnvironment": "node",
+    "testMatch": [
+        "<rootDir>/**/*.test.(j|t)s?(x)"
+    ],
+    "transform": {
+        "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+        "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+    ],
+    "verbose": true
+  }
+```
+
+#### Usage
+Once this has been confirmed all we have to do is run the following.
+```bash
+yarn run pixeloven test --watch
+```
+or perhaps as part of a CI workflow:
+```bash
+yarn run pixeloven test --ci --coverage
+```
+Jest has an extensive CLI and so it is recommended to review their documentation for all the available options. Proper configuration through **jest.json** is also highly recommended.

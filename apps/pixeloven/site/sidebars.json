@@ -5,7 +5,19 @@
       "getting-started/intro"
     ],
     "API": [
-      "api/cli",
+      {
+        "type": "category",
+        "label": "CLI Core",
+        "items": [
+          "api/cli-core-compile",
+          "api/cli-core-copy",
+          "api/cli-core-delete",
+          "api/cli-core-document",
+          "api/cli-core-lint",
+          "api/cli-core-pretty",
+          "api/cli-core-test"
+        ]
+      },
       "api/cli-addon-generators",
       "api/cli-addon-gh-pages",
       "api/cli-addon-storybook",

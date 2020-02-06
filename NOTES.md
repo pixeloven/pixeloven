@@ -60,6 +60,7 @@ Simply a list of ideas I throw down when I can't sleep
 * Webpack
     * Finish webpack for libraries 
     * Continue to break config in parts for reusability
+        * break babel and ts into separate packages (create babel only addon)
 
 ## Planned v7 Release
 * Express server
@@ -79,6 +80,7 @@ Simply a list of ideas I throw down when I can't sleep
 ## After v7 Release
 * Add support for PWA
 * Add static site generation support
+* Add MDX support
 * Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
 
 ## Planned v8 Release
