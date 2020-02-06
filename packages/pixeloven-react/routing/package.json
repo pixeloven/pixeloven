@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-react/routing",
-  "version": "6.0.0-rc.0",
+  "version": "6.0.0-rc.1",
   "description": "React Router configuration helpers and components",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -28,11 +28,11 @@
     "@pixeloven-react/common": ">=6.0.0-beta.25"
   },
   "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-rc.0",
-    "@pixeloven-tooling/compiler": "^6.0.0-beta.32",
-    "@pixeloven-tooling/linter": "^6.0.0-beta.33",
+    "@pixeloven-react/testing": "^6.0.0-rc.1",
+    "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
+    "@pixeloven-tooling/linter": "^6.0.0-rc.1",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-rc.0",
+    "@pixeloven-tooling/test": "^6.0.0-rc.1",
     "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
     "lint-staged": "9.5.0",
