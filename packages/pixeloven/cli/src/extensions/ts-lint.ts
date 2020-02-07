@@ -1,22 +1,23 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
 import { PixelOvenToolbox } from "../types";
 
-const fileName = "tslint.json";
+const tsLintFileName = "tslint.json";
 
 export default (context: PixelOvenToolbox) => {
     async function tsLint(args: string[]) {
         const { print, pixelOven } = context;
-        const configPath = resolvePath(fileName, false);
-        const tslintArgs = ["tslint", "-t", "codeFrame"];
-        if (configPath) {
-            tslintArgs.concat(["--config", configPath, ...args]);
+        const tsLintPath = resolvePath(tsLintFileName, false);
+        let tslintArgs = ["tslint", "-t", "codeFrame"];
+        if (tsLintPath) {
+            tslintArgs = tslintArgs.concat(["--config", tsLintPath, ...args]);
         } else {
+            tslintArgs = tslintArgs.concat(args);
             print.warning(
-                `Unable to find "${fileName}" reverting to default configuration`,
+                `Unable to find "${tsLintPath}" reverting to default configuration`,
             );
-            tslintArgs.concat(args);
         }
-        return pixelOven.run(tslintArgs);
+        const results = await pixelOven.run(tslintArgs);
+        return results;
     }
     context.tsLint = tsLint;
 };

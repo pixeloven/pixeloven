@@ -7,18 +7,20 @@ export default (context: PixelOvenToolbox) => {
     async function prettier(args: string[]) {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);
-        const prettierArgs = ["prettier", "--write"];
+        let prettierArgs = ["prettier", "--write"];
         if (configPath) {
-            prettierArgs.concat(["--config", configPath, ...args]);
+            prettierArgs = prettierArgs.concat([
+                "--config",
+                configPath,
+                ...args,
+            ]);
         } else {
-            prettierArgs.concat(args);
+            prettierArgs = prettierArgs.concat(args);
             print.warning(
                 `Unable to find "${fileName}" reverting to default configuration`,
             );
         }
-        const results = await pixelOven.run(
-            ["prettier", "--write"].concat(args),
-        );
+        const results = await pixelOven.run(prettierArgs);
         return results;
     }
     context.prettier = prettier;

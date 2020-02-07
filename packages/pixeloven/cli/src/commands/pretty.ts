@@ -10,7 +10,7 @@ export default {
             statusCode = 1;
         } else {
             const argList = pixelOven.getArgList(parameters.first, parameters, {
-                offset: 1,
+                offset: 0,
                 type: "withOptions",
             });
             const results = await prettier(argList);

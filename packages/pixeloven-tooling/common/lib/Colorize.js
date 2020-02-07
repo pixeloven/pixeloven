@@ -26,6 +26,11 @@ const Color = {
     BgWhite: "\x1b[47m"
 }
 
+/**
+ * Colorize string
+ * @param {*} color 
+ * @param {*} str 
+ */
 function colorize(color, str) {
     return `${color}${str}${Color.Reset}`;
 }
