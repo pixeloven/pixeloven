@@ -1,4 +1,13 @@
 /**
+ * Get object keys
+ * @param object
+ * @param type
+ */
+function getKeys<T>(object: T, type = "number") {
+    return Object.keys(object).filter(key => typeof object[key] === type);
+}
+
+/**
  * Cleanup and merge options
  * @todo Should generalize
  * @param defaults
@@ -36,4 +45,4 @@ function removeEmpty<T>(
         .reduce((res, key) => Object.assign(res, { [key]: input[key] }), {});
 }
 
-export { mergeOptions, removeEmpty };
+export { getKeys, mergeOptions, removeEmpty };
