@@ -1,0 +1,34 @@
+{
+    "name": "<%= props.projectName %>",
+    "author": "<%= props.projectAuthor %>",
+    "description": "<%= props.projectDescription %>",
+    "private": true,
+    "workspaces": [
+      "apps/*",
+      "packages/*"
+    ],
+    "devDependencies": {
+      "@pixeloven/cli": "6.0.0-rc.0",
+      "@pixeloven/cli-addon-generators": "6.0.0-rc.0",
+      "@pixeloven/cli-addon-storybook": "6.0.0-rc.0",
+      "@pixeloven/cli-addon-webpack": "6.0.0-rc.0",
+      "husky": "4.2.1",
+      "lerna": "3.20.2"
+    },
+    "scripts": {
+      "all:bootstrap": "yarn install && yarn all:compile && yarn all:linker",
+      "all:clean": "lerna clean --yes && rm -rf node_modules",
+      "all:compile": "lerna run --stream compile",
+      "all:linker": "lerna link",
+      "all:lint": "lerna run --stream lint",
+      "all:pretty": "lerna run --stream pretty",
+      "all:test": "lerna run --stream test",
+      "precommit": "lerna run --concurrency 1 --stream precommit"
+    }
+    "husky": {
+      "hooks": {
+        "pre-commit": "yarn precommit"
+      }
+    },
+  }
+  
