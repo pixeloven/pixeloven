@@ -1,5 +1,5 @@
 # @apps/integration
 
-> Pixel Oven integration test app
+> Pixel Oven integration testing
 
-Shows a very simple integration application for verifying the CLI
+Integration testing for the Core CLI
