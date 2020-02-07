@@ -1,5 +1,8 @@
 import { PixelOvenToolbox } from "../types";
 
+/**
+ * @todo Globbing inside yarn scripts seems to fail (even though lint works)
+ */
 export default {
     name: "pretty",
     run: async (context: PixelOvenToolbox) => {
@@ -10,7 +13,7 @@ export default {
             statusCode = 1;
         } else {
             const argList = pixelOven.getArgList(parameters.first, parameters, {
-                offset: 1,
+                offset: 0,
                 type: "withOptions",
             });
             const results = await prettier(argList);
