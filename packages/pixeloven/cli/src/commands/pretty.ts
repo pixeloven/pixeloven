@@ -1,8 +1,5 @@
 import { PixelOvenToolbox } from "../types";
 
-/**
- * @todo Globbing inside yarn scripts seems to fail (even though lint works)
- */
 export default {
     name: "pretty",
     run: async (context: PixelOvenToolbox) => {

@@ -41,7 +41,7 @@
     "lint-staged": "9.5.0"
   },
   "peerDependencies": {
-    "@pixeloven-storybook/common": ">=6.0.0-beta.32"
+    "@pixeloven-storybook/common": ">=6.0.0-rc.1"
   },
   "scripts": {
     "compile": "pixeloven-compiler ts",

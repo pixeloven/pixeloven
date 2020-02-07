@@ -10,13 +10,13 @@ Simply a list of ideas I throw down when I can't sleep
 * Clean up examples
     * abstract what I need from ssr example and gut the rest
     * finish dockerizing them
-* Remove commit-citizen from PO (maybe from pixeloven/ssr as well)
-    * Then just name space our commitlint better
-* Storybook
-    * storybook-addon-options is deprecated and will stop working soon
 
 ## After v6 Release
+* Storybook
+    * storybook-addon-options is deprecated and will stop working soon
 * Workflow
+    * Update base tooling to allow prettier to have full integration like the main CLI.
+    * Remove commit-citizen from PO (maybe from pixeloven/ssr as well)
     * Pre-commit stuff on examples and apps
     * Integration test system to verify CLI under a number of different conditions
         * Root of mono repo
@@ -47,7 +47,8 @@ Simply a list of ideas I throw down when I can't sleep
 * New CLI Addons
     * Break out typedoc feature
     * Break out the test feature (specifically jest)
-    * Create new commit CLI to support commit linting along side husky and lint-stage (Or just namespace our config better and integrate btter with @commitlint - can even propose integrations/prs)
+    * Create new commit CLI to support commit linting along side husky and lint-stage 
+        * namespace our config better and integrate with @commitlint
     * Finish github deploy CLI addon
 * Testing libraries
     * create common packages for some of our most common deps
@@ -60,6 +61,7 @@ Simply a list of ideas I throw down when I can't sleep
 * Webpack
     * Finish webpack for libraries 
     * Continue to break config in parts for reusability
+        * break babel and ts into separate packages (create babel only addon)
 
 ## Planned v7 Release
 * Express server
@@ -79,6 +81,7 @@ Simply a list of ideas I throw down when I can't sleep
 ## After v7 Release
 * Add support for PWA
 * Add static site generation support
+* Add MDX support
 * Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
 
 ## Planned v8 Release

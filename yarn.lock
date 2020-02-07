@@ -2495,6 +2495,19 @@
   dependencies:
     "@types/node" ">= 8"
 
+"@pixeloven/cli@6.0.0-beta.33":
+  version "6.0.0-beta.33"
+  resolved "https://registry.yarnpkg.com/@pixeloven/cli/-/cli-6.0.0-beta.33.tgz#870d0be4b0f8827990df5089731bcb5c5bd44c25"
+  integrity sha512-ANOLkQ5491HqvWAGxPGrj0ipjXNJVJ1KEvLWmNHja+ctnDQOcA+V2jwUprlIykcI8F71JRnj1n62Ja0kIRCxUA==
+  dependencies:
+    "@pixeloven-core/filesystem" "^6.0.0-beta.33"
+    "@pixeloven-tooling/compiler" "^6.0.0-beta.32"
+    "@pixeloven-tooling/linter" "^6.0.0-beta.33"
+    "@pixeloven-tooling/pretty" "^6.0.0-beta.26"
+    "@pixeloven-tooling/test" "^6.0.0-beta.32"
+    gluegun "4.1.2"
+    typedoc "0.15.7"
+
 "@reach/router@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@reach/router/-/router-1.2.1.tgz#34ae3541a5ac44fa7796e5506a5d7274a162be4e"

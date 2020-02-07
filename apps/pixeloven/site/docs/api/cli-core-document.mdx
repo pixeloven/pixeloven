@@ -1,0 +1,50 @@
+---
+id: cli-core-document
+title: CLI Core Document
+---
+## CLI: PixelOven.Document
+> NOTICE: This feature will be removed from the core cli and become an addon in a future update.
+
+Document is a wrapper for type doc and is therefore dependent on TypeScript. As such it follows a similar pattern as our own [Compile](#compile) cmd.
+
+### TypeScript
+> It is important to note that currently this feature expects both a **tsconfig.json** and **typedoc.json** file to be present at the root of the package for TypeDoc to run.
+
+|Argument|Description|
+|---|---|
+|`ts`| A proxy for the TypeDoc API with a few opinionated defaults for easier setup. |
+|`tsx`| An alias for `ts`. Implemented to help differentiate JSX based projects.|
+
+#### Options
+For reference on all the available options please review the [official documentation](https://typedoc.org/) for TypeDoc. 
+
+#### Setup
+First be sure to create a **tsconfig.json** file at the root of the project or in other words adjacent to the **package.json**.
+```json
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        "declarationDir": "./dist/types",
+        "outDir": "./dist/lib",
+    }
+}
+```
+Second make sure to have a configuration file for TypeDoc like seen below.
+```json
+{
+    "name": "@project/name",
+    "target": "es5",
+    "out": "docs",
+    "exclude": "*.{test}.{ts}",
+    "externalPattern": "**/node_modules/**",
+    "excludeExternals": true,
+    "includeDeclarations": true
+}
+```
+The above configuration files are not exhaustive examples but instead represents our recommendation for getting started. Please review the official documentation for more advanced configurations.
+
+#### Usage
+Once configured we can create our documentation from our source using a cmd similar what you see below.
+```bash
+yarn run pixeloven document ts ./src
+```
