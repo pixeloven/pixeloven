@@ -35,10 +35,10 @@ export default {
                 print.info(
                     "Please review our getting started section for existing projects https://www.pixeloven.com/docs/getting-started/intro",
                 );
-                return;
+                break;
             }
             case "New": {
-                return;
+                break;
             }
         }
         process.exit(statusCode);

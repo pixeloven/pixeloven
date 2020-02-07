@@ -1,5 +1,5 @@
 import "jest";
-import getArgList from "./get-arg-list";
+import getArgList from "./getArgList";
 
 const array = ["watch"];
 const options = {
