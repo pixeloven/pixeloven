@@ -19,7 +19,6 @@
         ]
       },
       "api/cli-addon-generators",
-      "api/cli-addon-gh-pages",
       "api/cli-addon-storybook",
       "api/cli-addon-webpack"
     ],

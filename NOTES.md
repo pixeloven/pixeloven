@@ -15,6 +15,7 @@ Simply a list of ideas I throw down when I can't sleep
 * Storybook
     * storybook-addon-options is deprecated and will stop working soon
 * Workflow
+    * Update base tooling to allow prettier to have full integration like the main CLI.
     * Remove commit-citizen from PO (maybe from pixeloven/ssr as well)
     * Pre-commit stuff on examples and apps
     * Integration test system to verify CLI under a number of different conditions
