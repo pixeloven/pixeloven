@@ -23,12 +23,6 @@ export default {
     run: async (toolbox: AddonGeneratorsToolbox) => {
         let statusCode = 0;
         const { createComponent, createPackage, print, prompt } = toolbox;
-        // todo create generator for library
-        // todo crete generator for addon
-        // todo crete generator for state
-        // Partial generators?
-        // Might need to ask questions about is this new or existing, App, CLI -> addon? Might need drop down like behavior
-
         /**
          * Starting generator type
          * @todo create CLI Addon, library, project generators
