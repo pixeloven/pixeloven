@@ -1,9 +1,9 @@
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
 export default {
     description: "Delete specific targeted build directories",
     name: "delete",
-    run: async (toolbox: PixelOvenToolbox) => {
+    run: async (toolbox: PixelOvenCoreToolbox) => {
         let statusCode = 0;
         const { filesystem, parameters, print } = toolbox;
         switch (parameters.first) {

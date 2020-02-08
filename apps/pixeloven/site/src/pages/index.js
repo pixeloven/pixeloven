@@ -86,7 +86,7 @@ function Home() {
                 To create a project called <i>my-app</i>, run this command:
               </p>
               <CodeBlock className="language-sh">
-                npx pixeloven init my-app
+                npx @pixeloven/cli init
               </CodeBlock>
               <br />
               <p>For new and existing projects please review our documentation for tips on <Link to={useBaseUrl('docs/getting-started/intro')}>getting started</Link>.</p>

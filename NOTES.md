@@ -4,7 +4,6 @@ Simply a list of ideas I throw down when I can't sleep
 ## Planned v6 Release
 * Onboarding
     * Finish getting started and API documentation
-    * Robust --help sections
     * Create generator for init and make compatible with npx (npx pixeloven init my-app) like create react app does.
     * Finish App and package generators
 * Clean up examples
