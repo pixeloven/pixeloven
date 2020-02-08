@@ -19,6 +19,7 @@ import {
  * @url https://github.com/SBoudrias/Inquirer.js/
  */
 export default {
+    description: "File generator addon",
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
         let statusCode = 0;

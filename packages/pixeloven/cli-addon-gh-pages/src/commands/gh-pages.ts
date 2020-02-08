@@ -1,6 +1,7 @@
 import { AddonGhPagesToolbox } from "../types";
 
 export default {
+    description: "GitHub publishing addon",
     name: "gh-pages",
     run: async (context: AddonGhPagesToolbox) => {
         let statusCode = 0;

@@ -49,6 +49,7 @@ function getOptions(option: string | boolean) {
 }
 
 export default {
+    description: "Webpack addon",
     name: "webpack",
     run: async (toolbox: AddonWebpackToolbox) => {
         let statusCode = 0;

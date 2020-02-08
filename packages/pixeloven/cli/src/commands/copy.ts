@@ -1,6 +1,7 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
+    description: "Copy files from source to destination",
     name: "copy",
     run: async (toolbox: PixelOvenToolbox) => {
         let statusCode = 0;

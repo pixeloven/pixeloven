@@ -1,6 +1,7 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
+    description: "Project formatter supported via Prettier",
     name: "pretty",
     run: async (context: PixelOvenToolbox) => {
         let statusCode = 0;

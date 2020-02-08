@@ -1,6 +1,7 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
+    description: "Auto document TypeScript via TypeDoc",
     name: "document",
     run: async (toolbox: PixelOvenToolbox) => {
         let statusCode = 0;

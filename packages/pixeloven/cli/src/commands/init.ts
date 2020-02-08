@@ -26,6 +26,7 @@ interface NewProjectOptions {
 }
 
 export default {
+    description: "PixelOven initializer",
     name: "init",
     run: async (toolbox: PixelOvenToolbox) => {
         const { prompt, print, template } = toolbox;

@@ -8,6 +8,7 @@ import {
  *  @todo: add "help" argument that prints available tasks and options
  */
 export default {
+    description: "Storybook addon",
     name: "story",
     run: async (toolbox: AddonStorybookToolbox) => {
         let statusCode = 0;
