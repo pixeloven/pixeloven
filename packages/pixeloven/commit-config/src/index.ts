@@ -1,7 +1,3 @@
-/**
- * @todo Make a single configuration file for both commit lint and commit citizen
- * @todo Make our issues text in the CLI Scope instead...
- */
 module.exports = {
     rules: {
         "body-leading-blank": [1, "always"],
