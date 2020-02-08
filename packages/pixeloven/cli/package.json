@@ -32,6 +32,7 @@
     "typedoc": "0.15.7"
   },
   "devDependencies": {
+    "copyfiles": "2.2.0",
     "lint-staged": "9.5.0"
   },
   "scripts": {
@@ -44,7 +45,8 @@
     "precommit": "lint-staged",
     "test": "pixeloven-test --color --coverage",
     "test:ci": "pixeloven-test --ci --coverage",
-    "test:watch": "pixeloven-test --watch"
+    "test:watch": "pixeloven-test --watch",
+    "postcompile": "copyfiles -u 2 src/templates/**/*.ejs dist/lib/templates"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
