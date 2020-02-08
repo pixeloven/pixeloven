@@ -32,34 +32,39 @@ export default {
 
         /**
          * @todo init should just create the basic project and then the generator addon is installed and can be run by the user to create apps and packages
-         * @param name
+         * @todo why does this not actually generate anything :(
+         * @todo need to make sure all paths are lower case
+         * @todo let's simplify tsconfig
+         * @todo Need to add all of our addon stuff
+         * @todo why does it assume /bu
+         * @param dist/lib/build/templates/ ????????????????????????????????????
          */
-        function generate(props: NewProjectOptions) {
+        async function generate(props: NewProjectOptions) {
             const { projectName } = props;
-            template.generate({
+            await template.generate({
                 props,
-                target: `${projectName}/apps/.gitkeep`,
-                template: ".gitkeep.ejs",
+                target: `${projectName.toLowerCase()}/apps/.gitkeep`,
+                template: "project/gitkeep.ejs",
             });
-            template.generate({
+            await template.generate({
                 props,
-                target: `${projectName}/packages/.gitkeep`,
-                template: ".gitkeep.ejs",
+                target: `${projectName.toLowerCase()}/packages/.gitkeep`,
+                template: "project/gitkeep.ejs",
             });
-            template.generate({
+            await template.generate({
                 props,
-                target: `${projectName}/lerna.json`,
-                template: "lerna.json.ejs",
+                target: `${projectName.toLowerCase()}/lerna.json`,
+                template: "project/lerna.json.ejs",
             });
-            template.generate({
+            await template.generate({
                 props,
-                target: `${projectName}/package.json`,
-                template: "package.json.ejs",
+                target: `${projectName.toLowerCase()}/package.json`,
+                template: "project/package.json.ejs",
             });
-            template.generate({
+            await template.generate({
                 props,
-                target: `${projectName}/tsconfig.json`,
-                template: "tsconfig.json.ejs",
+                target: `${projectName.toLowerCase()}/tsconfig.json`,
+                template: "project/tsconfig.json.ejs",
             });
         }
 
@@ -75,7 +80,7 @@ export default {
         const askNewProjectQuestions = [
             {
                 choices: getKeys(PackageManager),
-                message: `Which package manager do you prefer? `,
+                message: `Which package manager do you prefer?`,
                 name: "projectPackageManager",
                 suggest: PackageManager.Yarn,
                 type: "select",
@@ -113,7 +118,10 @@ export default {
                 const props = await prompt.ask<NewProjectOptions>(
                     askNewProjectQuestions,
                 );
-                generate(props);
+                await generate(props);
+                // @todo run npm/yarn install here.....
+                // @todo print messages about next steps for creating apps and packages!!!!
+                // @todo create app generator inn the addon...
                 break;
             }
         }
