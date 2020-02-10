@@ -5,6 +5,8 @@ title: PixelOven.Webpack
 
 [Webpack](https://webpack.js.org/) is in many regards a must have for large scale JS Application development. Through it's numerous extensions it also supports many other crucial aspects for web development. The goal of this addon is to abstract a lot of the complex configuration requred to get a solid workflow setup for large scale application development.
 
+This addon is meant to allow the CLI to use webpack as a bundler on top of a a TypeScript compiler. It includes many of the plugins and features expected from a fully production ready JavaScript application. Also included is a completely custom development server built to handle both client and server side  JavaScript development.
+
 ## Installation
 >Note: The currently version of this extension was specifically designed for creating server side rendered react applications. Though our ultimate goal is to provide a more general development platform we want to first nail this subset before conquering others.
 
@@ -22,35 +24,75 @@ yarn add --dev @pixeloven/cli-addon-webpack
 
 |API|Description|
 |---|---|
-|[`webpack`](#cli-pixelovenwebpack)| CLI entry point for interfacing with Webpack. |
+|[`webpack`](#cli-pixelovenwebpack)|CLI entry point for interfacing with Webpack.|
 
 Our webpack CLI Addon builds on top of webpack and many other supporting projects to create a system for developing and building JavaScript applications that scale. 
 
 |Argument|Required|Default|Description|
 |---|---|---|---|
-|`<task>`|Yes|N/A| Determines how to build Webpack. |
+|`<task>`|Yes|N/A|Determines how to build Webpack.|
 
 Based on the task provided Webpack will be built in one of two modes.
 
 |Argument|Description|
 |---|---|
-|`build`| Builds Webpack for production. |
-|`start`| Runs Webpack in watch mode for local development. |
+|`build`|Builds Webpack for production.|
+|`start`|Runs Webpack in watch mode for local development.|
 
 ### Options
+These options provide more general customization through webpack. For options specific to [Development](#development) or [Production](#production) builds can be found below.
+
 |Option|Default|Description|
 |---|---|---|
-|`--output-dir`| `./stories` | Output directory for static files. |
-|`--port`| `9001` | Port for hosting Webpack in watch mode. |
-|`--quiet`| `false` | Whether Webpack should log to console or not. |
+|`--allow-externals`|`false`|Allows bundling of external dependencies. This is automatic for client builds. Node/Server builds require this to be passed explicitly.|
+|`--path`|`/`|Public path an application will be mounted at. Generally the default value is recommended.|
+|`--source-map`|`false`|Sets a flag for webpack to include source mapping.|
+
+#### Build Options
+|Option|Default|Description|
+|---|---|---|
+|`--profile`|`false`|Sets a flag for webpack to output "records" with profiling.|
+|`--stats`|`false`|Output static "stats" via `webpack-bundle-analyzer`.|
+|`--stats-dir`|`./stats`|Provides directory path for stats output. Generally the default value is recommended.|
+
+#### Start Options
+|Option|Default|Description|
+|---|---|---|
+|`--development`|`false`|Tells Webpack to run in development mode. The default is "production".|
+|`--host`|`localhost`|Host development server will be running on. Generally the default value is recommended.|
+|`--ignored`|`/node_modules/`|Defines a pattern for ignoring paths for file watching.|
+|`--path`|`false`|Sets a flag for webpack to output "records" with profiling and stats.|
+|`--poll`|`500`|Set polling frequency. `false` signifies no polling. Generally the default value is recommended.|
+|`--port`|`8080`|Port to bind development server to.|
+|`--protocol`|`http`|Expected protocol for development server.|
+|`--stats`|`false`|Run "stats" via `webpack-bundle-analyzer` in a hosted server.|
+|`--stats-host`|`false`|Host stats server will be running on. Generally the default value is recommended.|
+|`--stats-port`|`8081+1`|Sets the base port for both client and server "stats" using `webpack-bundle-analyzer`. Requires two consecutive open ports.|
+
+It is recommended to keep polling on for cross platform purposes. File watching can be CPU intensive if a system falls back to **fs.watchFile** versus utilizing file system events with fs.watch. This is common on linux environments.
+
 
 ### Usage
 To run Webpack in development/watch mode on a specific port you.
 ```bash
-yarn run pixeloven story start --port 9080
+yarn run pixeloven webpack start \
+    --client ./src/client/index.tsx \
+    --server ./src/server/index.ts \
+    --allow-externals \
+    --development \
+    --source-map \
+    --host localhost \ 
+    --path / \
+    --port 8080 \ 
+    --protocol http 
 ```
-Or build Webpack for hosting as a static site.
+Or build with Webpack for production.
 ```bash
-yarn run pixeloven build start --output-dir ./site
+yarn run pixeloven webpack build \
+    --client ./src/client/index.tsx \
+    --server ./src/server/index.ts \
+    --allow-externals \
+    --stats \
+    --path /
 ```
 Of course you can also just use the default values which are recommended.
