@@ -31,7 +31,7 @@ describe("@pixeloven/cli-addon-generators", () => {
             afterAll(() => {
                 Sandbox.restore();
             });
-            it("should print info fo existing projects", async () => {
+            it("should print info for existing projects", async () => {
                 Stub.prompt.ask.resolves({
                     generatorType: "App",
                 });
