@@ -1,9 +1,12 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
 const fileName = "prettier.json";
 
-export default (context: PixelOvenToolbox) => {
+/**
+ * @todo Prettier has a standalone we can use instead
+ */
+export default (context: PixelOvenCoreToolbox) => {
     async function prettier(args: string[]) {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);

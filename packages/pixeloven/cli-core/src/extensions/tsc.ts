@@ -1,12 +1,12 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
 const fileName = "tsconfig.json";
 
 /**
  * @todo Does tsc have a standalone I can import vs running as a child process?
  */
-export default (toolbox: PixelOvenToolbox) => {
+export default (toolbox: PixelOvenCoreToolbox) => {
     async function tsc(args: string[]) {
         const { print, pixelOven } = toolbox;
         const configPath = resolvePath(fileName, false);

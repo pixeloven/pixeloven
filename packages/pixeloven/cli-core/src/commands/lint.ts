@@ -1,11 +1,11 @@
-import { ErrorCode, PixelOvenToolbox } from "../types";
+import { ErrorCode, PixelOvenCoreToolbox } from "../types";
 
 const availableTasksString = `Available tasks are "css", "scss", "js", "jsx", "ts", or "tsx".`;
 
 export default {
     description: "Project linter supporting typescript, scss and css",
     name: "lint",
-    run: async (context: PixelOvenToolbox) => {
+    run: async (context: PixelOvenCoreToolbox) => {
         let statusCode = 0;
         const { parameters, pixelOven, print, styleLint, tsLint } = context;
         const task = parameters.first;

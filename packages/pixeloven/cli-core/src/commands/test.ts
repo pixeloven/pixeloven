@@ -1,9 +1,9 @@
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
 export default {
     description: "Test runner interface",
     name: "test",
-    run: async (context: PixelOvenToolbox) => {
+    run: async (context: PixelOvenCoreToolbox) => {
         let statusCode = 0;
         const { parameters, pixelOven, print, jest } = context;
         const argList = pixelOven.getArgList("test", parameters, {

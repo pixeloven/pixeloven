@@ -1,5 +1,5 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
 const typeDocFileName = "typedoc.json";
 const tsconfigFileName = "tsconfig.json";
@@ -7,7 +7,7 @@ const tsconfigFileName = "tsconfig.json";
 /**
  * @todo Does typedoc have a standalone I can import vs running as a child process?
  */
-export default (context: PixelOvenToolbox) => {
+export default (context: PixelOvenCoreToolbox) => {
     async function typeDoc(args: string[] = []) {
         const { print, pixelOven } = context;
         const typeDocArgs = ["typedoc"];

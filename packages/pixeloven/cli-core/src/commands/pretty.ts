@@ -1,9 +1,9 @@
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
 export default {
     description: "Project formatter supported via Prettier",
     name: "pretty",
-    run: async (context: PixelOvenToolbox) => {
+    run: async (context: PixelOvenCoreToolbox) => {
         let statusCode = 0;
         const { parameters, pixelOven, print, prettier } = context;
         if (!parameters.first) {
