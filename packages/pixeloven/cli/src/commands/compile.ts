@@ -1,6 +1,7 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
+    description: "TypeScript compiler interface",
     name: "compile",
     run: async (toolbox: PixelOvenToolbox) => {
         let statusCode = 0;

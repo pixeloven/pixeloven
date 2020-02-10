@@ -31,6 +31,10 @@ Simply a list of ideas I throw down when I can't sleep
         * "tslint-eslint-rules",
         * "tslint-react",
         * "tslint-react-hooks"
+    * Generators
+        * create generator for library
+        * crete generator for addon
+        * Partial generators for existing projects???
     * Consolidate lerna's conventional-changelog-angular with the one here????
 * Document
     * Finish advanced guides and contribution docs

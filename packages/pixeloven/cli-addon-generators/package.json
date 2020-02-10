@@ -18,6 +18,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@pixeloven-core/common": "^6.0.0-rc.1",
     "@pixeloven-core/validation": "^6.0.0-rc.1",
     "@pixeloven/cli": "^6.0.0-rc.4"
   },
@@ -26,7 +27,7 @@
     "@pixeloven-tooling/linter": "^6.0.0-rc.1",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
     "@pixeloven-tooling/test": "^6.0.0-rc.1",
-    "copyfiles": "2.1.1",
+    "copyfiles": "2.2.0",
     "lint-staged": "9.5.0"
   },
   "scripts": {

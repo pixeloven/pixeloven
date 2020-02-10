@@ -1,8 +1,20 @@
 /**
+ * Get object keys
+ * @param object
+ * @param type
+ *
+ * @todo Make this more flexible so it can filter by 0,1, many
+ */
+function getKeys<T>(object: T, type = "number") {
+    return Object.keys(object).filter(key => typeof object[key] === type);
+}
+
+/**
  * Cleanup and merge options
- * @todo Should generalize
  * @param defaults
  * @param options
+ *
+ * @todo Should generalize and all any number of arguments
  */
 function mergeOptions<T>(defaults: T, options: Partial<T>): T {
     Object.keys(options).forEach(key => {
@@ -36,4 +48,4 @@ function removeEmpty<T>(
         .reduce((res, key) => Object.assign(res, { [key]: input[key] }), {});
 }
 
-export { mergeOptions, removeEmpty };
+export { getKeys, mergeOptions, removeEmpty };

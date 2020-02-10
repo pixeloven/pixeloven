@@ -1,6 +1,7 @@
 import { PixelOvenToolbox } from "../types";
 
 export default {
+    description: "Test runner interface",
     name: "test",
     run: async (context: PixelOvenToolbox) => {
         let statusCode = 0;

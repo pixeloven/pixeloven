@@ -20,24 +20,27 @@ const Stub = {
 };
 
 /**
- * @todo Can we mock the extensions for now to at least get coverage on the command logic?
+ * @todo https://shift.infinite.red/integration-testing-interactive-clis-93af3cc0d56f
+ * @todo Can't test this since templates is not able to be mocked.
+ *         - https://github.com/ductiletoaster/gluegun/blob/master/src/index.ts#L33
+ *         - Alternative here would be to mock out the file system and make this closer to a true integration test
  */
-describe("@pixeloven/cli-addon-generators", () => {
+describe("@pixeloven/cli", () => {
     describe("commands", () => {
-        describe("webpack", () => {
-            afterEach(() => {
-                Sandbox.reset();
-            });
+        describe("init", () => {
             afterAll(() => {
                 Sandbox.restore();
             });
+            afterEach(() => {
+                Sandbox.reset();
+            });
             it("should print info fo existing projects", async () => {
                 Stub.prompt.ask.resolves({
-                    generatorType: "App",
+                    projectType: "Existing",
                 });
 
-                const context = await cli.run("generate");
-                expect(context.commandName).toEqual("generate");
+                const context = await cli.run("init");
+                expect(context.commandName).toEqual("init");
                 expect(Stub.prompt.ask.callCount).toEqual(1);
                 expect(Stub.print.info.callCount).toEqual(1);
                 expect(Stub.process.exit.called).toEqual(true);

@@ -2,6 +2,7 @@
  * @todo Remove as any once https://github.com/infinitered/gluegun/pull/564 is merged
  */
 /* tslint:disable no-any */
+import { getKeys } from "@pixeloven-core/common";
 import * as Validation from "@pixeloven-core/validation";
 import {
     AddonGeneratorsToolbox,
@@ -18,34 +19,16 @@ import {
  * @url https://github.com/SBoudrias/Inquirer.js/
  */
 export default {
+    description: "File generator addon",
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
         let statusCode = 0;
         const { createComponent, createPackage, print, prompt } = toolbox;
-        // todo create generator for library
-        // todo crete generator for addon
-        // todo crete generator for state
-        // Partial generators?
-        // Might need to ask questions about is this new or existing, App, CLI -> addon? Might need drop down like behavior
-
-        function getKeys<T>(object: T) {
-            return Object.keys(object).filter(
-                key => typeof object[key] === "number",
-            );
-        }
-
         /**
          * Starting generator type
          * @todo create CLI Addon, library, project generators
          */
         const askCreateQuestions = [
-            // {
-            //     choices: getKeys(ProjectType),
-            //     filter: (txt: string) => !!ProjectType[txt],
-            //     message: 'Is this a new or existing project?',
-            //     name: 'isNewProject',
-            //     type: 'select',
-            // },
             {
                 choices: getKeys(GeneratorType),
                 message: "What would you like to generate?",
