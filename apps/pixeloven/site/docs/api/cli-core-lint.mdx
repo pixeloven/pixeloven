@@ -1,22 +1,22 @@
 ---
 id: cli-core-lint
-title: CLI Core Lint
+title: PixelOven.Lint
 ---
-## CLI: PixelOven.Lint
+## Overview
 The Lint API provides a proxy for TsLint as well as StyleLint for handling linting for SCSS, CSS, JavaScript and TypeScript.
 
-### Styles
+## Styles
 |Argument|Description|
 |---|---|
 |`css`| An alias for `scss`. Implemented to help differentiate CSS from SCSS.|
 |`scss`| A proxy for the StyleLint linter with a few opinionated defaults for easier setup. |
 
-#### Options
+### Options
 For reference on all the available options please review the [official documentation](https://stylelint.io/) for StyleLint. 
 
 > It is important to note that currently this feature expects a **stylelint.json** file to be present at the root of the package to configure the compiler.
 
-#### Setup
+### Setup
 First be sure to create a **stylelint.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -26,7 +26,7 @@ First be sure to create a **stylelint.json** file at the root of the project or 
 ```
 PixelOven by default provides [stylelint-config-recommended-scss](https://github.com/kristerkari/stylelint-config-recommended-scss) as a dependency and highly recommends using this as a starting point for all SCSS based projects.
 
-#### Usage
+### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
 yarn run pixeloven lint scss
@@ -37,7 +37,7 @@ yarn run pixeloven lint scss ./src/index.scss
 ```
 StyleLint options can be passed through the CLI but it is highly recommended that this behavior be managed with in a **stylelint.json** file.
 
-### TypeScript
+## TypeScript
 > It is important to note that currently this feature expects a **tslint.json** file to be present at the root of the package to configure the compiler.
 
 |Argument|Description|
@@ -45,10 +45,10 @@ StyleLint options can be passed through the CLI but it is highly recommended tha
 |`ts`| A proxy for the TSLint linter with a few opinionated defaults for easier setup. |
 |`tsx`| An alias for `ts`. Implemented to help differentiate JSX based projects.|
 
-#### Options
+### Options
 For reference on all the available options please review the [official documentation](https://palantir.github.io/tslint/) for TSLint. 
 
-#### Setup
+### Setup
 First be sure to create a **tslint.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -62,7 +62,7 @@ First be sure to create a **tslint.json** file at the root of the project or in 
 ```
 PixelOven by default provides [tslint-config-prettier](https://github.com/prettier/tslint-config-prettier) for compatibility between TSLint and Prettier as well as [tslint-eslint-rules](https://github.com/buzinas/tslint-eslint-rules) to match rules against ESLint.
 
-#### Usage
+### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
 yarn run pixeloven lint ts

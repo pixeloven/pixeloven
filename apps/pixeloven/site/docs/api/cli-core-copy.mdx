@@ -1,11 +1,12 @@
 ---
 id: cli-core-copy
-title: CLI Core Copy
+title: PixelOven.Copy
 ---
-## CLI: PixelOven.Copy
+
+## Overview
 Copy is a utility API that helps copy static assets from src directories into a distribution directory. This can be useful for when developing component libraries that depend on static components throughout the development life cycle.
 
-### By Pattern
+## By Pattern
 |Argument|Required|Default|Description|
 |---|---|---|---|
 |`<source>`| Yes | **N/A** | Source path directory to copy from |
@@ -14,7 +15,7 @@ Copy is a utility API that helps copy static assets from src directories into a 
 
 There are three arguments available for copy files. All paths and patterns are relative to where the command is invoked.
 
-#### Usage
+### Usage
 While source is a required field both dest and the given pattern are not. Source generally is a path but can also be one of a few keywords. 
 ```bash
 yarn run pixeloven copy <source> <dest[optional]> <pattern[optional]>
@@ -22,12 +23,12 @@ yarn run pixeloven copy <source> <dest[optional]> <pattern[optional]>
 More information about these `<source>` keywords can be found in our [Shortcuts](#shortcuts) section below.
 
 When `<source>` is not one of the args from above, `copy` will attempt to copy all contents of the source path/file to the provided dest path/file.
-```
+```bash
 yarn run pixeloven copy /work/dir/file.txt /dist/lib/custom/dir/file.txt
 ```
 
 Optionally we can provide a pattern to match specific file types against when copying between two locations.
-```
+```bash
 yarn run pixelove copy /work/dir /dist/lib **.tsx
 ```
 A common pattern where this might be used is as a post command hook after a compilation step has completed.
@@ -38,9 +39,8 @@ A common pattern where this might be used is as a post command hook after a comp
 }
 ```
 
-
-### Shortcuts
-> Note: The shortcuts listed below are based on our own opinions for directory structure. They are provided as a convenience
+## Shortcuts
+> Note: The shortcuts listed below are based on our own opinions for directory structure. They are provided as a convenience.
 |Argument|Description|
 |---|---|
 |`ico`| Copies `.ico` files |
@@ -50,7 +50,7 @@ A common pattern where this might be used is as a post command hook after a comp
 
 All files in all subdirectories relative to where the command is run that have the file extension matching that of the above keywords will be copied to a default `./disb/lib` directory. If the source provided is of an existing directory or file path, `copy` will attempt to copy all *contents* of the provided source path to a default `./dist/lib` 
 
-#### Usage
+### Usage
 The general pattern for these shortcuts follows the below pattern.
 ```
 yarn run pixeloven copy <source>

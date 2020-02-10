@@ -1,19 +1,16 @@
 ---
 id: cli-core-pretty
-title: CLI Core Pretty
+title: PixelOven.Pretty
 ---
 
-## CLI: PixelOven.Pretty
+## Overview
 The Pretty API provides a proxy for Prettier while providing a light abstraction for configuration. Prettier's own auto-fixing features help maintain code compliance and reduce friction between developers around formatting.
 
-### General
+## Prettier
 
-Prettier supports multiple languages out of the gate. As a result unlike [CLI: PixelOven.Lint](cli-pixelovenlint) this CLI has no need for arguments to be passed to handle for different languages.
+Prettier supports multiple languages out of the gate. As a result unlike [CLI: PixelOven.Lint](/docs/api/cli-core-lint) this CLI has no need for arguments to be passed to handle for different languages.
 
-#### Options
-For reference on all the available options please review the [official documentation](https://prettier.io/) for Prettier. 
-
-#### Setup
+### Setup
 First be sure to create a **prettier.json** file at the root of the project or in other words adjacent to the **package.json**.
 ```json
 {
@@ -23,7 +20,10 @@ First be sure to create a **prettier.json** file at the root of the project or i
 ```
 > It is important to note that PixelOven makes a few assumptions for ease integration and will default to Prettier's own default values if a config is not provided. The CLI will warn if this configuration is missing.
 
-#### Usage
+### Options
+For reference on all the available options please review the [official documentation](https://prettier.io/) for Prettier. 
+
+### Usage
 Once this has been confirmed all we have to do is run the following.
 ```bash
 yarn run pixeloven pretty
