@@ -37,12 +37,10 @@ Example of usage in `package.json`
   },
   "lint-staged": {
     "src/**/*.{scss}": [
-      "pixeloven-linter scss",
-      "git add"
+      "pixeloven-linter scss"
     ],
     "src/**/*.{ts,tsx}": [
-      "pixeloven-linter ts",
-      "git add"
+      "pixeloven-linter ts"
     ]
   }
 }

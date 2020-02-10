@@ -43,13 +43,11 @@
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
       "yarn pixeloven pretty",
-      "yarn pixeloven lint ts --fix",
-      "git add"
+      "yarn pixeloven lint ts --fix"
     ],
     "src/**/*.scss": [
       "yarn pixeloven pretty",
-      "yarn pixeloven lint scss --fix",
-      "git add"
+      "yarn pixeloven lint scss --fix"
     ]
   }
 }

@@ -54,8 +54,7 @@
     "src/**/*.{ts,tsx}": [
       "pixeloven-pretty",
       "pixeloven-linter ts --fix",
-      "pixeloven-linter ts",
-      "git add"
+      "pixeloven-linter ts"
     ]
   }
 }
