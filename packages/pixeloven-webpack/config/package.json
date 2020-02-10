@@ -61,7 +61,7 @@
     "@types/webpack-bundle-analyzer": "2.13.3",
     "@types/webpack-manifest-plugin": "2.1.0",
     "@types/webpack-node-externals": "1.7.0",
-    "lint-staged": "9.5.0"
+    "lint-staged": "10.0.7"
   },
   "scripts": {
     "compile": "pixeloven-compiler ts",
@@ -69,7 +69,7 @@
     "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
-    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-pretty src/**/*.{ts,tsx}",
     "precommit": "lint-staged",
     "test": "pixeloven-test --color --coverage",
     "test:ci": "pixeloven-test --ci --coverage",
@@ -77,7 +77,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty ts",
+      "pixeloven-pretty",
       "pixeloven-linter ts --fix",
       "pixeloven-linter ts",
       "git add"

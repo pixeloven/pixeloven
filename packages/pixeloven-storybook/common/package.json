@@ -41,7 +41,7 @@
     "@pixeloven-tooling/linter": "^6.0.0-rc.1",
     "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
     "@pixeloven-tooling/test": "^6.0.0-rc.1",
-    "lint-staged": "9.5.0"
+    "lint-staged": "10.0.7"
   },
   "scripts": {
     "compile": "pixeloven-compiler ts",
@@ -49,7 +49,7 @@
     "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
     "pretty": "yarn pretty:ts",
-    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
+    "pretty:ts": "pixeloven-pretty src/**/*.{ts,tsx}",
     "precommit": "lint-staged",
     "test": "pixeloven-test --color --coverage",
     "test:ci": "pixeloven-test --ci --coverage",
@@ -57,7 +57,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty ts",
+      "pixeloven-pretty",
       "pixeloven-linter ts --fix",
       "pixeloven-linter ts",
       "git add"

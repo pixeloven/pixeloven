@@ -28,7 +28,7 @@ Example of usage in `package.json`
 {
   "devDependencies": {
     "@pixeloven-tooling/linter": "6.0.0",
-    "lint-staged": "9.5.0"
+    "lint-staged": "10.0.7"
   },
   "scripts": {
     "lint": "yarn lint:ts && yarn lint:scss",

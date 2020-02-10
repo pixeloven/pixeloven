@@ -28,20 +28,20 @@ Example of usage in `package.json`
 {
   "devDependencies": {
     "@pixeloven-tooling/pretty": "6.0.0",
-    "lint-staged": "9.5.0"
+    "lint-staged": "10.0.7"
   },
   "scripts": {
     "pretty": "yarn pretty:ts && yarn pretty:scss",
-    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
-    "pretty:scss": "pixeloven-pretty scss src/**/*.{scss}"
+    "pretty:ts": "pixeloven-pretty src/**/*.{ts,tsx}",
+    "pretty:scss": "pixeloven-pretty src/**/*.{scss}"
   },
   "lint-staged": {
     "src/**/*.{scss}": [
-      "pixeloven-pretty scss",
+      "pixeloven-pretty",
       "git add"
     ],
     "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty ts",
+      "pixeloven-pretty",
       "git add"
     ]
   }

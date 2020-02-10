@@ -17,7 +17,7 @@
   "private": true,
   "devDependencies": {
     "@pixeloven/cli": "6.0.0-rc.0",
-    "lint-staged": "9.5.0"
+    "lint-staged": "10.0.7"
   },
   "scripts": {
     "compile": "pixeloven compile ts",
