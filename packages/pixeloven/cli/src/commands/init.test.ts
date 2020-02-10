@@ -34,7 +34,7 @@ describe("@pixeloven/cli", () => {
             afterEach(() => {
                 Sandbox.reset();
             });
-            it("should print info fo existing projects", async () => {
+            it("should print info for existing projects", async () => {
                 Stub.prompt.ask.resolves({
                     projectType: "Existing",
                 });
