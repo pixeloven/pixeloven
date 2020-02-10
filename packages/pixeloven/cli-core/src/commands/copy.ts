@@ -1,9 +1,9 @@
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
 export default {
     description: "Copy files from source to destination",
     name: "copy",
-    run: async (toolbox: PixelOvenToolbox) => {
+    run: async (toolbox: PixelOvenCoreToolbox) => {
         let statusCode = 0;
         const { filesystem, parameters, print } = toolbox;
         switch (parameters.first) {

@@ -1,7 +1,7 @@
 import { getArgList, run } from "../toolbox";
-import { PixelOvenToolbox } from "../types";
+import { PixelOvenCoreToolbox } from "../types";
 
-export default (toolbox: PixelOvenToolbox) => {
+export default (toolbox: PixelOvenCoreToolbox) => {
     toolbox.pixelOven = {
         getArgList,
         run,

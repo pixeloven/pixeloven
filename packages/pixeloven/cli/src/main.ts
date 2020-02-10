@@ -20,7 +20,7 @@ async function main(proc: NodeJS.Process) {
      */
     function addPlugins(plugins: string[]) {
         plugins.forEach(plugin => {
-            if (plugin.includes("cli-addon")) {
+            if (plugin.includes("cli-core") || plugin.includes("cli-addon")) {
                 builder.plugin(
                     filesystem.path(fs.realpathSync(plugin), "./dist/lib"),
                 );
