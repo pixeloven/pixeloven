@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-express/middleware-asset-manifest",
-    "version": "6.0.0-rc.1",
+    "version": "6.0.0-rc.5",
     "description": "Express middleware for reading an asset manifest",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,10 +18,10 @@
         "access": "public"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.1",
-        "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-        "@pixeloven-tooling/test": "^6.0.0-rc.1",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.5",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.5",
+        "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
+        "@pixeloven-tooling/test": "^6.0.0-rc.5",
         "@types/express": "4.17.0",
         "@types/supertest": "2.0.8",
         "lint-staged": "10.0.7",

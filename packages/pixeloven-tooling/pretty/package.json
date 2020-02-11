@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-tooling/pretty",
-  "version": "6.0.0-rc.1",
+  "version": "6.0.0-rc.5",
   "description": "Prettier abstraction for PixelOven's workflow",
   "bin": {
     "pixeloven-pretty": "./bin/index.js"
@@ -16,7 +16,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pixeloven-tooling/common": "^6.0.0-rc.1",
+    "@pixeloven-tooling/common": "^6.0.0-rc.5",
     "prettier": "1.19.1"
   }
 }
