@@ -19,7 +19,9 @@ yarn add --dev @pixeloven/cz-simplified-changelog
 ```
 
 ## Usage
+
 Example of usage in `package.json`
+
 ```json
   "config": {
     "commitizen": {

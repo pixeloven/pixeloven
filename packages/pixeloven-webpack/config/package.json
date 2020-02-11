@@ -1,84 +1,87 @@
 {
-  "name": "@pixeloven-webpack/config",
-  "version": "6.0.0-rc.1",
-  "description": "Webpack configuration for client and server",
-  "main": "dist/lib/index.js",
-  "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "homepage": "https://www.pixeloven.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixeloven/pixeloven.git"
-  },
-  "author": "Brian Gebel",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "@pixeloven-core/common": "^6.0.0-rc.1",
-    "@pixeloven-core/env": "^6.0.0-rc.1",
-    "@pixeloven-core/filesystem": "^6.0.0-rc.1",
-    "@pixeloven-core/logger": "^6.0.0-rc.1",
-    "@pixeloven-webpack/ts-loader": "^6.0.0-rc.1",
-    "autoprefixer": "9.7.3",
-    "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "circular-dependency-plugin": "5.2.0",
-    "css-loader": "3.4.2",
-    "file-loader": "5.0.2",
-    "fork-ts-checker-webpack-plugin": "3.1.1",
-    "mini-css-extract-plugin": "0.9.0",
-    "null-loader": "3.0.0",
-    "optimize-css-assets-webpack-plugin": "5.0.3",
-    "postcss-flexbugs-fixes": "4.1.0",
-    "postcss-loader": "3.0.0",
-    "react-dev-utils": "10.0.0",
-    "sass": "1.24.1",
-    "sass-loader": "8.0.0",
-    "terser-webpack-plugin": "2.3.1",
-    "time-fix-plugin": "2.0.6",
-    "tsconfig-paths-webpack-plugin": "3.2.0",
-    "tslint": "5.20.1",
-    "webpack": "4.41.5",
-    "webpack-bundle-analyzer": "3.6.0",
-    "webpack-manifest-plugin": "2.2.0",
-    "webpack-node-externals": "1.7.2"
-  },
-  "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
-    "@pixeloven-tooling/linter": "^6.0.0-rc.1",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-rc.1",
-    "@pixeloven-webpack/types": "^6.0.0-beta.26",
-    "@types/autoprefixer": "9.6.1",
-    "@types/case-sensitive-paths-webpack-plugin": "2.1.4",
-    "@types/circular-dependency-plugin": "5.0.0",
-    "@types/mini-css-extract-plugin": "0.8.0",
-    "@types/optimize-css-assets-webpack-plugin": "5.0.1",
-    "@types/terser-webpack-plugin": "2.2.0",
-    "@types/webpack-bundle-analyzer": "2.13.3",
-    "@types/webpack-manifest-plugin": "2.1.0",
-    "@types/webpack-node-externals": "1.7.0",
-    "lint-staged": "10.0.7"
-  },
-  "scripts": {
-    "compile": "pixeloven-compiler ts",
-    "compile:watch": "pixeloven-compiler ts --watch",
-    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "pretty": "pixeloven-pretty src/**/*.{json,md,ts,tsx}",
-    "precommit": "lint-staged",
-    "test": "pixeloven-test --color --coverage",
-    "test:ci": "pixeloven-test --ci --coverage",
-    "test:watch": "pixeloven-test --watch"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty",
-      "pixeloven-linter ts --fix",
-      "pixeloven-linter ts"
-    ]
-  }
+    "name": "@pixeloven-webpack/config",
+    "version": "6.0.0-rc.1",
+    "description": "Webpack configuration for client and server",
+    "main": "dist/lib/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "homepage": "https://www.pixeloven.com",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pixeloven/pixeloven.git"
+    },
+    "author": "Brian Gebel",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@pixeloven-core/common": "^6.0.0-rc.1",
+        "@pixeloven-core/env": "^6.0.0-rc.1",
+        "@pixeloven-core/filesystem": "^6.0.0-rc.1",
+        "@pixeloven-core/logger": "^6.0.0-rc.1",
+        "@pixeloven-webpack/ts-loader": "^6.0.0-rc.1",
+        "autoprefixer": "9.7.3",
+        "case-sensitive-paths-webpack-plugin": "2.2.0",
+        "circular-dependency-plugin": "5.2.0",
+        "css-loader": "3.4.2",
+        "file-loader": "5.0.2",
+        "fork-ts-checker-webpack-plugin": "3.1.1",
+        "mini-css-extract-plugin": "0.9.0",
+        "null-loader": "3.0.0",
+        "optimize-css-assets-webpack-plugin": "5.0.3",
+        "postcss-flexbugs-fixes": "4.1.0",
+        "postcss-loader": "3.0.0",
+        "react-dev-utils": "10.0.0",
+        "sass": "1.24.1",
+        "sass-loader": "8.0.0",
+        "terser-webpack-plugin": "2.3.1",
+        "time-fix-plugin": "2.0.6",
+        "tsconfig-paths-webpack-plugin": "3.2.0",
+        "tslint": "5.20.1",
+        "webpack": "4.41.5",
+        "webpack-bundle-analyzer": "3.6.0",
+        "webpack-manifest-plugin": "2.2.0",
+        "webpack-node-externals": "1.7.2"
+    },
+    "devDependencies": {
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.1",
+        "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
+        "@pixeloven-tooling/test": "^6.0.0-rc.1",
+        "@pixeloven-webpack/types": "^6.0.0-beta.26",
+        "@types/autoprefixer": "9.6.1",
+        "@types/case-sensitive-paths-webpack-plugin": "2.1.4",
+        "@types/circular-dependency-plugin": "5.0.0",
+        "@types/mini-css-extract-plugin": "0.8.0",
+        "@types/optimize-css-assets-webpack-plugin": "5.0.1",
+        "@types/terser-webpack-plugin": "2.2.0",
+        "@types/webpack-bundle-analyzer": "2.13.3",
+        "@types/webpack-manifest-plugin": "2.1.0",
+        "@types/webpack-node-externals": "1.7.0",
+        "lint-staged": "10.0.7"
+    },
+    "scripts": {
+        "compile": "pixeloven-compiler ts",
+        "compile:watch": "pixeloven-compiler ts --watch",
+        "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "pretty": "pixeloven-pretty **/*.{json,md,ts,tsx}",
+        "precommit": "lint-staged",
+        "test": "pixeloven-test --color --coverage",
+        "test:ci": "pixeloven-test --ci --coverage",
+        "test:watch": "pixeloven-test --watch"
+    },
+    "lint-staged": {
+        "*.{json,md}": [
+            "pixeloven-pretty"
+        ],
+        "src/**/*.{ts,tsx}": [
+            "pixeloven-pretty",
+            "pixeloven-linter ts --fix",
+            "pixeloven-linter ts"
+        ]
+    }
 }

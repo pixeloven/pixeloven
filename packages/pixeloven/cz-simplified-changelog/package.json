@@ -1,55 +1,58 @@
 {
-  "name": "@pixeloven/cz-simplified-changelog",
-  "version": "6.0.0-rc.1",
-  "description": "Commit citizen simplified changelog prompt",
-  "main": "dist/lib/index.js",
-  "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "homepage": "https://www.pixeloven.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixeloven/pixeloven.git"
-  },
-  "author": "Brian Gebel",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "chalk": "2.4.2",
-    "conventional-commit-types": "2.1.1",
-    "lodash.map": "4.6.0",
-    "longest": "2.0.1",
-    "right-pad": "1.0.1",
-    "word-wrap": "1.2.3"
-  },
-  "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
-    "@pixeloven-tooling/linter": "^6.0.0-rc.1",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-rc.1",
-    "@types/lodash.map": "4.6.13",
-    "commitizen": "4.0.3",
-    "lint-staged": "10.0.7"
-  },
-  "scripts": {
-    "compile": "pixeloven-compiler ts",
-    "compile:watch": "pixeloven-compiler ts --watch",
-    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "pretty": "pixeloven-pretty src/**/*.{json,md,ts,tsx}",
-    "precommit": "lint-staged",
-    "test": "pixeloven-test --color --coverage",
-    "test:ci": "pixeloven-test --ci --coverage",
-    "test:watch": "pixeloven-test --watch"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty",
-      "pixeloven-linter ts --fix",
-      "pixeloven-linter ts"
-    ]
-  }
+    "name": "@pixeloven/cz-simplified-changelog",
+    "version": "6.0.0-rc.1",
+    "description": "Commit citizen simplified changelog prompt",
+    "main": "dist/lib/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "homepage": "https://www.pixeloven.com",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pixeloven/pixeloven.git"
+    },
+    "author": "Brian Gebel",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "chalk": "2.4.2",
+        "conventional-commit-types": "2.1.1",
+        "lodash.map": "4.6.0",
+        "longest": "2.0.1",
+        "right-pad": "1.0.1",
+        "word-wrap": "1.2.3"
+    },
+    "devDependencies": {
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.1",
+        "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
+        "@pixeloven-tooling/test": "^6.0.0-rc.1",
+        "@types/lodash.map": "4.6.13",
+        "commitizen": "4.0.3",
+        "lint-staged": "10.0.7"
+    },
+    "scripts": {
+        "compile": "pixeloven-compiler ts",
+        "compile:watch": "pixeloven-compiler ts --watch",
+        "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "pretty": "pixeloven-pretty **/*.{json,md,ts,tsx}",
+        "precommit": "lint-staged",
+        "test": "pixeloven-test --color --coverage",
+        "test:ci": "pixeloven-test --ci --coverage",
+        "test:watch": "pixeloven-test --watch"
+    },
+    "lint-staged": {
+        "*.{json,md}": [
+            "pixeloven-pretty"
+        ],
+        "src/**/*.{ts,tsx}": [
+            "pixeloven-pretty",
+            "pixeloven-linter ts --fix",
+            "pixeloven-linter ts"
+        ]
+    }
 }

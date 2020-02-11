@@ -1,64 +1,67 @@
 {
-  "name": "@pixeloven-storybook/common",
-  "version": "6.0.0-rc.1",
-  "description": "Storybook Common",
-  "main": "dist/lib/index.js",
-  "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "homepage": "https://www.pixeloven.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixeloven/pixeloven.git"
-  },
-  "author": "Brian Gebel",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "@babel/core": "7.8.4",
-    "@storybook/addon-a11y": "5.3.11",
-    "@storybook/addon-actions": "5.3.11",
-    "@storybook/addon-backgrounds": "5.3.11",
-    "@storybook/addon-knobs": "5.3.11",
-    "@storybook/addon-notes": "5.3.11",
-    "@storybook/addon-options": "5.3.11",
-    "@storybook/addon-viewport": "5.3.11",
-    "@storybook/addons": "5.3.11",
-    "@storybook/core": "5.3.11",
-    "@storybook/react": "5.3.11",
-    "@storybook/theming": "5.3.11",
-    "babel-loader": "8.0.6",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "regenerator-runtime": "0.13.3",
-    "webpack": "4.41.5"
-  },
-  "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
-    "@pixeloven-tooling/linter": "^6.0.0-rc.1",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-rc.1",
-    "lint-staged": "10.0.7"
-  },
-  "scripts": {
-    "compile": "pixeloven-compiler ts",
-    "compile:watch": "pixeloven-compiler ts --watch",
-    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "pretty": "pixeloven-pretty src/**/*.{json,md,ts,tsx}",
-    "precommit": "lint-staged",
-    "test": "pixeloven-test --color --coverage",
-    "test:ci": "pixeloven-test --ci --coverage",
-    "test:watch": "pixeloven-test --watch"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty",
-      "pixeloven-linter ts --fix",
-      "pixeloven-linter ts"
-    ]
-  }
+    "name": "@pixeloven-storybook/common",
+    "version": "6.0.0-rc.1",
+    "description": "Storybook Common",
+    "main": "dist/lib/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "homepage": "https://www.pixeloven.com",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pixeloven/pixeloven.git"
+    },
+    "author": "Brian Gebel",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@babel/core": "7.8.4",
+        "@storybook/addon-a11y": "5.3.11",
+        "@storybook/addon-actions": "5.3.11",
+        "@storybook/addon-backgrounds": "5.3.11",
+        "@storybook/addon-knobs": "5.3.11",
+        "@storybook/addon-notes": "5.3.11",
+        "@storybook/addon-options": "5.3.11",
+        "@storybook/addon-viewport": "5.3.11",
+        "@storybook/addons": "5.3.11",
+        "@storybook/core": "5.3.11",
+        "@storybook/react": "5.3.11",
+        "@storybook/theming": "5.3.11",
+        "babel-loader": "8.0.6",
+        "react": "16.12.0",
+        "react-dom": "16.12.0",
+        "regenerator-runtime": "0.13.3",
+        "webpack": "4.41.5"
+    },
+    "devDependencies": {
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.1",
+        "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
+        "@pixeloven-tooling/test": "^6.0.0-rc.1",
+        "lint-staged": "10.0.7"
+    },
+    "scripts": {
+        "compile": "pixeloven-compiler ts",
+        "compile:watch": "pixeloven-compiler ts --watch",
+        "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "pretty": "pixeloven-pretty **/*.{json,md,ts,tsx}",
+        "precommit": "lint-staged",
+        "test": "pixeloven-test --color --coverage",
+        "test:ci": "pixeloven-test --ci --coverage",
+        "test:watch": "pixeloven-test --watch"
+    },
+    "lint-staged": {
+        "*.{json,md}": [
+            "pixeloven-pretty"
+        ],
+        "src/**/*.{ts,tsx}": [
+            "pixeloven-pretty",
+            "pixeloven-linter ts --fix",
+            "pixeloven-linter ts"
+        ]
+    }
 }

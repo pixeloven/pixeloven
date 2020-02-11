@@ -19,6 +19,7 @@ yarn add @pixeloven-webpack/compiler
 ```
 
 ## Usage
+
 > Note it's required that we provide a "client" and "server" configuration as an array to webpack.
 
 The primary function of this module is to act as a wrapper class for webpack's compiler. Additionally it Provides functionality useful for interfacing with webpack's compiler and it's corresponding configuration and output.
@@ -27,7 +28,7 @@ The primary function of this module is to act as a wrapper class for webpack's c
 
 ```javascript
 // webpack.config.js
- 
+
 export default [
     {
         name: 'client',
@@ -44,9 +45,10 @@ export default [
 ```
 
 We can take this configuration and compile it like shown below.
+
 ```javascript
 import { Compiler } from "@pixeloven-webpack/compiler";
-import configs from "./webpack.config.js"
+import configs from "./webpack.config.js";
 
 Compiler.create(configs);
 ```

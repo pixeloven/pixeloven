@@ -1,43 +1,43 @@
 {
-  "name": "@pixeloven/site",
-  "author": "Brian Gebel <brian@pixeloven.com>",
-  "description": "Static site for pixeloven.com",
-  "version": "6.0.0-rc.4",
-  "private": true,
-  "scripts": {
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "pretty": "pixeloven-pretty {docs,src}/**/*.{css,js,jsx,md,mdx,ts,tsx}",
-    "precommit": "lint-staged",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "GIT_USER=pixeloven-bot USE_SSH=true docusaurus deploy"
-  },
-  "dependencies": {
-    "@babel/core": "7.8.4",
-    "@babel/plugin-transform-runtime": "7.8.3",
-    "@docusaurus/core": "2.0.0-alpha.40",
-    "@docusaurus/preset-classic": "2.0.0-alpha.40",
-    "prop-types": "15.7.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0"
-  },
-  "devDependencies": {
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "lint-staged": "10.0.7"
-  },
-  "resolutions": {
-    "**/react": "16.12.0",
-    "**/react-dom": "16.12.0"
-  },
-  "lint-staged": {
-    "docs/**/*.{md,mdx}": [
-      "pixeloven-pretty"
-    ],
-    "src/**/*.{css,js,jsx}": [
-      "pixeloven-pretty"
-    ],
-    "*.{json,md}": [
-      "pixeloven-pretty"
-    ]
-  }
+    "name": "@pixeloven/site",
+    "author": "Brian Gebel <brian@pixeloven.com>",
+    "description": "Static site for pixeloven.com",
+    "version": "6.0.0-rc.4",
+    "private": true,
+    "scripts": {
+        "start": "docusaurus start",
+        "build": "docusaurus build",
+        "pretty": "pixeloven-pretty {docs,src}/**/*.{css,js,jsx,md,mdx,ts,tsx}",
+        "precommit": "lint-staged",
+        "swizzle": "docusaurus swizzle",
+        "deploy": "GIT_USER=pixeloven-bot USE_SSH=true docusaurus deploy"
+    },
+    "dependencies": {
+        "@babel/core": "7.8.4",
+        "@babel/plugin-transform-runtime": "7.8.3",
+        "@docusaurus/core": "2.0.0-alpha.40",
+        "@docusaurus/preset-classic": "2.0.0-alpha.40",
+        "prop-types": "15.7.2",
+        "react": "16.12.0",
+        "react-dom": "16.12.0"
+    },
+    "devDependencies": {
+        "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
+        "lint-staged": "10.0.7"
+    },
+    "resolutions": {
+        "**/react": "16.12.0",
+        "**/react-dom": "16.12.0"
+    },
+    "lint-staged": {
+        "docs/**/*.{md,mdx}": [
+            "pixeloven-pretty"
+        ],
+        "src/**/*.{css,js,jsx}": [
+            "pixeloven-pretty"
+        ],
+        "*.{json,md}": [
+            "pixeloven-pretty"
+        ]
+    }
 }

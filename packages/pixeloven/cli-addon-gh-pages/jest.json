@@ -14,19 +14,11 @@
             "statements": 0
         }
     },
-    "moduleFileExtensions": [
-        "js",
-        "json",
-        "jsx",
-        "ts",
-        "tsx"
-    ],
+    "moduleFileExtensions": ["js", "json", "jsx", "ts", "tsx"],
     "preset": "ts-jest",
     "rootDir": "./src",
     "testEnvironment": "node",
-    "testMatch": [
-        "<rootDir>/**/*.test.(j|t)s?(x)"
-    ],
+    "testMatch": ["<rootDir>/**/*.test.(j|t)s?(x)"],
     "transform": {
         "^.+\\.(ts|tsx)$": "ts-jest"
     },
@@ -34,4 +26,4 @@
         "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
     ],
     "verbose": true
-  }
+}
