@@ -14,37 +14,24 @@ const prettierJson = "prettier.json";
 async function main(proc) {
     let statusCode = 0;
     const params = Process.getParameters(proc.argv);
-    const firstArg = params.args.shift();
     
     function config(fileName) {
         const cwd = proc.cwd();
         const configPath = FileSystem.getPath(`${cwd}/${fileName}`);
         if (configPath) {
-            Logger.info(`pretty ${firstArg}`, `found configuration ${configPath}`);
+            Logger.info("pretty", `found configuration ${configPath}`);
         } else {
-            Logger.warn(`pretty ${firstArg}`, `could not find configuration file ${fileName} in current working directory`);
+            Logger.warn("pretty", `could not find configuration file ${fileName} in current working directory`);
         }
         return configPath;
     }
+    const configPath = config(prettierJson);
+    statusCode = await Process.run("prettier", ["--write", "--config", configPath, ...params.args]);
 
-    switch(firstArg) {
-        case "scss":
-        case "tsx":
-        case "ts": {
-            const configPath = config(prettierJson);
-            statusCode = await Process.run("prettier", ["--write", "--config", configPath, ...params.args]);
-            break;
-        }
-        default: {
-            statusCode = 1;
-            Logger.error(`pretty ${firstArg}`, `cmd does not exist`);
-            break;
-        }
-    }
     if (statusCode === 0) {
-        Logger.success(`pretty ${firstArg}`, "completed");
+        Logger.success("pretty", "completed");
     } else {
-        Logger.error(`pretty ${firstArg}`, `exited with status code ${statusCode}`);
+        Logger.error("pretty", `exited with status code ${statusCode}`);
     }
     proc.exit(statusCode);
 }

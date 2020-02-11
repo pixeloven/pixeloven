@@ -122,7 +122,8 @@ export default {
                 await generate(props);
                 // @todo run npm/yarn install here.....
                 // @todo print messages about next steps for creating apps and packages!!!!
-                // @todo create app generator inn the addon...
+                // @todo create app generator in the addon...
+                // @todo pass cli version into templates and in our docs
                 break;
             }
         }

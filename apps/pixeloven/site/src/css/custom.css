@@ -1,79 +1,79 @@
 :root {
-  --ifm-color-primary: #00b964;
+    --ifm-color-primary: #00b964;
 }
 .center {
-  display: block;
-  margin: 0 auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .community-stack {
-  position: relative;
+    position: relative;
 }
 
 .community-item--one {
-  position: absolute;
-  top: 0px;
-  left: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 .community-item--two {
-  position: absolute;
-  top: 80px;
-  left: 20%;
+    position: absolute;
+    top: 80px;
+    left: 20%;
 }
 .community-item--three {
-  position: absolute;
-  top: 160px;
-  left: 30%;
+    position: absolute;
+    top: 160px;
+    left: 30%;
 }
 .community-item--four {
-  position: absolute;
-  top: 0px;
-  right: 0%;
+    position: absolute;
+    top: 0px;
+    right: 0%;
 }
 .grayscale {
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
 }
 .features {
-  display: flex;
-  align-items: center;
-  padding: 4rem 0;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 4rem 0;
+    width: 100%;
 }
 
 .hero {
-  padding: 2.5rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+    padding: 2.5rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero.hero--dark {
-  --ifm-hero-background-color: #1B1C1D;
+    --ifm-hero-background-color: #1b1c1d;
 }
 
 .section {
-  background-color: var(--ifm-background-color);
+    background-color: var(--ifm-background-color);
 }
 
 .section--alt {
-  background-color: #f7f7f7;
+    background-color: #f7f7f7;
 }
 
 html[data-theme="dark"] .section {
-  background-color: var(--ifm-background-color);
+    background-color: var(--ifm-background-color);
 }
 
 html[data-theme="dark"] .section--alt {
-  background-color: #1B1C1D;
+    background-color: #1b1c1d;
 }
 
 .get-started {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer.footer--dark {
-  --ifm-footer-background-color: #1B1C1D;
+    --ifm-footer-background-color: #1b1c1d;
 }

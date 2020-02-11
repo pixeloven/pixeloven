@@ -4,17 +4,21 @@ title: PixelOven.Test
 ---
 
 ## Overview
+
 > NOTICE: This feature will be removed from the core cli and become an addon in a future update.
 
 Test is a simple wrapper for testing JavaScript applications. It currently acts as proxy for the Jest compiler and comes with a dependecies to make it more compatible with TypeScript.
 
 ## Jest
+
 > It is important to note that currently this feature expects a **jest.json** file to be present at the root of the package to configure the compiler.
 
-For reference on all the available configurations please review the [official documentation](https://jestjs.io/) for Jest. 
+For reference on all the available configurations please review the [official documentation](https://jestjs.io/) for Jest.
 
 ### Setup
+
 First be sure to create a **jest.json** file at the root of the project or in other words adjacent to the **package.json**.
+
 ```json
 {
     "bail": true,
@@ -32,19 +36,11 @@ First be sure to create a **jest.json** file at the root of the project or in ot
             "statements": 0
         }
     },
-    "moduleFileExtensions": [
-        "js",
-        "json",
-        "jsx",
-        "ts",
-        "tsx"
-    ],
+    "moduleFileExtensions": ["js", "json", "jsx", "ts", "tsx"],
     "preset": "ts-jest",
     "rootDir": "./src",
     "testEnvironment": "node",
-    "testMatch": [
-        "<rootDir>/**/*.test.(j|t)s?(x)"
-    ],
+    "testMatch": ["<rootDir>/**/*.test.(j|t)s?(x)"],
     "transform": {
         "^.+\\.(ts|tsx)$": "ts-jest"
     },
@@ -52,19 +48,25 @@ First be sure to create a **jest.json** file at the root of the project or in ot
         "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
     ],
     "verbose": true
-  }
+}
 ```
 
 ### Options
-For reference on all the available options please review the [official documentation](https://jestjs.io/) for Jest. 
+
+For reference on all the available options please review the [official documentation](https://jestjs.io/) for Jest.
 
 ### Usage
+
 Once this has been confirmed all we have to do is run the following.
+
 ```bash
 yarn run pixeloven test --watch
 ```
+
 or perhaps as part of a CI workflow:
+
 ```bash
 yarn run pixeloven test --ci --coverage
 ```
+
 Jest has an extensive CLI and so it is recommended to review their documentation for all the available options. Proper configuration through **jest.json** is also highly recommended.

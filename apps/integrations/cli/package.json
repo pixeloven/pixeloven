@@ -19,7 +19,7 @@
     "@pixeloven/cli": "^6.0.0-rc.4"
   },
   "devDependencies": {
-    "lint-staged": "9.5.0"
+    "lint-staged": "10.0.7"
   },
   "scripts": {
     "po:bootstrap": "mkdir coverage dist docs stats stories",
@@ -43,13 +43,11 @@
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
       "yarn pixeloven pretty",
-      "yarn pixeloven lint ts --fix",
-      "git add"
+      "yarn pixeloven lint ts --fix"
     ],
     "src/**/*.scss": [
       "yarn pixeloven pretty",
-      "yarn pixeloven lint scss --fix",
-      "git add"
+      "yarn pixeloven lint scss --fix"
     ]
   }
 }

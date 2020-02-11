@@ -2,27 +2,33 @@
 id: cli-core-delete
 title: PixelOven.Delete
 ---
+
 ## Overview
 
-Delete is another utility API that is meant to aid in deleting common paths during the development cycle.  
+Delete is another utility API that is meant to aid in deleting common paths during the development cycle.
 
 ## Common Directories
-|Argument|Description|
-|---|---|
-|`coverage`| Deletes the `./coverage` relative to the root the cmds execution. |
-|`dist`| Deletes the `./dist` relative to the root the cmds execution. |
-|`docs`| Deletes the `./docs` relative to the root the cmds execution. |
-|`stats`| Deletes the `./stats` relative to the root the cmds execution. |
-|`stories`| Deletes the `./stories` relative to the root the cmds execution. |
+
+| Argument   | Description                                                       |
+| ---------- | ----------------------------------------------------------------- |
+| `coverage` | Deletes the `./coverage` relative to the root the cmds execution. |
+| `dist`     | Deletes the `./dist` relative to the root the cmds execution.     |
+| `docs`     | Deletes the `./docs` relative to the root the cmds execution.     |
+| `stats`    | Deletes the `./stats` relative to the root the cmds execution.    |
+| `stories`  | Deletes the `./stories` relative to the root the cmds execution.  |
 
 ### Usage
->Similar to the Copy cmd this is purposefully very limited in scope. The directories were chosen in part from our own opinions on best practices as well as limitations of the current API. 
+
+> Similar to the Copy cmd this is purposefully very limited in scope. The directories were chosen in part from our own opinions on best practices as well as limitations of the current API.
 
 Using this cmd is as simple as:
+
 ```bash
 yarn run pixeloven delete dist
 ```
+
 A common pattern where this might be used is as a post command hook after a compilation step.
+
 ```json
 "scripts": {
     "compile": "pixeloven compile ts",

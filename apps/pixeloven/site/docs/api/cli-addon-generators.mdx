@@ -6,41 +6,48 @@ title: PixelOven.Generate
 This addon features an interactive CLI for generating common project files. The goal of this addon is to reduce the need for repeative boilerplating usually required by developers.
 
 ## Installation
->Note the current version of this extension only supports react as that is the primary use case for PixelOven. Though our ultimate goal is to provide a more general development platform we want to first nail this subset before conquering others.
+
+> Note the current version of this extension only supports react as that is the primary use case for PixelOven. Though our ultimate goal is to provide a more general development platform we want to first nail this subset before conquering others.
 
 To install this addon simply run the following with NPM
+
 ```bash
 npm install --save-dev @pixeloven/cli-addon-generators
 ```
+
 or yarn
+
 ```bash
 yarn add --dev @pixeloven/cli-addon-generators
 ```
 
 ## API Reference
-|Argument|Description|
-|---|---|
-|[`generate`](#cli-pixelovengenerate)| CLI entry point for interactive project generators. |
+
+| Argument                             | Description                                         |
+| ------------------------------------ | --------------------------------------------------- |
+| [`generate`](#cli-pixelovengenerate) | CLI entry point for interactive project generators. |
 
 All arguments and options for this addon are optional. The entire CLI is interactive and provides a more traditional experience for convenience.
 
-|Argument|Required|Default|Description|
-|---|---|---|---|
-|`<type>`|No|`null`| Shortcuts the first part of the interactive menu. |
+| Argument | Required | Default | Description                                       |
+| -------- | -------- | ------- | ------------------------------------------------- |
+| `<type>` | No       | `null`  | Shortcuts the first part of the interactive menu. |
 
 As mentioned above these types are optional and simply shortcut the first part of the interactive menu. The below types have a a 1:1 relationship with the first part of the interactive menu.
 
-|Argument|Description|
-|---|---|
-|`app`| Starts the interactive menu for creating a new App. |
-|`component`| Starts the interactive menu for generating a React component. |
-|`package`| Starts the interactive menu for creating a new Package.  |
+| Argument    | Description                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `app`       | Starts the interactive menu for creating a new App.           |
+| `component` | Starts the interactive menu for generating a React component. |
+| `package`   | Starts the interactive menu for creating a new Package.       |
 
 ### Usage
+
 Providing a type to generate is entirely optional. This argument is provided to help shortcuts the menu for a slightly more customized experience.
+
 ```bash
 yarn run pixeloven generate <type[optional]>
-``` 
+```
 
 To run the full interactive CLI simply run the following.
 

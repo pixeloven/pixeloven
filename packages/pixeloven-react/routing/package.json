@@ -1,62 +1,63 @@
 {
-  "name": "@pixeloven-react/routing",
-  "version": "6.0.0-rc.1",
-  "description": "React Router configuration helpers and components",
-  "main": "dist/lib/index.js",
-  "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "homepage": "https://www.pixeloven.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixeloven/pixeloven.git"
-  },
-  "author": "Brian Gebel",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "@types/react-redux": "7.1.1",
-    "@types/react-router": "5.1.2",
-    "@types/react-router-dom": "5.1.2",
-    "react-router": "5.1.2",
-    "react-router-dom": "5.1.2"
-  },
-  "peerDependencies": {
-    "@pixeloven-react/common": ">=6.0.0-rc.1"
-  },
-  "devDependencies": {
-    "@pixeloven-react/testing": "^6.0.0-rc.1",
-    "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
-    "@pixeloven-tooling/linter": "^6.0.0-rc.1",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-rc.1",
-    "@types/react": "16.9.17",
-    "@types/react-dom": "16.9.4",
-    "lint-staged": "9.5.0",
-    "react": "16.12.0",
-    "react-dom": "16.12.0"
-  },
-  "scripts": {
-    "compile": "pixeloven-compiler ts",
-    "compile:watch": "pixeloven-compiler ts --watch",
-    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "pretty": "yarn pretty:ts",
-    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
-    "precommit": "lint-staged",
-    "test": "pixeloven-test --color --coverage",
-    "test:ci": "pixeloven-test --ci --coverage",
-    "test:watch": "pixeloven-test --watch"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty ts",
-      "pixeloven-linter ts --fix",
-      "pixeloven-linter ts",
-      "git add"
-    ]
-  }
+    "name": "@pixeloven-react/routing",
+    "version": "6.0.0-rc.1",
+    "description": "React Router configuration helpers and components",
+    "main": "dist/lib/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "homepage": "https://www.pixeloven.com",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pixeloven/pixeloven.git"
+    },
+    "author": "Brian Gebel",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@types/react-redux": "7.1.1",
+        "@types/react-router": "5.1.2",
+        "@types/react-router-dom": "5.1.2",
+        "react-router": "5.1.2",
+        "react-router-dom": "5.1.2"
+    },
+    "peerDependencies": {
+        "@pixeloven-react/common": ">=6.0.0-rc.1"
+    },
+    "devDependencies": {
+        "@pixeloven-react/testing": "^6.0.0-rc.1",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.1",
+        "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
+        "@pixeloven-tooling/test": "^6.0.0-rc.1",
+        "@types/react": "16.9.17",
+        "@types/react-dom": "16.9.4",
+        "lint-staged": "10.0.7",
+        "react": "16.12.0",
+        "react-dom": "16.12.0"
+    },
+    "scripts": {
+        "compile": "pixeloven-compiler ts",
+        "compile:watch": "pixeloven-compiler ts --watch",
+        "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "pretty": "pixeloven-pretty **/*.{json,md,ts,tsx}",
+        "precommit": "lint-staged",
+        "test": "pixeloven-test --color --coverage",
+        "test:ci": "pixeloven-test --ci --coverage",
+        "test:watch": "pixeloven-test --watch"
+    },
+    "lint-staged": {
+        "*.{json,md}": [
+            "pixeloven-pretty"
+        ],
+        "src/**/*.{ts,tsx}": [
+            "pixeloven-pretty",
+            "pixeloven-linter ts --fix",
+            "pixeloven-linter ts"
+        ]
+    }
 }

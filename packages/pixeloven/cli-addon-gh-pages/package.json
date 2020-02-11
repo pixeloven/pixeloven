@@ -1,54 +1,55 @@
 {
-  "name": "@pixeloven/cli-addon-gh-pages",
-  "version": "6.0.0-rc.4",
-  "description": "Publishes project docs to GitHub Pages",
-  "main": "dist/lib/index.js",
-  "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "homepage": "https://www.pixeloven.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixeloven/pixeloven.git"
-  },
-  "author": "Brian Gebel",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "@pixeloven-core/exceptions": "^6.0.0-rc.1",
-    "@pixeloven-core/filesystem": "^6.0.0-rc.1",
-    "@pixeloven/cli": "^6.0.0-rc.4",
-    "gh-pages": "2.1.1"
-  },
-  "devDependencies": {
-    "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
-    "@pixeloven-tooling/linter": "^6.0.0-rc.1",
-    "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
-    "@pixeloven-tooling/test": "^6.0.0-rc.1",
-    "@types/gh-pages": "2.0.1",
-    "lint-staged": "9.5.0"
-  },
-  "scripts": {
-    "compile": "pixeloven-compiler ts",
-    "compile:watch": "pixeloven-compiler ts --watch",
-    "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
-    "pretty": "yarn pretty:ts",
-    "pretty:ts": "pixeloven-pretty ts src/**/*.{ts,tsx}",
-    "precommit": "lint-staged",
-    "test": "pixeloven-test --color --coverage",
-    "test:ci": "pixeloven-test --ci --coverage",
-    "test:watch": "pixeloven-test --watch"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "pixeloven-pretty ts",
-      "pixeloven-linter ts --fix",
-      "pixeloven-linter ts",
-      "git add"
-    ]
-  }
+    "name": "@pixeloven/cli-addon-gh-pages",
+    "version": "6.0.0-rc.4",
+    "description": "Publishes project docs to GitHub Pages",
+    "main": "dist/lib/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "homepage": "https://www.pixeloven.com",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pixeloven/pixeloven.git"
+    },
+    "author": "Brian Gebel",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@pixeloven-core/exceptions": "^6.0.0-rc.1",
+        "@pixeloven-core/filesystem": "^6.0.0-rc.1",
+        "@pixeloven/cli": "^6.0.0-rc.4",
+        "gh-pages": "2.1.1"
+    },
+    "devDependencies": {
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.1",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.1",
+        "@pixeloven-tooling/pretty": "^6.0.0-beta.26",
+        "@pixeloven-tooling/test": "^6.0.0-rc.1",
+        "@types/gh-pages": "2.0.1",
+        "lint-staged": "10.0.7"
+    },
+    "scripts": {
+        "compile": "pixeloven-compiler ts",
+        "compile:watch": "pixeloven-compiler ts --watch",
+        "lint": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
+        "pretty": "pixeloven-pretty **/*.{json,md,ts,tsx}",
+        "precommit": "lint-staged",
+        "test": "pixeloven-test --color --coverage",
+        "test:ci": "pixeloven-test --ci --coverage",
+        "test:watch": "pixeloven-test --watch"
+    },
+    "lint-staged": {
+        "*.{json,md}": [
+            "pixeloven-pretty"
+        ],
+        "src/**/*.{ts,tsx}": [
+            "pixeloven-pretty",
+            "pixeloven-linter ts --fix",
+            "pixeloven-linter ts"
+        ]
+    }
 }

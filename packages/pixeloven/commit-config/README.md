@@ -19,7 +19,9 @@ yarn add --dev @pixeloven/commit-config
 ```
 
 ## Usage
+
 Example of usage in `commitlint.config.js`
+
 ```javascript
 module.exports = {
     extends: ["@pixeloven/commit-config"],
