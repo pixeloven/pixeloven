@@ -4,11 +4,17 @@
 
 See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
+<<<<<<< HEAD
+
 ## Features
 
 This addon is meant to allow the CLI to use webpack as a bundler on top of a a TypeScript compiler. It includes many of the plugins and features expected from a fully production ready JavaScript application. Also included is a completely custom development server built to handle both client and server side JavaScript development.
 
 > TBD This section is a work in progress
+
+=======
+
+> > > > > > > master
 
 ## Install
 
@@ -23,6 +29,8 @@ or using yarn:
 ```sh
 yarn add --dev @pixeloven/cli-addon-webpack
 ```
+
+<<<<<<< HEAD
 
 ## Usage
 
@@ -70,3 +78,6 @@ With either of the above cmds there are options that can help with all phases of
 
 > Note below are some recommendations based on learn A few notes for development.
 > It is recommended to keep polling on for cross platform purposes. File watching can be CPU intensive if a system falls back to fs.watchFile versus utilizing file system events with fs.watch. This is often common on linux machines.
+> =======
+>
+> > > > > > > master

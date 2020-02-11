@@ -1,24 +1,24 @@
 ---
 id: cli-core-compile
-title: CLI Core Compile
+title: PixelOven.Compile
 ---
 
-## CLI: PixelOven.Compile
+## Overview
 
 Compile is a simple wrapper for standard JavaScript/TypeScript compilation. It currently acts as proxy for the TypeScript compiler.
 
-### TypeScript
+## TypeScript
 
 | Argument | Description                                                                           |
 | -------- | ------------------------------------------------------------------------------------- |
 | `ts`     | A proxy for the TypeScript compiler with a few opinionated defaults for easier setup. |
 | `tsx`    | An alias for `ts`. Implemented to help differentiate JSX based projects.              |
 
-#### Options
+### Options
 
 For reference on all the available options please review the [official documentation](https://www.typescriptlang.org/docs/home.html) for TypeScript.
 
-#### Setup
+### Setup
 
 Be sure to create a **tsconfig.json** file at the root of the project or in other words adjacent to the **package.json**.
 
@@ -36,7 +36,7 @@ Be sure to create a **tsconfig.json** file at the root of the project or in othe
 
 The above configuration file is not an exhaustive example but instead represents our recommendation for getting started. Please review the [official documentation](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) for more advanced configurations.
 
-#### Usage
+### Usage
 
 Once configured we can compile our source using a cmd similar what you see below.
 

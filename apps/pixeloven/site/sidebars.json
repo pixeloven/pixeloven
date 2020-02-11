@@ -1,38 +1,43 @@
 {
-  "docs": {
-    "Welcome": ["about-us"],
-    "Getting Started": [
-      "getting-started/intro"
-    ],
-    "API": [
-      {
-        "type": "category",
-        "label": "CLI Core",
-        "items": [
-          "api/cli-core-compile",
-          "api/cli-core-copy",
-          "api/cli-core-delete",
-          "api/cli-core-document",
-          "api/cli-core-lint",
-          "api/cli-core-pretty",
-          "api/cli-core-test"
+    "docs": {
+        "Welcome": ["about-us"],
+        "Getting Started": ["getting-started/intro"],
+        "API": [
+            {
+                "type": "category",
+                "label": "CLI: Core",
+                "items": [
+                    "api/cli-core-installation",
+                    "api/cli-core-compile",
+                    "api/cli-core-copy",
+                    "api/cli-core-delete",
+                    "api/cli-core-document",
+                    "api/cli-core-lint",
+                    "api/cli-core-pretty",
+                    "api/cli-core-test"
+                ]
+            },
+            {
+                "type": "category",
+                "label": "CLI: Addons",
+                "items": [
+                    "api/cli-addon-generators",
+                    "api/cli-addon-storybook",
+                    "api/cli-addon-webpack"
+                ]
+            }
+        ],
+        "Contributing": [
+            "contribution/intro",
+            "contribution/quick-start-guide",
+            "contribution/file-system-and-structure",
+            "contribution/code-of-conduct"
+        ],
+        "Recommendations": [
+            "recommendations/intro",
+            "recommendations/design-patterns",
+            "recommendations/working-with-libraries",
+            "recommendations/react-components"
         ]
-      },
-      "api/cli-addon-generators",
-      "api/cli-addon-storybook",
-      "api/cli-addon-webpack"
-    ],
-    "Contributing": [
-      "contribution/intro",
-      "contribution/quick-start-guide",
-      "contribution/file-system-and-structure",  
-      "contribution/code-of-conduct"
-    ],
-    "Recommendations": [
-      "recommendations/intro",  
-      "recommendations/design-patterns",  
-      "recommendations/working-with-libraries",  
-      "recommendations/react-components"
-    ]
-  }
+    }
 }
