@@ -23,7 +23,15 @@ export default {
     name: "generate",
     run: async (toolbox: AddonGeneratorsToolbox) => {
         let statusCode = 0;
-        const { createComponent, createPackage, print, prompt } = toolbox;
+        const {
+            createComponent,
+            createPackage,
+            parameters,
+            print,
+            prompt,
+        } = toolbox;
+        let type = parameters.first || "";
+
         /**
          * Starting generator type
          * @todo create CLI Addon, library, project generators
@@ -137,22 +145,27 @@ export default {
                 validate: Validation.minLength(1),
             },
         ];
-        const { generatorType } = (await prompt.ask<CreateOptions>(
-            askCreateQuestions,
-        )) as any;
-        switch (generatorType) {
-            case "App": {
+
+        if (!type) {
+            const { generatorType } = (await prompt.ask<CreateOptions>(
+                askCreateQuestions,
+            )) as any;
+            type = generatorType;
+        }
+
+        switch (type.toLowerCase()) {
+            case "app": {
                 print.info("Coming Soon");
                 break;
             }
-            case "Component": {
+            case "component": {
                 const options = (await prompt.ask<CreateComponentOptions>(
                     askCreateComponentQuestions,
                 )) as any;
                 createComponent(options);
                 break;
             }
-            case "Package": {
+            case "package": {
                 const options = (await prompt.ask<CreatePackageOptions>(
                     askCreatePackageQuestions,
                 )) as any;

@@ -1,12 +1,12 @@
 ---
 id: cli-addon-storybook
-title: CLI Addon Storybook
+title: PixelOven.Story
 ---
 
 [Storybook](https://storybook.js.org/) is an amazing tool for developing components in isolation out side of the constraints for a more standard application workflow. Because of this we wanted to provide an extension to PixelOven that would provide support for storybook. 
 
 ## Installation
->Note the currently version of this extension only supports react as that is the primary use case for PixelOven. Though our ultimate goal is to provide a more general development platform we want to first nail this subset before conquering others.
+>Note the current version of this extension only supports react as that is the primary use case for PixelOven. Though our ultimate goal is to provide a more general development platform we want to first nail this subset before conquering others.
 
 To install this addon simply run the following with NPM
 ```bash
@@ -22,23 +22,27 @@ yarn add --dev @pixeloven/cli-addon-storybook
 |---|---|
 |[`story`](#cli-pixelovenstory)| CLI entry point for interfacing with Storybook. |
 
-## CLI: PixelOven.Story
-
 Story wraps the standalone implementation of storybook while also abstracting away the configuration to work closely with the rest of PixelOven's CLI. This addon shares some dependencies with our [webpack addon](/docs/api/cli-addon-webpack) to maintain a similar level of support for Typescript, SCSS and other important features.
+
+|Argument|Required|Default|Description|
+|---|---|---|---|
+|`<task>`|Yes|N/A| Determines how to build storybook. |
+
+Based on the task provided Storybook will be built in one of two modes.
 
 |Argument|Description|
 |---|---|
 |`build`| Builds Storybook for static file serving. |
 |`start`| Runs Storybook in watch mode for local development. |
 
-#### Options
+### Options
 |Option|Default|Description|
 |---|---|---|
 |`--output-dir`| `./stories` | Output directory for static files. |
 |`--port`| `9001` | Port for hosting storybook in watch mode. |
 |`--quiet`| `false` | Whether storybook should log to console or not. |
 
-#### Usage
+### Usage
 To run storybook in development/watch mode on a specific port you.
 
 ```bash

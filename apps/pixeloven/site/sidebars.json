@@ -7,8 +7,9 @@
     "API": [
       {
         "type": "category",
-        "label": "CLI Core",
+        "label": "CLI: Core",
         "items": [
+          "api/cli-core-installation",
           "api/cli-core-compile",
           "api/cli-core-copy",
           "api/cli-core-delete",
@@ -18,9 +19,15 @@
           "api/cli-core-test"
         ]
       },
-      "api/cli-addon-generators",
-      "api/cli-addon-storybook",
-      "api/cli-addon-webpack"
+      {
+        "type": "category",
+        "label": "CLI: Addons",
+        "items": [
+          "api/cli-addon-generators",
+          "api/cli-addon-storybook",
+          "api/cli-addon-webpack"
+        ]
+      }
     ],
     "Contributing": [
       "contribution/intro",
