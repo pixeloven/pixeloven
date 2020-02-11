@@ -1,6 +1,6 @@
 {
     "docs": {
-        "Welcome": ["about-us"],
+        "Welcome": ["welcome/about-us"],
         "Getting Started": ["getting-started/intro"],
         "API": [
             {
@@ -31,7 +31,8 @@
             "contribution/intro",
             "contribution/quick-start-guide",
             "contribution/file-system-and-structure",
-            "contribution/code-of-conduct"
+            "contribution/code-of-conduct",
+            "contribution/roadmap"
         ],
         "Recommendations": [
             "recommendations/intro",
