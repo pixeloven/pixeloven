@@ -31,15 +31,10 @@ Example of usage in `package.json`
     "lint-staged": "10.0.7"
   },
   "scripts": {
-    "pretty": "yarn pretty:ts && yarn pretty:scss",
-    "pretty:ts": "pixeloven-pretty src/**/*.{ts,tsx}",
-    "pretty:scss": "pixeloven-pretty src/**/*.{scss}"
+    "pretty": "pixeloven-pretty src/**/*.{scss,ts,tsx}"
   },
   "lint-staged": {
-    "src/**/*.{scss}": [
-      "pixeloven-pretty"
-    ],
-    "src/**/*.{ts,tsx}": [
+    "src/**/*.{scss,ts,tsx}": [
       "pixeloven-pretty"
     ]
   }
