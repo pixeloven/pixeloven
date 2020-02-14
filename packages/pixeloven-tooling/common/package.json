@@ -4,7 +4,7 @@
   "description": "Common libraries used to build out tooling for PixelOven's workflow",
   "main": "lib/index.js",
   "files": [
-    "dist/"
+    "lib/"
   ],
   "homepage": "https://www.pixeloven.com",
   "repository": {
