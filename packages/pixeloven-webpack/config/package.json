@@ -35,7 +35,7 @@
         "postcss-flexbugs-fixes": "4.1.0",
         "postcss-loader": "3.0.0",
         "react-dev-utils": "10.0.0",
-        "sass": "1.24.1",
+        "sass": "1.26.2",
         "sass-loader": "8.0.0",
         "terser-webpack-plugin": "2.3.1",
         "time-fix-plugin": "2.0.6",
