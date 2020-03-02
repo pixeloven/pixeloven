@@ -95,29 +95,29 @@ export function getSetup(options: Options) {
     }
 
     function getOptimization() {
+        /**
+         * @todo Make splitchunks more configurable. It may be desireable to do code splitting during development.
+         */
         return ifClient(
-            {
-                minimize: ifProduction(),
-                minimizer: ifProduction(
-                    [
-                        /**
-                         * Minify the code JavaScript
-                         *
-                         * @env production
-                         */
-                        new TerserPlugin({
-                            cache: true,
-                            extractComments: "all",
-                            parallel: true,
-                            sourceMap: options.sourceMap,
-                            terserOptions: {
-                                safari10: true,
-                            },
-                        }),
-                        new OptimizeCSSAssetsPlugin(),
-                    ],
-                    [],
-                ),
+            ifProduction({
+                minimize: true,
+                minimizer: [
+                    /**
+                     * Minify the code JavaScript
+                     *
+                     * @env production
+                     */
+                    new TerserPlugin({
+                        cache: true,
+                        extractComments: "all",
+                        parallel: true,
+                        sourceMap: options.sourceMap,
+                        terserOptions: {
+                            safari10: true,
+                        },
+                    }),
+                    new OptimizeCSSAssetsPlugin(),
+                ],
                 noEmitOnErrors: true,
                 runtimeChunk: {
                     /* tslint:disable no-any */
@@ -155,10 +155,12 @@ export function getSetup(options: Options) {
                     },
                     chunks: "all",
                     maxInitialRequests: Infinity,
-                    maxSize: ifProduction(1000000, 0),
+                    maxSize: 1000000,
                     minSize: 0,
                 },
-            },
+            }, {
+                noEmitOnErrors: true,
+            }),
             {
                 noEmitOnErrors: true,
             },
