@@ -112,7 +112,5 @@ Update this retry logic
         - If publishing ten packages don't exit on the first failure. Attempt retry, track failures and log via output but continue. The final attempt can exit with a status code but we should still always attempt to publish all packages.
             - I deal scenario here is that that we work off a queue. FIFO where retries are thrown at the end of the queue and not attempted until other packages have had there turn.
     - https://github.com/ductiletoaster/lerna/blob/master/utils/npm-publish/npm-publish.js#L70
-
     - Might need to go as far as here
         - https://github.com/evocateur/libnpmpublish
-        - 
