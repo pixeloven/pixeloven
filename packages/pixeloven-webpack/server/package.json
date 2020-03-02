@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/server",
-    "version": "6.0.0-rc.7",
+    "version": "6.0.0-rc.8",
     "description": "Webpack Development Server",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -21,9 +21,9 @@
         "@pixeloven-core/common": "^6.0.0-rc.5",
         "@pixeloven-core/exceptions": "^6.0.0-rc.5",
         "@pixeloven-core/logger": "^6.0.0-rc.5",
-        "@pixeloven-webpack/compiler": "^6.0.0-rc.7",
+        "@pixeloven-webpack/compiler": "^6.0.0-rc.8",
         "@pixeloven-webpack/file-reporter": "^6.0.0-rc.5",
-        "@pixeloven-webpack/server-middleware": "^6.0.0-rc.7",
+        "@pixeloven-webpack/server-middleware": "^6.0.0-rc.8",
         "express": "4.17.1"
     },
     "devDependencies": {
