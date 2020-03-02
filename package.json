@@ -19,9 +19,9 @@
   "devDependencies": {
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
-    "codecov": "3.6.1",
+    "codecov": "3.6.5",
     "commitizen": "4.0.3",
-    "husky": "4.2.1",
+    "husky": "4.2.3",
     "lerna": "3.20.2"
   },
   "scripts": {
