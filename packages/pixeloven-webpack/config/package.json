@@ -23,7 +23,7 @@
         "@pixeloven-core/filesystem": "^6.0.0-rc.5",
         "@pixeloven-core/logger": "^6.0.0-rc.5",
         "@pixeloven-webpack/ts-loader": "^6.0.0-rc.5",
-        "autoprefixer": "9.7.3",
+        "autoprefixer": "9.7.4",
         "case-sensitive-paths-webpack-plugin": "2.3.0",
         "circular-dependency-plugin": "5.2.0",
         "css-loader": "3.4.2",
