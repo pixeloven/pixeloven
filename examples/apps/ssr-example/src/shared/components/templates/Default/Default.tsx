@@ -1,28 +1,10 @@
-import { Routes, UniversalRouteComponentProps } from "@pixeloven-react/routing";
-import { MainMenu } from "@shared/components/molecules";
 import React from "react";
-import { Link } from "react-router-dom";
-import { Container, Icon, Responsive, Segment } from "semantic-ui-react";
+
+import {Routes, UniversalRouteComponentProps} from "@pixeloven-react/routing";
 
 function Default(props: UniversalRouteComponentProps) {
-    const { routes } = props;
-    return (
-        <Responsive>
-            <Container fluid={true}>
-                <MainMenu as={Link} fixed={false} />
-            </Container>
-            <Container fluid={true}>
-                {routes && <Routes as="switch" config={routes} />}
-            </Container>
-            <Container fluid={true}>
-                <Segment inverted={true} vertical={true} textAlign="center">
-                    <p>
-                        Powered with <Icon name="heart" /> by PixelOven
-                    </p>
-                </Segment>
-            </Container>
-        </Responsive>
-    );
+    const {routes} = props;
+    return <div>{routes && <Routes as="switch" config={routes} />}</div>;
 }
 
 export default Default;

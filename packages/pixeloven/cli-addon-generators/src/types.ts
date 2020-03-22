@@ -59,7 +59,21 @@ export type CreatePackageExtension = (
     options: CreatePackageOptions,
 ) => Promise<void>;
 
+export interface CreateAppOptions {
+    appAuthorEmail: string;
+    appAuthorName: string;
+    appDescription: string;
+    appLicense: string;
+    appName: string;
+    appNameSpace?: string;
+    appRegistry?: string;
+    appVersion: number | string;
+}
+
+export type CreateAppExtension = (options: CreateAppOptions) => Promise<void>;
+
 export interface AddonGeneratorsToolbox extends PixelOvenToolbox {
+    createApp: CreateAppExtension;
     createComponent: CreateComponentExtension;
     createPackage: CreatePackageExtension;
 }

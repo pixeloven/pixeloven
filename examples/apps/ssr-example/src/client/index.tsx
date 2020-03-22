@@ -1,12 +1,12 @@
-import { BrowserRouter, Routing } from "@pixeloven-react/routing";
-import App from "@shared/components/App";
-import { config } from "@shared/config";
-import routeConfig from "@shared/routes";
-import { configureStore } from "@shared/store/store";
 import React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import "../shared/styles/core/core.scss";
+
+import {BrowserRouter, Routing} from "@pixeloven-react/routing";
+
+import App from "@shared/components/App";
+import {config} from "@shared/config";
+import routeConfig from "@shared/routes";
+import "@shared/styles/core/core.scss";
 
 /**
  * Define root mounting point
@@ -22,11 +22,9 @@ const routes = Routing.getConfig(routeConfig, config.publicPath);
  */
 function AppWrapper() {
     return (
-        <Provider store={configureStore("client")}>
-            <BrowserRouter>
-                <App routes={routes} />
-            </BrowserRouter>
-        </Provider>
+        <BrowserRouter>
+            <App routes={routes} />
+        </BrowserRouter>
     );
 }
 /**

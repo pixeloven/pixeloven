@@ -1,8 +1,6 @@
-import { Home } from "@shared/components/pages/Home";
-import { NoMatch } from "@shared/components/pages/NoMatch";
-import { Default } from "@shared/components/templates/Default";
-import { ExampleActionTypes } from "@shared/store/Example/types";
-import { Dispatch } from "redux";
+import {Home} from "@shared/components/pages/Home";
+import {NoMatch} from "@shared/components/pages/NoMatch";
+import {Default} from "@shared/components/templates/Default";
 
 /**
  * @todo Need to create a better unknown error page
@@ -31,12 +29,6 @@ const routes = [
             {
                 component: Home,
                 exact: true,
-                fetchData: (dispatch: Dispatch) => {
-                    dispatch({
-                        payload: "example",
-                        type: ExampleActionTypes.GET_EXAMPLE_IN_PROGRESS,
-                    });
-                },
                 path: "/",
             },
             // 404 Page
