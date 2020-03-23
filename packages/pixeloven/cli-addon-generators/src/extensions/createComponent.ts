@@ -9,6 +9,7 @@ export default (toolbox: AddonGeneratorsToolbox) => {
             componentName,
             componentHasState,
             componentHasStyle,
+            componentNameSpace,
         } = options;
         const { strings, template } = toolbox;
         const className = `${strings.lowerCase(
@@ -16,13 +17,14 @@ export default (toolbox: AddonGeneratorsToolbox) => {
         )}-${strings.kebabCase(componentName)}`;
         const name = `${strings.pascalCase(componentName)}`;
         const props = {
-            atomicType: componentAtomicType,
+            atomicType: strings.lowerCase(componentAtomicType),
             camelName: strings.camelCase(name),
             className,
             description: componentDescription,
             hasState: componentHasState,
             hasStyle: componentHasStyle,
             name,
+            nameSpace: componentNameSpace,
         };
         const atomicType = strings.pluralize(
             strings.lowerCase(componentAtomicType),

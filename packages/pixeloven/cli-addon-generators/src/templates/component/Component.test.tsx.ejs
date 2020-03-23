@@ -3,13 +3,13 @@ import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import React from "react";
 
-import <%= props.name %> from "./<%= props.name %>";
+import {<%= props.name %>} from "./index";
 
 configure({
     adapter: new ReactSixteenAdapter(),
 });
 
-describe("shared/components/<%= props.atomicType %>s/<%= props.name %>", () => {
+describe("<%= props.nameSpace %>/<%= props.atomicType %>s/<%= props.name %>", () => {
     it("should render a `div` element by default", () => {
         const wrapper = shallow(<<%= props.name %> />);
         expect(wrapper.find("div").length).toEqual(1);
