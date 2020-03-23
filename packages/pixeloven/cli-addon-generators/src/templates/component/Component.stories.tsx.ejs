@@ -4,7 +4,7 @@ import React from "react";
 import {<%= props.name %>} from "./index";
 import Readme from "./README.md";
 
-storiesOf("<%= props.nameSpace %>/<%= props.atomicType %>s/<%= props.name %>", module)
+storiesOf("<% if (props.nameSpace) { %><%= props.nameSpace %>/<% } %><%= props.atomicType %>s/<%= props.name %>", module)
     .add("default", () => {
         return <<%= props.name %> className={"story-class"} />;
     }, {

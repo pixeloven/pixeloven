@@ -9,7 +9,7 @@ configure({
     adapter: new ReactSixteenAdapter(),
 });
 
-describe("<%= props.nameSpace %>/<%= props.atomicType %>s/<%= props.name %>", () => {
+describe("<% if (props.nameSpace) { %><%= props.nameSpace %>/<% } %><%= props.atomicType %>s/<%= props.name %>", () => {
     it("should render a `div` element by default", () => {
         const wrapper = shallow(<<%= props.name %> />);
         expect(wrapper.find("div").length).toEqual(1);
