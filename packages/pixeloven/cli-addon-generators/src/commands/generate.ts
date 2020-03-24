@@ -93,6 +93,12 @@ export default {
                 type: "input",
                 validate: Validation.minLength(1),
             },
+            {
+                message:
+                    "Provide a component namespace if necessary (leave blank if not required):",
+                name: "componentNameSpace",
+                type: "input",
+            },
         ];
         const askCreatePackageQuestions = [
             {

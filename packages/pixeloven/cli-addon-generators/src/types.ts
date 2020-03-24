@@ -37,6 +37,7 @@ export interface CreateComponentOptions {
     componentHasState: boolean;
     componentHasStyle: boolean;
     componentName: string;
+    componentNameSpace: string;
 }
 
 export type CreateComponentExtension = (

@@ -1,0 +1,49 @@
+---
+id: generator
+title: Pixeloven Generators
+---
+
+Creating new apps, packages, or components within your project doesn't have to be a chore, we've provided generators to lend a hand.
+
+> Note: This section is a work in progress and should contain basic information for creating and working with generators
+
+## Overview
+
+To start any of the generators run the `generate` command
+
+```
+yarn pixeloven generate
+```
+
+The generators are somewhat opinionated and make a few assumptions about the organization of your project. See the instructions for each individual generator below for specifics.
+
+## Components
+
+1. To create a new component, run the `generate` command from the root of the host app or package and choose `Component` from the selection menu.
+1. Choose the appropriate atomic type for your component. Refer to the component docs to learn more about atomic design and how it's implemented in Pixeloven.
+1. Choose the format of the component, we recommend Functional components if you're using React 16.4.x or later.
+1. Choose to manage state within your component. If you're unsure, choose `N`. It's easy enough to add this later if necessary.
+1. Choose to include styles with your component. If you're unsure, choose `N`. It's easy enough to add this later if necessary.
+1. Enter a component name following the naming conventions in the contributing docs.
+1. Enter a short description of what your component does. You can expand on the description in the component README.
+1. Enter a namespace for the component if necessary. These are slightly different from app and package namespaces as they're not use for publishing. These namespaces are used to group the components within each app and package within your project. For example of the components within our packages use a `packages/package-name` namespace format.
+
+Congrats, your brand new component is ready and waiting for you in `/src/components` under the directory that matches the atomic type you chose above, `cd` into it to get started and view the component docs to learn more.
+
+## Packages
+
+1. To start a new package, run the `generate` command from the root of your project and choose `Package` from the selection menu.
+1. Enter a package name following the naming conventions in the contributing docs.
+1. Enter a namespace for the package if necessary. Namespaces are useful to discern packages of similar names across registries like NPM. For example all Pixeloven packages are prefixed with a `@pixeloven` namespace.
+1. Enter a short description of what your package does. This will be used in the package.json manifest so keep it short. You can expand on the description in the package README.
+1. Enter a license type. This is intentionally left open, there are too many license types available, but we suggest MIT for its comprehensive coverage and standard use across the open source community.
+1. Enter an author name. For projects within a large organization you'll typically want to use the name of the organization or managing team.
+1. Enter an email address for the author. If you publish your project to a public repo this will be public, you've been warned.
+1. Enter a private registry if necessary. If your organization publishes to enterprise NPM or GitHhub packages enter the registry url.
+1. Enter an initial publishing version. We typically use 0.0.1 and let Lerna forward the versions as necessary.
+
+Congrats, your brand new package is ready and waiting for you in the `/packages` directory, `cd` into it to get started and view the packages docs to learn more.
+
+## Applications
+
+1. To start a new app, run the `generate` command from the root of your project and choose `App` from the selection menu.
