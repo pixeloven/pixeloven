@@ -1,0 +1,39 @@
+{
+    "bail": true,
+    "verbose": true,
+    "preset": "ts-jest",
+    "coveragePathIgnorePatterns": ["<rootDir>/node_modules/"],
+    "coverageThreshold": {
+        "global": {
+            "branches": 90,
+            "functions": 90,
+            "lines": 90,
+            "statements": 90
+        }
+    },
+    "collectCoverageFrom": [
+        "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+        "!<rootDir>/src/**/*.stories.{js,jsx,ts,tsx}",
+        "!<rootDir>/src/**/styles/**",
+        "!**/node_modules/**"
+    ],
+    "testMatch": [
+        "<rootDir>/test/**/*.(j|t)s?(x)",
+        "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+    ],
+    "testPathIgnorePatterns": ["<rootDir>/node_modules/"],
+    "testEnvironment": "jsdom",
+    "testURL": "http://localhost",
+    "transform": {
+        "^.+\\.(js|jsx)$": "babel-jest",
+        "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "transformIgnorePatterns": ["<rootDir>/node_modules/"],
+    "moduleDirectories": ["node_modules"],
+    "moduleNameMapper": {
+        ".+\\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/files.ts",
+        ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/src/__mocks__/styles.ts"
+    },
+    "moduleFileExtensions": ["js", "jsx", "ts", "tsx"],
+    "maxConcurrency": 2
+}

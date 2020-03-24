@@ -40,7 +40,7 @@
         "test": "pixeloven-test --color --coverage",
         "test:ci": "pixeloven-test --ci --coverage",
         "test:watch": "pixeloven-test --watch",
-        "postcompile": "copyfiles -u 2 src/templates/**/*.ejs dist/lib/templates"
+        "postcompile": "pixeloven copy src/templates/ dist/lib/templates"
     },
     "lint-staged": {
         "*.{json,md}": [
