@@ -57,6 +57,7 @@ export default {
         const task = parameters.first;
         const {
             allowExternals,
+            circularDepCheck,
             client,
             development,
             host,
@@ -105,6 +106,7 @@ export default {
             logger.info(`${chalk.bold(name)} targeting ${target}`);
             return {
                 allowExternals,
+                circularDepCheck,
                 entry,
                 mode,
                 name,
@@ -147,7 +149,7 @@ export default {
             if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
                 print.error(`Invalid argument --${option}`);
                 print.error(
-                    `Available options for "${task}" are "--client", "--development", "--entry", "--host", "--ignored", "--library", "--path", "--port", "--protocol", "--server", "--source-map", or "--stats"`,
+                    `Available options for "${task}" are "--client", "--circular-dep-check", "--development", "--entry", "--host", "--ignored", "--library", "--path", "--port", "--protocol", "--server", "--source-map", or "--stats"`,
                 );
                 process.exit(ErrorCode.InvalidArgument);
             }

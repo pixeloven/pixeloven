@@ -9,6 +9,7 @@ interface Stats {
 
 export interface Options {
     allowExternals: boolean;
+    circularDepCheck?: "warn" | "error";
     entry: string;
     mode: Mode;
     name: Name;

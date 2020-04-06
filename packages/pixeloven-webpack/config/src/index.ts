@@ -72,33 +72,46 @@ function getConfig(options: Options) {
              *
              * @todo should determine why we can't just push errors/strings to compilation.warnings
              */
-            new CircularDependencyPlugin({
-                // exclude detection of files based on a RegExp
-                exclude: /node_modules/,
-                onStart() {
-                    numCyclesDetected = 0;
-                    numCyclesDisplayed = 0;
-                },
-                onDetected({ paths }) {
-                    if (numCyclesDetected < limitCyclesDetected) {
-                        // compilation.warnings.push(new Error(`circular dependency ${paths.join(" -> ")}`));
-                        logger.warn(
-                            `circular dependency ${paths.join(" -> ")}`,
-                        );
-                        numCyclesDisplayed++;
-                    }
-                    numCyclesDetected++;
-                },
-                onEnd() {
-                    if (numCyclesDetected > limitCyclesDetected) {
-                        // compilation.warnings.push(new Error(`${numCyclesDetected - numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`));
-                        logger.warn(
-                            `${numCyclesDetected -
-                                numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
-                        );
-                    }
-                },
-            }),
+            () => {
+                if (options.circularDepCheck) {
+                    return new CircularDependencyPlugin({
+                        // exclude detection of files based on a RegExp
+                        exclude: /node_modules/,
+                        onStart() {
+                            numCyclesDetected = 0;
+                            numCyclesDisplayed = 0;
+                        },
+                        onDetected({ paths }) {
+                            if (numCyclesDetected < limitCyclesDetected) {
+                                // compilation.warnings.push(new Error(`circular dependency ${paths.join(" -> ")}`));
+                                logger.warn(
+                                    `circular dependency ${paths.join(" -> ")}`,
+                                );
+                                numCyclesDisplayed++;
+                            }
+                            numCyclesDetected++;
+                        },
+                        onEnd() {
+                            if (numCyclesDetected > limitCyclesDetected) {
+                                // compilation.warnings.push(new Error(`${numCyclesDetected - numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`));
+                                if (options.circularDepCheck === "warn") {
+                                    logger.warn(
+                                        `${numCyclesDetected -
+                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
+                                    );
+                                } else {
+                                    logger.error(
+                                        `${numCyclesDetected -
+                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
+                                    );
+                                }
+                            }
+                        },
+                    });
+                } else {
+                    return;
+                }
+            },
             /**
              * Helps prevent hashes from updating if a bundle hasn't changed.
              * @env all
@@ -185,33 +198,46 @@ function getConfig(options: Options) {
              *
              * @todo should determine why we can't just push errors/strings to compilation.warnings
              */
-            new CircularDependencyPlugin({
-                // exclude detection of files based on a RegExp
-                exclude: /node_modules/,
-                onStart() {
-                    numCyclesDetected = 0;
-                    numCyclesDisplayed = 0;
-                },
-                onDetected({ paths }) {
-                    if (numCyclesDetected < limitCyclesDetected) {
-                        // compilation.warnings.push(new Error(`circular dependency ${paths.join(" -> ")}`));
-                        logger.warn(
-                            `circular dependency ${paths.join(" -> ")}`,
-                        );
-                        numCyclesDisplayed++;
-                    }
-                    numCyclesDetected++;
-                },
-                onEnd() {
-                    if (numCyclesDetected > limitCyclesDetected) {
-                        // compilation.warnings.push(new Error(`${numCyclesDetected - numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`));
-                        logger.warn(
-                            `${numCyclesDetected -
-                                numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
-                        );
-                    }
-                },
-            }),
+            () => {
+                if (options.circularDepCheck) {
+                    return new CircularDependencyPlugin({
+                        // exclude detection of files based on a RegExp
+                        exclude: /node_modules/,
+                        onStart() {
+                            numCyclesDetected = 0;
+                            numCyclesDisplayed = 0;
+                        },
+                        onDetected({ paths }) {
+                            if (numCyclesDetected < limitCyclesDetected) {
+                                // compilation.warnings.push(new Error(`circular dependency ${paths.join(" -> ")}`));
+                                logger.warn(
+                                    `circular dependency ${paths.join(" -> ")}`,
+                                );
+                                numCyclesDisplayed++;
+                            }
+                            numCyclesDetected++;
+                        },
+                        onEnd() {
+                            if (numCyclesDetected > limitCyclesDetected) {
+                                // compilation.warnings.push(new Error(`${numCyclesDetected - numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`));
+                                if (options.circularDepCheck === "warn") {
+                                    logger.warn(
+                                        `${numCyclesDetected -
+                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
+                                    );
+                                } else {
+                                    logger.error(
+                                        `${numCyclesDetected -
+                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
+                                    );
+                                }
+                            }
+                        },
+                    });
+                } else {
+                    return;
+                }
+            },
             /**
              * Moment.js is an extremely popular library that bundles large locale files
              * by default due to how Webpack interprets its code. This is a practical

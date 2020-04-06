@@ -29,6 +29,8 @@ export interface WebpackExtensionOptions {
 export enum WebpackExecutionOptionTypes {
     "allow-externals" = "allow-externals",
     "allowExternals" = "allowExternals",
+    "circular-dep-check" = "circular-dep-check",
+    "circularDepCheck" = "circularDepCheck",
     "client" = "client",
     "development" = "development",
     "entry" = "entry",
