@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-tooling/test",
-  "version": "6.0.0-rc.5",
+  "version": "6.0.0-rc.12",
   "description": "Jest abstraction for PixelOven's workflow",
   "bin": {
     "pixeloven-test": "./bin/index.js"

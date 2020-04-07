@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/ts-loader",
-    "version": "6.0.0-rc.5",
+    "version": "6.0.0-rc.12",
     "description": "Collection of loaders to handle TypeScript and other advanced JS features",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -25,16 +25,16 @@
         "@babel/preset-env": "7.8.4",
         "@babel/preset-react": "7.8.3",
         "@babel/preset-typescript": "7.8.3",
-        "@pixeloven-core/filesystem": "^6.0.0-rc.5",
+        "@pixeloven-core/filesystem": "^6.0.0-rc.12",
         "babel-loader": "8.0.6",
         "ts-loader": "6.2.1",
         "typescript": "3.8.3"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.5",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.5",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.12",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.12",
         "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
-        "@pixeloven-tooling/test": "^6.0.0-rc.5",
+        "@pixeloven-tooling/test": "^6.0.0-rc.12",
         "@pixeloven-webpack/types": "^6.0.0-beta.26",
         "lint-staged": "10.0.7"
     },

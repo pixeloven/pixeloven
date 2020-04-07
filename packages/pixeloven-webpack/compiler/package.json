@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/compiler",
-    "version": "6.0.0-rc.11",
+    "version": "6.0.0-rc.12",
     "description": "Wrapper class for webpack compiler",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,16 +18,16 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/common": "^6.0.0-rc.5",
-        "@pixeloven-core/env": "^6.0.0-rc.5",
-        "@pixeloven-webpack/config": "^6.0.0-rc.11",
+        "@pixeloven-core/common": "^6.0.0-rc.12",
+        "@pixeloven-core/env": "^6.0.0-rc.12",
+        "@pixeloven-webpack/config": "^6.0.0-rc.12",
         "webpack": "4.41.5"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.5",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.5",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.12",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.12",
         "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
-        "@pixeloven-tooling/test": "^6.0.0-rc.5",
+        "@pixeloven-tooling/test": "^6.0.0-rc.12",
         "@pixeloven-webpack/types": "^6.0.0-beta.26",
         "lint-staged": "10.0.7"
     },

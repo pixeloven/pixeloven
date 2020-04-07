@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/cli",
-    "version": "6.0.0-rc.5",
+    "version": "6.0.0-rc.12",
     "description": "Command line interface for PixelOven framework",
     "main": "dist/lib/index.js",
     "types": "dist/types/types.d.ts",
@@ -21,13 +21,13 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/common": "^6.0.0-rc.5",
-        "@pixeloven-core/filesystem": "^6.0.0-rc.5",
-        "@pixeloven-core/validation": "^6.0.0-rc.5",
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.5",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.5",
+        "@pixeloven-core/common": "^6.0.0-rc.12",
+        "@pixeloven-core/filesystem": "^6.0.0-rc.12",
+        "@pixeloven-core/validation": "^6.0.0-rc.12",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.12",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.12",
         "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
-        "@pixeloven-tooling/test": "^6.0.0-rc.5",
+        "@pixeloven-tooling/test": "^6.0.0-rc.12",
         "gluegun": "4.1.2",
         "typedoc": "0.15.7"
     },
