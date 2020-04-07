@@ -24,7 +24,7 @@
         "@pixeloven-webpack/types": "^6.0.0-beta.26",
         "css-loader": "3.4.2",
         "deepmerge": "4.2.2",
-        "fork-ts-checker-webpack-plugin": "3.1.1",
+        "fork-ts-checker-webpack-plugin": "4.1.2",
         "sass": "1.24.1",
         "sass-loader": "8.0.0",
         "style-loader": "1.1.2",

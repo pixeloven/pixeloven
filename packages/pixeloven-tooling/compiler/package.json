@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "@pixeloven-tooling/common": "^6.0.0-rc.5",
-    "typescript": "3.7.5"
+    "typescript": "3.8.3"
   }
 }
