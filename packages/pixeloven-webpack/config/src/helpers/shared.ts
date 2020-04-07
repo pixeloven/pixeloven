@@ -6,7 +6,6 @@ import {
     resolveTsConfig,
 } from "@pixeloven-core/filesystem";
 import autoprefixer from "autoprefixer";
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
@@ -96,10 +95,10 @@ export function getSetup(options: Options) {
 
     function getOptimization() {
         /**
-         * @todo Make splitchunks more configurable. It may be desireable to do code splitting during development.
+         * @todo Make splitchunks more configurable.
          */
         return ifClient(
-            ifProduction({
+            {
                 minimize: true,
                 minimizer: [
                     /**
@@ -158,9 +157,7 @@ export function getSetup(options: Options) {
                     maxSize: 1000000,
                     minSize: 0,
                 },
-            }, {
-                noEmitOnErrors: true,
-            }),
+            },
             {
                 noEmitOnErrors: true,
             },
@@ -300,21 +297,6 @@ export function getSetup(options: Options) {
         );
     }
 
-    function getPluginForkTsCheckerWebpack() {
-        return ifProduction(
-            new ForkTsCheckerWebpackPlugin({
-                silent: true,
-                tsconfig: resolveTsConfig(),
-            }),
-            new ForkTsCheckerWebpackPlugin({
-                async: false,
-                silent: true,
-                tsconfig: resolveTsConfig(),
-                watch: resolveSourceRoot(),
-            }),
-        );
-    }
-
     function getNode() {
         return ifNode(
             {
@@ -372,7 +354,6 @@ export function getSetup(options: Options) {
         getOutput,
         getPerformance,
         getPluginBundleAnalyzer,
-        getPluginForkTsCheckerWebpack,
         getResolve,
     };
 }

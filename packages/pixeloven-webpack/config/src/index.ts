@@ -1,15 +1,17 @@
 import { removeEmpty } from "@pixeloven-core/common";
 import { getUtils } from "@pixeloven-core/env";
-import { resolveSourceRoot } from "@pixeloven-core/filesystem";
-import { logger } from "@pixeloven-core/logger";
+import { resolveSourceRoot, resolveTsConfig } from "@pixeloven-core/filesystem";
 import tsLoader from "@pixeloven-webpack/ts-loader";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
-import CircularDependencyPlugin from "circular-dependency-plugin";
+
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TimeFixPlugin from "time-fix-plugin";
 import webpack, { Configuration } from "webpack";
 import ManifestPlugin from "webpack-manifest-plugin";
 import { Options } from "./types";
+
+import { createCircularDependencyPlugin } from "./CircularDependencyPlugin";
+import { createForkTsCheckerWebpack } from "./ForkTsCheckerWebpackPlugin";
 
 import { getSetup } from "./helpers/shared";
 
@@ -35,16 +37,8 @@ function getConfig(options: Options) {
         getOutput,
         getPerformance,
         getPluginBundleAnalyzer,
-        getPluginForkTsCheckerWebpack,
         getResolve,
     } = getSetup(options);
-
-    /**
-     * @todo eventually make this something that can be configurable once we understand it's impact more
-     */
-    const limitCyclesDetected = 3;
-    let numCyclesDetected = 0;
-    let numCyclesDisplayed = 0;
 
     /**
      * @todo Look into https://github.com/mzgoddard/hard-source-webpack-plugin
@@ -72,46 +66,10 @@ function getConfig(options: Options) {
              *
              * @todo should determine why we can't just push errors/strings to compilation.warnings
              */
-            () => {
-                if (options.circularDepCheck) {
-                    return new CircularDependencyPlugin({
-                        // exclude detection of files based on a RegExp
-                        exclude: /node_modules/,
-                        onStart() {
-                            numCyclesDetected = 0;
-                            numCyclesDisplayed = 0;
-                        },
-                        onDetected({ paths }) {
-                            if (numCyclesDetected < limitCyclesDetected) {
-                                // compilation.warnings.push(new Error(`circular dependency ${paths.join(" -> ")}`));
-                                logger.warn(
-                                    `circular dependency ${paths.join(" -> ")}`,
-                                );
-                                numCyclesDisplayed++;
-                            }
-                            numCyclesDetected++;
-                        },
-                        onEnd() {
-                            if (numCyclesDetected > limitCyclesDetected) {
-                                // compilation.warnings.push(new Error(`${numCyclesDetected - numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`));
-                                if (options.circularDepCheck === "warn") {
-                                    logger.warn(
-                                        `${numCyclesDetected -
-                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
-                                    );
-                                } else {
-                                    logger.error(
-                                        `${numCyclesDetected -
-                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
-                                    );
-                                }
-                            }
-                        },
-                    });
-                } else {
-                    return;
-                }
-            },
+            createCircularDependencyPlugin({
+                circularDepCheck: options.circularDepCheck,
+                limitCyclesDetected: 3,
+            }),
             /**
              * Helps prevent hashes from updating if a bundle hasn't changed.
              * @env all
@@ -141,7 +99,12 @@ function getConfig(options: Options) {
              * Perform type checking and linting in a separate process to speed up compilation
              * @env all
              */
-            getPluginForkTsCheckerWebpack(),
+            createForkTsCheckerWebpack({
+                mode: options.mode,
+                name: options.name,
+                target: options.target,
+                tsConfig: resolveTsConfig(),
+            }),
             /**
              * Extract css to file
              * @env production
@@ -198,46 +161,10 @@ function getConfig(options: Options) {
              *
              * @todo should determine why we can't just push errors/strings to compilation.warnings
              */
-            () => {
-                if (options.circularDepCheck) {
-                    return new CircularDependencyPlugin({
-                        // exclude detection of files based on a RegExp
-                        exclude: /node_modules/,
-                        onStart() {
-                            numCyclesDetected = 0;
-                            numCyclesDisplayed = 0;
-                        },
-                        onDetected({ paths }) {
-                            if (numCyclesDetected < limitCyclesDetected) {
-                                // compilation.warnings.push(new Error(`circular dependency ${paths.join(" -> ")}`));
-                                logger.warn(
-                                    `circular dependency ${paths.join(" -> ")}`,
-                                );
-                                numCyclesDisplayed++;
-                            }
-                            numCyclesDetected++;
-                        },
-                        onEnd() {
-                            if (numCyclesDetected > limitCyclesDetected) {
-                                // compilation.warnings.push(new Error(`${numCyclesDetected - numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`));
-                                if (options.circularDepCheck === "warn") {
-                                    logger.warn(
-                                        `${numCyclesDetected -
-                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
-                                    );
-                                } else {
-                                    logger.error(
-                                        `${numCyclesDetected -
-                                            numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
-                                    );
-                                }
-                            }
-                        },
-                    });
-                } else {
-                    return;
-                }
-            },
+            createCircularDependencyPlugin({
+                circularDepCheck: options.circularDepCheck,
+                limitCyclesDetected: 3,
+            }),
             /**
              * Moment.js is an extremely popular library that bundles large locale files
              * by default due to how Webpack interprets its code. This is a practical
@@ -258,7 +185,15 @@ function getConfig(options: Options) {
                 TARGET: options.target,
             }),
             getPluginBundleAnalyzer(options.stats),
-            getPluginForkTsCheckerWebpack(),
+            /**
+             * Forks TS compiler into a seperate process
+             */
+            createForkTsCheckerWebpack({
+                mode: options.mode,
+                name: options.name,
+                target: options.target,
+                tsConfig: resolveTsConfig(),
+            }),
         ]),
     );
 
