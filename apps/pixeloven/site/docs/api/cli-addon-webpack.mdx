@@ -50,11 +50,12 @@ Based on the task provided Webpack will be built in one of two modes.
 
 These options provide more general customization through webpack. For options specific to [Development](#development) or [Production](#production) builds can be found below.
 
-| Option              | Default | Description                                                                                                                             |
-| ------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `--allow-externals` | `false` | Allows bundling of external dependencies. This is automatic for client builds. Node/Server builds require this to be passed explicitly. |
-| `--path`            | `/`     | Public path an application will be mounted at. Generally the default value is recommended.                                              |
-| `--source-map`      | `false` | Sets a flag for webpack to include source mapping.                                                                                      |
+| Option                 | Default | Description                                                                                                                             |
+| ---------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `--allow-externals`    | `false` | Allows bundling of external dependencies. This is automatic for client builds. Node/Server builds require this to be passed explicitly. |
+| `--path`               | `/`     | Public path an application will be mounted at. Generally the default value is recommended.                                              |
+| `--source-map`         | `false` | Sets a flag for webpack to include source mapping.                                                                                      |
+| `--circular-dep-check` |         | Enables circular dependency checking                                                                                                    |
 
 #### Build Options
 
