@@ -63,6 +63,7 @@ export default {
             host,
             ignored,
             library,
+            namespace,
             path,
             poll,
             port,
@@ -110,6 +111,7 @@ export default {
                 entry,
                 mode,
                 name,
+                namespace,
                 outputPath: globalDefaultOutputPath,
                 profiling: profile,
                 publicPath: path,
@@ -207,6 +209,7 @@ export default {
                     serverOptions: {
                         host,
                         ignored,
+                        namespace,
                         path,
                         poll,
                         port,

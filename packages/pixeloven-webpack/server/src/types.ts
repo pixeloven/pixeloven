@@ -7,10 +7,11 @@ export enum Protocol {
 
 export interface Options {
     host: string;
+    ignored: RegExp | string | string[];
+    namespace?: string;
     port: number;
     protocol: Protocol;
     path: string;
     poll: number | boolean;
-    ignored: RegExp | string | string[];
     reportingOptions?: PartialFileReporterOptions;
 }

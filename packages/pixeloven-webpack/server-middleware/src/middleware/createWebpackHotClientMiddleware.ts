@@ -4,6 +4,7 @@ import path from "path";
 import webpackHotMiddleware from "webpack-hot-middleware";
 
 interface ClientMiddlewareConfig {
+    namespace?: string;
     publicPath: string;
 }
 
@@ -23,7 +24,9 @@ function createWebpackHotClientMiddleware(
         return webpackHotMiddleware(compiler.client, {
             heartbeat: 3000,
             log: false,
-            path: path.normalize(`/${config.publicPath}/__webpack_hmr`),
+            path: path.normalize(
+                `/${config.publicPath}/__${config.namespace ?? "webpack"}_hmr`,
+            ),
             reload: true,
         });
     }

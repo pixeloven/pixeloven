@@ -35,6 +35,7 @@ export enum WebpackExecutionOptionTypes {
     "development" = "development",
     "entry" = "entry",
     "host" = "host",
+    "namespace" = "namespace",
     "ignored" = "ignored",
     "library" = "library",
     "path" = "path",
