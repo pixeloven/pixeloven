@@ -13,6 +13,7 @@ export interface Options {
     entry: string;
     mode: Mode;
     name: Name;
+    namespace: string;
     staticAssetPath: string;
     outputPath: string;
     profiling: boolean;

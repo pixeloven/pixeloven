@@ -11,6 +11,7 @@ const defaultCompilerOptions: Options = {
     entry: "./src/index.ts",
     mode: Mode.development,
     name: Name.library,
+    namespace: "webpack",
     outputPath: "./dist",
     profiling: false,
     publicPath: "/",

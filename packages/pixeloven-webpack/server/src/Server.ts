@@ -23,6 +23,7 @@ import { Options, Protocol } from "./types";
 const defaultServerOptions: Options = {
     host: "localhost",
     ignored: /node_modules/,
+    namespace: "webpack",
     path: "/",
     poll: 500,
     port: 8080,
@@ -67,6 +68,7 @@ async function Server(compiler: Compiler, options: Options) {
     const webpackHotClientMiddleware = createWebpackHotClientMiddleware(
         compiler,
         {
+            namespace: options.namespace,
             publicPath: options.path,
         },
     );
