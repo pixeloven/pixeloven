@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/file-reporter",
-    "version": "6.0.0-rc.12",
+    "version": "6.0.0-rc.17",
     "description": "Webpack file reporter",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -28,7 +28,7 @@
         "@pixeloven-tooling/linter": "^6.0.0-rc.12",
         "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
         "@pixeloven-tooling/test": "^6.0.0-rc.12",
-        "@pixeloven-webpack/types": "^6.0.0-beta.26",
+        "@pixeloven-webpack/types": "^6.0.0-rc.17",
         "@types/filesize": "4.2.0",
         "@types/recursive-readdir": "2.2.0",
         "lint-staged": "10.0.7"
