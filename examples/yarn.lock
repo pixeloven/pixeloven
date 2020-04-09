@@ -2375,6 +2375,21 @@
     "@pixeloven-webpack/types" "^6.0.0-beta.26"
     "@pixeloven/cli" "^6.0.0-rc.12"
 
+"@pixeloven/cli-core@6.0.0-rc.12":
+  version "6.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/@pixeloven/cli-core/-/cli-core-6.0.0-rc.12.tgz#11f1389166c7a55340608e9d8e541cd5d6eb9f7a"
+  integrity sha512-HoOCt7cVYkdw0xfqcGczDet1Qydvh+KEdo3r91tKTHMENJz0tX5Emuu6I3xV4oiRVa+VdYtinokI8cL59zT/9A==
+  dependencies:
+    "@pixeloven-core/common" "^6.0.0-rc.12"
+    "@pixeloven-core/filesystem" "^6.0.0-rc.12"
+    "@pixeloven-core/validation" "^6.0.0-rc.12"
+    "@pixeloven-tooling/compiler" "^6.0.0-rc.12"
+    "@pixeloven-tooling/linter" "^6.0.0-rc.12"
+    "@pixeloven-tooling/pretty" "^6.0.0-rc.5"
+    "@pixeloven-tooling/test" "^6.0.0-rc.12"
+    "@pixeloven/cli" "^6.0.0-rc.12"
+    typedoc "0.15.7"
+
 "@pixeloven/cli@6.0.0-rc.12", "@pixeloven/cli@^6.0.0-rc.12":
   version "6.0.0-rc.12"
   resolved "https://registry.yarnpkg.com/@pixeloven/cli/-/cli-6.0.0-rc.12.tgz#84e9ccda80e813c135503704e8de115843e12d56"

@@ -179,6 +179,8 @@ export function getSetup(options: Options) {
                     `${options.staticAssetPath}/js/[name].[contenthash].js`,
                     `${options.staticAssetPath}/js/[name].[hash].js`,
                 ),
+                hotUpdateChunkFilename: `${options.staticAssetPath}/[id].[hash].hot-update.js`,
+                hotUpdateMainFilename: `${options.staticAssetPath}/[hash].hot-update.json`,
                 path: resolvePath(
                     path.normalize(`${options.outputPath}/public`),
                     false,
