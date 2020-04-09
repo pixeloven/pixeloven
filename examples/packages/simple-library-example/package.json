@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@pixeloven/cli": "6.0.0-rc.0",
+    "@pixeloven/cli": "6.0.0-rc.12",
     "lint-staged": "10.0.7"
   },
   "scripts": {
