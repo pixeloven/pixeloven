@@ -1,4 +1,3 @@
 /**
  * Register package types here
  */
-

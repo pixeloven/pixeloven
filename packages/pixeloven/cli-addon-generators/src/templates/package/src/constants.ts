@@ -1,4 +1,3 @@
 /**
  * Register package constants here
  */
-
