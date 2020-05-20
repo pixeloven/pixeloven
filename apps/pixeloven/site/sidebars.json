@@ -1,7 +1,10 @@
 {
     "docs": {
         "Welcome": ["about-us"],
-        "Getting Started": ["getting-started/intro"],
+        "Getting Started": [
+            "getting-started/intro",
+            "getting-started/generator"
+        ],
         "API": [
             {
                 "type": "category",

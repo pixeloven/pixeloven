@@ -1,0 +1,3 @@
+/**
+ * Register package types here
+ */

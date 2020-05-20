@@ -20,4 +20,4 @@ yarn add --dev @pixeloven/cli-addon-generators
 
 ## Generating components
 
-Refer to [the component instructions](./component.md)
+See the [generator specific docs](https://www.pixeloven.com/docs/getting-started/generator).
