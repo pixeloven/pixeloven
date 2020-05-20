@@ -7,6 +7,7 @@ import * as Validation from "@pixeloven-core/validation";
 import {
     AddonGeneratorsToolbox,
     AtomicDesignType,
+    CreateAppOptions,
     CreateComponentOptions,
     CreateOptions,
     CreatePackageOptions,
@@ -24,6 +25,7 @@ export default {
     run: async (toolbox: AddonGeneratorsToolbox) => {
         let statusCode = 0;
         const {
+            createApp,
             createComponent,
             createPackage,
             parameters,
@@ -151,6 +153,56 @@ export default {
                 validate: Validation.minLength(1),
             },
         ];
+        const askCreateAppQuestions = [
+            {
+                message: "What is the name of the new app?",
+                name: "appName",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message:
+                    "Provide a app namespace if necessary (leave blank if not required):",
+                name: "appNameSpace",
+                type: "input",
+            },
+            {
+                message: "Provide a brief description of the app:",
+                name: "appDescription",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message: "Provide a license type for the app:",
+                name: "appLicense",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message: "Provide the author name:",
+                name: "appAuthorName",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message: "Provide the author email:",
+                name: "appAuthorEmail",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message:
+                    "Provide a private registery if necessary(leave blank if not required):",
+                name: "appRegistry",
+                type: "input",
+            },
+            {
+                message: "Provide an initial version to publish the app with:",
+                name: "appVersion",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+        ];
 
         if (!type) {
             const { generatorType } = (await prompt.ask<CreateOptions>(
@@ -161,7 +213,10 @@ export default {
 
         switch (type.toLowerCase()) {
             case "app": {
-                print.info("Coming Soon");
+                const options = (await prompt.ask<CreateAppOptions>(
+                    askCreateAppQuestions,
+                )) as any;
+                createApp(options);
                 break;
             }
             case "component": {

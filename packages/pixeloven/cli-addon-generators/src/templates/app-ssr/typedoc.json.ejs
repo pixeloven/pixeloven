@@ -1,0 +1,13 @@
+{
+    <%_ if (props.nameSpace && props.nameSpace.length > 0) { -%>
+    "name": "<%= props.nameSpace %>/apps-<%= props.name %>",
+    <%_ } else { -%>
+    "name": "<%= props.name %>",
+    <%_} -%>
+    "target": "es5",
+    "out": "docs",
+    "exclude": "*.{story,test}.{ts,tsx}",
+    "externalPattern": "**/node_modules/**",
+    "excludeExternals": true,
+    "includeDeclarations": false
+}

@@ -1,7 +1,8 @@
-import { MemoryRouter } from "@pixeloven-react/routing";
-import { storiesOf } from "@storybook/react";
-import { createLocation, createMemoryHistory } from "history";
+import {createLocation, createMemoryHistory} from "history";
 import React from "react";
+
+import {MemoryRouter} from "@pixeloven-react/routing";
+import {storiesOf} from "@storybook/react";
 
 import Default from "./Default";
 import Readme from "./README.md";
@@ -23,6 +24,6 @@ storiesOf("Components/Templates/Default", module).add(
         </MemoryRouter>
     ),
     {
-        notes: { markdown: Readme },
+        notes: {markdown: Readme},
     },
 );
