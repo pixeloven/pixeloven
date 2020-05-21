@@ -4,13 +4,29 @@ Simply a list of ideas I throw down when I can't sleep
 ## Planned v6 Release
 * Onboarding
     * Finish getting started and API documentation
-    * Create generator for init and make compatible with npx (npx pixeloven init my-app) like create react app does.
     * Finish App and package generators
 * Clean up examples
     * abstract what I need from ssr example and gut the rest
     * finish dockerizing them
     * Revisit the peer vs dep situation for the main cli
-
+    * Remove warnings
+```
+warning @pixeloven/cli > @pixeloven-tooling/linter > tslint-react@4.2.0: TSLint has been deprecated in favor of ESLint. Please see https://github.com/palantir/tslint-react/issues/210 for more information.
+warning @pixeloven/cli > @pixeloven-tooling/test > jest-haste-map > fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+warning @pixeloven/cli > @pixeloven-tooling/test > jest-config > jest-environment-jsdom > jsdom > left-pad@1.3.0: use String.prototype.padStart()
+warning @pixeloven/cli > @pixeloven-tooling/test > jest-config > jest-environment-jsdom > jsdom > request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+warning @pixeloven/cli > @pixeloven-tooling/test > jest-haste-map > micromatch > snapdragon > source-map-resolve > resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+warning @pixeloven/cli > @pixeloven-tooling/test > jest-haste-map > micromatch > snapdragon > source-map-resolve > urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+warning @pixeloven/cli > @pixeloven-tooling/linter > stylelint > postcss-markdown > remark > unified > @types/vfile > @types/vfile-message@2.0.0: This is a stub types definition. vfile-message provides its own type definitions, so you do not need this installed.
+warning @pixeloven/cli-addon-storybook > @pixeloven-storybook/common > @storybook/react > react-dev-utils > fork-ts-checker-webpack-plugin > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+warning @pixeloven/cli-addon-storybook > @pixeloven-storybook/common > @storybook/react > react-dev-utils > fork-ts-checker-webpack-plugin > chokidar > fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+warning @pixeloven/cli-addon-storybook > @pixeloven-storybook/config > webpack > watchpack > watchpack-chokidar2 > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+warning @pixeloven/cli-addon-storybook > @pixeloven-storybook/common > @storybook/addon-actions > @storybook/components > popper.js@1.16.1: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+warning @pixeloven/cli-addon-storybook > @pixeloven-storybook/common > @storybook/addon-actions > @storybook/components > react-popper-tooltip > react-popper > popper.js@1.16.1: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+warning @pixeloven/cli-addon-webpack > @pixeloven-webpack/compiler > @pixeloven-webpack/config > react-dev-utils > fork-ts-checker-webpack-plugin > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+warning lerna > @lerna/bootstrap > @lerna/run-lifecycle > npm-lifecycle > node-gyp > request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+warning lerna > @lerna/bootstrap > @lerna/symlink-binary > @lerna/create-symlink > @zkochan/cmd-shim > mkdirp-promise@5.0.1: This package is broken and no longer maintained. 'mkdirp' itself supports promises now, please switch to that.
+```
 ## After v6 Release
 * Storybook
     * storybook-addon-options is deprecated and will stop working soon
