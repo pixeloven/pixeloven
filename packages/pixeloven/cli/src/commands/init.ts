@@ -1,6 +1,5 @@
 import { getKeys } from "@pixeloven-core/common";
 import * as Validation from "@pixeloven-core/validation";
-import { packageManager } from "gluegun";
 import { PixelOvenToolbox } from "../types";
 
 enum PackageManager {
