@@ -54,9 +54,15 @@ export default {
                 template: "project/tsconfig.json.ejs",
             });
             if (props.projectPackageManager === "Yarn") {
-                await system.run(`yarn --cwd ${locationName} install`);
+                await system.spawn(`yarn --cwd ${locationName} install`, {
+                    detached: true,
+                    stdio: "inherit",
+                });
             } else {
-                await system.run(`npm --prefix ${locationName} install`);
+                await system.spawn(`npm --prefix ${locationName} install`, {
+                    detached: true,
+                    stdio: "inherit",
+                });
             }
         }
         const askNewProjectQuestions = [
