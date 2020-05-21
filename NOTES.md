@@ -9,6 +9,7 @@ Simply a list of ideas I throw down when I can't sleep
 * Clean up examples
     * abstract what I need from ssr example and gut the rest
     * finish dockerizing them
+    * Revisit the peer vs dep situation for the main cli
 
 ## After v6 Release
 * Storybook
