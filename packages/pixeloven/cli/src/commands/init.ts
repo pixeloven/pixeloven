@@ -2,21 +2,11 @@ import { getKeys } from "@pixeloven-core/common";
 import * as Validation from "@pixeloven-core/validation";
 import { PixelOvenToolbox } from "../types";
 
-enum ProjectType {
-    New,
-    Existing,
-}
-type ProjectStrings = keyof typeof ProjectType;
-
 enum PackageManager {
     NPM,
     Yarn,
 }
 type PackageManagerStrings = keyof typeof PackageManager;
-
-interface ProjectOptions {
-    projectType: ProjectStrings;
-}
 
 interface NewProjectOptions {
     projectName: string;
@@ -29,16 +19,11 @@ export default {
     description: "PixelOven initializer",
     name: "init",
     run: async (toolbox: PixelOvenToolbox) => {
-        const { prompt, print, template } = toolbox;
+        const { prompt, print, system, template } = toolbox;
 
         /**
-         * @todo init should just create the basic project and then the generator addon is installed and can be run by the user to create apps and packages
-         * @todo why does this not actually generate anything :(
-         * @todo need to make sure all paths are lower case
-         * @todo let's simplify tsconfig
-         * @todo Need to add all of our addon stuff
-         * @todo why does it assume /bu
-         * @param dist/lib/build/templates/ ????????????????????????????????????
+         * Wrapper for all the generators
+         * @param props
          */
         async function generate(props: NewProjectOptions) {
             const { projectName } = props;
@@ -68,16 +53,6 @@ export default {
                 template: "project/tsconfig.json.ejs",
             });
         }
-
-        const statusCode = 0;
-        const askProjectQuestions = [
-            {
-                choices: getKeys(ProjectType),
-                message: "Is this a new or existing project?",
-                name: "projectType",
-                type: "select",
-            },
-        ];
         const askNewProjectQuestions = [
             {
                 choices: getKeys(PackageManager),
@@ -105,27 +80,18 @@ export default {
                 validate: Validation.minLength(1),
             },
         ];
-        const { projectType } = await prompt.ask<ProjectOptions>(
-            askProjectQuestions,
-        );
-        switch (projectType) {
-            case "Existing": {
-                print.info(
-                    "Please review our getting started section for existing projects https://www.pixeloven.com/docs/getting-started/intro",
-                );
-                break;
-            }
-            case "New": {
-                const props = await prompt.ask<NewProjectOptions>(
-                    askNewProjectQuestions,
-                );
-                await generate(props);
-                // @todo run npm/yarn install here.....
-                // @todo print messages about next steps for creating apps and packages!!!!
-                // @todo create app generator in the addon...
-                // @todo pass cli version into templates and in our docs
-                break;
-            }
+        let statusCode = 0;
+        try {
+            const props = await prompt.ask<NewProjectOptions>(
+                askNewProjectQuestions,
+            );
+            await generate(props);
+            system.spawn("yarn install");
+            print.info(
+                `Next try "yarn generate" to start your first application or package.`,
+            );
+        } catch (e) {
+            statusCode = 1;
         }
         process.exit(statusCode);
     },
