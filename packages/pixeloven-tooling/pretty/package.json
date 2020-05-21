@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "@pixeloven-tooling/common": "^6.0.0-rc.5",
-    "prettier": "1.19.1"
+    "prettier": "2.0.5"
   }
 }

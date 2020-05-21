@@ -17,14 +17,14 @@
   },
   "dependencies": {
     "@pixeloven-tooling/common": "^6.0.0-rc.5",
-    "stylelint": "13.3.0",
+    "stylelint": "13.5.0",
     "stylelint-config-recommended-scss": "4.2.0",
-    "stylelint-scss": "3.16.0",
-    "tslint": "5.20.1",
+    "stylelint-scss": "3.17.2",
+    "tslint": "6.1.2",
     "tslint-config-prettier": "1.18.0",
     "tslint-eslint-rules": "5.4.0",
-    "tslint-react": "4.2.0",
+    "tslint-react": "5.0.0",
     "tslint-react-hooks": "2.2.2",
-    "typescript": "3.8.3"
+    "typescript": "3.9.3"
   }
 }

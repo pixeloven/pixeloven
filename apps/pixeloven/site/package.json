@@ -13,7 +13,7 @@
         "deploy": "GIT_USER=pixeloven-bot USE_SSH=true docusaurus deploy"
     },
     "dependencies": {
-        "@babel/core": "7.9.0",
+        "@babel/core": "7.9.6",
         "@babel/plugin-transform-runtime": "7.9.0",
         "@docusaurus/core": "2.0.0-alpha.40",
         "@docusaurus/preset-classic": "2.0.0-alpha.40",
