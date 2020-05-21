@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import "jest";
 import httpMocks from "node-mocks-http";
+import sinon, { SinonSandbox } from "sinon";
 import DynamicMiddleware from "./DynamicMiddleware";
 
 const exampleMiddleware = (req: Request, res: Response, next: NextFunction) =>
@@ -34,17 +35,24 @@ describe("@pixeloven-express/dynamic-middleware", () => {
             });
         });
         describe("handle", () => {
+            let sandbox: SinonSandbox;
+            beforeEach(() => {
+                sandbox = sinon.createSandbox();
+            });
+            afterEach(() => {
+                sandbox.restore();
+            });
             const dynamicMiddleware = new DynamicMiddleware([
                 exampleMiddleware,
             ]);
-            it("should return a wrapper middleware and async exec each layer", done => {
+            it("should return a wrapper middleware and async exec each layer", (done) => {
                 const mockRequest = httpMocks.createRequest();
                 const mockResponse = httpMocks.createResponse();
-                const mockNext = jest.fn(done);
+                const mockNext = sinon.spy(done);
                 const handler = dynamicMiddleware.handle();
                 expect(typeof handler).toEqual("function");
                 handler(mockRequest, mockResponse, mockNext);
-                expect(mockNext.mock.calls.length).toEqual(1);
+                expect(mockNext.callCount).toEqual(1);
             });
         });
         describe("mount", () => {

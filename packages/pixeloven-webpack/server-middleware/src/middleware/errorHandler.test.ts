@@ -1,30 +1,36 @@
 import "jest";
 import httpMocks from "node-mocks-http";
+import sinon, { SinonSandbox } from "sinon";
 import errorHandler from "./errorHandler";
 
 describe("@pixeloven-webpack/server", () => {
     describe("middleware", () => {
         describe("errorHandler", () => {
-            it(`should respond with 500"`, () => {
+            let sandbox: SinonSandbox;
+            beforeEach(() => {
+                sandbox = sinon.createSandbox();
+            });
+            afterEach(() => {
+                sandbox.restore();
+            });
+            it(`should respond with 500`, () => {
                 const mockError = new Error("testing");
                 const mockRequest = httpMocks.createRequest();
                 const mockResponse = httpMocks.createResponse();
-                const mockNext = jest.fn();
+                const mockNext = sinon.spy();
                 mockResponse.headersSent = false;
                 errorHandler(mockError, mockRequest, mockResponse, mockNext);
-                expect(mockNext.mock.calls.length).toEqual(0);
+                expect(mockNext.callCount).toEqual(1);
                 expect(mockResponse.statusCode).toEqual(500);
             });
             it(`should pass to built in error handler"`, () => {
                 const mockError = new Error("testing");
                 const mockRequest = httpMocks.createRequest();
                 const mockResponse = httpMocks.createResponse();
-                const mockNext = jest.fn((error: Error) => {
-                    expect(error.message).toEqual("testing");
-                });
+                const mockNext = sinon.spy();
                 mockResponse.headersSent = true;
                 errorHandler(mockError, mockRequest, mockResponse, mockNext);
-                expect(mockNext.mock.calls.length).toEqual(1);
+                expect(mockNext.callCount).toEqual(1);
                 expect(mockResponse.statusCode).toEqual(200);
             });
         });

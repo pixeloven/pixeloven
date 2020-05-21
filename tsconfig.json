@@ -38,15 +38,17 @@
       "target": "es5"
   },
   "exclude": [
-      "**/coverage",
-      "**/dist",
-      "**/docs",
-      "**/node_modules",
-      "**/stats",
-      "**/*.stories.tsx",
-      "**/*.test.tsx",
-      "**/*.stories.ts",
-      "**/*.test.ts",
-      "**/__mocks__",
+    "coverage",
+    "dist",
+    "docs",
+    "node_modules",
+    "**/coverage",
+    "**/dist",
+    "**/docs",
+    "**/node_modules",
+    "**/*.stories.{ts,tsx}",
+    "**/*.test.{ts,tsx}",
+    "**/__mocks__",
+    "**/src/templates",
   ]
 }

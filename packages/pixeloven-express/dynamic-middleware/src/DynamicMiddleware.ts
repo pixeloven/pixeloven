@@ -14,7 +14,7 @@ type Middleware = (req: Request, res: Response, next: NextFunction) => void;
  * @type Layer
  * @description Represents a new application layer. Either a new Application layer or middleware.
  */
-type Layers = Array<Application | Express | Middleware>;
+type Layers = (Application | Express | Middleware)[];
 
 class DynamicMiddleware {
     protected layers: Layers;
@@ -45,9 +45,14 @@ class DynamicMiddleware {
             async.each(
                 this.layers,
                 (fn, callback) => {
-                    fn(req, res, callback);
+                    /* tslint:disable-next-line no-any */
+                    fn(req, res, (err?: any) => {
+                        if (err && err.stack && err.message) {
+                            callback(err);
+                        }
+                    });
                 },
-                err => {
+                (err) => {
                     next(err);
                 },
             );
@@ -67,7 +72,7 @@ class DynamicMiddleware {
      * @param layer
      */
     public unmount(layer: Application | Middleware) {
-        this.layers = this.layers.filter(l => l !== layer);
+        this.layers = this.layers.filter((l) => l !== layer);
     }
 }
 
