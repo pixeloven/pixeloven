@@ -27,31 +27,37 @@ export default {
          */
         async function generate(props: NewProjectOptions) {
             const { projectName } = props;
+            const locationName = projectName.toLowerCase();
             await template.generate({
                 props,
-                target: `${projectName.toLowerCase()}/apps/.gitkeep`,
+                target: `${locationName}/apps/.gitkeep`,
                 template: "project/gitkeep.ejs",
             });
             await template.generate({
                 props,
-                target: `${projectName.toLowerCase()}/packages/.gitkeep`,
+                target: `${locationName}/packages/.gitkeep`,
                 template: "project/gitkeep.ejs",
             });
             await template.generate({
                 props,
-                target: `${projectName.toLowerCase()}/lerna.json`,
+                target: `${locationName}/lerna.json`,
                 template: "project/lerna.json.ejs",
             });
             await template.generate({
                 props,
-                target: `${projectName.toLowerCase()}/package.json`,
+                target: `${locationName}/package.json`,
                 template: "project/package.json.ejs",
             });
             await template.generate({
                 props,
-                target: `${projectName.toLowerCase()}/tsconfig.json`,
+                target: `${locationName}/tsconfig.json`,
                 template: "project/tsconfig.json.ejs",
             });
+            if (props.projectPackageManager === "Yarn") {
+                system.run(`yarn --cwd ${locationName} install`);
+            } else {
+                system.run(`npm --prefix ${locationName} install`);
+            }
         }
         const askNewProjectQuestions = [
             {
@@ -86,7 +92,7 @@ export default {
                 askNewProjectQuestions,
             );
             await generate(props);
-            system.spawn("yarn install");
+
             print.info(
                 `Next try "yarn generate" to start your first application or package.`,
             );
