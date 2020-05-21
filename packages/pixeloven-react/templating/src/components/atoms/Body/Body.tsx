@@ -4,7 +4,7 @@ import { HelmetData } from "react-helmet";
 interface BodyProps {
     children: string;
     scripts?: React.ReactNode;
-    state?: object; // Todo make generic
+    state?: object;
     helmet?: HelmetData;
 }
 
