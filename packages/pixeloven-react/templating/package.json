@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-react/templating",
-    "version": "6.0.0-rc.12",
+    "version": "6.0.0-rc.18",
     "description": "Defines simple react components and functionality to support server side rendering.",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
