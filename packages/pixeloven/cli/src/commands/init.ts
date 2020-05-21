@@ -1,5 +1,6 @@
 import { getKeys } from "@pixeloven-core/common";
 import * as Validation from "@pixeloven-core/validation";
+import { packageManager } from "gluegun";
 import { PixelOvenToolbox } from "../types";
 
 enum PackageManager {
@@ -54,9 +55,9 @@ export default {
                 template: "project/tsconfig.json.ejs",
             });
             if (props.projectPackageManager === "Yarn") {
-                system.run(`yarn --cwd ${locationName} install`);
+                await system.run(`yarn --cwd ${locationName} install`);
             } else {
-                system.run(`npm --prefix ${locationName} install`);
+                await system.run(`npm --prefix ${locationName} install`);
             }
         }
         const askNewProjectQuestions = [

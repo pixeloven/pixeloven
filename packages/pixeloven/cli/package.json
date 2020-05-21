@@ -28,8 +28,8 @@
         "@pixeloven-tooling/linter": "^6.0.0-rc.12",
         "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
         "@pixeloven-tooling/test": "^6.0.0-rc.12",
-        "gluegun": "4.1.2",
-        "typedoc": "0.15.7"
+        "gluegun": "4.3.1",
+        "typedoc": "0.17.7"
     },
     "devDependencies": {
         "copyfiles": "2.2.0",
