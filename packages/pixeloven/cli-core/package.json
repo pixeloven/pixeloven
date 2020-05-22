@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/cli-core",
-    "version": "6.0.0-rc.24",
+    "version": "6.0.0-rc.25",
     "description": "Core command line interface for PixelOven framework",
     "main": "dist/lib/index.js",
     "types": "dist/types/types.d.ts",
@@ -28,7 +28,7 @@
         "@pixeloven-tooling/linter": "^6.0.0-rc.24",
         "@pixeloven-tooling/pretty": "^6.0.0-rc.24",
         "@pixeloven-tooling/test": "^6.0.0-rc.24",
-        "@pixeloven/cli": "^6.0.0-rc.24",
+        "@pixeloven/cli": "^6.0.0-rc.25",
         "gluegun": "4.3.1",
         "typedoc": "0.15.7"
     },
