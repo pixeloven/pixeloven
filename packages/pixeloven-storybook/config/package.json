@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-storybook/config",
-    "version": "6.0.0-rc.17",
+    "version": "6.0.0-rc.24",
     "description": "Storybook configuration",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -19,8 +19,8 @@
     },
     "dependencies": {
         "@babel/core": "7.9.6",
-        "@pixeloven-core/filesystem": "^6.0.0-rc.12",
-        "@pixeloven-webpack/ts-loader": "^6.0.0-rc.17",
+        "@pixeloven-core/filesystem": "^6.0.0-rc.24",
+        "@pixeloven-webpack/ts-loader": "^6.0.0-rc.24",
         "@pixeloven-webpack/types": "^6.0.0-rc.17",
         "css-loader": "3.4.2",
         "deepmerge": "4.2.2",
@@ -32,11 +32,11 @@
         "webpack": "4.41.5"
     },
     "devDependencies": {
-        "@pixeloven-storybook/common": "^6.0.0-rc.17",
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.12",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.12",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
-        "@pixeloven-tooling/test": "^6.0.0-rc.12",
+        "@pixeloven-storybook/common": "^6.0.0-rc.24",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.24",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.24",
+        "@pixeloven-tooling/pretty": "^6.0.0-rc.24",
+        "@pixeloven-tooling/test": "^6.0.0-rc.24",
         "@types/mini-css-extract-plugin": "0.8.0",
         "lint-staged": "10.0.7"
     },

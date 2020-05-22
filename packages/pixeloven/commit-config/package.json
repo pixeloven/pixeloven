@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/commit-config",
-    "version": "6.0.0-rc.12",
+    "version": "6.0.0-rc.24",
     "description": "Commit lint configuration",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,10 +18,10 @@
         "access": "public"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.12",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.12",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.5",
-        "@pixeloven-tooling/test": "^6.0.0-rc.12",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.24",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.24",
+        "@pixeloven-tooling/pretty": "^6.0.0-rc.24",
+        "@pixeloven-tooling/test": "^6.0.0-rc.24",
         "lint-staged": "10.0.7"
     },
     "scripts": {
