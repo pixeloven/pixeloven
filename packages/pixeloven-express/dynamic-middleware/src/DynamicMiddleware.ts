@@ -45,16 +45,10 @@ class DynamicMiddleware {
             async.each(
                 this.layers,
                 (fn, callback) => {
-                    /* tslint:disable-next-line no-any */
-                    fn(req, res, (err?: any) => {
-                        if (err && err.stack && err.message) {
-                            callback(err);
-                        }
-                    });
+                    // @ts-ignore
+                    fn(req, res, callback);
                 },
-                (err) => {
-                    next(err);
-                },
+                next,
             );
         };
     }

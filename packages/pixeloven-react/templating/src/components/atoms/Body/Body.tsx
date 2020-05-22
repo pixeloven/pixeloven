@@ -24,6 +24,7 @@ function Body(props: BodyProps) {
             <div id="root" dangerouslySetInnerHTML={innerHTML} />
             <script dangerouslySetInnerHTML={initialState} />
             {scripts}
+            {helmet && helmet.script.toComponent()}
         </body>
     );
 }

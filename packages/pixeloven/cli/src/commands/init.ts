@@ -2,6 +2,16 @@ import { getKeys } from "@pixeloven-core/common";
 import * as Validation from "@pixeloven-core/validation";
 import { PixelOvenToolbox } from "../types";
 
+enum ProjectType {
+    New,
+    Existing,
+}
+type ProjectStrings = keyof typeof ProjectType;
+
+interface ProjectOptions {
+    projectType: ProjectStrings;
+}
+
 enum PackageManager {
     NPM,
     Yarn,
@@ -65,6 +75,16 @@ export default {
                 });
             }
         }
+
+        const askProjectQuestions = [
+            {
+                choices: getKeys(ProjectType),
+                message: "Is this a new or existing project?",
+                name: "projectType",
+                type: "select",
+            },
+        ];
+
         const askNewProjectQuestions = [
             {
                 choices: getKeys(PackageManager),
@@ -92,17 +112,32 @@ export default {
                 validate: Validation.minLength(1),
             },
         ];
+
         let statusCode = 0;
         try {
-            const props = await prompt.ask<NewProjectOptions>(
-                askNewProjectQuestions,
+            const { projectType } = await prompt.ask<ProjectOptions>(
+                askProjectQuestions,
             );
-            await generate(props);
-
-            print.info(
-                `Next try "yarn generate" to start your first application or package.`,
-            );
-        } catch (e) {
+            switch (projectType) {
+                case "Existing": {
+                    print.info(
+                        "Please review our getting started section for existing projects https://www.pixeloven.com/docs/getting-started/intro",
+                    );
+                    break;
+                }
+                case "New": {
+                    const props = await prompt.ask<NewProjectOptions>(
+                        askNewProjectQuestions,
+                    );
+                    await generate(props);
+                    print.info(
+                        `Next try "yarn generate" to start your first application or package.`,
+                    );
+                    break;
+                }
+            }
+        } catch (err) {
+            print.error(err.message);
             statusCode = 1;
         }
         process.exit(statusCode);
