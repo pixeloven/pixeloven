@@ -1,20 +1,18 @@
 # Notes
 Simply a list of ideas I throw down when I can't sleep
 
-## Planned v6 Release
-* Onboarding
-    * Finish getting started and API documentation
-    * Finish App and package generators
+## After v6 Release
 * Clean up examples
     * abstract what I need from ssr example and gut the rest
     * finish dockerizing them
     * Revisit the peer vs dep situation for the main cli
-
-## After v6 Release
+    * create deprecated section so I can link back to main site for all the old packages
 * Storybook
     * storybook-addon-options is deprecated and will stop working soon
 * Workflow
-    * Update base tooling to allow prettier to have full integration like the main CLI.
+    * Prettier, Jest, TypeScript and TsLint/Eslint
+        * write as addons (remove core lib and fold back into base cli)
+        * use standalones when avalible instead of spawning process
     * Remove commit-citizen from PO (maybe from pixeloven/ssr as well)
     * Pre-commit stuff on examples and apps
     * Integration test system to verify CLI under a number of different conditions
@@ -32,7 +30,7 @@ Simply a list of ideas I throw down when I can't sleep
         * "tslint-react-hooks"
     * Generators
         * create generator for library
-        * crete generator for addon
+        * create generator for addon
         * Partial generators for existing projects???
     * Consolidate lerna's conventional-changelog-angular with the one here????
 * Document
