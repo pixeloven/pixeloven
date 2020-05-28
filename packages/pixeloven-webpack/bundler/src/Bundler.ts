@@ -85,11 +85,8 @@ async function Bundler(compiler: Compiler, options: Options) {
             createOrEmptyDir(options.outputPath);
         }
 
-        // Attempt build
-        let statusCode = 0;
-        statusCode += await client();
-        statusCode += await library();
-        statusCode += await server();
+        const statusCodes = await Promise.all([client(), library(), server()]);
+        const statusCode = statusCodes.reduce((total, num) => total + num);
 
         // Run stats on new build if it exists
         const latestFileSizes = await fileReporter.fromFileSystem(
