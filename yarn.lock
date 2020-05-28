@@ -9,7 +9,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.1", "@babel/code-frame@^7.8.3":
+"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.1", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
   version "7.10.1"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.1.tgz#d5481c5095daa1c57e16e54c6f9198443afb49ff"
   integrity sha512-IGhtTmpjGbYzcEDOw7DcQtbQSXcG9ftmAXtWTu9V936vDye4xjjekktFAtgZsWpzTj/X01jocB46mTywm/4SZw==
@@ -3680,10 +3680,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.5.tgz#3d03acd3b3414cf67faf999aed11682ed121f22b"
   integrity sha512-90hiq6/VqtQgX8Sp0EzeIsv3r+ellbGj4URKj5j30tLlZvRUpnAe9YbYnjl3pJM93GyXU0tghHhvXHq+5rnCKA==
 
-"@types/node@10.17.12":
-  version "10.17.12"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.12.tgz#4134d75b0dade682f6da9a2f44f5463e8e4f4172"
-  integrity sha512-SSB4O9/0NVv5mbQ5/MabnAyFfcpVFRVIJj1TZkG21HHgwXQGjosiQB3SBWC9pMCMUTNpWL9gUe//9mFFPQAdKw==
+"@types/node@12.12.6":
+  version "12.12.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.6.tgz#a47240c10d86a9a57bb0c633f0b2e0aea9ce9253"
+  integrity sha512-FjsYUPzEJdGXjwKqSpE0/9QEh6kzhTAeObA54rn6j3rR4C/mzpI9L0KNfoeASSPMMdxIsoJuCLDWcM/rVjIsSA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -8599,6 +8599,19 @@ fork-ts-checker-webpack-plugin@4.1.2:
   integrity sha512-3Qe6GxiidhyChpNcfQ9qaNEeO0FavxpvS1ArEy3boSWT05uCUTWPFMNl4OeH3XqsZymWv7t6EkTyj6YHJbVXig==
   dependencies:
     babel-code-frame "^6.22.0"
+    chalk "^2.4.1"
+    micromatch "^3.1.10"
+    minimatch "^3.0.4"
+    semver "^5.6.0"
+    tapable "^1.0.0"
+    worker-rpc "^0.1.0"
+
+fork-ts-checker-webpack-plugin@4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-4.1.6.tgz#5055c703febcf37fa06405d400c122b905167fc5"
+  integrity sha512-DUxuQaKoqfNne8iikd14SAkh5uw4+8vNifp6gmA73yYNS6ywLIWSLD/n/mBzHQRpW3J7rbATEakmiA8JvkTyZw==
+  dependencies:
+    "@babel/code-frame" "^7.5.5"
     chalk "^2.4.1"
     micromatch "^3.1.10"
     minimatch "^3.0.4"
