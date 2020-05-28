@@ -18,7 +18,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@babel/core": "7.9.6",
+        "@babel/core": "7.10.1",
         "@storybook/addon-a11y": "5.3.18",
         "@storybook/addon-actions": "5.3.18",
         "@storybook/addon-backgrounds": "5.3.18",
