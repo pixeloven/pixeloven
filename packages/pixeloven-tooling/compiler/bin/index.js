@@ -9,7 +9,7 @@ const tsConfigJson = "tsconfig.json";
 
 /**
  * Compiler for PixelOven workflow
- * @todo Can we support watch mode?
+ * @todo https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#a-simple-transform-function - should do this for both cli compilers
  * @param {*} argv 
  */
 async function main(proc) {

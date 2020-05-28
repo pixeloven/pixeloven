@@ -28,11 +28,7 @@ async function main(proc) {
     }
 
     const configPath = config(jestJson);
-    if (params.options.watch) {
-        statusCode = await Process.run("jest", ["--watch", "--config", configPath, ...params.raw]);
-    } else {
-        statusCode = await Process.run("jest", ["--config", configPath, ...params.raw]);
-    }
+    statusCode = await Process.run("jest", ["--config", configPath, ...params.raw]);
     if (statusCode === 0) {
         Logger.success(`test`, "completed");
     } else {
