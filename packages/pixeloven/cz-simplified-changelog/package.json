@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/cz-simplified-changelog",
-    "version": "6.0.0-rc.24",
+    "version": "6.0.0-rc.26",
     "description": "Commit citizen simplified changelog prompt",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -26,10 +26,10 @@
         "word-wrap": "1.2.3"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.24",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.24",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.24",
-        "@pixeloven-tooling/test": "^6.0.0-rc.24",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.26",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.26",
+        "@pixeloven-tooling/pretty": "^6.0.0-rc.26",
+        "@pixeloven-tooling/test": "^6.0.0-rc.26",
         "@types/lodash.map": "4.6.13",
         "commitizen": "4.0.3",
         "lint-staged": "10.0.7"

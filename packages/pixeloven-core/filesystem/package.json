@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-core/filesystem",
-    "version": "6.0.0-rc.24",
+    "version": "6.0.0-rc.26",
     "description": "Filesystem abstractions",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,14 +18,14 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/exceptions": "^6.0.0-rc.24",
+        "@pixeloven-core/exceptions": "^6.0.0-rc.26",
         "fs-extra": "8.1.0"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.24",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.24",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.24",
-        "@pixeloven-tooling/test": "^6.0.0-rc.24",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.26",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.26",
+        "@pixeloven-tooling/pretty": "^6.0.0-rc.26",
+        "@pixeloven-tooling/test": "^6.0.0-rc.26",
         "@types/fs-extra": "8.0.1",
         "lint-staged": "10.0.7"
     },
