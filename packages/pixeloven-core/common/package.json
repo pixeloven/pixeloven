@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-core/common",
-    "version": "6.0.0-rc.26",
+    "version": "6.0.0-rc.27",
     "description": "Common abstractions that have yet to find a home",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",

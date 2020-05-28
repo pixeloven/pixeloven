@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/ts-loader",
-    "version": "6.0.0-rc.26",
+    "version": "6.0.0-rc.27",
     "description": "Collection of loaders to handle TypeScript and other advanced JS features",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
