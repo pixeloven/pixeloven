@@ -15,13 +15,17 @@ function getPath(...paths) {
 
 /**
  * Returns parsed package JSON by path
- * @param {*} absPath 
+ * @param {String} absPath 
  */
 function getPackage(absPath) {
     const packageJSON = fs.readFileSync(`${absPath}/package.json`);
     return JSON.parse(packageJSON);
 }
 
+/**
+ * Is path a directory
+ * @param {String} path 
+ */
 function isDirectory(path) {
     try {
         const stat = fs.lstatSync(path);
