@@ -2321,10 +2321,10 @@
   dependencies:
     async "3.2.0"
 
-"@pixeloven-express/middleware-asset-manifest@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@pixeloven-express/middleware-asset-manifest/-/middleware-asset-manifest-6.0.0.tgz#f50c94eac9920b8aa5a74dcedf82559738e70548"
-  integrity sha512-8UzME/1hIRwDYLFG4J4RcsuxaGA3YLjBmFhmdPrj0d12c6w85gDmh1apJMB5NcTf30CF0KuoKJaaQLU85vEb+Q==
+"@pixeloven-express/middleware-asset-manifest@6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@pixeloven-express/middleware-asset-manifest/-/middleware-asset-manifest-6.0.1.tgz#46ac5b1f65eb7d0c62e73b74ae25c6f12a1e685c"
+  integrity sha512-/GG8nybsfjXPxKPVHnaRFBJgF7f8cyCnFKdVYyS/gLNpSq1Jo7wEbE/47MqTmNPwvJ7p3FLYwVT5LoAfQ2eyNg==
 
 "@pixeloven-react/common@6.0.0":
   version "6.0.0"
@@ -2338,10 +2338,22 @@
     react "16.12.0"
     react-dom "16.12.0"
 
-"@pixeloven-react/routing@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@pixeloven-react/routing/-/routing-6.0.0.tgz#9f9938faf4a93fe621d0fac72bb3a1123e0f4612"
-  integrity sha512-7h6x76pnAebFrbTXM2JAdDcC+Qo37MsEBOG9muEayQ2vzyHYPFFTJakj/7Ug7+Iu6wnQ601m13OyyWKELXBbDg==
+"@pixeloven-react/common@6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@pixeloven-react/common/-/common-6.0.1.tgz#235ce810367d625ad8a71c75d0dfd15c024c416d"
+  integrity sha512-ARUYRJ3PJdUEuSq6Ocg+zRnzIv7qGXvS/NsnBBe1SJCHHJc395lWKCqvvtSo5/EEsySI3Wwhb1Bs6O+hhT9MlQ==
+  dependencies:
+    "@types/classnames" "2.2.9"
+    "@types/react" "16.9.17"
+    "@types/react-dom" "16.9.4"
+    classnames "2.2.6"
+    react "16.12.0"
+    react-dom "16.12.0"
+
+"@pixeloven-react/routing@6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@pixeloven-react/routing/-/routing-6.0.1.tgz#7cfd3bcdf5b6286c1f23422247c8fd3b7e8a0259"
+  integrity sha512-Cln0z+HOmMrjTVQtZCpkBNCP6pkqtGPzTlRI+YDDdjBprcFCyDvwJh1NPKeeKMiqhEvWFlfVe7pQ7XKEnCnrkA==
   dependencies:
     "@types/react-redux" "7.1.1"
     "@types/react-router" "5.1.2"
@@ -2349,10 +2361,10 @@
     react-router "5.1.2"
     react-router-dom "5.1.2"
 
-"@pixeloven-react/templating@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@pixeloven-react/templating/-/templating-6.0.0.tgz#0be128dfb7b460037fbd150ace7dd03f769afda8"
-  integrity sha512-J0XmPbUbwv65zL6iNZeqb+w6m1rcGF0wa3lLDdGuttJnbSON9DB5V4w297kcBE8jOcugiN9U5o2Z2ekHqRbw3w==
+"@pixeloven-react/templating@6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@pixeloven-react/templating/-/templating-6.0.1.tgz#e52a9b62b8f8b7b011eaca5e35944650b2bc80a1"
+  integrity sha512-I/WMRQylKTaRnfgcR0f4kBLtHvVHTZQy93qbVbwW2YKhvEIA7S3zlWK+8JQJM6LPWmT03JlGjYLL230tRPk0Kw==
   dependencies:
     "@types/react" "16.9.17"
     "@types/react-dom" "16.9.4"
