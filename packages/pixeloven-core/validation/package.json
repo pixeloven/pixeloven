@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-core/validation",
-    "version": "6.0.0-rc.26",
+    "version": "6.0.0-rc.28",
     "description": "Helper functions for code generation",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,10 +18,10 @@
         "access": "public"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.26",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.26",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.26",
-        "@pixeloven-tooling/test": "^6.0.0-rc.26",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.28",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.28",
+        "@pixeloven-tooling/pretty": "^6.0.0-rc.28",
+        "@pixeloven-tooling/test": "^6.0.0-rc.28",
         "lint-staged": "10.0.7"
     },
     "scripts": {

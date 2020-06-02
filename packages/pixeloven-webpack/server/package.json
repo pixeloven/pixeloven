@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/server",
-    "version": "6.0.0-rc.27",
+    "version": "6.0.0-rc.28",
     "description": "Webpack Development Server",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,19 +18,19 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/common": "^6.0.0-rc.27",
-        "@pixeloven-core/exceptions": "^6.0.0-rc.26",
-        "@pixeloven-core/logger": "^6.0.0-rc.26",
-        "@pixeloven-webpack/compiler": "^6.0.0-rc.27",
-        "@pixeloven-webpack/file-reporter": "^6.0.0-rc.26",
-        "@pixeloven-webpack/server-middleware": "^6.0.0-rc.27",
+        "@pixeloven-core/common": "^6.0.0-rc.28",
+        "@pixeloven-core/exceptions": "^6.0.0-rc.28",
+        "@pixeloven-core/logger": "^6.0.0-rc.28",
+        "@pixeloven-webpack/compiler": "^6.0.0-rc.28",
+        "@pixeloven-webpack/file-reporter": "^6.0.0-rc.28",
+        "@pixeloven-webpack/server-middleware": "^6.0.0-rc.28",
         "express": "4.17.1"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.26",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.26",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.26",
-        "@pixeloven-tooling/test": "^6.0.0-rc.26",
+        "@pixeloven-tooling/compiler": "^6.0.0-rc.28",
+        "@pixeloven-tooling/linter": "^6.0.0-rc.28",
+        "@pixeloven-tooling/pretty": "^6.0.0-rc.28",
+        "@pixeloven-tooling/test": "^6.0.0-rc.28",
         "@pixeloven-webpack/types": "^6.0.0-rc.17",
         "@types/express": "4.17.6",
         "lint-staged": "10.0.7"
