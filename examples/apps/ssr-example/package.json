@@ -11,10 +11,10 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
-        "@pixeloven-express/middleware-asset-manifest": "6.0.0",
-        "@pixeloven-react/common": "6.0.0",
-        "@pixeloven-react/routing": "6.0.0",
-        "@pixeloven-react/templating": "6.0.0",
+        "@pixeloven-express/middleware-asset-manifest": "6.0.1",
+        "@pixeloven-react/common": "6.0.1",
+        "@pixeloven-react/routing": "6.0.1",
+        "@pixeloven-react/templating": "6.0.1",
         "express": "4.17.1",
         "express-winston": "4.0.3",
         "winston": "3.2.1"
