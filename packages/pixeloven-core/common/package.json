@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-core/common",
-    "version": "6.0.0-rc.28",
+    "version": "6.0.0",
     "description": "Common abstractions that have yet to find a home",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -21,10 +21,10 @@
         "@types/node": "12.12.6"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.28",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.28",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.28",
-        "@pixeloven-tooling/test": "^6.0.0-rc.28",
+        "@pixeloven-tooling/compiler": "^6.0.0",
+        "@pixeloven-tooling/linter": "^6.0.0",
+        "@pixeloven-tooling/pretty": "^6.0.0",
+        "@pixeloven-tooling/test": "^6.0.0",
         "lint-staged": "10.2.7"
     },
     "scripts": {
