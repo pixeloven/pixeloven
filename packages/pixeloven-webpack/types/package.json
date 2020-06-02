@@ -1,7 +1,7 @@
 {
   "name": "@pixeloven-webpack/types",
   "version": "6.0.0",
-  "description": "Collection of types for webpack",
+  "description": "Collection of shared types for @pixeloven-webpack",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "files": [

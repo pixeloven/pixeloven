@@ -15,8 +15,8 @@
     "dependencies": {
         "@babel/core": "7.10.1",
         "@babel/plugin-transform-runtime": "7.9.0",
-        "@docusaurus/core": "2.0.0-alpha.40",
-        "@docusaurus/preset-classic": "2.0.0-alpha.40",
+        "@docusaurus/core": "2.0.0-alpha.56",
+        "@docusaurus/preset-classic": "2.0.0-alpha.56",
         "prop-types": "15.7.2",
         "react": "16.12.0",
         "react-dom": "16.12.0"
