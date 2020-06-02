@@ -29,7 +29,7 @@
         "@pixeloven-tooling/linter": "^6.0.0-rc.28",
         "@pixeloven-tooling/pretty": "^6.0.0-rc.28",
         "@pixeloven-tooling/test": "^6.0.0-rc.28",
-        "lint-staged": "10.0.7"
+        "lint-staged": "10.2.7"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

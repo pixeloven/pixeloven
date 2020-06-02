@@ -33,7 +33,7 @@
         "typedoc": "0.17.7"
     },
     "devDependencies": {
-        "lint-staged": "10.0.7"
+        "lint-staged": "10.2.7"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

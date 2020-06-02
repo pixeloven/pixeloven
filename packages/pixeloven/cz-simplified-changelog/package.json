@@ -18,7 +18,7 @@
         "access": "public"
     },
     "dependencies": {
-        "chalk": "2.4.2",
+        "chalk": "4.0.0",
         "conventional-commit-types": "2.1.1",
         "lodash.map": "4.6.0",
         "longest": "2.0.1",
@@ -31,8 +31,8 @@
         "@pixeloven-tooling/pretty": "^6.0.0-rc.28",
         "@pixeloven-tooling/test": "^6.0.0-rc.28",
         "@types/lodash.map": "4.6.13",
-        "commitizen": "4.0.3",
-        "lint-staged": "10.0.7"
+        "commitizen": "4.1.2",
+        "lint-staged": "10.2.7"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

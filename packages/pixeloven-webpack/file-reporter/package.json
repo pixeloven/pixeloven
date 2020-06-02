@@ -31,7 +31,7 @@
         "@pixeloven-webpack/types": "^6.0.0-rc.17",
         "@types/filesize": "4.2.0",
         "@types/recursive-readdir": "2.2.0",
-        "lint-staged": "10.0.7"
+        "lint-staged": "10.2.7"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

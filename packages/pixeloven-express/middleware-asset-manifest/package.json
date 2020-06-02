@@ -24,7 +24,7 @@
         "@pixeloven-tooling/test": "^6.0.0-rc.28",
         "@types/express": "4.17.6",
         "@types/supertest": "2.0.8",
-        "lint-staged": "10.0.7",
+        "lint-staged": "10.2.7",
         "supertest": "4.0.2"
     },
     "scripts": {

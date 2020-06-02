@@ -19,7 +19,7 @@
     "@pixeloven/cli": "^6.0.0-rc.28"
   },
   "devDependencies": {
-    "lint-staged": "10.0.7"
+    "lint-staged": "10.2.7"
   },
   "scripts": {
     "po:bootstrap": "mkdir coverage dist docs stats stories",

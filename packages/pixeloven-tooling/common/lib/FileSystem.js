@@ -3,7 +3,7 @@ const path = require("path");
 
 /**
  * Returns path if it exists
- * @param  {...any} paths 
+ * @param  {...String} paths 
  */
 function getPath(...paths) {
     const resolvedPath = path.resolve(...paths);
