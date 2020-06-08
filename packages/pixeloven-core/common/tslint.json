@@ -9,6 +9,7 @@
         "tslint-eslint-rules"
     ],
     "rules": {
+        "array-type": false,
         "arrow-parens": false,
         "prefer-object-spread": false,
         "interface-name": false,
