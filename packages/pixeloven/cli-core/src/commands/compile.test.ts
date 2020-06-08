@@ -50,10 +50,9 @@ describe("@pixeloven/cli", () => {
                 });
                 const context = await cli.run("compile tsx ./some/file.ts");
                 expect(context.commandName).toEqual("compile");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.calledOnce).toEqual(true);
-                expect(Stub.print.warning.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.system.spawn.callCount).toEqual(1);
+                expect(Stub.print.error.callCount).toEqual(0);
+                expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should successfully compile ts,tsx files with tsconfig.json", async () => {
@@ -65,9 +64,9 @@ describe("@pixeloven/cli", () => {
                 });
                 const context = await cli.run("compile ts ./some/file.ts");
                 expect(context.commandName).toEqual("compile");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.system.spawn.callCount).toEqual(1);
+                expect(Stub.print.error.callCount).toEqual(0);
+                expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should fail to compile ts,tsx files", async () => {
@@ -79,9 +78,9 @@ describe("@pixeloven/cli", () => {
                 });
                 const context = await cli.run("compile ts ./some/file.ts");
                 expect(context.commandName).toEqual("compile");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.error.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.system.spawn.callCount).toEqual(1);
+                expect(Stub.print.error.callCount).toEqual(1);
+                expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
         });

@@ -89,9 +89,9 @@ describe("@pixeloven/cli", () => {
                 const context = await cli.run("document tsx");
                 expect(context.commandName).toEqual("document");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.callCount).toEqual(1);
+                expect(Stub.print.success.callCount).toEqual(0);
                 expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
+                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
         });
     });
