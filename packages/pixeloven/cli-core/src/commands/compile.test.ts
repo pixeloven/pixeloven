@@ -5,18 +5,14 @@ import { build, print, system } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
 
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, ".."))
-    .create();
+const cli = build().brand("pixeloven").src(resolve(__dirname, "..")).create();
 
 const Sandbox = sinon.createSandbox();
 
-const Mock = {
-    core: Sandbox.mock(core),
-};
-
 const Stub = {
+    core: {
+        resolvePath: Sandbox.stub(core, "resolvePath"),
+    },
     print: Sandbox.stub(print),
     process: {
         exit: Sandbox.stub(process, "exit"),
@@ -46,7 +42,9 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
             it("should successfully compile ts,tsx files without tsconfig.json", async () => {
-                Mock.core.expects("resolvePath").returns(false);
+                Stub.core.resolvePath
+                    .withArgs("tsconfig.json")
+                    .returns("/some/abs/path/tsconfig.json");
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
@@ -59,8 +57,8 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should successfully compile ts,tsx files with tsconfig.json", async () => {
-                Mock.core
-                    .expects("resolvePath")
+                Stub.core.resolvePath
+                    .withArgs("tsconfig.json")
                     .returns("/some/abs/path/tsconfig.json");
                 Stub.system.spawn.resolves({
                     status: 0,
@@ -73,8 +71,8 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should fail to compile ts,tsx files", async () => {
-                Mock.core
-                    .expects("resolvePath")
+                Stub.core.resolvePath
+                    .withArgs("tsconfig.json")
                     .returns("/some/abs/path/tsconfig.json");
                 Stub.system.spawn.resolves({
                     status: 1,

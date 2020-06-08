@@ -16,6 +16,7 @@ export default (context: PixelOvenCoreToolbox) => {
                 cmd.concat(["--config", configPath]).concat(args),
             );
         } else {
+            // @todo because this always resolves path it will never reach this
             print.warning(
                 `Unable to find "${fileName}" reverting to default configuration`,
             );
