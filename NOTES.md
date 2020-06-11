@@ -7,6 +7,8 @@ Simply a list of ideas I throw down when I can't sleep
     * finish dockerizing them
     * Revisit the peer vs dep situation for the main cli
     * create deprecated section so I can link back to main site for all the old packages
+    * Document how to extend PO
+    * Document how to contribute
 * Storybook
     * storybook-addon-options is deprecated and will stop working soon
 * Workflow
