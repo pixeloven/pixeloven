@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven/integrations",
-  "version": "6.0.0-rc.26",
+  "version": "6.0.1",
   "description": "Integration tests for the core CLI",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -16,10 +16,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@pixeloven/cli": "^6.0.0-rc.26"
+    "@pixeloven/cli": "^6.0.1"
   },
   "devDependencies": {
-    "lint-staged": "10.0.7"
+    "lint-staged": "10.2.7"
   },
   "scripts": {
     "po:bootstrap": "mkdir coverage dist docs stats stories",

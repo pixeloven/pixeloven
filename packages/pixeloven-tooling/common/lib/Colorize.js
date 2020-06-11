@@ -28,8 +28,8 @@ const Color = {
 
 /**
  * Colorize string
- * @param {*} color 
- * @param {*} str 
+ * @param {String} color 
+ * @param {String} str 
  */
 function colorize(color, str) {
     return `${color}${str}${Color.Reset}`;

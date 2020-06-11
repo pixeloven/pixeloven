@@ -1,5 +1,10 @@
 const { Color, colorize } = require("./Colorize");
 
+/**
+ * Info logger
+ * @param {String} context 
+ * @param  {...String} msg 
+ */
 function info(context, ...msg) {
     const header = colorize(Color.FgBlue, "info");
     const tag = colorize(Color.Dim, context);

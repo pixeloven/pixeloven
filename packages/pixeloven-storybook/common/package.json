@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-storybook/common",
-    "version": "6.0.0-rc.26",
+    "version": "6.0.1",
     "description": "Storybook Common",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,7 +18,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@babel/core": "7.9.6",
+        "@babel/core": "7.10.1",
         "@storybook/addon-a11y": "5.3.18",
         "@storybook/addon-actions": "5.3.18",
         "@storybook/addon-backgrounds": "5.3.18",
@@ -37,11 +37,11 @@
         "webpack": "4.41.5"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.26",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.26",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.26",
-        "@pixeloven-tooling/test": "^6.0.0-rc.26",
-        "lint-staged": "10.0.7"
+        "@pixeloven-tooling/compiler": "^6.0.1",
+        "@pixeloven-tooling/linter": "^6.0.1",
+        "@pixeloven-tooling/pretty": "^6.0.1",
+        "@pixeloven-tooling/test": "^6.0.1",
+        "lint-staged": "10.2.7"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

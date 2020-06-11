@@ -5,18 +5,14 @@ import { build, print, system } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
 
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, ".."))
-    .create();
+const cli = build().brand("pixeloven").src(resolve(__dirname, "..")).create();
 
 const Sandbox = sinon.createSandbox();
 
-const Mock = {
-    core: Sandbox.mock(core),
-};
-
 const Stub = {
+    core: {
+        resolvePath: Sandbox.stub(core, "resolvePath"),
+    },
     print: Sandbox.stub(print),
     process: {
         exit: Sandbox.stub(process, "exit"),
@@ -46,44 +42,45 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
             it("should successfully compile ts,tsx files without tsconfig.json", async () => {
-                Mock.core.expects("resolvePath").returns(false);
+                Stub.core.resolvePath
+                    .withArgs("tsconfig.json")
+                    .returns("/some/abs/path/tsconfig.json");
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
                 const context = await cli.run("compile tsx ./some/file.ts");
                 expect(context.commandName).toEqual("compile");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.calledOnce).toEqual(true);
-                expect(Stub.print.warning.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.system.spawn.callCount).toEqual(1);
+                expect(Stub.print.error.callCount).toEqual(0);
+                expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should successfully compile ts,tsx files with tsconfig.json", async () => {
-                Mock.core
-                    .expects("resolvePath")
+                Stub.core.resolvePath
+                    .withArgs("tsconfig.json")
                     .returns("/some/abs/path/tsconfig.json");
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
                 const context = await cli.run("compile ts ./some/file.ts");
                 expect(context.commandName).toEqual("compile");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.system.spawn.callCount).toEqual(1);
+                expect(Stub.print.error.callCount).toEqual(0);
+                expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
             it("should fail to compile ts,tsx files", async () => {
-                Mock.core
-                    .expects("resolvePath")
+                Stub.core.resolvePath
+                    .withArgs("tsconfig.json")
                     .returns("/some/abs/path/tsconfig.json");
                 Stub.system.spawn.resolves({
                     status: 1,
                 });
                 const context = await cli.run("compile ts ./some/file.ts");
                 expect(context.commandName).toEqual("compile");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.error.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledOnce).toEqual(true);
+                expect(Stub.system.spawn.callCount).toEqual(1);
+                expect(Stub.print.error.callCount).toEqual(1);
+                expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
         });

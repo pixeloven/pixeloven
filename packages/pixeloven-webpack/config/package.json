@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/config",
-    "version": "6.0.0-rc.26",
+    "version": "6.0.1",
     "description": "Webpack configuration for client and server",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,17 +18,17 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/common": "^6.0.0-rc.26",
-        "@pixeloven-core/env": "^6.0.0-rc.26",
-        "@pixeloven-core/filesystem": "^6.0.0-rc.26",
-        "@pixeloven-core/logger": "^6.0.0-rc.26",
-        "@pixeloven-webpack/ts-loader": "^6.0.0-rc.26",
+        "@pixeloven-core/common": "^6.0.1",
+        "@pixeloven-core/env": "^6.0.1",
+        "@pixeloven-core/filesystem": "^6.0.1",
+        "@pixeloven-core/logger": "^6.0.1",
+        "@pixeloven-webpack/ts-loader": "^6.0.1",
         "autoprefixer": "9.7.4",
         "case-sensitive-paths-webpack-plugin": "2.3.0",
         "circular-dependency-plugin": "5.2.0",
         "css-loader": "3.4.2",
         "file-loader": "5.1.0",
-        "fork-ts-checker-webpack-plugin": "4.1.2",
+        "fork-ts-checker-webpack-plugin": "4.1.6",
         "mini-css-extract-plugin": "0.9.0",
         "null-loader": "3.0.0",
         "optimize-css-assets-webpack-plugin": "5.0.3",
@@ -47,11 +47,11 @@
         "webpack-node-externals": "1.7.2"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.0-rc.26",
-        "@pixeloven-tooling/linter": "^6.0.0-rc.26",
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.26",
-        "@pixeloven-tooling/test": "^6.0.0-rc.26",
-        "@pixeloven-webpack/types": "^6.0.0-rc.17",
+        "@pixeloven-tooling/compiler": "^6.0.1",
+        "@pixeloven-tooling/linter": "^6.0.1",
+        "@pixeloven-tooling/pretty": "^6.0.1",
+        "@pixeloven-tooling/test": "^6.0.1",
+        "@pixeloven-webpack/types": "^6.0.1",
         "@types/autoprefixer": "9.6.1",
         "@types/case-sensitive-paths-webpack-plugin": "2.1.4",
         "@types/circular-dependency-plugin": "5.0.0",
@@ -61,7 +61,7 @@
         "@types/webpack-bundle-analyzer": "2.13.3",
         "@types/webpack-manifest-plugin": "2.1.0",
         "@types/webpack-node-externals": "1.7.0",
-        "lint-staged": "10.0.7"
+        "lint-staged": "10.2.7"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

@@ -2,7 +2,7 @@
     "name": "@pixeloven/site",
     "author": "Brian Gebel <brian@pixeloven.com>",
     "description": "Static site for pixeloven.com",
-    "version": "6.0.0-rc.26",
+    "version": "6.0.1",
     "private": true,
     "scripts": {
         "start": "docusaurus start",
@@ -13,17 +13,17 @@
         "deploy": "GIT_USER=pixeloven-bot USE_SSH=true docusaurus deploy"
     },
     "dependencies": {
-        "@babel/core": "7.9.6",
+        "@babel/core": "7.10.1",
         "@babel/plugin-transform-runtime": "7.9.0",
-        "@docusaurus/core": "2.0.0-alpha.40",
-        "@docusaurus/preset-classic": "2.0.0-alpha.40",
+        "@docusaurus/core": "2.0.0-alpha.56",
+        "@docusaurus/preset-classic": "2.0.0-alpha.56",
         "prop-types": "15.7.2",
         "react": "16.12.0",
         "react-dom": "16.12.0"
     },
     "devDependencies": {
-        "@pixeloven-tooling/pretty": "^6.0.0-rc.26",
-        "lint-staged": "10.0.7"
+        "@pixeloven-tooling/pretty": "^6.0.1",
+        "lint-staged": "10.2.7"
     },
     "resolutions": {
         "**/react": "16.12.0",
