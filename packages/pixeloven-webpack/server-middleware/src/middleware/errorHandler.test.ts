@@ -20,7 +20,7 @@ describe("@pixeloven-webpack/server", () => {
                 const mockNext = sinon.spy();
                 mockResponse.headersSent = false;
                 errorHandler(mockError, mockRequest, mockResponse, mockNext);
-                expect(mockNext.callCount).toEqual(1);
+                expect(mockNext.callCount).toEqual(0);
                 expect(mockResponse.statusCode).toEqual(500);
             });
             it(`should pass to built in error handler"`, () => {
