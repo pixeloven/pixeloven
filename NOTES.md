@@ -15,10 +15,6 @@ Simply a list of ideas I throw down when I can't sleep
 * Storybook
     * storybook-addon-options is deprecated and will stop working soon
 * Workflow
-    * Prettier, Jest, TypeScript and TsLint/Eslint
-        * write as addons (remove core lib and fold back into base cli)
-        * use standalones when avalible instead of spawning process
-    * Remove commit-citizen from PO (maybe from pixeloven/ssr as well)
     * Pre-commit stuff on examples and apps
     * Integration test system to verify CLI under a number of different conditions
         * Root of mono repo
@@ -27,12 +23,6 @@ Simply a list of ideas I throw down when I can't sleep
         * Mount each package in isolation to test for issues
         * Plus all the options one can have
     * Reach 90-100% unit test coverage
-    * Create custom tslint / eslint extension to match our specifications (new repo might be best for this one)
-        * "tslint:latest",
-        * "tslint-config-prettier",
-        * "tslint-eslint-rules",
-        * "tslint-react",
-        * "tslint-react-hooks"
     * Generators
         * create generator for library
         * create generator for addon
@@ -50,15 +40,6 @@ Simply a list of ideas I throw down when I can't sleep
     * Generalize toolbox for CLI and clean up existing functions
     * Remove react-dev-utils
     * Replace node-mocks-http with supertest (reduce mocking)
-* New CLI Addons
-    * Break out typedoc feature
-    * Break out the test feature (specifically jest)
-    * Create new commit CLI to support commit linting along side husky and lint-stage 
-        * namespace our config better and integrate with @commitlint
-    * Finish github deploy CLI addon
-* Testing libraries
-    * create common packages for some of our most common deps
-    * create section for cypress and consider something for CLI Addon
 * Express server
     * make dynamic middleware more attractive outside of our context
     * create a common package for core deps and basic server setup
