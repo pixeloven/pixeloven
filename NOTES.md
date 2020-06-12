@@ -3,6 +3,9 @@ Simply a list of ideas I throw down when I can't sleep
 
 ## After v6 Release
 * Clean up examples
+    * Generators should get the current versions automatically some how
+    * Update examples right before versioning
+    * automate versioning when merging to master
     * abstract what I need from ssr example and gut the rest
     * finish dockerizing them
     * Revisit the peer vs dep situation for the main cli

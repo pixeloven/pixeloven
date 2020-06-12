@@ -17,7 +17,7 @@
       "packages/*"
     ],
     "devDependencies": {
-      "lerna": "3.22.0"
+      "lerna": "3.22.1"
     },
     "scripts": {
       "all:bootstrap": "yarn install && yarn all:compile && yarn all:linker",
