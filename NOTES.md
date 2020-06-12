@@ -1,7 +1,6 @@
 # Notes
 Simply a list of ideas I throw down when I can't sleep
 
-## After v6 Release
 * Clean up examples
     * Generators should get the current versions automatically some how
     * Update examples right before versioning
@@ -15,6 +14,8 @@ Simply a list of ideas I throw down when I can't sleep
 * Storybook
     * storybook-addon-options is deprecated and will stop working soon
 * Workflow
+    * Automate test, build and release
+    * Integrate with github packages (docker, npm, etc)
     * Pre-commit stuff on examples and apps
     * Integration test system to verify CLI under a number of different conditions
         * Root of mono repo
@@ -40,30 +41,7 @@ Simply a list of ideas I throw down when I can't sleep
     * Generalize toolbox for CLI and clean up existing functions
     * Remove react-dev-utils
     * Replace node-mocks-http with supertest (reduce mocking)
-* Express server
-    * make dynamic middleware more attractive outside of our context
-    * create a common package for core deps and basic server setup
-    * clean up webpack middleware and see what can be merged, forked and moved into this section
-    * improve dev server so it can go under this section instead of the other way around
-* Webpack
-    * Finish webpack for libraries 
-    * Continue to break config in parts for reusability
-        * break babel and ts into separate packages (create babel only addon)
 
-## Planned v7 Release
-* Express server
-    * create custom ok render for health check
-    * configurable renderer (prod)
-    * configurable error handler (prod)
-    * custom dev error handler like created react apps
-* Fork Jarvis modify for our needs.
-    + Create more robust console section
-    + BundleAnalyzerPlugin display tab with custom styles
-    + Reduce connection section to be more condensed 
-* Workflow
-    * Automate test, build and release
-    * Integrate with github packages (docker, npm, etc)
-    * Keep NPM for legacy
 
 ## After v7 Release
 * Add support for PWA
@@ -73,7 +51,6 @@ Simply a list of ideas I throw down when I can't sleep
 
 ## Planned v8 Release
 * PixelOven theme for storybook, coverage and workflow
-* Create a unified configuration
 
 ## Resources
 * https://code.visualstudio.com/docs/remote/containers-advanced#_developing-inside-a-container-on-a-remote-docker-host
