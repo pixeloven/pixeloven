@@ -1,17 +1,8 @@
 /* tslint:disable no-any */
 
-module.exports = webpackHotMiddleware;
-
 import type { Compiler, Stats } from "webpack";
 import { pathMatch } from "./helpers";
-
-type LogFunction = (message?: any, ...optionalParams: any[]) => void;
-
-interface Options {
-    log?: LogFunction;
-    heartbeat?: number;
-    path?: string;
-}
+import type { LogFunction, Options } from "./types";
 
 interface Clients {
     [id: number]: any;
@@ -109,7 +100,7 @@ function publishStats(
     action: any,
     statsResult: any,
     eventStream: any,
-    log?: LogFunction,
+    log?: LogFunction | false,
 ) {
     const statsResultJson = statsResult.toJson({
         all: false,
@@ -151,7 +142,7 @@ function publishStats(
     });
 }
 
-function webpackHotMiddleware(compiler: Compiler, opts: Options) {
+function webpackHotMiddleware(compiler: Compiler, opts: Partial<Options>) {
     opts = opts || {};
     opts.log =
         typeof opts.log === "undefined" ? console.log.bind(console) : opts.log;
@@ -222,3 +213,5 @@ function webpackHotMiddleware(compiler: Compiler, opts: Options) {
     };
     return middleware;
 }
+
+export default webpackHotMiddleware;

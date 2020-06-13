@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@pixeloven-express/dynamic-middleware": "^6.0.1",
+        "@pixeloven-webpack/hot-middleware": "^6.0.1",
         "@types/react": "16.9.17",
         "ansi-html": "0.0.7",
         "html-entities": "1.2.1",
@@ -28,8 +29,7 @@
         "require-from-string": "2.0.2",
         "webpack": "4.41.5",
         "webpack-dev-middleware": "3.7.2",
-        "webpack-flush-chunks": "2.0.3",
-        "webpack-hot-middleware": "2.25.0"
+        "webpack-flush-chunks": "2.0.3"
     },
     "devDependencies": {
         "@pixeloven-tooling/compiler": "^6.0.1",

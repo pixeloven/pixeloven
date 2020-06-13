@@ -1,7 +1,7 @@
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { NextFunction, Request, Response } from "express";
 import path from "path";
-import webpackHotMiddleware from "webpack-hot-middleware";
+import webpackHotMiddleware from "@pixeloven-webpack/hot-middleware";
 
 interface ClientMiddlewareConfig {
     namespace?: string;
