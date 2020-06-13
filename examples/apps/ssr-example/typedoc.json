@@ -1,9 +1,0 @@
-{
-    "name": "@examples/apps-ssr-example",
-    "target": "es5",
-    "out": "docs",
-    "exclude": "*.{story,test}.{ts,tsx}",
-    "externalPattern": "**/node_modules/**",
-    "excludeExternals": true,
-    "includeDeclarations": false
-}

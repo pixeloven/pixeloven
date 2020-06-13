@@ -20,7 +20,6 @@
     "dependencies": {
         "@pixeloven-core/exceptions": "^6.0.1",
         "@pixeloven-core/filesystem": "^6.0.1",
-        "@pixeloven/cli": "^6.0.1",
         "gh-pages": "2.1.1"
     },
     "devDependencies": {
@@ -28,8 +27,12 @@
         "@pixeloven-tooling/linter": "^6.0.1",
         "@pixeloven-tooling/pretty": "^6.0.1",
         "@pixeloven-tooling/test": "^6.0.1",
+        "@pixeloven/cli": "^6.0.1",
         "@types/gh-pages": "2.0.1",
         "lint-staged": "10.2.7"
+    },
+    "peerDependencies": {
+        "@pixeloven/cli": "^6.0.0"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

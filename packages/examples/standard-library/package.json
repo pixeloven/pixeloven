@@ -1,0 +1,41 @@
+{
+  "name": "@examples/standard-library",
+  "version": "1.0.0",
+  "description": "Simple example for creating a TypeScript based library",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://www.pixeloven.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@pixeloven/cli": "^6.0.1",
+    "@pixeloven/cli-core": "^6.0.1",
+    "lint-staged": "10.2.7"
+  },
+  "scripts": {
+    "compile": "pixeloven compile ts",
+    "lint": "yarn run lint:ts",
+    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
+    "precommit": "lint-staged",
+    "pretest": "pixeloven delete coverage",
+    "pretty": "yarn run pretty:ts",
+    "pretty:ts": "pixeloven pretty ./src/**/*.{ts,tsx}",
+    "test": "pixeloven test --color --coverage",
+    "test:ci": "pixeloven test --ci --coverage",
+    "test:watch": "pixeloven test --watch"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint ts --fix"
+    ]
+  }
+}

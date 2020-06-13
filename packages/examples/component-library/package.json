@@ -1,0 +1,52 @@
+{
+  "name": "@examples/component-library",
+  "version": "1.0.0",
+  "description": "Component example for creating a React + TypeScript based library",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://www.pixeloven.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixeloven/pixeloven.git"
+  },
+  "author": "Brian Gebel",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@pixeloven-react/common": "^6.0.1"
+  },
+  "devDependencies": {
+    "@pixeloven/cli": "^6.0.1",
+    "@pixeloven/cli-core": "^6.0.1",
+    "@pixeloven-react/testing": "^6.0.1",
+    "lint-staged": "10.2.7"
+  },
+  "scripts": {
+    "compile": "pixeloven compile ts",
+    "lint": "yarn lint:ts && yarn lint:scss",
+    "lint:ts": "pixeloven lint ts ./src/**/*.{ts,tsx}",
+    "lint:scss": "pixeloven lint scss ./src/**/*.{scss}",
+    "postcompile": "pixeloven copy assets",
+    "precommit": "lint-staged",
+    "pretest": "pixeloven delete coverage",
+    "pretty": "yarn run pretty:ts && yarn run pretty:scss",
+    "pretty:ts": "pixeloven pretty ./src/**/*.{ts,tsx}",
+    "pretty:scss": "pixeloven pretty ./src/**/*.scss",
+    "test": "pixeloven test --color --coverage",
+    "test:ci": "pixeloven test --ci --coverage",
+    "test:watch": "pixeloven test --watch"
+  },
+  "lint-staged": {
+    "src/**/*.{scss}": [
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint scss --fix"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "yarn pixeloven pretty",
+      "yarn pixeloven lint ts --fix"
+    ]
+  }
+}
