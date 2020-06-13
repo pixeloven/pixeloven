@@ -35,10 +35,10 @@ function webpackReactAssetMiddleware(
             dynamicMiddleware.mount(
                 (req: Request, res: Response, next: NextFunction) => {
                     req.files = {
-                        css: stylesheets.map(file =>
+                        css: stylesheets.map((file) =>
                             normalize(`/${config.publicPath}/${file}`),
                         ),
-                        js: scripts.map(file =>
+                        js: scripts.map((file) =>
                             normalize(`/${config.publicPath}/${file}`),
                         ),
                     };

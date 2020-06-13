@@ -15,7 +15,7 @@ export default {
         const { parameters, print, storybook } = toolbox;
         const task = parameters.first;
         const invalidOptions = Object.keys(parameters.options).filter(
-            option => !StorybookExecutionOptionTypes.hasOwnProperty(option),
+            (option) => !StorybookExecutionOptionTypes.hasOwnProperty(option),
         );
         if (!task) {
             print.error("Invalid argument no task provided.");

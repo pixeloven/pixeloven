@@ -51,10 +51,10 @@ export class AssetManifest {
         const basePath = `/${this.config.publicPath}/`;
         const manifestJson = this.parseManifestFile();
         return {
-            css: this.filter(manifestJson, "css").map(file =>
+            css: this.filter(manifestJson, "css").map((file) =>
                 normalize(`${basePath}/${file}`),
             ),
-            js: this.filter(manifestJson, "js").map(file =>
+            js: this.filter(manifestJson, "js").map((file) =>
                 normalize(`${basePath}/${file}`),
             ),
         };

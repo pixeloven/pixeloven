@@ -42,7 +42,7 @@ function getFileName(stats: any, chunkName: string) {
     return path.join(
         outputPath,
         Array.isArray(fileName)
-            ? fileName.find(asset => /\.js$/.test(asset))
+            ? fileName.find((asset) => /\.js$/.test(asset))
             : fileName,
     );
 }

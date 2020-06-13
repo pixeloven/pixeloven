@@ -147,7 +147,7 @@ export default {
         /**
          * @todo Need to list all options in some sorta help style menu
          */
-        Object.keys(parameters.options).forEach(option => {
+        Object.keys(parameters.options).forEach((option) => {
             if (!WebpackExecutionOptionTypes.hasOwnProperty(option)) {
                 print.error(`Invalid argument --${option}`);
                 print.error(

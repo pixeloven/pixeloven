@@ -75,11 +75,11 @@ async function Server(compiler: Compiler, options: Options) {
     const webpackHotServerMiddleware = createWebpackHotServerMiddleware(
         compiler,
         {
-            done: stats => {
+            done: (stats) => {
                 const messages = fileReporter.fromStats(stats);
                 fileReporter.printStats(messages);
             },
-            error: error => {
+            error: (error) => {
                 logger.error(error.message);
             },
         },
@@ -87,11 +87,11 @@ async function Server(compiler: Compiler, options: Options) {
     const webpackReactAssetMiddleware = createWebpackReactAssetMiddleware(
         compiler,
         {
-            done: stats => {
+            done: (stats) => {
                 const messages = fileReporter.fromStats(stats);
                 fileReporter.printStats(messages);
             },
-            error: error => {
+            error: (error) => {
                 logger.error(error.message);
             },
             publicPath: options.path,
@@ -140,7 +140,7 @@ async function Server(compiler: Compiler, options: Options) {
                 resolve(0);
                 process.exit();
             });
-            process.on("uncaughtException", err => {
+            process.on("uncaughtException", (err) => {
                 logger.error(err.message);
                 reject(err);
                 process.exit();
