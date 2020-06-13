@@ -1,5 +1,11 @@
 /* tslint:disable no-any */
 
+/**
+ * @todo Break the client portion into a new package
+ * @todo Bring tests back and convert them to work with jest
+ * @todo Create integration test for the CLI addon
+ * @todo Better code abstraction
+ */
 import type { Compiler, Stats } from "webpack";
 import { pathMatch } from "./helpers";
 import type { LogFunction, Options } from "./types";

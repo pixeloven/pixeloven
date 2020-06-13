@@ -67,7 +67,7 @@ export function getSetup(options: Options) {
             {
                 main: removeEmpty([
                     ifDevelopment(
-                        `webpack-hot-middleware/client?path=${path.normalize(
+                        `@pixeloven-webpack/hot-middleware/dist/lib/client?path=${path.normalize(
                             `/${options.publicPath}/__${options.namespace}_hmr`,
                         )}`,
                         undefined,
