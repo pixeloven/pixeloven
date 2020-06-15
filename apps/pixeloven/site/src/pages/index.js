@@ -100,12 +100,18 @@ function Home() {
                                 npx @pixeloven/cli init
                             </CodeBlock>
                             <br />
-                            <p>If you prefer to install pixeloven globally the run the following cmd:</p>
+                            <p>
+                                If you prefer to install pixeloven globally the
+                                run the following cmd:
+                            </p>
                             <CodeBlock className="language-sh">
                                 npm i -g @pixeloven/cli
                             </CodeBlock>
                             <br />
-                            <p>Followed by our boostrapping script in your desired workspace:</p>
+                            <p>
+                                Followed by our boostrapping script in your
+                                desired workspace:
+                            </p>
                             <CodeBlock className="language-sh">
                                 pixeloven init
                             </CodeBlock>

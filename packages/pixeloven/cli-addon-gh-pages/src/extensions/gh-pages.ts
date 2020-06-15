@@ -22,7 +22,7 @@ function publish(path: string) {
  * @todo base back specific error codes -- to do that we should write this scrip ourselves
  */
 export default (toolbox: AddonGhPagesToolbox) => {
-    toolbox.ghPages = async options => {
+    toolbox.ghPages = async (options) => {
         const { print } = toolbox;
         try {
             return await publish(options.path);

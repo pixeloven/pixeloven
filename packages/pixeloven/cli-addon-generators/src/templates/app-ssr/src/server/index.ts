@@ -5,7 +5,7 @@ import server from "./server";
 /**
  * @description catch unhandled errors and log them to console and exit purposefully. Any errors logged here should be fixed ASAP.
  */
-process.on("uncaughtException", error => {
+process.on("uncaughtException", (error) => {
     console.log(error);
     process.exit(1);
 });
@@ -25,7 +25,7 @@ server(app, config)
             app.listen(config.server.port, config.server.host);
         }
     })
-    .catch(error => {
+    .catch((error) => {
         /**
          * @todo UC-61 improve server error logging
          * @description This catches and exits only if the express

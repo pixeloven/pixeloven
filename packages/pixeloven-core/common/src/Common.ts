@@ -6,7 +6,7 @@
  * @todo Make this more flexible so it can filter by 0,1, many
  */
 function getKeys<T>(object: T, type = "number") {
-    return Object.keys(object).filter(key => typeof object[key] === type);
+    return Object.keys(object).filter((key) => typeof object[key] === type);
 }
 
 /**
@@ -17,7 +17,7 @@ function getKeys<T>(object: T, type = "number") {
  * @todo Should generalize and all any number of arguments
  */
 function mergeOptions<T>(defaults: T, options: Partial<T>): T {
-    Object.keys(options).forEach(key => {
+    Object.keys(options).forEach((key) => {
         if (options[key] === undefined) {
             delete options[key];
         }
@@ -41,10 +41,10 @@ function removeEmpty<T>(
     input: Array<T | undefined> | { [P in keyof T]: T[P] },
 ) {
     if (Array.isArray(input)) {
-        return input.filter(item => !!item);
+        return input.filter((item) => !!item);
     }
     return Object.keys(input)
-        .filter(key => !!input[key])
+        .filter((key) => !!input[key])
         .reduce((res, key) => Object.assign(res, { [key]: input[key] }), {});
 }
 

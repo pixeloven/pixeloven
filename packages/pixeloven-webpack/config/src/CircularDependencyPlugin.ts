@@ -34,13 +34,15 @@ export function createCircularDependencyPlugin(
                     // compilation.warnings.push(new Error(`${numCyclesDetected - numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`));
                     if (options.circularDepCheck === "warn") {
                         logger.warn(
-                            `${numCyclesDetected -
-                                numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
+                            `${
+                                numCyclesDetected - numCyclesDisplayed
+                            } additional circular dependencies with a total of ${numCyclesDetected} detected`,
                         );
                     } else {
                         logger.error(
-                            `${numCyclesDetected -
-                                numCyclesDisplayed} additional circular dependencies with a total of ${numCyclesDetected} detected`,
+                            `${
+                                numCyclesDetected - numCyclesDisplayed
+                            } additional circular dependencies with a total of ${numCyclesDetected} detected`,
                         );
                     }
                 }

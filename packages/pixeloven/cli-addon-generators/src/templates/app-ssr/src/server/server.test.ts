@@ -37,7 +37,7 @@ describe("Server", () => {
         afterEach(() => {
             Helmet.canUseDOM = true;
         });
-        it(`responds to "/api/v1/health" with 200 and render "OK"`, done => {
+        it(`responds to "/api/v1/health" with 200 and render "OK"`, (done) => {
             const app = express();
             server(app, testConfig);
             request(app)
@@ -51,7 +51,7 @@ describe("Server", () => {
                     done();
                 });
         });
-        it(`responds to "/api/*" with 404 and render "OK"`, done => {
+        it(`responds to "/api/*" with 404 and render "OK"`, (done) => {
             const app = express();
             server(app, testConfig);
             request(app)
@@ -65,7 +65,7 @@ describe("Server", () => {
                     done();
                 });
         });
-        it(`responds to "/" with 200 and render <App />`, done => {
+        it(`responds to "/" with 200 and render <App />`, (done) => {
             const app = express();
             server(app, testConfig);
             request(app)

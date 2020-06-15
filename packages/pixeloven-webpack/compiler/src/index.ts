@@ -32,7 +32,7 @@ const defaultCompilerOptions: Options = {
  * @param options
  */
 function getCompiler(options: Array<Partial<Options>> = []) {
-    const combined = options.map(single => {
+    const combined = options.map((single) => {
         return getConfig(mergeOptions(defaultCompilerOptions, single));
     });
     return Compiler.create(combined);

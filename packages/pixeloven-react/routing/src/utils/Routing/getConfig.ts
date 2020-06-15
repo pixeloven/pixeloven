@@ -15,7 +15,7 @@ function getConfig(
     routeConfig: UniversalRouteConfig[],
     parentRoute: string = "",
 ): UniversalRouteProps[] {
-    return routeConfig.map(route => {
+    return routeConfig.map((route) => {
         let path = parentRoute;
         if (route.path) {
             path =
@@ -32,7 +32,7 @@ function getConfig(
             path,
             routes,
         };
-        Object.keys(results).forEach(key => {
+        Object.keys(results).forEach((key) => {
             if (!results[key]) {
                 delete results[key];
             }

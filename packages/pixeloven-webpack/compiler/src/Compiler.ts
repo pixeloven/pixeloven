@@ -17,7 +17,7 @@ class Compiler {
                 `No webpack configuration provided. Please provide an entry for Webpack to target`,
             );
         }
-        configs.forEach(config => {
+        configs.forEach((config) => {
             if (!config.name || !Name.hasOwnProperty(config.name)) {
                 throw Error(
                     `Cannot find configuration property "name" with value  of "client" or "server". Please provide an entry for Webpack to target`,
@@ -51,7 +51,7 @@ class Compiler {
      */
     public get client() {
         return this.combined.compilers.find(
-            compiler => compiler.name === Name.client,
+            (compiler) => compiler.name === Name.client,
         );
     }
 
@@ -60,7 +60,7 @@ class Compiler {
      */
     public get library() {
         return this.combined.compilers.find(
-            compiler => compiler.name === Name.library,
+            (compiler) => compiler.name === Name.library,
         );
     }
 
@@ -69,7 +69,7 @@ class Compiler {
      */
     public get server() {
         return this.combined.compilers.find(
-            compiler => compiler.name === Name.server,
+            (compiler) => compiler.name === Name.server,
         );
     }
 

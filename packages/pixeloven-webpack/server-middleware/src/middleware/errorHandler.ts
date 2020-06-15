@@ -64,7 +64,7 @@ function renderProblems(type: string, lines: string[]) {
         }
     }
     const problems: string[] = [];
-    lines.forEach(msg => problems.push(renderProblem(type, msg)));
+    lines.forEach((msg) => problems.push(renderProblem(type, msg)));
     return (
         "<html>" +
         '<body style="' +
