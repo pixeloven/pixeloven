@@ -28,7 +28,7 @@ function getColor(level?: string) {
  * @todo we can extend the AbstractConfigSetLevels and others for specific functionality
  * @todo we want our logger to look good!
  */
-const console = winston.format.printf(info => {
+const console = winston.format.printf((info) => {
     const color = getColor(info.level);
     return `${color(info.level.toLocaleLowerCase())} ${chalk.gray(
         info.meta.timestamp,

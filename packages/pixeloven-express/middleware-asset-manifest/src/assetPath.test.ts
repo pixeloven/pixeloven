@@ -20,7 +20,7 @@ describe("Server/Middleware", () => {
         afterEach(() => {
             sandbox.reset();
         });
-        it(`should create default middleware without files`, done => {
+        it(`should create default middleware without files`, (done) => {
             existsSyncStub.returns(false);
             let testReq: Request;
             const handler = assetPath("/", "asset-manifest.json");
@@ -44,7 +44,7 @@ describe("Server/Middleware", () => {
                     done();
                 });
         });
-        it(`should create middleware with files`, done => {
+        it(`should create middleware with files`, (done) => {
             existsSyncStub.returns(true);
             sandbox.stub(fs, "readFileSync").returns(json);
             let testReq: Request;

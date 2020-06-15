@@ -9,9 +9,7 @@ async function main(proc: NodeJS.Process) {
     /**
      * Create CLI builder
      */
-    const builder = build()
-        .brand("pixeloven")
-        .src(__dirname);
+    const builder = build().brand("pixeloven").src(__dirname);
 
     /**
      * Add plugins
@@ -19,7 +17,7 @@ async function main(proc: NodeJS.Process) {
      * @todo Try and replace with https://infinitered.github.io/gluegun/#/runtime?id=plugins
      */
     function addPlugins(plugins: string[]) {
-        plugins.forEach(plugin => {
+        plugins.forEach((plugin) => {
             if (plugin.includes("cli-core") || plugin.includes("cli-addon")) {
                 builder.plugin(
                     filesystem.path(fs.realpathSync(plugin), "./dist/lib"),
@@ -49,10 +47,7 @@ async function main(proc: NodeJS.Process) {
     /**
      * Create CLI and return context
      */
-    const cli = builder
-        .version()
-        .help()
-        .create();
+    const cli = builder.version().help().create();
     const context = await cli.run(proc.argv);
     return context;
 }

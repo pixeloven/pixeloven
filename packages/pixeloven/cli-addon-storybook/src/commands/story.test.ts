@@ -16,10 +16,7 @@ const Stub = {
     },
 };
 
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, ".."))
-    .create();
+const cli = build().brand("pixeloven").src(resolve(__dirname, "..")).create();
 
 describe("@pixeloven/cli-addon-storybook", () => {
     describe("commands", () => {

@@ -146,7 +146,7 @@ const matchedRoutes = Router.getMatches(routes, {
     as: "switch",
     path: req.path, // Ex: Express request object
 });
-matchedRoutes.forEach(matchedRoute => {
+matchedRoutes.forEach((matchedRoute) => {
     if (matchedRoute.route.fetchData) {
         matchedRoute.route.fetchData(
             store.dispatch,

@@ -19,12 +19,7 @@ describe("Server", () => {
                 );
                 expect(wrapper.find("body").length).toEqual(1);
                 expect(wrapper.find("div").length).toEqual(1);
-                expect(
-                    wrapper
-                        .find("div")
-                        .last()
-                        .props().id,
-                ).toEqual("root");
+                expect(wrapper.find("div").last().props().id).toEqual("root");
             });
         });
     });

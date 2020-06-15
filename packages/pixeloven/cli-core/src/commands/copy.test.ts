@@ -4,10 +4,7 @@ import { build, filesystem, print } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
 
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, ".."))
-    .create();
+const cli = build().brand("pixeloven").src(resolve(__dirname, "..")).create();
 
 const Sandbox = sinon.createSandbox();
 

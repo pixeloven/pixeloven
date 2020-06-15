@@ -24,7 +24,7 @@ interface SimplifiedAnswers extends Answers {
 }
 
 const filter = (array: string[]) => {
-    return array.filter(str => {
+    return array.filter((str) => {
         return str && str.length;
     });
 };

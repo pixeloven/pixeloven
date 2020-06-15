@@ -20,7 +20,7 @@ function Routes(props: RoutesProps) {
             exact={route.exact}
             path={route.path}
             strict={route.strict}
-            render={componentProps => (
+            render={(componentProps) => (
                 <Status
                     statusCode={route.statusCode}
                     staticContext={componentProps.staticContext}
