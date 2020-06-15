@@ -2,9 +2,8 @@ import {NextFunction, Request, Response} from "express";
 import React from "react";
 import {renderToString} from "react-dom/server";
 import {Helmet} from "react-helmet";
-import {StaticContext, StaticRouter} from "react-router";
 
-import {Routing, UniversalRouteProps} from "@pixeloven-react/routing";
+import {Routing, StaticContext, StaticRouter, UniversalRouteProps} from "@pixeloven-react/routing";
 import {Body, Head, Html, Link, Script} from "@pixeloven-react/templating";
 
 import {Config} from "@server/config";
