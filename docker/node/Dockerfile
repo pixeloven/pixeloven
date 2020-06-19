@@ -1,4 +1,4 @@
-FROM node:12.14
+FROM node:12
 LABEL description="Node 10 image for PixelOven"
 LABEL maintainer="Brian Gebel <brian@pixeloven.com>"
 

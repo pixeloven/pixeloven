@@ -1,6 +1,6 @@
 {
   "name": "@examples/component-library",
-  "version": "1.0.0",
+  "version": "6.0.1",
   "description": "Component example for creating a React + TypeScript based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
