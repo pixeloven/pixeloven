@@ -1,6 +1,7 @@
 import React from "react";
 import {Helmet} from "react-helmet";
 import {Container, Grid, Header, Segment} from "semantic-ui-react";
+import {Logo} from "@examples/component-library";
 import {UniversalRouteComponentProps} from "@pixeloven-react/routing";
 
 function Home(props: UniversalRouteComponentProps) {
@@ -30,7 +31,6 @@ function Home(props: UniversalRouteComponentProps) {
                     <Grid.Row>
                         <Grid.Column>
                             <Header as="h2">
-                                <Icon iconType="ui" iconName="checkmark" className="a-icon--before-text" />
                                 Atomic Design
                             </Header>
                             <p>
