@@ -17,12 +17,14 @@ const styles = {
     fontFamily: "Menlo, Consolas, monospace",
     fontSize: "13px",
     position: "fixed",
-    zIndex: 9999,
+    zIndex: 999999,
     padding: "10px",
     left: 0,
-    right: 0,
+    right: 0, // why aren't these working
     top: 0,
     bottom: 0,
+    width: "100%",
+    height: "100%",
     overflow: "auto",
     dir: "ltr",
     textAlign: "left",
@@ -87,7 +89,7 @@ export default function (options: ClientOverlayOptions) {
     }
 
     for (const style in options.overlayStyles) {
-        if (styles[style]) {
+        if (options.overlayStyles[style]) {
             styles[style] = options.overlayStyles[style];
         }
     }
