@@ -7,11 +7,11 @@ import {
 } from "@pixeloven-webpack/file-reporter";
 import {
     createWebpackDevMiddleware,
-    createWebpackHotClientMiddleware,
     createWebpackHotServerMiddleware,
     createWebpackReactAssetMiddleware,
     errorHandler,
 } from "@pixeloven-webpack/server-middleware";
+import createWebpackHotClientMiddleware from "./createWebpackHotClientMiddleware";
 import express from "express";
 import fs from "fs";
 import path from "path";

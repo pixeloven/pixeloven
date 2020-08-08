@@ -24,6 +24,7 @@
         "@pixeloven-webpack/compiler": "^6.0.1",
         "@pixeloven-webpack/file-reporter": "^6.0.1",
         "@pixeloven-webpack/server-middleware": "^6.0.1",
+        "@pixeloven-webpack/hot-middleware": "^6.0.1",
         "express": "4.17.1"
     },
     "devDependencies": {
