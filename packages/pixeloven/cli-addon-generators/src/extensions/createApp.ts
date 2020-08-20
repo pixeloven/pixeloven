@@ -36,11 +36,6 @@ export default (toolbox: AddonGeneratorsToolbox) => {
             target: `apps/${name}/README.md`,
             template: "app-ssr/README.md.ejs",
         });
-        template.generate({
-            props,
-            target: `apps/${name}/typedoc.json`,
-            template: "app-ssr/typedoc.json.ejs",
-        });
         filesystem.copy(`${baseDirectory}/templates/app-ssr`, `apps/${name}`, {
             matching: ["!*.ejs", "!*.js"],
             overwrite: true,
