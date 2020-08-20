@@ -39,7 +39,6 @@ export type PrettierExtension = (args: string[]) => Promise<RunResponse>;
 export type StyleLintExtension = (args: string[]) => Promise<RunResponse>;
 export type TsLintExtension = (args: string[]) => Promise<RunResponse>;
 export type TscExtension = (args: string[]) => Promise<RunResponse>;
-export type TypeDocExtension = (args: string[]) => Promise<RunResponse>;
 
 export interface PixelOvenCoreToolbox extends PixelOvenToolbox {
     jest: JestExtension;
@@ -48,5 +47,4 @@ export interface PixelOvenCoreToolbox extends PixelOvenToolbox {
     styleLint: StyleLintExtension;
     tsc: TscExtension;
     tsLint: TsLintExtension;
-    typeDoc: TypeDocExtension;
 }

@@ -36,11 +36,6 @@ export default (toolbox: AddonGeneratorsToolbox) => {
             target: `packages/${name}/README.md`,
             template: "package/README.md.ejs",
         });
-        template.generate({
-            props,
-            target: `packages/${name}/typedoc.json`,
-            template: "package/typedoc.json.ejs",
-        });
         filesystem.copy(
             `${baseDirectory}/templates/package`,
             `packages/${name}`,

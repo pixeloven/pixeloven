@@ -24,8 +24,7 @@
         "@pixeloven-tooling/compiler": "^6.0.1",
         "@pixeloven-tooling/linter": "^6.0.1",
         "@pixeloven-tooling/pretty": "^6.0.1",
-        "@pixeloven-tooling/test": "^6.0.1",
-        "typedoc": "0.17.7"
+        "@pixeloven-tooling/test": "^6.0.1"
     },
     "devDependencies": {
         "@pixeloven/cli": "^6.0.1",
