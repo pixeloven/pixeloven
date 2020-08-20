@@ -6,6 +6,7 @@ import {BrowserRouter, Routing} from "@pixeloven-react/routing";
 import App from "@shared/components/App";
 import {config} from "@shared/config";
 import routeConfig from "@shared/routes";
+
 import "@shared/styles/core/core.scss";
 
 /**

@@ -1,6 +1,6 @@
 {
     "name": "@examples/ssr",
-    "version": "1.0.0",
+    "version": "6.0.1",
     "description": "Example app using pixeloven framework",
     "homepage": "https://www.pixeloven.com",
     "repository": {
@@ -10,13 +10,19 @@
     "author": "Brian Gebel",
     "license": "MIT",
     "private": true,
+    "publishConfig": {
+        "access": "restricted"
+    },
     "dependencies": {
+        "@examples/component-library": "^6.0.1",
         "@pixeloven-express/middleware-asset-manifest": "^6.0.1",
         "@pixeloven-react/common": "^6.0.1",
         "@pixeloven-react/routing": "^6.0.1",
         "@pixeloven-react/templating": "^6.0.1",
         "express": "4.17.1",
         "express-winston": "4.0.3",
+        "semantic-ui-react": "0.88.2",
+        "semantic-ui-sass": "2.4.2",
         "winston": "3.2.1"
     },
     "devDependencies": {
