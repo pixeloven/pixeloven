@@ -35,7 +35,7 @@ const siteConfig = {
       //   alt: 'PixelOven Logo',
       //   src: 'img/logo.svg',
       // },
-      links: [
+      items: [
         { 
           to: 'docs/getting-started/intro', 
           label: 'Docs', 
