@@ -1,15 +1,5 @@
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
-export enum ErrorCode {
-    InvalidArgument = 1,
-    InvalidTask,
-    FailedBundling,
-    FailedClientBundling,
-    FailedServerBundling,
-    MissingTask,
-    MissingTarget,
-}
-
 interface RunResponse {
     stdout?: Buffer | string;
     status: number;
