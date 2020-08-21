@@ -16,8 +16,8 @@ interface RunResponse {
     error?: Error;
 }
 
-export type TsLintExtension = (args: string[]) => Promise<RunResponse>;
+export type StyleLintExtension = (args: string[]) => Promise<RunResponse>;
 
-export interface AddonTsLintToolbox extends PixelOvenToolbox {
-    tsLint: TsLintExtension;
+export interface AddonStyleLintToolbox extends PixelOvenToolbox {
+    styleLint: StyleLintExtension;
 }

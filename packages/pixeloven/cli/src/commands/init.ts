@@ -30,7 +30,8 @@ export default {
     name: "init",
     run: async (toolbox: PixelOvenToolbox) => {
         const { prompt, print, system, template } = toolbox;
-
+        // @todo https://infinitered.github.io/gluegun/#/toolbox-package-manager
+        // instead of asking a question???
         /**
          * Wrapper for all the generators
          * @param props

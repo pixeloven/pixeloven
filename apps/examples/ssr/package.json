@@ -31,6 +31,8 @@
         "@pixeloven/cli-addon-generators": "^6.0.1",
         "@pixeloven/cli-addon-storybook": "^6.0.1",
         "@pixeloven/cli-addon-webpack": "^6.0.1",
+        "@pixeloven/cli-addon-style-lint": "^6.0.1",
+        "@pixeloven/cli-addon-ts-lint": "^6.0.1",
         "@pixeloven/cli-core": "^6.0.1",
         "@types/express": "4.17.6",
         "@types/supertest": "2.0.8",

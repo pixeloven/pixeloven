@@ -1,7 +1,7 @@
 {
-    "name": "@pixeloven/cli-addon-ts-lint",
+    "name": "@pixeloven/cli-addon-style-lint",
     "version": "6.0.1",
-    "description": "Wrapper for TS Lint",
+    "description": "Wrapper for Style Lint",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
     "files": [
