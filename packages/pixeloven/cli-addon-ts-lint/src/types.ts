@@ -1,5 +1,15 @@
 import { PixelOvenToolbox } from "@pixeloven/cli";
 
+export enum ErrorCode {
+    InvalidArgument = 1,
+    InvalidTask,
+    FailedBundling,
+    FailedClientBundling,
+    FailedServerBundling,
+    MissingTask,
+    MissingTarget,
+}
+
 interface RunResponse {
     stdout?: Buffer | string;
     status: number;
@@ -9,7 +19,7 @@ interface RunResponse {
 export type StyleLintExtension = (args: string[]) => Promise<RunResponse>;
 export type TsLintExtension = (args: string[]) => Promise<RunResponse>;
 
-export interface AddonGhPagesToolbox extends PixelOvenToolbox {
+export interface AddonTsLintToolbox extends PixelOvenToolbox {
     styleLint: StyleLintExtension;
     tsLint: TsLintExtension;
 }

@@ -1,12 +1,12 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
-import { PixelOvenCoreToolbox } from "../types";
+import { AddonTsLintToolbox } from "../types";
 
 const fileName = "stylelint.json";
 
 /**
  * @todo Add support for CSS
  */
-export default (context: PixelOvenCoreToolbox) => {
+export default (context: AddonTsLintToolbox) => {
     async function styleLint(args: string[]) {
         const { print, pixelOven } = context;
         const configPath = resolvePath(fileName, false);

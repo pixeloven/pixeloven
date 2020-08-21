@@ -1,4 +1,4 @@
-# @pixeloven-core/cli-addon-gh-pages
+# @pixeloven-core/cli-addon-ts-lint
 
 > Pixel Oven generators
 
@@ -9,11 +9,11 @@ See our website [PixelOven](https://www.pixeloven.com/) for more information or 
 Using npm:
 
 ```sh
-npm install --save-dev @pixeloven/cli-addon-gh-pages
+npm install --save-dev @pixeloven/cli-addon-ts-lint
 ```
 
 or using yarn:
 
 ```sh
-yarn add --dev @pixeloven/cli-addon-gh-pages
+yarn add --dev @pixeloven/cli-addon-ts-lint
 ```
