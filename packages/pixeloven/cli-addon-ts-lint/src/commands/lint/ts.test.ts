@@ -25,30 +25,14 @@ const Stub = {
  *      - These tests rely on mocking too much
  *      - Docker might help here
  */
-describe("@pixeloven/cli", () => {
+describe("@pixeloven/cli-addon-ts-lint", () => {
     describe("commands", () => {
-        describe("lint", () => {
+        describe("lint ts", () => {
             afterAll(() => {
                 Sandbox.restore();
             });
             afterEach(() => {
                 Sandbox.reset();
-            });
-            it("should print error for missing task", async () => {
-                const context = await cli.run("lint");
-                expect(context.commandName).toEqual("lint");
-                expect(Stub.print.error.callCount).toEqual(1);
-                expect(Stub.print.info.callCount).toEqual(1);
-                expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(3)).toEqual(true);
-            });
-            it("should print error for invalid task", async () => {
-                const context = await cli.run("lint wrong");
-                expect(context.commandName).toEqual("lint");
-                expect(Stub.print.error.callCount).toEqual(1);
-                expect(Stub.print.info.callCount).toEqual(1);
-                expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(1)).toEqual(true);
             });
             it("should warn if tslint.json is missing and succeed linting ts", async () => {
                 Stub.core.resolvePath
@@ -88,62 +72,6 @@ describe("@pixeloven/cli", () => {
                     status: 0,
                 });
                 const context = await cli.run("lint tsx");
-                expect(context.commandName).toEqual("lint");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.callCount).toEqual(1);
-                expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
-            });
-            it("should succeed linting js with tslint.json", async () => {
-                Stub.core.resolvePath
-                    .withArgs("tslint.json")
-                    .returns("/some/abs/path/tslint.json");
-                Stub.system.spawn.resolves({
-                    status: 0,
-                });
-                const context = await cli.run("lint js");
-                expect(context.commandName).toEqual("lint");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledOnce).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
-            });
-            it("should succeed linting jsx with tslint.json", async () => {
-                Stub.core.resolvePath
-                    .withArgs("tslint.json")
-                    .returns("/some/abs/path/tslint.json");
-                Stub.system.spawn.resolves({
-                    status: 0,
-                });
-                const context = await cli.run("lint jsx");
-                expect(context.commandName).toEqual("lint");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.callCount).toEqual(1);
-                expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
-            });
-            it("should warn if stylelint.json is missing and succeed linting css/scss", async () => {
-                Stub.core.resolvePath
-                    .withArgs("stylelint.json")
-                    .returns("/some/abs/path/stylelint.json");
-                Stub.system.spawn.resolves({
-                    status: 0,
-                });
-                const context = await cli.run("lint scss");
-                expect(context.commandName).toEqual("lint");
-                expect(Stub.system.spawn.calledOnce).toEqual(true);
-                expect(Stub.print.success.callCount).toEqual(1);
-                expect(Stub.process.exit.called).toEqual(true);
-                expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
-            });
-            it("should succeed linting css/scss with stylelint.json", async () => {
-                Stub.core.resolvePath
-                    .withArgs("stylelint.json")
-                    .returns("/some/abs/path/stylelint.json");
-                Stub.system.spawn.resolves({
-                    status: 0,
-                });
-                const context = await cli.run("lint css");
                 expect(context.commandName).toEqual("lint");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.callCount).toEqual(1);
