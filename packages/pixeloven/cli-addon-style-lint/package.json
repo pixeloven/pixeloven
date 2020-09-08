@@ -29,10 +29,12 @@
         "@pixeloven-tooling/pretty": "^6.0.1",
         "@pixeloven-tooling/test": "^6.0.1",
         "@pixeloven/cli": "^6.0.1",
+        "@pixeloven/cli-core": "^6.0.1",
         "lint-staged": "10.2.7"
     },
     "peerDependencies": {
-        "@pixeloven/cli": "^6.0.1"
+        "@pixeloven/cli": "^6.0.1",
+        "@pixeloven/cli-core": "^6.0.1"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

@@ -5,7 +5,10 @@ import { build, print, system } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
 
-const cli = build().brand("pixeloven").src(resolve(__dirname, "..")).create();
+const cli = build()
+    .brand("pixeloven")
+    .src(resolve(__dirname, "../.."))
+    .create();
 
 const Sandbox = sinon.createSandbox();
 
@@ -41,7 +44,7 @@ describe("@pixeloven/cli-addon-style-lint", () => {
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
-                const context = await cli.run("lint scss");
+                const context = await cli.run("lint style");
                 expect(context.commandName).toEqual("lint");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.callCount).toEqual(1);
@@ -55,7 +58,7 @@ describe("@pixeloven/cli-addon-style-lint", () => {
                 Stub.system.spawn.resolves({
                     status: 0,
                 });
-                const context = await cli.run("lint css");
+                const context = await cli.run("lint style");
                 expect(context.commandName).toEqual("lint");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.callCount).toEqual(1);
