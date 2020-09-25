@@ -1,14 +1,32 @@
 import "jest";
 
+import fs from "fs";
 import * as core from "@pixeloven-core/filesystem";
-import { build, print, system } from "gluegun";
+import { build, filesystem, print, system } from "gluegun";
 import { resolve } from "path";
 import sinon from "sinon";
 
-const cli = build()
-    .brand("pixeloven")
-    .src(resolve(__dirname, "../.."))
-    .create();
+const cwdPath = filesystem.path(
+    process.cwd(),
+    "../../../node_modules",
+    "@pixeloven",
+);
+const cwdPathPlugins = filesystem.subdirectories(cwdPath);
+
+const builder = build().brand("pixeloven").src(resolve(__dirname, "../.."));
+
+function addPlugins(plugins: string[]) {
+    plugins.forEach((plugin) => {
+        if (plugin.includes("cli-core") || plugin.includes("cli-addon")) {
+            builder.plugin(
+                filesystem.path(fs.realpathSync(plugin), "./dist/lib"),
+            );
+        }
+    });
+}
+addPlugins(cwdPathPlugins);
+
+const cli = builder.version().create();
 
 const Sandbox = sinon.createSandbox();
 
@@ -45,7 +63,7 @@ describe("@pixeloven/cli-addon-style-lint", () => {
                     status: 0,
                 });
                 const context = await cli.run("lint style");
-                expect(context.commandName).toEqual("lint");
+                expect(context.commandName).toEqual("style");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.callCount).toEqual(1);
                 expect(Stub.process.exit.called).toEqual(true);
@@ -59,7 +77,7 @@ describe("@pixeloven/cli-addon-style-lint", () => {
                     status: 0,
                 });
                 const context = await cli.run("lint style");
-                expect(context.commandName).toEqual("lint");
+                expect(context.commandName).toEqual("style");
                 expect(Stub.system.spawn.calledOnce).toEqual(true);
                 expect(Stub.print.success.callCount).toEqual(1);
                 expect(Stub.process.exit.called).toEqual(true);
