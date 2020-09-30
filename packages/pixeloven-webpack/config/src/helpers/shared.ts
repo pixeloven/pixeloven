@@ -17,6 +17,7 @@ import {
     Options as WebpackOptions,
     Resolve,
     RuleSetRule,
+    SourceMapDevToolPlugin,
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import webpackNodeExternals from "webpack-node-externals";
@@ -117,6 +118,10 @@ export function getSetup(options: Options) {
                             },
                         }),
                         new OptimizeCSSAssetsPlugin(),
+                        new SourceMapDevToolPlugin({
+                            filename: 'sourcemaps/[file].map',
+                            exclude: ['vendor.js'],
+                        })
                     ],
                     [],
                 ),
