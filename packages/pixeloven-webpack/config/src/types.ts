@@ -18,7 +18,7 @@ export interface Options {
     outputPath: string;
     profiling: boolean;
     publicPath: string;
-    sourceMap: boolean;
+    sourceMap: string;
     stats: Stats;
     target: Target;
 }

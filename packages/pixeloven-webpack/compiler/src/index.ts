@@ -15,7 +15,7 @@ const defaultCompilerOptions: Options = {
     outputPath: "./dist",
     profiling: false,
     publicPath: "/",
-    sourceMap: false,
+    sourceMap: "eval-source-map",
     staticAssetPath: "static",
     stats: {
         enabled: false,
