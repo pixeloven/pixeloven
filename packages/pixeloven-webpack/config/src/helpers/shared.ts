@@ -59,7 +59,7 @@ export function getSetup(options: Options) {
     });
 
     function getDevTool() {
-        return options.sourceMap ? "eval-source-map" : false;
+        return options.sourceMap;
     }
 
     function getEntry() {
@@ -111,7 +111,7 @@ export function getSetup(options: Options) {
                             cache: true,
                             extractComments: "all",
                             parallel: true,
-                            sourceMap: options.sourceMap,
+                            sourceMap: !!options.sourceMap,
                             terserOptions: {
                                 safari10: true,
                             },
