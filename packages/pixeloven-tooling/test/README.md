@@ -27,7 +27,7 @@ Example of usage in `package.json`
 ```json
 {
   "devDependencies": {
-    "@pixeloven-tooling/test": "6.0.0"
+    "@pixeloven-tooling/test": "6.1.0"
   },
   "scripts": {
     "test": "pixeloven-test --color --coverage",
