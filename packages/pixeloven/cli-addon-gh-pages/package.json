@@ -32,7 +32,7 @@
         "lint-staged": "10.2.7"
     },
     "peerDependencies": {
-        "@pixeloven/cli": "^6.0.0"
+        "@pixeloven/cli": "^6.1.0"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",
