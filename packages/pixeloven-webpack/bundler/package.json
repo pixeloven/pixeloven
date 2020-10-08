@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/bundler",
-    "version": "6.0.1",
+    "version": "6.1.0",
     "description": "Webpack build handler",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,18 +18,18 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/common": "^6.0.1",
-        "@pixeloven-core/filesystem": "^6.0.1",
-        "@pixeloven-core/logger": "^6.0.1",
-        "@pixeloven-webpack/compiler": "^6.0.1",
-        "@pixeloven-webpack/file-reporter": "^6.0.1"
+        "@pixeloven-core/common": "^6.1.0",
+        "@pixeloven-core/filesystem": "^6.1.0",
+        "@pixeloven-core/logger": "^6.1.0",
+        "@pixeloven-webpack/compiler": "^6.1.0",
+        "@pixeloven-webpack/file-reporter": "^6.1.0"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.1",
-        "@pixeloven-tooling/linter": "^6.0.1",
-        "@pixeloven-tooling/pretty": "^6.0.1",
-        "@pixeloven-tooling/test": "^6.0.1",
-        "@pixeloven-webpack/types": "^6.0.1",
+        "@pixeloven-tooling/compiler": "^6.1.0",
+        "@pixeloven-tooling/linter": "^6.1.0",
+        "@pixeloven-tooling/pretty": "^6.1.0",
+        "@pixeloven-tooling/test": "^6.1.0",
+        "@pixeloven-webpack/types": "^6.1.0",
         "lint-staged": "10.2.7"
     },
     "scripts": {
