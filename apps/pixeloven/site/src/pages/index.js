@@ -204,7 +204,7 @@ function Home() {
                             <CodeBlock className="language-json">
                                 {JSON.stringify(
                                     {
-                                        "@pixeloven/cli": "6.1.0",
+                                        "@pixeloven/cli": "6.x",
                                         "@pixeloven/cli-addon-generators":
                                             "6.1.0",
                                         "@pixeloven/cli-addon-storybook":

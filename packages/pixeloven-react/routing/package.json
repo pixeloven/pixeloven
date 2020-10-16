@@ -24,20 +24,21 @@
         "react-router": "5.1.2",
         "react-router-dom": "5.1.2"
     },
-    "peerDependencies": {
-        "@pixeloven-react/common": ">=6.1.0"
-    },
     "devDependencies": {
         "@pixeloven-react/testing": "^6.1.0",
         "@pixeloven-tooling/compiler": "^6.1.0",
         "@pixeloven-tooling/linter": "^6.1.0",
         "@pixeloven-tooling/pretty": "^6.1.0",
         "@pixeloven-tooling/test": "^6.1.0",
+        "@pixeloven-tooling/common": "^6.1.0",
         "@types/react": "16.9.41",
         "@types/react-dom": "16.9.8",
         "lint-staged": "10.2.7",
         "react": "16.12.0",
         "react-dom": "16.12.0"
+    },
+    "peerDependencies": {
+        "@pixeloven-react/common": "6.x"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",
