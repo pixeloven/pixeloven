@@ -43,7 +43,7 @@ describe("@pixeloven/cli", () => {
                 expect(Stub.process.exit.called).toEqual(true);
                 expect(Stub.process.exit.calledWithExactly(0)).toEqual(true);
             });
-            it("should copy ico", async () => {
+            it("should copy image", async () => {
                 const context = await cli.run("copy images");
                 expect(Stub.filesystem.copy.callCount).toEqual(1);
                 expect(Stub.print.success.callCount).toEqual(1);
