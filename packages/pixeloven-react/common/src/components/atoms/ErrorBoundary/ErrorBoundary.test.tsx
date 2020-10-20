@@ -16,7 +16,7 @@ configure({
 
 console.error = jest.fn();
 
-describe("apps/checkout/organisms/ErrorBoundry", () => {
+describe("components/atoms/ErrorBoundry", () => {
     it("should render <GoodTestComponent /> without errors", () => {
         const onCatch = jest.fn();
         const render = () => {
