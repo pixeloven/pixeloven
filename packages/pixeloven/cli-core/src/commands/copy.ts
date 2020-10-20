@@ -14,6 +14,13 @@ export default {
                 });
                 print.success(`Successfully copied ico files to dist`);
                 break;
+            case "images":
+                filesystem.copy("src", "dist/lib", {
+                    matching: "**/*.{jpg,jpeg,png,svg}",
+                    overwrite: true,
+                });
+                print.success(`Successfully copied image files to dist`);
+                break;
             case "scss":
                 filesystem.copy("src", "dist/lib", {
                     matching: "**/*.scss",
@@ -30,7 +37,7 @@ export default {
                 break;
             case "assets":
                 filesystem.copy("src", "dist/lib", {
-                    matching: "**/*.{ico,scss,svg}",
+                    matching: "**/*.{ico,jpg,jpeg,png,scss,svg}",
                     overwrite: true,
                 });
                 print.success(`Successfully copied assets to dist`);
