@@ -204,12 +204,12 @@ function Home() {
                             <CodeBlock className="language-json">
                                 {JSON.stringify(
                                     {
-                                        "@pixeloven/cli": "6.1.0",
+                                        "@pixeloven/cli": "6.2.0",
                                         "@pixeloven/cli-addon-generators":
-                                            "6.1.0",
+                                            "6.2.0",
                                         "@pixeloven/cli-addon-storybook":
-                                            "6.1.0",
-                                        "@pixeloven/cli-addon-webpack": "6.1.0",
+                                            "6.2.0",
+                                        "@pixeloven/cli-addon-webpack": "6.2.0",
                                         "@my-project/cli-pixeloven-addon-fancy":
                                             "1.0.0",
                                     },
@@ -226,8 +226,8 @@ function Home() {
                             <CodeBlock className="language-json">
                                 {JSON.stringify(
                                     {
-                                        "@pixeloven-react/common": "6.1.0",
-                                        "@pixeloven-react/routing": "6.1.0",
+                                        "@pixeloven-react/common": "6.2.0",
+                                        "@pixeloven-react/routing": "6.2.0",
                                     },
                                     null,
                                     4,

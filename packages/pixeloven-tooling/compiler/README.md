@@ -27,7 +27,7 @@ Example of usage in `package.json`
 ```json
 {
   "devDependencies": {
-    "@pixeloven-tooling/linter": "6.1.0",
+    "@pixeloven-tooling/linter": "6.2.0",
     "lint-staged": "10.0.7"
   },
   "scripts": {

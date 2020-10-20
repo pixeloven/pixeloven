@@ -32,7 +32,7 @@
         "@pixeloven-webpack/types": "^6.1.0",
         "@types/express": "4.17.6",
         "@types/html-entities": "1.2.16",
-        "lint-staged": "10.2.7"
+        "lint-staged": "10.4.2"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",
