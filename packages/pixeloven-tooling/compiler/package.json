@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-tooling/compiler",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "TypeScript abstraction for PixelOven's workflow",
   "bin": {
     "pixeloven-compiler": "./bin/index.js"

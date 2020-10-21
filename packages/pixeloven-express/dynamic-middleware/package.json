@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-express/dynamic-middleware",
-    "version": "6.1.0",
+    "version": "6.2.0",
     "description": "Express dynamic middleware",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -21,10 +21,10 @@
         "async": "3.2.0"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.1.0",
-        "@pixeloven-tooling/linter": "^6.1.0",
-        "@pixeloven-tooling/pretty": "^6.1.0",
-        "@pixeloven-tooling/test": "^6.1.0",
+        "@pixeloven-tooling/compiler": "^6.2.0",
+        "@pixeloven-tooling/linter": "^6.2.0",
+        "@pixeloven-tooling/pretty": "^6.2.0",
+        "@pixeloven-tooling/test": "^6.2.0",
         "@types/async": "3.2.3",
         "@types/express": "4.17.6",
         "lint-staged": "10.4.2",
