@@ -13,9 +13,9 @@
         "deploy": "GIT_USER=pixeloven-bot USE_SSH=true docusaurus deploy"
     },
     "dependencies": {
-        "@docusaurus/core": "2.0.0-alpha.66",
-        "@docusaurus/preset-classic": "2.0.0-alpha.66",
-        "@docusaurus/utils": "2.0.0-alpha.66",
+        "@docusaurus/core": "2.0.0-alpha.63",
+        "@docusaurus/preset-classic": "2.0.0-alpha.63",
+        "@docusaurus/utils": "2.0.0-alpha.63",
         "react": "16.12.0",
         "react-dom": "16.12.0"
     },
