@@ -36,7 +36,7 @@
         "@pixeloven-tooling/pretty": "^6.1.0",
         "@pixeloven-tooling/test": "^6.1.0",
         "@pixeloven-webpack/types": "^6.1.0",
-        "lint-staged": "10.2.7"
+        "lint-staged": "10.4.2"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

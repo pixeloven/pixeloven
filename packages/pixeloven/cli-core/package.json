@@ -28,7 +28,7 @@
     },
     "devDependencies": {
         "@pixeloven/cli": "^6.1.0",
-        "lint-staged": "10.2.7"
+        "lint-staged": "10.4.2"
     },
     "peerDependencies": {
         "@pixeloven/cli": "6.x"
