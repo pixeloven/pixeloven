@@ -31,8 +31,8 @@
         "@storybook/react": "5.3.21",
         "@storybook/theming": "5.3.21",
         "babel-loader": "8.1.0",
-        "react": "16.12.0",
-        "react-dom": "16.12.0",
+        "react": "16.13.1",
+        "react-dom": "16.13.1",
         "regenerator-runtime": "0.13.5",
         "webpack": "4.41.5"
     },

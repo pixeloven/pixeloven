@@ -21,8 +21,8 @@
         "@pixeloven-react/templating": "^6.2.0",
         "express": "4.17.1",
         "express-winston": "4.0.3",
-        "react": "16.12.0",
-        "react-dom": "16.12.0",
+        "react": "16.13.1",
+        "react-dom": "16.13.1",
         "semantic-ui-react": "0.88.2",
         "semantic-ui-sass": "2.4.2",
         "winston": "3.2.1"

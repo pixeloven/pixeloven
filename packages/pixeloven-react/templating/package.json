@@ -18,21 +18,22 @@
         "access": "public"
     },
     "dependencies": {
-        "@types/react": "16.9.41",
-        "@types/react-dom": "16.9.8",
         "@types/react-helmet": "6.1.0",
-        "classnames": "2.2.6",
-        "react": "16.12.0",
-        "react-dom": "16.12.0",
         "react-helmet": "6.1.0"
     },
     "devDependencies": {
+        "@pixeloven-react/common": "^6.2.0",
         "@pixeloven-react/testing": "^6.2.0",
         "@pixeloven-tooling/compiler": "^6.2.0",
         "@pixeloven-tooling/linter": "^6.2.0",
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
-        "lint-staged": "10.4.2"
+        "lint-staged": "10.4.2",
+        "react": "16.13.1",
+        "react-dom": "16.13.1"
+    },
+    "peerDependencies": {
+        "@pixeloven-react/common": "6.x"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",
