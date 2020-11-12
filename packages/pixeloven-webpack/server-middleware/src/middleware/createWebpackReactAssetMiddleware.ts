@@ -23,37 +23,32 @@ function webpackReactAssetMiddleware(
     compiler: Compiler,
     config: ReactAssetMiddlewareConfig,
 ) {
-    const dynamicMiddleware = new DynamicMiddleware();
-
-    function onDoneHandler(stats: Stats) {
-        if (stats.compilation.compiler.name === "client") {
-            const clientStats = stats.toJson("verbose");
-            const { scripts, stylesheets } = flushChunks(clientStats as any, {
-                chunkNames: flushChunkNames(),
-            });
-            dynamicMiddleware.clean();
-            dynamicMiddleware.mount(
-                (req: Request, res: Response, next: NextFunction) => {
-                    req.files = {
-                        css: stylesheets.map((file) =>
-                            normalize(`/${config.publicPath}/${file}`),
-                        ),
-                        js: scripts.map((file) =>
-                            normalize(`/${config.publicPath}/${file}`),
-                        ),
-                    };
-                    next();
-                },
-            );
-            if (config.done) {
-                config.done(stats);
-            }
-        }
-    }
-
     if (compiler.client) {
         try {
-            compiler.onDone("client", onDoneHandler);
+            const dynamicMiddleware = new DynamicMiddleware();
+
+            compiler.onDone("client", (stats) => {
+                const { scripts, stylesheets } = flushChunks(stats, {
+                    chunkNames: flushChunkNames(),
+                });
+                dynamicMiddleware.clean();
+                dynamicMiddleware.mount(
+                    (req: Request, res: Response, next: NextFunction) => {
+                        req.files = {
+                            css: stylesheets.map((file) =>
+                                normalize(`/${config.publicPath}/${file}`),
+                            ),
+                            js: scripts.map((file) =>
+                                normalize(`/${config.publicPath}/${file}`),
+                            ),
+                        };
+                        next();
+                    },
+                );
+                if (config.done) {
+                    config.done(stats);
+                }
+            });
             return dynamicMiddleware.handle();
         } catch (err) {
             if (config.error) {
