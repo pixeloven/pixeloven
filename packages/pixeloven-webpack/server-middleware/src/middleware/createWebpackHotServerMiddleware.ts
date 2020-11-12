@@ -27,9 +27,6 @@ function requireDefault(obj: Module) {
  * @param chunkName
  */
 function getFileName(stats: Stats.ToJsonOutput, chunkName: string) {
-    /**
-     * @todo We should probably error out if outputPath is empty
-     */
     const outputPath = stats.outputPath || "";
     const fileName = stats?.assetsByChunkName?.[chunkName];
     if (fileName) {

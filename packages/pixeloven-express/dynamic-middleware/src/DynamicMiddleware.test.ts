@@ -21,11 +21,11 @@ describe("@pixeloven-express/dynamic-middleware", () => {
     describe("DynamicMiddleware", () => {
         it("should instantiate without layers", () => {
             const dynamicMiddleware = new DynamicMiddleware();
-            expect(dynamicMiddleware.get().length).toEqual(0);
+            expect(dynamicMiddleware.length).toEqual(0);
         });
         it("should instantiate with layers", () => {
             const dynamicMiddleware = new DynamicMiddleware([goodMiddleware]);
-            expect(dynamicMiddleware.get().length).toEqual(1);
+            expect(dynamicMiddleware.length).toEqual(1);
         });
         describe("clean", () => {
             const dynamicMiddleware = new DynamicMiddleware([goodMiddleware]);

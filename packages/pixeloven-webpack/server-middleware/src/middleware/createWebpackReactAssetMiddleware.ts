@@ -3,7 +3,7 @@ import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { NextFunction, Request, Response } from "express";
 import { normalize } from "path";
-import { flushChunkNames } from "react-universal-component/server";
+import { clearChunks, flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
 
@@ -28,6 +28,7 @@ function webpackReactAssetMiddleware(
             const dynamicMiddleware = new DynamicMiddleware();
 
             compiler.onDone("client", (stats) => {
+                clearChunks();
                 const { scripts, stylesheets } = flushChunks(stats, {
                     chunkNames: flushChunkNames(),
                 });
