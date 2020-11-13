@@ -31,7 +31,7 @@ function webpackReactAssetMiddleware(
                 const { scripts, stylesheets } = flushChunks(stats, {
                     chunkNames: flushChunkNames(),
                 });
-                // Need to do this before rendering
+                // Need to do this before rendering and maybe before compiling???
                 // clearChunks();
                 // https://github.com/faceyspacey/react-universal-component/issues/178
                 dynamicMiddleware.clean();
