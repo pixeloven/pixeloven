@@ -1,9 +1,9 @@
+/* tslint:disable no-any */
 import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { NextFunction, Request, Response } from "express";
 import { normalize } from "path";
 import { flushChunkNames } from "react-universal-component/server";
-// import { clearChunks, flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
 
@@ -23,35 +23,37 @@ function webpackReactAssetMiddleware(
     compiler: Compiler,
     config: ReactAssetMiddlewareConfig,
 ) {
+    const dynamicMiddleware = new DynamicMiddleware();
+
+    function onDoneHandler(stats: Stats) {
+        if (stats.compilation.compiler.name === "client") {
+            const clientStats = stats.toJson("verbose");
+            const { scripts, stylesheets } = flushChunks(clientStats as any, {
+                chunkNames: flushChunkNames(),
+            });
+            dynamicMiddleware.clean();
+            dynamicMiddleware.mount(
+                (req: Request, res: Response, next: NextFunction) => {
+                    req.files = {
+                        css: stylesheets.map((file) =>
+                            normalize(`/${config.publicPath}/${file}`),
+                        ),
+                        js: scripts.map((file) =>
+                            normalize(`/${config.publicPath}/${file}`),
+                        ),
+                    };
+                    next();
+                },
+            );
+            if (config.done) {
+                config.done(stats);
+            }
+        }
+    }
+
     if (compiler.client) {
         try {
-            const dynamicMiddleware = new DynamicMiddleware();
-
-            compiler.onDone("client", (stats) => {
-                const { scripts, stylesheets } = flushChunks(stats, {
-                    chunkNames: flushChunkNames(),
-                });
-                // Need to do this before rendering and maybe before compiling???
-                // clearChunks();
-                // https://github.com/faceyspacey/react-universal-component/issues/178
-                dynamicMiddleware.clean();
-                dynamicMiddleware.mount(
-                    (req: Request, res: Response, next: NextFunction) => {
-                        req.files = {
-                            css: stylesheets.map((file) =>
-                                normalize(`/${config.publicPath}/${file}`),
-                            ),
-                            js: scripts.map((file) =>
-                                normalize(`/${config.publicPath}/${file}`),
-                            ),
-                        };
-                        next();
-                    },
-                );
-                if (config.done) {
-                    config.done(stats);
-                }
-            });
+            compiler.onDone("client", onDoneHandler);
             return dynamicMiddleware.handle();
         } catch (err) {
             if (config.error) {
