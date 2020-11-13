@@ -1,9 +1,9 @@
-/* tslint:disable no-any */
 import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { NextFunction, Request, Response } from "express";
 import { normalize } from "path";
-import { clearChunks, flushChunkNames } from "react-universal-component/server";
+import { flushChunkNames } from "react-universal-component/server";
+// import { clearChunks, flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
 
@@ -28,10 +28,12 @@ function webpackReactAssetMiddleware(
             const dynamicMiddleware = new DynamicMiddleware();
 
             compiler.onDone("client", (stats) => {
-                clearChunks();
                 const { scripts, stylesheets } = flushChunks(stats, {
                     chunkNames: flushChunkNames(),
                 });
+                // Need to do this before rendering
+                // clearChunks();
+                // https://github.com/faceyspacey/react-universal-component/issues/178
                 dynamicMiddleware.clean();
                 dynamicMiddleware.mount(
                     (req: Request, res: Response, next: NextFunction) => {
