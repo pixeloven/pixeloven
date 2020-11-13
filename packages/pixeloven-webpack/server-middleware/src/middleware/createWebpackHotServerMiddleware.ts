@@ -25,26 +25,19 @@ function requireDefault(obj: Module) {
  * @description If source maps are generated `assetsByChunkName.main` will be an array of filenames.
  * @param stats
  * @param chunkName
- *
- * @todo We have to use any here until we can upgrade @types/webpack
  */
-/* tslint:disable-next-line no-any */
-function getFileName(stats: any, chunkName: string) {
-    /**
-     * @todo We should probably error out if outputPath is empty
-     */
+function getFileName(stats: Stats.ToJsonOutput, chunkName: string) {
     const outputPath = stats.outputPath || "";
-    const fileName =
-        stats.assetsByChunkName && stats.assetsByChunkName[chunkName];
-    if (!fileName) {
-        throw Error(`Asset chunk ${chunkName} could not be found.`);
-    }
-    return path.join(
-        outputPath,
-        Array.isArray(fileName)
+    const fileName = stats?.assetsByChunkName?.[chunkName];
+    if (fileName) {
+        const assetName = Array.isArray(fileName)
             ? fileName.find((asset) => /\.js$/.test(asset))
-            : fileName,
-    );
+            : fileName;
+        if (assetName) {
+            return path.join(outputPath, assetName);
+        }
+    }
+    throw Error(`Asset chunk ${chunkName} could not be found.`);
 }
 
 /**
@@ -88,8 +81,8 @@ function webpackHotServerMiddleware(
         const statsObject = stats.toJson("verbose");
         const fileName = getFileName(statsObject, "main");
         const buffer = outputFs.readFileSync(fileName);
-        dynamicMiddleware.clean();
         const server = getServer(fileName, buffer);
+        dynamicMiddleware.clean();
         dynamicMiddleware.mount(server);
         if (config.done) {
             config.done(stats);
