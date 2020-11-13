@@ -12,19 +12,7 @@
 @import "~semantic-ui-sass/scss/collections/grid";
 
 .sb-show-main {
-    background: repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 7px,
-            rgba(0, 0, 0, 0.2) 1px,
-            transparent 8px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 7px,
-            rgba(0, 0, 0, 0.2) 1px,
-            transparent 8px
-        );
+    background: repeating-linear-gradient(0deg, transparent, transparent 7px, rgba(0, 0, 0, 0.2) 1px, transparent 8px),
+        repeating-linear-gradient(90deg, transparent, transparent 7px, rgba(0, 0, 0, 0.2) 1px, transparent 8px);
     padding: 40px;
 }
