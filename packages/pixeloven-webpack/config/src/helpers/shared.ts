@@ -9,6 +9,7 @@ import autoprefixer from "autoprefixer";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import path from "path";
+import stripInlineComments from "postcss-strip-inline-comments";
 import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import TerserPlugin from "terser-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
@@ -233,7 +234,6 @@ export function getSetup(options: Options) {
                             hmr: ifDevelopment(),
                         },
                     },
-
                     {
                         loader: require.resolve("css-loader"),
                     },
@@ -241,7 +241,7 @@ export function getSetup(options: Options) {
                         loader: require.resolve("postcss-loader"),
                         options: {
                             ident: "postcss",
-                            plugins: postCssPlugin,
+                            plugins: [postCssPlugin, stripInlineComments],
                         },
                     },
                     {
