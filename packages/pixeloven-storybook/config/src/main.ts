@@ -2,17 +2,17 @@ import getConfig from "./webpack";
 
 module.exports = {
     addons: [
-        "@storybook/addon-options",
+        require.resolve("@storybook/addon-options"),
 
         // Panels
-        "@storybook/addon-backgrounds",
-        "@storybook/addon-notes",
-        "@storybook/addon-viewport",
+        require.resolve("@storybook/addon-backgrounds"),
+        require.resolve("@storybook/addon-notes"),
+        require.resolve("@storybook/addon-viewport"),
 
         // Tabs
-        "@storybook/addon-knobs",
-        "@storybook/addon-a11y",
-        "@storybook/addon-actions",
+        require.resolve("@storybook/addon-knobs"),
+        require.resolve("@storybook/addon-a11y"),
+        require.resolve("@storybook/addon-actions"),
     ],
     stories: [process.cwd() + "/**/*.stories.[tj]s[x]"],
     webpackFinal: getConfig,

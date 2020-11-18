@@ -24,7 +24,6 @@
         "enzyme-adapter-react-16": "1.15.5"
     },
     "devDependencies": {
-        "@pixeloven-react/common": "^6.3.0",
         "@pixeloven-tooling/compiler": "^6.2.0",
         "@pixeloven-tooling/linter": "^6.3.0",
         "@pixeloven-tooling/pretty": "^6.2.0",
@@ -34,7 +33,8 @@
         "react-dom": "16.13.1"
     },
     "peerDependencies": {
-        "@pixeloven-react/common": "6.x"
+        "react": "16.x",
+        "react-dom": "16.x"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",
