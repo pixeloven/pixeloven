@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-react/common",
-    "version": "6.3.0",
+    "version": "6.3.1",
     "description": "Encapsulates react dependencies and provides a simple abstraction for common project functionality.",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -24,9 +24,9 @@
         "classnames": "2.2.6"
     },
     "devDependencies": {
-        "@pixeloven-react/testing": "^6.3.0",
+        "@pixeloven-react/testing": "^6.3.1",
         "@pixeloven-tooling/compiler": "^6.2.0",
-        "@pixeloven-tooling/linter": "^6.3.0",
+        "@pixeloven-tooling/linter": "^6.3.1",
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
         "lint-staged": "10.4.2",

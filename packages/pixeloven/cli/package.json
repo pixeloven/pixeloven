@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/cli",
-    "version": "6.3.0",
+    "version": "6.3.1",
     "description": "Command line interface for PixelOven framework",
     "main": "dist/lib/index.js",
     "types": "dist/types/types.d.ts",
@@ -21,8 +21,8 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/common": "^6.3.0",
-        "@pixeloven-core/validation": "^6.3.0",
+        "@pixeloven-core/common": "^6.3.1",
+        "@pixeloven-core/validation": "^6.3.1",
         "gluegun": "4.3.1"
     },
     "devDependencies": {
