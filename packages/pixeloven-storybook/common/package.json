@@ -19,21 +19,14 @@
     },
     "dependencies": {
         "@babel/core": "7.10.1",
-        "@storybook/addon-a11y": "5.3.21",
         "@storybook/addon-actions": "5.3.21",
         "@storybook/addon-backgrounds": "5.3.21",
         "@storybook/addon-knobs": "5.3.21",
-        "@storybook/addon-notes": "5.3.21",
-        "@storybook/addon-options": "5.3.21",
         "@storybook/addon-viewport": "5.3.21",
-        "@storybook/addons": "5.3.21",
-        "@storybook/core": "5.3.21",
         "@storybook/react": "5.3.21",
         "@storybook/theming": "5.3.21",
         "babel-loader": "8.1.0",
-        "react": "16.13.1",
-        "react-dom": "16.13.1",
-        "regenerator-runtime": "0.13.5",
+        "regenerator-runtime": "0.13.7",
         "webpack": "4.41.5"
     },
     "devDependencies": {
@@ -41,7 +34,13 @@
         "@pixeloven-tooling/linter": "^6.3.0",
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
-        "lint-staged": "10.4.2"
+        "lint-staged": "10.4.2",
+        "react": "16.13.1",
+        "react-dom": "16.13.1"
+    },
+    "peerDependencies": {
+        "react": "16.x",
+        "react-dom": "16.x"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",
