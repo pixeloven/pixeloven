@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-storybook/config",
-    "version": "6.3.1",
+    "version": "6.3.2",
     "description": "Storybook configuration",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",

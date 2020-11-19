@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/cli-addon-storybook",
-    "version": "6.3.1",
+    "version": "6.3.2",
     "description": "PixelOven CLI addon for storybook based development",
     "main": "dist/lib/index.js",
     "types": "dist/types/types.d.ts",
@@ -20,7 +20,7 @@
     "dependencies": {
         "@pixeloven-core/exceptions": "^6.3.1",
         "@pixeloven-storybook/common": "^6.3.1",
-        "@pixeloven-storybook/config": "^6.3.1"
+        "@pixeloven-storybook/config": "^6.3.2"
     },
     "devDependencies": {
         "@pixeloven-tooling/compiler": "^6.2.0",
