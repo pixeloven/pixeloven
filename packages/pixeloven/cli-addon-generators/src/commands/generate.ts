@@ -103,8 +103,7 @@ export default {
                 validate: Validation.minLength(1),
             },
             {
-                message:
-                    "Provide a component namespace if necessary (ex apps/pixeloven):",
+                message: "Provide a component namespace (ex apps/pixeloven):",
                 name: "componentNameSpace",
                 type: "input",
                 validate: Validation.minLength(1),
