@@ -33,11 +33,12 @@ export interface CreateOptions {
 export interface CreateComponentOptions {
     componentAtomicType: AtomicDesignTypeStrings;
     componentDescription: string;
-    componentParadigmType: ProgrammingParadigmStrings;
+    componentDirPath: string;
     componentHasState: boolean;
     componentHasStyle: boolean;
     componentName: string;
     componentNameSpace: string;
+    componentParadigmType: ProgrammingParadigmStrings;
 }
 
 export type CreateComponentExtension = (
