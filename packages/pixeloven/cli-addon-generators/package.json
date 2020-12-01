@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/cli-addon-generators",
-    "version": "6.3.1",
+    "version": "6.3.3",
     "description": "PixelOven CLI Common code generators",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",

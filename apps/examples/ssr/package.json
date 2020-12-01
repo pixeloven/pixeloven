@@ -1,6 +1,6 @@
 {
     "name": "@examples/ssr",
-    "version": "6.3.2",
+    "version": "6.3.3",
     "description": "Example app using pixeloven framework",
     "homepage": "https://www.pixeloven.com",
     "repository": {
@@ -30,7 +30,7 @@
     "devDependencies": {
         "@pixeloven-react/testing": "^6.3.1",
         "@pixeloven/cli": "^6.3.1",
-        "@pixeloven/cli-addon-generators": "^6.3.1",
+        "@pixeloven/cli-addon-generators": "^6.3.3",
         "@pixeloven/cli-addon-storybook": "^6.3.2",
         "@pixeloven/cli-addon-webpack": "^6.3.1",
         "@pixeloven/cli-core": "^6.3.1",
