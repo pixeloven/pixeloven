@@ -60,7 +60,7 @@ To make referencing source files easier we have set up three aliases that are av
 
 Further down into our `src/shared/components` directory structure we have adopted Atomic Design philosophies for creating and managing React components. Please reference [react-atomic-design](https://github.com/danilowoz/react-atomic-design) for details on what Atomic Design is and how it is applied to React.
 
-> Note it is worth mentioning that we use our own customized setup but generally all the same patterns still apply.
+> Note: It is worth mentioning that we use our own customized setup but generally all the same patterns still apply.
 
 For reference when we refer to `un-connected` or `connected` we are referring to a components to the relationship application state (redux).
 
@@ -88,7 +88,7 @@ Though these elements are generally connected to an application state, it is not
 
 When creating any new components make sure to follow the pattern below. In this example we will walk through creating a small `atom` component but these same patterns should apply regardless of scope.
 
-_Note: To make component creation easier, we provide a generator that will automatically create and initialize all the necessary component files. Refer to the [CLI Addon Generators documentation to learn more](/docs/api/cli-addon-generators#components)._
+> Note: To make component creation easier, we provide a generator that will automatically create and initialize all the necessary component files. Refer to the [CLI Addon Generators documentation to learn more](/docs/api/cli-addon-generators#components).
 
 First we must create a directory structure for our Atomic components.
 
@@ -100,7 +100,7 @@ src/shared/components/
 
 Once our Atomic directory is complete we can create our component directory. Here we will define all our support files for our component, ensuring that the name of the component comes first followed by the appropriate file type (scss, stories, test, etc).
 
-_Note: Co-locating the component's support files and sharing the component name makes local development far easier versus spreading files throughout the application or naming every component file `index.tsx`. The `index.ts` file is still necessary, but only to export the component at the component directory level and shouldn't contain any other component code._
+> Note: Co-locating the component's support files and sharing the component name makes local development far easier versus spreading files throughout the application or naming every component file `index.tsx`. The `index.ts` file is still necessary, but only to export the component at the component directory level and shouldn't contain any other component code.
 
 ```
 atoms

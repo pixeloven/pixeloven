@@ -15,7 +15,7 @@ import { Logo } from "@shared/components/atoms/Logo";
 
 Alternatively we can also create an `index.ts` file in the atoms directory and export all of our Atom components, allowing us to reference multiple at once.
 
-_Note: Be extremely cautious when importing from a shared directory such as this. If the component we're importing into is exported from the same directory as the component we're importing, it will create a circular dependency. This can create bugs that are difficult to track down, slow down our application, or even create heap memory issues that result in our application crashing._
+> Note: Be extremely cautious when importing from a shared directory such as this. If the component we're importing into is exported from the same directory as the component we're importing, it will create a circular dependency. This can create bugs that are difficult to track down, slow down our application, or even create heap memory issues that result in our application crashing.
 
 ```javascript
 import { Button, Link, Logo } from "@shared/components/atoms";
