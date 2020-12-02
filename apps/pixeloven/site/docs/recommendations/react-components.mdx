@@ -3,33 +3,31 @@ id: react-components
 title: React Components
 ---
 
-This document is general advice for creating and working with new components.
+This document is general advice for working with React components.
 
 ## Referencing source files
 
-To make referencing source files easier we have set up three simple aliases when working inside an app.
-
--   `@client` which points to `src/client/*`
--   `@server` which points to `src/server/*`
--   `@shared` which points to `src/shared/*`
-
-Example usage would be as follows:
+To make referencing source files easier we have set up a `@shared` directory alias to simplify import declarations vs having to navigate up and down the directory tree. For example, to import a Logo Atom into another component we'd write:
 
 ```javascript
 import { Logo } from "@shared/components/atoms/Logo";
 ```
 
-Alternatively we can also create an `index.ts` file in the atoms directory and export all of our **atoms** allowing us to reference multiple at once.
+Alternatively we can also create an `index.ts` file in the atoms directory and export all of our Atom components, allowing us to reference multiple at once.
+
+_Note: Be extremely cautious when importing from a shared directory such as this. If the component we're importing into is exported from the same directory as the component we're importing, it will create a circular dependency. This can create bugs that are difficult to track down, slow down our application, or even create heap memory issues that result in our application crashing._
 
 ```javascript
-import { Logo } from "@shared/components/atoms";
+import { Button, Link, Logo } from "@shared/components/atoms";
 ```
+
+We provide a few aliases for our source directories, refer to the [Design Patterns documentation to learn more](/docs/reccommendations/design-patterns#source-file-structure-and-aliases).
 
 ## Supporting files
 
-Our components may also contain other important files. For instance this framework supports the use of localized stylesheets with `Logo.scss`. It is also highly recommended that all _stories_ be accompanied by a `README.md` file to help with development.
+We rely on co-location for our component's supporting files, including styles, tests, stories, and documentation. We find co-locating the supporting files makes development far easier versus spreading them throughout the application. We highly recommend that all `stories.tsx` be accompanied by a `README.md` file to document and aid other developers working with the component.
 
-And finally we have our `index.ts`. This file should simply export our component for consumption in the general application.
+The `index.ts` file is necessary, but only to export the component at the component directory level and shouldn't contain any other component code. For example, to export the component we'd write:
 
 ```javascript
 /**
@@ -43,13 +41,13 @@ export { default as LogoConnected } from "./Logo.connect";
 
 ## Connecting a component to state
 
-If this component needs to _connect_ to [redux](https://redux.js.org/) state then it will need the following file(s).
+If this component needs to _connect_ to [Redux](https://redux.js.org/) state then it will also need a co-located connect file.
 
 ```
 Logo.connect.ts
 ```
 
-Here's a simple example of what this file might look like.
+Here's a simplified example of what this file might look like.
 
 ```javascript
 const makeMapStateToProps = () => {
@@ -71,4 +69,10 @@ const LogoConnect = connect(
 export default LogoConnect;
 ```
 
-The reason for this separation is primarily for testability but it also allows us to use a component in multiple contexts (with or without redux). The only reference to a connected component should be with in our route config.
+We separate the application state management primarily for testability, but it also allows us to use a component in multiple contexts (with or without Redux). The only reference to a connected component should be with in our route config.
+
+ADD LINK TO DOCUMENTATION ON ROUTES
+
+## Component composition
+
+ADD DOCUMENTATION ON COMPONENT COMPOSITION
