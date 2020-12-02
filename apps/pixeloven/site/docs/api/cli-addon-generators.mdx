@@ -70,15 +70,16 @@ The generators are somewhat opinionated and make a few assumptions about the org
 #### Components
 
 1. To create a new component, run the `generate` command from the root of the host app or package and choose `Component` from the selection menu.
-1. Choose the appropriate atomic type for your component. Refer to the component docs to learn more about atomic design and how it's implemented in Pixeloven.
+1. Choose the appropriate Atomic type for your component. Refer to the [component docs to learn more](/recommendations/design-patterns#atomic-design-structure) about Atomic design and how it's implemented in Pixeloven.
 1. Choose the format of the component, we recommend Functional components if you're using React 16.4.x or later.
-1. Choose to manage state within your component. If you're unsure, choose `N`. It's easy enough to add this later if necessary.
+1. Choose to manage local state within your component. If you're unsure, choose `N`. It's easy enough to add this later if necessary.
 1. Choose to include styles with your component. If you're unsure, choose `N`. It's easy enough to add this later if necessary.
 1. Enter a component name following the naming conventions in the contributing docs.
 1. Enter a short description of what your component does. You can expand on the description in the component README.
-1. Enter a namespace for the component if necessary. These are slightly different from app and package namespaces as they're not use for publishing. These namespaces are used to group the components within each app and package within your project. For example of the components within our packages use a `packages/package-name` namespace format.
+1. Enter the directory path for your components. For apps this will typically be `src/shared/components` and for packages simply `src`.
+1. Enter a namespace for your components. These namespaces are used to group the components within each app and package within your project. For example of the components within our packages use a `packages/package-name` namespace format.
 
-Congrats, your brand new component is ready and waiting for you in `/src/components` under the directory that matches the atomic type you chose above, `cd` into it to get started and view the component docs to learn more.
+Congrats! Your brand new component is ready and waiting for you in the directory that matches the Atomic type you chose above. `cd` into it to get started and [view the component docs to learn more](/recommendations/react-components).
 
 #### Packages
 
