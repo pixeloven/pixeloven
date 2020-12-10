@@ -103,22 +103,18 @@ src/shared/components/molecules/MetadataIndicator
 function MetadataIndicator(props) {
     if (showFirstIndicator && showSecondIndicator) {
         return (
-            <SlideIn>
+            <React.Fragment>
                 <FirstIndicator />
                 <SecondIndicator />
-            </SlideIn>
+            </React.Fragment>
         );
     } else if (showFirstIndicator) {
         return (
-            <SlideIn>
-                <FirstIndicator />
-            </SlideIn>
+            <FirstIndicator />
         );
     } else if (showSecondIndicator) {
         return (
-            <SlideIn>
-                <SecondIndicator />
-            </SlideIn>
+            <SecondIndicator />
         );
     }
 
