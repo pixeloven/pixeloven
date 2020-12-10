@@ -81,43 +81,43 @@ When it comes to extracting components, there are two important factors to consi
 
 We use the Atomic Design as our philosophy for creating reusable React components, along with additional co-located support files for each new component. However, sometimes an Atomic component itself might include complex business logic for rendering, or code that is reused only within that component, and extracting some of its pieces into their own components would help improve readability and maintainability of the code. If you see that these pieces need to be extracted into their own component, yet they do not warrant creating the additional supporting files, then simply create a co-located React component within the original component folder and import it into the original component. Any necessary styles, stories, or tests then live within the original support files.
 
-In the example below, `CampaignMetadataIndicator` is a Molecule component and it requires complex business for rendering several indicators. The `VelocityIndicator` and `ProximityIndicator` in the end both render the same Molecule component, however they use widely different business logic and copy. Extracting these implementations into two separate components lets us clearly see the logic that the parent, `CampaignMetadataIndicator`, uses to decide which indicator to render. `VelocityIndicator` and `ProximityIndicator`, in turn, are responsible for logic specific to them. Since they are not being used anywhere else, they do not warrant creation of a new Atomic component with new support files, so they are kept within the same directory as their parent, `molecules/CampaignMetadataIndicator`.
+In the example below, `MetadataIndicator` is a Molecule component and it requires complex business for rendering several indicators. `FirstIndicator` and `SecondIndicator` in the end both render the same Molecule component, however they use widely different business logic and copy. Extracting these implementations into two separate components lets us clearly see the logic that the parent, `MetadataIndicator`, uses to decide which indicator to render. `FirstIndicator` and `SecondIndicator`, in turn, are responsible for logic specific to them. Since they are not being used anywhere else, they do not warrant creation of a new Atomic component with new support files, so they are kept within the same directory as their parent, `molecules/MetadataIndicator`.
 
 In this case, both complexity and reusability played a role in the decision to extract the components. Reusability is frequently a more obvious reason, however, complexity alone could warrant extraction, depending on the situation. The goal is to improve readability of the code for us humans, which will make it easier for us to reason about and modify the code as needed in the future.
 
 As [React docs](https://reactjs.org/docs/components-and-props.html#extracting-components) put it: "Don’t be afraid to split components into smaller components." :)
 
 ```
-src/shared/components/molecules/CampaignMetadataIndicator
-├── CampaignMetadataIndicator.scss
-├── CampaignMetadataIndicator.stories.tsx
-├── CampaignMetadataIndicator.test.tsx
-├── CampaignMetadataIndicator.tsx
+src/shared/components/molecules/MetadataIndicator
+├── FirstIndicator.tsx
 ├── index.ts
-├── ProximityIndicator.tsx
+├── MetadataIndicator.scss
+├── MetadataIndicator.stories.tsx
+├── MetadataIndicator.test.tsx
+├── MetadataIndicator.tsx
 ├── README.md
-└── VelocityIndicator.tsx
+└── SecondIndicator.tsx
 ```
 
 ```javascript
-function CampaignMetadataIndicator(props) {
-    if (showVelocity && showProximity) {
+function MetadataIndicator(props) {
+    if (showFirstIndicator && showSecondIndicator) {
         return (
             <SlideIn>
-                <VelocityIndicator />
-                <ProximityIndicator />
+                <FirstIndicator />
+                <SecondIndicator />
             </SlideIn>
         );
-    } else if (showVelocity) {
+    } else if (showFirstIndicator) {
         return (
             <SlideIn>
-                <VelocityIndicator />
+                <FirstIndicator />
             </SlideIn>
         );
-    } else if (showProximity) {
+    } else if (showSecondIndicator) {
         return (
             <SlideIn>
-                <ProximityIndicator />
+                <SecondIndicator />
             </SlideIn>
         );
     }
