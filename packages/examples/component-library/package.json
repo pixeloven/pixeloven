@@ -1,6 +1,6 @@
 {
   "name": "@examples/component-library",
-  "version": "6.3.1",
+  "version": "6.3.4",
   "description": "Component example for creating a React + TypeScript based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -25,8 +25,8 @@
   },
   "devDependencies": {
     "@pixeloven-react/testing": "^6.3.1",
-    "@pixeloven/cli": "^6.3.1",
-    "@pixeloven/cli-core": "^6.3.1",
+    "@pixeloven/cli": "^6.3.4",
+    "@pixeloven/cli-core": "^6.3.4",
     "lint-staged": "10.4.2"
   },
   "scripts": {
