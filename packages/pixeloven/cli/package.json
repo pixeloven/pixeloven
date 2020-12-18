@@ -23,7 +23,7 @@
     "dependencies": {
         "@pixeloven-core/common": "^6.3.1",
         "@pixeloven-core/validation": "^6.3.1",
-        "gluegun": "4.3.1"
+        "gluegun": "4.5.0"
     },
     "devDependencies": {
         "copyfiles": "2.2.0",
