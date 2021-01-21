@@ -1,41 +1,60 @@
-stages:
-- stage: Development
+stages:     
+- stage: Build
   jobs:
-  - job: PixelOven
+  - job: Build
     pool:
-      vmImage: "ubuntu-18.04"
+      vmImage: "ubuntu-20.04"
     strategy:
       matrix:
-        # Comment out until we can figure out how to not report coverage twice
-        # node_10_x:
-        #   node_version: 10.x
         node_12_x:
           node_version: 12.x
+        node_14_x:
+          node_version: 14.x
     steps:
     - task: NodeTool@0 
       inputs:
         versionSpec: $(node_version)
     # Setup
-    - script: npm i -g npm
-      displayName: Update npm
     - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
       displayName: Update yarn
-    - script: npm i -g lerna
-      displayName: Install lerna
-    - script: lerna bootstrap
+    - script: yarn install
       displayName: Bootstrap dependencies
     # CLI Pipeline
     - script: yarn all:compile
-      displayName: Compile PixelOven packages
+      displayName: Compile packages
     - script: yarn all:lint
-      displayName: Lint PixelOven packages
+      displayName: Lint packages
     - script: yarn all:test
-      displayName: Test PixelOven packages
+      displayName: Test packages
     # Site Pipeline
     - script: yarn all:build
       displayName: Build PixelOven Site
+    - publish: $(System.DefaultWorkingDirectory)
+      artifact: build-$(node_version)
+      
+- stage: Report
+  - job: Report
+    dependsOn: Build
+    pool:
+      vmImage: "ubuntu-20.04"
+    strategy:
+      matrix:
+        node_14_x:
+          node_version: 14.x
+    steps:
+    - task: NodeTool@0 
+      inputs:
+        versionSpec: $(node_version)
+    # Setup
+    - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+      displayName: Update yarn
+    - script: yarn install
+      displayName: Bootstrap dependencies
     # Reporting
     - script: yarn codecov -t $(CODECOV_TOKEN)
       displayName: Report code coverage
-    # @todo Run against examples now
-    # @todo Create an integration test suite
+
+# @todo -- build custom image with tooling
+# @todo -- build example and doc site and deploy
+# @todo -- check for warnings
+# @todo -- add sonar cloud and do report as a seperate stage
