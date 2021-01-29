@@ -23,10 +23,10 @@
     "dependencies": {
         "@pixeloven-core/common": "^6.3.1",
         "@pixeloven-core/validation": "^6.3.1",
-        "gluegun": "4.5.0"
+        "gluegun": "4.6.0"
     },
     "devDependencies": {
-        "copyfiles": "2.2.0",
+        "copyfiles": "2.4.1",
         "lint-staged": "10.4.2"
     },
     "scripts": {
