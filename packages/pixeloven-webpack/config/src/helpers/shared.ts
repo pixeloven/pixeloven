@@ -255,7 +255,9 @@ export function getSetup(options: Options) {
                     {
                         loader: require.resolve("css-loader"),
                         options: {
-                            onlyLocals: true,
+                            modules: {
+                                exportOnlyLocals: true,
+                            },
                         },
                     },
                 ],
