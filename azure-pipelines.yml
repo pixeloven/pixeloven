@@ -1,5 +1,6 @@
 stages:     
 - stage: Build
+
   jobs:
   - job: Build
     pool:
@@ -10,14 +11,29 @@ stages:
           node_version: 12.x
         node_14_x:
           node_version: 14.x
+
+    variables:
+      YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
+
     steps:
-    - task: NodeTool@0 
+    - task: NodeTool@0
       inputs:
         versionSpec: $(node_version)
-    # Setup
-    - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
-      displayName: Update yarn
-    - script: yarn install
+
+    # # Update yarn
+    # - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+    #   displayName: Update yarn
+
+    - task: Cache@2
+      inputs:
+        key: 'yarn | "$(Agent.OS)" | yarn.lock'
+        restoreKeys: |
+          yarn | "$(Agent.OS)"
+          yarn
+        path: $(YARN_CACHE_FOLDER)
+      displayName: Cache Yarn packages
+
+    - script: yarn install --frozen-lockfile
       displayName: Bootstrap dependencies
     # CLI Pipeline
     - script: yarn all:compile
@@ -29,31 +45,14 @@ stages:
     # Site Pipeline
     - script: yarn all:build
       displayName: Build PixelOven Site
-    - publish: $(System.DefaultWorkingDirectory)
-      artifact: build-$(node_version)
-      
-- stage: Report
-  - job: Report
-    dependsOn: Build
-    pool:
-      vmImage: "ubuntu-20.04"
-    strategy:
-      matrix:
-        node_14_x:
-          node_version: 14.x
-    steps:
-    - task: NodeTool@0 
-      inputs:
-        versionSpec: $(node_version)
-    # Setup
-    - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
-      displayName: Update yarn
-    - script: yarn install
-      displayName: Bootstrap dependencies
-    # Reporting
     - script: yarn codecov -t $(CODECOV_TOKEN)
+      condition: eq("$(node_version)", "14.x")
       displayName: Report code coverage
+    # - publish: $(System.DefaultWorkingDirectory)
+    #   artifact: build-$(node_version)
 
+# @todo -- cache node_modules
+# @todo -- publish artifacts
 # @todo -- build custom image with tooling
 # @todo -- build example and doc site and deploy
 # @todo -- check for warnings
