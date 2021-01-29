@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-tooling/linter",
-  "version": "6.3.1",
+  "version": "6.4.0",
   "description": "Linter abstraction for PixelOven's workflow",
   "bin": {
     "pixeloven-linter": "./bin/index.js"

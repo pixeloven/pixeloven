@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-react/testing",
-    "version": "6.3.1",
+    "version": "6.4.0",
     "description": "Encapsulates react testing dependencies and provides a simple abstraction for common testing functionality.",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -25,7 +25,7 @@
     },
     "devDependencies": {
         "@pixeloven-tooling/compiler": "^6.2.0",
-        "@pixeloven-tooling/linter": "^6.3.1",
+        "@pixeloven-tooling/linter": "^6.4.0",
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
         "lint-staged": "10.4.2",
