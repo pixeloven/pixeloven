@@ -41,7 +41,6 @@
     "all:test": "lerna run --stream test",
     "all:document": "lerna run --stream document",
     "all:report:coverage": "yarn codecov -t \"$CODECOV_TOKEN\"",
-    "examples:bootstrap": "yarn --cwd examples lerna bootstrap",
     "precommit": "lerna run --concurrency 1 --stream precommit --since HEAD",
     "preversion": "yarn all:bootstrap"
   },
