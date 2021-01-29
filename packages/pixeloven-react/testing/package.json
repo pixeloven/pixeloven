@@ -18,10 +18,10 @@
         "access": "public"
     },
     "dependencies": {
-        "@types/enzyme": "3.10.7",
+        "@types/enzyme": "3.10.8",
         "@types/enzyme-adapter-react-16": "1.0.6",
         "enzyme": "3.11.0",
-        "enzyme-adapter-react-16": "1.15.5"
+        "enzyme-adapter-react-16": "1.15.6"
     },
     "devDependencies": {
         "@pixeloven-tooling/compiler": "^6.2.0",
@@ -29,8 +29,8 @@
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
         "lint-staged": "10.4.2",
-        "react": "16.13.1",
-        "react-dom": "16.13.1"
+        "react": "16.14.0",
+        "react-dom": "16.14.0"
     },
     "peerDependencies": {
         "react": "16.x",

@@ -45,13 +45,6 @@ export function getSetup(options: Options) {
         return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
     };
 
-    const postCssPlugin = () => [
-        require("postcss-flexbugs-fixes"),
-        autoprefixer({
-            flexbox: "no-2009",
-        }),
-    ];
-
     const { ifClient, ifDevelopment, ifProduction, ifNode } = getUtils({
         mode: options.mode,
         name: options.name,
@@ -229,9 +222,6 @@ export function getSetup(options: Options) {
                 use: removeEmpty([
                     {
                         loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hmr: ifDevelopment(),
-                        },
                     },
 
                     {
@@ -240,8 +230,14 @@ export function getSetup(options: Options) {
                     {
                         loader: require.resolve("postcss-loader"),
                         options: {
-                            ident: "postcss",
-                            plugins: postCssPlugin,
+                            postcssOptions: {
+                                plugins: [
+                                    require.resolve("postcss-flexbugs-fixes"),
+                                    autoprefixer({
+                                        flexbox: "no-2009",
+                                    }),
+                                ],
+                            },
                         },
                     },
                     {
@@ -259,7 +255,9 @@ export function getSetup(options: Options) {
                     {
                         loader: require.resolve("css-loader"),
                         options: {
-                            onlyLocals: true,
+                            modules: {
+                                exportOnlyLocals: true,
+                            },
                         },
                     },
                 ],
