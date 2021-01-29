@@ -46,11 +46,12 @@ stages:
     - script: yarn all:build
       displayName: Build PixelOven Site
     - script: yarn codecov -t $(CODECOV_TOKEN)
-      condition: eq("$(node_version)", "14.x")
+    # condition: and(succeeded(), eq($(node_version), '14'))
       displayName: Report code coverage
     # - publish: $(System.DefaultWorkingDirectory)
     #   artifact: build-$(node_version)
 
+# @todo -- publish to npm automatically?
 # @todo -- cache node_modules
 # @todo -- publish artifacts
 # @todo -- build custom image with tooling
