@@ -9,7 +9,7 @@ import { RouteComponentProps, RouteProps } from "react-router-dom";
 /* tslint:disable no-any ban-types */
 type Params = any;
 
-export type FetchDataFunction = (callback: Function, ownProps: Params) => void | any;
+export type FetchDataFunction = Function;
 
 export type MatchType = "switch" | "default";
 
