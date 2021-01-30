@@ -1,16 +1,15 @@
 import { ConnectedComponentClass } from "react-redux";
 import { match } from "react-router";
 import { RouteComponentProps, RouteProps } from "react-router-dom";
-import { Dispatch } from "redux";
 
 /**
  * @todo Should remove the reliance on redux make types more generic
  * @todo need to expose react router through this package
  */
-/* tslint:disable no-any */
+/* tslint:disable no-any ban-types */
 type Params = any;
 
-export type FetchDataFunction = (dispatch: Dispatch, ownProps: Params) => void;
+export type FetchDataFunction = (callback: Function, ownProps: Params) => void | any;
 
 export type MatchType = "switch" | "default";
 
