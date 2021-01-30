@@ -11,6 +11,7 @@ import App from "@shared/components/App";
 import routeConfig, {unknownErrorRoutes} from "@shared/routes";
 
 interface TemplateProps {
+    data: object;
     req: Request;
     routes: UniversalRouteProps[];
     staticContext: StaticContext;
@@ -28,7 +29,9 @@ function Template(props: TemplateProps) {
             <Head helmet={helmetData}>
                 {props.req.files && <Link href={props.req.files.css} rel="stylesheet" type="text/css" />}
             </Head>
-            <Body scripts={props.req.files && <Script src={props.req.files.js} />}>{content}</Body>
+            <Body state={props.data} scripts={props.req.files && <Script src={props.req.files.js} />}>
+                {content}
+            </Body>
         </Html>,
     );
     return `<!DOCTYPE html>${template}`;
@@ -42,6 +45,7 @@ export function errorHandler(config: Config) {
         try {
             const routes = Routing.getConfig(unknownErrorRoutes, config.publicPath);
             const output = Template({
+                data: {},
                 req,
                 routes,
                 staticContext,
@@ -63,7 +67,19 @@ export function renderer(config: Config) {
         };
         try {
             const routes = Routing.getConfig(routeConfig, config.publicPath);
+            const matchedRoutes = Routing.getMatches(routes, {
+                as: "switch",
+                path: req.path,
+            });
+            const data = {test: ""};
+
+            matchedRoutes.forEach((matchedRoute) => {
+                if (matchedRoute.route.fetchData) {
+                    data.test = matchedRoute.route.fetchData();
+                }
+            });
             const output = Template({
+                data,
                 req,
                 routes,
                 staticContext,
