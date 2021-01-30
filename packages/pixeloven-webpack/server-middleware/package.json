@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/server-middleware",
-    "version": "6.4.0",
+    "version": "6.4.1",
     "description": "Webpack Development Server middleware",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@pixeloven-express/dynamic-middleware": "^6.4.0",
-        "@pixeloven-webpack/hot-middleware": "^6.4.0",
+        "@pixeloven-webpack/hot-middleware": "^6.4.1",
         "ansi-html": "0.0.7",
         "html-entities": "1.2.1",
         "react": "16.14.0",
@@ -35,7 +35,7 @@
         "@pixeloven-tooling/linter": "^6.4.0",
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
-        "@pixeloven-webpack/compiler": "^6.4.0",
+        "@pixeloven-webpack/compiler": "^6.4.1",
         "@pixeloven-webpack/types": "^6.1.0",
         "@types/express": "4.17.6",
         "@types/html-entities": "1.2.16",
