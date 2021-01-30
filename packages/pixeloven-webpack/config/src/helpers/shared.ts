@@ -232,7 +232,7 @@ export function getSetup(options: Options) {
                         options: {
                             postcssOptions: {
                                 plugins: [
-                                    require.resolve("postcss-flexbugs-fixes"),
+                                    require("postcss-flexbugs-fixes"),
                                     autoprefixer({
                                         flexbox: "no-2009",
                                     }),
@@ -258,6 +258,13 @@ export function getSetup(options: Options) {
                             modules: {
                                 exportOnlyLocals: true,
                             },
+                        },
+                    },
+                    {
+                        loader: require.resolve("sass-loader"),
+                        options: {
+                            // Prefer `dart-sass`
+                            implementation: require("sass"),
                         },
                     },
                 ],
