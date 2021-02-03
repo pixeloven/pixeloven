@@ -6,9 +6,10 @@ import { RouteComponentProps, RouteProps } from "react-router-dom";
  * @todo Should remove the reliance on redux make types more generic
  * @todo need to expose react router through this package
  */
-/* tslint:disable no-any ban-types */
+/* tslint:disable no-any */
 type Params = any;
 
+/* tslint:disable-next-line:ban-types */
 export type FetchDataFunction = Function;
 
 export type MatchType = "switch" | "default";
@@ -57,3 +58,4 @@ export interface UniversalRouteConfig {
     routes?: UniversalRouteConfig[];
     statusCode?: number;
 }
+/* tslint:enable no-any */
