@@ -1,7 +1,6 @@
 import { ConnectedComponentClass } from "react-redux";
 import { match } from "react-router";
 import { RouteComponentProps, RouteProps } from "react-router-dom";
-import { Dispatch } from "redux";
 
 /**
  * @todo Should remove the reliance on redux make types more generic
@@ -10,7 +9,8 @@ import { Dispatch } from "redux";
 /* tslint:disable no-any */
 type Params = any;
 
-export type FetchDataFunction = (dispatch: Dispatch, ownProps: Params) => void;
+/* tslint:disable-next-line:ban-types */
+export type FetchDataFunction = Function;
 
 export type MatchType = "switch" | "default";
 
@@ -58,3 +58,4 @@ export interface UniversalRouteConfig {
     routes?: UniversalRouteConfig[];
     statusCode?: number;
 }
+/* tslint:enable no-any */

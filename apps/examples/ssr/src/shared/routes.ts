@@ -30,6 +30,9 @@ const routes = [
                 component: Home,
                 exact: true,
                 path: "/",
+                fetchData: () => {
+                    return "hallo!";
+                },
             },
             // 404 Page
             {
