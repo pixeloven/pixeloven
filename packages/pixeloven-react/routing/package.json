@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-react/routing",
-    "version": "6.4.0",
+    "version": "6.4.2",
     "description": "React Router configuration helpers and components",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",

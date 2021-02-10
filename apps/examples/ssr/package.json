@@ -1,6 +1,6 @@
 {
     "name": "@examples/ssr",
-    "version": "6.4.1",
+    "version": "6.4.2",
     "description": "Example app using pixeloven framework",
     "homepage": "https://www.pixeloven.com",
     "repository": {
@@ -17,7 +17,7 @@
         "@examples/component-library": "^6.4.1",
         "@pixeloven-express/middleware-asset-manifest": "^6.4.0",
         "@pixeloven-react/common": "^6.4.0",
-        "@pixeloven-react/routing": "^6.4.0",
+        "@pixeloven-react/routing": "^6.4.2",
         "@pixeloven-react/templating": "^6.4.0",
         "express": "4.17.1",
         "express-winston": "4.0.3",
