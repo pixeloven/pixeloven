@@ -7,9 +7,7 @@ function Default(props: UniversalRouteComponentProps) {
     const {routes} = props;
     return (
         <Responsive>
-            <Container fluid={true}>
-                {routes && <Routes as="switch" config={routes} />}
-            </Container>
+            <Container fluid={true}>{routes && <Routes as="switch" config={routes} />}</Container>
             <Container fluid={true}>
                 <Segment inverted={true} vertical={true} textAlign="center">
                     <p>

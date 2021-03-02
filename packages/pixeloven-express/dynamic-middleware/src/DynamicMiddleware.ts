@@ -12,7 +12,7 @@ type Middleware = (req: Request, res: Response, next: NextFunction) => void;
 
 /**
  * @type Layer
- * @description Represents a new application layer. Either a new Application layer or middleware.
+ * @description Represents a new application or middleware.
  */
 type Layers = (Application | Express | Middleware)[];
 
@@ -21,6 +21,13 @@ class DynamicMiddleware {
 
     constructor(layers: Layers = []) {
         this.layers = layers;
+    }
+
+    /**
+     * Get number of middleware
+     */
+    public get length() {
+        return this.layers.length;
     }
 
     /**

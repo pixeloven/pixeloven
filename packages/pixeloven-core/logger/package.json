@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-core/logger",
-    "version": "6.0.1",
+    "version": "6.4.0",
     "description": "Node logger",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -22,11 +22,11 @@
         "winston": "3.2.1"
     },
     "devDependencies": {
-        "@pixeloven-tooling/compiler": "^6.0.1",
-        "@pixeloven-tooling/linter": "^6.0.1",
-        "@pixeloven-tooling/pretty": "^6.0.1",
-        "@pixeloven-tooling/test": "^6.0.1",
-        "lint-staged": "10.2.7"
+        "@pixeloven-tooling/compiler": "^6.2.0",
+        "@pixeloven-tooling/linter": "^6.4.0",
+        "@pixeloven-tooling/pretty": "^6.2.0",
+        "@pixeloven-tooling/test": "^6.2.0",
+        "lint-staged": "10.4.2"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",

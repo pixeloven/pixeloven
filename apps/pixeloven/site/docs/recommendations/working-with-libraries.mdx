@@ -3,27 +3,29 @@ id: working-with-libraries
 title: Working with libraries
 ---
 
-This document is general advice for creating new components and utilities.
+When working with third party libraries we often find the library will lack type definitions (this is starting to improve as the community adopts TypeScript). In these situations we need to include community definitions, declare our own, or in extreme cases, ignore the lack of types.
 
 ## Community definitions
 
-Generally the TypeScript community has or will define definitions for lots of scenarios. If you are using a package or library try to first look at [DefinitelyTyped](https://definitelytyped.org/).
+Generally the TypeScript community has or will create definitions for most scenarios. If you are using a library that doesn't include it's own types, try to search for the library in [DefinitelyTyped](https://definitelytyped.org/). If that fails you can also search NPM repository for `@types/*` where `*` is the package name. As a last resort, search Google before moving to the options below.
 
-If that fails you can also search NPM repository for `@types/*` where `*` is the package name. As a last resort before moving to the below options is to search google. :)
+## Un-typed libraries
 
-## Declaration files
+For un-typed libraries we recommend attempting to declare custom type definitions, but in some cases when that is too tedious or even impossible we have an option to move forward using module files.
 
-Declaring definitions can be necessary for when a module is un-typed or when using an external API.
+### Declaration files
 
-> Note this is the right way to import an un-typed module or file. However, it is a tedious process and so it is recommended to first search for types from the community (shown above) or if too cumbersome do what is show below in the next sub sections.
+Declaring custom definitions for a library may be necessary when a module is un-typed or when using an external API.
 
-### Custom definitions
+> Note: This is the right way to import an un-typed module or file. However, it is a tedious process and so it is recommended to first search for types from the community (shown above) or if too cumbersome use module files (shown below).
 
-It is possible to write types for a third party package. In these cases it is recommended to follow TypeScripts own documentation on [declaration files](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html).
+#### Custom definitions
 
-### External APIs
+When defining types for a third party library we recommend following TypeScript's own [documentation for declaration files](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html).
 
-In this example we are working with a specific API defined by an IE browser. We created a file `dom.ie.d.ts` and placed the below contents.
+#### External APIs
+
+Typescript's built in type definitions do not include vendor-specific DOM specs. When working with custom external APIs we will often need to define our oun interfaces, for example when working with a specific API defined by an IE browser. Here we create a `dom.ie.d.ts` file and define the `msMatchesSelector` method within the `Element` interface.
 
 ```javascript
 interface Element {
@@ -31,35 +33,33 @@ interface Element {
 }
 ```
 
-For this example we can see why this is needed from this [stack overflow page](https://stackoverflow.com/questions/53040790/ts2339-property-msmatchesselector-does-not-exist-on-type-element?noredirect=1&lq=1).
+For issues like this example, Google is your best friend. We found [this issue with a solution on Stack Overflow](https://stackoverflow.com/questions/53040790/ts2339-property-msmatchesselector-does-not-exist-on-type-element?noredirect=1&lq=1).
 
-## Un-typed libraries
+### Module files
 
-For un-typed modules and libraries it is recommended that you attempt to come up with your own type definitions but if it is found to be too tedious or even impossible we have an option to move forward. Generally this is meant to help define custom types for an un-typed module. However, for quicker integration we often use this as a way to blanket accept a module without types.
+Generally this is meant to help define custom types for an un-typed module. However, for quicker integration we sometimes use this as a way to blanket accept a module without types.
 
-> Note this practice should be discourage for most cases so please **Use sparingly**.
+> Note: This practice should be discourage for most cases so please **Use sparingly**
 
-In your application locate or create a file `./src/modules.d.ts`. In this file you will want to declare a module like below.
+We start by locating or creating a `./src/modules.d.ts` file and declaring the module. For example:
 
 ```javascript
-declare module "import-module-name";
+declare module "external-module-name";
 ```
 
-Where `import-module-name` is the name used for importing the module into your source.
+Where `external-module-name` is the library name used for importing the module into your source.
 
 ```javascript
-import woot from "import-module-name";
+import woot from "external-module-name";
 ```
 
 ## Turning off type-checking
 
-Occasionally, you may need to disable type checking if you're using a feature
-that is not supported by the current `@type/*` library. If that is case you can
-use one of the following to disable type-checking:
+Occasionally, we may encounter situations where we need to disable type checking, for example when using a feature that is not supported by the current `@type/*` library. In these cases we will use one of the following to disable type-checking:
 
-> Note this practice should be discourage for most cases so please **Use sparingly**.
+> Note: This practice should be discourage for most cases so please **Use sparingly**.
 
 -   `// @ts-ignore`: disables checking for the next line
 -   `// @ts-nocheck`: disables checking for the whole file
 
-For information see TypeScripts documentation on [type checking](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html)
+For more information refer to [TypeScript's documentation on type checking](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html)
