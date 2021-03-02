@@ -2,11 +2,9 @@ import getConfig from "./webpack";
 
 module.exports = {
     addons: [
-        "@storybook/addon-options",
-
         // Panels
         "@storybook/addon-backgrounds",
-        "@storybook/addon-notes",
+        "@storybook/addon-docs",
         "@storybook/addon-viewport",
 
         // Tabs
