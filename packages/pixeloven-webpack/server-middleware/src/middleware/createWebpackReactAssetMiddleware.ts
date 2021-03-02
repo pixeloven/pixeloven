@@ -3,7 +3,7 @@ import { DynamicMiddleware } from "@pixeloven-express/dynamic-middleware";
 import { Compiler } from "@pixeloven-webpack/compiler";
 import { NextFunction, Request, Response } from "express";
 import { normalize } from "path";
-import { flushChunkNames } from "react-universal-component/server";
+import { clearChunks, flushChunkNames } from "react-universal-component/server";
 import { Stats } from "webpack";
 import flushChunks from "webpack-flush-chunks";
 
@@ -11,6 +11,23 @@ interface ReactAssetMiddlewareConfig {
     done?: (stats: Stats) => void;
     error?: (stats: Error) => void;
     publicPath: string;
+}
+
+interface ReactAssetMiddleware {
+    publicPath: string;
+    stylesheets: string[];
+    scripts: string[];
+}
+
+function reactAssetMiddleware(config: ReactAssetMiddleware) {
+    return (req: Request, res: Response, next: NextFunction) => {
+        const { publicPath, stylesheets, scripts } = config;
+        req.files = {
+            css: stylesheets.map((file) => normalize(`/${publicPath}/${file}`)),
+            js: scripts.map((file) => normalize(`/${publicPath}/${file}`)),
+        };
+        next();
+    };
 }
 
 /**
@@ -23,50 +40,46 @@ function webpackReactAssetMiddleware(
     compiler: Compiler,
     config: ReactAssetMiddlewareConfig,
 ) {
-    const dynamicMiddleware = new DynamicMiddleware();
-
-    function onDoneHandler(stats: Stats) {
-        if (stats.compilation.compiler.name === "client") {
-            const clientStats = stats.toJson("verbose");
-            const { scripts, stylesheets } = flushChunks(clientStats as any, {
-                chunkNames: flushChunkNames(),
-            });
-            dynamicMiddleware.clean();
-            dynamicMiddleware.mount(
-                (req: Request, res: Response, next: NextFunction) => {
-                    req.files = {
-                        css: stylesheets.map((file) =>
-                            normalize(`/${config.publicPath}/${file}`),
-                        ),
-                        js: scripts.map((file) =>
-                            normalize(`/${config.publicPath}/${file}`),
-                        ),
-                    };
-                    next();
-                },
-            );
-            if (config.done) {
-                config.done(stats);
-            }
-        }
+    if (!compiler.client) {
+        return (req: Request, res: Response, next: NextFunction) => {
+            next();
+        };
     }
-
-    if (compiler.client) {
-        try {
-            compiler.onDone("client", onDoneHandler);
-            return dynamicMiddleware.handle();
-        } catch (err) {
-            if (config.error) {
-                config.error(err);
+    try {
+        const dynamicMiddleware = new DynamicMiddleware();
+        compiler.onDone("client", (stats: Stats) => {
+            if (stats.compilation.compiler.name === "client") {
+                clearChunks();
+                const clientStats = stats.toJson("verbose");
+                const { scripts, stylesheets } = flushChunks(
+                    clientStats as any,
+                    {
+                        chunkNames: flushChunkNames(),
+                    },
+                );
+                dynamicMiddleware.clean();
+                dynamicMiddleware.mount(
+                    reactAssetMiddleware({
+                        publicPath: config.publicPath,
+                        stylesheets,
+                        scripts,
+                    }),
+                );
+                // @todo we should remove all these and just hook into the done state ourselves
+                if (config.done) {
+                    config.done(stats);
+                }
             }
-            return (req: Request, res: Response, next: NextFunction) => {
-                next(err);
-            };
+        });
+        return dynamicMiddleware.handle();
+    } catch (err) {
+        if (config.error) {
+            config.error(err);
         }
+        return (req: Request, res: Response, next: NextFunction) => {
+            next(err);
+        };
     }
-    return (req: Request, res: Response, next: NextFunction) => {
-        next();
-    };
 }
 
 /**

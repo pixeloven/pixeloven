@@ -45,13 +45,6 @@ export function getSetup(options: Options) {
         return path.resolve(info.absoluteResourcePath).replace(/\\/g, "/");
     };
 
-    const postCssPlugin = () => [
-        require("postcss-flexbugs-fixes"),
-        autoprefixer({
-            flexbox: "no-2009",
-        }),
-    ];
-
     const { ifClient, ifDevelopment, ifProduction, ifNode } = getUtils({
         mode: options.mode,
         name: options.name,
@@ -59,7 +52,7 @@ export function getSetup(options: Options) {
     });
 
     function getDevTool() {
-        return options.sourceMap ? "eval-source-map" : false;
+        return options.sourceMap;
     }
 
     function getEntry() {
@@ -111,7 +104,7 @@ export function getSetup(options: Options) {
                             cache: true,
                             extractComments: "all",
                             parallel: true,
-                            sourceMap: options.sourceMap,
+                            sourceMap: !!options.sourceMap,
                             terserOptions: {
                                 safari10: true,
                             },
@@ -229,9 +222,6 @@ export function getSetup(options: Options) {
                 use: removeEmpty([
                     {
                         loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hmr: ifDevelopment(),
-                        },
                     },
 
                     {
@@ -240,8 +230,14 @@ export function getSetup(options: Options) {
                     {
                         loader: require.resolve("postcss-loader"),
                         options: {
-                            ident: "postcss",
-                            plugins: postCssPlugin,
+                            postcssOptions: {
+                                plugins: [
+                                    require("postcss-flexbugs-fixes"),
+                                    autoprefixer({
+                                        flexbox: "no-2009",
+                                    }),
+                                ],
+                            },
                         },
                     },
                     {
@@ -259,7 +255,16 @@ export function getSetup(options: Options) {
                     {
                         loader: require.resolve("css-loader"),
                         options: {
-                            onlyLocals: true,
+                            modules: {
+                                exportOnlyLocals: true,
+                            },
+                        },
+                    },
+                    {
+                        loader: require.resolve("sass-loader"),
+                        options: {
+                            // Prefer `dart-sass`
+                            implementation: require("sass"),
                         },
                     },
                 ],

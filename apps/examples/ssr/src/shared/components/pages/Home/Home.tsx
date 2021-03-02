@@ -30,9 +30,7 @@ function Home(props: UniversalRouteComponentProps) {
                 <Grid container={true} divided="vertically">
                     <Grid.Row>
                         <Grid.Column>
-                            <Header as="h2">
-                                Atomic Design
-                            </Header>
+                            <Header as="h2">Atomic Design</Header>
                             <p>
                                 Popularly known within the design world, Atomic Design helps to build consistent, solid
                                 and reusable design systems. Plus, in the world of React, Vue and frameworks that

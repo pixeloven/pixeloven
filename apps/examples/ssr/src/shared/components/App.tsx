@@ -1,13 +1,19 @@
-import {Routes, UniversalRouteProps} from "@pixeloven-react/routing";
 import React from "react";
 
-interface Props {
-    routes: UniversalRouteProps[];
+import {ErrorBoundary} from "@pixeloven-react/common";
+import {Routes, UniversalRouteProps} from "@pixeloven-react/routing";
+
+interface AppProps {
+    routes?: UniversalRouteProps[];
 }
 
-function App(props: Props) {
+function App(props: AppProps) {
     const {routes} = props;
-    return <Routes as="switch" config={routes} />;
+    return (
+        <ErrorBoundary fallback={<div>Something Bad Happened</div>} onCatch={console.error}>
+            {routes ? <Routes as="switch" config={routes} /> : <div>Don't forget to pass in some routes...</div>}
+        </ErrorBoundary>
+    );
 }
 
 export default App;

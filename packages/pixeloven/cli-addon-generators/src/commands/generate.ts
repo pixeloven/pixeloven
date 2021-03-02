@@ -97,9 +97,16 @@ export default {
             },
             {
                 message:
-                    "Provide a component namespace if necessary (leave blank if not required):",
+                    "Provide a path to your components directory (ex src/shared/components):",
+                name: "componentDirPath",
+                type: "input",
+                validate: Validation.minLength(1),
+            },
+            {
+                message: "Provide a component namespace (ex apps/pixeloven):",
                 name: "componentNameSpace",
                 type: "input",
+                validate: Validation.minLength(1),
             },
         ];
         const askCreatePackageQuestions = [
