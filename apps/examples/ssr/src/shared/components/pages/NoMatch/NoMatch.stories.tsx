@@ -1,9 +1,8 @@
-import Readme from "./README.md";
-
-import {storiesOf} from "@storybook/react";
-
 import {createLocation, createMemoryHistory} from "history";
 import React from "react";
+
+import {MemoryRouter} from "@pixeloven-react/routing";
+
 import NoMatch from "./NoMatch";
 
 const history = createMemoryHistory();
@@ -15,12 +14,13 @@ const match = {
     url: "testing",
 };
 
-storiesOf("Components/Pages/NoMatch", module).add(
-    "default",
-    () => {
-        return <NoMatch history={history} location={location} match={match} />;
-    },
-    {
-        notes: {markdown: Readme},
-    },
+export default {
+    title: "Components/Pages/NoMatch",
+    component: NoMatch,
+};
+
+export const Primary = () => (
+    <MemoryRouter>
+        <NoMatch history={history} location={location} match={match} />
+    </MemoryRouter>
 );

@@ -1,5 +1,5 @@
 import "jest";
-import { Actions, Backgrounds, Knobs, storybook, Viewport } from "./index";
+import { Actions, Knobs, storybook, Viewport } from "./index";
 
 describe("@pixeloven-storybook/common", () => {
     describe("index", () => {
@@ -8,7 +8,6 @@ describe("@pixeloven-storybook/common", () => {
         });
         it("should addon libraries", () => {
             expect(typeof Actions).toEqual("object");
-            expect(typeof Backgrounds).toEqual("object");
             expect(typeof Knobs).toEqual("object");
             expect(typeof Viewport).toEqual("object");
         });

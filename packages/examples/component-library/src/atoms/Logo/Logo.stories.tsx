@@ -1,15 +1,18 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 
 import Logo from "./Logo";
-import Readme from "./README.md";
 
-storiesOf("@src/atoms/Logo", module).add(
-    "Default",
-    () => {
-        return <Logo speed={"30s"} />;
-    },
-    {
-        notes: { markdown: Readme },
-    },
-);
+interface LogoStoryProps {
+    speed: string;
+}
+
+export default {
+    title: "@examples/component-library/atoms/Logo",
+    component: Logo,
+};
+
+export const Primary = (props: LogoStoryProps) => <Logo speed={props.speed} />;
+
+Primary.args = {
+    speed: "20s",
+};
