@@ -5,7 +5,7 @@ Enzyme.configure({
     adapter: new Adapter(),
 });
 
-export default Enzyme;
+export * from "enzyme";
 
 // https://github.com/testing-library
 // support both enzyme and this

@@ -1,10 +1,10 @@
+import React from "react";
+import { storiesOf } from "@storybook/react";
+
+import Logo from "./Logo";
 import Readme from "./README.md";
 
-import { storiesOf } from "@storybook/react";
-import React from "react";
-import Logo from "./Logo";
-
-storiesOf("Logo", module).add(
+storiesOf("@src/atoms/Logo", module).add(
     "Default",
     () => {
         return <Logo speed={"30s"} />;

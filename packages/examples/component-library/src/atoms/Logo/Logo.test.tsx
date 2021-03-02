@@ -1,14 +1,10 @@
-import { configure, shallow } from "enzyme";
-import ReactSixteenAdapter from "enzyme-adapter-react-16";
 import "jest";
 import React from "react";
+import { shallow } from "@pixeloven-react/testing";
+
 import Logo from "./Logo";
 
-configure({
-    adapter: new ReactSixteenAdapter(),
-});
-
-describe("Logo", () => {
+describe("@src/atoms/Logo", () => {
     it("should be of type function", () => {
         expect(typeof Logo).toEqual("function");
     });
