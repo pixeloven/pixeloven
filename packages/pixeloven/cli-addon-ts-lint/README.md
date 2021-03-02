@@ -1,6 +1,6 @@
-# @pixeloven-core/cli-addon-ts-lint
+# @pixeloven-core/cli-addon-tslint
 
-> Pixel Oven generators
+> Pixel Oven tslint
 
 See our website [PixelOven](https://www.pixeloven.com/) for more information or our [issues](https://github.com/pixeloven/pixeloven/issues) board to report issues associated with this package.
 
@@ -9,11 +9,11 @@ See our website [PixelOven](https://www.pixeloven.com/) for more information or 
 Using npm:
 
 ```sh
-npm install --save-dev @pixeloven/cli-addon-ts-lint
+npm install --save-dev @pixeloven/cli-addon-tslint
 ```
 
 or using yarn:
 
 ```sh
-yarn add --dev @pixeloven/cli-addon-ts-lint
+yarn add --dev @pixeloven/cli-addon-tslint
 ```

@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/cli-addon-ts-lint",
+    "name": "@pixeloven/cli-addon-tslint",
     "version": "6.4.1",
     "description": "Wrapper for TS Lint",
     "main": "dist/lib/index.js",

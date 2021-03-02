@@ -46,7 +46,7 @@ const Stub = {
  *      - These tests rely on mocking too much
  *      - Docker might help here
  */
-describe("@pixeloven/cli-addon-style-lint", () => {
+describe("@pixeloven/cli-addon-stylelint", () => {
     describe("commands", () => {
         describe("lint style", () => {
             afterAll(() => {

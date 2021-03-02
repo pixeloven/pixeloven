@@ -1,5 +1,5 @@
 {
-    "name": "@pixeloven/cli-addon-style-lint",
+    "name": "@pixeloven/cli-addon-stylelint",
     "version": "6.4.1",
     "description": "Wrapper for Style Lint",
     "main": "dist/lib/index.js",
