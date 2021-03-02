@@ -18,14 +18,14 @@
         "access": "public"
     },
     "dependencies": {
-        "@babel/core": "7.10.1",
+        "@babel/core": "7.13.8",
         "@storybook/addon-actions": "5.3.21",
         "@storybook/addon-backgrounds": "5.3.21",
         "@storybook/addon-knobs": "5.3.21",
         "@storybook/addon-viewport": "5.3.21",
         "@storybook/react": "5.3.21",
         "@storybook/theming": "5.3.21",
-        "babel-loader": "8.1.0",
+        "babel-loader": "8.2.2",
         "regenerator-runtime": "0.13.7",
         "webpack": "4.41.5"
     },

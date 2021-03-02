@@ -1,12 +1,11 @@
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-/**
- * @todo Need to implement this everywhere?
- */
 Enzyme.configure({
     adapter: new Adapter(),
 });
+
+export default Enzyme;
 
 // https://github.com/testing-library
 // support both enzyme and this
