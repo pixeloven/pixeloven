@@ -16,7 +16,7 @@ interface Props {
  * @param props
  */
 function Logo(props: Props) {
-    const { className, speed = "20s" } = props;
+    const { className, speed } = props;
     return (
         <img
             className={classNames("a-logo", className)}

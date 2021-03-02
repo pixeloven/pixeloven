@@ -5,9 +5,6 @@ import { shallow } from "@pixeloven-react/testing";
 import Logo from "./Logo";
 
 describe("@src/atoms/Logo", () => {
-    it("should be of type function", () => {
-        expect(typeof Logo).toEqual("function");
-    });
     it("should render an `img` with default 20s speed animation", () => {
         const wrapper = shallow(<Logo />);
         expect(wrapper.type()).toBe("img");
