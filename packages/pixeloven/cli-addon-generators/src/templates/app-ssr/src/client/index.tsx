@@ -14,7 +14,7 @@ const root = document.getElementById("root");
 
 /**
  * Get route config
- * @note process.env.PUBLIC_PATH is replaced by the webpack build. However ideally we bring this formt he window instead.
+ * @note process.env.PUBLIC_PATH is replaced by the webpack build. However ideally we bring this form the window instead.
  */
 const publicPath = process.env.PUBLIC_PATH || "/";
 const routes = Routing.getConfig(routeConfig, publicPath);
