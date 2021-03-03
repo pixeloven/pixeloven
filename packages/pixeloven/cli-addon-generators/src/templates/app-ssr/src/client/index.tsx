@@ -4,7 +4,6 @@ import * as ReactDOM from "react-dom";
 import { BrowserRouter, Routing } from "@pixeloven-react/routing";
 
 import App from "@shared/components/App";
-import { config } from "@shared/config";
 import routeConfig from "@shared/routes";
 import "@shared/styles/core/core.scss";
 
@@ -15,8 +14,10 @@ const root = document.getElementById("root");
 
 /**
  * Get route config
+ * @note process.env.PUBLIC_PATH is replaced by the webpack build. However ideally we bring this form the window instead.
  */
-const routes = Routing.getConfig(routeConfig, config.publicPath);
+const publicPath = process.env.PUBLIC_PATH || "/";
+const routes = Routing.getConfig(routeConfig, publicPath);
 /**
  * Wrap application with container, router and store
  */

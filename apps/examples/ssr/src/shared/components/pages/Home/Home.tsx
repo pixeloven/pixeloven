@@ -4,7 +4,11 @@ import {Container, Grid, Header, Segment} from "semantic-ui-react";
 import {Logo} from "@examples/component-library";
 import {UniversalRouteComponentProps} from "@pixeloven-react/routing";
 
-function Home(props: UniversalRouteComponentProps) {
+interface HomePageParams {
+    example: string;
+}
+
+function Home(props: UniversalRouteComponentProps<HomePageParams>) {
     return (
         <React.Fragment>
             <Helmet>
