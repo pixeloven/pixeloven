@@ -17,8 +17,8 @@ const match = {
 };
 
 export default {
-    title: "Components/Pages/Home",
     component: Home,
+    title: "Components/Pages/Home",
 };
 
 export const Primary = () => (

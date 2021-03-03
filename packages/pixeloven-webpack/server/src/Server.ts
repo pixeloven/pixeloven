@@ -106,7 +106,10 @@ async function Server(compiler: Compiler, options: Options) {
                     `found "public" directory...`,
                     `setting up static file serving`,
                 ]);
-                app.use(options.path, express.static(staticAssetPath));
+                const staticMiddleware = express.static(staticAssetPath, {
+                    cacheControl: false,
+                });
+                app.use(options.path, staticMiddleware);
             }
             logger.info(`mounting webpack development middleware`);
             app.use(webpackDevMiddleware);

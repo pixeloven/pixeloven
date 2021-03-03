@@ -76,6 +76,7 @@ ADD LINK TO DOCUMENTATION ON ROUTES
 ## Component composition
 
 When it comes to extracting components, there are two important factors to consider:
+
 1. complexity of code (e.g. conditional rendering and other business logic)
 2. reusability of code
 
@@ -109,13 +110,9 @@ function MetadataIndicator(props) {
             </React.Fragment>
         );
     } else if (showFirstIndicator) {
-        return (
-            <FirstIndicator />
-        );
+        return <FirstIndicator />;
     } else if (showSecondIndicator) {
-        return (
-            <SecondIndicator />
-        );
+        return <SecondIndicator />;
     }
 
     return <React.Fragment />;

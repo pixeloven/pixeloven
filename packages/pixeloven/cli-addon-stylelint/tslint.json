@@ -1,25 +1,21 @@
 {
     "defaultSeverity": "error",
     "linterOptions": {
-        "exclude": ["dist", "coverage", "node_modules", "stats"]
+        "exclude": ["dist", "coverage", "node_modules"]
     },
     "extends": [
         "tslint:latest",
         "tslint-config-prettier",
-        "tslint-eslint-rules",
-        "tslint-react"
+        "tslint-eslint-rules"
     ],
     "rules": {
         "arrow-parens": false,
-        "jsx-no-lambda": false,
-        "jsx-no-multiline-js": false,
-        "jsx-wrap-multiline": false,
+        "prefer-object-spread": false,
         "interface-name": false,
         "no-implicit-dependencies": false,
         "no-submodule-imports": false,
         "no-console": false,
         "no-any": true,
-        "no-null-keyword": true,
-        "object-literal-sort-keys": true
+        "no-null-keyword": true
     }
 }

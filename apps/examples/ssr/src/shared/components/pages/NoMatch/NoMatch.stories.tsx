@@ -15,8 +15,8 @@ const match = {
 };
 
 export default {
-    title: "Components/Pages/NoMatch",
     component: NoMatch,
+    title: "Components/Pages/NoMatch",
 };
 
 export const Primary = () => (

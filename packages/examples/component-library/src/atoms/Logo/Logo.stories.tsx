@@ -7,8 +7,8 @@ interface LogoStoryProps {
 }
 
 export default {
-    title: "@examples/component-library/atoms/Logo",
     component: Logo,
+    title: "@examples/component-library/atoms/Logo",
 };
 
 export const Primary = (props: LogoStoryProps) => <Logo speed={props.speed} />;
