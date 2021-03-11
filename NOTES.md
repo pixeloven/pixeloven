@@ -47,13 +47,28 @@ Simply a list of ideas I throw down when I can't sleep
 * eliminate warnings with new build setup
 
 ## After v7 Release
+* Webpack v5
 * eslint addon
-* Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
+    * create eslint config that combines 
+```
+"tslint:latest", 
+"tslint-config-prettier", 
+"tslint-eslint-rules", W
+"tslint-react", 
+"tslint-react-hooks"
+```
 * Add support for PWA
 * Add static site generation support
 * Add MDX support
+* all addons are standlone vs spawning new process
 
 ## Planned v8 Release
+* Unified logging 
+* Unified configuration
+* Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
+
+
+## Planned v9 Release
 * PixelOven theme for storybook, coverage and workflow
 
 ## Resources
