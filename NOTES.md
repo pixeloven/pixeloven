@@ -44,6 +44,7 @@ Simply a list of ideas I throw down when I can't sleep
 ## Before v7 Release
 * updated docs
 * updated ssr example and generator
+* eliminate warnings with new build setup
 
 ## After v7 Release
 * eslint addon
