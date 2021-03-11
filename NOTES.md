@@ -41,11 +41,16 @@ Simply a list of ideas I throw down when I can't sleep
     * Replace node-mocks-http with supertest (reduce mocking)
 
 
+## Before v7 Release
+* updated docs
+* updated ssr example and generator
+
 ## After v7 Release
+* eslint addon
+* Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
 * Add support for PWA
 * Add static site generation support
 * Add MDX support
-* Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
 
 ## Planned v8 Release
 * PixelOven theme for storybook, coverage and workflow
