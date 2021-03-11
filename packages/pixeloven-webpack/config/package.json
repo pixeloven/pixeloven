@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/config",
-    "version": "6.4.1",
+    "version": "7.0.0-alpha.0",
     "description": "Webpack configuration for client and server",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -22,7 +22,7 @@
         "@pixeloven-core/env": "^6.4.0",
         "@pixeloven-core/filesystem": "^6.4.0",
         "@pixeloven-core/logger": "^6.4.0",
-        "@pixeloven-webpack/ts-loader": "^6.4.0",
+        "@pixeloven-webpack/ts-loader": "^7.0.0-alpha.0",
         "autoprefixer": "10.2.4",
         "case-sensitive-paths-webpack-plugin": "2.3.0",
         "circular-dependency-plugin": "5.2.2",

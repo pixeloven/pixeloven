@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/bundler",
-    "version": "6.4.1",
+    "version": "7.0.0-alpha.0",
     "description": "Webpack build handler",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -21,7 +21,7 @@
         "@pixeloven-core/common": "^6.4.0",
         "@pixeloven-core/filesystem": "^6.4.0",
         "@pixeloven-core/logger": "^6.4.0",
-        "@pixeloven-webpack/compiler": "^6.4.1",
+        "@pixeloven-webpack/compiler": "^7.0.0-alpha.0",
         "@pixeloven-webpack/file-reporter": "^6.4.0"
     },
     "devDependencies": {

@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-react/testing",
-    "version": "6.4.0",
+    "version": "7.0.0-alpha.0",
     "description": "Encapsulates react testing dependencies and provides a simple abstraction for common testing functionality.",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",

@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven/cli-core",
-    "version": "6.4.0",
+    "version": "7.0.0-alpha.0",
     "description": "Core command line interface for PixelOven framework",
     "main": "dist/lib/index.js",
     "types": "dist/types/types.d.ts",
@@ -27,7 +27,7 @@
         "@pixeloven-tooling/test": "^6.2.0"
     },
     "devDependencies": {
-        "@pixeloven/cli": "^6.4.0",
+        "@pixeloven/cli": "^7.0.0-alpha.0",
         "lint-staged": "10.4.2"
     },
     "peerDependencies": {

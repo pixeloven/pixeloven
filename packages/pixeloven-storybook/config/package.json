@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-storybook/config",
-    "version": "6.4.0",
+    "version": "7.0.0-alpha.0",
     "description": "Storybook configuration",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -20,7 +20,7 @@
     "dependencies": {
         "@babel/core": "7.13.8",
         "@pixeloven-core/filesystem": "^6.4.0",
-        "@pixeloven-webpack/ts-loader": "^6.4.0",
+        "@pixeloven-webpack/ts-loader": "^7.0.0-alpha.0",
         "@pixeloven-webpack/types": "^6.1.0",
         "@storybook/addon-a11y": "6.1.20",
         "@storybook/addon-actions": "6.1.20",

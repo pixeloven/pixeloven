@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/compiler",
-    "version": "6.4.1",
+    "version": "7.0.0-alpha.0",
     "description": "Wrapper class for webpack compiler",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -20,7 +20,7 @@
     "dependencies": {
         "@pixeloven-core/common": "^6.4.0",
         "@pixeloven-core/env": "^6.4.0",
-        "@pixeloven-webpack/config": "^6.4.1",
+        "@pixeloven-webpack/config": "^7.0.0-alpha.0",
         "webpack": "4.41.5"
     },
     "devDependencies": {
