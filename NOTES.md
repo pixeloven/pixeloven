@@ -42,8 +42,8 @@ Simply a list of ideas I throw down when I can't sleep
 
 
 ## Before v7 Release
-* updated docs
-* updated ssr example and generator
+* updated docs to reflect new CLI changes
+* updated ssr example and generators
 * eliminate warnings with new build setup
 
 ## After v7 Release
