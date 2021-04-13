@@ -1,41 +1,60 @@
-stages:
-- stage: Development
+stages:     
+- stage: Build
+
   jobs:
-  - job: PixelOven
+  - job: Build
     pool:
-      vmImage: "ubuntu-18.04"
+      vmImage: "ubuntu-20.04"
     strategy:
       matrix:
-        # Comment out until we can figure out how to not report coverage twice
-        # node_10_x:
-        #   node_version: 10.x
         node_12_x:
           node_version: 12.x
+        node_14_x:
+          node_version: 14.x
+
+    variables:
+      YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
+
     steps:
-    - task: NodeTool@0 
+    - task: NodeTool@0
       inputs:
         versionSpec: $(node_version)
-    # Setup
-    - script: npm i -g npm
-      displayName: Update npm
-    - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
-      displayName: Update yarn
-    - script: npm i -g lerna
-      displayName: Install lerna
-    - script: lerna bootstrap
+
+    # # Update yarn
+    # - script: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+    #   displayName: Update yarn
+
+    - task: Cache@2
+      inputs:
+        key: 'yarn | "$(Agent.OS)" | yarn.lock'
+        restoreKeys: |
+          yarn | "$(Agent.OS)"
+          yarn
+        path: $(YARN_CACHE_FOLDER)
+      displayName: Cache Yarn packages
+
+    - script: yarn install --frozen-lockfile
       displayName: Bootstrap dependencies
     # CLI Pipeline
     - script: yarn all:compile
-      displayName: Compile PixelOven packages
+      displayName: Compile packages
     - script: yarn all:lint
-      displayName: Lint PixelOven packages
+      displayName: Lint packages
     - script: yarn all:test
-      displayName: Test PixelOven packages
+      displayName: Test packages
     # Site Pipeline
     - script: yarn all:build
       displayName: Build PixelOven Site
-    # Reporting
     - script: yarn codecov -t $(CODECOV_TOKEN)
+    # condition: and(succeeded(), eq($(node_version), '14'))
       displayName: Report code coverage
-    # @todo Run against examples now
-    # @todo Create an integration test suite
+    # - publish: $(System.DefaultWorkingDirectory)
+    #   artifact: build-$(node_version)
+
+# @todo -- publish to npm automatically?
+# @todo -- cache node_modules
+# @todo -- publish artifacts
+# @todo -- build custom image with tooling
+# @todo -- build example and doc site and deploy
+# @todo -- check for warnings
+# @todo -- add sonar cloud and do report as a seperate stage
