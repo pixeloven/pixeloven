@@ -1,6 +1,6 @@
 {
   "name": "@examples/standard-library",
-  "version": "6.3.4",
+  "version": "7.0.0-alpha.0",
   "description": "Simple example for creating a TypeScript based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -19,8 +19,8 @@
     "access": "restricted"
   },
   "devDependencies": {
-    "@pixeloven/cli": "^6.3.4",
-    "@pixeloven/cli-core": "^6.3.4",
+    "@pixeloven/cli": "^7.0.0-alpha.0",
+    "@pixeloven/cli-core": "^7.0.0-alpha.0",
     "lint-staged": "10.4.2"
   },
   "scripts": {

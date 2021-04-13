@@ -11,8 +11,6 @@ Simply a list of ideas I throw down when I can't sleep
     * create deprecated section so I can link back to main site for all the old packages
     * Document how to extend PO
     * Document how to contribute
-* Storybook
-    * storybook-addon-options is deprecated and will stop working soon
 * Workflow
     * Automate test, build and release
     * Integrate with github packages (docker, npm, etc)
@@ -43,13 +41,34 @@ Simply a list of ideas I throw down when I can't sleep
     * Replace node-mocks-http with supertest (reduce mocking)
 
 
+## Before v7 Release
+* updated docs to reflect new CLI changes
+* updated ssr example and generators
+* eliminate warnings with new build setup
+
 ## After v7 Release
+* Webpack v5
+* eslint addon
+    * create eslint config that combines 
+```
+"tslint:latest", 
+"tslint-config-prettier", 
+"tslint-eslint-rules",
+"tslint-react", 
+"tslint-react-hooks"
+```
 * Add support for PWA
 * Add static site generation support
 * Add MDX support
-* Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
+* all addons are standlone vs spawning new process
 
 ## Planned v8 Release
+* Unified logging 
+* Unified configuration
+* Create a env addon for the CLI for those who wish to pull .env from a file (based on @env)
+
+
+## Planned v9 Release
 * PixelOven theme for storybook, coverage and workflow
 
 ## Resources

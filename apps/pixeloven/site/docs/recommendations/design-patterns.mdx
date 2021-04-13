@@ -3,7 +3,7 @@ id: design-patterns
 title: Design Patterns
 ---
 
-## Application files structure
+## Application file structure
 
 This section is both documentation for our own application structure and recommended structure for derivative apps.
 
@@ -40,9 +40,9 @@ Starting with each application you will find the following structure.
 | `src`          | Alright the fun part! Contains all the source files used to build our application.                                                   |
 | `stats`        | Webpack bundle analysis stats                                                                                                        |
 
-### Source files and aliases
+## Source file structure and aliases
 
-Our source files require a bit more in depth discussion. Our source files are meant to be built in an isomorphic style. Isomorphic or Universal JavaScript is meant to reduce the amount of repeated code and context switching but often comes at the cost of complexity. We introduced a simple file structure to help us reduce thrashing when working in this context.
+Our source files require a bit more in depth discussion due to being organized in an isomorphic style. Isomorphic or Universal JavaScript is meant to reduce the amount of repeated code and context switching but often comes at the cost of complexity. We introduced a standard file structure to help us reduce thrashing when working in this context.
 
 | Directory    | Description                                                                   |
 | ------------ | ----------------------------------------------------------------------------- |
@@ -50,51 +50,68 @@ Our source files require a bit more in depth discussion. Our source files are me
 | `src/server` | This is the entry point for our build process for all server side code paths. |
 | `src/shared` | Contains all source that is universal to the two code paths.                  |
 
-### Atomic design structure
+To make referencing source files easier we have set up three aliases that are available from within an app.
 
-Further down into our `src/shared/components` directory structure we have adopted Atomic Design philosophies for creating and managing react components. Please reference [react-atomic-design](https://github.com/danilowoz/react-atomic-design) for details on what Atomic Design is and how it is applied to react.
+-   `@client` which points to `src/client/*`
+-   `@server` which points to `src/server/*`
+-   `@shared` which points to `src/shared/*`
 
-> Note it is worth mentioning that we use our own customized setup but generally all the same patterns still apply.
+## Atomic design structure
+
+Further down into our `src/shared/components` directory structure we have adopted Atomic Design philosophies for creating and managing React components. Please reference [react-atomic-design](https://github.com/danilowoz/react-atomic-design) for details on what Atomic Design is and how it is applied to React.
+
+> Note: It is worth mentioning that we use our own customized setup but generally all the same patterns still apply.
 
 For reference when we refer to `un-connected` or `connected` we are referring to a components to the relationship application state (redux).
 
-#### Un-connected elements
+### Un-connected components
 
-These comments are blind to application state but all may contain logic or internal state mechanisms. As a general rule the further up the atomic structure you go the more complex both logic and state may become.
+These components are blind to application state but all may contain logic or internal state mechanisms. As a general rule the further up the Atomic structure you go the more complex both logic and state may become.
 
--   `atoms` The smallest based elements used as building blocks for everything else. These often are very self contained units are almost purely stateless.
--   `molecules` Often made up of a small collection of atoms. They generally follow a similar rule as atoms but at a slightly larger scale.
--   `organisms` Like molecules to atoms these elements are made up of a collection of both. They often will contain some internal logic or state.
+| Directory   | Description                                                                                                                                                                                                                            |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `atoms`     | The smallest based elements used as building blocks for everything else. These often are very self contained components and should almost always be stateless.                                                                         |
+| `molecules` | Often made up of a small collection of Atoms. They generally follow a similar rule as atoms but at a slightly larger scale. What little state they may contain should be entirely localized to controlling the components within them. |
+| `organisms` | Like Molecules to Atoms these elements are made up of a collection of both. They often will contain some internal logic or state to control the components within them.                                                                |
 
-#### Connected elements
+### Connected components
 
-Though these elements are generally connected to an application state it is not a requirement. Anyone of these may rely on purely component state or even be completely static.
+Though these elements are generally connected to an application state, it is not a requirement. Any of these may rely purely on local state, or even be completely static.
 
--   `pages` Pages are made up of a collection of our atomic elements they are almost always connected to state and are highly specific.
--   `partials` Partials are some what in between the two other components of this class. They are some what self contained sections that may are may not be reusable but are not application entry points. Usually a Page may consist of a few of these in the case of a modal or a popup.
--   `templates` Similar to pages these elements are made up of atomic elements and are also often connected to state. However, where they differ is in them not being very specific but instead striving for a generic stance.
+| Directory   | Description                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `partials`  | Partials are some what in-between the other two components types of connected components. They are some what self contained sections that may or may not be reusable but are not application entry points. A typical Page may consist of a few of these in the case of a modal or a popup.                                                                                         |
+| `pages`     | Pages are made up of a collection of our Atomic components, are almost always connected to state, and are highly specific to their use case within your application.                                                                                                                                                                                                               |
+| `templates` | Similar to Pages these elements are made up of a collection of Atomic components, including Pages, and are often connected to state. However, they differ from Pages by striving to be very generic. Think of these as the outermost wrappers that contain the components each of our Pages might share, like a Header and Footer component, with our Pages rendered between them. |
 
 ## Component structure
 
-When creating any new components we should follow the below pattern. In this example we will assume that we are creating a small `atomic` component. However, it should be noted that these same patterns should apply regardless of scope.
+When creating any new components make sure to follow the pattern below. In this example we will walk through creating a small `atom` component but these same patterns should apply regardless of scope.
 
-First we must decide where our component should live.
+> Note: To make component creation easier, we provide a generator that will automatically create and initialize all the necessary component files. Refer to the [CLI Addon Generators documentation to learn more](/docs/api/cli-addon-generators#components).
+
+First we must create a directory structure for our Atomic components.
 
 ```
-...
-components
+src/shared/components/
 └── atoms
-```
-
-Once this decision has been made we will want to created our component directory. In this directory we should define all our independent pieces such that the name of the component comes first followed by what it is used for.
-
-```
 ...
-Logo
-├── Logo.scss
-├── Logo.stories.tsx
-├── Logo.test.tsx
-├── Logo.tsx
-├── index.ts
-└── README.md
 ```
+
+Once our Atomic directory is complete we can create our component directory. Here we will define all our support files for our component, ensuring that the name of the component comes first followed by the appropriate file type (scss, stories, test, etc).
+
+> Note: Co-locating the component's support files and sharing the component name makes local development far easier versus spreading files throughout the application or naming every component file `index.tsx`. The `index.ts` file is still necessary, but only to export the component at the component directory level and shouldn't contain any other component code.
+
+```
+atoms
+└── Logo
+    ├── Logo.scss
+    ├── Logo.stories.tsx
+    ├── Logo.test.tsx
+    ├── Logo.tsx
+    ├── index.ts
+    └── README.md
+...
+```
+
+Continue on to learn about working with React Components.

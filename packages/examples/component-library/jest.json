@@ -1,9 +1,9 @@
 {
   "bail": true,
   "collectCoverageFrom": [
-      "!<rootDir>/**/*.stories.{js,jsx,ts,tsx}",
-      "!<rootDir>/**/*.test.{js,jsx,ts,tsx}",
-      "<rootDir>/**/*.{js,jsx,ts,tsx}"
+    "<rootDir>/**/*.{js,jsx,ts,tsx}",
+    "!<rootDir>/**/*.stories.{js,jsx,ts,tsx}",
+    "!<rootDir>/**/*.test.{js,jsx,ts,tsx}"
   ],
   "coverageDirectory": "<rootDir>/../coverage",
   "coverageThreshold": {

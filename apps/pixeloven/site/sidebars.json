@@ -36,8 +36,8 @@
         "Recommendations": [
             "recommendations/intro",
             "recommendations/design-patterns",
-            "recommendations/working-with-libraries",
-            "recommendations/react-components"
+            "recommendations/react-components",
+            "recommendations/working-with-libraries"
         ]
     }
 }

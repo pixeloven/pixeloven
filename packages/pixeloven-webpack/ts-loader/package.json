@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/ts-loader",
-    "version": "6.3.1",
+    "version": "7.0.0-alpha.0",
     "description": "Collection of loaders to handle TypeScript and other advanced JS features",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,21 +18,21 @@
         "access": "public"
     },
     "dependencies": {
-        "@babel/core": "7.10.1",
-        "@babel/plugin-proposal-class-properties": "7.10.1",
-        "@babel/plugin-proposal-decorators": "7.10.1",
+        "@babel/core": "7.13.8",
+        "@babel/plugin-proposal-class-properties": "7.13.0",
+        "@babel/plugin-proposal-decorators": "7.13.5",
         "@babel/plugin-syntax-dynamic-import": "7.8.3",
-        "@babel/preset-env": "7.10.1",
-        "@babel/preset-react": "7.10.1",
-        "@babel/preset-typescript": "7.10.1",
-        "@pixeloven-core/filesystem": "^6.3.1",
-        "babel-loader": "8.1.0",
+        "@babel/preset-env": "7.13.9",
+        "@babel/preset-react": "7.12.13",
+        "@babel/preset-typescript": "7.13.0",
+        "@pixeloven-core/filesystem": "^6.4.0",
+        "babel-loader": "8.2.2",
         "ts-loader": "7.0.5",
         "typescript": "3.9.3"
     },
     "devDependencies": {
         "@pixeloven-tooling/compiler": "^6.2.0",
-        "@pixeloven-tooling/linter": "^6.3.1",
+        "@pixeloven-tooling/linter": "^6.4.0",
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
         "@pixeloven-webpack/types": "^6.1.0",

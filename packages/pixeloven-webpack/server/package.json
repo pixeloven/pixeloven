@@ -1,6 +1,6 @@
 {
     "name": "@pixeloven-webpack/server",
-    "version": "6.3.1",
+    "version": "7.0.0-alpha.0",
     "description": "Webpack Development Server",
     "main": "dist/lib/index.js",
     "types": "dist/types/index.d.ts",
@@ -18,18 +18,18 @@
         "access": "public"
     },
     "dependencies": {
-        "@pixeloven-core/common": "^6.3.1",
-        "@pixeloven-core/exceptions": "^6.3.1",
-        "@pixeloven-core/logger": "^6.3.1",
-        "@pixeloven-webpack/compiler": "^6.3.1",
-        "@pixeloven-webpack/file-reporter": "^6.3.1",
-        "@pixeloven-webpack/hot-middleware": "^6.3.1",
-        "@pixeloven-webpack/server-middleware": "^6.3.1",
+        "@pixeloven-core/common": "^6.4.0",
+        "@pixeloven-core/exceptions": "^6.4.0",
+        "@pixeloven-core/logger": "^6.4.0",
+        "@pixeloven-webpack/compiler": "^7.0.0-alpha.0",
+        "@pixeloven-webpack/file-reporter": "^6.4.0",
+        "@pixeloven-webpack/hot-middleware": "^7.0.0-alpha.0",
+        "@pixeloven-webpack/server-middleware": "^7.0.0-alpha.0",
         "express": "4.17.1"
     },
     "devDependencies": {
         "@pixeloven-tooling/compiler": "^6.2.0",
-        "@pixeloven-tooling/linter": "^6.3.1",
+        "@pixeloven-tooling/linter": "^6.4.0",
         "@pixeloven-tooling/pretty": "^6.2.0",
         "@pixeloven-tooling/test": "^6.2.0",
         "@pixeloven-webpack/types": "^6.1.0",

@@ -1,6 +1,6 @@
 {
   "name": "@pixeloven-tooling/linter",
-  "version": "6.3.1",
+  "version": "6.4.0",
   "description": "Linter abstraction for PixelOven's workflow",
   "bin": {
     "pixeloven-linter": "./bin/index.js"
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@pixeloven-tooling/common": "^6.1.0",
-    "stylelint": "13.7.2",
+    "stylelint": "13.9.0",
     "stylelint-config-recommended-scss": "4.2.0",
     "stylelint-scss": "3.18.0",
     "tslint": "6.1.3",

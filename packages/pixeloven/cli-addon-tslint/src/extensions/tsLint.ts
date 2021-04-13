@@ -1,9 +1,9 @@
 import { resolvePath } from "@pixeloven-core/filesystem";
-import { PixelOvenCoreToolbox } from "../types";
+import { AddonTsLintToolbox } from "../types";
 
 const tsLintFileName = "tslint.json";
 
-export default (context: PixelOvenCoreToolbox) => {
+export default (context: AddonTsLintToolbox) => {
     async function tsLint(args: string[]) {
         const { print, pixelOven } = context;
         const tsLintPath = resolvePath(tsLintFileName, false);

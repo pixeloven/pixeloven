@@ -1,5 +1,12 @@
 import { GluegunParameters, GluegunToolbox } from "gluegun";
 
+export enum ErrorCode {
+    InvalidArgument = 1,
+    InvalidTask,
+    MissingTask,
+    MissingTarget,
+}
+
 export type PixelOvenParameters = GluegunParameters;
 
 export interface PixelOvenOptions {

@@ -27,7 +27,11 @@ async function server(app: Application, config: Config) {
      */
     if (config.environment.node === "production") {
         app.use(assetPath(config.publicPath, path.resolve(__dirname, "public/asset-manifest.json")));
-        app.use(config.publicPath, express.static(path.resolve(__dirname, "public")));
+        const staticMiddleware = express.static(path.resolve(__dirname, "public"), {
+            cacheControl: true,
+            maxAge: 31536000000,
+        });
+        app.use(config.publicPath, staticMiddleware);
     }
 
     /**

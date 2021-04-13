@@ -19,6 +19,7 @@
         "no-submodule-imports": false,
         "no-console": false,
         "no-any": true,
-        "no-null-keyword": true
+        "no-null-keyword": true,
+        "object-literal-sort-keys": true
     }
 }
