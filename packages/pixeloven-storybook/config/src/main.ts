@@ -12,6 +12,9 @@ module.exports = {
         "@storybook/addon-a11y",
         "@storybook/addon-actions",
     ],
-    stories: [process.cwd() + "/**/*.stories.[tj]s[x]"],
+    stories: [
+        process.cwd() + "/**/*.stories.[tj]s[x]",
+        process.cwd() + "/**/*.stories.mdx"
+    ],
     webpackFinal: getConfig,
 };
