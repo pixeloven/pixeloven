@@ -1,6 +1,6 @@
 {
   "name": "@examples/component-library",
-  "version": "7.0.0-alpha.0",
+  "version": "7.0.0-alpha.1",
   "description": "Component example for creating a React + TypeScript based library",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@pixeloven-react/testing": "^7.0.0-alpha.0",
     "@pixeloven/cli": "^7.0.0-alpha.0",
-    "@pixeloven/cli-addon-storybook": "^7.0.0-alpha.0",
+    "@pixeloven/cli-addon-storybook": "^7.0.0-alpha.1",
     "@pixeloven/cli-core": "^7.0.0-alpha.0",
     "lint-staged": "10.4.2"
   },

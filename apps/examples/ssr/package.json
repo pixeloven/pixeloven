@@ -1,6 +1,6 @@
 {
     "name": "@examples/ssr",
-    "version": "7.0.0-alpha.0",
+    "version": "7.0.0-alpha.1",
     "description": "Example app using pixeloven framework",
     "homepage": "https://www.pixeloven.com",
     "repository": {
@@ -14,7 +14,7 @@
         "access": "restricted"
     },
     "dependencies": {
-        "@examples/component-library": "^7.0.0-alpha.0",
+        "@examples/component-library": "^7.0.0-alpha.1",
         "@pixeloven-express/middleware-asset-manifest": "^6.4.0",
         "@pixeloven-react/common": "^7.0.0-alpha.0",
         "@pixeloven-react/routing": "^7.0.0-alpha.0",
@@ -31,7 +31,7 @@
         "@pixeloven-react/testing": "^7.0.0-alpha.0",
         "@pixeloven/cli": "^7.0.0-alpha.0",
         "@pixeloven/cli-addon-generators": "^7.0.0-alpha.0",
-        "@pixeloven/cli-addon-storybook": "^7.0.0-alpha.0",
+        "@pixeloven/cli-addon-storybook": "^7.0.0-alpha.1",
         "@pixeloven/cli-addon-stylelint": "^7.0.0-alpha.0",
         "@pixeloven/cli-addon-tslint": "^7.0.0-alpha.0",
         "@pixeloven/cli-addon-webpack": "^7.0.0-alpha.0",
