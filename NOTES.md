@@ -53,7 +53,7 @@ Simply a list of ideas I throw down when I can't sleep
 ```
 "tslint:latest", 
 "tslint-config-prettier", 
-"tslint-eslint-rules", W
+"tslint-eslint-rules",
 "tslint-react", 
 "tslint-react-hooks"
 ```
