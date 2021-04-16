@@ -29,6 +29,7 @@
     "@pixeloven/cli": "^7.0.0-alpha.0",
     "@pixeloven/cli-addon-storybook": "^7.0.0-alpha.1",
     "@pixeloven/cli-core": "^7.0.0-alpha.0",
+    "@storybook/addon-docs": "6.2.7",
     "lint-staged": "10.4.2"
   },
   "scripts": {

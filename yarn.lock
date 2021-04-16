@@ -3513,6 +3513,20 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
+"@storybook/addon-controls@6.2.7":
+  version "6.2.7"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-6.2.7.tgz#bfa829106ca4d4247108fe864d7dd96afbec0c97"
+  integrity sha512-0FFcFtIffQWwV5aTTq7TDn2dq9M0+oU4q48ac+tOc2Ql8RfM4sYhCc8D30PhSCtc0/xH1xw/aHzotCkDqqAcrg==
+  dependencies:
+    "@storybook/addons" "6.2.7"
+    "@storybook/api" "6.2.7"
+    "@storybook/client-api" "6.2.7"
+    "@storybook/components" "6.2.7"
+    "@storybook/node-logger" "6.2.7"
+    "@storybook/theming" "6.2.7"
+    core-js "^3.8.2"
+    ts-dedent "^2.0.0"
+
 "@storybook/addon-docs@6.2.7":
   version "6.2.7"
   resolved "https://registry.yarnpkg.com/@storybook/addon-docs/-/addon-docs-6.2.7.tgz#1bcc9b0ac6e1fdb96a8614c93ae2bf11fccb189e"
@@ -3561,6 +3575,24 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
+"@storybook/addon-essentials@6.2.7":
+  version "6.2.7"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-6.2.7.tgz#cb51fea1f37e827c1f06367d687fcaa4c186d58c"
+  integrity sha512-7vE1MBgJ1nQyK/e13NB45rp6dWGHpM6DxfN0ft2XlzHAUn4cPlNwj8x4m9dprIhJTEujum8C9cWWWU7q4LoaoQ==
+  dependencies:
+    "@storybook/addon-actions" "6.2.7"
+    "@storybook/addon-backgrounds" "6.2.7"
+    "@storybook/addon-controls" "6.2.7"
+    "@storybook/addon-docs" "6.2.7"
+    "@storybook/addon-toolbars" "6.2.7"
+    "@storybook/addon-viewport" "6.2.7"
+    "@storybook/addons" "6.2.7"
+    "@storybook/api" "6.2.7"
+    "@storybook/node-logger" "6.2.7"
+    core-js "^3.8.2"
+    regenerator-runtime "^0.13.7"
+    ts-dedent "^2.0.0"
+
 "@storybook/addon-knobs@6.2.7":
   version "6.2.7"
   resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-6.2.7.tgz#8eda92cea5d2f7e483e4b2ca8790d01e9f73eaef"
@@ -3585,6 +3617,17 @@
     react-lifecycles-compat "^3.0.4"
     react-select "^3.2.0"
     regenerator-runtime "^0.13.7"
+
+"@storybook/addon-toolbars@6.2.7":
+  version "6.2.7"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-toolbars/-/addon-toolbars-6.2.7.tgz#9b6d3b42725aac754d4d533a501db51e6d2b314c"
+  integrity sha512-E7oK63DNg9w9F74TaMMopLfQj2rFAA4FsBAlaTNT8reHSqOCO+boLo+SghVoMChD4Jgtq2gCZlH+eA3yy9JEVQ==
+  dependencies:
+    "@storybook/addons" "6.2.7"
+    "@storybook/api" "6.2.7"
+    "@storybook/client-api" "6.2.7"
+    "@storybook/components" "6.2.7"
+    core-js "^3.8.2"
 
 "@storybook/addon-viewport@6.2.7":
   version "6.2.7"

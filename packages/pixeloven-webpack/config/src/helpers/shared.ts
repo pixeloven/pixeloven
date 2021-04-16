@@ -340,7 +340,7 @@ export function getSetup(options: Options) {
                 "@src": resolveSourceRoot(),
             },
             extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx"],
-            modules: [resolveSourceRoot(), "node_modules"],
+            modules: [resolveSourceRoot(), "node_modules", "stories"],
             plugins: [
                 new ModuleScopePlugin(resolveSourceRoot(), [
                     resolvePath("package.json"),
