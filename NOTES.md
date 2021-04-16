@@ -45,6 +45,7 @@ Simply a list of ideas I throw down when I can't sleep
 * updated docs to reflect new CLI changes
 * updated ssr example and generators
 * eliminate warnings with new build setup
+    * remove need for -tools
 
 ## After v7 Release
 * Webpack v5
