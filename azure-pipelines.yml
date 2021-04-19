@@ -33,6 +33,8 @@ stages:
         path: $(YARN_CACHE_FOLDER)
       displayName: Cache Yarn packages
 
+    - script: yarn all:clean
+      displayName: Clean up old files
     - script: yarn install --frozen-lockfile
       displayName: Bootstrap dependencies
     # CLI Pipeline

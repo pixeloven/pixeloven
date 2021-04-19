@@ -41,8 +41,8 @@
         "lint:ts": "pixeloven-linter ts src/**/*.{ts,tsx}",
         "pretty": "pixeloven-pretty **/*.{json,md,ts,tsx}",
         "precommit": "lint-staged",
-        "test": "pixeloven-test --color --coverage --env node",
-        "test:ci": "pixeloven-test --ci --coverage --env node",
+        "test": "pixeloven-test --color --coverage",
+        "test:ci": "pixeloven-test --ci --coverage",
         "test:watch": "pixeloven-test --watch"
     },
     "lint-staged": {
