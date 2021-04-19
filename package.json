@@ -28,7 +28,7 @@
   "scripts": {
     "all:bootstrap": "yarn all:clean && yarn install && yarn all:compile",
     "all:build": "lerna run --stream build",
-    "all:clean": "lerna clean --yes && rm -rf node_modules && rm -rf **/dist",
+    "all:clean": "lerna clean --yes && git clean -fxd",
     "all:commit": "git-cz",
     "all:compile": "lerna run --scope \"{@pixeloven/*,@pixeloven-*/*}\" --stream compile && lerna link && lerna run --scope \"@examples/*\" --stream compile",
     "all:linker": "lerna link",
