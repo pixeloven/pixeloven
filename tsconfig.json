@@ -47,8 +47,8 @@
     "**/dist",
     "**/docs",
     "**/node_modules",
-    "**/*.stories.{ts,tsx}",
-    "**/*.test.{ts,tsx}",
+    "**/*.stories.*",
+    "**/*.test.*",
     "**/__mocks__",
     "**/src/templates",
   ]
