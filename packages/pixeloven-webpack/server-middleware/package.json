@@ -22,8 +22,6 @@
         "@pixeloven-webpack/hot-middleware": "^6.4.1",
         "ansi-html": "0.0.7",
         "html-entities": "1.2.1",
-        "react": "16.14.0",
-        "react-dom": "16.14.0",
         "react-universal-component": "4.5.0",
         "require-from-string": "2.0.2",
         "webpack": "4.41.5",
@@ -43,7 +41,9 @@
         "@types/react": "16.9.53",
         "@types/require-from-string": "1.2.0",
         "@types/webpack-dev-middleware": "2.0.3",
-        "lint-staged": "10.4.2"
+        "lint-staged": "10.4.2",
+        "react": "16.14.0",
+        "react-dom": "16.14.0"
     },
     "scripts": {
         "compile": "pixeloven-compiler ts",
