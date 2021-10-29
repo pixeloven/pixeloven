@@ -45,6 +45,10 @@
         "react": "16.14.0",
         "react-dom": "16.14.0"
     },
+    "peerDependencies": {
+        "react": "16.x",
+        "react-dom": "16.x"
+    },
     "scripts": {
         "compile": "pixeloven-compiler ts",
         "compile:watch": "pixeloven-compiler ts --watch",
